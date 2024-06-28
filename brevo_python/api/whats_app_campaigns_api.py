@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -637,6 +637,7 @@ class WhatsAppCampaignsApi(object):
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page
         :param str sort: Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
+        :param str source: source of the template
         :return: GetWATemplates
                  If the method is called asynchronously,
                  returns the request thread.
@@ -662,12 +663,13 @@ class WhatsAppCampaignsApi(object):
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page
         :param str sort: Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed
+        :param str source: source of the template
         :return: GetWATemplates
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['start_date', 'end_date', 'limit', 'offset', 'sort']  # noqa: E501
+        all_params = ['start_date', 'end_date', 'limit', 'offset', 'sort', 'source']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -702,6 +704,8 @@ class WhatsAppCampaignsApi(object):
             query_params.append(('offset', params['offset']))  # noqa: E501
         if 'sort' in params:
             query_params.append(('sort', params['sort']))  # noqa: E501
+        if 'source' in params:
+            query_params.append(('source', params['source']))  # noqa: E501
 
         header_params = {}
 

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -36,6 +36,7 @@ class Order(object):
         'updated_at': 'str',
         'status': 'str',
         'amount': 'float',
+        'store_id': 'str',
         'products': 'list[OrderProducts]',
         'email': 'str',
         'billing': 'OrderBilling',
@@ -48,13 +49,14 @@ class Order(object):
         'updated_at': 'updatedAt',
         'status': 'status',
         'amount': 'amount',
+        'store_id': 'storeId',
         'products': 'products',
         'email': 'email',
         'billing': 'billing',
         'coupons': 'coupons'
     }
 
-    def __init__(self, id=None, created_at=None, updated_at=None, status=None, amount=None, products=None, email=None, billing=None, coupons=None):  # noqa: E501
+    def __init__(self, id=None, created_at=None, updated_at=None, status=None, amount=None, store_id=None, products=None, email=None, billing=None, coupons=None):  # noqa: E501
         """Order - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
@@ -62,6 +64,7 @@ class Order(object):
         self._updated_at = None
         self._status = None
         self._amount = None
+        self._store_id = None
         self._products = None
         self._email = None
         self._billing = None
@@ -73,6 +76,8 @@ class Order(object):
         self.updated_at = updated_at
         self.status = status
         self.amount = amount
+        if store_id is not None:
+            self.store_id = store_id
         self.products = products
         if email is not None:
             self.email = email
@@ -205,6 +210,29 @@ class Order(object):
             raise ValueError("Invalid value for `amount`, must not be `None`")  # noqa: E501
 
         self._amount = amount
+
+    @property
+    def store_id(self):
+        """Gets the store_id of this Order.  # noqa: E501
+
+        ID of store where the order is placed  # noqa: E501
+
+        :return: The store_id of this Order.  # noqa: E501
+        :rtype: str
+        """
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, store_id):
+        """Sets the store_id of this Order.
+
+        ID of store where the order is placed  # noqa: E501
+
+        :param store_id: The store_id of this Order.  # noqa: E501
+        :type: str
+        """
+
+        self._store_id = store_id
 
     @property
     def products(self):

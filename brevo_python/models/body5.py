@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,128 +31,157 @@ class Body5(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'link_contact_ids': 'list[int]',
-        'unlink_contact_ids': 'list[int]',
-        'link_company_ids': 'list[str]',
-        'unlink_company_ids': 'list[str]'
+        'name': 'str',
+        'attributes': 'object',
+        'country_code': 'int',
+        'linked_contacts_ids': 'list[int]',
+        'linked_deals_ids': 'list[str]'
     }
 
     attribute_map = {
-        'link_contact_ids': 'linkContactIds',
-        'unlink_contact_ids': 'unlinkContactIds',
-        'link_company_ids': 'linkCompanyIds',
-        'unlink_company_ids': 'unlinkCompanyIds'
+        'name': 'name',
+        'attributes': 'attributes',
+        'country_code': 'countryCode',
+        'linked_contacts_ids': 'linkedContactsIds',
+        'linked_deals_ids': 'linkedDealsIds'
     }
 
-    def __init__(self, link_contact_ids=None, unlink_contact_ids=None, link_company_ids=None, unlink_company_ids=None):  # noqa: E501
+    def __init__(self, name=None, attributes=None, country_code=None, linked_contacts_ids=None, linked_deals_ids=None):  # noqa: E501
         """Body5 - a model defined in Swagger"""  # noqa: E501
 
-        self._link_contact_ids = None
-        self._unlink_contact_ids = None
-        self._link_company_ids = None
-        self._unlink_company_ids = None
+        self._name = None
+        self._attributes = None
+        self._country_code = None
+        self._linked_contacts_ids = None
+        self._linked_deals_ids = None
         self.discriminator = None
 
-        if link_contact_ids is not None:
-            self.link_contact_ids = link_contact_ids
-        if unlink_contact_ids is not None:
-            self.unlink_contact_ids = unlink_contact_ids
-        if link_company_ids is not None:
-            self.link_company_ids = link_company_ids
-        if unlink_company_ids is not None:
-            self.unlink_company_ids = unlink_company_ids
+        self.name = name
+        if attributes is not None:
+            self.attributes = attributes
+        if country_code is not None:
+            self.country_code = country_code
+        if linked_contacts_ids is not None:
+            self.linked_contacts_ids = linked_contacts_ids
+        if linked_deals_ids is not None:
+            self.linked_deals_ids = linked_deals_ids
 
     @property
-    def link_contact_ids(self):
-        """Gets the link_contact_ids of this Body5.  # noqa: E501
+    def name(self):
+        """Gets the name of this Body5.  # noqa: E501
 
-        Contact ids for contacts to be linked with deal  # noqa: E501
+        Name of company  # noqa: E501
 
-        :return: The link_contact_ids of this Body5.  # noqa: E501
+        :return: The name of this Body5.  # noqa: E501
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Sets the name of this Body5.
+
+        Name of company  # noqa: E501
+
+        :param name: The name of this Body5.  # noqa: E501
+        :type: str
+        """
+        if name is None:
+            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
+
+        self._name = name
+
+    @property
+    def attributes(self):
+        """Gets the attributes of this Body5.  # noqa: E501
+
+        Attributes for company creation  # noqa: E501
+
+        :return: The attributes of this Body5.  # noqa: E501
+        :rtype: object
+        """
+        return self._attributes
+
+    @attributes.setter
+    def attributes(self, attributes):
+        """Sets the attributes of this Body5.
+
+        Attributes for company creation  # noqa: E501
+
+        :param attributes: The attributes of this Body5.  # noqa: E501
+        :type: object
+        """
+
+        self._attributes = attributes
+
+    @property
+    def country_code(self):
+        """Gets the country_code of this Body5.  # noqa: E501
+
+        Country code if phone_number is passed in attributes.  # noqa: E501
+
+        :return: The country_code of this Body5.  # noqa: E501
+        :rtype: int
+        """
+        return self._country_code
+
+    @country_code.setter
+    def country_code(self, country_code):
+        """Sets the country_code of this Body5.
+
+        Country code if phone_number is passed in attributes.  # noqa: E501
+
+        :param country_code: The country_code of this Body5.  # noqa: E501
+        :type: int
+        """
+
+        self._country_code = country_code
+
+    @property
+    def linked_contacts_ids(self):
+        """Gets the linked_contacts_ids of this Body5.  # noqa: E501
+
+        Contact ids to be linked with company  # noqa: E501
+
+        :return: The linked_contacts_ids of this Body5.  # noqa: E501
         :rtype: list[int]
         """
-        return self._link_contact_ids
+        return self._linked_contacts_ids
 
-    @link_contact_ids.setter
-    def link_contact_ids(self, link_contact_ids):
-        """Sets the link_contact_ids of this Body5.
+    @linked_contacts_ids.setter
+    def linked_contacts_ids(self, linked_contacts_ids):
+        """Sets the linked_contacts_ids of this Body5.
 
-        Contact ids for contacts to be linked with deal  # noqa: E501
+        Contact ids to be linked with company  # noqa: E501
 
-        :param link_contact_ids: The link_contact_ids of this Body5.  # noqa: E501
+        :param linked_contacts_ids: The linked_contacts_ids of this Body5.  # noqa: E501
         :type: list[int]
         """
 
-        self._link_contact_ids = link_contact_ids
+        self._linked_contacts_ids = linked_contacts_ids
 
     @property
-    def unlink_contact_ids(self):
-        """Gets the unlink_contact_ids of this Body5.  # noqa: E501
+    def linked_deals_ids(self):
+        """Gets the linked_deals_ids of this Body5.  # noqa: E501
 
-        Contact ids for contacts to be unlinked from deal  # noqa: E501
+        Deal ids to be linked with company  # noqa: E501
 
-        :return: The unlink_contact_ids of this Body5.  # noqa: E501
-        :rtype: list[int]
-        """
-        return self._unlink_contact_ids
-
-    @unlink_contact_ids.setter
-    def unlink_contact_ids(self, unlink_contact_ids):
-        """Sets the unlink_contact_ids of this Body5.
-
-        Contact ids for contacts to be unlinked from deal  # noqa: E501
-
-        :param unlink_contact_ids: The unlink_contact_ids of this Body5.  # noqa: E501
-        :type: list[int]
-        """
-
-        self._unlink_contact_ids = unlink_contact_ids
-
-    @property
-    def link_company_ids(self):
-        """Gets the link_company_ids of this Body5.  # noqa: E501
-
-        Company ids to be linked with deal  # noqa: E501
-
-        :return: The link_company_ids of this Body5.  # noqa: E501
+        :return: The linked_deals_ids of this Body5.  # noqa: E501
         :rtype: list[str]
         """
-        return self._link_company_ids
+        return self._linked_deals_ids
 
-    @link_company_ids.setter
-    def link_company_ids(self, link_company_ids):
-        """Sets the link_company_ids of this Body5.
+    @linked_deals_ids.setter
+    def linked_deals_ids(self, linked_deals_ids):
+        """Sets the linked_deals_ids of this Body5.
 
-        Company ids to be linked with deal  # noqa: E501
+        Deal ids to be linked with company  # noqa: E501
 
-        :param link_company_ids: The link_company_ids of this Body5.  # noqa: E501
+        :param linked_deals_ids: The linked_deals_ids of this Body5.  # noqa: E501
         :type: list[str]
         """
 
-        self._link_company_ids = link_company_ids
-
-    @property
-    def unlink_company_ids(self):
-        """Gets the unlink_company_ids of this Body5.  # noqa: E501
-
-        Company ids to be unlinked from deal  # noqa: E501
-
-        :return: The unlink_company_ids of this Body5.  # noqa: E501
-        :rtype: list[str]
-        """
-        return self._unlink_company_ids
-
-    @unlink_company_ids.setter
-    def unlink_company_ids(self, unlink_company_ids):
-        """Sets the unlink_company_ids of this Body5.
-
-        Company ids to be unlinked from deal  # noqa: E501
-
-        :param unlink_company_ids: The unlink_company_ids of this Body5.  # noqa: E501
-        :type: list[str]
-        """
-
-        self._unlink_company_ids = unlink_company_ids
+        self._linked_deals_ids = linked_deals_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

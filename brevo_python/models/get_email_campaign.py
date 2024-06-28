@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,6 +34,7 @@ class GetEmailCampaign(object):
         'id': 'int',
         'name': 'str',
         'subject': 'str',
+        'preview_text': 'str',
         'type': 'str',
         'status': 'str',
         'scheduled_at': 'str',
@@ -44,6 +45,10 @@ class GetEmailCampaign(object):
         'winner_criteria': 'str',
         'winner_delay': 'int',
         'send_at_best_time': 'bool',
+        'utm_campaign_value': 'str',
+        'utm_source': 'str',
+        'utm_medium': 'str',
+        'utm_id': 'int',
         'test_sent': 'bool',
         'header': 'str',
         'footer': 'str',
@@ -68,6 +73,7 @@ class GetEmailCampaign(object):
         'id': 'id',
         'name': 'name',
         'subject': 'subject',
+        'preview_text': 'previewText',
         'type': 'type',
         'status': 'status',
         'scheduled_at': 'scheduledAt',
@@ -78,6 +84,10 @@ class GetEmailCampaign(object):
         'winner_criteria': 'winnerCriteria',
         'winner_delay': 'winnerDelay',
         'send_at_best_time': 'sendAtBestTime',
+        'utm_campaign_value': 'utmCampaignValue',
+        'utm_source': 'utmSource',
+        'utm_medium': 'utmMedium',
+        'utm_id': 'utmID',
         'test_sent': 'testSent',
         'header': 'header',
         'footer': 'footer',
@@ -98,12 +108,13 @@ class GetEmailCampaign(object):
         'statistics': 'statistics'
     }
 
-    def __init__(self, id=None, name=None, subject=None, type=None, status=None, scheduled_at=None, ab_testing=None, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, send_at_best_time=None, test_sent=None, header=None, footer=None, sender=None, reply_to=None, to_field=None, html_content=None, share_link=None, tag=None, created_at=None, modified_at=None, inline_image_activation=None, mirror_active=None, recurring=None, sent_date=None, return_bounce=None, recipients=None, statistics=None):  # noqa: E501
+    def __init__(self, id=None, name=None, subject=None, preview_text=None, type=None, status=None, scheduled_at=None, ab_testing=None, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, send_at_best_time=None, utm_campaign_value=None, utm_source=None, utm_medium=None, utm_id=None, test_sent=None, header=None, footer=None, sender=None, reply_to=None, to_field=None, html_content=None, share_link=None, tag=None, created_at=None, modified_at=None, inline_image_activation=None, mirror_active=None, recurring=None, sent_date=None, return_bounce=None, recipients=None, statistics=None):  # noqa: E501
         """GetEmailCampaign - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._name = None
         self._subject = None
+        self._preview_text = None
         self._type = None
         self._status = None
         self._scheduled_at = None
@@ -114,6 +125,10 @@ class GetEmailCampaign(object):
         self._winner_criteria = None
         self._winner_delay = None
         self._send_at_best_time = None
+        self._utm_campaign_value = None
+        self._utm_source = None
+        self._utm_medium = None
+        self._utm_id = None
         self._test_sent = None
         self._header = None
         self._footer = None
@@ -138,6 +153,8 @@ class GetEmailCampaign(object):
         self.name = name
         if subject is not None:
             self.subject = subject
+        if preview_text is not None:
+            self.preview_text = preview_text
         self.type = type
         self.status = status
         if scheduled_at is not None:
@@ -156,6 +173,14 @@ class GetEmailCampaign(object):
             self.winner_delay = winner_delay
         if send_at_best_time is not None:
             self.send_at_best_time = send_at_best_time
+        if utm_campaign_value is not None:
+            self.utm_campaign_value = utm_campaign_value
+        if utm_source is not None:
+            self.utm_source = utm_source
+        if utm_medium is not None:
+            self.utm_medium = utm_medium
+        if utm_id is not None:
+            self.utm_id = utm_id
         self.test_sent = test_sent
         self.header = header
         self.footer = footer
@@ -255,6 +280,29 @@ class GetEmailCampaign(object):
         """
 
         self._subject = subject
+
+    @property
+    def preview_text(self):
+        """Gets the preview_text of this GetEmailCampaign.  # noqa: E501
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :return: The preview_text of this GetEmailCampaign.  # noqa: E501
+        :rtype: str
+        """
+        return self._preview_text
+
+    @preview_text.setter
+    def preview_text(self, preview_text):
+        """Sets the preview_text of this GetEmailCampaign.
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :param preview_text: The preview_text of this GetEmailCampaign.  # noqa: E501
+        :type: str
+        """
+
+        self._preview_text = preview_text
 
     @property
     def type(self):
@@ -501,6 +549,98 @@ class GetEmailCampaign(object):
         """
 
         self._send_at_best_time = send_at_best_time
+
+    @property
+    def utm_campaign_value(self):
+        """Gets the utm_campaign_value of this GetEmailCampaign.  # noqa: E501
+
+        utm parameter associated with campaign  # noqa: E501
+
+        :return: The utm_campaign_value of this GetEmailCampaign.  # noqa: E501
+        :rtype: str
+        """
+        return self._utm_campaign_value
+
+    @utm_campaign_value.setter
+    def utm_campaign_value(self, utm_campaign_value):
+        """Sets the utm_campaign_value of this GetEmailCampaign.
+
+        utm parameter associated with campaign  # noqa: E501
+
+        :param utm_campaign_value: The utm_campaign_value of this GetEmailCampaign.  # noqa: E501
+        :type: str
+        """
+
+        self._utm_campaign_value = utm_campaign_value
+
+    @property
+    def utm_source(self):
+        """Gets the utm_source of this GetEmailCampaign.  # noqa: E501
+
+        source of utm parameter  # noqa: E501
+
+        :return: The utm_source of this GetEmailCampaign.  # noqa: E501
+        :rtype: str
+        """
+        return self._utm_source
+
+    @utm_source.setter
+    def utm_source(self, utm_source):
+        """Sets the utm_source of this GetEmailCampaign.
+
+        source of utm parameter  # noqa: E501
+
+        :param utm_source: The utm_source of this GetEmailCampaign.  # noqa: E501
+        :type: str
+        """
+
+        self._utm_source = utm_source
+
+    @property
+    def utm_medium(self):
+        """Gets the utm_medium of this GetEmailCampaign.  # noqa: E501
+
+        medium parameter  # noqa: E501
+
+        :return: The utm_medium of this GetEmailCampaign.  # noqa: E501
+        :rtype: str
+        """
+        return self._utm_medium
+
+    @utm_medium.setter
+    def utm_medium(self, utm_medium):
+        """Sets the utm_medium of this GetEmailCampaign.
+
+        medium parameter  # noqa: E501
+
+        :param utm_medium: The utm_medium of this GetEmailCampaign.  # noqa: E501
+        :type: str
+        """
+
+        self._utm_medium = utm_medium
+
+    @property
+    def utm_id(self):
+        """Gets the utm_id of this GetEmailCampaign.  # noqa: E501
+
+        utm id  # noqa: E501
+
+        :return: The utm_id of this GetEmailCampaign.  # noqa: E501
+        :rtype: int
+        """
+        return self._utm_id
+
+    @utm_id.setter
+    def utm_id(self, utm_id):
+        """Sets the utm_id of this GetEmailCampaign.
+
+        utm id  # noqa: E501
+
+        :param utm_id: The utm_id of this GetEmailCampaign.  # noqa: E501
+        :type: int
+        """
+
+        self._utm_id = utm_id
 
     @property
     def test_sent(self):

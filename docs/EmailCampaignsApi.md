@@ -337,7 +337,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 api_instance = brevo_python.EmailCampaignsApi(brevo_python.ApiClient(configuration))
 type = 'type_example' # str | Filter on the type of the campaigns (optional)
 status = 'status_example' # str | Filter on the status of the campaign (optional)
-statistics = 'statistics_example' # str | Filter on the type of statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response. (optional)
+statistics = 'statistics_example' # str | Filter on the type of statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint. (optional)
 start_date = 'start_date_example' # str | Mandatory if endDate is used. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. Prefer to pass your timezone in date-time format for accurate result ( only available if either 'status' not passed and if passed is set to 'sent' ) (optional)
 end_date = 'end_date_example' # str | Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. Prefer to pass your timezone in date-time format for accurate result ( only available if either 'status' not passed and if passed is set to 'sent' ) (optional)
 limit = 50 # int | Number of documents per page (optional) (default to 50)
@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | **str**| Filter on the type of the campaigns | [optional] 
  **status** | **str**| Filter on the status of the campaign | [optional] 
- **statistics** | **str**| Filter on the type of statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response. | [optional] 
+ **statistics** | **str**| Filter on the type of statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint. | [optional] 
  **start_date** | **str**| Mandatory if endDate is used. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. Prefer to pass your timezone in date-time format for accurate result ( only available if either &#39;status&#39; not passed and if passed is set to &#39;sent&#39; ) | [optional] 
  **end_date** | **str**| Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. Prefer to pass your timezone in date-time format for accurate result ( only available if either &#39;status&#39; not passed and if passed is set to &#39;sent&#39; ) | [optional] 
  **limit** | **int**| Number of documents per page | [optional] [default to 50]

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -33,6 +33,7 @@ class CreateDomainModel(object):
     swagger_types = {
         'id': 'int',
         'domain_name': 'str',
+        'domain_provider': 'str',
         'message': 'str',
         'dns_records': 'CreateDomainModelDnsRecords'
     }
@@ -40,15 +41,17 @@ class CreateDomainModel(object):
     attribute_map = {
         'id': 'id',
         'domain_name': 'domain_name',
+        'domain_provider': 'domain_provider',
         'message': 'message',
         'dns_records': 'dns_records'
     }
 
-    def __init__(self, id=None, domain_name=None, message=None, dns_records=None):  # noqa: E501
+    def __init__(self, id=None, domain_name=None, domain_provider=None, message=None, dns_records=None):  # noqa: E501
         """CreateDomainModel - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._domain_name = None
+        self._domain_provider = None
         self._message = None
         self._dns_records = None
         self.discriminator = None
@@ -56,6 +59,8 @@ class CreateDomainModel(object):
         self.id = id
         if domain_name is not None:
             self.domain_name = domain_name
+        if domain_provider is not None:
+            self.domain_provider = domain_provider
         if message is not None:
             self.message = message
         if dns_records is not None:
@@ -108,6 +113,29 @@ class CreateDomainModel(object):
         """
 
         self._domain_name = domain_name
+
+    @property
+    def domain_provider(self):
+        """Gets the domain_provider of this CreateDomainModel.  # noqa: E501
+
+        Domain Provider  # noqa: E501
+
+        :return: The domain_provider of this CreateDomainModel.  # noqa: E501
+        :rtype: str
+        """
+        return self._domain_provider
+
+    @domain_provider.setter
+    def domain_provider(self, domain_provider):
+        """Sets the domain_provider of this CreateDomainModel.
+
+        Domain Provider  # noqa: E501
+
+        :param domain_provider: The domain_provider of this CreateDomainModel.  # noqa: E501
+        :type: str
+        """
+
+        self._domain_provider = domain_provider
 
     @property
     def message(self):

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **int** | ID of the campaign | 
 **name** | **str** | Name of the campaign | 
 **subject** | **str** | Subject of the campaign. Only available if &#x60;abTesting&#x60; flag of the campaign is &#x60;false&#x60; | [optional] 
+**preview_text** | **str** | Preview text or preheader of the email campaign | [optional] 
 **type** | **str** | Type of campaign | 
 **status** | **str** | Status of the campaign | 
 **scheduled_at** | **str** | UTC date-time on which campaign is scheduled (YYYY-MM-DDTHH:mm:ss.SSSZ) | [optional] 
@@ -16,6 +17,10 @@ Name | Type | Description | Notes
 **winner_criteria** | **str** | Criteria for the winning version. Only available if &#x60;abTesting&#x60; flag of the campaign is &#x60;true&#x60; | [optional] 
 **winner_delay** | **int** | The duration of the test in hours at the end of which the winning version will be sent. Only available if &#x60;abTesting&#x60; flag of the campaign is &#x60;true&#x60; | [optional] 
 **send_at_best_time** | **bool** | It is true if you have chosen to send your campaign at best time, otherwise it is false | [optional] 
+**utm_campaign_value** | **str** | utm parameter associated with campaign | [optional] 
+**utm_source** | **str** | source of utm parameter | [optional] 
+**utm_medium** | **str** | medium parameter | [optional] 
+**utm_id** | **int** | utm id | [optional] 
 **test_sent** | **bool** | Retrieved the status of test email sending. (true&#x3D;Test email has been sent  false&#x3D;Test email has not been sent) | 
 **header** | **str** | Header of the campaign | 
 **footer** | **str** | Footer of the campaign | 

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -40,7 +40,8 @@ class GetTransacSmsReportReports(object):
         'unsubscribed': 'int',
         'replied': 'int',
         'accepted': 'int',
-        'rejected': 'int'
+        'rejected': 'int',
+        'skipped': 'int'
     }
 
     attribute_map = {
@@ -53,10 +54,11 @@ class GetTransacSmsReportReports(object):
         'unsubscribed': 'unsubscribed',
         'replied': 'replied',
         'accepted': 'accepted',
-        'rejected': 'rejected'
+        'rejected': 'rejected',
+        'skipped': 'skipped'
     }
 
-    def __init__(self, _date=None, requests=None, delivered=None, hard_bounces=None, soft_bounces=None, blocked=None, unsubscribed=None, replied=None, accepted=None, rejected=None):  # noqa: E501
+    def __init__(self, _date=None, requests=None, delivered=None, hard_bounces=None, soft_bounces=None, blocked=None, unsubscribed=None, replied=None, accepted=None, rejected=None, skipped=None):  # noqa: E501
         """GetTransacSmsReportReports - a model defined in Swagger"""  # noqa: E501
 
         self.__date = None
@@ -69,6 +71,7 @@ class GetTransacSmsReportReports(object):
         self._replied = None
         self._accepted = None
         self._rejected = None
+        self._skipped = None
         self.discriminator = None
 
         if _date is not None:
@@ -91,6 +94,8 @@ class GetTransacSmsReportReports(object):
             self.accepted = accepted
         if rejected is not None:
             self.rejected = rejected
+        if skipped is not None:
+            self.skipped = skipped
 
     @property
     def _date(self):
@@ -280,7 +285,7 @@ class GetTransacSmsReportReports(object):
     def accepted(self):
         """Gets the accepted of this GetTransacSmsReportReports.  # noqa: E501
 
-        Number of accepted for the date  # noqa: E501
+        Number of accepted SMS for the date  # noqa: E501
 
         :return: The accepted of this GetTransacSmsReportReports.  # noqa: E501
         :rtype: int
@@ -291,7 +296,7 @@ class GetTransacSmsReportReports(object):
     def accepted(self, accepted):
         """Sets the accepted of this GetTransacSmsReportReports.
 
-        Number of accepted for the date  # noqa: E501
+        Number of accepted SMS for the date  # noqa: E501
 
         :param accepted: The accepted of this GetTransacSmsReportReports.  # noqa: E501
         :type: int
@@ -303,7 +308,7 @@ class GetTransacSmsReportReports(object):
     def rejected(self):
         """Gets the rejected of this GetTransacSmsReportReports.  # noqa: E501
 
-        Number of rejected for the date  # noqa: E501
+        Number of rejected SMS for the date  # noqa: E501
 
         :return: The rejected of this GetTransacSmsReportReports.  # noqa: E501
         :rtype: int
@@ -314,13 +319,36 @@ class GetTransacSmsReportReports(object):
     def rejected(self, rejected):
         """Sets the rejected of this GetTransacSmsReportReports.
 
-        Number of rejected for the date  # noqa: E501
+        Number of rejected SMS for the date  # noqa: E501
 
         :param rejected: The rejected of this GetTransacSmsReportReports.  # noqa: E501
         :type: int
         """
 
         self._rejected = rejected
+
+    @property
+    def skipped(self):
+        """Gets the skipped of this GetTransacSmsReportReports.  # noqa: E501
+
+        Number of skipped SMS for the date  # noqa: E501
+
+        :return: The skipped of this GetTransacSmsReportReports.  # noqa: E501
+        :rtype: int
+        """
+        return self._skipped
+
+    @skipped.setter
+    def skipped(self, skipped):
+        """Sets the skipped of this GetTransacSmsReportReports.
+
+        Number of skipped SMS for the date  # noqa: E501
+
+        :param skipped: The skipped of this GetTransacSmsReportReports.  # noqa: E501
+        :type: int
+        """
+
+        self._skipped = skipped
 
     def to_dict(self):
         """Returns the model properties as a dict"""

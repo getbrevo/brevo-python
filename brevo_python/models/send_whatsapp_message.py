@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,6 +34,7 @@ class SendWhatsappMessage(object):
         'template_id': 'int',
         'text': 'str',
         'sender_number': 'str',
+        'params': 'object',
         'contact_numbers': 'list[str]'
     }
 
@@ -41,15 +42,17 @@ class SendWhatsappMessage(object):
         'template_id': 'templateId',
         'text': 'text',
         'sender_number': 'senderNumber',
+        'params': 'params',
         'contact_numbers': 'contactNumbers'
     }
 
-    def __init__(self, template_id=None, text=None, sender_number=None, contact_numbers=None):  # noqa: E501
+    def __init__(self, template_id=None, text=None, sender_number=None, params=None, contact_numbers=None):  # noqa: E501
         """SendWhatsappMessage - a model defined in Swagger"""  # noqa: E501
 
         self._template_id = None
         self._text = None
         self._sender_number = None
+        self._params = None
         self._contact_numbers = None
         self.discriminator = None
 
@@ -58,6 +61,8 @@ class SendWhatsappMessage(object):
         if text is not None:
             self.text = text
         self.sender_number = sender_number
+        if params is not None:
+            self.params = params
         self.contact_numbers = contact_numbers
 
     @property
@@ -130,6 +135,29 @@ class SendWhatsappMessage(object):
             raise ValueError("Invalid value for `sender_number`, must not be `None`")  # noqa: E501
 
         self._sender_number = sender_number
+
+    @property
+    def params(self):
+        """Gets the params of this SendWhatsappMessage.  # noqa: E501
+
+        Pass the set of attributes to customize the template. For example, {\"FNAME\":\"Joe\", \"LNAME\":\"Doe\"}.  # noqa: E501
+
+        :return: The params of this SendWhatsappMessage.  # noqa: E501
+        :rtype: object
+        """
+        return self._params
+
+    @params.setter
+    def params(self, params):
+        """Sets the params of this SendWhatsappMessage.
+
+        Pass the set of attributes to customize the template. For example, {\"FNAME\":\"Joe\", \"LNAME\":\"Doe\"}.  # noqa: E501
+
+        :param params: The params of this SendWhatsappMessage.  # noqa: E501
+        :type: object
+        """
+
+        self._params = params
 
     @property
     def contact_numbers(self):

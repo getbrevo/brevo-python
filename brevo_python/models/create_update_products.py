@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -40,7 +40,8 @@ class CreateUpdateProducts(object):
         'categories': 'list[str]',
         'parent_id': 'str',
         'meta_info': 'dict(str, str)',
-        'deleted_at': 'str'
+        'deleted_at': 'str',
+        'is_deleted': 'bool'
     }
 
     attribute_map = {
@@ -53,10 +54,11 @@ class CreateUpdateProducts(object):
         'categories': 'categories',
         'parent_id': 'parentId',
         'meta_info': 'metaInfo',
-        'deleted_at': 'deletedAt'
+        'deleted_at': 'deletedAt',
+        'is_deleted': 'isDeleted'
     }
 
-    def __init__(self, id=None, name=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, meta_info=None, deleted_at=None):  # noqa: E501
+    def __init__(self, id=None, name=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, meta_info=None, deleted_at=None, is_deleted=None):  # noqa: E501
         """CreateUpdateProducts - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
@@ -69,6 +71,7 @@ class CreateUpdateProducts(object):
         self._parent_id = None
         self._meta_info = None
         self._deleted_at = None
+        self._is_deleted = None
         self.discriminator = None
 
         self.id = id
@@ -89,6 +92,8 @@ class CreateUpdateProducts(object):
             self.meta_info = meta_info
         if deleted_at is not None:
             self.deleted_at = deleted_at
+        if is_deleted is not None:
+            self.is_deleted = is_deleted
 
     @property
     def id(self):
@@ -323,6 +328,29 @@ class CreateUpdateProducts(object):
         """
 
         self._deleted_at = deleted_at
+
+    @property
+    def is_deleted(self):
+        """Gets the is_deleted of this CreateUpdateProducts.  # noqa: E501
+
+        product deleted from the shop's database  # noqa: E501
+
+        :return: The is_deleted of this CreateUpdateProducts.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_deleted
+
+    @is_deleted.setter
+    def is_deleted(self, is_deleted):
+        """Sets the is_deleted of this CreateUpdateProducts.
+
+        product deleted from the shop's database  # noqa: E501
+
+        :param is_deleted: The is_deleted of this CreateUpdateProducts.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_deleted = is_deleted
 
     def to_dict(self):
         """Returns the model properties as a dict"""

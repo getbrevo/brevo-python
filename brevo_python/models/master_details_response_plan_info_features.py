@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,7 +34,9 @@ class MasterDetailsResponsePlanInfoFeatures(object):
         'name': 'str',
         'unit_value': 'str',
         'quantity': 'int',
+        'quantity_with_overages': 'int',
         'used': 'int',
+        'used_overages': 'int',
         'remaining': 'int'
     }
 
@@ -42,17 +44,21 @@ class MasterDetailsResponsePlanInfoFeatures(object):
         'name': 'name',
         'unit_value': 'unitValue',
         'quantity': 'quantity',
+        'quantity_with_overages': 'quantityWithOverages',
         'used': 'used',
+        'used_overages': 'usedOverages',
         'remaining': 'remaining'
     }
 
-    def __init__(self, name=None, unit_value=None, quantity=None, used=None, remaining=None):  # noqa: E501
+    def __init__(self, name=None, unit_value=None, quantity=None, quantity_with_overages=None, used=None, used_overages=None, remaining=None):  # noqa: E501
         """MasterDetailsResponsePlanInfoFeatures - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._unit_value = None
         self._quantity = None
+        self._quantity_with_overages = None
         self._used = None
+        self._used_overages = None
         self._remaining = None
         self.discriminator = None
 
@@ -62,8 +68,12 @@ class MasterDetailsResponsePlanInfoFeatures(object):
             self.unit_value = unit_value
         if quantity is not None:
             self.quantity = quantity
+        if quantity_with_overages is not None:
+            self.quantity_with_overages = quantity_with_overages
         if used is not None:
             self.used = used
+        if used_overages is not None:
+            self.used_overages = used_overages
         if remaining is not None:
             self.remaining = remaining
 
@@ -137,6 +147,29 @@ class MasterDetailsResponsePlanInfoFeatures(object):
         self._quantity = quantity
 
     @property
+    def quantity_with_overages(self):
+        """Gets the quantity_with_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+
+        Quantity with overages provided in the plan (only applicable on ENTv2)  # noqa: E501
+
+        :return: The quantity_with_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :rtype: int
+        """
+        return self._quantity_with_overages
+
+    @quantity_with_overages.setter
+    def quantity_with_overages(self, quantity_with_overages):
+        """Sets the quantity_with_overages of this MasterDetailsResponsePlanInfoFeatures.
+
+        Quantity with overages provided in the plan (only applicable on ENTv2)  # noqa: E501
+
+        :param quantity_with_overages: The quantity_with_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :type: int
+        """
+
+        self._quantity_with_overages = quantity_with_overages
+
+    @property
     def used(self):
         """Gets the used of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
 
@@ -158,6 +191,29 @@ class MasterDetailsResponsePlanInfoFeatures(object):
         """
 
         self._used = used
+
+    @property
+    def used_overages(self):
+        """Gets the used_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+
+        Quantity consumed by sub-organizations over the admin plan limit (only applicable on ENTv2)  # noqa: E501
+
+        :return: The used_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :rtype: int
+        """
+        return self._used_overages
+
+    @used_overages.setter
+    def used_overages(self, used_overages):
+        """Sets the used_overages of this MasterDetailsResponsePlanInfoFeatures.
+
+        Quantity consumed by sub-organizations over the admin plan limit (only applicable on ENTv2)  # noqa: E501
+
+        :param used_overages: The used_overages of this MasterDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :type: int
+        """
+
+        self._used_overages = used_overages
 
     @property
     def remaining(self):

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -33,11 +33,12 @@ class RequestContactImport(object):
     swagger_types = {
         'file_url': 'str',
         'file_body': 'str',
-        'json_body': 'list[dict(str, object)]',
+        'json_body': 'list[RequestContactImportJsonBody]',
         'list_ids': 'list[int]',
         'notify_url': 'str',
         'new_list': 'RequestContactImportNewList',
         'email_blacklist': 'bool',
+        'disable_notification': 'bool',
         'sms_blacklist': 'bool',
         'update_existing_contacts': 'bool',
         'empty_contacts_attributes': 'bool'
@@ -51,12 +52,13 @@ class RequestContactImport(object):
         'notify_url': 'notifyUrl',
         'new_list': 'newList',
         'email_blacklist': 'emailBlacklist',
+        'disable_notification': 'disableNotification',
         'sms_blacklist': 'smsBlacklist',
         'update_existing_contacts': 'updateExistingContacts',
         'empty_contacts_attributes': 'emptyContactsAttributes'
     }
 
-    def __init__(self, file_url=None, file_body=None, json_body=None, list_ids=None, notify_url=None, new_list=None, email_blacklist=False, sms_blacklist=False, update_existing_contacts=True, empty_contacts_attributes=False):  # noqa: E501
+    def __init__(self, file_url=None, file_body=None, json_body=None, list_ids=None, notify_url=None, new_list=None, email_blacklist=False, disable_notification=False, sms_blacklist=False, update_existing_contacts=True, empty_contacts_attributes=False):  # noqa: E501
         """RequestContactImport - a model defined in Swagger"""  # noqa: E501
 
         self._file_url = None
@@ -66,6 +68,7 @@ class RequestContactImport(object):
         self._notify_url = None
         self._new_list = None
         self._email_blacklist = None
+        self._disable_notification = None
         self._sms_blacklist = None
         self._update_existing_contacts = None
         self._empty_contacts_attributes = None
@@ -85,6 +88,8 @@ class RequestContactImport(object):
             self.new_list = new_list
         if email_blacklist is not None:
             self.email_blacklist = email_blacklist
+        if disable_notification is not None:
+            self.disable_notification = disable_notification
         if sms_blacklist is not None:
             self.sms_blacklist = sms_blacklist
         if update_existing_contacts is not None:
@@ -145,7 +150,7 @@ class RequestContactImport(object):
         **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.   # noqa: E501
 
         :return: The json_body of this RequestContactImport.  # noqa: E501
-        :rtype: list[dict(str, object)]
+        :rtype: list[RequestContactImportJsonBody]
         """
         return self._json_body
 
@@ -156,7 +161,7 @@ class RequestContactImport(object):
         **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.   # noqa: E501
 
         :param json_body: The json_body of this RequestContactImport.  # noqa: E501
-        :type: list[dict(str, object)]
+        :type: list[RequestContactImportJsonBody]
         """
 
         self._json_body = json_body
@@ -250,6 +255,29 @@ class RequestContactImport(object):
         """
 
         self._email_blacklist = email_blacklist
+
+    @property
+    def disable_notification(self):
+        """Gets the disable_notification of this RequestContactImport.  # noqa: E501
+
+        To disable email notification  # noqa: E501
+
+        :return: The disable_notification of this RequestContactImport.  # noqa: E501
+        :rtype: bool
+        """
+        return self._disable_notification
+
+    @disable_notification.setter
+    def disable_notification(self, disable_notification):
+        """Sets the disable_notification of this RequestContactImport.
+
+        To disable email notification  # noqa: E501
+
+        :param disable_notification: The disable_notification of this RequestContactImport.  # noqa: E501
+        :type: bool
+        """
+
+        self._disable_notification = disable_notification
 
     @property
     def sms_blacklist(self):

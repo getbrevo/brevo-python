@@ -361,7 +361,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_whats_app_templates**
-> GetWATemplates get_whats_app_templates(start_date=start_date, end_date=end_date, limit=limit, offset=offset, sort=sort)
+> GetWATemplates get_whats_app_templates(start_date=start_date, end_date=end_date, limit=limit, offset=offset, sort=sort, source=source)
 
 Return all your created WhatsApp templates
 
@@ -391,10 +391,11 @@ end_date = 'end_date_example' # str | **Mandatory if startDate is used**. Ending
 limit = 50 # int | Number of documents per page (optional) (default to 50)
 offset = 0 # int | Index of the first document in the page (optional) (default to 0)
 sort = 'desc' # str | Sort the results in the ascending/descending order of record modification. Default order is **descending** if `sort` is not passed (optional) (default to desc)
+source = 'source_example' # str | source of the template (optional)
 
 try:
     # Return all your created WhatsApp templates
-    api_response = api_instance.get_whats_app_templates(start_date=start_date, end_date=end_date, limit=limit, offset=offset, sort=sort)
+    api_response = api_instance.get_whats_app_templates(start_date=start_date, end_date=end_date, limit=limit, offset=offset, sort=sort, source=source)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WhatsAppCampaignsApi->get_whats_app_templates: %s\n" % e)
@@ -409,6 +410,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Number of documents per page | [optional] [default to 50]
  **offset** | **int**| Index of the first document in the page | [optional] [default to 0]
  **sort** | **str**| Sort the results in the ascending/descending order of record modification. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
+ **source** | **str**| source of the template | [optional] 
 
 ### Return type
 

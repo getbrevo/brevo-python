@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **parent_id** | **str** | Parent product id of the product | [optional] 
 **meta_info** | **dict(str, str)** | Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 10. | [optional] 
 **deleted_at** | **str** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop&#39;s database | [optional] 
+**is_deleted** | **bool** | product deleted from the shop&#39;s database | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

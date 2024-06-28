@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,45 +31,72 @@ class Body9(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'text': 'str'
+        'name': 'str',
+        'attributes': 'object'
     }
 
     attribute_map = {
-        'text': 'text'
+        'name': 'name',
+        'attributes': 'attributes'
     }
 
-    def __init__(self, text=None):  # noqa: E501
+    def __init__(self, name=None, attributes=None):  # noqa: E501
         """Body9 - a model defined in Swagger"""  # noqa: E501
 
-        self._text = None
+        self._name = None
+        self._attributes = None
         self.discriminator = None
 
-        self.text = text
+        if name is not None:
+            self.name = name
+        if attributes is not None:
+            self.attributes = attributes
 
     @property
-    def text(self):
-        """Gets the text of this Body9.  # noqa: E501
+    def name(self):
+        """Gets the name of this Body9.  # noqa: E501
 
-        edited message text  # noqa: E501
+        Name of deal  # noqa: E501
 
-        :return: The text of this Body9.  # noqa: E501
+        :return: The name of this Body9.  # noqa: E501
         :rtype: str
         """
-        return self._text
+        return self._name
 
-    @text.setter
-    def text(self, text):
-        """Sets the text of this Body9.
+    @name.setter
+    def name(self, name):
+        """Sets the name of this Body9.
 
-        edited message text  # noqa: E501
+        Name of deal  # noqa: E501
 
-        :param text: The text of this Body9.  # noqa: E501
+        :param name: The name of this Body9.  # noqa: E501
         :type: str
         """
-        if text is None:
-            raise ValueError("Invalid value for `text`, must not be `None`")  # noqa: E501
 
-        self._text = text
+        self._name = name
+
+    @property
+    def attributes(self):
+        """Gets the attributes of this Body9.  # noqa: E501
+
+        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
+
+        :return: The attributes of this Body9.  # noqa: E501
+        :rtype: object
+        """
+        return self._attributes
+
+    @attributes.setter
+    def attributes(self, attributes):
+        """Sets the attributes of this Body9.
+
+        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
+
+        :param attributes: The attributes of this Body9.  # noqa: E501
+        :type: object
+        """
+
+        self._attributes = attributes
 
     def to_dict(self):
         """Returns the model properties as a dict"""

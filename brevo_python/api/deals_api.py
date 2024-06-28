@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -131,7 +131,7 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str filters_attributes: Filter by attrbutes. If you have filter for owner on your side please send it as `attributes.owner`.\"
+        :param str filters_attributes_deal_name: Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
         :param str filters_linked_companies_ids: Filter by linked companies ids
         :param str filters_linked_contacts_ids: Filter by linked companies ids
         :param int offset: Index of the first document of the page
@@ -158,7 +158,7 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str filters_attributes: Filter by attrbutes. If you have filter for owner on your side please send it as `attributes.owner`.\"
+        :param str filters_attributes_deal_name: Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
         :param str filters_linked_companies_ids: Filter by linked companies ids
         :param str filters_linked_contacts_ids: Filter by linked companies ids
         :param int offset: Index of the first document of the page
@@ -170,7 +170,7 @@ class DealsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['filters_attributes', 'filters_linked_companies_ids', 'filters_linked_contacts_ids', 'offset', 'limit', 'sort', 'sort_by']  # noqa: E501
+        all_params = ['filters_attributes_deal_name', 'filters_linked_companies_ids', 'filters_linked_contacts_ids', 'offset', 'limit', 'sort', 'sort_by']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -191,8 +191,8 @@ class DealsApi(object):
         path_params = {}
 
         query_params = []
-        if 'filters_attributes' in params:
-            query_params.append(('filters[attributes]', params['filters_attributes']))  # noqa: E501
+        if 'filters_attributes_deal_name' in params:
+            query_params.append(('filters[attributes.deal_name]', params['filters_attributes_deal_name']))  # noqa: E501
         if 'filters_linked_companies_ids' in params:
             query_params.append(('filters[linkedCompaniesIds]', params['filters_linked_companies_ids']))  # noqa: E501
         if 'filters_linked_contacts_ids' in params:
@@ -443,7 +443,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body4 body: Updated deal details. (required)
+        :param Body9 body: Updated deal details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -465,7 +465,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body4 body: Updated deal details. (required)
+        :param Body9 body: Updated deal details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -538,6 +538,113 @@ class DealsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def crm_deals_import_post(self, file, mapping, **kwargs):  # noqa: E501
+        """Import deals(creation and updation)  # noqa: E501
+
+        Import deals from a CSV file with mapping options.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_deals_import_post(file, mapping, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param file file: The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+        :param str mapping: The mapping options in JSON format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+        :return: InlineResponse2003
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.crm_deals_import_post_with_http_info(file, mapping, **kwargs)  # noqa: E501
+        else:
+            (data) = self.crm_deals_import_post_with_http_info(file, mapping, **kwargs)  # noqa: E501
+            return data
+
+    def crm_deals_import_post_with_http_info(self, file, mapping, **kwargs):  # noqa: E501
+        """Import deals(creation and updation)  # noqa: E501
+
+        Import deals from a CSV file with mapping options.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_deals_import_post_with_http_info(file, mapping, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param file file: The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+        :param str mapping: The mapping options in JSON format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+        :return: InlineResponse2003
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['file', 'mapping']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method crm_deals_import_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'file' is set
+        if ('file' not in params or
+                params['file'] is None):
+            raise ValueError("Missing the required parameter `file` when calling `crm_deals_import_post`")  # noqa: E501
+        # verify the required parameter 'mapping' is set
+        if ('mapping' not in params or
+                params['mapping'] is None):
+            raise ValueError("Missing the required parameter `mapping` when calling `crm_deals_import_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+        if 'file' in params:
+            local_var_files['file'] = params['file']  # noqa: E501
+        if 'mapping' in params:
+            form_params.append(('mapping', params['mapping']))  # noqa: E501
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['multipart/form-data'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/crm/deals/import', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2003',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def crm_deals_link_unlink_id_patch(self, id, body, **kwargs):  # noqa: E501
         """Link and Unlink a deal with contacts and companies  # noqa: E501
 
@@ -548,7 +655,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body5 body: Linked / Unlinked contacts and companies ids. (required)
+        :param Body10 body: Linked / Unlinked contacts and companies ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -570,7 +677,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body5 body: Linked / Unlinked contacts and companies ids. (required)
+        :param Body10 body: Linked / Unlinked contacts and companies ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -652,8 +759,8 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body3 body: Deal create data. (required)
-        :return: InlineResponse201
+        :param Body8 body: Deal create data. (required)
+        :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -673,8 +780,8 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body3 body: Deal create data. (required)
-        :return: InlineResponse201
+        :param Body8 body: Deal create data. (required)
+        :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -732,7 +839,96 @@ class DealsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse201',  # noqa: E501
+            response_type='InlineResponse2011',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def crm_pipeline_details_all_get(self, **kwargs):  # noqa: E501
+        """Get all pipelines  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_pipeline_details_all_get(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: Pipelines
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.crm_pipeline_details_all_get_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.crm_pipeline_details_all_get_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def crm_pipeline_details_all_get_with_http_info(self, **kwargs):  # noqa: E501
+        """Get all pipelines  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_pipeline_details_all_get_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: Pipelines
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method crm_pipeline_details_all_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/crm/pipeline/details/all', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Pipelines',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -743,6 +939,7 @@ class DealsApi(object):
     def crm_pipeline_details_get(self, **kwargs):  # noqa: E501
         """Get pipeline stages  # noqa: E501
 
+        This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.crm_pipeline_details_get(async_req=True)
@@ -763,6 +960,7 @@ class DealsApi(object):
     def crm_pipeline_details_get_with_http_info(self, **kwargs):  # noqa: E501
         """Get pipeline stages  # noqa: E501
 
+        This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.crm_pipeline_details_get_with_http_info(async_req=True)
@@ -822,6 +1020,103 @@ class DealsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='Pipeline',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def crm_pipeline_details_pipeline_id_get(self, pipeline_id, **kwargs):  # noqa: E501
+        """Get a pipeline  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_pipeline_details_pipeline_id_get(pipeline_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str pipeline_id: (required)
+        :return: Pipelines
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.crm_pipeline_details_pipeline_id_get_with_http_info(pipeline_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.crm_pipeline_details_pipeline_id_get_with_http_info(pipeline_id, **kwargs)  # noqa: E501
+            return data
+
+    def crm_pipeline_details_pipeline_id_get_with_http_info(self, pipeline_id, **kwargs):  # noqa: E501
+        """Get a pipeline  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_pipeline_details_pipeline_id_get_with_http_info(pipeline_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str pipeline_id: (required)
+        :return: Pipelines
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['pipeline_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method crm_pipeline_details_pipeline_id_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'pipeline_id' is set
+        if ('pipeline_id' not in params or
+                params['pipeline_id'] is None):
+            raise ValueError("Missing the required parameter `pipeline_id` when calling `crm_pipeline_details_pipeline_id_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'pipeline_id' in params:
+            path_params['pipelineID'] = params['pipeline_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/crm/pipeline/details/{pipelineID}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Pipelines',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

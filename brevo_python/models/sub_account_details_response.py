@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,6 +34,7 @@ class SubAccountDetailsResponse(object):
         'name': 'str',
         'email': 'str',
         'company_name': 'str',
+        'groups': 'list[SubAccountDetailsResponseGroups]',
         'plan_info': 'SubAccountDetailsResponsePlanInfo'
     }
 
@@ -41,15 +42,17 @@ class SubAccountDetailsResponse(object):
         'name': 'name',
         'email': 'email',
         'company_name': 'companyName',
+        'groups': 'groups',
         'plan_info': 'planInfo'
     }
 
-    def __init__(self, name=None, email=None, company_name=None, plan_info=None):  # noqa: E501
+    def __init__(self, name=None, email=None, company_name=None, groups=None, plan_info=None):  # noqa: E501
         """SubAccountDetailsResponse - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._email = None
         self._company_name = None
+        self._groups = None
         self._plan_info = None
         self.discriminator = None
 
@@ -59,6 +62,8 @@ class SubAccountDetailsResponse(object):
             self.email = email
         if company_name is not None:
             self.company_name = company_name
+        if groups is not None:
+            self.groups = groups
         if plan_info is not None:
             self.plan_info = plan_info
 
@@ -130,6 +135,29 @@ class SubAccountDetailsResponse(object):
         """
 
         self._company_name = company_name
+
+    @property
+    def groups(self):
+        """Gets the groups of this SubAccountDetailsResponse.  # noqa: E501
+
+        List of group(s) associated with the sub-account  # noqa: E501
+
+        :return: The groups of this SubAccountDetailsResponse.  # noqa: E501
+        :rtype: list[SubAccountDetailsResponseGroups]
+        """
+        return self._groups
+
+    @groups.setter
+    def groups(self, groups):
+        """Sets the groups of this SubAccountDetailsResponse.
+
+        List of group(s) associated with the sub-account  # noqa: E501
+
+        :param groups: The groups of this SubAccountDetailsResponse.  # noqa: E501
+        :type: list[SubAccountDetailsResponseGroups]
+        """
+
+        self._groups = groups
 
     @property
     def plan_info(self):

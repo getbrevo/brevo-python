@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | Email address of the contact for which you requested the details | 
+**email** | **str** | Email address of the contact for which you requested the details | [optional] 
 **id** | **int** | ID of the contact for which you requested the details | 
 **email_blacklisted** | **bool** | Blacklist status for email campaigns (true&#x3D;blacklisted, false&#x3D;not blacklisted) | 
 **sms_blacklisted** | **bool** | Blacklist status for SMS campaigns (true&#x3D;blacklisted, false&#x3D;not blacklisted) | 

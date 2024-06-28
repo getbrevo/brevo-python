@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -1350,6 +1350,9 @@ class ContactsApi(object):
         :param str modified_since: Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param str created_since: Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+        :param int segment_id: Id of the segment. **Either listIds or segmentId can be passed.**
+        :param list[int] list_ids: Ids of the list. **Either listIds or segmentId can be passed.**
+        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))** 
         :return: GetContacts
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1375,12 +1378,15 @@ class ContactsApi(object):
         :param str modified_since: Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param str created_since: Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+        :param int segment_id: Id of the segment. **Either listIds or segmentId can be passed.**
+        :param list[int] list_ids: Ids of the list. **Either listIds or segmentId can be passed.**
+        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))** 
         :return: GetContacts
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['limit', 'offset', 'modified_since', 'created_since', 'sort']  # noqa: E501
+        all_params = ['limit', 'offset', 'modified_since', 'created_since', 'sort', 'segment_id', 'list_ids', 'filter']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1415,6 +1421,13 @@ class ContactsApi(object):
             query_params.append(('createdSince', params['created_since']))  # noqa: E501
         if 'sort' in params:
             query_params.append(('sort', params['sort']))  # noqa: E501
+        if 'segment_id' in params:
+            query_params.append(('segmentId', params['segment_id']))  # noqa: E501
+        if 'list_ids' in params:
+            query_params.append(('listIds', params['list_ids']))  # noqa: E501
+            collection_formats['listIds'] = 'csv'  # noqa: E501
+        if 'filter' in params:
+            query_params.append(('filter', params['filter']))  # noqa: E501
 
         header_params = {}
 
@@ -1899,6 +1912,8 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
+        :param str start_date: Mandatory if endDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result
+        :param str end_date: Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result
         :return: GetExtendedList
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1920,12 +1935,14 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
+        :param str start_date: Mandatory if endDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result
+        :param str end_date: Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result
         :return: GetExtendedList
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['list_id']  # noqa: E501
+        all_params = ['list_id', 'start_date', 'end_date']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1952,6 +1969,10 @@ class ContactsApi(object):
             path_params['listId'] = params['list_id']  # noqa: E501
 
         query_params = []
+        if 'start_date' in params:
+            query_params.append(('startDate', params['start_date']))  # noqa: E501
+        if 'end_date' in params:
+            query_params.append(('endDate', params['end_date']))  # noqa: E501
 
         header_params = {}
 
@@ -2207,7 +2228,7 @@ class ContactsApi(object):
     def import_contacts(self, request_contact_import, **kwargs):  # noqa: E501
         """Import contacts  # noqa: E501
 
-        It returns the background process ID which on completion calls the notify URL that you have set in the input.  # noqa: E501
+        It returns the background process ID which on completion calls the notify URL that you have set in the input.  **Note**: - Any contact attribute that doesn't exist in your account will be ignored at import end.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.import_contacts(request_contact_import, async_req=True)
@@ -2229,7 +2250,7 @@ class ContactsApi(object):
     def import_contacts_with_http_info(self, request_contact_import, **kwargs):  # noqa: E501
         """Import contacts  # noqa: E501
 
-        It returns the background process ID which on completion calls the notify URL that you have set in the input.  # noqa: E501
+        It returns the background process ID which on completion calls the notify URL that you have set in the input.  **Note**: - Any contact attribute that doesn't exist in your account will be ignored at import end.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.import_contacts_with_http_info(request_contact_import, async_req=True)

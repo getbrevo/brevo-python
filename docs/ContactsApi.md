@@ -785,7 +785,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_contacts**
-> GetContacts get_contacts(limit=limit, offset=offset, modified_since=modified_since, created_since=created_since, sort=sort)
+> GetContacts get_contacts(limit=limit, offset=offset, modified_since=modified_since, created_since=created_since, sort=sort, segment_id=segment_id, list_ids=list_ids, filter=filter)
 
 Get all the contacts
 
@@ -815,10 +815,13 @@ offset = 0 # int | Index of the first document of the page (optional) (default t
 modified_since = 'modified_since_example' # str | Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
 created_since = 'created_since_example' # str | Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
 sort = 'desc' # str | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed (optional) (default to desc)
+segment_id = 789 # int | Id of the segment. **Either listIds or segmentId can be passed.** (optional)
+list_ids = [56] # list[int] | Ids of the list. **Either listIds or segmentId can be passed.** (optional)
+filter = 'filter_example' # str | Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))**  (optional)
 
 try:
     # Get all the contacts
-    api_response = api_instance.get_contacts(limit=limit, offset=offset, modified_since=modified_since, created_since=created_since, sort=sort)
+    api_response = api_instance.get_contacts(limit=limit, offset=offset, modified_since=modified_since, created_since=created_since, sort=sort, segment_id=segment_id, list_ids=list_ids, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ContactsApi->get_contacts: %s\n" % e)
@@ -833,6 +836,9 @@ Name | Type | Description  | Notes
  **modified_since** | **str**| Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. | [optional] 
  **created_since** | **str**| Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. | [optional] 
  **sort** | **str**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
+ **segment_id** | **int**| Id of the segment. **Either listIds or segmentId can be passed.** | [optional] 
+ **list_ids** | [**list[int]**](int.md)| Ids of the list. **Either listIds or segmentId can be passed.** | [optional] 
+ **filter** | **str**| Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter&#x3D;equals(FIRSTNAME,\&quot;Antoine\&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, \&quot;1989-11-23\&quot;))**  | [optional] 
 
 ### Return type
 
@@ -1096,7 +1102,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_list**
-> GetExtendedList get_list(list_id)
+> GetExtendedList get_list(list_id, start_date=start_date, end_date=end_date)
 
 Get a list's details
 
@@ -1122,10 +1128,12 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
 list_id = 789 # int | Id of the list
+start_date = 'start_date_example' # str | Mandatory if endDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result (optional)
+end_date = 'end_date_example' # str | Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result (optional)
 
 try:
     # Get a list's details
-    api_response = api_instance.get_list(list_id)
+    api_response = api_instance.get_list(list_id, start_date=start_date, end_date=end_date)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ContactsApi->get_list: %s\n" % e)
@@ -1136,6 +1144,8 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **list_id** | **int**| Id of the list | 
+ **start_date** | **str**| Mandatory if endDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result | [optional] 
+ **end_date** | **str**| Mandatory if startDate is used. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id.Prefer to pass your timezone in date-time format for accurate result | [optional] 
 
 ### Return type
 
@@ -1279,7 +1289,7 @@ Name | Type | Description  | Notes
 
 Import contacts
 
-It returns the background process ID which on completion calls the notify URL that you have set in the input.
+It returns the background process ID which on completion calls the notify URL that you have set in the input.  **Note**: - Any contact attribute that doesn't exist in your account will be ignored at import end. 
 
 ### Example
 ```python

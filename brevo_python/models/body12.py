@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,128 +31,296 @@ class Body12(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'agent_id': 'str',
-        'received_from': 'str',
-        'agent_email': 'str',
-        'agent_name': 'str'
+        'name': 'str',
+        'duration': 'int',
+        'task_type_id': 'str',
+        '_date': 'datetime',
+        'notes': 'str',
+        'done': 'bool',
+        'assign_to_id': 'str',
+        'contacts_ids': 'list[int]',
+        'deals_ids': 'list[str]',
+        'companies_ids': 'list[str]'
     }
 
     attribute_map = {
-        'agent_id': 'agentId',
-        'received_from': 'receivedFrom',
-        'agent_email': 'agentEmail',
-        'agent_name': 'agentName'
+        'name': 'name',
+        'duration': 'duration',
+        'task_type_id': 'taskTypeId',
+        '_date': 'date',
+        'notes': 'notes',
+        'done': 'done',
+        'assign_to_id': 'assignToId',
+        'contacts_ids': 'contactsIds',
+        'deals_ids': 'dealsIds',
+        'companies_ids': 'companiesIds'
     }
 
-    def __init__(self, agent_id=None, received_from=None, agent_email=None, agent_name=None):  # noqa: E501
+    def __init__(self, name=None, duration=None, task_type_id=None, _date=None, notes=None, done=None, assign_to_id=None, contacts_ids=None, deals_ids=None, companies_ids=None):  # noqa: E501
         """Body12 - a model defined in Swagger"""  # noqa: E501
 
-        self._agent_id = None
-        self._received_from = None
-        self._agent_email = None
-        self._agent_name = None
+        self._name = None
+        self._duration = None
+        self._task_type_id = None
+        self.__date = None
+        self._notes = None
+        self._done = None
+        self._assign_to_id = None
+        self._contacts_ids = None
+        self._deals_ids = None
+        self._companies_ids = None
         self.discriminator = None
 
-        if agent_id is not None:
-            self.agent_id = agent_id
-        if received_from is not None:
-            self.received_from = received_from
-        if agent_email is not None:
-            self.agent_email = agent_email
-        if agent_name is not None:
-            self.agent_name = agent_name
+        if name is not None:
+            self.name = name
+        if duration is not None:
+            self.duration = duration
+        if task_type_id is not None:
+            self.task_type_id = task_type_id
+        if _date is not None:
+            self._date = _date
+        if notes is not None:
+            self.notes = notes
+        if done is not None:
+            self.done = done
+        if assign_to_id is not None:
+            self.assign_to_id = assign_to_id
+        if contacts_ids is not None:
+            self.contacts_ids = contacts_ids
+        if deals_ids is not None:
+            self.deals_ids = deals_ids
+        if companies_ids is not None:
+            self.companies_ids = companies_ids
 
     @property
-    def agent_id(self):
-        """Gets the agent_id of this Body12.  # noqa: E501
+    def name(self):
+        """Gets the name of this Body12.  # noqa: E501
 
-        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).  # noqa: E501
+        Name of task  # noqa: E501
 
-        :return: The agent_id of this Body12.  # noqa: E501
+        :return: The name of this Body12.  # noqa: E501
         :rtype: str
         """
-        return self._agent_id
+        return self._name
 
-    @agent_id.setter
-    def agent_id(self, agent_id):
-        """Sets the agent_id of this Body12.
+    @name.setter
+    def name(self, name):
+        """Sets the name of this Body12.
 
-        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).  # noqa: E501
+        Name of task  # noqa: E501
 
-        :param agent_id: The agent_id of this Body12.  # noqa: E501
+        :param name: The name of this Body12.  # noqa: E501
         :type: str
         """
 
-        self._agent_id = agent_id
+        self._name = name
 
     @property
-    def received_from(self):
-        """Gets the received_from of this Body12.  # noqa: E501
+    def duration(self):
+        """Gets the duration of this Body12.  # noqa: E501
 
-        mark your messages to distinguish messages created by you from the others.  # noqa: E501
+        Duration of task in milliseconds [1 minute = 60000 ms]  # noqa: E501
 
-        :return: The received_from of this Body12.  # noqa: E501
+        :return: The duration of this Body12.  # noqa: E501
+        :rtype: int
+        """
+        return self._duration
+
+    @duration.setter
+    def duration(self, duration):
+        """Sets the duration of this Body12.
+
+        Duration of task in milliseconds [1 minute = 60000 ms]  # noqa: E501
+
+        :param duration: The duration of this Body12.  # noqa: E501
+        :type: int
+        """
+
+        self._duration = duration
+
+    @property
+    def task_type_id(self):
+        """Gets the task_type_id of this Body12.  # noqa: E501
+
+        Id for type of task e.g Call / Email / Meeting etc.  # noqa: E501
+
+        :return: The task_type_id of this Body12.  # noqa: E501
         :rtype: str
         """
-        return self._received_from
+        return self._task_type_id
 
-    @received_from.setter
-    def received_from(self, received_from):
-        """Sets the received_from of this Body12.
+    @task_type_id.setter
+    def task_type_id(self, task_type_id):
+        """Sets the task_type_id of this Body12.
 
-        mark your messages to distinguish messages created by you from the others.  # noqa: E501
+        Id for type of task e.g Call / Email / Meeting etc.  # noqa: E501
 
-        :param received_from: The received_from of this Body12.  # noqa: E501
+        :param task_type_id: The task_type_id of this Body12.  # noqa: E501
         :type: str
         """
 
-        self._received_from = received_from
+        self._task_type_id = task_type_id
 
     @property
-    def agent_email(self):
-        """Gets the agent_email of this Body12.  # noqa: E501
+    def _date(self):
+        """Gets the _date of this Body12.  # noqa: E501
 
-        agent email. When sending online pings from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address. If there’s no agent with the specified email address in your Brevo organization, a dummy agent will be created automatically.  # noqa: E501
+        Task date/time  # noqa: E501
 
-        :return: The agent_email of this Body12.  # noqa: E501
+        :return: The _date of this Body12.  # noqa: E501
+        :rtype: datetime
+        """
+        return self.__date
+
+    @_date.setter
+    def _date(self, _date):
+        """Sets the _date of this Body12.
+
+        Task date/time  # noqa: E501
+
+        :param _date: The _date of this Body12.  # noqa: E501
+        :type: datetime
+        """
+
+        self.__date = _date
+
+    @property
+    def notes(self):
+        """Gets the notes of this Body12.  # noqa: E501
+
+        Notes added to a task  # noqa: E501
+
+        :return: The notes of this Body12.  # noqa: E501
         :rtype: str
         """
-        return self._agent_email
+        return self._notes
 
-    @agent_email.setter
-    def agent_email(self, agent_email):
-        """Sets the agent_email of this Body12.
+    @notes.setter
+    def notes(self, notes):
+        """Sets the notes of this Body12.
 
-        agent email. When sending online pings from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address. If there’s no agent with the specified email address in your Brevo organization, a dummy agent will be created automatically.  # noqa: E501
+        Notes added to a task  # noqa: E501
 
-        :param agent_email: The agent_email of this Body12.  # noqa: E501
+        :param notes: The notes of this Body12.  # noqa: E501
         :type: str
         """
 
-        self._agent_email = agent_email
+        self._notes = notes
 
     @property
-    def agent_name(self):
-        """Gets the agent_name of this Body12.  # noqa: E501
+    def done(self):
+        """Gets the done of this Body12.  # noqa: E501
 
-        agent name.  # noqa: E501
+        Task marked as done  # noqa: E501
 
-        :return: The agent_name of this Body12.  # noqa: E501
+        :return: The done of this Body12.  # noqa: E501
+        :rtype: bool
+        """
+        return self._done
+
+    @done.setter
+    def done(self, done):
+        """Sets the done of this Body12.
+
+        Task marked as done  # noqa: E501
+
+        :param done: The done of this Body12.  # noqa: E501
+        :type: bool
+        """
+
+        self._done = done
+
+    @property
+    def assign_to_id(self):
+        """Gets the assign_to_id of this Body12.  # noqa: E501
+
+        To assign a task to a user you can use either the account email or ID.  # noqa: E501
+
+        :return: The assign_to_id of this Body12.  # noqa: E501
         :rtype: str
         """
-        return self._agent_name
+        return self._assign_to_id
 
-    @agent_name.setter
-    def agent_name(self, agent_name):
-        """Sets the agent_name of this Body12.
+    @assign_to_id.setter
+    def assign_to_id(self, assign_to_id):
+        """Sets the assign_to_id of this Body12.
 
-        agent name.  # noqa: E501
+        To assign a task to a user you can use either the account email or ID.  # noqa: E501
 
-        :param agent_name: The agent_name of this Body12.  # noqa: E501
+        :param assign_to_id: The assign_to_id of this Body12.  # noqa: E501
         :type: str
         """
 
-        self._agent_name = agent_name
+        self._assign_to_id = assign_to_id
+
+    @property
+    def contacts_ids(self):
+        """Gets the contacts_ids of this Body12.  # noqa: E501
+
+        Contact ids for contacts linked to this task  # noqa: E501
+
+        :return: The contacts_ids of this Body12.  # noqa: E501
+        :rtype: list[int]
+        """
+        return self._contacts_ids
+
+    @contacts_ids.setter
+    def contacts_ids(self, contacts_ids):
+        """Sets the contacts_ids of this Body12.
+
+        Contact ids for contacts linked to this task  # noqa: E501
+
+        :param contacts_ids: The contacts_ids of this Body12.  # noqa: E501
+        :type: list[int]
+        """
+
+        self._contacts_ids = contacts_ids
+
+    @property
+    def deals_ids(self):
+        """Gets the deals_ids of this Body12.  # noqa: E501
+
+        Deal ids for deals a task is linked to  # noqa: E501
+
+        :return: The deals_ids of this Body12.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._deals_ids
+
+    @deals_ids.setter
+    def deals_ids(self, deals_ids):
+        """Sets the deals_ids of this Body12.
+
+        Deal ids for deals a task is linked to  # noqa: E501
+
+        :param deals_ids: The deals_ids of this Body12.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._deals_ids = deals_ids
+
+    @property
+    def companies_ids(self):
+        """Gets the companies_ids of this Body12.  # noqa: E501
+
+        Companies ids for companies a task is linked to  # noqa: E501
+
+        :return: The companies_ids of this Body12.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._companies_ids
+
+    @companies_ids.setter
+    def companies_ids(self, companies_ids):
+        """Sets the companies_ids of this Body12.
+
+        Companies ids for companies a task is linked to  # noqa: E501
+
+        :param companies_ids: The companies_ids of this Body12.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._companies_ids = companies_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

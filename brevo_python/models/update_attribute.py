@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -32,25 +32,30 @@ class UpdateAttribute(object):
     """
     swagger_types = {
         'value': 'str',
-        'enumeration': 'list[UpdateAttributeEnumeration]'
+        'enumeration': 'list[UpdateAttributeEnumeration]',
+        'multi_category_options': 'list[str]'
     }
 
     attribute_map = {
         'value': 'value',
-        'enumeration': 'enumeration'
+        'enumeration': 'enumeration',
+        'multi_category_options': 'multiCategoryOptions'
     }
 
-    def __init__(self, value=None, enumeration=None):  # noqa: E501
+    def __init__(self, value=None, enumeration=None, multi_category_options=None):  # noqa: E501
         """UpdateAttribute - a model defined in Swagger"""  # noqa: E501
 
         self._value = None
         self._enumeration = None
+        self._multi_category_options = None
         self.discriminator = None
 
         if value is not None:
             self.value = value
         if enumeration is not None:
             self.enumeration = enumeration
+        if multi_category_options is not None:
+            self.multi_category_options = multi_category_options
 
     @property
     def value(self):
@@ -97,6 +102,29 @@ class UpdateAttribute(object):
         """
 
         self._enumeration = enumeration
+
+    @property
+    def multi_category_options(self):
+        """Gets the multi_category_options of this UpdateAttribute.  # noqa: E501
+
+        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes**. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+
+        :return: The multi_category_options of this UpdateAttribute.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._multi_category_options
+
+    @multi_category_options.setter
+    def multi_category_options(self, multi_category_options):
+        """Sets the multi_category_options of this UpdateAttribute.
+
+        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes**. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+
+        :param multi_category_options: The multi_category_options of this UpdateAttribute.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._multi_category_options = multi_category_options
 
     def to_dict(self):
         """Returns the model properties as a dict"""

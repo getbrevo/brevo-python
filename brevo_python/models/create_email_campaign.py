@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -39,6 +39,7 @@ class CreateEmailCampaign(object):
         'template_id': 'int',
         'scheduled_at': 'str',
         'subject': 'str',
+        'preview_text': 'str',
         'reply_to': 'str',
         'to_field': 'str',
         'recipients': 'CreateEmailCampaignRecipients',
@@ -72,6 +73,7 @@ class CreateEmailCampaign(object):
         'template_id': 'templateId',
         'scheduled_at': 'scheduledAt',
         'subject': 'subject',
+        'preview_text': 'previewText',
         'reply_to': 'replyTo',
         'to_field': 'toField',
         'recipients': 'recipients',
@@ -96,7 +98,7 @@ class CreateEmailCampaign(object):
         'update_form_id': 'updateFormId'
     }
 
-    def __init__(self, tag=None, sender=None, name=None, html_content=None, html_url=None, template_id=None, scheduled_at=None, subject=None, reply_to=None, to_field=None, recipients=None, attachment_url=None, inline_image_activation=False, mirror_active=None, footer=None, header=None, utm_campaign=None, params=None, send_at_best_time=False, ab_testing=False, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, ip_warmup_enable=False, initial_quota=None, increase_rate=None, unsubscription_page_id=None, update_form_id=None):  # noqa: E501
+    def __init__(self, tag=None, sender=None, name=None, html_content=None, html_url=None, template_id=None, scheduled_at=None, subject=None, preview_text=None, reply_to=None, to_field=None, recipients=None, attachment_url=None, inline_image_activation=False, mirror_active=None, footer=None, header=None, utm_campaign=None, params=None, send_at_best_time=False, ab_testing=False, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, ip_warmup_enable=False, initial_quota=None, increase_rate=None, unsubscription_page_id=None, update_form_id=None):  # noqa: E501
         """CreateEmailCampaign - a model defined in Swagger"""  # noqa: E501
 
         self._tag = None
@@ -107,6 +109,7 @@ class CreateEmailCampaign(object):
         self._template_id = None
         self._scheduled_at = None
         self._subject = None
+        self._preview_text = None
         self._reply_to = None
         self._to_field = None
         self._recipients = None
@@ -145,6 +148,8 @@ class CreateEmailCampaign(object):
             self.scheduled_at = scheduled_at
         if subject is not None:
             self.subject = subject
+        if preview_text is not None:
+            self.preview_text = preview_text
         if reply_to is not None:
             self.reply_to = reply_to
         if to_field is not None:
@@ -375,6 +380,29 @@ class CreateEmailCampaign(object):
         """
 
         self._subject = subject
+
+    @property
+    def preview_text(self):
+        """Gets the preview_text of this CreateEmailCampaign.  # noqa: E501
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :return: The preview_text of this CreateEmailCampaign.  # noqa: E501
+        :rtype: str
+        """
+        return self._preview_text
+
+    @preview_text.setter
+    def preview_text(self, preview_text):
+        """Sets the preview_text of this CreateEmailCampaign.
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :param preview_text: The preview_text of this CreateEmailCampaign.  # noqa: E501
+        :type: str
+        """
+
+        self._preview_text = preview_text
 
     @property
     def reply_to(self):

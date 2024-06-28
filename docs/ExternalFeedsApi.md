@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_external_feed**
-> InlineResponse2013 create_external_feed(create_external_feed)
+> InlineResponse2015 create_external_feed(create_external_feed)
 
 Create an external feed
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2013**](InlineResponse2013.md)
+[**InlineResponse2015**](InlineResponse2015.md)
 
 ### Authorization
 

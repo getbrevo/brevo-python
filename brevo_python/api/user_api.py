@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -32,6 +32,105 @@ class UserApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
+
+    def edit_user_permission(self, update_permissions, **kwargs):  # noqa: E501
+        """Update permission for a user  # noqa: E501
+
+        `Feature` - A Feature represents a specific functionality like Email campaign, Deals, Calls, Automations, etc. on Brevo. While inviting a user, determine which feature you want to manage access to. You must specify the feature accurately to avoid errors.  `Permission` - A Permission defines the level of access or control a user has over a specific feature. While inviting user, decide on the permission level required for the selected feature. Make sure the chosen permission is related to the selected feature.  Features and their respective permissions are as below:  - `email_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `sms_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `contacts`:   - \"view\"   - \"create_edit_delete\"   - \"import\"   - \"export\"   - \"list_and_attributes\"   - \"forms\" - `templates`:   - \"create_edit_delete\"   - \"activate_deactivate\" - `workflows`:   - \"create_edit_delete\"   - \"activate_deactivate_pause\"   - \"settings\" - `facebook_ads`:   - \"create_edit_delete\"   - \"schedule_pause\" - `landing_pages`:   - \"all\" - `transactional_emails`:   - \"settings\"   - \"logs\" - `smtp_api`:   - \"smtp\"   - \"api_keys\"   - \"authorized_ips\" - `user_management`:   - \"all\" - `sales_platform`:   - \"manage_owned_deals_tasks\"   - \"manage_others_deals_tasks\"   - \"reports\"   - \"settings\" - `phone`:   - \"all\" - `conversations`:   - \"access\"   - \"assign\"   - \"configure\" - `senders_domains_dedicated_ips`:   - \"senders_management\"   - \"domains_management\"   - \"dedicated_ips_management\" - `push_notifications`:   - \"view\"   - \"create_edit_delete\"   - \"send\"   - \"settings\" - `companies`:   - \"manage_owned_companies\"   - \"manage_other_companies\"   - \"settings\"  **Note**: - The privileges array remains the same as in the send invitation; the user simply needs to provide the permissions that need to be updated. - The availability of feature and its permission depends on your current plan. Please select the features and permissions accordingly.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.edit_user_permission(update_permissions, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Inviteuser update_permissions: Values to update permissions for an invited user (required)
+        :return: Inviteuser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.edit_user_permission_with_http_info(update_permissions, **kwargs)  # noqa: E501
+        else:
+            (data) = self.edit_user_permission_with_http_info(update_permissions, **kwargs)  # noqa: E501
+            return data
+
+    def edit_user_permission_with_http_info(self, update_permissions, **kwargs):  # noqa: E501
+        """Update permission for a user  # noqa: E501
+
+        `Feature` - A Feature represents a specific functionality like Email campaign, Deals, Calls, Automations, etc. on Brevo. While inviting a user, determine which feature you want to manage access to. You must specify the feature accurately to avoid errors.  `Permission` - A Permission defines the level of access or control a user has over a specific feature. While inviting user, decide on the permission level required for the selected feature. Make sure the chosen permission is related to the selected feature.  Features and their respective permissions are as below:  - `email_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `sms_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `contacts`:   - \"view\"   - \"create_edit_delete\"   - \"import\"   - \"export\"   - \"list_and_attributes\"   - \"forms\" - `templates`:   - \"create_edit_delete\"   - \"activate_deactivate\" - `workflows`:   - \"create_edit_delete\"   - \"activate_deactivate_pause\"   - \"settings\" - `facebook_ads`:   - \"create_edit_delete\"   - \"schedule_pause\" - `landing_pages`:   - \"all\" - `transactional_emails`:   - \"settings\"   - \"logs\" - `smtp_api`:   - \"smtp\"   - \"api_keys\"   - \"authorized_ips\" - `user_management`:   - \"all\" - `sales_platform`:   - \"manage_owned_deals_tasks\"   - \"manage_others_deals_tasks\"   - \"reports\"   - \"settings\" - `phone`:   - \"all\" - `conversations`:   - \"access\"   - \"assign\"   - \"configure\" - `senders_domains_dedicated_ips`:   - \"senders_management\"   - \"domains_management\"   - \"dedicated_ips_management\" - `push_notifications`:   - \"view\"   - \"create_edit_delete\"   - \"send\"   - \"settings\" - `companies`:   - \"manage_owned_companies\"   - \"manage_other_companies\"   - \"settings\"  **Note**: - The privileges array remains the same as in the send invitation; the user simply needs to provide the permissions that need to be updated. - The availability of feature and its permission depends on your current plan. Please select the features and permissions accordingly.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.edit_user_permission_with_http_info(update_permissions, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Inviteuser update_permissions: Values to update permissions for an invited user (required)
+        :return: Inviteuser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['update_permissions']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method edit_user_permission" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'update_permissions' is set
+        if ('update_permissions' not in params or
+                params['update_permissions'] is None):
+            raise ValueError("Missing the required parameter `update_permissions` when calling `edit_user_permission`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'update_permissions' in params:
+            body_params = params['update_permissions']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organization/user/update/permissions', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Inviteuser',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
 
     def get_invited_users_list(self, **kwargs):  # noqa: E501
         """Get the list of all your users  # noqa: E501
@@ -212,6 +311,307 @@ class UserApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GetUserPermission',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def inviteuser(self, send_invitation, **kwargs):  # noqa: E501
+        """Send invitation to user  # noqa: E501
+
+        `Feature` - A Feature represents a specific functionality like Email campaign, Deals, Calls, Automations, etc. on Brevo. While inviting a user, determine which feature you want to manage access to. You must specify the feature accurately to avoid errors.  `Permission` - A Permission defines the level of access or control a user has over a specific feature. While inviting user, decide on the permission level required for the selected feature. Make sure the chosen permission is related to the selected feature.  Features and their respective permissions are as below:  - `email_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `sms_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `contacts`:   - \"view\"   - \"create_edit_delete\"   - \"import\"   - \"export\"   - \"list_and_attributes\"   - \"forms\" - `templates`:   - \"create_edit_delete\"   - \"activate_deactivate\" - `workflows`:   - \"create_edit_delete\"   - \"activate_deactivate_pause\"   - \"settings\" - `facebook_ads`:   - \"create_edit_delete\"   - \"schedule_pause\" - `landing_pages`:   - \"all\" - `transactional_emails`:   - \"settings\"   - \"logs\" - `smtp_api`:   - \"smtp\"   - \"api_keys\"   - \"authorized_ips\" - `user_management`:   - \"all\" - `sales_platform`:   - \"manage_owned_deals_tasks\"   - \"manage_others_deals_tasks\"   - \"reports\"   - \"settings\" - `phone`:   - \"all\" - `conversations`:   - \"access\"   - \"assign\"   - \"configure\" - `senders_domains_dedicated_ips`:   - \"senders_management\"   - \"domains_management\"   - \"dedicated_ips_management\" - `push_notifications`:   - \"view\"   - \"create_edit_delete\"   - \"send\"   - \"settings\" - `companies`:   - \"manage_owned_companies\"   - \"manage_other_companies\"   - \"settings\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited user. - The availability of feature and its permission depends on your current plan. Please select the features and permissions accordingly.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.inviteuser(send_invitation, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Inviteuser send_invitation: Values to create an invitation (required)
+        :return: Inviteuser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.inviteuser_with_http_info(send_invitation, **kwargs)  # noqa: E501
+        else:
+            (data) = self.inviteuser_with_http_info(send_invitation, **kwargs)  # noqa: E501
+            return data
+
+    def inviteuser_with_http_info(self, send_invitation, **kwargs):  # noqa: E501
+        """Send invitation to user  # noqa: E501
+
+        `Feature` - A Feature represents a specific functionality like Email campaign, Deals, Calls, Automations, etc. on Brevo. While inviting a user, determine which feature you want to manage access to. You must specify the feature accurately to avoid errors.  `Permission` - A Permission defines the level of access or control a user has over a specific feature. While inviting user, decide on the permission level required for the selected feature. Make sure the chosen permission is related to the selected feature.  Features and their respective permissions are as below:  - `email_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `sms_campaigns`:   - \"create_edit_delete\"   - \"send_schedule_suspend\" - `contacts`:   - \"view\"   - \"create_edit_delete\"   - \"import\"   - \"export\"   - \"list_and_attributes\"   - \"forms\" - `templates`:   - \"create_edit_delete\"   - \"activate_deactivate\" - `workflows`:   - \"create_edit_delete\"   - \"activate_deactivate_pause\"   - \"settings\" - `facebook_ads`:   - \"create_edit_delete\"   - \"schedule_pause\" - `landing_pages`:   - \"all\" - `transactional_emails`:   - \"settings\"   - \"logs\" - `smtp_api`:   - \"smtp\"   - \"api_keys\"   - \"authorized_ips\" - `user_management`:   - \"all\" - `sales_platform`:   - \"manage_owned_deals_tasks\"   - \"manage_others_deals_tasks\"   - \"reports\"   - \"settings\" - `phone`:   - \"all\" - `conversations`:   - \"access\"   - \"assign\"   - \"configure\" - `senders_domains_dedicated_ips`:   - \"senders_management\"   - \"domains_management\"   - \"dedicated_ips_management\" - `push_notifications`:   - \"view\"   - \"create_edit_delete\"   - \"send\"   - \"settings\" - `companies`:   - \"manage_owned_companies\"   - \"manage_other_companies\"   - \"settings\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited user. - The availability of feature and its permission depends on your current plan. Please select the features and permissions accordingly.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.inviteuser_with_http_info(send_invitation, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Inviteuser send_invitation: Values to create an invitation (required)
+        :return: Inviteuser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['send_invitation']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method inviteuser" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'send_invitation' is set
+        if ('send_invitation' not in params or
+                params['send_invitation'] is None):
+            raise ValueError("Missing the required parameter `send_invitation` when calling `inviteuser`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'send_invitation' in params:
+            body_params = params['send_invitation']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organization/user/invitation/send', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Inviteuser',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def put_revoke_user_permission(self, email, **kwargs):  # noqa: E501
+        """Revoke user permission  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.put_revoke_user_permission(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user. (required)
+        :return: PutRevokeUserPermission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.put_revoke_user_permission_with_http_info(email, **kwargs)  # noqa: E501
+        else:
+            (data) = self.put_revoke_user_permission_with_http_info(email, **kwargs)  # noqa: E501
+            return data
+
+    def put_revoke_user_permission_with_http_info(self, email, **kwargs):  # noqa: E501
+        """Revoke user permission  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.put_revoke_user_permission_with_http_info(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user. (required)
+        :return: PutRevokeUserPermission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['email']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method put_revoke_user_permission" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `put_revoke_user_permission`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organization/user/invitation/revoke/{email}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='PutRevokeUserPermission',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def putresendcancelinvitation(self, action, email, **kwargs):  # noqa: E501
+        """Resend / Cancel invitation  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.putresendcancelinvitation(action, email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str action: action (required)
+        :param str email: Email of the invited user. (required)
+        :return: Putresendcancelinvitation
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.putresendcancelinvitation_with_http_info(action, email, **kwargs)  # noqa: E501
+        else:
+            (data) = self.putresendcancelinvitation_with_http_info(action, email, **kwargs)  # noqa: E501
+            return data
+
+    def putresendcancelinvitation_with_http_info(self, action, email, **kwargs):  # noqa: E501
+        """Resend / Cancel invitation  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.putresendcancelinvitation_with_http_info(action, email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str action: action (required)
+        :param str email: Email of the invited user. (required)
+        :return: Putresendcancelinvitation
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['action', 'email']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method putresendcancelinvitation" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'action' is set
+        if ('action' not in params or
+                params['action'] is None):
+            raise ValueError("Missing the required parameter `action` when calling `putresendcancelinvitation`")  # noqa: E501
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `putresendcancelinvitation`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'action' in params:
+            path_params['action'] = params['action']  # noqa: E501
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organization/user/invitation/{action}/{email}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='Putresendcancelinvitation',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
