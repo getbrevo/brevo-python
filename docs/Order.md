@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **updated_at** | **str** | Event updated UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when the status of the order is actually changed/updated. | 
 **status** | **str** | State of the order. | 
 **amount** | **float** | Total amount of the order, including all shipping expenses, tax and the price of items. | 
+**store_id** | **str** | ID of store where the order is placed | [optional] 
 **products** | [**list[OrderProducts]**](OrderProducts.md) |  | 
 **email** | **str** | Email of the contact, Mandatory if \&quot;phone\&quot; field is not passed in \&quot;billing\&quot; parameter. | [optional] 
 **billing** | [**OrderBilling**](OrderBilling.md) |  | [optional] 

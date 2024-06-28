@@ -275,7 +275,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.CompaniesApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | 
-body = brevo_python.Body1() # Body1 | Updated company details.
+body = brevo_python.Body6() # Body6 | Updated company details.
 
 try:
     # Update a company
@@ -290,7 +290,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
- **body** | [**Body1**](Body1.md)| Updated company details. | 
+ **body** | [**Body6**](Body6.md)| Updated company details. | 
 
 ### Return type
 
@@ -334,7 +334,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.CompaniesApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | 
-body = brevo_python.Body2() # Body2 | Linked / Unlinked contacts and deals ids.
+body = brevo_python.Body7() # Body7 | Linked / Unlinked contacts and deals ids.
 
 try:
     # Link and Unlink company with contacts and deals
@@ -348,7 +348,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
- **body** | [**Body2**](Body2.md)| Linked / Unlinked contacts and deals ids. | 
+ **body** | [**Body7**](Body7.md)| Linked / Unlinked contacts and deals ids. | 
 
 ### Return type
 
@@ -366,7 +366,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **companies_post**
-> InlineResponse200 companies_post(body)
+> InlineResponse2002 companies_post(body)
 
 Create a company
 
@@ -391,7 +391,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.CompaniesApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body() # Body | Company create data.
+body = brevo_python.Body5() # Body5 | Company create data.
 
 try:
     # Create a company
@@ -405,11 +405,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body**](Body.md)| Company create data. | 
+ **body** | [**Body5**](Body5.md)| Company create data. | 
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 

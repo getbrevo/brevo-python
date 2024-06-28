@@ -11,10 +11,16 @@ Method | HTTP request | Description
 [**create_update_category**](EcommerceApi.md#create_update_category) | **POST** /categories | Create/Update a category
 [**create_update_product**](EcommerceApi.md#create_update_product) | **POST** /products | Create/Update a product
 [**ecommerce_activate_post**](EcommerceApi.md#ecommerce_activate_post) | **POST** /ecommerce/activate | Activate the eCommerce app
+[**ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_metrics_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign
+[**ecommerce_attribution_metrics_get**](EcommerceApi.md#ecommerce_attribution_metrics_get) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns
+[**ecommerce_attribution_products_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_products_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign
+[**ecommerce_config_display_currency_get**](EcommerceApi.md#ecommerce_config_display_currency_get) | **GET** /ecommerce/config/displayCurrency | Get the ISO 4217 compliant display currency code for your Brevo account
 [**get_categories**](EcommerceApi.md#get_categories) | **GET** /categories | Return all your categories
 [**get_category_info**](EcommerceApi.md#get_category_info) | **GET** /categories/{id} | Get a category details
+[**get_orders**](EcommerceApi.md#get_orders) | **GET** /orders | Get order details
 [**get_product_info**](EcommerceApi.md#get_product_info) | **GET** /products/{id} | Get a product&#39;s details
 [**get_products**](EcommerceApi.md#get_products) | **GET** /products | Return all your products
+[**set_config_display_currency**](EcommerceApi.md#set_config_display_currency) | **POST** /ecommerce/config/displayCurrency | Set the ISO 4217 compliant display currency code for your Brevo account
 
 
 # **create_batch_order**
@@ -415,8 +421,240 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**
+> InlineResponse2006 ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+
+Get detailed attribution metrics for a single Brevo campaign
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+conversion_source = 'conversion_source_example' # str | The Brevo campaign type for which data will be retrieved
+conversion_source_id = 8.14 # float | The Brevo campaign id for which data will be retrieved
+
+try:
+    # Get detailed attribution metrics for a single Brevo campaign
+    api_response = api_instance.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->ecommerce_attribution_metrics_conversion_source_conversion_source_id_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **conversion_source** | **str**| The Brevo campaign type for which data will be retrieved | 
+ **conversion_source_id** | **float**| The Brevo campaign id for which data will be retrieved | 
+
+### Return type
+
+[**InlineResponse2006**](InlineResponse2006.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ecommerce_attribution_metrics_get**
+> InlineResponse2005 ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id)
+
+Get attribution metrics for one or more Brevo campaigns
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+period_from = '2013-10-20T19:20:30+01:00' # datetime | When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
+period_to = '2013-10-20T19:20:30+01:00' # datetime | When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
+email_campaign_id = [3.4] # list[float] | The email campaign id(s) to get metrics for (optional)
+
+try:
+    # Get attribution metrics for one or more Brevo campaigns
+    api_response = api_instance.ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->ecommerce_attribution_metrics_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **period_from** | **datetime**| When getting metrics for a specific period, define the starting datetime in RFC3339 format | [optional] 
+ **period_to** | **datetime**| When getting metrics for a specific period, define the end datetime in RFC3339 format | [optional] 
+ **email_campaign_id** | [**list[float]**](float.md)| The email campaign id(s) to get metrics for | [optional] 
+
+### Return type
+
+[**InlineResponse2005**](InlineResponse2005.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ecommerce_attribution_products_conversion_source_conversion_source_id_get**
+> InlineResponse2007 ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+
+Get attributed product sales for a single Brevo campaign
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+conversion_source = 'conversion_source_example' # str | The Brevo campaign type for which data will be retrieved
+conversion_source_id = 8.14 # float | The Brevo campaign id for which data will be retrieved
+
+try:
+    # Get attributed product sales for a single Brevo campaign
+    api_response = api_instance.ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->ecommerce_attribution_products_conversion_source_conversion_source_id_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **conversion_source** | **str**| The Brevo campaign type for which data will be retrieved | 
+ **conversion_source_id** | **float**| The Brevo campaign id for which data will be retrieved | 
+
+### Return type
+
+[**InlineResponse2007**](InlineResponse2007.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ecommerce_config_display_currency_get**
+> InlineResponse2004 ecommerce_config_display_currency_get()
+
+Get the ISO 4217 compliant display currency code for your Brevo account
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+
+try:
+    # Get the ISO 4217 compliant display currency code for your Brevo account
+    api_response = api_instance.ecommerce_config_display_currency_get()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->ecommerce_config_display_currency_get: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**InlineResponse2004**](InlineResponse2004.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_categories**
-> GetCategories get_categories(limit=limit, offset=offset, sort=sort, ids=ids, name=name)
+> GetCategories get_categories(limit=limit, offset=offset, sort=sort, ids=ids, name=name, modified_since=modified_since, created_since=created_since)
 
 Return all your categories
 
@@ -446,10 +684,12 @@ offset = 0 # int | Index of the first document in the page (optional) (default t
 sort = 'desc' # str | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed (optional) (default to desc)
 ids = ['ids_example'] # list[str] | Filter by category ids (optional)
 name = 'name_example' # str | Filter by category name (optional)
+modified_since = 'modified_since_example' # str | Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+created_since = 'created_since_example' # str | Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
 
 try:
     # Return all your categories
-    api_response = api_instance.get_categories(limit=limit, offset=offset, sort=sort, ids=ids, name=name)
+    api_response = api_instance.get_categories(limit=limit, offset=offset, sort=sort, ids=ids, name=name, modified_since=modified_since, created_since=created_since)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling EcommerceApi->get_categories: %s\n" % e)
@@ -464,6 +704,8 @@ Name | Type | Description  | Notes
  **sort** | **str**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
  **ids** | [**list[str]**](str.md)| Filter by category ids | [optional] 
  **name** | **str**| Filter by category name | [optional] 
+ **modified_since** | **str**| Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
+ **created_since** | **str**| Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
 
 ### Return type
 
@@ -537,6 +779,73 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_orders**
+> GetOrders get_orders(limit=limit, offset=offset, sort=sort, modified_since=modified_since, created_since=created_since)
+
+Get order details
+
+Get all the orders
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+limit = 50 # int | Number of documents per page (optional) (default to 50)
+offset = 0 # int | Index of the first document in the page (optional) (default to 0)
+sort = 'desc' # str | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed (optional) (default to desc)
+modified_since = 'modified_since_example' # str | Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+created_since = 'created_since_example' # str | Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+
+try:
+    # Get order details
+    api_response = api_instance.get_orders(limit=limit, offset=offset, sort=sort, modified_since=modified_since, created_since=created_since)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->get_orders: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| Number of documents per page | [optional] [default to 50]
+ **offset** | **int**| Index of the first document in the page | [optional] [default to 0]
+ **sort** | **str**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
+ **modified_since** | **str**| Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
+ **created_since** | **str**| Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
+
+### Return type
+
+[**GetOrders**](GetOrders.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_product_info**
 > GetProductDetails get_product_info(id)
 
@@ -595,7 +904,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_products**
-> GetProducts get_products(limit=limit, offset=offset, sort=sort, ids=ids, name=name, price_lte=price_lte, price_gte=price_gte, price_lt=price_lt, price_gt=price_gt, price_eq=price_eq, price_ne=price_ne, categories=categories)
+> GetProducts get_products(limit=limit, offset=offset, sort=sort, ids=ids, name=name, price_lte=price_lte, price_gte=price_gte, price_lt=price_lt, price_gt=price_gt, price_eq=price_eq, price_ne=price_ne, categories=categories, modified_since=modified_since, created_since=created_since)
 
 Return all your products
 
@@ -632,10 +941,12 @@ price_gt = 8.14 # float | Price filter for products greater than particular amou
 price_eq = 8.14 # float | Price filter for products equals to particular amount (optional)
 price_ne = 8.14 # float | Price filter for products not equals to particular amount (optional)
 categories = ['categories_example'] # list[str] | Filter by category ids (optional)
+modified_since = 'modified_since_example' # str | Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+created_since = 'created_since_example' # str | Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
 
 try:
     # Return all your products
-    api_response = api_instance.get_products(limit=limit, offset=offset, sort=sort, ids=ids, name=name, price_lte=price_lte, price_gte=price_gte, price_lt=price_lt, price_gt=price_gt, price_eq=price_eq, price_ne=price_ne, categories=categories)
+    api_response = api_instance.get_products(limit=limit, offset=offset, sort=sort, ids=ids, name=name, price_lte=price_lte, price_gte=price_gte, price_lt=price_lt, price_gt=price_gt, price_eq=price_eq, price_ne=price_ne, categories=categories, modified_since=modified_since, created_since=created_since)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling EcommerceApi->get_products: %s\n" % e)
@@ -657,10 +968,69 @@ Name | Type | Description  | Notes
  **price_eq** | **float**| Price filter for products equals to particular amount | [optional] 
  **price_ne** | **float**| Price filter for products not equals to particular amount | [optional] 
  **categories** | [**list[str]**](str.md)| Filter by category ids | [optional] 
+ **modified_since** | **str**| Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
+ **created_since** | **str**| Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional] 
 
 ### Return type
 
 [**GetProducts**](GetProducts.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_config_display_currency**
+> SetConfigDisplayCurrency set_config_display_currency(set_config_display_currency)
+
+Set the ISO 4217 compliant display currency code for your Brevo account
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
+set_config_display_currency = brevo_python.SetConfigDisplayCurrency() # SetConfigDisplayCurrency | set ISO 4217 compliant display currency code payload
+
+try:
+    # Set the ISO 4217 compliant display currency code for your Brevo account
+    api_response = api_instance.set_config_display_currency(set_config_display_currency)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling EcommerceApi->set_config_display_currency: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **set_config_display_currency** | [**SetConfigDisplayCurrency**](SetConfigDisplayCurrency.md)| set ISO 4217 compliant display currency code payload | 
+
+### Return type
+
+[**SetConfigDisplayCurrency**](SetConfigDisplayCurrency.md)
 
 ### Authorization
 

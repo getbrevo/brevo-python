@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **url** | **str** | URL to the category | [optional] 
 **update_enabled** | **bool** | Facilitate to update the existing category in the same request (updateEnabled &#x3D; true) | [optional] [default to False]
 **deleted_at** | **str** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop&#39;s database | [optional] 
+**is_deleted** | **bool** | category deleted from the shop&#39;s database | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

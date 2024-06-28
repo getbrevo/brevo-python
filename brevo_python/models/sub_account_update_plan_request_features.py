@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -84,7 +84,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def landing_page(self):
         """Gets the landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
 
-        Number of landing pages  # noqa: E501
+        Number of landing pages / Not required on ENTv2  # noqa: E501
 
         :return: The landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :rtype: int
@@ -95,7 +95,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def landing_page(self, landing_page):
         """Sets the landing_page of this SubAccountUpdatePlanRequestFeatures.
 
-        Number of landing pages  # noqa: E501
+        Number of landing pages / Not required on ENTv2  # noqa: E501
 
         :param landing_page: The landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :type: int
@@ -107,7 +107,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def inbox(self):
         """Gets the inbox of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
 
-        Number of inboxes  # noqa: E501
+        Number of inboxes / Not required on ENTv2  # noqa: E501
 
         :return: The inbox of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :rtype: int
@@ -118,7 +118,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def inbox(self, inbox):
         """Sets the inbox of this SubAccountUpdatePlanRequestFeatures.
 
-        Number of inboxes  # noqa: E501
+        Number of inboxes / Not required on ENTv2  # noqa: E501
 
         :param inbox: The inbox of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :type: int

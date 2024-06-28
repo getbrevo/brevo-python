@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,49 +31,31 @@ class SubAccountDetailsResponsePlanInfoCredits(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'sms': 'int',
-        'emails': 'SubAccountDetailsResponsePlanInfoCreditsEmails'
+        'emails': 'SubAccountDetailsResponsePlanInfoCreditsEmails',
+        'sms': 'SubAccountDetailsResponsePlanInfoCreditsSms',
+        'wp_subscribers': 'SubAccountDetailsResponsePlanInfoCreditsWpSubscribers'
     }
 
     attribute_map = {
+        'emails': 'emails',
         'sms': 'sms',
-        'emails': 'emails'
+        'wp_subscribers': 'wpSubscribers'
     }
 
-    def __init__(self, sms=None, emails=None):  # noqa: E501
+    def __init__(self, emails=None, sms=None, wp_subscribers=None):  # noqa: E501
         """SubAccountDetailsResponsePlanInfoCredits - a model defined in Swagger"""  # noqa: E501
 
-        self._sms = None
         self._emails = None
+        self._sms = None
+        self._wp_subscribers = None
         self.discriminator = None
 
-        if sms is not None:
-            self.sms = sms
         if emails is not None:
             self.emails = emails
-
-    @property
-    def sms(self):
-        """Gets the sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
-
-        SMS credits remaining on the sub-account  # noqa: E501
-
-        :return: The sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
-        :rtype: int
-        """
-        return self._sms
-
-    @sms.setter
-    def sms(self, sms):
-        """Sets the sms of this SubAccountDetailsResponsePlanInfoCredits.
-
-        SMS credits remaining on the sub-account  # noqa: E501
-
-        :param sms: The sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
-        :type: int
-        """
-
-        self._sms = sms
+        if sms is not None:
+            self.sms = sms
+        if wp_subscribers is not None:
+            self.wp_subscribers = wp_subscribers
 
     @property
     def emails(self):
@@ -95,6 +77,48 @@ class SubAccountDetailsResponsePlanInfoCredits(object):
         """
 
         self._emails = emails
+
+    @property
+    def sms(self):
+        """Gets the sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+
+
+        :return: The sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :rtype: SubAccountDetailsResponsePlanInfoCreditsSms
+        """
+        return self._sms
+
+    @sms.setter
+    def sms(self, sms):
+        """Sets the sms of this SubAccountDetailsResponsePlanInfoCredits.
+
+
+        :param sms: The sms of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :type: SubAccountDetailsResponsePlanInfoCreditsSms
+        """
+
+        self._sms = sms
+
+    @property
+    def wp_subscribers(self):
+        """Gets the wp_subscribers of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+
+
+        :return: The wp_subscribers of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :rtype: SubAccountDetailsResponsePlanInfoCreditsWpSubscribers
+        """
+        return self._wp_subscribers
+
+    @wp_subscribers.setter
+    def wp_subscribers(self, wp_subscribers):
+        """Sets the wp_subscribers of this SubAccountDetailsResponsePlanInfoCredits.
+
+
+        :param wp_subscribers: The wp_subscribers of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :type: SubAccountDetailsResponsePlanInfoCreditsWpSubscribers
+        """
+
+        self._wp_subscribers = wp_subscribers
 
     def to_dict(self):
         """Returns the model properties as a dict"""

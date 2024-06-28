@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,73 +31,73 @@ class Body3(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'name': 'str',
-        'attributes': 'object'
+        'group_name': 'str',
+        'sub_account_ids': 'list[int]'
     }
 
     attribute_map = {
-        'name': 'name',
-        'attributes': 'attributes'
+        'group_name': 'groupName',
+        'sub_account_ids': 'subAccountIds'
     }
 
-    def __init__(self, name=None, attributes=None):  # noqa: E501
+    def __init__(self, group_name=None, sub_account_ids=None):  # noqa: E501
         """Body3 - a model defined in Swagger"""  # noqa: E501
 
-        self._name = None
-        self._attributes = None
+        self._group_name = None
+        self._sub_account_ids = None
         self.discriminator = None
 
-        self.name = name
-        if attributes is not None:
-            self.attributes = attributes
+        self.group_name = group_name
+        if sub_account_ids is not None:
+            self.sub_account_ids = sub_account_ids
 
     @property
-    def name(self):
-        """Gets the name of this Body3.  # noqa: E501
+    def group_name(self):
+        """Gets the group_name of this Body3.  # noqa: E501
 
-        Name of deal  # noqa: E501
+        The name of the group of sub-accounts  # noqa: E501
 
-        :return: The name of this Body3.  # noqa: E501
+        :return: The group_name of this Body3.  # noqa: E501
         :rtype: str
         """
-        return self._name
+        return self._group_name
 
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Body3.
+    @group_name.setter
+    def group_name(self, group_name):
+        """Sets the group_name of this Body3.
 
-        Name of deal  # noqa: E501
+        The name of the group of sub-accounts  # noqa: E501
 
-        :param name: The name of this Body3.  # noqa: E501
+        :param group_name: The group_name of this Body3.  # noqa: E501
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
+        if group_name is None:
+            raise ValueError("Invalid value for `group_name`, must not be `None`")  # noqa: E501
 
-        self._name = name
+        self._group_name = group_name
 
     @property
-    def attributes(self):
-        """Gets the attributes of this Body3.  # noqa: E501
+    def sub_account_ids(self):
+        """Gets the sub_account_ids of this Body3.  # noqa: E501
 
-        Attributes fo\\r deal creation  # noqa: E501
+        Pass the list of sub-account Ids to be included in the group  # noqa: E501
 
-        :return: The attributes of this Body3.  # noqa: E501
-        :rtype: object
+        :return: The sub_account_ids of this Body3.  # noqa: E501
+        :rtype: list[int]
         """
-        return self._attributes
+        return self._sub_account_ids
 
-    @attributes.setter
-    def attributes(self, attributes):
-        """Sets the attributes of this Body3.
+    @sub_account_ids.setter
+    def sub_account_ids(self, sub_account_ids):
+        """Sets the sub_account_ids of this Body3.
 
-        Attributes fo\\r deal creation  # noqa: E501
+        Pass the list of sub-account Ids to be included in the group  # noqa: E501
 
-        :param attributes: The attributes of this Body3.  # noqa: E501
-        :type: object
+        :param sub_account_ids: The sub_account_ids of this Body3.  # noqa: E501
+        :type: list[int]
         """
 
-        self._attributes = attributes
+        self._sub_account_ids = sub_account_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

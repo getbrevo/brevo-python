@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -36,7 +36,8 @@ class CreateWhatsAppTemplate(object):
         'category': 'str',
         'media_url': 'str',
         'body_text': 'str',
-        'header_text': 'str'
+        'header_text': 'str',
+        'source': 'str'
     }
 
     attribute_map = {
@@ -45,10 +46,11 @@ class CreateWhatsAppTemplate(object):
         'category': 'category',
         'media_url': 'mediaUrl',
         'body_text': 'bodyText',
-        'header_text': 'headerText'
+        'header_text': 'headerText',
+        'source': 'source'
     }
 
-    def __init__(self, name=None, language=None, category=None, media_url=None, body_text=None, header_text=None):  # noqa: E501
+    def __init__(self, name=None, language=None, category=None, media_url=None, body_text=None, header_text=None, source=None):  # noqa: E501
         """CreateWhatsAppTemplate - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
@@ -57,6 +59,7 @@ class CreateWhatsAppTemplate(object):
         self._media_url = None
         self._body_text = None
         self._header_text = None
+        self._source = None
         self.discriminator = None
 
         self.name = name
@@ -67,6 +70,8 @@ class CreateWhatsAppTemplate(object):
         self.body_text = body_text
         if header_text is not None:
             self.header_text = header_text
+        if source is not None:
+            self.source = source
 
     @property
     def name(self):
@@ -97,7 +102,7 @@ class CreateWhatsAppTemplate(object):
     def language(self):
         """Gets the language of this CreateWhatsAppTemplate.  # noqa: E501
 
-        Language of the template. For Example :  **en** for English   # noqa: E501
+        Language of the template. For Example : **en** for English   # noqa: E501
 
         :return: The language of this CreateWhatsAppTemplate.  # noqa: E501
         :rtype: str
@@ -108,7 +113,7 @@ class CreateWhatsAppTemplate(object):
     def language(self, language):
         """Sets the language of this CreateWhatsAppTemplate.
 
-        Language of the template. For Example :  **en** for English   # noqa: E501
+        Language of the template. For Example : **en** for English   # noqa: E501
 
         :param language: The language of this CreateWhatsAppTemplate.  # noqa: E501
         :type: str
@@ -140,7 +145,7 @@ class CreateWhatsAppTemplate(object):
         """
         if category is None:
             raise ValueError("Invalid value for `category`, must not be `None`")  # noqa: E501
-        allowed_values = ["MARKETING", "TRANSACTIONAL"]  # noqa: E501
+        allowed_values = ["MARKETING", "UTILITY"]  # noqa: E501
         if category not in allowed_values:
             raise ValueError(
                 "Invalid value for `category` ({0}), must be one of {1}"  # noqa: E501
@@ -219,6 +224,35 @@ class CreateWhatsAppTemplate(object):
         """
 
         self._header_text = header_text
+
+    @property
+    def source(self):
+        """Gets the source of this CreateWhatsAppTemplate.  # noqa: E501
+
+        source of the template  # noqa: E501
+
+        :return: The source of this CreateWhatsAppTemplate.  # noqa: E501
+        :rtype: str
+        """
+        return self._source
+
+    @source.setter
+    def source(self, source):
+        """Sets the source of this CreateWhatsAppTemplate.
+
+        source of the template  # noqa: E501
+
+        :param source: The source of this CreateWhatsAppTemplate.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["Automation", "Conversations"]  # noqa: E501
+        if source not in allowed_values:
+            raise ValueError(
+                "Invalid value for `source` ({0}), must be one of {1}"  # noqa: E501
+                .format(source, allowed_values)
+            )
+
+        self._source = source
 
     def to_dict(self):
         """Returns the model properties as a dict"""

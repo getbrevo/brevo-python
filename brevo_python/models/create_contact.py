@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -33,7 +33,7 @@ class CreateContact(object):
     swagger_types = {
         'email': 'str',
         'ext_id': 'str',
-        'attributes': 'object',
+        'attributes': 'dict(str, object)',
         'email_blacklisted': 'bool',
         'sms_blacklisted': 'bool',
         'list_ids': 'list[int]',
@@ -132,10 +132,10 @@ class CreateContact(object):
     def attributes(self):
         """Gets the attributes of this CreateContact.  # noqa: E501
 
-        Pass the set of attributes and their values. The attribute's parameter should be passed in capital letter while creating a contact. These attributes must be present in your Brevo account. For eg. {\"FNAME\":\"Elly\", \"LNAME\":\"Roger\"}  # noqa: E501
+        Pass the set of attributes and their values. These attributes must be present in your Brevo account. For eg. {'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES':['India','China']}  # noqa: E501
 
         :return: The attributes of this CreateContact.  # noqa: E501
-        :rtype: object
+        :rtype: dict(str, object)
         """
         return self._attributes
 
@@ -143,10 +143,10 @@ class CreateContact(object):
     def attributes(self, attributes):
         """Sets the attributes of this CreateContact.
 
-        Pass the set of attributes and their values. The attribute's parameter should be passed in capital letter while creating a contact. These attributes must be present in your Brevo account. For eg. {\"FNAME\":\"Elly\", \"LNAME\":\"Roger\"}  # noqa: E501
+        Pass the set of attributes and their values. These attributes must be present in your Brevo account. For eg. {'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES':['India','China']}  # noqa: E501
 
         :param attributes: The attributes of this CreateContact.  # noqa: E501
-        :type: object
+        :type: dict(str, object)
         """
 
         self._attributes = attributes

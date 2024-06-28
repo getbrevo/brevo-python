@@ -24,7 +24,7 @@ Method | HTTP request | Description
 [**send_test_template**](TransactionalEmailsApi.md#send_test_template) | **POST** /smtp/templates/{templateId}/sendTest | Send a template to your test list
 [**send_transac_email**](TransactionalEmailsApi.md#send_transac_email) | **POST** /smtp/email | Send a transactional email
 [**smtp_blocked_contacts_email_delete**](TransactionalEmailsApi.md#smtp_blocked_contacts_email_delete) | **DELETE** /smtp/blockedContacts/{email} | Unblock or resubscribe a transactional contact
-[**smtp_log_message_id_delete**](TransactionalEmailsApi.md#smtp_log_message_id_delete) | **DELETE** /smtp/log/{messageId} | Delete an SMTP transactional log
+[**smtp_log_identifier_delete**](TransactionalEmailsApi.md#smtp_log_identifier_delete) | **DELETE** /smtp/log/{identifier} | Delete an SMTP transactional log
 [**update_smtp_template**](TransactionalEmailsApi.md#update_smtp_template) | **PUT** /smtp/templates/{templateId} | Update an email template
 
 
@@ -1263,8 +1263,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **smtp_log_message_id_delete**
-> smtp_log_message_id_delete(message_id)
+# **smtp_log_identifier_delete**
+> smtp_log_identifier_delete(identifier)
 
 Delete an SMTP transactional log
 
@@ -1289,20 +1289,20 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.TransactionalEmailsApi(brevo_python.ApiClient(configuration))
-message_id = 'message_id_example' # str | MessageId of the transactional log to delete
+identifier = 'identifier_example' # str | MessageId or Email of the transactional log(s) to delete
 
 try:
     # Delete an SMTP transactional log
-    api_instance.smtp_log_message_id_delete(message_id)
+    api_instance.smtp_log_identifier_delete(identifier)
 except ApiException as e:
-    print("Exception when calling TransactionalEmailsApi->smtp_log_message_id_delete: %s\n" % e)
+    print("Exception when calling TransactionalEmailsApi->smtp_log_identifier_delete: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **message_id** | **str**| MessageId of the transactional log to delete | 
+ **identifier** | **str**| MessageId or Email of the transactional log(s) to delete | 
 
 ### Return type
 

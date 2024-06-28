@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,6 +34,7 @@ class OrderBilling(object):
         'address': 'str',
         'city': 'str',
         'country_code': 'str',
+        'country': 'str',
         'phone': 'str',
         'post_code': 'str',
         'payment_method': 'str',
@@ -44,18 +45,20 @@ class OrderBilling(object):
         'address': 'address',
         'city': 'city',
         'country_code': 'countryCode',
+        'country': 'country',
         'phone': 'phone',
         'post_code': 'postCode',
         'payment_method': 'paymentMethod',
         'region': 'region'
     }
 
-    def __init__(self, address=None, city=None, country_code=None, phone=None, post_code=None, payment_method=None, region=None):  # noqa: E501
+    def __init__(self, address=None, city=None, country_code=None, country=None, phone=None, post_code=None, payment_method=None, region=None):  # noqa: E501
         """OrderBilling - a model defined in Swagger"""  # noqa: E501
 
         self._address = None
         self._city = None
         self._country_code = None
+        self._country = None
         self._phone = None
         self._post_code = None
         self._payment_method = None
@@ -68,6 +71,8 @@ class OrderBilling(object):
             self.city = city
         if country_code is not None:
             self.country_code = country_code
+        if country is not None:
+            self.country = country
         if phone is not None:
             self.phone = phone
         if post_code is not None:
@@ -145,6 +150,29 @@ class OrderBilling(object):
         """
 
         self._country_code = country_code
+
+    @property
+    def country(self):
+        """Gets the country of this OrderBilling.  # noqa: E501
+
+        Billing country name.  # noqa: E501
+
+        :return: The country of this OrderBilling.  # noqa: E501
+        :rtype: str
+        """
+        return self._country
+
+    @country.setter
+    def country(self, country):
+        """Sets the country of this OrderBilling.
+
+        Billing country name.  # noqa: E501
+
+        :param country: The country of this OrderBilling.  # noqa: E501
+        :type: str
+        """
+
+        self._country = country
 
     @property
     def phone(self):

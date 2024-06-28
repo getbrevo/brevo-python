@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -32,25 +32,30 @@ class CreateDomainModelDnsRecords(object):
     """
     swagger_types = {
         'dkim_record': 'CreateDomainModelDnsRecordsDkimRecord',
-        'brevo_code': 'CreateDomainModelDnsRecordsDkimRecord'
+        'brevo_code': 'CreateDomainModelDnsRecordsDkimRecord',
+        'dmarc_record': 'CreateDomainModelDnsRecordsDkimRecord'
     }
 
     attribute_map = {
         'dkim_record': 'dkim_record',
-        'brevo_code': 'brevo_code'
+        'brevo_code': 'brevo_code',
+        'dmarc_record': 'dmarc_record'
     }
 
-    def __init__(self, dkim_record=None, brevo_code=None):  # noqa: E501
+    def __init__(self, dkim_record=None, brevo_code=None, dmarc_record=None):  # noqa: E501
         """CreateDomainModelDnsRecords - a model defined in Swagger"""  # noqa: E501
 
         self._dkim_record = None
         self._brevo_code = None
+        self._dmarc_record = None
         self.discriminator = None
 
         if dkim_record is not None:
             self.dkim_record = dkim_record
         if brevo_code is not None:
             self.brevo_code = brevo_code
+        if dmarc_record is not None:
+            self.dmarc_record = dmarc_record
 
     @property
     def dkim_record(self):
@@ -93,6 +98,27 @@ class CreateDomainModelDnsRecords(object):
         """
 
         self._brevo_code = brevo_code
+
+    @property
+    def dmarc_record(self):
+        """Gets the dmarc_record of this CreateDomainModelDnsRecords.  # noqa: E501
+
+
+        :return: The dmarc_record of this CreateDomainModelDnsRecords.  # noqa: E501
+        :rtype: CreateDomainModelDnsRecordsDkimRecord
+        """
+        return self._dmarc_record
+
+    @dmarc_record.setter
+    def dmarc_record(self, dmarc_record):
+        """Sets the dmarc_record of this CreateDomainModelDnsRecords.
+
+
+        :param dmarc_record: The dmarc_record of this CreateDomainModelDnsRecords.  # noqa: E501
+        :type: CreateDomainModelDnsRecordsDkimRecord
+        """
+
+        self._dmarc_record = dmarc_record
 
     def to_dict(self):
         """Returns the model properties as a dict"""

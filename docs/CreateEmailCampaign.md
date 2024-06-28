@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **template_id** | **int** | Mandatory if htmlContent and htmlUrl are empty. Id of the transactional email template with status &#39;active&#39;. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature. | [optional] 
 **scheduled_at** | **str** | Sending UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. If sendAtBestTime is set to true, your campaign will be sent according to the date passed (ignoring the time part). | [optional] 
 **subject** | **str** | Subject of the campaign. Mandatory if abTesting is false. Ignored if abTesting is true. | [optional] 
+**preview_text** | **str** | Preview text or preheader of the email campaign | [optional] 
 **reply_to** | **str** | Email on which the campaign recipients will be able to reply to | [optional] 
 **to_field** | **str** | To personalize the «To» Field. If you want to include the first name and last name of your recipient, add {FNAME} {LNAME}. These contact attributes must already exist in your Brevo account. If input parameter &#39;params&#39; used please use {{contact.FNAME}} {{contact.LNAME}} for personalization | [optional] 
 **recipients** | [**CreateEmailCampaignRecipients**](CreateEmailCampaignRecipients.md) |  | [optional] 

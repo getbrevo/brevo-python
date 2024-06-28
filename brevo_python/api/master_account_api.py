@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -32,6 +32,517 @@ class MasterAccountApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
+
+    def corporate_group_id_delete(self, id, **kwargs):  # noqa: E501
+        """Delete a group  # noqa: E501
+
+        This endpoint allows you to delete a group of sub-organizations. When a group is deleted, the sub-organizations are no longer part of this group. The users associated with the group are no longer associated with the group once deleted.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_delete(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_group_id_delete_with_http_info(id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_group_id_delete_with_http_info(id, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_group_id_delete_with_http_info(self, id, **kwargs):  # noqa: E501
+        """Delete a group  # noqa: E501
+
+        This endpoint allows you to delete a group of sub-organizations. When a group is deleted, the sub-organizations are no longer part of this group. The users associated with the group are no longer associated with the group once deleted.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_delete_with_http_info(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_group_id_delete" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `corporate_group_id_delete`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/group/{id}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_group_id_get(self, id, **kwargs):  # noqa: E501
+        """GET a group details  # noqa: E501
+
+        This endpoint allows you to retrieve a specific group’s information such as the list of sub-organizations and the user associated with the group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_get(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group of sub-organization (required)
+        :return: CorporateGroupDetailsResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_group_id_get_with_http_info(id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_group_id_get_with_http_info(id, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_group_id_get_with_http_info(self, id, **kwargs):  # noqa: E501
+        """GET a group details  # noqa: E501
+
+        This endpoint allows you to retrieve a specific group’s information such as the list of sub-organizations and the user associated with the group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_get_with_http_info(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group of sub-organization (required)
+        :return: CorporateGroupDetailsResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_group_id_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `corporate_group_id_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/group/{id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='CorporateGroupDetailsResponse',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_group_id_put(self, id, body, **kwargs):  # noqa: E501
+        """Update a group of sub-accounts  # noqa: E501
+
+        This endpoint allows you to update a group of sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_put(id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group (required)
+        :param Body3 body: Group details to be updated. (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_group_id_put_with_http_info(id, body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_group_id_put_with_http_info(id, body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_group_id_put_with_http_info(self, id, body, **kwargs):  # noqa: E501
+        """Update a group of sub-accounts  # noqa: E501
+
+        This endpoint allows you to update a group of sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_id_put_with_http_info(id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Id of the group (required)
+        :param Body3 body: Group details to be updated. (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_group_id_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `corporate_group_id_put`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_group_id_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/group/{id}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_group_post(self, body, **kwargs):  # noqa: E501
+        """Create a new group of sub-accounts  # noqa: E501
+
+        This endpoint allows to create a group of sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_post(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body body: Group details to be created. (required)
+        :return: InlineResponse201
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_group_post_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_group_post_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_group_post_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Create a new group of sub-accounts  # noqa: E501
+
+        This endpoint allows to create a group of sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_post_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body body: Group details to be created. (required)
+        :return: InlineResponse201
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_group_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_group_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/group', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse201',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_group_unlink_group_id_sub_accounts_put(self, group_id, body, **kwargs):  # noqa: E501
+        """Delete sub-account from group  # noqa: E501
+
+        This endpoint allows you to remove a sub-organization from a group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_unlink_group_id_sub_accounts_put(group_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str group_id: Id of the group (required)
+        :param Body4 body: List of sub-account ids (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_group_unlink_group_id_sub_accounts_put_with_http_info(group_id, body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_group_unlink_group_id_sub_accounts_put_with_http_info(group_id, body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_group_unlink_group_id_sub_accounts_put_with_http_info(self, group_id, body, **kwargs):  # noqa: E501
+        """Delete sub-account from group  # noqa: E501
+
+        This endpoint allows you to remove a sub-organization from a group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_group_unlink_group_id_sub_accounts_put_with_http_info(group_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str group_id: Id of the group (required)
+        :param Body4 body: List of sub-account ids (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['group_id', 'body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_group_unlink_group_id_sub_accounts_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'group_id' is set
+        if ('group_id' not in params or
+                params['group_id'] is None):
+            raise ValueError("Missing the required parameter `group_id` when calling `corporate_group_unlink_group_id_sub_accounts_put`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_group_unlink_group_id_sub_accounts_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'group_id' in params:
+            path_params['groupId'] = params['group_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/group/unlink/{groupId}/subAccounts', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
 
     def corporate_master_account_get(self, **kwargs):  # noqa: E501
         """Get the details of requested master account  # noqa: E501
@@ -117,6 +628,105 @@ class MasterAccountApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='MasterDetailsResponse',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_sso_token_post(self, sso_token_request_corporate, **kwargs):  # noqa: E501
+        """Generate SSO token to access admin account  # noqa: E501
+
+        This endpoint generates an SSO token to authenticate and access the admin account using the endpoint https://account-app.brevo.com/account/login/corporate/sso/[token], where [token] will be replaced by the actual token.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sso_token_post(sso_token_request_corporate, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SsoTokenRequestCorporate sso_token_request_corporate: User email of admin account (required)
+        :return: GetSsoToken
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_sso_token_post_with_http_info(sso_token_request_corporate, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_sso_token_post_with_http_info(sso_token_request_corporate, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_sso_token_post_with_http_info(self, sso_token_request_corporate, **kwargs):  # noqa: E501
+        """Generate SSO token to access admin account  # noqa: E501
+
+        This endpoint generates an SSO token to authenticate and access the admin account using the endpoint https://account-app.brevo.com/account/login/corporate/sso/[token], where [token] will be replaced by the actual token.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sso_token_post_with_http_info(sso_token_request_corporate, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SsoTokenRequestCorporate sso_token_request_corporate: User email of admin account (required)
+        :return: GetSsoToken
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['sso_token_request_corporate']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_sso_token_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'sso_token_request_corporate' is set
+        if ('sso_token_request_corporate' not in params or
+                params['sso_token_request_corporate'] is None):
+            raise ValueError("Missing the required parameter `sso_token_request_corporate` when calling `corporate_sso_token_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'sso_token_request_corporate' in params:
+            body_params = params['sso_token_request_corporate']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/ssoToken', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='GetSsoToken',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -224,6 +834,113 @@ class MasterAccountApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='SubAccountsResponse',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_sub_account_id_applications_toggle_put(self, id, toggle_applications, **kwargs):  # noqa: E501
+        """Enable/disable sub-account application(s)  # noqa: E501
+
+        API endpoint for the Corporate owner to enable/disable applications on the sub-account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_id_applications_toggle_put(id, toggle_applications, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: Id of the sub-account organization (mandatory) (required)
+        :param SubAccountAppsToggleRequest toggle_applications: List of applications to activate or deactivate on a sub-account (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_sub_account_id_applications_toggle_put_with_http_info(id, toggle_applications, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_sub_account_id_applications_toggle_put_with_http_info(id, toggle_applications, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_sub_account_id_applications_toggle_put_with_http_info(self, id, toggle_applications, **kwargs):  # noqa: E501
+        """Enable/disable sub-account application(s)  # noqa: E501
+
+        API endpoint for the Corporate owner to enable/disable applications on the sub-account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_id_applications_toggle_put_with_http_info(id, toggle_applications, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: Id of the sub-account organization (mandatory) (required)
+        :param SubAccountAppsToggleRequest toggle_applications: List of applications to activate or deactivate on a sub-account (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'toggle_applications']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_sub_account_id_applications_toggle_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `corporate_sub_account_id_applications_toggle_put`")  # noqa: E501
+        # verify the required parameter 'toggle_applications' is set
+        if ('toggle_applications' not in params or
+                params['toggle_applications'] is None):
+            raise ValueError("Missing the required parameter `toggle_applications` when calling `corporate_sub_account_id_applications_toggle_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'toggle_applications' in params:
+            body_params = params['toggle_applications']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/subAccount/{id}/applications/toggle', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -430,7 +1147,7 @@ class MasterAccountApi(object):
     def corporate_sub_account_id_plan_put(self, id, update_plan_details, **kwargs):  # noqa: E501
         """Update sub-account plan  # noqa: E501
 
-        This endpoint will update the sub-account plan  # noqa: E501
+        This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1\" to set the consumable in unlimited mode.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.corporate_sub_account_id_plan_put(id, update_plan_details, async_req=True)
@@ -453,7 +1170,7 @@ class MasterAccountApi(object):
     def corporate_sub_account_id_plan_put_with_http_info(self, id, update_plan_details, **kwargs):  # noqa: E501
         """Update sub-account plan  # noqa: E501
 
-        This endpoint will update the sub-account plan  # noqa: E501
+        This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1\" to set the consumable in unlimited mode.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.corporate_sub_account_id_plan_put_with_http_info(id, update_plan_details, async_req=True)
@@ -520,6 +1237,204 @@ class MasterAccountApi(object):
 
         return self.api_client.call_api(
             '/corporate/subAccount/{id}/plan', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_sub_account_ip_associate_post(self, body, **kwargs):  # noqa: E501
+        """Associate an IP to sub-accounts  # noqa: E501
+
+        This endpoint allows to associate an IP to sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_ip_associate_post(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body1 body: Ip address association details (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_sub_account_ip_associate_post_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_sub_account_ip_associate_post_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_sub_account_ip_associate_post_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Associate an IP to sub-accounts  # noqa: E501
+
+        This endpoint allows to associate an IP to sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_ip_associate_post_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body1 body: Ip address association details (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_sub_account_ip_associate_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_sub_account_ip_associate_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/subAccount/ip/associate', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='object',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_sub_account_ip_dissociate_put(self, body, **kwargs):  # noqa: E501
+        """Dissociate an IP from sub-accounts  # noqa: E501
+
+        This endpoint allows to dissociate an IP from sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_ip_dissociate_put(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body2 body: Ip address dissociation details (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_sub_account_ip_dissociate_put_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_sub_account_ip_dissociate_put_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_sub_account_ip_dissociate_put_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Dissociate an IP from sub-accounts  # noqa: E501
+
+        This endpoint allows to dissociate an IP from sub-accounts  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_account_ip_dissociate_put_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body2 body: Ip address dissociation details (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_sub_account_ip_dissociate_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_sub_account_ip_dissociate_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/subAccount/ip/dissociate', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -733,7 +1648,7 @@ class MasterAccountApi(object):
             collection_formats=collection_formats)
 
     def corporate_sub_account_sso_token_post(self, sso_token_request, **kwargs):  # noqa: E501
-        """Generate SSO token to access Brevo  # noqa: E501
+        """Generate SSO token to access sub-account  # noqa: E501
 
         This endpoint generates an sso token to authenticate and access a sub-account of the master using the account endpoint https://account-app.brevo.com/account/login/sub-account/sso/[token], where [token] will be replaced by the actual token.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -755,7 +1670,7 @@ class MasterAccountApi(object):
             return data
 
     def corporate_sub_account_sso_token_post_with_http_info(self, sso_token_request, **kwargs):  # noqa: E501
-        """Generate SSO token to access Brevo  # noqa: E501
+        """Generate SSO token to access sub-account  # noqa: E501
 
         This endpoint generates an sso token to authenticate and access a sub-account of the master using the account endpoint https://account-app.brevo.com/account/login/sub-account/sso/[token], where [token] will be replaced by the actual token.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -824,6 +1739,212 @@ class MasterAccountApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GetSsoToken',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_user_invitation_action_email_put(self, action, email, **kwargs):  # noqa: E501
+        """Resend / cancel admin user invitation  # noqa: E501
+
+        This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_invitation_action_email_put(action, email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str action: Action to be performed (cancel / resend) (required)
+        :param str email: Email address of the recipient (required)
+        :return: InlineResponse200
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_user_invitation_action_email_put_with_http_info(action, email, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_user_invitation_action_email_put_with_http_info(action, email, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_user_invitation_action_email_put_with_http_info(self, action, email, **kwargs):  # noqa: E501
+        """Resend / cancel admin user invitation  # noqa: E501
+
+        This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_invitation_action_email_put_with_http_info(action, email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str action: Action to be performed (cancel / resend) (required)
+        :param str email: Email address of the recipient (required)
+        :return: InlineResponse200
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['action', 'email']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_user_invitation_action_email_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'action' is set
+        if ('action' not in params or
+                params['action'] is None):
+            raise ValueError("Missing the required parameter `action` when calling `corporate_user_invitation_action_email_put`")  # noqa: E501
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `corporate_user_invitation_action_email_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'action' in params:
+            path_params['action'] = params['action']  # noqa: E501
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/user/invitation/{action}/{email}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse200',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_user_revoke_email_delete(self, email, **kwargs):  # noqa: E501
+        """Revoke an admin user  # noqa: E501
+
+        This endpoint allows to revoke/remove an invited member of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_revoke_email_delete(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_user_revoke_email_delete_with_http_info(email, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_user_revoke_email_delete_with_http_info(email, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_user_revoke_email_delete_with_http_info(self, email, **kwargs):  # noqa: E501
+        """Revoke an admin user  # noqa: E501
+
+        This endpoint allows to revoke/remove an invited member of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_revoke_email_delete_with_http_info(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['email']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_user_revoke_email_delete" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `corporate_user_revoke_email_delete`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/user/revoke/{email}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -933,6 +2054,384 @@ class MasterAccountApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GetAccountActivity',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_corporate_invited_users_list(self, **kwargs):  # noqa: E501
+        """Get the list of all admin users  # noqa: E501
+
+        This endpoint allows you to list all Admin users of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_corporate_invited_users_list(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: GetCorporateInvitedUsersList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_corporate_invited_users_list_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.get_corporate_invited_users_list_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def get_corporate_invited_users_list_with_http_info(self, **kwargs):  # noqa: E501
+        """Get the list of all admin users  # noqa: E501
+
+        This endpoint allows you to list all Admin users of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_corporate_invited_users_list_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: GetCorporateInvitedUsersList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_corporate_invited_users_list" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/invited/users', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='GetCorporateInvitedUsersList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_corporate_user_permission(self, email, **kwargs):  # noqa: E501
+        """Check admin user permissions  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_corporate_user_permission(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user (required)
+        :return: GetCorporateUserPermission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_corporate_user_permission_with_http_info(email, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_corporate_user_permission_with_http_info(email, **kwargs)  # noqa: E501
+            return data
+
+    def get_corporate_user_permission_with_http_info(self, email, **kwargs):  # noqa: E501
+        """Check admin user permissions  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_corporate_user_permission_with_http_info(email, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email of the invited user (required)
+        :return: GetCorporateUserPermission
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['email']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_corporate_user_permission" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `get_corporate_user_permission`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/user/{email}/permissions', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='GetCorporateUserPermission',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_sub_account_groups(self, **kwargs):  # noqa: E501
+        """Get the list of groups  # noqa: E501
+
+        This endpoint allows you to list all groups created on your Admin account.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_sub_account_groups(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: list[InlineResponse2001]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_sub_account_groups_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.get_sub_account_groups_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def get_sub_account_groups_with_http_info(self, **kwargs):  # noqa: E501
+        """Get the list of groups  # noqa: E501
+
+        This endpoint allows you to list all groups created on your Admin account.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_sub_account_groups_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: list[InlineResponse2001]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_sub_account_groups" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/groups', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[InlineResponse2001]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def invite_admin_user(self, send_invitation, **kwargs):  # noqa: E501
+        """Send invitation to an admin user  # noqa: E501
+
+        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.invite_admin_user(send_invitation, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param InviteAdminUser send_invitation: Payload to send an invitation (required)
+        :return: InviteAdminUser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.invite_admin_user_with_http_info(send_invitation, **kwargs)  # noqa: E501
+        else:
+            (data) = self.invite_admin_user_with_http_info(send_invitation, **kwargs)  # noqa: E501
+            return data
+
+    def invite_admin_user_with_http_info(self, send_invitation, **kwargs):  # noqa: E501
+        """Send invitation to an admin user  # noqa: E501
+
+        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.invite_admin_user_with_http_info(send_invitation, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param InviteAdminUser send_invitation: Payload to send an invitation (required)
+        :return: InviteAdminUser
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['send_invitation']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method invite_admin_user" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'send_invitation' is set
+        if ('send_invitation' not in params or
+                params['send_invitation'] is None):
+            raise ValueError("Missing the required parameter `send_invitation` when calling `invite_admin_user`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'send_invitation' in params:
+            body_params = params['send_invitation']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/user/invitation/send', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InviteAdminUser',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -32,24 +32,29 @@ class OrderBatch(object):
     """
     swagger_types = {
         'orders': 'list[Order]',
-        'notify_url': 'str'
+        'notify_url': 'str',
+        'historical': 'bool'
     }
 
     attribute_map = {
         'orders': 'orders',
-        'notify_url': 'notifyUrl'
+        'notify_url': 'notifyUrl',
+        'historical': 'historical'
     }
 
-    def __init__(self, orders=None, notify_url=None):  # noqa: E501
+    def __init__(self, orders=None, notify_url=None, historical=True):  # noqa: E501
         """OrderBatch - a model defined in Swagger"""  # noqa: E501
 
         self._orders = None
         self._notify_url = None
+        self._historical = None
         self.discriminator = None
 
         self.orders = orders
         if notify_url is not None:
             self.notify_url = notify_url
+        if historical is not None:
+            self.historical = historical
 
     @property
     def orders(self):
@@ -98,6 +103,29 @@ class OrderBatch(object):
         """
 
         self._notify_url = notify_url
+
+    @property
+    def historical(self):
+        """Gets the historical of this OrderBatch.  # noqa: E501
+
+        Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.  # noqa: E501
+
+        :return: The historical of this OrderBatch.  # noqa: E501
+        :rtype: bool
+        """
+        return self._historical
+
+    @historical.setter
+    def historical(self, historical):
+        """Sets the historical of this OrderBatch.
+
+        Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.  # noqa: E501
+
+        :param historical: The historical of this OrderBatch.  # noqa: E501
+        :type: bool
+        """
+
+        self._historical = historical
 
     def to_dict(self):
         """Returns the model properties as a dict"""

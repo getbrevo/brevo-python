@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,6 +34,7 @@ class GetCampaignOverview(object):
         'id': 'int',
         'name': 'str',
         'subject': 'str',
+        'preview_text': 'str',
         'type': 'str',
         'status': 'str',
         'scheduled_at': 'str',
@@ -50,6 +51,7 @@ class GetCampaignOverview(object):
         'id': 'id',
         'name': 'name',
         'subject': 'subject',
+        'preview_text': 'previewText',
         'type': 'type',
         'status': 'status',
         'scheduled_at': 'scheduledAt',
@@ -62,12 +64,13 @@ class GetCampaignOverview(object):
         'send_at_best_time': 'sendAtBestTime'
     }
 
-    def __init__(self, id=None, name=None, subject=None, type=None, status=None, scheduled_at=None, ab_testing=None, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, send_at_best_time=None):  # noqa: E501
+    def __init__(self, id=None, name=None, subject=None, preview_text=None, type=None, status=None, scheduled_at=None, ab_testing=None, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, send_at_best_time=None):  # noqa: E501
         """GetCampaignOverview - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._name = None
         self._subject = None
+        self._preview_text = None
         self._type = None
         self._status = None
         self._scheduled_at = None
@@ -84,6 +87,8 @@ class GetCampaignOverview(object):
         self.name = name
         if subject is not None:
             self.subject = subject
+        if preview_text is not None:
+            self.preview_text = preview_text
         self.type = type
         self.status = status
         if scheduled_at is not None:
@@ -175,6 +180,29 @@ class GetCampaignOverview(object):
         """
 
         self._subject = subject
+
+    @property
+    def preview_text(self):
+        """Gets the preview_text of this GetCampaignOverview.  # noqa: E501
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :return: The preview_text of this GetCampaignOverview.  # noqa: E501
+        :rtype: str
+        """
+        return self._preview_text
+
+    @preview_text.setter
+    def preview_text(self, preview_text):
+        """Sets the preview_text of this GetCampaignOverview.
+
+        Preview text or preheader of the email campaign  # noqa: E501
+
+        :param preview_text: The preview_text of this GetCampaignOverview.  # noqa: E501
+        :type: str
+        """
+
+        self._preview_text = preview_text
 
     @property
     def type(self):

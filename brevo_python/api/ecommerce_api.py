@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -710,6 +710,407 @@ class EcommerceApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
+        """Get detailed attribution metrics for a single Brevo campaign  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
+        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
+        :return: InlineResponse2006
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, **kwargs)  # noqa: E501
+            return data
+
+    def ecommerce_attribution_metrics_conversion_source_conversion_source_id_get_with_http_info(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
+        """Get detailed attribution metrics for a single Brevo campaign  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
+        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
+        :return: InlineResponse2006
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['conversion_source', 'conversion_source_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ecommerce_attribution_metrics_conversion_source_conversion_source_id_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'conversion_source' is set
+        if ('conversion_source' not in params or
+                params['conversion_source'] is None):
+            raise ValueError("Missing the required parameter `conversion_source` when calling `ecommerce_attribution_metrics_conversion_source_conversion_source_id_get`")  # noqa: E501
+        # verify the required parameter 'conversion_source_id' is set
+        if ('conversion_source_id' not in params or
+                params['conversion_source_id'] is None):
+            raise ValueError("Missing the required parameter `conversion_source_id` when calling `ecommerce_attribution_metrics_conversion_source_conversion_source_id_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'conversion_source' in params:
+            path_params['conversionSource'] = params['conversion_source']  # noqa: E501
+        if 'conversion_source_id' in params:
+            path_params['conversionSourceId'] = params['conversion_source_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2006',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def ecommerce_attribution_metrics_get(self, **kwargs):  # noqa: E501
+        """Get attribution metrics for one or more Brevo campaigns  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_metrics_get(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param datetime period_from: When getting metrics for a specific period, define the starting datetime in RFC3339 format
+        :param datetime period_to: When getting metrics for a specific period, define the end datetime in RFC3339 format
+        :param list[float] email_campaign_id: The email campaign id(s) to get metrics for
+        :return: InlineResponse2005
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.ecommerce_attribution_metrics_get_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.ecommerce_attribution_metrics_get_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def ecommerce_attribution_metrics_get_with_http_info(self, **kwargs):  # noqa: E501
+        """Get attribution metrics for one or more Brevo campaigns  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_metrics_get_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param datetime period_from: When getting metrics for a specific period, define the starting datetime in RFC3339 format
+        :param datetime period_to: When getting metrics for a specific period, define the end datetime in RFC3339 format
+        :param list[float] email_campaign_id: The email campaign id(s) to get metrics for
+        :return: InlineResponse2005
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['period_from', 'period_to', 'email_campaign_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ecommerce_attribution_metrics_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'period_from' in params:
+            query_params.append(('periodFrom', params['period_from']))  # noqa: E501
+        if 'period_to' in params:
+            query_params.append(('periodTo', params['period_to']))  # noqa: E501
+        if 'email_campaign_id' in params:
+            query_params.append(('emailCampaignId[]', params['email_campaign_id']))  # noqa: E501
+            collection_formats['emailCampaignId[]'] = 'csv'  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/ecommerce/attribution/metrics', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2005',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def ecommerce_attribution_products_conversion_source_conversion_source_id_get(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
+        """Get attributed product sales for a single Brevo campaign  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
+        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
+        :return: InlineResponse2007
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.ecommerce_attribution_products_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.ecommerce_attribution_products_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, **kwargs)  # noqa: E501
+            return data
+
+    def ecommerce_attribution_products_conversion_source_conversion_source_id_get_with_http_info(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
+        """Get attributed product sales for a single Brevo campaign  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_attribution_products_conversion_source_conversion_source_id_get_with_http_info(conversion_source, conversion_source_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
+        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
+        :return: InlineResponse2007
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['conversion_source', 'conversion_source_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ecommerce_attribution_products_conversion_source_conversion_source_id_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'conversion_source' is set
+        if ('conversion_source' not in params or
+                params['conversion_source'] is None):
+            raise ValueError("Missing the required parameter `conversion_source` when calling `ecommerce_attribution_products_conversion_source_conversion_source_id_get`")  # noqa: E501
+        # verify the required parameter 'conversion_source_id' is set
+        if ('conversion_source_id' not in params or
+                params['conversion_source_id'] is None):
+            raise ValueError("Missing the required parameter `conversion_source_id` when calling `ecommerce_attribution_products_conversion_source_conversion_source_id_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'conversion_source' in params:
+            path_params['conversionSource'] = params['conversion_source']  # noqa: E501
+        if 'conversion_source_id' in params:
+            path_params['conversionSourceId'] = params['conversion_source_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/ecommerce/attribution/products/{conversionSource}/{conversionSourceId}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2007',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def ecommerce_config_display_currency_get(self, **kwargs):  # noqa: E501
+        """Get the ISO 4217 compliant display currency code for your Brevo account  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_config_display_currency_get(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: InlineResponse2004
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.ecommerce_config_display_currency_get_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.ecommerce_config_display_currency_get_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def ecommerce_config_display_currency_get_with_http_info(self, **kwargs):  # noqa: E501
+        """Get the ISO 4217 compliant display currency code for your Brevo account  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.ecommerce_config_display_currency_get_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: InlineResponse2004
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ecommerce_config_display_currency_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/ecommerce/config/displayCurrency', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2004',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def get_categories(self, **kwargs):  # noqa: E501
         """Return all your categories  # noqa: E501
 
@@ -724,6 +1125,8 @@ class EcommerceApi(object):
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :param list[str] ids: Filter by category ids
         :param str name: Filter by category name
+        :param str modified_since: Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
         :return: GetCategories
                  If the method is called asynchronously,
                  returns the request thread.
@@ -749,12 +1152,14 @@ class EcommerceApi(object):
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :param list[str] ids: Filter by category ids
         :param str name: Filter by category name
+        :param str modified_since: Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
         :return: GetCategories
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['limit', 'offset', 'sort', 'ids', 'name']  # noqa: E501
+        all_params = ['limit', 'offset', 'sort', 'ids', 'name', 'modified_since', 'created_since']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -788,6 +1193,10 @@ class EcommerceApi(object):
             collection_formats['ids'] = 'csv'  # noqa: E501
         if 'name' in params:
             query_params.append(('name', params['name']))  # noqa: E501
+        if 'modified_since' in params:
+            query_params.append(('modifiedSince', params['modified_since']))  # noqa: E501
+        if 'created_since' in params:
+            query_params.append(('createdSince', params['created_since']))  # noqa: E501
 
         header_params = {}
 
@@ -919,6 +1328,119 @@ class EcommerceApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def get_orders(self, **kwargs):  # noqa: E501
+        """Get order details  # noqa: E501
+
+        Get all the orders  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_orders(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int limit: Number of documents per page
+        :param int offset: Index of the first document in the page
+        :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+        :param str modified_since: Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :return: GetOrders
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_orders_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.get_orders_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def get_orders_with_http_info(self, **kwargs):  # noqa: E501
+        """Get order details  # noqa: E501
+
+        Get all the orders  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_orders_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int limit: Number of documents per page
+        :param int offset: Index of the first document in the page
+        :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+        :param str modified_since: Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :return: GetOrders
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['limit', 'offset', 'sort', 'modified_since', 'created_since']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_orders" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        if 'limit' in params and params['limit'] > 100:  # noqa: E501
+            raise ValueError("Invalid value for parameter `limit` when calling `get_orders`, must be a value less than or equal to `100`")  # noqa: E501
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'limit' in params:
+            query_params.append(('limit', params['limit']))  # noqa: E501
+        if 'offset' in params:
+            query_params.append(('offset', params['offset']))  # noqa: E501
+        if 'sort' in params:
+            query_params.append(('sort', params['sort']))  # noqa: E501
+        if 'modified_since' in params:
+            query_params.append(('modifiedSince', params['modified_since']))  # noqa: E501
+        if 'created_since' in params:
+            query_params.append(('createdSince', params['created_since']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/orders', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='GetOrders',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def get_product_info(self, id, **kwargs):  # noqa: E501
         """Get a product's details  # noqa: E501
 
@@ -1037,6 +1559,8 @@ class EcommerceApi(object):
         :param float price_eq: Price filter for products equals to particular amount
         :param float price_ne: Price filter for products not equals to particular amount
         :param list[str] categories: Filter by category ids
+        :param str modified_since: Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
         :return: GetProducts
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1069,12 +1593,14 @@ class EcommerceApi(object):
         :param float price_eq: Price filter for products equals to particular amount
         :param float price_ne: Price filter for products not equals to particular amount
         :param list[str] categories: Filter by category ids
+        :param str modified_since: Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+        :param str created_since: Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
         :return: GetProducts
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['limit', 'offset', 'sort', 'ids', 'name', 'price_lte', 'price_gte', 'price_lt', 'price_gt', 'price_eq', 'price_ne', 'categories']  # noqa: E501
+        all_params = ['limit', 'offset', 'sort', 'ids', 'name', 'price_lte', 'price_gte', 'price_lt', 'price_gt', 'price_eq', 'price_ne', 'categories', 'modified_since', 'created_since']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1123,6 +1649,10 @@ class EcommerceApi(object):
         if 'categories' in params:
             query_params.append(('categories', params['categories']))  # noqa: E501
             collection_formats['categories'] = 'csv'  # noqa: E501
+        if 'modified_since' in params:
+            query_params.append(('modifiedSince', params['modified_since']))  # noqa: E501
+        if 'created_since' in params:
+            query_params.append(('createdSince', params['created_since']))  # noqa: E501
 
         header_params = {}
 
@@ -1150,6 +1680,103 @@ class EcommerceApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GetProducts',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_config_display_currency(self, set_config_display_currency, **kwargs):  # noqa: E501
+        """Set the ISO 4217 compliant display currency code for your Brevo account  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_config_display_currency(set_config_display_currency, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SetConfigDisplayCurrency set_config_display_currency: set ISO 4217 compliant display currency code payload (required)
+        :return: SetConfigDisplayCurrency
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_config_display_currency_with_http_info(set_config_display_currency, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_config_display_currency_with_http_info(set_config_display_currency, **kwargs)  # noqa: E501
+            return data
+
+    def set_config_display_currency_with_http_info(self, set_config_display_currency, **kwargs):  # noqa: E501
+        """Set the ISO 4217 compliant display currency code for your Brevo account  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_config_display_currency_with_http_info(set_config_display_currency, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SetConfigDisplayCurrency set_config_display_currency: set ISO 4217 compliant display currency code payload (required)
+        :return: SetConfigDisplayCurrency
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['set_config_display_currency']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_config_display_currency" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'set_config_display_currency' is set
+        if ('set_config_display_currency' not in params or
+                params['set_config_display_currency'] is None):
+            raise ValueError("Missing the required parameter `set_config_display_currency` when calling `set_config_display_currency`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'set_config_display_currency' in params:
+            body_params = params['set_config_display_currency']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/ecommerce/config/displayCurrency', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SetConfigDisplayCurrency',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

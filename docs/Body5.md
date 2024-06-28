@@ -3,10 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**link_contact_ids** | **list[int]** | Contact ids for contacts to be linked with deal | [optional] 
-**unlink_contact_ids** | **list[int]** | Contact ids for contacts to be unlinked from deal | [optional] 
-**link_company_ids** | **list[str]** | Company ids to be linked with deal | [optional] 
-**unlink_company_ids** | **list[str]** | Company ids to be unlinked from deal | [optional] 
+**name** | **str** | Name of company | 
+**attributes** | **object** | Attributes for company creation | [optional] 
+**country_code** | **int** | Country code if phone_number is passed in attributes. | [optional] 
+**linked_contacts_ids** | **list[int]** | Contact ids to be linked with company | [optional] 
+**linked_deals_ids** | **list[str]** | Deal ids to be linked with company | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

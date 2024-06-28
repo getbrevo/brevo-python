@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -43,7 +43,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body12 body: Agent fields. (required)
+        :param Body17 body: Agent fields. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -65,7 +65,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body12 body: Agent fields. (required)
+        :param Body17 body: Agent fields. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -339,7 +339,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body9 body:
+        :param Body14 body:
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -362,7 +362,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body9 body:
+        :param Body14 body:
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -440,7 +440,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body8 body: Message fields. (required)
+        :param Body13 body: Message fields. (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -461,7 +461,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body8 body: Message fields. (required)
+        :param Body13 body: Message fields. (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -732,7 +732,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body11 body: (required)
+        :param Body16 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -754,7 +754,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body11 body: (required)
+        :param Body16 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -837,7 +837,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body10 body: (required)
+        :param Body15 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -859,7 +859,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body10 body: (required)
+        :param Body15 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.

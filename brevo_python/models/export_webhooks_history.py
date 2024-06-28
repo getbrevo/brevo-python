@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -35,6 +35,7 @@ class ExportWebhooksHistory(object):
         'start_date': 'str',
         'end_date': 'str',
         'sort': 'str',
+        'type': 'str',
         'event': 'str',
         'notify_url': 'str',
         'webhook_id': 'int',
@@ -47,6 +48,7 @@ class ExportWebhooksHistory(object):
         'start_date': 'startDate',
         'end_date': 'endDate',
         'sort': 'sort',
+        'type': 'type',
         'event': 'event',
         'notify_url': 'notifyURL',
         'webhook_id': 'webhookId',
@@ -54,13 +56,14 @@ class ExportWebhooksHistory(object):
         'message_id': 'messageId'
     }
 
-    def __init__(self, days=None, start_date=None, end_date=None, sort=None, event=None, notify_url=None, webhook_id=None, email=None, message_id=None):  # noqa: E501
+    def __init__(self, days=None, start_date=None, end_date=None, sort=None, type=None, event=None, notify_url=None, webhook_id=None, email=None, message_id=None):  # noqa: E501
         """ExportWebhooksHistory - a model defined in Swagger"""  # noqa: E501
 
         self._days = None
         self._start_date = None
         self._end_date = None
         self._sort = None
+        self._type = None
         self._event = None
         self._notify_url = None
         self._webhook_id = None
@@ -76,6 +79,7 @@ class ExportWebhooksHistory(object):
             self.end_date = end_date
         if sort is not None:
             self.sort = sort
+        self.type = type
         self.event = event
         self.notify_url = notify_url
         if webhook_id is not None:
@@ -176,6 +180,37 @@ class ExportWebhooksHistory(object):
         """
 
         self._sort = sort
+
+    @property
+    def type(self):
+        """Gets the type of this ExportWebhooksHistory.  # noqa: E501
+
+        Filter the history based on webhook type  # noqa: E501
+
+        :return: The type of this ExportWebhooksHistory.  # noqa: E501
+        :rtype: str
+        """
+        return self._type
+
+    @type.setter
+    def type(self, type):
+        """Sets the type of this ExportWebhooksHistory.
+
+        Filter the history based on webhook type  # noqa: E501
+
+        :param type: The type of this ExportWebhooksHistory.  # noqa: E501
+        :type: str
+        """
+        if type is None:
+            raise ValueError("Invalid value for `type`, must not be `None`")  # noqa: E501
+        allowed_values = ["transactional", "marketing"]  # noqa: E501
+        if type not in allowed_values:
+            raise ValueError(
+                "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
+                .format(type, allowed_values)
+            )
+
+        self._type = type
 
     @property
     def event(self):
@@ -283,7 +318,7 @@ class ExportWebhooksHistory(object):
     def message_id(self):
         """Gets the message_id of this ExportWebhooksHistory.  # noqa: E501
 
-        Filter the history for a specific message id  # noqa: E501
+        Filter the history for a specific message id. Applicable only for transactional webhooks.  # noqa: E501
 
         :return: The message_id of this ExportWebhooksHistory.  # noqa: E501
         :rtype: int
@@ -294,7 +329,7 @@ class ExportWebhooksHistory(object):
     def message_id(self, message_id):
         """Sets the message_id of this ExportWebhooksHistory.
 
-        Filter the history for a specific message id  # noqa: E501
+        Filter the history for a specific message id. Applicable only for transactional webhooks.  # noqa: E501
 
         :param message_id: The message_id of this ExportWebhooksHistory.  # noqa: E501
         :type: int

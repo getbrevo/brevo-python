@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,23 +34,26 @@ class CreateSubAccount(object):
         'company_name': 'str',
         'email': 'str',
         'language': 'str',
-        'timezone': 'str'
+        'timezone': 'str',
+        'group_ids': 'list[str]'
     }
 
     attribute_map = {
         'company_name': 'companyName',
         'email': 'email',
         'language': 'language',
-        'timezone': 'timezone'
+        'timezone': 'timezone',
+        'group_ids': 'groupIds'
     }
 
-    def __init__(self, company_name=None, email=None, language=None, timezone=None):  # noqa: E501
+    def __init__(self, company_name=None, email=None, language=None, timezone=None, group_ids=None):  # noqa: E501
         """CreateSubAccount - a model defined in Swagger"""  # noqa: E501
 
         self._company_name = None
         self._email = None
         self._language = None
         self._timezone = None
+        self._group_ids = None
         self.discriminator = None
 
         self.company_name = company_name
@@ -59,6 +62,8 @@ class CreateSubAccount(object):
             self.language = language
         if timezone is not None:
             self.timezone = timezone
+        if group_ids is not None:
+            self.group_ids = group_ids
 
     @property
     def company_name(self):
@@ -161,6 +166,29 @@ class CreateSubAccount(object):
         """
 
         self._timezone = timezone
+
+    @property
+    def group_ids(self):
+        """Gets the group_ids of this CreateSubAccount.  # noqa: E501
+
+        Set the group(s) for the sub-account  # noqa: E501
+
+        :return: The group_ids of this CreateSubAccount.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._group_ids
+
+    @group_ids.setter
+    def group_ids(self, group_ids):
+        """Sets the group_ids of this CreateSubAccount.
+
+        Set the group(s) for the sub-account  # noqa: E501
+
+        :param group_ids: The group_ids of this CreateSubAccount.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._group_ids = group_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

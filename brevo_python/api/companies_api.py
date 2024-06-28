@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -443,7 +443,7 @@ class CompaniesApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body1 body: Updated company details. (required)
+        :param Body6 body: Updated company details. (required)
         :return: Company
                  If the method is called asynchronously,
                  returns the request thread.
@@ -465,7 +465,7 @@ class CompaniesApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body1 body: Updated company details. (required)
+        :param Body6 body: Updated company details. (required)
         :return: Company
                  If the method is called asynchronously,
                  returns the request thread.
@@ -548,7 +548,7 @@ class CompaniesApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body2 body: Linked / Unlinked contacts and deals ids. (required)
+        :param Body7 body: Linked / Unlinked contacts and deals ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -570,7 +570,7 @@ class CompaniesApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body2 body: Linked / Unlinked contacts and deals ids. (required)
+        :param Body7 body: Linked / Unlinked contacts and deals ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -652,8 +652,8 @@ class CompaniesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body body: Company create data. (required)
-        :return: InlineResponse200
+        :param Body5 body: Company create data. (required)
+        :return: InlineResponse2002
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -673,8 +673,8 @@ class CompaniesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body body: Company create data. (required)
-        :return: InlineResponse200
+        :param Body5 body: Company create data. (required)
+        :return: InlineResponse2002
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -732,7 +732,7 @@ class CompaniesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse200',  # noqa: E501
+            response_type='InlineResponse2002',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

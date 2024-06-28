@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -72,7 +72,7 @@ class ErrorModel(object):
         """
         if code is None:
             raise ValueError("Invalid value for `code`, must not be `None`")  # noqa: E501
-        allowed_values = ["invalid_parameter", "missing_parameter", "out_of_range", "campaign_processing", "campaign_sent", "document_not_found", "reseller_permission_denied", "not_enough_credits", "permission_denied", "duplicate_parameter", "duplicate_request", "method_not_allowed", "unauthorized", "account_under_validation", "not_acceptable", "bad_request"]  # noqa: E501
+        allowed_values = ["invalid_parameter", "missing_parameter", "out_of_range", "campaign_processing", "campaign_sent", "document_not_found", "reseller_permission_denied", "not_enough_credits", "permission_denied", "duplicate_parameter", "duplicate_request", "method_not_allowed", "unauthorized", "account_under_validation", "not_acceptable", "bad_request", "unprocessable_entity"]  # noqa: E501
         if code not in allowed_values:
             raise ValueError(
                 "Invalid value for `code` ({0}), must be one of {1}"  # noqa: E501

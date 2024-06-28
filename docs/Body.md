@@ -3,9 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of company | 
-**attributes** | **object** | Attributes for company creation | [optional] 
-**country_code** | **int** | Country code if phone_number is passed in attributes. | [optional] 
+**group_name** | **str** | The name of the group of sub-accounts | 
+**sub_account_ids** | **list[int]** | Pass the list of sub-account Ids to be included in the group | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -36,7 +36,9 @@ class SendSmtpEmailMessageVersions(object):
         'bcc': 'list[SendSmtpEmailBcc]',
         'cc': 'list[SendSmtpEmailCc]',
         'reply_to': 'SendSmtpEmailReplyTo1',
-        'subject': 'str'
+        'subject': 'str',
+        'html_content': 'str',
+        'text_content': 'str'
     }
 
     attribute_map = {
@@ -45,10 +47,12 @@ class SendSmtpEmailMessageVersions(object):
         'bcc': 'bcc',
         'cc': 'cc',
         'reply_to': 'replyTo',
-        'subject': 'subject'
+        'subject': 'subject',
+        'html_content': 'htmlContent',
+        'text_content': 'textContent'
     }
 
-    def __init__(self, to=None, params=None, bcc=None, cc=None, reply_to=None, subject=None):  # noqa: E501
+    def __init__(self, to=None, params=None, bcc=None, cc=None, reply_to=None, subject=None, html_content=None, text_content=None):  # noqa: E501
         """SendSmtpEmailMessageVersions - a model defined in Swagger"""  # noqa: E501
 
         self._to = None
@@ -57,6 +61,8 @@ class SendSmtpEmailMessageVersions(object):
         self._cc = None
         self._reply_to = None
         self._subject = None
+        self._html_content = None
+        self._text_content = None
         self.discriminator = None
 
         self.to = to
@@ -70,6 +76,10 @@ class SendSmtpEmailMessageVersions(object):
             self.reply_to = reply_to
         if subject is not None:
             self.subject = subject
+        if html_content is not None:
+            self.html_content = html_content
+        if text_content is not None:
+            self.text_content = text_content
 
     @property
     def to(self):
@@ -208,6 +218,52 @@ class SendSmtpEmailMessageVersions(object):
         """
 
         self._subject = subject
+
+    @property
+    def html_content(self):
+        """Gets the html_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+
+        HTML body of the message. **Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed**   # noqa: E501
+
+        :return: The html_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+        :rtype: str
+        """
+        return self._html_content
+
+    @html_content.setter
+    def html_content(self, html_content):
+        """Sets the html_content of this SendSmtpEmailMessageVersions.
+
+        HTML body of the message. **Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed**   # noqa: E501
+
+        :param html_content: The html_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+        :type: str
+        """
+
+        self._html_content = html_content
+
+    @property
+    def text_content(self):
+        """Gets the text_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+
+        Plain Text body of the message. **Ignored if 'templateId' is passed**   # noqa: E501
+
+        :return: The text_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+        :rtype: str
+        """
+        return self._text_content
+
+    @text_content.setter
+    def text_content(self, text_content):
+        """Sets the text_content of this SendSmtpEmailMessageVersions.
+
+        Plain Text body of the message. **Ignored if 'templateId' is passed**   # noqa: E501
+
+        :param text_content: The text_content of this SendSmtpEmailMessageVersions.  # noqa: E501
+        :type: str
+        """
+
+        self._text_content = text_content
 
     def to_dict(self):
         """Returns the model properties as a dict"""

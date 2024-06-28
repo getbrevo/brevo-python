@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -37,7 +37,10 @@ class GetWebhook(object):
         'events': 'list[str]',
         'type': 'str',
         'created_at': 'str',
-        'modified_at': 'str'
+        'modified_at': 'str',
+        'batched': 'bool',
+        'auth': 'GetWebhookAuth',
+        'headers': 'list[GetWebhookHeaders]'
     }
 
     attribute_map = {
@@ -47,10 +50,13 @@ class GetWebhook(object):
         'events': 'events',
         'type': 'type',
         'created_at': 'createdAt',
-        'modified_at': 'modifiedAt'
+        'modified_at': 'modifiedAt',
+        'batched': 'batched',
+        'auth': 'auth',
+        'headers': 'headers'
     }
 
-    def __init__(self, url=None, id=None, description=None, events=None, type=None, created_at=None, modified_at=None):  # noqa: E501
+    def __init__(self, url=None, id=None, description=None, events=None, type=None, created_at=None, modified_at=None, batched=None, auth=None, headers=None):  # noqa: E501
         """GetWebhook - a model defined in Swagger"""  # noqa: E501
 
         self._url = None
@@ -60,6 +66,9 @@ class GetWebhook(object):
         self._type = None
         self._created_at = None
         self._modified_at = None
+        self._batched = None
+        self._auth = None
+        self._headers = None
         self.discriminator = None
 
         self.url = url
@@ -69,6 +78,12 @@ class GetWebhook(object):
         self.type = type
         self.created_at = created_at
         self.modified_at = modified_at
+        if batched is not None:
+            self.batched = batched
+        if auth is not None:
+            self.auth = auth
+        if headers is not None:
+            self.headers = headers
 
     @property
     def url(self):
@@ -248,6 +263,73 @@ class GetWebhook(object):
             raise ValueError("Invalid value for `modified_at`, must not be `None`")  # noqa: E501
 
         self._modified_at = modified_at
+
+    @property
+    def batched(self):
+        """Gets the batched of this GetWebhook.  # noqa: E501
+
+        To send batched webhooks  # noqa: E501
+
+        :return: The batched of this GetWebhook.  # noqa: E501
+        :rtype: bool
+        """
+        return self._batched
+
+    @batched.setter
+    def batched(self, batched):
+        """Sets the batched of this GetWebhook.
+
+        To send batched webhooks  # noqa: E501
+
+        :param batched: The batched of this GetWebhook.  # noqa: E501
+        :type: bool
+        """
+
+        self._batched = batched
+
+    @property
+    def auth(self):
+        """Gets the auth of this GetWebhook.  # noqa: E501
+
+
+        :return: The auth of this GetWebhook.  # noqa: E501
+        :rtype: GetWebhookAuth
+        """
+        return self._auth
+
+    @auth.setter
+    def auth(self, auth):
+        """Sets the auth of this GetWebhook.
+
+
+        :param auth: The auth of this GetWebhook.  # noqa: E501
+        :type: GetWebhookAuth
+        """
+
+        self._auth = auth
+
+    @property
+    def headers(self):
+        """Gets the headers of this GetWebhook.  # noqa: E501
+
+        Custom headers to be send with webhooks  # noqa: E501
+
+        :return: The headers of this GetWebhook.  # noqa: E501
+        :rtype: list[GetWebhookHeaders]
+        """
+        return self._headers
+
+    @headers.setter
+    def headers(self, headers):
+        """Sets the headers of this GetWebhook.
+
+        Custom headers to be send with webhooks  # noqa: E501
+
+        :param headers: The headers of this GetWebhook.  # noqa: E501
+        :type: list[GetWebhookHeaders]
+        """
+
+        self._headers = headers
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -31,72 +31,45 @@ class Body4(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'name': 'str',
-        'attributes': 'object'
+        'sub_account_ids': 'list[int]'
     }
 
     attribute_map = {
-        'name': 'name',
-        'attributes': 'attributes'
+        'sub_account_ids': 'subAccountIds'
     }
 
-    def __init__(self, name=None, attributes=None):  # noqa: E501
+    def __init__(self, sub_account_ids=None):  # noqa: E501
         """Body4 - a model defined in Swagger"""  # noqa: E501
 
-        self._name = None
-        self._attributes = None
+        self._sub_account_ids = None
         self.discriminator = None
 
-        if name is not None:
-            self.name = name
-        if attributes is not None:
-            self.attributes = attributes
+        self.sub_account_ids = sub_account_ids
 
     @property
-    def name(self):
-        """Gets the name of this Body4.  # noqa: E501
+    def sub_account_ids(self):
+        """Gets the sub_account_ids of this Body4.  # noqa: E501
 
-        Name of deal  # noqa: E501
+        List of sub-account ids  # noqa: E501
 
-        :return: The name of this Body4.  # noqa: E501
-        :rtype: str
+        :return: The sub_account_ids of this Body4.  # noqa: E501
+        :rtype: list[int]
         """
-        return self._name
+        return self._sub_account_ids
 
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Body4.
+    @sub_account_ids.setter
+    def sub_account_ids(self, sub_account_ids):
+        """Sets the sub_account_ids of this Body4.
 
-        Name of deal  # noqa: E501
+        List of sub-account ids  # noqa: E501
 
-        :param name: The name of this Body4.  # noqa: E501
-        :type: str
+        :param sub_account_ids: The sub_account_ids of this Body4.  # noqa: E501
+        :type: list[int]
         """
+        if sub_account_ids is None:
+            raise ValueError("Invalid value for `sub_account_ids`, must not be `None`")  # noqa: E501
 
-        self._name = name
-
-    @property
-    def attributes(self):
-        """Gets the attributes of this Body4.  # noqa: E501
-
-        Attributes for deal update  # noqa: E501
-
-        :return: The attributes of this Body4.  # noqa: E501
-        :rtype: object
-        """
-        return self._attributes
-
-    @attributes.setter
-    def attributes(self, attributes):
-        """Sets the attributes of this Body4.
-
-        Attributes for deal update  # noqa: E501
-
-        :param attributes: The attributes of this Body4.  # noqa: E501
-        :type: object
-        """
-
-        self._attributes = attributes
+        self._sub_account_ids = sub_account_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

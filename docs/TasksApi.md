@@ -41,7 +41,7 @@ api_instance = brevo_python.TasksApi(brevo_python.ApiClient(configuration))
 filter_type = 'filter_type_example' # str | Filter by task type (ID) (optional)
 filter_status = 'filter_status_example' # str | Filter by task status (optional)
 filter_date = 'filter_date_example' # str | Filter by date (optional)
-filter_assign_to = 'filter_assign_to_example' # str | Filter by assignTo id (optional)
+filter_assign_to = 'filter_assign_to_example' # str | Filter by the \"assignTo\" ID. You can utilize account emails for the \"assignTo\" attribute. (optional)
 filter_contacts = 'filter_contacts_example' # str | Filter by contact ids (optional)
 filter_deals = 'filter_deals_example' # str | Filter by deals ids (optional)
 filter_companies = 'filter_companies_example' # str | Filter by companies ids (optional)
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
  **filter_type** | **str**| Filter by task type (ID) | [optional] 
  **filter_status** | **str**| Filter by task status | [optional] 
  **filter_date** | **str**| Filter by date | [optional] 
- **filter_assign_to** | **str**| Filter by assignTo id | [optional] 
+ **filter_assign_to** | **str**| Filter by the \&quot;assignTo\&quot; ID. You can utilize account emails for the \&quot;assignTo\&quot; attribute. | [optional] 
  **filter_contacts** | **str**| Filter by contact ids | [optional] 
  **filter_deals** | **str**| Filter by deals ids | [optional] 
  **filter_companies** | **str**| Filter by companies ids | [optional] 
@@ -233,7 +233,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.TasksApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | 
-body = brevo_python.Body7() # Body7 | Updated task details.
+body = brevo_python.Body12() # Body12 | Updated task details.
 
 try:
     # Update a task
@@ -247,7 +247,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
- **body** | [**Body7**](Body7.md)| Updated task details. | 
+ **body** | [**Body12**](Body12.md)| Updated task details. | 
 
 ### Return type
 
@@ -265,7 +265,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crm_tasks_post**
-> InlineResponse2011 crm_tasks_post(body)
+> InlineResponse2012 crm_tasks_post(body)
 
 Create a task
 
@@ -290,7 +290,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.TasksApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body6() # Body6 | Task name.
+body = brevo_python.Body11() # Body11 | Task name.
 
 try:
     # Create a task
@@ -304,11 +304,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body6**](Body6.md)| Task name. | 
+ **body** | [**Body11**](Body11.md)| Task name. | 
 
 ### Return type
 
-[**InlineResponse2011**](InlineResponse2011.md)
+[**InlineResponse2012**](InlineResponse2012.md)
 
 ### Authorization
 

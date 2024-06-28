@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -34,29 +34,33 @@ class SubAccountsResponseSubAccounts(object):
         'id': 'int',
         'company_name': 'str',
         'active': 'bool',
-        'created_at': 'int'
+        'created_at': 'int',
+        'groups': 'list[SubAccountsResponseGroups]'
     }
 
     attribute_map = {
         'id': 'id',
         'company_name': 'companyName',
         'active': 'active',
-        'created_at': 'createdAt'
+        'created_at': 'createdAt',
+        'groups': 'groups'
     }
 
-    def __init__(self, id=None, company_name=None, active=None, created_at=None):  # noqa: E501
+    def __init__(self, id=None, company_name=None, active=None, created_at=None, groups=None):  # noqa: E501
         """SubAccountsResponseSubAccounts - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._company_name = None
         self._active = None
         self._created_at = None
+        self._groups = None
         self.discriminator = None
 
         self.id = id
         self.company_name = company_name
         self.active = active
         self.created_at = created_at
+        self.groups = groups
 
     @property
     def id(self):
@@ -157,6 +161,31 @@ class SubAccountsResponseSubAccounts(object):
             raise ValueError("Invalid value for `created_at`, must not be `None`")  # noqa: E501
 
         self._created_at = created_at
+
+    @property
+    def groups(self):
+        """Gets the groups of this SubAccountsResponseSubAccounts.  # noqa: E501
+
+        Group details  # noqa: E501
+
+        :return: The groups of this SubAccountsResponseSubAccounts.  # noqa: E501
+        :rtype: list[SubAccountsResponseGroups]
+        """
+        return self._groups
+
+    @groups.setter
+    def groups(self, groups):
+        """Sets the groups of this SubAccountsResponseSubAccounts.
+
+        Group details  # noqa: E501
+
+        :param groups: The groups of this SubAccountsResponseSubAccounts.  # noqa: E501
+        :type: list[SubAccountsResponseGroups]
+        """
+        if groups is None:
+            raise ValueError("Invalid value for `groups`, must not be `None`")  # noqa: E501
+
+        self._groups = groups
 
     def to_dict(self):
         """Returns the model properties as a dict"""

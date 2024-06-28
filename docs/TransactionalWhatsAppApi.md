@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_whatsapp_message**
-> InlineResponse2012 send_whatsapp_message(send_whatsapp_message)
+> InlineResponse2014 send_whatsapp_message(send_whatsapp_message)
 
 Send a WhatsApp message
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2012**](InlineResponse2012.md)
+[**InlineResponse2014**](InlineResponse2014.md)
 
 ### Authorization
 

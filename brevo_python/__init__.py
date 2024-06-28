@@ -5,7 +5,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -20,15 +20,18 @@ from brevo_python.api.account_api import AccountApi
 from brevo_python.api.companies_api import CompaniesApi
 from brevo_python.api.contacts_api import ContactsApi
 from brevo_python.api.conversations_api import ConversationsApi
+from brevo_python.api.coupons_api import CouponsApi
 from brevo_python.api.deals_api import DealsApi
 from brevo_python.api.domains_api import DomainsApi
 from brevo_python.api.ecommerce_api import EcommerceApi
 from brevo_python.api.email_campaigns_api import EmailCampaignsApi
+from brevo_python.api.events_api import EventsApi
 from brevo_python.api.external_feeds_api import ExternalFeedsApi
 from brevo_python.api.files_api import FilesApi
 from brevo_python.api.inbound_parsing_api import InboundParsingApi
 from brevo_python.api.master_account_api import MasterAccountApi
 from brevo_python.api.notes_api import NotesApi
+from brevo_python.api.payments_api import PaymentsApi
 from brevo_python.api.process_api import ProcessApi
 from brevo_python.api.reseller_api import ResellerApi
 from brevo_python.api.sms_campaigns_api import SMSCampaignsApi
@@ -61,6 +64,11 @@ from brevo_python.models.body1 import Body1
 from brevo_python.models.body10 import Body10
 from brevo_python.models.body11 import Body11
 from brevo_python.models.body12 import Body12
+from brevo_python.models.body13 import Body13
+from brevo_python.models.body14 import Body14
+from brevo_python.models.body15 import Body15
+from brevo_python.models.body16 import Body16
+from brevo_python.models.body17 import Body17
 from brevo_python.models.body2 import Body2
 from brevo_python.models.body3 import Body3
 from brevo_python.models.body4 import Body4
@@ -70,14 +78,22 @@ from brevo_python.models.body7 import Body7
 from brevo_python.models.body8 import Body8
 from brevo_python.models.body9 import Body9
 from brevo_python.models.body_variables_items import BodyVariablesItems
+from brevo_python.models.cart import Cart
 from brevo_python.models.companies_list import CompaniesList
 from brevo_python.models.company import Company
 from brevo_python.models.company_attributes import CompanyAttributes
 from brevo_python.models.company_attributes_inner import CompanyAttributesInner
 from brevo_python.models.component_items import ComponentItems
+from brevo_python.models.configuration import Configuration
 from brevo_python.models.conversations_message import ConversationsMessage
 from brevo_python.models.conversations_message_file import ConversationsMessageFile
 from brevo_python.models.conversations_message_file_image_info import ConversationsMessageFileImageInfo
+from brevo_python.models.conversion_source_metrics import ConversionSourceMetrics
+from brevo_python.models.conversion_source_product import ConversionSourceProduct
+from brevo_python.models.corporate_group_details_response import CorporateGroupDetailsResponse
+from brevo_python.models.corporate_group_details_response_group import CorporateGroupDetailsResponseGroup
+from brevo_python.models.corporate_group_details_response_subaccounts import CorporateGroupDetailsResponseSubaccounts
+from brevo_python.models.corporate_group_details_response_users import CorporateGroupDetailsResponseUsers
 from brevo_python.models.create_api_key_request import CreateApiKeyRequest
 from brevo_python.models.create_api_key_response import CreateApiKeyResponse
 from brevo_python.models.create_attribute import CreateAttribute
@@ -85,6 +101,8 @@ from brevo_python.models.create_attribute_enumeration import CreateAttributeEnum
 from brevo_python.models.create_category_model import CreateCategoryModel
 from brevo_python.models.create_child import CreateChild
 from brevo_python.models.create_contact import CreateContact
+from brevo_python.models.create_coupon_collection import CreateCouponCollection
+from brevo_python.models.create_coupons import CreateCoupons
 from brevo_python.models.create_doi_contact import CreateDoiContact
 from brevo_python.models.create_domain import CreateDomain
 from brevo_python.models.create_domain_model import CreateDomainModel
@@ -96,6 +114,8 @@ from brevo_python.models.create_email_campaign_sender import CreateEmailCampaign
 from brevo_python.models.create_external_feed import CreateExternalFeed
 from brevo_python.models.create_list import CreateList
 from brevo_python.models.create_model import CreateModel
+from brevo_python.models.create_payment_request import CreatePaymentRequest
+from brevo_python.models.create_payment_response import CreatePaymentResponse
 from brevo_python.models.create_product_model import CreateProductModel
 from brevo_python.models.create_reseller import CreateReseller
 from brevo_python.models.create_sender import CreateSender
@@ -131,6 +151,8 @@ from brevo_python.models.deals_list import DealsList
 from brevo_python.models.delete_hardbounces import DeleteHardbounces
 from brevo_python.models.email_export_recipients import EmailExportRecipients
 from brevo_python.models.error_model import ErrorModel
+from brevo_python.models.event import Event
+from brevo_python.models.event_identifiers import EventIdentifiers
 from brevo_python.models.export_webhooks_history import ExportWebhooksHistory
 from brevo_python.models.file_data import FileData
 from brevo_python.models.file_downloadable_link import FileDownloadableLink
@@ -170,6 +192,14 @@ from brevo_python.models.get_contact_campaign_stats_transac_attributes import Ge
 from brevo_python.models.get_contact_campaign_stats_unsubscriptions import GetContactCampaignStatsUnsubscriptions
 from brevo_python.models.get_contact_details import GetContactDetails
 from brevo_python.models.get_contacts import GetContacts
+from brevo_python.models.get_corporate_invited_users_list import GetCorporateInvitedUsersList
+from brevo_python.models.get_corporate_invited_users_list_feature_access import GetCorporateInvitedUsersListFeatureAccess
+from brevo_python.models.get_corporate_invited_users_list_groups import GetCorporateInvitedUsersListGroups
+from brevo_python.models.get_corporate_invited_users_list_users import GetCorporateInvitedUsersListUsers
+from brevo_python.models.get_corporate_user_permission import GetCorporateUserPermission
+from brevo_python.models.get_corporate_user_permission_feature_access import GetCorporateUserPermissionFeatureAccess
+from brevo_python.models.get_corporate_user_permission_groups import GetCorporateUserPermissionGroups
+from brevo_python.models.get_coupon_collection import GetCouponCollection
 from brevo_python.models.get_device_browser_stats import GetDeviceBrowserStats
 from brevo_python.models.get_domain_configuration_model import GetDomainConfigurationModel
 from brevo_python.models.get_domains_list import GetDomainsList
@@ -209,6 +239,8 @@ from brevo_python.models.get_ips import GetIps
 from brevo_python.models.get_ips_from_sender import GetIpsFromSender
 from brevo_python.models.get_list import GetList
 from brevo_python.models.get_lists import GetLists
+from brevo_python.models.get_orders import GetOrders
+from brevo_python.models.get_payment_request import GetPaymentRequest
 from brevo_python.models.get_process import GetProcess
 from brevo_python.models.get_processes import GetProcesses
 from brevo_python.models.get_product_details import GetProductDetails
@@ -251,6 +283,8 @@ from brevo_python.models.get_user_permission_privileges import GetUserPermission
 from brevo_python.models.get_wa_templates import GetWATemplates
 from brevo_python.models.get_wa_templates_templates import GetWATemplatesTemplates
 from brevo_python.models.get_webhook import GetWebhook
+from brevo_python.models.get_webhook_auth import GetWebhookAuth
+from brevo_python.models.get_webhook_headers import GetWebhookHeaders
 from brevo_python.models.get_webhooks import GetWebhooks
 from brevo_python.models.get_whats_app_config import GetWhatsAppConfig
 from brevo_python.models.get_whatsapp_campaign_overview import GetWhatsappCampaignOverview
@@ -259,10 +293,26 @@ from brevo_python.models.get_whatsapp_campaigns_campaigns import GetWhatsappCamp
 from brevo_python.models.get_whatsapp_event_report import GetWhatsappEventReport
 from brevo_python.models.get_whatsapp_event_report_events import GetWhatsappEventReportEvents
 from brevo_python.models.inline_response200 import InlineResponse200
+from brevo_python.models.inline_response2001 import InlineResponse2001
+from brevo_python.models.inline_response2002 import InlineResponse2002
+from brevo_python.models.inline_response2003 import InlineResponse2003
+from brevo_python.models.inline_response2004 import InlineResponse2004
+from brevo_python.models.inline_response2005 import InlineResponse2005
+from brevo_python.models.inline_response2005_totals import InlineResponse2005Totals
+from brevo_python.models.inline_response2006 import InlineResponse2006
+from brevo_python.models.inline_response2007 import InlineResponse2007
+from brevo_python.models.inline_response2008 import InlineResponse2008
 from brevo_python.models.inline_response201 import InlineResponse201
 from brevo_python.models.inline_response2011 import InlineResponse2011
 from brevo_python.models.inline_response2012 import InlineResponse2012
 from brevo_python.models.inline_response2013 import InlineResponse2013
+from brevo_python.models.inline_response2014 import InlineResponse2014
+from brevo_python.models.inline_response2015 import InlineResponse2015
+from brevo_python.models.inline_response400 import InlineResponse400
+from brevo_python.models.invite_admin_user import InviteAdminUser
+from brevo_python.models.invite_admin_user_privileges import InviteAdminUserPrivileges
+from brevo_python.models.inviteuser import Inviteuser
+from brevo_python.models.inviteuser_privileges import InviteuserPrivileges
 from brevo_python.models.manage_ip import ManageIp
 from brevo_python.models.master_details_response import MasterDetailsResponse
 from brevo_python.models.master_details_response_billing_info import MasterDetailsResponseBillingInfo
@@ -274,6 +324,7 @@ from brevo_python.models.note import Note
 from brevo_python.models.note_data import NoteData
 from brevo_python.models.note_id import NoteId
 from brevo_python.models.note_list import NoteList
+from brevo_python.models.notification import Notification
 from brevo_python.models.order import Order
 from brevo_python.models.order_batch import OrderBatch
 from brevo_python.models.order_billing import OrderBilling
@@ -281,10 +332,13 @@ from brevo_python.models.order_products import OrderProducts
 from brevo_python.models.otp import Otp
 from brevo_python.models.pipeline import Pipeline
 from brevo_python.models.pipeline_stage import PipelineStage
+from brevo_python.models.pipelines import Pipelines
 from brevo_python.models.post_contact_info import PostContactInfo
 from brevo_python.models.post_contact_info_contacts import PostContactInfoContacts
 from brevo_python.models.post_send_failed import PostSendFailed
 from brevo_python.models.post_send_sms_test_failed import PostSendSmsTestFailed
+from brevo_python.models.put_revoke_user_permission import PutRevokeUserPermission
+from brevo_python.models.putresendcancelinvitation import Putresendcancelinvitation
 from brevo_python.models.remaining_credit_model import RemainingCreditModel
 from brevo_python.models.remaining_credit_model_child import RemainingCreditModelChild
 from brevo_python.models.remaining_credit_model_reseller import RemainingCreditModelReseller
@@ -293,6 +347,7 @@ from brevo_python.models.remove_credits import RemoveCredits
 from brevo_python.models.request_contact_export import RequestContactExport
 from brevo_python.models.request_contact_export_custom_contact_filter import RequestContactExportCustomContactFilter
 from brevo_python.models.request_contact_import import RequestContactImport
+from brevo_python.models.request_contact_import_json_body import RequestContactImportJsonBody
 from brevo_python.models.request_contact_import_new_list import RequestContactImportNewList
 from brevo_python.models.request_sms_recipient_export import RequestSmsRecipientExport
 from brevo_python.models.schedule_smtp_email import ScheduleSmtpEmail
@@ -313,11 +368,17 @@ from brevo_python.models.send_test_email import SendTestEmail
 from brevo_python.models.send_test_sms import SendTestSms
 from brevo_python.models.send_transac_sms import SendTransacSms
 from brevo_python.models.send_whatsapp_message import SendWhatsappMessage
+from brevo_python.models.set_config_display_currency import SetConfigDisplayCurrency
 from brevo_python.models.sso_token_request import SsoTokenRequest
+from brevo_python.models.sso_token_request_corporate import SsoTokenRequestCorporate
+from brevo_python.models.sub_account_apps_toggle_request import SubAccountAppsToggleRequest
 from brevo_python.models.sub_account_details_response import SubAccountDetailsResponse
+from brevo_python.models.sub_account_details_response_groups import SubAccountDetailsResponseGroups
 from brevo_python.models.sub_account_details_response_plan_info import SubAccountDetailsResponsePlanInfo
 from brevo_python.models.sub_account_details_response_plan_info_credits import SubAccountDetailsResponsePlanInfoCredits
 from brevo_python.models.sub_account_details_response_plan_info_credits_emails import SubAccountDetailsResponsePlanInfoCreditsEmails
+from brevo_python.models.sub_account_details_response_plan_info_credits_sms import SubAccountDetailsResponsePlanInfoCreditsSms
+from brevo_python.models.sub_account_details_response_plan_info_credits_wp_subscribers import SubAccountDetailsResponsePlanInfoCreditsWpSubscribers
 from brevo_python.models.sub_account_details_response_plan_info_features import SubAccountDetailsResponsePlanInfoFeatures
 from brevo_python.models.sub_account_details_response_plan_info_features_inbox import SubAccountDetailsResponsePlanInfoFeaturesInbox
 from brevo_python.models.sub_account_details_response_plan_info_features_landing_page import SubAccountDetailsResponsePlanInfoFeaturesLandingPage
@@ -326,6 +387,7 @@ from brevo_python.models.sub_account_update_plan_request import SubAccountUpdate
 from brevo_python.models.sub_account_update_plan_request_credits import SubAccountUpdatePlanRequestCredits
 from brevo_python.models.sub_account_update_plan_request_features import SubAccountUpdatePlanRequestFeatures
 from brevo_python.models.sub_accounts_response import SubAccountsResponse
+from brevo_python.models.sub_accounts_response_groups import SubAccountsResponseGroups
 from brevo_python.models.sub_accounts_response_sub_accounts import SubAccountsResponseSubAccounts
 from brevo_python.models.task import Task
 from brevo_python.models.task_list import TaskList
@@ -341,6 +403,7 @@ from brevo_python.models.update_child import UpdateChild
 from brevo_python.models.update_child_account_status import UpdateChildAccountStatus
 from brevo_python.models.update_child_domain import UpdateChildDomain
 from brevo_python.models.update_contact import UpdateContact
+from brevo_python.models.update_coupon_collection import UpdateCouponCollection
 from brevo_python.models.update_email_campaign import UpdateEmailCampaign
 from brevo_python.models.update_email_campaign_recipients import UpdateEmailCampaignRecipients
 from brevo_python.models.update_email_campaign_sender import UpdateEmailCampaignSender

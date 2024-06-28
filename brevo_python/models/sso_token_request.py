@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -33,21 +33,24 @@ class SsoTokenRequest(object):
     swagger_types = {
         'id': 'int',
         'email': 'str',
-        'target': 'str'
+        'target': 'str',
+        'url': 'str'
     }
 
     attribute_map = {
         'id': 'id',
         'email': 'email',
-        'target': 'target'
+        'target': 'target',
+        'url': 'url'
     }
 
-    def __init__(self, id=None, email=None, target=None):  # noqa: E501
+    def __init__(self, id=None, email=None, target=None, url=None):  # noqa: E501
         """SsoTokenRequest - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._email = None
         self._target = None
+        self._url = None
         self.discriminator = None
 
         self.id = id
@@ -55,6 +58,8 @@ class SsoTokenRequest(object):
             self.email = email
         if target is not None:
             self.target = target
+        if url is not None:
+            self.url = url
 
     @property
     def id(self):
@@ -132,6 +137,29 @@ class SsoTokenRequest(object):
             )
 
         self._target = target
+
+    @property
+    def url(self):
+        """Gets the url of this SsoTokenRequest.  # noqa: E501
+
+        Set the full target URL after login success. The user will land directly on this target URL after login  # noqa: E501
+
+        :return: The url of this SsoTokenRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._url
+
+    @url.setter
+    def url(self, url):
+        """Sets the url of this SsoTokenRequest.
+
+        Set the full target URL after login success. The user will land directly on this target URL after login  # noqa: E501
+
+        :param url: The url of this SsoTokenRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._url = url
 
     def to_dict(self):
         """Returns the model properties as a dict"""

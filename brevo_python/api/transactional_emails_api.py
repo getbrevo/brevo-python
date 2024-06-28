@@ -3,7 +3,7 @@
 """
     Brevo API
 
-    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   # noqa: E501
+    Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |   # noqa: E501
 
     OpenAPI spec version: 3.0.0
     Contact: contact@brevo.com
@@ -2158,43 +2158,43 @@ class TransactionalEmailsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def smtp_log_message_id_delete(self, message_id, **kwargs):  # noqa: E501
+    def smtp_log_identifier_delete(self, identifier, **kwargs):  # noqa: E501
         """Delete an SMTP transactional log  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.smtp_log_message_id_delete(message_id, async_req=True)
+        >>> thread = api.smtp_log_identifier_delete(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str message_id: MessageId of the transactional log to delete (required)
+        :param str identifier: MessageId or Email of the transactional log(s) to delete (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.smtp_log_message_id_delete_with_http_info(message_id, **kwargs)  # noqa: E501
+            return self.smtp_log_identifier_delete_with_http_info(identifier, **kwargs)  # noqa: E501
         else:
-            (data) = self.smtp_log_message_id_delete_with_http_info(message_id, **kwargs)  # noqa: E501
+            (data) = self.smtp_log_identifier_delete_with_http_info(identifier, **kwargs)  # noqa: E501
             return data
 
-    def smtp_log_message_id_delete_with_http_info(self, message_id, **kwargs):  # noqa: E501
+    def smtp_log_identifier_delete_with_http_info(self, identifier, **kwargs):  # noqa: E501
         """Delete an SMTP transactional log  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.smtp_log_message_id_delete_with_http_info(message_id, async_req=True)
+        >>> thread = api.smtp_log_identifier_delete_with_http_info(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str message_id: MessageId of the transactional log to delete (required)
+        :param str identifier: MessageId or Email of the transactional log(s) to delete (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['message_id']  # noqa: E501
+        all_params = ['identifier']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2205,20 +2205,20 @@ class TransactionalEmailsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method smtp_log_message_id_delete" % key
+                    " to method smtp_log_identifier_delete" % key
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'message_id' is set
-        if ('message_id' not in params or
-                params['message_id'] is None):
-            raise ValueError("Missing the required parameter `message_id` when calling `smtp_log_message_id_delete`")  # noqa: E501
+        # verify the required parameter 'identifier' is set
+        if ('identifier' not in params or
+                params['identifier'] is None):
+            raise ValueError("Missing the required parameter `identifier` when calling `smtp_log_identifier_delete`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'message_id' in params:
-            path_params['messageId'] = params['message_id']  # noqa: E501
+        if 'identifier' in params:
+            path_params['identifier'] = params['identifier']  # noqa: E501
 
         query_params = []
 
@@ -2240,7 +2240,7 @@ class TransactionalEmailsApi(object):
         auth_settings = ['api-key', 'partner-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/smtp/log/{messageId}', 'DELETE',
+            '/smtp/log/{identifier}', 'DELETE',
             path_params,
             query_params,
             header_params,
