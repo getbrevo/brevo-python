@@ -75,7 +75,7 @@ class ApiClient(object):
         elif header_name is not None and header_name != "User-Agent":
             self.default_headers[header_name] = header_value
         else:
-            self.user_agent = 'brevo_clientAPI/v1.1.0/python'
+            self.user_agent = 'brevo_clientAPI/v1.1.2/python'
         self.cookie = cookie
 
     def __del__(self):
