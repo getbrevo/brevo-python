@@ -43,7 +43,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body17 body: Agent fields. (required)
+        :param Body19 body: Agent fields. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -65,7 +65,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body17 body: Agent fields. (required)
+        :param Body19 body: Agent fields. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -339,7 +339,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body14 body:
+        :param Body16 body:
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -362,7 +362,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body14 body:
+        :param Body16 body:
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -440,7 +440,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body13 body: Message fields. (required)
+        :param Body15 body: Message fields. (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -461,7 +461,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body13 body: Message fields. (required)
+        :param Body15 body: Message fields. (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -732,7 +732,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body16 body: (required)
+        :param Body18 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -754,7 +754,7 @@ class ConversationsApi(object):
 
         :param async_req bool
         :param str id: ID of the message (required)
-        :param Body16 body: (required)
+        :param Body18 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -837,7 +837,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body15 body: (required)
+        :param Body17 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.
@@ -859,7 +859,7 @@ class ConversationsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body15 body: (required)
+        :param Body17 body: (required)
         :return: ConversationsMessage
                  If the method is called asynchronously,
                  returns the request thread.

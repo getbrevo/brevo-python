@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_coupon_collection**
-> InlineResponse2008 update_coupon_collection(id, update_coupon_collection=update_coupon_collection)
+> InlineResponse2009 update_coupon_collection(id, update_coupon_collection=update_coupon_collection)
 
 Update a coupon collection by id
 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 

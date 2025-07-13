@@ -61,7 +61,8 @@ class CreateEmailCampaign(object):
         'initial_quota': 'int',
         'increase_rate': 'int',
         'unsubscription_page_id': 'str',
-        'update_form_id': 'str'
+        'update_form_id': 'str',
+        'email_expiration_date': 'CreateEmailCampaignEmailExpirationDate'
     }
 
     attribute_map = {
@@ -95,10 +96,11 @@ class CreateEmailCampaign(object):
         'initial_quota': 'initialQuota',
         'increase_rate': 'increaseRate',
         'unsubscription_page_id': 'unsubscriptionPageId',
-        'update_form_id': 'updateFormId'
+        'update_form_id': 'updateFormId',
+        'email_expiration_date': 'emailExpirationDate'
     }
 
-    def __init__(self, tag=None, sender=None, name=None, html_content=None, html_url=None, template_id=None, scheduled_at=None, subject=None, preview_text=None, reply_to=None, to_field=None, recipients=None, attachment_url=None, inline_image_activation=False, mirror_active=None, footer=None, header=None, utm_campaign=None, params=None, send_at_best_time=False, ab_testing=False, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, ip_warmup_enable=False, initial_quota=None, increase_rate=None, unsubscription_page_id=None, update_form_id=None):  # noqa: E501
+    def __init__(self, tag=None, sender=None, name=None, html_content=None, html_url=None, template_id=None, scheduled_at=None, subject=None, preview_text=None, reply_to=None, to_field=None, recipients=None, attachment_url=None, inline_image_activation=False, mirror_active=None, footer=None, header=None, utm_campaign=None, params=None, send_at_best_time=False, ab_testing=False, subject_a=None, subject_b=None, split_rule=None, winner_criteria=None, winner_delay=None, ip_warmup_enable=False, initial_quota=None, increase_rate=None, unsubscription_page_id=None, update_form_id=None, email_expiration_date=None):  # noqa: E501
         """CreateEmailCampaign - a model defined in Swagger"""  # noqa: E501
 
         self._tag = None
@@ -132,6 +134,7 @@ class CreateEmailCampaign(object):
         self._increase_rate = None
         self._unsubscription_page_id = None
         self._update_form_id = None
+        self._email_expiration_date = None
         self.discriminator = None
 
         if tag is not None:
@@ -194,6 +197,8 @@ class CreateEmailCampaign(object):
             self.unsubscription_page_id = unsubscription_page_id
         if update_form_id is not None:
             self.update_form_id = update_form_id
+        if email_expiration_date is not None:
+            self.email_expiration_date = email_expiration_date
 
     @property
     def tag(self):
@@ -925,6 +930,27 @@ class CreateEmailCampaign(object):
         """
 
         self._update_form_id = update_form_id
+
+    @property
+    def email_expiration_date(self):
+        """Gets the email_expiration_date of this CreateEmailCampaign.  # noqa: E501
+
+
+        :return: The email_expiration_date of this CreateEmailCampaign.  # noqa: E501
+        :rtype: CreateEmailCampaignEmailExpirationDate
+        """
+        return self._email_expiration_date
+
+    @email_expiration_date.setter
+    def email_expiration_date(self, email_expiration_date):
+        """Sets the email_expiration_date of this CreateEmailCampaign.
+
+
+        :param email_expiration_date: The email_expiration_date of this CreateEmailCampaign.  # noqa: E501
+        :type: CreateEmailCampaignEmailExpirationDate
+        """
+
+        self._email_expiration_date = email_expiration_date
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -33,21 +33,27 @@ class SubAccountUpdatePlanRequestCredits(object):
     swagger_types = {
         'email': 'int',
         'sms': 'float',
-        'wp_subscribers': 'int'
+        'wp_subscribers': 'int',
+        'external_feeds': 'float',
+        'whatsapp': 'float'
     }
 
     attribute_map = {
         'email': 'email',
         'sms': 'sms',
-        'wp_subscribers': 'wpSubscribers'
+        'wp_subscribers': 'wpSubscribers',
+        'external_feeds': 'externalFeeds',
+        'whatsapp': 'whatsapp'
     }
 
-    def __init__(self, email=None, sms=None, wp_subscribers=None):  # noqa: E501
+    def __init__(self, email=None, sms=None, wp_subscribers=None, external_feeds=None, whatsapp=None):  # noqa: E501
         """SubAccountUpdatePlanRequestCredits - a model defined in Swagger"""  # noqa: E501
 
         self._email = None
         self._sms = None
         self._wp_subscribers = None
+        self._external_feeds = None
+        self._whatsapp = None
         self.discriminator = None
 
         if email is not None:
@@ -56,12 +62,16 @@ class SubAccountUpdatePlanRequestCredits(object):
             self.sms = sms
         if wp_subscribers is not None:
             self.wp_subscribers = wp_subscribers
+        if external_feeds is not None:
+            self.external_feeds = external_feeds
+        if whatsapp is not None:
+            self.whatsapp = whatsapp
 
     @property
     def email(self):
         """Gets the email of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
 
-        Number of email credits  # noqa: E501
+        Number of email credits | Pass the value -1 for unlimited emails in ENTv2 only  # noqa: E501
 
         :return: The email of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
         :rtype: int
@@ -72,7 +82,7 @@ class SubAccountUpdatePlanRequestCredits(object):
     def email(self, email):
         """Sets the email of this SubAccountUpdatePlanRequestCredits.
 
-        Number of email credits  # noqa: E501
+        Number of email credits | Pass the value -1 for unlimited emails in ENTv2 only  # noqa: E501
 
         :param email: The email of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
         :type: int
@@ -84,7 +94,7 @@ class SubAccountUpdatePlanRequestCredits(object):
     def sms(self):
         """Gets the sms of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
 
-        Number of SMS credits | available in ENT-v2 only  # noqa: E501
+        Number of SMS credits | Pass the value -1 for unlimited SMS in ENTv2 only  # noqa: E501
 
         :return: The sms of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
         :rtype: float
@@ -95,7 +105,7 @@ class SubAccountUpdatePlanRequestCredits(object):
     def sms(self, sms):
         """Sets the sms of this SubAccountUpdatePlanRequestCredits.
 
-        Number of SMS credits | available in ENT-v2 only  # noqa: E501
+        Number of SMS credits | Pass the value -1 for unlimited SMS in ENTv2 only  # noqa: E501
 
         :param sms: The sms of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
         :type: float
@@ -125,6 +135,52 @@ class SubAccountUpdatePlanRequestCredits(object):
         """
 
         self._wp_subscribers = wp_subscribers
+
+    @property
+    def external_feeds(self):
+        """Gets the external_feeds of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+
+        Number of externalFeeds credits, possible values are 0 or 1 |available in ENTv2 only  # noqa: E501
+
+        :return: The external_feeds of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+        :rtype: float
+        """
+        return self._external_feeds
+
+    @external_feeds.setter
+    def external_feeds(self, external_feeds):
+        """Sets the external_feeds of this SubAccountUpdatePlanRequestCredits.
+
+        Number of externalFeeds credits, possible values are 0 or 1 |available in ENTv2 only  # noqa: E501
+
+        :param external_feeds: The external_feeds of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+        :type: float
+        """
+
+        self._external_feeds = external_feeds
+
+    @property
+    def whatsapp(self):
+        """Gets the whatsapp of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+
+        Number of whatsapp credits | Pass the value -1 for unlimited whatsapp in ENTv2 only  # noqa: E501
+
+        :return: The whatsapp of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+        :rtype: float
+        """
+        return self._whatsapp
+
+    @whatsapp.setter
+    def whatsapp(self, whatsapp):
+        """Sets the whatsapp of this SubAccountUpdatePlanRequestCredits.
+
+        Number of whatsapp credits | Pass the value -1 for unlimited whatsapp in ENTv2 only  # noqa: E501
+
+        :param whatsapp: The whatsapp of this SubAccountUpdatePlanRequestCredits.  # noqa: E501
+        :type: float
+        """
+
+        self._whatsapp = whatsapp
 
     def to_dict(self):
         """Returns the model properties as a dict"""

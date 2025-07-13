@@ -33,20 +33,23 @@ class RemoveContactFromList(object):
     swagger_types = {
         'emails': 'list[str]',
         'ids': 'list[int]',
+        'ext_ids': 'list[str]',
         'all': 'bool'
     }
 
     attribute_map = {
         'emails': 'emails',
         'ids': 'ids',
+        'ext_ids': 'extIds',
         'all': 'all'
     }
 
-    def __init__(self, emails=None, ids=None, all=None):  # noqa: E501
+    def __init__(self, emails=None, ids=None, ext_ids=None, all=None):  # noqa: E501
         """RemoveContactFromList - a model defined in Swagger"""  # noqa: E501
 
         self._emails = None
         self._ids = None
+        self._ext_ids = None
         self._all = None
         self.discriminator = None
 
@@ -54,6 +57,8 @@ class RemoveContactFromList(object):
             self.emails = emails
         if ids is not None:
             self.ids = ids
+        if ext_ids is not None:
+            self.ext_ids = ext_ids
         if all is not None:
             self.all = all
 
@@ -61,7 +66,7 @@ class RemoveContactFromList(object):
     def emails(self):
         """Gets the emails of this RemoveContactFromList.  # noqa: E501
 
-        Required if 'all' is false. Emails to remove from a list. You can pass a maximum of 150 emails for removal in one request.  # noqa: E501
+        Required if 'all' is false and EXT_ID attributes, IDs are not passed. Emails to remove from a list. You can pass a maximum of 150 emails for removal in one request.  # noqa: E501
 
         :return: The emails of this RemoveContactFromList.  # noqa: E501
         :rtype: list[str]
@@ -72,7 +77,7 @@ class RemoveContactFromList(object):
     def emails(self, emails):
         """Sets the emails of this RemoveContactFromList.
 
-        Required if 'all' is false. Emails to remove from a list. You can pass a maximum of 150 emails for removal in one request.  # noqa: E501
+        Required if 'all' is false and EXT_ID attributes, IDs are not passed. Emails to remove from a list. You can pass a maximum of 150 emails for removal in one request.  # noqa: E501
 
         :param emails: The emails of this RemoveContactFromList.  # noqa: E501
         :type: list[str]
@@ -84,7 +89,7 @@ class RemoveContactFromList(object):
     def ids(self):
         """Gets the ids of this RemoveContactFromList.  # noqa: E501
 
-        Mandatory if Emails are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if Emails, EXT_ID attributes are not passed, ignored otherwise. Contact IDs to add to a list. You can pass a maximum of 150 Ids for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :return: The ids of this RemoveContactFromList.  # noqa: E501
         :rtype: list[int]
@@ -95,7 +100,7 @@ class RemoveContactFromList(object):
     def ids(self, ids):
         """Sets the ids of this RemoveContactFromList.
 
-        Mandatory if Emails are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if Emails, EXT_ID attributes are not passed, ignored otherwise. Contact IDs to add to a list. You can pass a maximum of 150 Ids for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :param ids: The ids of this RemoveContactFromList.  # noqa: E501
         :type: list[int]
@@ -104,10 +109,33 @@ class RemoveContactFromList(object):
         self._ids = ids
 
     @property
+    def ext_ids(self):
+        """Gets the ext_ids of this RemoveContactFromList.  # noqa: E501
+
+        Mandatory if 'all' is false and Emails, IDs are not passed, ignored otherwise. EXT_ID attributes to add to a list. You can pass a maximum of 150 extIds for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+
+        :return: The ext_ids of this RemoveContactFromList.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._ext_ids
+
+    @ext_ids.setter
+    def ext_ids(self, ext_ids):
+        """Sets the ext_ids of this RemoveContactFromList.
+
+        Mandatory if 'all' is false and Emails, IDs are not passed, ignored otherwise. EXT_ID attributes to add to a list. You can pass a maximum of 150 extIds for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+
+        :param ext_ids: The ext_ids of this RemoveContactFromList.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._ext_ids = ext_ids
+
+    @property
     def all(self):
         """Gets the all of this RemoveContactFromList.  # noqa: E501
 
-        Required if none of 'emails' or 'ids' are passed. Remove all existing contacts from a list.  A process will be created in this scenario. You can fetch the process details to know about the progress  # noqa: E501
+        Required if none of 'emails', EXT_ID attributes or 'ids' are passed. Remove all existing contacts from a list.  A process will be created in this scenario. You can fetch the process details to know about the progress  # noqa: E501
 
         :return: The all of this RemoveContactFromList.  # noqa: E501
         :rtype: bool
@@ -118,7 +146,7 @@ class RemoveContactFromList(object):
     def all(self, all):
         """Sets the all of this RemoveContactFromList.
 
-        Required if none of 'emails' or 'ids' are passed. Remove all existing contacts from a list.  A process will be created in this scenario. You can fetch the process details to know about the progress  # noqa: E501
+        Required if none of 'emails', EXT_ID attributes or 'ids' are passed. Remove all existing contacts from a list.  A process will be created in this scenario. You can fetch the process details to know about the progress  # noqa: E501
 
         :param all: The all of this RemoveContactFromList.  # noqa: E501
         :type: bool

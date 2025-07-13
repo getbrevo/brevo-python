@@ -86,7 +86,7 @@ class CreateContact(object):
     def email(self):
         """Gets the email of this CreateContact.  # noqa: E501
 
-        Email address of the user. Mandatory if \"SMS\" field is not passed in \"attributes\" parameter. Mobile Number in \"SMS\" field should be passed with proper country code. For example {\"SMS\":\"+91xxxxxxxxxx\"} or {\"SMS\":\"0091xxxxxxxxxx\"}  # noqa: E501
+        Email address of the user. **Mandatory if \"ext_id\"  & \"SMS\" field is not passed.**  # noqa: E501
 
         :return: The email of this CreateContact.  # noqa: E501
         :rtype: str
@@ -97,7 +97,7 @@ class CreateContact(object):
     def email(self, email):
         """Sets the email of this CreateContact.
 
-        Email address of the user. Mandatory if \"SMS\" field is not passed in \"attributes\" parameter. Mobile Number in \"SMS\" field should be passed with proper country code. For example {\"SMS\":\"+91xxxxxxxxxx\"} or {\"SMS\":\"0091xxxxxxxxxx\"}  # noqa: E501
+        Email address of the user. **Mandatory if \"ext_id\"  & \"SMS\" field is not passed.**  # noqa: E501
 
         :param email: The email of this CreateContact.  # noqa: E501
         :type: str

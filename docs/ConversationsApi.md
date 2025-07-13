@@ -43,7 +43,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ConversationsApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body17() # Body17 | Agent fields.
+body = brevo_python.Body19() # Body19 | Agent fields.
 
 try:
     # Sets agent’s status to online for 2-3 minutes
@@ -56,7 +56,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body17**](Body17.md)| Agent fields. | 
+ **body** | [**Body19**](Body19.md)| Agent fields. | 
 
 ### Return type
 
@@ -217,7 +217,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.ConversationsApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | ID of the message
-body = brevo_python.Body14() # Body14 |  (optional)
+body = brevo_python.Body16() # Body16 |  (optional)
 
 try:
     # Update a message sent by an agent
@@ -232,7 +232,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| ID of the message | 
- **body** | [**Body14**](Body14.md)|  | [optional] 
+ **body** | [**Body16**](Body16.md)|  | [optional] 
 
 ### Return type
 
@@ -275,7 +275,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ConversationsApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body13() # Body13 | Message fields.
+body = brevo_python.Body15() # Body15 | Message fields.
 
 try:
     # Send a message as an agent
@@ -289,7 +289,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body13**](Body13.md)| Message fields. | 
+ **body** | [**Body15**](Body15.md)| Message fields. | 
 
 ### Return type
 
@@ -446,7 +446,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.ConversationsApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | ID of the message
-body = brevo_python.Body16() # Body16 | 
+body = brevo_python.Body18() # Body18 | 
 
 try:
     # Update an automated message
@@ -461,7 +461,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| ID of the message | 
- **body** | [**Body16**](Body16.md)|  | 
+ **body** | [**Body18**](Body18.md)|  | 
 
 ### Return type
 
@@ -506,7 +506,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ConversationsApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body15() # Body15 | 
+body = brevo_python.Body17() # Body17 | 
 
 try:
     # Send an automated message to a visitor
@@ -520,7 +520,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body15**](Body15.md)|  | 
+ **body** | [**Body17**](Body17.md)|  | 
 
 ### Return type
 

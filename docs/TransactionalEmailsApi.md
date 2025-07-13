@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**get_transac_blocked_contacts**](TransactionalEmailsApi.md#get_transac_blocked_contacts) | **GET** /smtp/blockedContacts | Get the list of blocked or unsubscribed transactional contacts
 [**get_transac_email_content**](TransactionalEmailsApi.md#get_transac_email_content) | **GET** /smtp/emails/{uuid} | Get the personalized content of a sent transactional email
 [**get_transac_emails_list**](TransactionalEmailsApi.md#get_transac_emails_list) | **GET** /smtp/emails | Get the list of transactional emails on the basis of allowed filters
+[**post_preview_smtp_email_templates**](TransactionalEmailsApi.md#post_preview_smtp_email_templates) | **POST** /smtp/template/preview | Generate the rendered preview of transactional template
 [**send_test_template**](TransactionalEmailsApi.md#send_test_template) | **POST** /smtp/templates/{templateId}/sendTest | Send a template to your test list
 [**send_transac_email**](TransactionalEmailsApi.md#send_transac_email) | **POST** /smtp/email | Send a transactional email
 [**smtp_blocked_contacts_email_delete**](TransactionalEmailsApi.md#smtp_blocked_contacts_email_delete) | **DELETE** /smtp/blockedContacts/{email} | Unblock or resubscribe a transactional contact
@@ -1092,6 +1093,63 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **post_preview_smtp_email_templates**
+> TemplatePreview post_preview_smtp_email_templates(fetch_template_preview)
+
+Generate the rendered preview of transactional template
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.TransactionalEmailsApi(brevo_python.ApiClient(configuration))
+fetch_template_preview = brevo_python.FetchTemplatePreview() # FetchTemplatePreview | Values to fetch Template preview
+
+try:
+    # Generate the rendered preview of transactional template
+    api_response = api_instance.post_preview_smtp_email_templates(fetch_template_preview)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionalEmailsApi->post_preview_smtp_email_templates: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fetch_template_preview** | [**FetchTemplatePreview**](FetchTemplatePreview.md)| Values to fetch Template preview | 
+
+### Return type
+
+[**TemplatePreview**](TemplatePreview.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **send_test_template**
 > send_test_template(template_id, send_test_email)
 
@@ -1289,7 +1347,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.TransactionalEmailsApi(brevo_python.ApiClient(configuration))
-identifier = 'identifier_example' # str | MessageId or Email of the transactional log(s) to delete
+identifier = 'identifier_example' # str | MessageId of the transactional log(s) to delete
 
 try:
     # Delete an SMTP transactional log
@@ -1302,7 +1360,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **str**| MessageId or Email of the transactional log(s) to delete | 
+ **identifier** | **str**| MessageId of the transactional log(s) to delete | 
 
 ### Return type
 

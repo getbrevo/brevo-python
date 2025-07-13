@@ -31,102 +31,45 @@ class InlineResponse2008(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'id': 'str',
-        'name': 'str',
-        'default_coupon': 'str'
+        'products': 'list[ConversionSourceProduct]'
     }
 
     attribute_map = {
-        'id': 'id',
-        'name': 'name',
-        'default_coupon': 'defaultCoupon'
+        'products': 'products'
     }
 
-    def __init__(self, id=None, name=None, default_coupon=None):  # noqa: E501
+    def __init__(self, products=None):  # noqa: E501
         """InlineResponse2008 - a model defined in Swagger"""  # noqa: E501
 
-        self._id = None
-        self._name = None
-        self._default_coupon = None
+        self._products = None
         self.discriminator = None
 
-        self.id = id
-        self.name = name
-        if default_coupon is not None:
-            self.default_coupon = default_coupon
+        self.products = products
 
     @property
-    def id(self):
-        """Gets the id of this InlineResponse2008.  # noqa: E501
+    def products(self):
+        """Gets the products of this InlineResponse2008.  # noqa: E501
 
-        The id of the collection  # noqa: E501
+        List of attributed products  # noqa: E501
 
-        :return: The id of this InlineResponse2008.  # noqa: E501
-        :rtype: str
+        :return: The products of this InlineResponse2008.  # noqa: E501
+        :rtype: list[ConversionSourceProduct]
         """
-        return self._id
+        return self._products
 
-    @id.setter
-    def id(self, id):
-        """Sets the id of this InlineResponse2008.
+    @products.setter
+    def products(self, products):
+        """Sets the products of this InlineResponse2008.
 
-        The id of the collection  # noqa: E501
+        List of attributed products  # noqa: E501
 
-        :param id: The id of this InlineResponse2008.  # noqa: E501
-        :type: str
+        :param products: The products of this InlineResponse2008.  # noqa: E501
+        :type: list[ConversionSourceProduct]
         """
-        if id is None:
-            raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
+        if products is None:
+            raise ValueError("Invalid value for `products`, must not be `None`")  # noqa: E501
 
-        self._id = id
-
-    @property
-    def name(self):
-        """Gets the name of this InlineResponse2008.  # noqa: E501
-
-        The name of the collection  # noqa: E501
-
-        :return: The name of this InlineResponse2008.  # noqa: E501
-        :rtype: str
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """Sets the name of this InlineResponse2008.
-
-        The name of the collection  # noqa: E501
-
-        :param name: The name of this InlineResponse2008.  # noqa: E501
-        :type: str
-        """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
-
-        self._name = name
-
-    @property
-    def default_coupon(self):
-        """Gets the default_coupon of this InlineResponse2008.  # noqa: E501
-
-        The default coupon of the collection  # noqa: E501
-
-        :return: The default_coupon of this InlineResponse2008.  # noqa: E501
-        :rtype: str
-        """
-        return self._default_coupon
-
-    @default_coupon.setter
-    def default_coupon(self, default_coupon):
-        """Sets the default_coupon of this InlineResponse2008.
-
-        The default coupon of the collection  # noqa: E501
-
-        :param default_coupon: The default_coupon of this InlineResponse2008.  # noqa: E501
-        :type: str
-        """
-
-        self._default_coupon = default_coupon
+        self._products = products
 
     def to_dict(self):
         """Returns the model properties as a dict"""

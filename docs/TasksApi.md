@@ -233,7 +233,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.TasksApi(brevo_python.ApiClient(configuration))
 id = 'id_example' # str | 
-body = brevo_python.Body12() # Body12 | Updated task details.
+body = brevo_python.Body14() # Body14 | Updated task details.
 
 try:
     # Update a task
@@ -247,7 +247,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
- **body** | [**Body12**](Body12.md)| Updated task details. | 
+ **body** | [**Body14**](Body14.md)| Updated task details. | 
 
 ### Return type
 
@@ -290,7 +290,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.TasksApi(brevo_python.ApiClient(configuration))
-body = brevo_python.Body11() # Body11 | Task name.
+body = brevo_python.Body13() # Body13 | Task name.
 
 try:
     # Create a task
@@ -304,7 +304,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body11**](Body11.md)| Task name. | 
+ **body** | [**Body13**](Body13.md)| Task name. | 
 
 ### Return type
 

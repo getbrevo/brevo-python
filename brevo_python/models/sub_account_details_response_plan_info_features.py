@@ -33,21 +33,24 @@ class SubAccountDetailsResponsePlanInfoFeatures(object):
     swagger_types = {
         'inbox': 'SubAccountDetailsResponsePlanInfoFeaturesInbox',
         'landing_page': 'SubAccountDetailsResponsePlanInfoFeaturesLandingPage',
-        'users': 'SubAccountDetailsResponsePlanInfoFeaturesUsers'
+        'users': 'SubAccountDetailsResponsePlanInfoFeaturesUsers',
+        'sales_users': 'SubAccountDetailsResponsePlanInfoFeaturesSalesUsers'
     }
 
     attribute_map = {
         'inbox': 'inbox',
         'landing_page': 'landingPage',
-        'users': 'users'
+        'users': 'users',
+        'sales_users': 'salesUsers'
     }
 
-    def __init__(self, inbox=None, landing_page=None, users=None):  # noqa: E501
+    def __init__(self, inbox=None, landing_page=None, users=None, sales_users=None):  # noqa: E501
         """SubAccountDetailsResponsePlanInfoFeatures - a model defined in Swagger"""  # noqa: E501
 
         self._inbox = None
         self._landing_page = None
         self._users = None
+        self._sales_users = None
         self.discriminator = None
 
         if inbox is not None:
@@ -56,6 +59,8 @@ class SubAccountDetailsResponsePlanInfoFeatures(object):
             self.landing_page = landing_page
         if users is not None:
             self.users = users
+        if sales_users is not None:
+            self.sales_users = sales_users
 
     @property
     def inbox(self):
@@ -119,6 +124,27 @@ class SubAccountDetailsResponsePlanInfoFeatures(object):
         """
 
         self._users = users
+
+    @property
+    def sales_users(self):
+        """Gets the sales_users of this SubAccountDetailsResponsePlanInfoFeatures.  # noqa: E501
+
+
+        :return: The sales_users of this SubAccountDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :rtype: SubAccountDetailsResponsePlanInfoFeaturesSalesUsers
+        """
+        return self._sales_users
+
+    @sales_users.setter
+    def sales_users(self, sales_users):
+        """Sets the sales_users of this SubAccountDetailsResponsePlanInfoFeatures.
+
+
+        :param sales_users: The sales_users of this SubAccountDetailsResponsePlanInfoFeatures.  # noqa: E501
+        :type: SubAccountDetailsResponsePlanInfoFeaturesSalesUsers
+        """
+
+        self._sales_users = sales_users
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**delete_contact**](ContactsApi.md#delete_contact) | **DELETE** /contacts/{identifier} | Delete a contact
 [**delete_folder**](ContactsApi.md#delete_folder) | **DELETE** /contacts/folders/{folderId} | Delete a folder (and all its lists)
 [**delete_list**](ContactsApi.md#delete_list) | **DELETE** /contacts/lists/{listId} | Delete a list
+[**delete_multi_attribute_options**](ContactsApi.md#delete_multi_attribute_options) | **DELETE** /contacts/attributes/{attributeType}/{multipleChoiceAttribute}/{multipleChoiceAttributeOption} | Delete a multiple-choice attribute option
 [**get_attributes**](ContactsApi.md#get_attributes) | **GET** /contacts/attributes | List all attributes
 [**get_contact_info**](ContactsApi.md#get_contact_info) | **GET** /contacts/{identifier} | Get a contact&#39;s details
 [**get_contact_stats**](ContactsApi.md#get_contact_stats) | **GET** /contacts/{identifier}/campaignStats | Get email campaigns&#39; statistics for a contact
@@ -62,7 +63,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
 list_id = 789 # int | Id of the list
-contact_emails = brevo_python.AddContactToList() # AddContactToList | Emails addresses OR IDs of the contacts
+contact_emails = brevo_python.AddContactToList() # AddContactToList | Emails addresses OR IDs OR EXT_ID attributes of the contacts
 
 try:
     # Add existing contacts to a list
@@ -77,7 +78,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **list_id** | **int**| Id of the list | 
- **contact_emails** | [**AddContactToList**](AddContactToList.md)| Emails addresses OR IDs of the contacts | 
+ **contact_emails** | [**AddContactToList**](AddContactToList.md)| Emails addresses OR IDs OR EXT_ID attributes of the contacts | 
 
 ### Return type
 
@@ -158,6 +159,8 @@ void (empty response body)
 > CreateUpdateContactModel create_contact(create_contact)
 
 Create a contact
+
+Creates new contacts on Brevo. Contacts can be created by passing either - <br><br> 1. email address of the contact (email_id),  <br> 2. phone number of the contact (to be passed as \"SMS\" field in \"attributes\" along with proper country code), For example- {\"SMS\":\"+91xxxxxxxxxx\"} or {\"SMS\":\"0091xxxxxxxxxx\"} <br> 3. ext_id <br>
 
 ### Example
 ```python
@@ -440,9 +443,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_contact**
-> delete_contact(identifier)
+> delete_contact(identifier, identifier_type=identifier_type)
 
 Delete a contact
+
+There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
 
 ### Example
 ```python
@@ -465,11 +470,12 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
-identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact
+identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded)
+identifier_type = 'identifier_type_example' # str | email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
 
 try:
     # Delete a contact
-    api_instance.delete_contact(identifier)
+    api_instance.delete_contact(identifier, identifier_type=identifier_type)
 except ApiException as e:
     print("Exception when calling ContactsApi->delete_contact: %s\n" % e)
 ```
@@ -478,7 +484,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **str**| Email (urlencoded) OR ID of the contact | 
+ **identifier** | **str**| Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) | 
+ **identifier_type** | **str**| email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute | [optional] 
 
 ### Return type
 
@@ -607,6 +614,66 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_multi_attribute_options**
+> delete_multi_attribute_options(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option)
+
+Delete a multiple-choice attribute option
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
+attribute_type = 'attribute_type_example' # str | Type of the attribute
+multiple_choice_attribute = 'multiple_choice_attribute_example' # str | Name of the existing multiple-choice attribute
+multiple_choice_attribute_option = 'multiple_choice_attribute_option_example' # str | Name of the existing multiple-choice attribute option that you want to delete
+
+try:
+    # Delete a multiple-choice attribute option
+    api_instance.delete_multi_attribute_options(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option)
+except ApiException as e:
+    print("Exception when calling ContactsApi->delete_multi_attribute_options: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **attribute_type** | **str**| Type of the attribute | 
+ **multiple_choice_attribute** | **str**| Name of the existing multiple-choice attribute | 
+ **multiple_choice_attribute_option** | **str**| Name of the existing multiple-choice attribute option that you want to delete | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_attributes**
 > GetAttributes get_attributes()
 
@@ -661,11 +728,11 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_contact_info**
-> GetExtendedContactDetails get_contact_info(identifier, start_date=start_date, end_date=end_date)
+> GetExtendedContactDetails get_contact_info(identifier, identifier_type=identifier_type, start_date=start_date, end_date=end_date)
 
 Get a contact's details
 
-Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
+There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute <br><br>Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats ``https://developers.brevo.com/reference/contacts-7#getcontactstats`` endpoint with the appropriate date ranges.
 
 ### Example
 ```python
@@ -688,13 +755,14 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
-identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact OR its SMS attribute value
+identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded)
+identifier_type = 'identifier_type_example' # str | email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
 start_date = 'start_date_example' # str | **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  (optional)
 end_date = 'end_date_example' # str | **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  (optional)
 
 try:
     # Get a contact's details
-    api_response = api_instance.get_contact_info(identifier, start_date=start_date, end_date=end_date)
+    api_response = api_instance.get_contact_info(identifier, identifier_type=identifier_type, start_date=start_date, end_date=end_date)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ContactsApi->get_contact_info: %s\n" % e)
@@ -704,7 +772,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **str**| Email (urlencoded) OR ID of the contact OR its SMS attribute value | 
+ **identifier** | **str**| Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) | 
+ **identifier_type** | **str**| email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute | [optional] 
  **start_date** | **str**| **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  | [optional] 
  **end_date** | **str**| **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  | [optional] 
 
@@ -817,7 +886,7 @@ created_since = 'created_since_example' # str | Filter (urlencoded) the contacts
 sort = 'desc' # str | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed (optional) (default to desc)
 segment_id = 789 # int | Id of the segment. **Either listIds or segmentId can be passed.** (optional)
 list_ids = [56] # list[int] | Ids of the list. **Either listIds or segmentId can be passed.** (optional)
-filter = 'filter_example' # str | Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))**  (optional)
+filter = 'filter_example' # str | Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"), filter=equals(GENDER, \"1\"), filter=equals(GENDER, \"MALE\"), filter=equals(COUNTRY,\"USA, INDIA\")**  (optional)
 
 try:
     # Get all the contacts
@@ -838,7 +907,7 @@ Name | Type | Description  | Notes
  **sort** | **str**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
  **segment_id** | **int**| Id of the segment. **Either listIds or segmentId can be passed.** | [optional] 
  **list_ids** | [**list[int]**](int.md)| Ids of the list. **Either listIds or segmentId can be passed.** | [optional] 
- **filter** | **str**| Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter&#x3D;equals(FIRSTNAME,\&quot;Antoine\&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, \&quot;1989-11-23\&quot;))**  | [optional] 
+ **filter** | **str**| Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,\&quot;Antoine\&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, \&quot;1989-11-23\&quot;), filter&#x3D;equals(GENDER, \&quot;1\&quot;), filter&#x3D;equals(GENDER, \&quot;MALE\&quot;), filter&#x3D;equals(COUNTRY,\&quot;USA, INDIA\&quot;)**  | [optional] 
 
 ### Return type
 
@@ -1041,7 +1110,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folders**
-> GetFolders get_folders(limit, offset, sort=sort)
+> GetFolders get_folders(limit=limit, offset=offset, sort=sort)
 
 Get all folders
 
@@ -1066,13 +1135,13 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
-limit = 10 # int | Number of documents per page (default to 10)
-offset = 0 # int | Index of the first document of the page (default to 0)
+limit = 10 # int | Number of documents per page (optional) (default to 10)
+offset = 0 # int | Index of the first document of the page (optional) (default to 0)
 sort = 'desc' # str | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed (optional) (default to desc)
 
 try:
     # Get all folders
-    api_response = api_instance.get_folders(limit, offset, sort=sort)
+    api_response = api_instance.get_folders(limit=limit, offset=offset, sort=sort)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ContactsApi->get_folders: %s\n" % e)
@@ -1082,8 +1151,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| Number of documents per page | [default to 10]
- **offset** | **int**| Index of the first document of the page | [default to 0]
+ **limit** | **int**| Number of documents per page | [optional] [default to 10]
+ **offset** | **int**| Index of the first document of the page | [optional] [default to 0]
  **sort** | **str**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc]
 
 ### Return type
@@ -1370,7 +1439,7 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
 list_id = 789 # int | Id of the list
-contact_emails = brevo_python.RemoveContactFromList() # RemoveContactFromList | Emails addresses OR IDs of the contacts
+contact_emails = brevo_python.RemoveContactFromList() # RemoveContactFromList | Emails addresses OR IDs OR EXT_ID attributes of the contacts
 
 try:
     # Delete a contact from a list
@@ -1385,7 +1454,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **list_id** | **int**| Id of the list | 
- **contact_emails** | [**RemoveContactFromList**](RemoveContactFromList.md)| Emails addresses OR IDs of the contacts | 
+ **contact_emails** | [**RemoveContactFromList**](RemoveContactFromList.md)| Emails addresses OR IDs OR EXT_ID attributes of the contacts | 
 
 ### Return type
 
@@ -1578,9 +1647,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_contact**
-> update_contact(identifier, update_contact)
+> update_contact(identifier, update_contact, identifier_type=identifier_type)
 
 Update a contact
+
+There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
 
 ### Example
 ```python
@@ -1603,12 +1674,13 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.ContactsApi(brevo_python.ApiClient(configuration))
-identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact
+identifier = 'identifier_example' # str | Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
 update_contact = brevo_python.UpdateContact() # UpdateContact | Values to update a contact
+identifier_type = 'identifier_type_example' # str | email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute (optional)
 
 try:
     # Update a contact
-    api_instance.update_contact(identifier, update_contact)
+    api_instance.update_contact(identifier, update_contact, identifier_type=identifier_type)
 except ApiException as e:
     print("Exception when calling ContactsApi->update_contact: %s\n" % e)
 ```
@@ -1617,8 +1689,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **str**| Email (urlencoded) OR ID of the contact | 
+ **identifier** | **str**| Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value | 
  **update_contact** | [**UpdateContact**](UpdateContact.md)| Values to update a contact | 
+ **identifier_type** | **str**| email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute | [optional] 
 
 ### Return type
 

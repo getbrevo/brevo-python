@@ -31,7 +31,7 @@ class GetSegments(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'segments': 'GetSegmentsSegments',
+        'segments': 'list[object]',
         'count': 'int'
     }
 
@@ -58,7 +58,7 @@ class GetSegments(object):
 
 
         :return: The segments of this GetSegments.  # noqa: E501
-        :rtype: GetSegmentsSegments
+        :rtype: list[object]
         """
         return self._segments
 
@@ -68,7 +68,7 @@ class GetSegments(object):
 
 
         :param segments: The segments of this GetSegments.  # noqa: E501
-        :type: GetSegmentsSegments
+        :type: list[object]
         """
 
         self._segments = segments

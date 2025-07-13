@@ -72,7 +72,7 @@ class InviteuserPrivileges(object):
         :param feature: The feature of this InviteuserPrivileges.  # noqa: E501
         :type: str
         """
-        allowed_values = ["email_campaigns", "sms_campaigns", "contacts", "templates", "workflows", "facebook_ads", "landing_pages", "transactional_emails", "smtp_api", "user_management", "sales_platform", "phone", "conversations", "senders_domains_dedicated_ips", "push_notifications"]  # noqa: E501
+        allowed_values = ["email_campaigns", "sms_campaigns", "contacts", "templates", "workflows", "landing_pages", "transactional_emails", "smtp_api", "user_management", "sales_platform", "phone", "conversations", "senders_domains_dedicated_ips", "push_notifications"]  # noqa: E501
         if feature not in allowed_values:
             raise ValueError(
                 "Invalid value for `feature` ({0}), must be one of {1}"  # noqa: E501
@@ -101,7 +101,7 @@ class InviteuserPrivileges(object):
         :param permissions: The permissions of this InviteuserPrivileges.  # noqa: E501
         :type: list[str]
         """
-        allowed_values = ["create_edit_delete", "send_schedule_suspend", "view", "import", "export", "list_and_attributes", "forms", "activate_deactivate", "activate_deactivate_pause", "settings", "schedule_pause", "all", "logs", "access", "assign", "configure", "manage_owned_deals_tasks", "manage_others_deals_tasks", "manage_owned_companies", "manage_others_companies", "reports", "senders_management", "domains_management", "dedicated_ips_management", "send", "smtp", "api_keys", "authorized_ips", "none"]  # noqa: E501
+        allowed_values = ["create_edit_delete", "send_schedule_suspend", "view", "import", "export", "list_and_attributes", "forms", "activate_deactivate", "activate_deactivate_pause", "settings", "schedule_pause", "all", "logs", "access", "assign", "configure", "create_edit_deals", "delete_deals", "manage_others_deals_tasks", "manage_owned_companies", "manage_others_companies", "reports", "senders_management", "domains_management", "dedicated_ips_management", "send", "smtp", "api_keys", "authorized_ips", "none"]  # noqa: E501
         if not set(permissions).issubset(set(allowed_values)):
             raise ValueError(
                 "Invalid values for `permissions` [{0}], must be a subset of [{1}]"  # noqa: E501

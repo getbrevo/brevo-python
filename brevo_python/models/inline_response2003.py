@@ -31,44 +31,45 @@ class InlineResponse2003(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'process_id': 'int'
+        'id': 'str'
     }
 
     attribute_map = {
-        'process_id': 'processId'
+        'id': 'id'
     }
 
-    def __init__(self, process_id=None):  # noqa: E501
+    def __init__(self, id=None):  # noqa: E501
         """InlineResponse2003 - a model defined in Swagger"""  # noqa: E501
 
-        self._process_id = None
+        self._id = None
         self.discriminator = None
 
-        if process_id is not None:
-            self.process_id = process_id
+        self.id = id
 
     @property
-    def process_id(self):
-        """Gets the process_id of this InlineResponse2003.  # noqa: E501
+    def id(self):
+        """Gets the id of this InlineResponse2003.  # noqa: E501
 
-        The ID of the import process  # noqa: E501
+        Unique ID of the created attribute  # noqa: E501
 
-        :return: The process_id of this InlineResponse2003.  # noqa: E501
-        :rtype: int
+        :return: The id of this InlineResponse2003.  # noqa: E501
+        :rtype: str
         """
-        return self._process_id
+        return self._id
 
-    @process_id.setter
-    def process_id(self, process_id):
-        """Sets the process_id of this InlineResponse2003.
+    @id.setter
+    def id(self, id):
+        """Sets the id of this InlineResponse2003.
 
-        The ID of the import process  # noqa: E501
+        Unique ID of the created attribute  # noqa: E501
 
-        :param process_id: The process_id of this InlineResponse2003.  # noqa: E501
-        :type: int
+        :param id: The id of this InlineResponse2003.  # noqa: E501
+        :type: str
         """
+        if id is None:
+            raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
-        self._process_id = process_id
+        self._id = id
 
     def to_dict(self):
         """Returns the model properties as a dict"""

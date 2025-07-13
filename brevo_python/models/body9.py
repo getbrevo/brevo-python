@@ -31,72 +31,171 @@ class Body9(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'name': 'str',
-        'attributes': 'object'
+        'label': 'str',
+        'attribute_type': 'str',
+        'description': 'str',
+        'options_labels': 'list[str]',
+        'object_type': 'str'
     }
 
     attribute_map = {
-        'name': 'name',
-        'attributes': 'attributes'
+        'label': 'label',
+        'attribute_type': 'attributeType',
+        'description': 'description',
+        'options_labels': 'optionsLabels',
+        'object_type': 'objectType'
     }
 
-    def __init__(self, name=None, attributes=None):  # noqa: E501
+    def __init__(self, label=None, attribute_type=None, description=None, options_labels=None, object_type=None):  # noqa: E501
         """Body9 - a model defined in Swagger"""  # noqa: E501
 
-        self._name = None
-        self._attributes = None
+        self._label = None
+        self._attribute_type = None
+        self._description = None
+        self._options_labels = None
+        self._object_type = None
         self.discriminator = None
 
-        if name is not None:
-            self.name = name
-        if attributes is not None:
-            self.attributes = attributes
+        self.label = label
+        self.attribute_type = attribute_type
+        if description is not None:
+            self.description = description
+        if options_labels is not None:
+            self.options_labels = options_labels
+        self.object_type = object_type
 
     @property
-    def name(self):
-        """Gets the name of this Body9.  # noqa: E501
+    def label(self):
+        """Gets the label of this Body9.  # noqa: E501
 
-        Name of deal  # noqa: E501
+        The label for the attribute (max 50 characters, cannot be empty)  # noqa: E501
 
-        :return: The name of this Body9.  # noqa: E501
+        :return: The label of this Body9.  # noqa: E501
         :rtype: str
         """
-        return self._name
+        return self._label
 
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Body9.
+    @label.setter
+    def label(self, label):
+        """Sets the label of this Body9.
 
-        Name of deal  # noqa: E501
+        The label for the attribute (max 50 characters, cannot be empty)  # noqa: E501
 
-        :param name: The name of this Body9.  # noqa: E501
+        :param label: The label of this Body9.  # noqa: E501
+        :type: str
+        """
+        if label is None:
+            raise ValueError("Invalid value for `label`, must not be `None`")  # noqa: E501
+
+        self._label = label
+
+    @property
+    def attribute_type(self):
+        """Gets the attribute_type of this Body9.  # noqa: E501
+
+        The type of attribute (must be one of the defined enums)  # noqa: E501
+
+        :return: The attribute_type of this Body9.  # noqa: E501
+        :rtype: str
+        """
+        return self._attribute_type
+
+    @attribute_type.setter
+    def attribute_type(self, attribute_type):
+        """Sets the attribute_type of this Body9.
+
+        The type of attribute (must be one of the defined enums)  # noqa: E501
+
+        :param attribute_type: The attribute_type of this Body9.  # noqa: E501
+        :type: str
+        """
+        if attribute_type is None:
+            raise ValueError("Invalid value for `attribute_type`, must not be `None`")  # noqa: E501
+        allowed_values = ["text", "user", "number", "single-select", "date", "boolean", "multi-choice"]  # noqa: E501
+        if attribute_type not in allowed_values:
+            raise ValueError(
+                "Invalid value for `attribute_type` ({0}), must be one of {1}"  # noqa: E501
+                .format(attribute_type, allowed_values)
+            )
+
+        self._attribute_type = attribute_type
+
+    @property
+    def description(self):
+        """Gets the description of this Body9.  # noqa: E501
+
+        A description of the attribute  # noqa: E501
+
+        :return: The description of this Body9.  # noqa: E501
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """Sets the description of this Body9.
+
+        A description of the attribute  # noqa: E501
+
+        :param description: The description of this Body9.  # noqa: E501
         :type: str
         """
 
-        self._name = name
+        self._description = description
 
     @property
-    def attributes(self):
-        """Gets the attributes of this Body9.  # noqa: E501
+    def options_labels(self):
+        """Gets the options_labels of this Body9.  # noqa: E501
 
-        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
+        Options for multi-choice or single-select attributes  # noqa: E501
 
-        :return: The attributes of this Body9.  # noqa: E501
-        :rtype: object
+        :return: The options_labels of this Body9.  # noqa: E501
+        :rtype: list[str]
         """
-        return self._attributes
+        return self._options_labels
 
-    @attributes.setter
-    def attributes(self, attributes):
-        """Sets the attributes of this Body9.
+    @options_labels.setter
+    def options_labels(self, options_labels):
+        """Sets the options_labels of this Body9.
 
-        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
+        Options for multi-choice or single-select attributes  # noqa: E501
 
-        :param attributes: The attributes of this Body9.  # noqa: E501
-        :type: object
+        :param options_labels: The options_labels of this Body9.  # noqa: E501
+        :type: list[str]
         """
 
-        self._attributes = attributes
+        self._options_labels = options_labels
+
+    @property
+    def object_type(self):
+        """Gets the object_type of this Body9.  # noqa: E501
+
+        The type of object the attribute belongs to (prefilled with `companies`or `deal`, mandatory)  # noqa: E501
+
+        :return: The object_type of this Body9.  # noqa: E501
+        :rtype: str
+        """
+        return self._object_type
+
+    @object_type.setter
+    def object_type(self, object_type):
+        """Sets the object_type of this Body9.
+
+        The type of object the attribute belongs to (prefilled with `companies`or `deal`, mandatory)  # noqa: E501
+
+        :param object_type: The object_type of this Body9.  # noqa: E501
+        :type: str
+        """
+        if object_type is None:
+            raise ValueError("Invalid value for `object_type`, must not be `None`")  # noqa: E501
+        allowed_values = ["companies", "deals"]  # noqa: E501
+        if object_type not in allowed_values:
+            raise ValueError(
+                "Invalid value for `object_type` ({0}), must be one of {1}"  # noqa: E501
+                .format(object_type, allowed_values)
+            )
+
+        self._object_type = object_type
 
     def to_dict(self):
         """Returns the model properties as a dict"""

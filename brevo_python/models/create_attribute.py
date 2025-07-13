@@ -117,7 +117,7 @@ class CreateAttribute(object):
     def enumeration(self):
         """Gets the enumeration of this CreateAttribute.  # noqa: E501
 
-        List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
+        List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
 
         :return: The enumeration of this CreateAttribute.  # noqa: E501
         :rtype: list[CreateAttributeEnumeration]
@@ -128,7 +128,7 @@ class CreateAttribute(object):
     def enumeration(self, enumeration):
         """Sets the enumeration of this CreateAttribute.
 
-        List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
+        List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
 
         :param enumeration: The enumeration of this CreateAttribute.  # noqa: E501
         :type: list[CreateAttributeEnumeration]
@@ -140,7 +140,7 @@ class CreateAttribute(object):
     def multi_category_options(self):
         """Gets the multi_category_options of this CreateAttribute.  # noqa: E501
 
-        List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is \"normal\" and attribute's type is \"multiple-choice\".** For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+        List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is \"normal\" and attribute's type is \"multiple-choice\". None of the multicategory options can exceed max 200 characters.** For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
 
         :return: The multi_category_options of this CreateAttribute.  # noqa: E501
         :rtype: list[str]
@@ -151,7 +151,7 @@ class CreateAttribute(object):
     def multi_category_options(self, multi_category_options):
         """Sets the multi_category_options of this CreateAttribute.
 
-        List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is \"normal\" and attribute's type is \"multiple-choice\".** For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+        List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is \"normal\" and attribute's type is \"multiple-choice\". None of the multicategory options can exceed max 200 characters.** For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
 
         :param multi_category_options: The multi_category_options of this CreateAttribute.  # noqa: E501
         :type: list[str]
@@ -163,7 +163,7 @@ class CreateAttribute(object):
     def type(self):
         """Gets the type of this CreateAttribute.  # noqa: E501
 
-        Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'boolean' and 'multiple-choice' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )  # noqa: E501
+        Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'user' and 'multiple-choice' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )  # noqa: E501
 
         :return: The type of this CreateAttribute.  # noqa: E501
         :rtype: str
@@ -174,7 +174,7 @@ class CreateAttribute(object):
     def type(self, type):
         """Sets the type of this CreateAttribute.
 
-        Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'boolean' and 'multiple-choice' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )  # noqa: E501
+        Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'user' and 'multiple-choice' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )  # noqa: E501
 
         :param type: The type of this CreateAttribute.  # noqa: E501
         :type: str

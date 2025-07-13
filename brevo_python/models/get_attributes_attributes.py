@@ -35,7 +35,8 @@ class GetAttributesAttributes(object):
         'category': 'str',
         'type': 'str',
         'enumeration': 'list[GetAttributesEnumeration]',
-        'calculated_value': 'str'
+        'calculated_value': 'str',
+        'multi_category_options': 'list[str]'
     }
 
     attribute_map = {
@@ -43,10 +44,11 @@ class GetAttributesAttributes(object):
         'category': 'category',
         'type': 'type',
         'enumeration': 'enumeration',
-        'calculated_value': 'calculatedValue'
+        'calculated_value': 'calculatedValue',
+        'multi_category_options': 'multiCategoryOptions'
     }
 
-    def __init__(self, name=None, category=None, type=None, enumeration=None, calculated_value=None):  # noqa: E501
+    def __init__(self, name=None, category=None, type=None, enumeration=None, calculated_value=None, multi_category_options=None):  # noqa: E501
         """GetAttributesAttributes - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
@@ -54,6 +56,7 @@ class GetAttributesAttributes(object):
         self._type = None
         self._enumeration = None
         self._calculated_value = None
+        self._multi_category_options = None
         self.discriminator = None
 
         self.name = name
@@ -64,6 +67,8 @@ class GetAttributesAttributes(object):
             self.enumeration = enumeration
         if calculated_value is not None:
             self.calculated_value = calculated_value
+        if multi_category_options is not None:
+            self.multi_category_options = multi_category_options
 
     @property
     def name(self):
@@ -141,7 +146,7 @@ class GetAttributesAttributes(object):
         :param type: The type of this GetAttributesAttributes.  # noqa: E501
         :type: str
         """
-        allowed_values = ["text", "date", "float", "id", "boolean"]  # noqa: E501
+        allowed_values = ["text", "date", "float", "id", "boolean", "multiple-choice", "user"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
@@ -195,6 +200,29 @@ class GetAttributesAttributes(object):
         """
 
         self._calculated_value = calculated_value
+
+    @property
+    def multi_category_options(self):
+        """Gets the multi_category_options of this GetAttributesAttributes.  # noqa: E501
+
+        Parameter only available for \"multiple-choice\" type attributes.  # noqa: E501
+
+        :return: The multi_category_options of this GetAttributesAttributes.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._multi_category_options
+
+    @multi_category_options.setter
+    def multi_category_options(self, multi_category_options):
+        """Sets the multi_category_options of this GetAttributesAttributes.
+
+        Parameter only available for \"multiple-choice\" type attributes.  # noqa: E501
+
+        :param multi_category_options: The multi_category_options of this GetAttributesAttributes.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._multi_category_options = multi_category_options
 
     def to_dict(self):
         """Returns the model properties as a dict"""

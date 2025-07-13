@@ -33,21 +33,24 @@ class CreateEmailCampaignRecipients(object):
     swagger_types = {
         'exclusion_list_ids': 'list[int]',
         'list_ids': 'list[int]',
-        'segment_ids': 'list[int]'
+        'segment_ids': 'list[int]',
+        'exclusion_segment_ids': 'list[int]'
     }
 
     attribute_map = {
         'exclusion_list_ids': 'exclusionListIds',
         'list_ids': 'listIds',
-        'segment_ids': 'segmentIds'
+        'segment_ids': 'segmentIds',
+        'exclusion_segment_ids': 'exclusionSegmentIds'
     }
 
-    def __init__(self, exclusion_list_ids=None, list_ids=None, segment_ids=None):  # noqa: E501
+    def __init__(self, exclusion_list_ids=None, list_ids=None, segment_ids=None, exclusion_segment_ids=None):  # noqa: E501
         """CreateEmailCampaignRecipients - a model defined in Swagger"""  # noqa: E501
 
         self._exclusion_list_ids = None
         self._list_ids = None
         self._segment_ids = None
+        self._exclusion_segment_ids = None
         self.discriminator = None
 
         if exclusion_list_ids is not None:
@@ -56,6 +59,8 @@ class CreateEmailCampaignRecipients(object):
             self.list_ids = list_ids
         if segment_ids is not None:
             self.segment_ids = segment_ids
+        if exclusion_segment_ids is not None:
+            self.exclusion_segment_ids = exclusion_segment_ids
 
     @property
     def exclusion_list_ids(self):
@@ -125,6 +130,29 @@ class CreateEmailCampaignRecipients(object):
         """
 
         self._segment_ids = segment_ids
+
+    @property
+    def exclusion_segment_ids(self):
+        """Gets the exclusion_segment_ids of this CreateEmailCampaignRecipients.  # noqa: E501
+
+        Segment ids which have to be excluded from a campaign.   # noqa: E501
+
+        :return: The exclusion_segment_ids of this CreateEmailCampaignRecipients.  # noqa: E501
+        :rtype: list[int]
+        """
+        return self._exclusion_segment_ids
+
+    @exclusion_segment_ids.setter
+    def exclusion_segment_ids(self, exclusion_segment_ids):
+        """Sets the exclusion_segment_ids of this CreateEmailCampaignRecipients.
+
+        Segment ids which have to be excluded from a campaign.   # noqa: E501
+
+        :param exclusion_segment_ids: The exclusion_segment_ids of this CreateEmailCampaignRecipients.  # noqa: E501
+        :type: list[int]
+        """
+
+        self._exclusion_segment_ids = exclusion_segment_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -72,7 +72,7 @@ class ErrorModel(object):
         """
         if code is None:
             raise ValueError("Invalid value for `code`, must not be `None`")  # noqa: E501
-        allowed_values = ["invalid_parameter", "missing_parameter", "out_of_range", "campaign_processing", "campaign_sent", "document_not_found", "reseller_permission_denied", "not_enough_credits", "permission_denied", "duplicate_parameter", "duplicate_request", "method_not_allowed", "unauthorized", "account_under_validation", "not_acceptable", "bad_request", "unprocessable_entity"]  # noqa: E501
+        allowed_values = ["invalid_parameter", "missing_parameter", "out_of_range", "campaign_processing", "campaign_sent", "document_not_found", "not_enough_credits", "permission_denied", "duplicate_parameter", "duplicate_request", "method_not_allowed", "unauthorized", "account_under_validation", "not_acceptable", "bad_request", "unprocessable_entity"]  # noqa: E501
         if code not in allowed_values:
             raise ValueError(
                 "Invalid value for `code` ({0}), must be one of {1}"  # noqa: E501

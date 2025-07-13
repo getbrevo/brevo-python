@@ -711,7 +711,7 @@ class EcommerceApi(object):
             collection_formats=collection_formats)
 
     def ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
-        """Get detailed attribution metrics for a single Brevo campaign  # noqa: E501
+        """Get detailed attribution metrics for a single Brevo campaign or workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -719,9 +719,9 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
-        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
-        :return: InlineResponse2006
+        :param str conversion_source: The Brevo campaign type or workflow type for which data will be retrieved (required)
+        :param str conversion_source_id: The Brevo campaign or automation workflow id for which data will be retrieved (required)
+        :return: InlineResponse2007
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -733,7 +733,7 @@ class EcommerceApi(object):
             return data
 
     def ecommerce_attribution_metrics_conversion_source_conversion_source_id_get_with_http_info(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
-        """Get detailed attribution metrics for a single Brevo campaign  # noqa: E501
+        """Get detailed attribution metrics for a single Brevo campaign or workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -741,9 +741,9 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
-        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
-        :return: InlineResponse2006
+        :param str conversion_source: The Brevo campaign type or workflow type for which data will be retrieved (required)
+        :param str conversion_source_id: The Brevo campaign or automation workflow id for which data will be retrieved (required)
+        :return: InlineResponse2007
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -807,7 +807,7 @@ class EcommerceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2006',  # noqa: E501
+            response_type='InlineResponse2007',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -816,7 +816,7 @@ class EcommerceApi(object):
             collection_formats=collection_formats)
 
     def ecommerce_attribution_metrics_get(self, **kwargs):  # noqa: E501
-        """Get attribution metrics for one or more Brevo campaigns  # noqa: E501
+        """Get attribution metrics for one or more Brevo campaigns or workflows  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -826,8 +826,11 @@ class EcommerceApi(object):
         :param async_req bool
         :param datetime period_from: When getting metrics for a specific period, define the starting datetime in RFC3339 format
         :param datetime period_to: When getting metrics for a specific period, define the end datetime in RFC3339 format
-        :param list[float] email_campaign_id: The email campaign id(s) to get metrics for
-        :return: InlineResponse2005
+        :param list[str] email_campaign_id: The email campaign ID(s) to get metrics for
+        :param list[str] sms_campaign_id: The SMS campaign ID(s) to get metrics for
+        :param list[str] automation_workflow_email_id: The automation workflow ID(s) to get email attribution metrics for
+        :param list[str] automation_workflow_sms_id: The automation workflow ID(s) to get SMS attribution metrics for
+        :return: InlineResponse2006
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -839,7 +842,7 @@ class EcommerceApi(object):
             return data
 
     def ecommerce_attribution_metrics_get_with_http_info(self, **kwargs):  # noqa: E501
-        """Get attribution metrics for one or more Brevo campaigns  # noqa: E501
+        """Get attribution metrics for one or more Brevo campaigns or workflows  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -849,13 +852,16 @@ class EcommerceApi(object):
         :param async_req bool
         :param datetime period_from: When getting metrics for a specific period, define the starting datetime in RFC3339 format
         :param datetime period_to: When getting metrics for a specific period, define the end datetime in RFC3339 format
-        :param list[float] email_campaign_id: The email campaign id(s) to get metrics for
-        :return: InlineResponse2005
+        :param list[str] email_campaign_id: The email campaign ID(s) to get metrics for
+        :param list[str] sms_campaign_id: The SMS campaign ID(s) to get metrics for
+        :param list[str] automation_workflow_email_id: The automation workflow ID(s) to get email attribution metrics for
+        :param list[str] automation_workflow_sms_id: The automation workflow ID(s) to get SMS attribution metrics for
+        :return: InlineResponse2006
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['period_from', 'period_to', 'email_campaign_id']  # noqa: E501
+        all_params = ['period_from', 'period_to', 'email_campaign_id', 'sms_campaign_id', 'automation_workflow_email_id', 'automation_workflow_sms_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -883,6 +889,15 @@ class EcommerceApi(object):
         if 'email_campaign_id' in params:
             query_params.append(('emailCampaignId[]', params['email_campaign_id']))  # noqa: E501
             collection_formats['emailCampaignId[]'] = 'csv'  # noqa: E501
+        if 'sms_campaign_id' in params:
+            query_params.append(('smsCampaignId[]', params['sms_campaign_id']))  # noqa: E501
+            collection_formats['smsCampaignId[]'] = 'csv'  # noqa: E501
+        if 'automation_workflow_email_id' in params:
+            query_params.append(('automationWorkflowEmailId[]', params['automation_workflow_email_id']))  # noqa: E501
+            collection_formats['automationWorkflowEmailId[]'] = 'csv'  # noqa: E501
+        if 'automation_workflow_sms_id' in params:
+            query_params.append(('automationWorkflowSmsId[]', params['automation_workflow_sms_id']))  # noqa: E501
+            collection_formats['automationWorkflowSmsId[]'] = 'csv'  # noqa: E501
 
         header_params = {}
 
@@ -909,7 +924,7 @@ class EcommerceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2005',  # noqa: E501
+            response_type='InlineResponse2006',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -918,7 +933,7 @@ class EcommerceApi(object):
             collection_formats=collection_formats)
 
     def ecommerce_attribution_products_conversion_source_conversion_source_id_get(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
-        """Get attributed product sales for a single Brevo campaign  # noqa: E501
+        """Get attributed product sales for a single Brevo campaign or workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -926,9 +941,9 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
-        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
-        :return: InlineResponse2007
+        :param str conversion_source: The Brevo campaign or automation workflow type for which data will be retrieved (required)
+        :param str conversion_source_id: The Brevo campaign or automation workflow id for which data will be retrieved (required)
+        :return: InlineResponse2008
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -940,7 +955,7 @@ class EcommerceApi(object):
             return data
 
     def ecommerce_attribution_products_conversion_source_conversion_source_id_get_with_http_info(self, conversion_source, conversion_source_id, **kwargs):  # noqa: E501
-        """Get attributed product sales for a single Brevo campaign  # noqa: E501
+        """Get attributed product sales for a single Brevo campaign or workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -948,9 +963,9 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str conversion_source: The Brevo campaign type for which data will be retrieved (required)
-        :param float conversion_source_id: The Brevo campaign id for which data will be retrieved (required)
-        :return: InlineResponse2007
+        :param str conversion_source: The Brevo campaign or automation workflow type for which data will be retrieved (required)
+        :param str conversion_source_id: The Brevo campaign or automation workflow id for which data will be retrieved (required)
+        :return: InlineResponse2008
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1014,7 +1029,7 @@ class EcommerceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2007',  # noqa: E501
+            response_type='InlineResponse2008',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1031,7 +1046,7 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2004
+        :return: InlineResponse2005
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1051,7 +1066,7 @@ class EcommerceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2004
+        :return: InlineResponse2005
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1103,7 +1118,7 @@ class EcommerceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2004',  # noqa: E501
+            response_type='InlineResponse2005',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

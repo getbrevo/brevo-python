@@ -31,45 +31,69 @@ class InlineResponse2007(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'products': 'list[ConversionSourceProduct]'
+        'conversion_source_metrics': 'ConversionSourceMetrics',
+        'new_customers_count': 'float'
     }
 
     attribute_map = {
-        'products': 'products'
+        'conversion_source_metrics': 'ConversionSourceMetrics',
+        'new_customers_count': 'newCustomersCount'
     }
 
-    def __init__(self, products=None):  # noqa: E501
+    def __init__(self, conversion_source_metrics=None, new_customers_count=None):  # noqa: E501
         """InlineResponse2007 - a model defined in Swagger"""  # noqa: E501
 
-        self._products = None
+        self._conversion_source_metrics = None
+        self._new_customers_count = None
         self.discriminator = None
 
-        self.products = products
+        if conversion_source_metrics is not None:
+            self.conversion_source_metrics = conversion_source_metrics
+        self.new_customers_count = new_customers_count
 
     @property
-    def products(self):
-        """Gets the products of this InlineResponse2007.  # noqa: E501
+    def conversion_source_metrics(self):
+        """Gets the conversion_source_metrics of this InlineResponse2007.  # noqa: E501
 
-        List of attributed products  # noqa: E501
 
-        :return: The products of this InlineResponse2007.  # noqa: E501
-        :rtype: list[ConversionSourceProduct]
+        :return: The conversion_source_metrics of this InlineResponse2007.  # noqa: E501
+        :rtype: ConversionSourceMetrics
         """
-        return self._products
+        return self._conversion_source_metrics
 
-    @products.setter
-    def products(self, products):
-        """Sets the products of this InlineResponse2007.
+    @conversion_source_metrics.setter
+    def conversion_source_metrics(self, conversion_source_metrics):
+        """Sets the conversion_source_metrics of this InlineResponse2007.
 
-        List of attributed products  # noqa: E501
 
-        :param products: The products of this InlineResponse2007.  # noqa: E501
-        :type: list[ConversionSourceProduct]
+        :param conversion_source_metrics: The conversion_source_metrics of this InlineResponse2007.  # noqa: E501
+        :type: ConversionSourceMetrics
         """
-        if products is None:
-            raise ValueError("Invalid value for `products`, must not be `None`")  # noqa: E501
 
-        self._products = products
+        self._conversion_source_metrics = conversion_source_metrics
+
+    @property
+    def new_customers_count(self):
+        """Gets the new_customers_count of this InlineResponse2007.  # noqa: E501
+
+
+        :return: The new_customers_count of this InlineResponse2007.  # noqa: E501
+        :rtype: float
+        """
+        return self._new_customers_count
+
+    @new_customers_count.setter
+    def new_customers_count(self, new_customers_count):
+        """Sets the new_customers_count of this InlineResponse2007.
+
+
+        :param new_customers_count: The new_customers_count of this InlineResponse2007.  # noqa: E501
+        :type: float
+        """
+        if new_customers_count is None:
+            raise ValueError("Invalid value for `new_customers_count`, must not be `None`")  # noqa: E501
+
+        self._new_customers_count = new_customers_count
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -133,6 +133,7 @@ class AccountApi(object):
         :param async_req bool
         :param str start_date: Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
         :param str end_date: Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+        :param str email: Enter the user's email address to filter their activity in the account.
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page.
         :return: GetAccountActivity
@@ -157,6 +158,7 @@ class AccountApi(object):
         :param async_req bool
         :param str start_date: Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
         :param str end_date: Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+        :param str email: Enter the user's email address to filter their activity in the account.
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page.
         :return: GetAccountActivity
@@ -164,7 +166,7 @@ class AccountApi(object):
                  returns the request thread.
         """
 
-        all_params = ['start_date', 'end_date', 'limit', 'offset']  # noqa: E501
+        all_params = ['start_date', 'end_date', 'email', 'limit', 'offset']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -193,6 +195,8 @@ class AccountApi(object):
             query_params.append(('startDate', params['start_date']))  # noqa: E501
         if 'end_date' in params:
             query_params.append(('endDate', params['end_date']))  # noqa: E501
+        if 'email' in params:
+            query_params.append(('email', params['email']))  # noqa: E501
         if 'limit' in params:
             query_params.append(('limit', params['limit']))  # noqa: E501
         if 'offset' in params:

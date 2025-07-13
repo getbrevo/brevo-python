@@ -35,6 +35,7 @@ class RequestContactExportCustomContactFilter(object):
         'action_for_email_campaigns': 'str',
         'action_for_sms_campaigns': 'str',
         'list_id': 'int',
+        'segment_id': 'int',
         'email_campaign_id': 'int',
         'sms_campaign_id': 'int'
     }
@@ -44,17 +45,19 @@ class RequestContactExportCustomContactFilter(object):
         'action_for_email_campaigns': 'actionForEmailCampaigns',
         'action_for_sms_campaigns': 'actionForSmsCampaigns',
         'list_id': 'listId',
+        'segment_id': 'segmentId',
         'email_campaign_id': 'emailCampaignId',
         'sms_campaign_id': 'smsCampaignId'
     }
 
-    def __init__(self, action_for_contacts=None, action_for_email_campaigns=None, action_for_sms_campaigns=None, list_id=None, email_campaign_id=None, sms_campaign_id=None):  # noqa: E501
+    def __init__(self, action_for_contacts=None, action_for_email_campaigns=None, action_for_sms_campaigns=None, list_id=None, segment_id=None, email_campaign_id=None, sms_campaign_id=None):  # noqa: E501
         """RequestContactExportCustomContactFilter - a model defined in Swagger"""  # noqa: E501
 
         self._action_for_contacts = None
         self._action_for_email_campaigns = None
         self._action_for_sms_campaigns = None
         self._list_id = None
+        self._segment_id = None
         self._email_campaign_id = None
         self._sms_campaign_id = None
         self.discriminator = None
@@ -67,6 +70,8 @@ class RequestContactExportCustomContactFilter(object):
             self.action_for_sms_campaigns = action_for_sms_campaigns
         if list_id is not None:
             self.list_id = list_id
+        if segment_id is not None:
+            self.segment_id = segment_id
         if email_campaign_id is not None:
             self.email_campaign_id = email_campaign_id
         if sms_campaign_id is not None:
@@ -163,7 +168,7 @@ class RequestContactExportCustomContactFilter(object):
     def list_id(self):
         """Gets the list_id of this RequestContactExportCustomContactFilter.  # noqa: E501
 
-        Mandatory if actionForContacts is passed, ignored otherwise. Id of the list for which the corresponding action shall be applied in the filter.  # noqa: E501
+        ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.  # noqa: E501
 
         :return: The list_id of this RequestContactExportCustomContactFilter.  # noqa: E501
         :rtype: int
@@ -174,13 +179,36 @@ class RequestContactExportCustomContactFilter(object):
     def list_id(self, list_id):
         """Sets the list_id of this RequestContactExportCustomContactFilter.
 
-        Mandatory if actionForContacts is passed, ignored otherwise. Id of the list for which the corresponding action shall be applied in the filter.  # noqa: E501
+        ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.  # noqa: E501
 
         :param list_id: The list_id of this RequestContactExportCustomContactFilter.  # noqa: E501
         :type: int
         """
 
         self._list_id = list_id
+
+    @property
+    def segment_id(self):
+        """Gets the segment_id of this RequestContactExportCustomContactFilter.  # noqa: E501
+
+        ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included.   # noqa: E501
+
+        :return: The segment_id of this RequestContactExportCustomContactFilter.  # noqa: E501
+        :rtype: int
+        """
+        return self._segment_id
+
+    @segment_id.setter
+    def segment_id(self, segment_id):
+        """Sets the segment_id of this RequestContactExportCustomContactFilter.
+
+        ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included.   # noqa: E501
+
+        :param segment_id: The segment_id of this RequestContactExportCustomContactFilter.  # noqa: E501
+        :type: int
+        """
+
+        self._segment_id = segment_id
 
     @property
     def email_campaign_id(self):

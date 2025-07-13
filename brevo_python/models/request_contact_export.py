@@ -33,21 +33,33 @@ class RequestContactExport(object):
     swagger_types = {
         'export_attributes': 'list[str]',
         'custom_contact_filter': 'RequestContactExportCustomContactFilter',
-        'notify_url': 'str'
+        'notify_url': 'str',
+        'disable_notification': 'bool',
+        'export_mandatory_attributes': 'bool',
+        'export_subscription_status': 'list[str]',
+        'export_metadata': 'list[str]'
     }
 
     attribute_map = {
         'export_attributes': 'exportAttributes',
         'custom_contact_filter': 'customContactFilter',
-        'notify_url': 'notifyUrl'
+        'notify_url': 'notifyUrl',
+        'disable_notification': 'disableNotification',
+        'export_mandatory_attributes': 'exportMandatoryAttributes',
+        'export_subscription_status': 'exportSubscriptionStatus',
+        'export_metadata': 'exportMetadata'
     }
 
-    def __init__(self, export_attributes=None, custom_contact_filter=None, notify_url=None):  # noqa: E501
+    def __init__(self, export_attributes=None, custom_contact_filter=None, notify_url=None, disable_notification=False, export_mandatory_attributes=True, export_subscription_status=None, export_metadata=None):  # noqa: E501
         """RequestContactExport - a model defined in Swagger"""  # noqa: E501
 
         self._export_attributes = None
         self._custom_contact_filter = None
         self._notify_url = None
+        self._disable_notification = None
+        self._export_mandatory_attributes = None
+        self._export_subscription_status = None
+        self._export_metadata = None
         self.discriminator = None
 
         if export_attributes is not None:
@@ -55,12 +67,20 @@ class RequestContactExport(object):
         self.custom_contact_filter = custom_contact_filter
         if notify_url is not None:
             self.notify_url = notify_url
+        if disable_notification is not None:
+            self.disable_notification = disable_notification
+        if export_mandatory_attributes is not None:
+            self.export_mandatory_attributes = export_mandatory_attributes
+        if export_subscription_status is not None:
+            self.export_subscription_status = export_subscription_status
+        if export_metadata is not None:
+            self.export_metadata = export_metadata
 
     @property
     def export_attributes(self):
         """Gets the export_attributes of this RequestContactExport.  # noqa: E501
 
-        List of all the attributes that you want to export. These attributes must be present in your contact database. For example, ['fname', 'lname', 'email'].  # noqa: E501
+        List of all the attributes that you want to export. These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. For example, ['fname', 'lname', 'email'].  # noqa: E501
 
         :return: The export_attributes of this RequestContactExport.  # noqa: E501
         :rtype: list[str]
@@ -71,7 +91,7 @@ class RequestContactExport(object):
     def export_attributes(self, export_attributes):
         """Sets the export_attributes of this RequestContactExport.
 
-        List of all the attributes that you want to export. These attributes must be present in your contact database. For example, ['fname', 'lname', 'email'].  # noqa: E501
+        List of all the attributes that you want to export. These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. For example, ['fname', 'lname', 'email'].  # noqa: E501
 
         :param export_attributes: The export_attributes of this RequestContactExport.  # noqa: E501
         :type: list[str]
@@ -124,6 +144,98 @@ class RequestContactExport(object):
         """
 
         self._notify_url = notify_url
+
+    @property
+    def disable_notification(self):
+        """Gets the disable_notification of this RequestContactExport.  # noqa: E501
+
+        To avoid generating the email notification upon contact export, pass **true**  # noqa: E501
+
+        :return: The disable_notification of this RequestContactExport.  # noqa: E501
+        :rtype: bool
+        """
+        return self._disable_notification
+
+    @disable_notification.setter
+    def disable_notification(self, disable_notification):
+        """Sets the disable_notification of this RequestContactExport.
+
+        To avoid generating the email notification upon contact export, pass **true**  # noqa: E501
+
+        :param disable_notification: The disable_notification of this RequestContactExport.  # noqa: E501
+        :type: bool
+        """
+
+        self._disable_notification = disable_notification
+
+    @property
+    def export_mandatory_attributes(self):
+        """Gets the export_mandatory_attributes of this RequestContactExport.  # noqa: E501
+
+        To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME  # noqa: E501
+
+        :return: The export_mandatory_attributes of this RequestContactExport.  # noqa: E501
+        :rtype: bool
+        """
+        return self._export_mandatory_attributes
+
+    @export_mandatory_attributes.setter
+    def export_mandatory_attributes(self, export_mandatory_attributes):
+        """Sets the export_mandatory_attributes of this RequestContactExport.
+
+        To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME  # noqa: E501
+
+        :param export_mandatory_attributes: The export_mandatory_attributes of this RequestContactExport.  # noqa: E501
+        :type: bool
+        """
+
+        self._export_mandatory_attributes = export_mandatory_attributes
+
+    @property
+    def export_subscription_status(self):
+        """Gets the export_subscription_status of this RequestContactExport.  # noqa: E501
+
+        Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.  # noqa: E501
+
+        :return: The export_subscription_status of this RequestContactExport.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._export_subscription_status
+
+    @export_subscription_status.setter
+    def export_subscription_status(self, export_subscription_status):
+        """Sets the export_subscription_status of this RequestContactExport.
+
+        Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.  # noqa: E501
+
+        :param export_subscription_status: The export_subscription_status of this RequestContactExport.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._export_subscription_status = export_subscription_status
+
+    @property
+    def export_metadata(self):
+        """Gets the export_metadata of this RequestContactExport.  # noqa: E501
+
+        Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.  # noqa: E501
+
+        :return: The export_metadata of this RequestContactExport.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._export_metadata
+
+    @export_metadata.setter
+    def export_metadata(self, export_metadata):
+        """Sets the export_metadata of this RequestContactExport.
+
+        Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.  # noqa: E501
+
+        :param export_metadata: The export_metadata of this RequestContactExport.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._export_metadata = export_metadata
 
     def to_dict(self):
         """Returns the model properties as a dict"""

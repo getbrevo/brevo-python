@@ -31,157 +31,72 @@ class Body5(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'name': 'str',
-        'attributes': 'object',
-        'country_code': 'int',
-        'linked_contacts_ids': 'list[int]',
-        'linked_deals_ids': 'list[str]'
+        'all_features_access': 'bool',
+        'privileges': 'list[CorporateuseremailpermissionsPrivileges]'
     }
 
     attribute_map = {
-        'name': 'name',
-        'attributes': 'attributes',
-        'country_code': 'countryCode',
-        'linked_contacts_ids': 'linkedContactsIds',
-        'linked_deals_ids': 'linkedDealsIds'
+        'all_features_access': 'all_features_access',
+        'privileges': 'privileges'
     }
 
-    def __init__(self, name=None, attributes=None, country_code=None, linked_contacts_ids=None, linked_deals_ids=None):  # noqa: E501
+    def __init__(self, all_features_access=None, privileges=None):  # noqa: E501
         """Body5 - a model defined in Swagger"""  # noqa: E501
 
-        self._name = None
-        self._attributes = None
-        self._country_code = None
-        self._linked_contacts_ids = None
-        self._linked_deals_ids = None
+        self._all_features_access = None
+        self._privileges = None
         self.discriminator = None
 
-        self.name = name
-        if attributes is not None:
-            self.attributes = attributes
-        if country_code is not None:
-            self.country_code = country_code
-        if linked_contacts_ids is not None:
-            self.linked_contacts_ids = linked_contacts_ids
-        if linked_deals_ids is not None:
-            self.linked_deals_ids = linked_deals_ids
+        self.all_features_access = all_features_access
+        self.privileges = privileges
 
     @property
-    def name(self):
-        """Gets the name of this Body5.  # noqa: E501
+    def all_features_access(self):
+        """Gets the all_features_access of this Body5.  # noqa: E501
 
-        Name of company  # noqa: E501
+        All access to the features  # noqa: E501
 
-        :return: The name of this Body5.  # noqa: E501
-        :rtype: str
+        :return: The all_features_access of this Body5.  # noqa: E501
+        :rtype: bool
         """
-        return self._name
+        return self._all_features_access
 
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Body5.
+    @all_features_access.setter
+    def all_features_access(self, all_features_access):
+        """Sets the all_features_access of this Body5.
 
-        Name of company  # noqa: E501
+        All access to the features  # noqa: E501
 
-        :param name: The name of this Body5.  # noqa: E501
-        :type: str
+        :param all_features_access: The all_features_access of this Body5.  # noqa: E501
+        :type: bool
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
+        if all_features_access is None:
+            raise ValueError("Invalid value for `all_features_access`, must not be `None`")  # noqa: E501
 
-        self._name = name
+        self._all_features_access = all_features_access
 
     @property
-    def attributes(self):
-        """Gets the attributes of this Body5.  # noqa: E501
+    def privileges(self):
+        """Gets the privileges of this Body5.  # noqa: E501
 
-        Attributes for company creation  # noqa: E501
 
-        :return: The attributes of this Body5.  # noqa: E501
-        :rtype: object
+        :return: The privileges of this Body5.  # noqa: E501
+        :rtype: list[CorporateuseremailpermissionsPrivileges]
         """
-        return self._attributes
+        return self._privileges
 
-    @attributes.setter
-    def attributes(self, attributes):
-        """Sets the attributes of this Body5.
+    @privileges.setter
+    def privileges(self, privileges):
+        """Sets the privileges of this Body5.
 
-        Attributes for company creation  # noqa: E501
 
-        :param attributes: The attributes of this Body5.  # noqa: E501
-        :type: object
+        :param privileges: The privileges of this Body5.  # noqa: E501
+        :type: list[CorporateuseremailpermissionsPrivileges]
         """
+        if privileges is None:
+            raise ValueError("Invalid value for `privileges`, must not be `None`")  # noqa: E501
 
-        self._attributes = attributes
-
-    @property
-    def country_code(self):
-        """Gets the country_code of this Body5.  # noqa: E501
-
-        Country code if phone_number is passed in attributes.  # noqa: E501
-
-        :return: The country_code of this Body5.  # noqa: E501
-        :rtype: int
-        """
-        return self._country_code
-
-    @country_code.setter
-    def country_code(self, country_code):
-        """Sets the country_code of this Body5.
-
-        Country code if phone_number is passed in attributes.  # noqa: E501
-
-        :param country_code: The country_code of this Body5.  # noqa: E501
-        :type: int
-        """
-
-        self._country_code = country_code
-
-    @property
-    def linked_contacts_ids(self):
-        """Gets the linked_contacts_ids of this Body5.  # noqa: E501
-
-        Contact ids to be linked with company  # noqa: E501
-
-        :return: The linked_contacts_ids of this Body5.  # noqa: E501
-        :rtype: list[int]
-        """
-        return self._linked_contacts_ids
-
-    @linked_contacts_ids.setter
-    def linked_contacts_ids(self, linked_contacts_ids):
-        """Sets the linked_contacts_ids of this Body5.
-
-        Contact ids to be linked with company  # noqa: E501
-
-        :param linked_contacts_ids: The linked_contacts_ids of this Body5.  # noqa: E501
-        :type: list[int]
-        """
-
-        self._linked_contacts_ids = linked_contacts_ids
-
-    @property
-    def linked_deals_ids(self):
-        """Gets the linked_deals_ids of this Body5.  # noqa: E501
-
-        Deal ids to be linked with company  # noqa: E501
-
-        :return: The linked_deals_ids of this Body5.  # noqa: E501
-        :rtype: list[str]
-        """
-        return self._linked_deals_ids
-
-    @linked_deals_ids.setter
-    def linked_deals_ids(self, linked_deals_ids):
-        """Sets the linked_deals_ids of this Body5.
-
-        Deal ids to be linked with company  # noqa: E501
-
-        :param linked_deals_ids: The linked_deals_ids of this Body5.  # noqa: E501
-        :type: list[str]
-        """
-
-        self._linked_deals_ids = linked_deals_ids
+        self._privileges = privileges
 
     def to_dict(self):
         """Returns the model properties as a dict"""

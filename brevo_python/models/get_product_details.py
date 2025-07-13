@@ -45,7 +45,8 @@ class GetProductDetails(object):
         's3_thumb_analytics': 'str',
         'meta_info': 'object',
         's3_thumb_editor': 'str',
-        'is_deleted': 'bool'
+        'is_deleted': 'bool',
+        'stock': 'float'
     }
 
     attribute_map = {
@@ -63,10 +64,11 @@ class GetProductDetails(object):
         's3_thumb_analytics': 's3ThumbAnalytics',
         'meta_info': 'metaInfo',
         's3_thumb_editor': 's3ThumbEditor',
-        'is_deleted': 'isDeleted'
+        'is_deleted': 'isDeleted',
+        'stock': 'stock'
     }
 
-    def __init__(self, id=None, name=None, created_at=None, modified_at=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, s3_original=None, s3_thumb_analytics=None, meta_info=None, s3_thumb_editor=None, is_deleted=None):  # noqa: E501
+    def __init__(self, id=None, name=None, created_at=None, modified_at=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, s3_original=None, s3_thumb_analytics=None, meta_info=None, s3_thumb_editor=None, is_deleted=None, stock=None):  # noqa: E501
         """GetProductDetails - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
@@ -84,6 +86,7 @@ class GetProductDetails(object):
         self._meta_info = None
         self._s3_thumb_editor = None
         self._is_deleted = None
+        self._stock = None
         self.discriminator = None
 
         self.id = id
@@ -110,6 +113,8 @@ class GetProductDetails(object):
         self.s3_thumb_editor = s3_thumb_editor
         if is_deleted is not None:
             self.is_deleted = is_deleted
+        if stock is not None:
+            self.stock = stock
 
     @property
     def id(self):
@@ -467,6 +472,29 @@ class GetProductDetails(object):
         """
 
         self._is_deleted = is_deleted
+
+    @property
+    def stock(self):
+        """Gets the stock of this GetProductDetails.  # noqa: E501
+
+        Current stock value of the product from the shop's database  # noqa: E501
+
+        :return: The stock of this GetProductDetails.  # noqa: E501
+        :rtype: float
+        """
+        return self._stock
+
+    @stock.setter
+    def stock(self, stock):
+        """Sets the stock of this GetProductDetails.
+
+        Current stock value of the product from the shop's database  # noqa: E501
+
+        :param stock: The stock of this GetProductDetails.  # noqa: E501
+        :type: float
+        """
+
+        self._stock = stock
 
     def to_dict(self):
         """Returns the model properties as a dict"""

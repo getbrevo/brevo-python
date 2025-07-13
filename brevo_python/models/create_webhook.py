@@ -35,6 +35,7 @@ class CreateWebhook(object):
         'description': 'str',
         'events': 'list[str]',
         'type': 'str',
+        'channel': 'str',
         'domain': 'str',
         'batched': 'bool',
         'auth': 'GetWebhookAuth',
@@ -46,19 +47,21 @@ class CreateWebhook(object):
         'description': 'description',
         'events': 'events',
         'type': 'type',
+        'channel': 'channel',
         'domain': 'domain',
         'batched': 'batched',
         'auth': 'auth',
         'headers': 'headers'
     }
 
-    def __init__(self, url=None, description=None, events=None, type='transactional', domain=None, batched=None, auth=None, headers=None):  # noqa: E501
+    def __init__(self, url=None, description=None, events=None, type='transactional', channel='email', domain=None, batched=None, auth=None, headers=None):  # noqa: E501
         """CreateWebhook - a model defined in Swagger"""  # noqa: E501
 
         self._url = None
         self._description = None
         self._events = None
         self._type = None
+        self._channel = None
         self._domain = None
         self._batched = None
         self._auth = None
@@ -71,6 +74,8 @@ class CreateWebhook(object):
         self.events = events
         if type is not None:
             self.type = type
+        if channel is not None:
+            self.channel = channel
         if domain is not None:
             self.domain = domain
         if batched is not None:
@@ -132,7 +137,7 @@ class CreateWebhook(object):
     def events(self):
         """Gets the events of this CreateWebhook.  # noqa: E501
 
-        - Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed`   # noqa: E501
+        - Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed` - Possible values for type **Transactional** and channel **SMS** #### `accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`sent`,`blacklisted`,`skip` - Possible values for type **Marketing**  channel **SMS** #### `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`skip`   # noqa: E501
 
         :return: The events of this CreateWebhook.  # noqa: E501
         :rtype: list[str]
@@ -143,7 +148,7 @@ class CreateWebhook(object):
     def events(self, events):
         """Sets the events of this CreateWebhook.
 
-        - Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed`   # noqa: E501
+        - Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed` - Possible values for type **Transactional** and channel **SMS** #### `accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`sent`,`blacklisted`,`skip` - Possible values for type **Marketing**  channel **SMS** #### `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`skip`   # noqa: E501
 
         :param events: The events of this CreateWebhook.  # noqa: E501
         :type: list[str]
@@ -188,6 +193,35 @@ class CreateWebhook(object):
             )
 
         self._type = type
+
+    @property
+    def channel(self):
+        """Gets the channel of this CreateWebhook.  # noqa: E501
+
+        channel of webhook  # noqa: E501
+
+        :return: The channel of this CreateWebhook.  # noqa: E501
+        :rtype: str
+        """
+        return self._channel
+
+    @channel.setter
+    def channel(self, channel):
+        """Sets the channel of this CreateWebhook.
+
+        channel of webhook  # noqa: E501
+
+        :param channel: The channel of this CreateWebhook.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["sms", "email"]  # noqa: E501
+        if channel not in allowed_values:
+            raise ValueError(
+                "Invalid value for `channel` ({0}), must be one of {1}"  # noqa: E501
+                .format(channel, allowed_values)
+            )
+
+        self._channel = channel
 
     @property
     def domain(self):

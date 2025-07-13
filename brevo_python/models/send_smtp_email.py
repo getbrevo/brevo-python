@@ -46,7 +46,8 @@ class SendSmtpEmail(object):
         'message_versions': 'list[SendSmtpEmailMessageVersions]',
         'tags': 'list[str]',
         'scheduled_at': 'datetime',
-        'batch_id': 'str'
+        'batch_id': 'str',
+        'preheader': 'str'
     }
 
     attribute_map = {
@@ -65,10 +66,11 @@ class SendSmtpEmail(object):
         'message_versions': 'messageVersions',
         'tags': 'tags',
         'scheduled_at': 'scheduledAt',
-        'batch_id': 'batchId'
+        'batch_id': 'batchId',
+        'preheader': 'preheader'
     }
 
-    def __init__(self, sender=None, to=None, bcc=None, cc=None, html_content=None, text_content=None, subject=None, reply_to=None, attachment=None, headers=None, template_id=None, params=None, message_versions=None, tags=None, scheduled_at=None, batch_id=None):  # noqa: E501
+    def __init__(self, sender=None, to=None, bcc=None, cc=None, html_content=None, text_content=None, subject=None, reply_to=None, attachment=None, headers=None, template_id=None, params=None, message_versions=None, tags=None, scheduled_at=None, batch_id=None, preheader=None):  # noqa: E501
         """SendSmtpEmail - a model defined in Swagger"""  # noqa: E501
 
         self._sender = None
@@ -87,6 +89,7 @@ class SendSmtpEmail(object):
         self._tags = None
         self._scheduled_at = None
         self._batch_id = None
+        self._preheader = None
         self.discriminator = None
 
         if sender is not None:
@@ -121,6 +124,8 @@ class SendSmtpEmail(object):
             self.scheduled_at = scheduled_at
         if batch_id is not None:
             self.batch_id = batch_id
+        if preheader is not None:
+            self.preheader = preheader
 
     @property
     def sender(self):
@@ -444,7 +449,7 @@ class SendSmtpEmail(object):
     def scheduled_at(self):
         """Gets the scheduled_at of this SendSmtpEmail.  # noqa: E501
 
-        UTC date-time on which the email has to schedule (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for scheduling. There can be an expected delay of +5 minutes in scheduled email delivery. **Please note this feature is currently a public beta**.  # noqa: E501
+        UTC date-time on which the email has to schedule (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for scheduling. There can be an expected delay of +5 minutes in scheduled email delivery.  # noqa: E501
 
         :return: The scheduled_at of this SendSmtpEmail.  # noqa: E501
         :rtype: datetime
@@ -455,7 +460,7 @@ class SendSmtpEmail(object):
     def scheduled_at(self, scheduled_at):
         """Sets the scheduled_at of this SendSmtpEmail.
 
-        UTC date-time on which the email has to schedule (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for scheduling. There can be an expected delay of +5 minutes in scheduled email delivery. **Please note this feature is currently a public beta**.  # noqa: E501
+        UTC date-time on which the email has to schedule (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for scheduling. There can be an expected delay of +5 minutes in scheduled email delivery.  # noqa: E501
 
         :param scheduled_at: The scheduled_at of this SendSmtpEmail.  # noqa: E501
         :type: datetime
@@ -485,6 +490,29 @@ class SendSmtpEmail(object):
         """
 
         self._batch_id = batch_id
+
+    @property
+    def preheader(self):
+        """Gets the preheader of this SendSmtpEmail.  # noqa: E501
+
+        A short summary that appears next to the subject line in the recipient’s inbox. This preview text gives recipients a quick idea of what the email is about before they open it.   # noqa: E501
+
+        :return: The preheader of this SendSmtpEmail.  # noqa: E501
+        :rtype: str
+        """
+        return self._preheader
+
+    @preheader.setter
+    def preheader(self, preheader):
+        """Sets the preheader of this SendSmtpEmail.
+
+        A short summary that appears next to the subject line in the recipient’s inbox. This preview text gives recipients a quick idea of what the email is about before they open it.   # noqa: E501
+
+        :param preheader: The preheader of this SendSmtpEmail.  # noqa: E501
+        :type: str
+        """
+
+        self._preheader = preheader
 
     def to_dict(self):
         """Returns the model properties as a dict"""

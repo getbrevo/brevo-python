@@ -31,7 +31,7 @@ class ConversionSourceMetrics(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'id': 'float',
+        'id': 'str',
         'conversion_source': 'str',
         'orders_count': 'float',
         'revenue': 'float',
@@ -68,7 +68,7 @@ class ConversionSourceMetrics(object):
 
 
         :return: The id of this ConversionSourceMetrics.  # noqa: E501
-        :rtype: float
+        :rtype: str
         """
         return self._id
 
@@ -78,7 +78,7 @@ class ConversionSourceMetrics(object):
 
 
         :param id: The id of this ConversionSourceMetrics.  # noqa: E501
-        :type: float
+        :type: str
         """
         if id is None:
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
@@ -105,7 +105,7 @@ class ConversionSourceMetrics(object):
         """
         if conversion_source is None:
             raise ValueError("Invalid value for `conversion_source`, must not be `None`")  # noqa: E501
-        allowed_values = ["email_campaign"]  # noqa: E501
+        allowed_values = ["email_campaign", "sms_campaign", "automation_workflow_email", "automation_workflow_sms"]  # noqa: E501
         if conversion_source not in allowed_values:
             raise ValueError(
                 "Invalid value for `conversion_source` ({0}), must be one of {1}"  # noqa: E501

@@ -101,8 +101,8 @@ class TransactionalWhatsAppApi(object):
             params[key] = val
         del params['kwargs']
 
-        if 'limit' in params and params['limit'] > 5000:  # noqa: E501
-            raise ValueError("Invalid value for parameter `limit` when calling `get_whatsapp_event_report`, must be a value less than or equal to `5000`")  # noqa: E501
+        if 'limit' in params and params['limit'] > 10000:  # noqa: E501
+            raise ValueError("Invalid value for parameter `limit` when calling `get_whatsapp_event_report`, must be a value less than or equal to `10000`")  # noqa: E501
         if 'limit' in params and params['limit'] < 0:  # noqa: E501
             raise ValueError("Invalid value for parameter `limit` when calling `get_whatsapp_event_report`, must be a value greater than or equal to `0`")  # noqa: E501
         collection_formats = {}

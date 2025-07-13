@@ -3,17 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of task | 
-**duration** | **int** | Duration of task in milliseconds [1 minute &#x3D; 60000 ms] | [optional] 
-**task_type_id** | **str** | Id for type of task e.g Call / Email / Meeting etc. | 
-**_date** | **datetime** | Task due date and time | 
-**notes** | **str** | Notes added to a task | [optional] 
-**done** | **bool** | Task marked as done | [optional] 
-**assign_to_id** | **str** | To assign a task to a user you can use either the account email or ID. | [optional] 
-**contacts_ids** | **list[int]** | Contact ids for contacts linked to this task | [optional] 
-**deals_ids** | **list[str]** | Deal ids for deals a task is linked to | [optional] 
-**companies_ids** | **list[str]** | Companies ids for companies a task is linked to | [optional] 
-**reminder** | [**TaskReminder**](TaskReminder.md) |  | [optional] 
+**name** | **str** | Name of deal | [optional] 
+**attributes** | **object** | Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the &#x60;pipeline&#x60; and the &#x60;deal_stage&#x60;.  Pipeline and deal_stage are ids you can fetch using this endpoint &#x60;/crm/pipeline/details/{pipelineID}&#x60;  | [optional] 
+**linked_contacts_ids** | **list[int]** | Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed. | [optional] 
+**linked_companies_ids** | **list[str]** | Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

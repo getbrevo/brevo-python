@@ -31,69 +31,72 @@ class InlineResponse2006(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'conversion_source_metrics': 'ConversionSourceMetrics',
-        'new_customers_count': 'float'
+        'results': 'list[ConversionSourceMetrics]',
+        'totals': 'InlineResponse2006Totals'
     }
 
     attribute_map = {
-        'conversion_source_metrics': 'ConversionSourceMetrics',
-        'new_customers_count': 'newCustomersCount'
+        'results': 'results',
+        'totals': 'totals'
     }
 
-    def __init__(self, conversion_source_metrics=None, new_customers_count=None):  # noqa: E501
+    def __init__(self, results=None, totals=None):  # noqa: E501
         """InlineResponse2006 - a model defined in Swagger"""  # noqa: E501
 
-        self._conversion_source_metrics = None
-        self._new_customers_count = None
+        self._results = None
+        self._totals = None
         self.discriminator = None
 
-        if conversion_source_metrics is not None:
-            self.conversion_source_metrics = conversion_source_metrics
-        self.new_customers_count = new_customers_count
+        self.results = results
+        self.totals = totals
 
     @property
-    def conversion_source_metrics(self):
-        """Gets the conversion_source_metrics of this InlineResponse2006.  # noqa: E501
+    def results(self):
+        """Gets the results of this InlineResponse2006.  # noqa: E501
 
+        List of conversion attribution metrics  # noqa: E501
 
-        :return: The conversion_source_metrics of this InlineResponse2006.  # noqa: E501
-        :rtype: ConversionSourceMetrics
+        :return: The results of this InlineResponse2006.  # noqa: E501
+        :rtype: list[ConversionSourceMetrics]
         """
-        return self._conversion_source_metrics
+        return self._results
 
-    @conversion_source_metrics.setter
-    def conversion_source_metrics(self, conversion_source_metrics):
-        """Sets the conversion_source_metrics of this InlineResponse2006.
+    @results.setter
+    def results(self, results):
+        """Sets the results of this InlineResponse2006.
 
+        List of conversion attribution metrics  # noqa: E501
 
-        :param conversion_source_metrics: The conversion_source_metrics of this InlineResponse2006.  # noqa: E501
-        :type: ConversionSourceMetrics
+        :param results: The results of this InlineResponse2006.  # noqa: E501
+        :type: list[ConversionSourceMetrics]
         """
+        if results is None:
+            raise ValueError("Invalid value for `results`, must not be `None`")  # noqa: E501
 
-        self._conversion_source_metrics = conversion_source_metrics
+        self._results = results
 
     @property
-    def new_customers_count(self):
-        """Gets the new_customers_count of this InlineResponse2006.  # noqa: E501
+    def totals(self):
+        """Gets the totals of this InlineResponse2006.  # noqa: E501
 
 
-        :return: The new_customers_count of this InlineResponse2006.  # noqa: E501
-        :rtype: float
+        :return: The totals of this InlineResponse2006.  # noqa: E501
+        :rtype: InlineResponse2006Totals
         """
-        return self._new_customers_count
+        return self._totals
 
-    @new_customers_count.setter
-    def new_customers_count(self, new_customers_count):
-        """Sets the new_customers_count of this InlineResponse2006.
+    @totals.setter
+    def totals(self, totals):
+        """Sets the totals of this InlineResponse2006.
 
 
-        :param new_customers_count: The new_customers_count of this InlineResponse2006.  # noqa: E501
-        :type: float
+        :param totals: The totals of this InlineResponse2006.  # noqa: E501
+        :type: InlineResponse2006Totals
         """
-        if new_customers_count is None:
-            raise ValueError("Invalid value for `new_customers_count`, must not be `None`")  # noqa: E501
+        if totals is None:
+            raise ValueError("Invalid value for `totals`, must not be `None`")  # noqa: E501
 
-        self._new_customers_count = new_customers_count
+        self._totals = totals
 
     def to_dict(self):
         """Returns the model properties as a dict"""

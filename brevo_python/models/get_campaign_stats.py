@@ -46,7 +46,9 @@ class GetCampaignStats(object):
         'unsubscriptions': 'int',
         'viewed': 'int',
         'deferred': 'int',
-        'return_bounce': 'int'
+        'return_bounce': 'int',
+        'opens_rate': 'float',
+        'apple_mpp_opens': 'int'
     }
 
     attribute_map = {
@@ -65,10 +67,12 @@ class GetCampaignStats(object):
         'unsubscriptions': 'unsubscriptions',
         'viewed': 'viewed',
         'deferred': 'deferred',
-        'return_bounce': 'returnBounce'
+        'return_bounce': 'returnBounce',
+        'opens_rate': 'opensRate',
+        'apple_mpp_opens': 'appleMppOpens'
     }
 
-    def __init__(self, list_id=None, unique_clicks=None, clickers=None, complaints=None, delivered=None, sent=None, soft_bounces=None, hard_bounces=None, unique_views=None, trackable_views=None, trackable_views_rate=None, estimated_views=None, unsubscriptions=None, viewed=None, deferred=None, return_bounce=None):  # noqa: E501
+    def __init__(self, list_id=None, unique_clicks=None, clickers=None, complaints=None, delivered=None, sent=None, soft_bounces=None, hard_bounces=None, unique_views=None, trackable_views=None, trackable_views_rate=None, estimated_views=None, unsubscriptions=None, viewed=None, deferred=None, return_bounce=None, opens_rate=None, apple_mpp_opens=None):  # noqa: E501
         """GetCampaignStats - a model defined in Swagger"""  # noqa: E501
 
         self._list_id = None
@@ -87,6 +91,8 @@ class GetCampaignStats(object):
         self._viewed = None
         self._deferred = None
         self._return_bounce = None
+        self._opens_rate = None
+        self._apple_mpp_opens = None
         self.discriminator = None
 
         if list_id is not None:
@@ -110,6 +116,8 @@ class GetCampaignStats(object):
             self.deferred = deferred
         if return_bounce is not None:
             self.return_bounce = return_bounce
+        self.opens_rate = opens_rate
+        self.apple_mpp_opens = apple_mpp_opens
 
     @property
     def list_id(self):
@@ -500,6 +508,56 @@ class GetCampaignStats(object):
         """
 
         self._return_bounce = return_bounce
+
+    @property
+    def opens_rate(self):
+        """Gets the opens_rate of this GetCampaignStats.  # noqa: E501
+
+        Percentage of recipients who open the email out of your total number of recipients. Depending on your Campaign settings, they may include Apple MPP opens.  # noqa: E501
+
+        :return: The opens_rate of this GetCampaignStats.  # noqa: E501
+        :rtype: float
+        """
+        return self._opens_rate
+
+    @opens_rate.setter
+    def opens_rate(self, opens_rate):
+        """Sets the opens_rate of this GetCampaignStats.
+
+        Percentage of recipients who open the email out of your total number of recipients. Depending on your Campaign settings, they may include Apple MPP opens.  # noqa: E501
+
+        :param opens_rate: The opens_rate of this GetCampaignStats.  # noqa: E501
+        :type: float
+        """
+        if opens_rate is None:
+            raise ValueError("Invalid value for `opens_rate`, must not be `None`")  # noqa: E501
+
+        self._opens_rate = opens_rate
+
+    @property
+    def apple_mpp_opens(self):
+        """Gets the apple_mpp_opens of this GetCampaignStats.  # noqa: E501
+
+        Numbers of times your email has been opened automatically through Apple MPP.  # noqa: E501
+
+        :return: The apple_mpp_opens of this GetCampaignStats.  # noqa: E501
+        :rtype: int
+        """
+        return self._apple_mpp_opens
+
+    @apple_mpp_opens.setter
+    def apple_mpp_opens(self, apple_mpp_opens):
+        """Sets the apple_mpp_opens of this GetCampaignStats.
+
+        Numbers of times your email has been opened automatically through Apple MPP.  # noqa: E501
+
+        :param apple_mpp_opens: The apple_mpp_opens of this GetCampaignStats.  # noqa: E501
+        :type: int
+        """
+        if apple_mpp_opens is None:
+            raise ValueError("Invalid value for `apple_mpp_opens`, must not be `None`")  # noqa: E501
+
+        self._apple_mpp_opens = apple_mpp_opens
 
     def to_dict(self):
         """Returns the model properties as a dict"""
