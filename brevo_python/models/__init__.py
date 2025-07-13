@@ -60,7 +60,6 @@ from brevo_python.models.company import Company
 from brevo_python.models.company_attributes import CompanyAttributes
 from brevo_python.models.company_attributes_inner import CompanyAttributesInner
 from brevo_python.models.component_items import ComponentItems
-from brevo_python.models.configuration import Configuration
 from brevo_python.models.contact_balances_resp import ContactBalancesResp
 from brevo_python.models.contact_error_model import ContactErrorModel
 from brevo_python.models.conversations_message import ConversationsMessage
