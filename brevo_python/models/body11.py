@@ -32,73 +32,41 @@ class Body11(object):
     """
     swagger_types = {
         'name': 'str',
-        'duration': 'int',
-        'task_type_id': 'str',
-        '_date': 'datetime',
-        'notes': 'str',
-        'done': 'bool',
-        'assign_to_id': 'str',
-        'contacts_ids': 'list[int]',
-        'deals_ids': 'list[str]',
-        'companies_ids': 'list[str]',
-        'reminder': 'TaskReminder'
+        'attributes': 'object',
+        'linked_contacts_ids': 'list[int]',
+        'linked_companies_ids': 'list[str]'
     }
 
     attribute_map = {
         'name': 'name',
-        'duration': 'duration',
-        'task_type_id': 'taskTypeId',
-        '_date': 'date',
-        'notes': 'notes',
-        'done': 'done',
-        'assign_to_id': 'assignToId',
-        'contacts_ids': 'contactsIds',
-        'deals_ids': 'dealsIds',
-        'companies_ids': 'companiesIds',
-        'reminder': 'reminder'
+        'attributes': 'attributes',
+        'linked_contacts_ids': 'linkedContactsIds',
+        'linked_companies_ids': 'linkedCompaniesIds'
     }
 
-    def __init__(self, name=None, duration=None, task_type_id=None, _date=None, notes=None, done=None, assign_to_id=None, contacts_ids=None, deals_ids=None, companies_ids=None, reminder=None):  # noqa: E501
+    def __init__(self, name=None, attributes=None, linked_contacts_ids=None, linked_companies_ids=None):  # noqa: E501
         """Body11 - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
-        self._duration = None
-        self._task_type_id = None
-        self.__date = None
-        self._notes = None
-        self._done = None
-        self._assign_to_id = None
-        self._contacts_ids = None
-        self._deals_ids = None
-        self._companies_ids = None
-        self._reminder = None
+        self._attributes = None
+        self._linked_contacts_ids = None
+        self._linked_companies_ids = None
         self.discriminator = None
 
-        self.name = name
-        if duration is not None:
-            self.duration = duration
-        self.task_type_id = task_type_id
-        self._date = _date
-        if notes is not None:
-            self.notes = notes
-        if done is not None:
-            self.done = done
-        if assign_to_id is not None:
-            self.assign_to_id = assign_to_id
-        if contacts_ids is not None:
-            self.contacts_ids = contacts_ids
-        if deals_ids is not None:
-            self.deals_ids = deals_ids
-        if companies_ids is not None:
-            self.companies_ids = companies_ids
-        if reminder is not None:
-            self.reminder = reminder
+        if name is not None:
+            self.name = name
+        if attributes is not None:
+            self.attributes = attributes
+        if linked_contacts_ids is not None:
+            self.linked_contacts_ids = linked_contacts_ids
+        if linked_companies_ids is not None:
+            self.linked_companies_ids = linked_companies_ids
 
     @property
     def name(self):
         """Gets the name of this Body11.  # noqa: E501
 
-        Name of task  # noqa: E501
+        Name of deal  # noqa: E501
 
         :return: The name of this Body11.  # noqa: E501
         :rtype: str
@@ -109,249 +77,82 @@ class Body11(object):
     def name(self, name):
         """Sets the name of this Body11.
 
-        Name of task  # noqa: E501
+        Name of deal  # noqa: E501
 
         :param name: The name of this Body11.  # noqa: E501
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
 
     @property
-    def duration(self):
-        """Gets the duration of this Body11.  # noqa: E501
+    def attributes(self):
+        """Gets the attributes of this Body11.  # noqa: E501
 
-        Duration of task in milliseconds [1 minute = 60000 ms]  # noqa: E501
+        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
 
-        :return: The duration of this Body11.  # noqa: E501
-        :rtype: int
+        :return: The attributes of this Body11.  # noqa: E501
+        :rtype: object
         """
-        return self._duration
+        return self._attributes
 
-    @duration.setter
-    def duration(self, duration):
-        """Sets the duration of this Body11.
+    @attributes.setter
+    def attributes(self, attributes):
+        """Sets the attributes of this Body11.
 
-        Duration of task in milliseconds [1 minute = 60000 ms]  # noqa: E501
+        Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`   # noqa: E501
 
-        :param duration: The duration of this Body11.  # noqa: E501
-        :type: int
+        :param attributes: The attributes of this Body11.  # noqa: E501
+        :type: object
         """
-        if duration is not None and duration < 0:  # noqa: E501
-            raise ValueError("Invalid value for `duration`, must be a value greater than or equal to `0`")  # noqa: E501
 
-        self._duration = duration
+        self._attributes = attributes
 
     @property
-    def task_type_id(self):
-        """Gets the task_type_id of this Body11.  # noqa: E501
+    def linked_contacts_ids(self):
+        """Gets the linked_contacts_ids of this Body11.  # noqa: E501
 
-        Id for type of task e.g Call / Email / Meeting etc.  # noqa: E501
+        Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :return: The task_type_id of this Body11.  # noqa: E501
-        :rtype: str
-        """
-        return self._task_type_id
-
-    @task_type_id.setter
-    def task_type_id(self, task_type_id):
-        """Sets the task_type_id of this Body11.
-
-        Id for type of task e.g Call / Email / Meeting etc.  # noqa: E501
-
-        :param task_type_id: The task_type_id of this Body11.  # noqa: E501
-        :type: str
-        """
-        if task_type_id is None:
-            raise ValueError("Invalid value for `task_type_id`, must not be `None`")  # noqa: E501
-
-        self._task_type_id = task_type_id
-
-    @property
-    def _date(self):
-        """Gets the _date of this Body11.  # noqa: E501
-
-        Task due date and time  # noqa: E501
-
-        :return: The _date of this Body11.  # noqa: E501
-        :rtype: datetime
-        """
-        return self.__date
-
-    @_date.setter
-    def _date(self, _date):
-        """Sets the _date of this Body11.
-
-        Task due date and time  # noqa: E501
-
-        :param _date: The _date of this Body11.  # noqa: E501
-        :type: datetime
-        """
-        if _date is None:
-            raise ValueError("Invalid value for `_date`, must not be `None`")  # noqa: E501
-
-        self.__date = _date
-
-    @property
-    def notes(self):
-        """Gets the notes of this Body11.  # noqa: E501
-
-        Notes added to a task  # noqa: E501
-
-        :return: The notes of this Body11.  # noqa: E501
-        :rtype: str
-        """
-        return self._notes
-
-    @notes.setter
-    def notes(self, notes):
-        """Sets the notes of this Body11.
-
-        Notes added to a task  # noqa: E501
-
-        :param notes: The notes of this Body11.  # noqa: E501
-        :type: str
-        """
-
-        self._notes = notes
-
-    @property
-    def done(self):
-        """Gets the done of this Body11.  # noqa: E501
-
-        Task marked as done  # noqa: E501
-
-        :return: The done of this Body11.  # noqa: E501
-        :rtype: bool
-        """
-        return self._done
-
-    @done.setter
-    def done(self, done):
-        """Sets the done of this Body11.
-
-        Task marked as done  # noqa: E501
-
-        :param done: The done of this Body11.  # noqa: E501
-        :type: bool
-        """
-
-        self._done = done
-
-    @property
-    def assign_to_id(self):
-        """Gets the assign_to_id of this Body11.  # noqa: E501
-
-        To assign a task to a user you can use either the account email or ID.  # noqa: E501
-
-        :return: The assign_to_id of this Body11.  # noqa: E501
-        :rtype: str
-        """
-        return self._assign_to_id
-
-    @assign_to_id.setter
-    def assign_to_id(self, assign_to_id):
-        """Sets the assign_to_id of this Body11.
-
-        To assign a task to a user you can use either the account email or ID.  # noqa: E501
-
-        :param assign_to_id: The assign_to_id of this Body11.  # noqa: E501
-        :type: str
-        """
-
-        self._assign_to_id = assign_to_id
-
-    @property
-    def contacts_ids(self):
-        """Gets the contacts_ids of this Body11.  # noqa: E501
-
-        Contact ids for contacts linked to this task  # noqa: E501
-
-        :return: The contacts_ids of this Body11.  # noqa: E501
+        :return: The linked_contacts_ids of this Body11.  # noqa: E501
         :rtype: list[int]
         """
-        return self._contacts_ids
+        return self._linked_contacts_ids
 
-    @contacts_ids.setter
-    def contacts_ids(self, contacts_ids):
-        """Sets the contacts_ids of this Body11.
+    @linked_contacts_ids.setter
+    def linked_contacts_ids(self, linked_contacts_ids):
+        """Sets the linked_contacts_ids of this Body11.
 
-        Contact ids for contacts linked to this task  # noqa: E501
+        Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :param contacts_ids: The contacts_ids of this Body11.  # noqa: E501
+        :param linked_contacts_ids: The linked_contacts_ids of this Body11.  # noqa: E501
         :type: list[int]
         """
 
-        self._contacts_ids = contacts_ids
+        self._linked_contacts_ids = linked_contacts_ids
 
     @property
-    def deals_ids(self):
-        """Gets the deals_ids of this Body11.  # noqa: E501
+    def linked_companies_ids(self):
+        """Gets the linked_companies_ids of this Body11.  # noqa: E501
 
-        Deal ids for deals a task is linked to  # noqa: E501
+        Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :return: The deals_ids of this Body11.  # noqa: E501
+        :return: The linked_companies_ids of this Body11.  # noqa: E501
         :rtype: list[str]
         """
-        return self._deals_ids
+        return self._linked_companies_ids
 
-    @deals_ids.setter
-    def deals_ids(self, deals_ids):
-        """Sets the deals_ids of this Body11.
+    @linked_companies_ids.setter
+    def linked_companies_ids(self, linked_companies_ids):
+        """Sets the linked_companies_ids of this Body11.
 
-        Deal ids for deals a task is linked to  # noqa: E501
+        Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :param deals_ids: The deals_ids of this Body11.  # noqa: E501
+        :param linked_companies_ids: The linked_companies_ids of this Body11.  # noqa: E501
         :type: list[str]
         """
 
-        self._deals_ids = deals_ids
-
-    @property
-    def companies_ids(self):
-        """Gets the companies_ids of this Body11.  # noqa: E501
-
-        Companies ids for companies a task is linked to  # noqa: E501
-
-        :return: The companies_ids of this Body11.  # noqa: E501
-        :rtype: list[str]
-        """
-        return self._companies_ids
-
-    @companies_ids.setter
-    def companies_ids(self, companies_ids):
-        """Sets the companies_ids of this Body11.
-
-        Companies ids for companies a task is linked to  # noqa: E501
-
-        :param companies_ids: The companies_ids of this Body11.  # noqa: E501
-        :type: list[str]
-        """
-
-        self._companies_ids = companies_ids
-
-    @property
-    def reminder(self):
-        """Gets the reminder of this Body11.  # noqa: E501
-
-
-        :return: The reminder of this Body11.  # noqa: E501
-        :rtype: TaskReminder
-        """
-        return self._reminder
-
-    @reminder.setter
-    def reminder(self, reminder):
-        """Sets the reminder of this Body11.
-
-
-        :param reminder: The reminder of this Body11.  # noqa: E501
-        :type: TaskReminder
-        """
-
-        self._reminder = reminder
+        self._linked_companies_ids = linked_companies_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

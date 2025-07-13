@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**get_sms_events**](TransactionalSMSApi.md#get_sms_events) | **GET** /transactionalSMS/statistics/events | Get all your SMS activity (unaggregated events)
 [**get_transac_aggregated_sms_report**](TransactionalSMSApi.md#get_transac_aggregated_sms_report) | **GET** /transactionalSMS/statistics/aggregatedReport | Get your SMS activity aggregated over a period of time
 [**get_transac_sms_report**](TransactionalSMSApi.md#get_transac_sms_report) | **GET** /transactionalSMS/statistics/reports | Get your SMS activity aggregated per day
+[**send_async_transactional_sms**](TransactionalSMSApi.md#send_async_transactional_sms) | **POST** /transactionalSMS/send | Send SMS message asynchronously to a mobile number
 [**send_transac_sms**](TransactionalSMSApi.md#send_transac_sms) | **POST** /transactionalSMS/sms | Send SMS message to a mobile number
 
 
@@ -199,6 +200,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetTransacSmsReport**](GetTransacSmsReport.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **send_async_transactional_sms**
+> send_async_transactional_sms()
+
+Send SMS message asynchronously to a mobile number
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.TransactionalSMSApi(brevo_python.ApiClient(configuration))
+
+try:
+    # Send SMS message asynchronously to a mobile number
+    api_instance.send_async_transactional_sms()
+except ApiException as e:
+    print("Exception when calling TransactionalSMSApi->send_async_transactional_sms: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

@@ -33,21 +33,24 @@ class SubAccountUpdatePlanRequestFeatures(object):
     swagger_types = {
         'users': 'int',
         'landing_page': 'int',
-        'inbox': 'int'
+        'inbox': 'int',
+        'sales_users': 'int'
     }
 
     attribute_map = {
         'users': 'users',
         'landing_page': 'landingPage',
-        'inbox': 'inbox'
+        'inbox': 'inbox',
+        'sales_users': 'salesUsers'
     }
 
-    def __init__(self, users=None, landing_page=None, inbox=None):  # noqa: E501
+    def __init__(self, users=None, landing_page=None, inbox=None, sales_users=None):  # noqa: E501
         """SubAccountUpdatePlanRequestFeatures - a model defined in Swagger"""  # noqa: E501
 
         self._users = None
         self._landing_page = None
         self._inbox = None
+        self._sales_users = None
         self.discriminator = None
 
         if users is not None:
@@ -56,6 +59,8 @@ class SubAccountUpdatePlanRequestFeatures(object):
             self.landing_page = landing_page
         if inbox is not None:
             self.inbox = inbox
+        if sales_users is not None:
+            self.sales_users = sales_users
 
     @property
     def users(self):
@@ -84,7 +89,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def landing_page(self):
         """Gets the landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
 
-        Number of landing pages / Not required on ENTv2  # noqa: E501
+        Number of landing pages  # noqa: E501
 
         :return: The landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :rtype: int
@@ -95,7 +100,7 @@ class SubAccountUpdatePlanRequestFeatures(object):
     def landing_page(self, landing_page):
         """Sets the landing_page of this SubAccountUpdatePlanRequestFeatures.
 
-        Number of landing pages / Not required on ENTv2  # noqa: E501
+        Number of landing pages  # noqa: E501
 
         :param landing_page: The landing_page of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
         :type: int
@@ -125,6 +130,29 @@ class SubAccountUpdatePlanRequestFeatures(object):
         """
 
         self._inbox = inbox
+
+    @property
+    def sales_users(self):
+        """Gets the sales_users of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
+
+        Number of sales users  # noqa: E501
+
+        :return: The sales_users of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
+        :rtype: int
+        """
+        return self._sales_users
+
+    @sales_users.setter
+    def sales_users(self, sales_users):
+        """Sets the sales_users of this SubAccountUpdatePlanRequestFeatures.
+
+        Number of sales users  # noqa: E501
+
+        :param sales_users: The sales_users of this SubAccountUpdatePlanRequestFeatures.  # noqa: E501
+        :type: int
+        """
+
+        self._sales_users = sales_users
 
     def to_dict(self):
         """Returns the model properties as a dict"""

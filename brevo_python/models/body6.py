@@ -33,29 +33,38 @@ class Body6(object):
     swagger_types = {
         'name': 'str',
         'attributes': 'object',
-        'country_code': 'int'
+        'country_code': 'int',
+        'linked_contacts_ids': 'list[int]',
+        'linked_deals_ids': 'list[str]'
     }
 
     attribute_map = {
         'name': 'name',
         'attributes': 'attributes',
-        'country_code': 'countryCode'
+        'country_code': 'countryCode',
+        'linked_contacts_ids': 'linkedContactsIds',
+        'linked_deals_ids': 'linkedDealsIds'
     }
 
-    def __init__(self, name=None, attributes=None, country_code=None):  # noqa: E501
+    def __init__(self, name=None, attributes=None, country_code=None, linked_contacts_ids=None, linked_deals_ids=None):  # noqa: E501
         """Body6 - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._attributes = None
         self._country_code = None
+        self._linked_contacts_ids = None
+        self._linked_deals_ids = None
         self.discriminator = None
 
-        if name is not None:
-            self.name = name
+        self.name = name
         if attributes is not None:
             self.attributes = attributes
         if country_code is not None:
             self.country_code = country_code
+        if linked_contacts_ids is not None:
+            self.linked_contacts_ids = linked_contacts_ids
+        if linked_deals_ids is not None:
+            self.linked_deals_ids = linked_deals_ids
 
     @property
     def name(self):
@@ -77,6 +86,8 @@ class Body6(object):
         :param name: The name of this Body6.  # noqa: E501
         :type: str
         """
+        if name is None:
+            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
 
@@ -84,7 +95,7 @@ class Body6(object):
     def attributes(self):
         """Gets the attributes of this Body6.  # noqa: E501
 
-        Attributes for company update  # noqa: E501
+        Attributes for company creation  # noqa: E501
 
         :return: The attributes of this Body6.  # noqa: E501
         :rtype: object
@@ -95,7 +106,7 @@ class Body6(object):
     def attributes(self, attributes):
         """Sets the attributes of this Body6.
 
-        Attributes for company update  # noqa: E501
+        Attributes for company creation  # noqa: E501
 
         :param attributes: The attributes of this Body6.  # noqa: E501
         :type: object
@@ -125,6 +136,52 @@ class Body6(object):
         """
 
         self._country_code = country_code
+
+    @property
+    def linked_contacts_ids(self):
+        """Gets the linked_contacts_ids of this Body6.  # noqa: E501
+
+        Contact ids to be linked with company  # noqa: E501
+
+        :return: The linked_contacts_ids of this Body6.  # noqa: E501
+        :rtype: list[int]
+        """
+        return self._linked_contacts_ids
+
+    @linked_contacts_ids.setter
+    def linked_contacts_ids(self, linked_contacts_ids):
+        """Sets the linked_contacts_ids of this Body6.
+
+        Contact ids to be linked with company  # noqa: E501
+
+        :param linked_contacts_ids: The linked_contacts_ids of this Body6.  # noqa: E501
+        :type: list[int]
+        """
+
+        self._linked_contacts_ids = linked_contacts_ids
+
+    @property
+    def linked_deals_ids(self):
+        """Gets the linked_deals_ids of this Body6.  # noqa: E501
+
+        Deal ids to be linked with company  # noqa: E501
+
+        :return: The linked_deals_ids of this Body6.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._linked_deals_ids
+
+    @linked_deals_ids.setter
+    def linked_deals_ids(self, linked_deals_ids):
+        """Sets the linked_deals_ids of this Body6.
+
+        Deal ids to be linked with company  # noqa: E501
+
+        :param linked_deals_ids: The linked_deals_ids of this Body6.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._linked_deals_ids = linked_deals_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

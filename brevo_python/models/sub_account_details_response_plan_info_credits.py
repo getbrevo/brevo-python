@@ -33,21 +33,27 @@ class SubAccountDetailsResponsePlanInfoCredits(object):
     swagger_types = {
         'emails': 'SubAccountDetailsResponsePlanInfoCreditsEmails',
         'sms': 'SubAccountDetailsResponsePlanInfoCreditsSms',
-        'wp_subscribers': 'SubAccountDetailsResponsePlanInfoCreditsWpSubscribers'
+        'wp_subscribers': 'SubAccountDetailsResponsePlanInfoCreditsWpSubscribers',
+        'whatsapp': 'SubAccountDetailsResponsePlanInfoCreditsWhatsapp',
+        'external_feeds': 'SubAccountDetailsResponsePlanInfoCreditsExternalFeeds'
     }
 
     attribute_map = {
         'emails': 'emails',
         'sms': 'sms',
-        'wp_subscribers': 'wpSubscribers'
+        'wp_subscribers': 'wpSubscribers',
+        'whatsapp': 'whatsapp',
+        'external_feeds': 'externalFeeds'
     }
 
-    def __init__(self, emails=None, sms=None, wp_subscribers=None):  # noqa: E501
+    def __init__(self, emails=None, sms=None, wp_subscribers=None, whatsapp=None, external_feeds=None):  # noqa: E501
         """SubAccountDetailsResponsePlanInfoCredits - a model defined in Swagger"""  # noqa: E501
 
         self._emails = None
         self._sms = None
         self._wp_subscribers = None
+        self._whatsapp = None
+        self._external_feeds = None
         self.discriminator = None
 
         if emails is not None:
@@ -56,6 +62,10 @@ class SubAccountDetailsResponsePlanInfoCredits(object):
             self.sms = sms
         if wp_subscribers is not None:
             self.wp_subscribers = wp_subscribers
+        if whatsapp is not None:
+            self.whatsapp = whatsapp
+        if external_feeds is not None:
+            self.external_feeds = external_feeds
 
     @property
     def emails(self):
@@ -119,6 +129,48 @@ class SubAccountDetailsResponsePlanInfoCredits(object):
         """
 
         self._wp_subscribers = wp_subscribers
+
+    @property
+    def whatsapp(self):
+        """Gets the whatsapp of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+
+
+        :return: The whatsapp of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :rtype: SubAccountDetailsResponsePlanInfoCreditsWhatsapp
+        """
+        return self._whatsapp
+
+    @whatsapp.setter
+    def whatsapp(self, whatsapp):
+        """Sets the whatsapp of this SubAccountDetailsResponsePlanInfoCredits.
+
+
+        :param whatsapp: The whatsapp of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :type: SubAccountDetailsResponsePlanInfoCreditsWhatsapp
+        """
+
+        self._whatsapp = whatsapp
+
+    @property
+    def external_feeds(self):
+        """Gets the external_feeds of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+
+
+        :return: The external_feeds of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :rtype: SubAccountDetailsResponsePlanInfoCreditsExternalFeeds
+        """
+        return self._external_feeds
+
+    @external_feeds.setter
+    def external_feeds(self, external_feeds):
+        """Sets the external_feeds of this SubAccountDetailsResponsePlanInfoCredits.
+
+
+        :param external_feeds: The external_feeds of this SubAccountDetailsResponsePlanInfoCredits.  # noqa: E501
+        :type: SubAccountDetailsResponsePlanInfoCreditsExternalFeeds
+        """
+
+        self._external_feeds = external_feeds
 
     def to_dict(self):
         """Returns the model properties as a dict"""

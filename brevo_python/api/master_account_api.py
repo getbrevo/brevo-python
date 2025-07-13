@@ -544,6 +544,97 @@ class MasterAccountApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def corporate_ip_get(self, **kwargs):  # noqa: E501
+        """List of all IPs  # noqa: E501
+
+        This endpoint allows you to retrieve the list of active IPs on your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_ip_get(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_ip_get_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_ip_get_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def corporate_ip_get_with_http_info(self, **kwargs):  # noqa: E501
+        """List of all IPs  # noqa: E501
+
+        This endpoint allows you to retrieve the list of active IPs on your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_ip_get_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_ip_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/ip', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def corporate_master_account_get(self, **kwargs):  # noqa: E501
         """Get the details of requested master account  # noqa: E501
 
@@ -1746,6 +1837,212 @@ class MasterAccountApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def corporate_sub_accounts_plan_put(self, update_plan_details, **kwargs):  # noqa: E501
+        """Update sub-accounts plan  # noqa: E501
+
+        This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1\" to set the consumable in unlimited mode.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_accounts_plan_put(update_plan_details, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SubAccountsUpdatePlanRequest update_plan_details: Values to update sub-accounts plan (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_sub_accounts_plan_put_with_http_info(update_plan_details, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_sub_accounts_plan_put_with_http_info(update_plan_details, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_sub_accounts_plan_put_with_http_info(self, update_plan_details, **kwargs):  # noqa: E501
+        """Update sub-accounts plan  # noqa: E501
+
+        This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1\" to set the consumable in unlimited mode.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_sub_accounts_plan_put_with_http_info(update_plan_details, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SubAccountsUpdatePlanRequest update_plan_details: Values to update sub-accounts plan (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['update_plan_details']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_sub_accounts_plan_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'update_plan_details' is set
+        if ('update_plan_details' not in params or
+                params['update_plan_details'] is None):
+            raise ValueError("Missing the required parameter `update_plan_details` when calling `corporate_sub_accounts_plan_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'update_plan_details' in params:
+            body_params = params['update_plan_details']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/subAccounts/plan', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def corporate_user_email_permissions_put(self, email, body, **kwargs):  # noqa: E501
+        """Change admin user permissions  # noqa: E501
+
+        This endpoint will allow you to change the permissions of Admin users of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_email_permissions_put(email, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email address of Admin user (required)
+        :param Body5 body: Values to update an admin user permissions (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.corporate_user_email_permissions_put_with_http_info(email, body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.corporate_user_email_permissions_put_with_http_info(email, body, **kwargs)  # noqa: E501
+            return data
+
+    def corporate_user_email_permissions_put_with_http_info(self, email, body, **kwargs):  # noqa: E501
+        """Change admin user permissions  # noqa: E501
+
+        This endpoint will allow you to change the permissions of Admin users of your Admin account  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.corporate_user_email_permissions_put_with_http_info(email, body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str email: Email address of Admin user (required)
+        :param Body5 body: Values to update an admin user permissions (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['email', 'body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method corporate_user_email_permissions_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'email' is set
+        if ('email' not in params or
+                params['email'] is None):
+            raise ValueError("Missing the required parameter `email` when calling `corporate_user_email_permissions_put`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `corporate_user_email_permissions_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'email' in params:
+            path_params['email'] = params['email']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/corporate/user/{email}/permissions', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def corporate_user_invitation_action_email_put(self, action, email, **kwargs):  # noqa: E501
         """Resend / cancel admin user invitation  # noqa: E501
 
@@ -1963,6 +2260,7 @@ class MasterAccountApi(object):
         :param async_req bool
         :param str start_date: Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
         :param str end_date: Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+        :param str email: Enter the user's email address to filter their activity in the account.
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page.
         :return: GetAccountActivity
@@ -1987,6 +2285,7 @@ class MasterAccountApi(object):
         :param async_req bool
         :param str start_date: Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
         :param str end_date: Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+        :param str email: Enter the user's email address to filter their activity in the account.
         :param int limit: Number of documents per page
         :param int offset: Index of the first document in the page.
         :return: GetAccountActivity
@@ -1994,7 +2293,7 @@ class MasterAccountApi(object):
                  returns the request thread.
         """
 
-        all_params = ['start_date', 'end_date', 'limit', 'offset']  # noqa: E501
+        all_params = ['start_date', 'end_date', 'email', 'limit', 'offset']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2023,6 +2322,8 @@ class MasterAccountApi(object):
             query_params.append(('startDate', params['start_date']))  # noqa: E501
         if 'end_date' in params:
             query_params.append(('endDate', params['end_date']))  # noqa: E501
+        if 'email' in params:
+            query_params.append(('email', params['email']))  # noqa: E501
         if 'limit' in params:
             query_params.append(('limit', params['limit']))  # noqa: E501
         if 'offset' in params:
@@ -2155,6 +2456,7 @@ class MasterAccountApi(object):
     def get_corporate_user_permission(self, email, **kwargs):  # noqa: E501
         """Check admin user permissions  # noqa: E501
 
+        This endpoint will provide the list of admin user permissions  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_corporate_user_permission(email, async_req=True)
@@ -2176,6 +2478,7 @@ class MasterAccountApi(object):
     def get_corporate_user_permission_with_http_info(self, email, **kwargs):  # noqa: E501
         """Check admin user permissions  # noqa: E501
 
+        This endpoint will provide the list of admin user permissions  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_corporate_user_permission_with_http_info(email, async_req=True)
@@ -2343,7 +2646,7 @@ class MasterAccountApi(object):
     def invite_admin_user(self, send_invitation, **kwargs):  # noqa: E501
         """Send invitation to an admin user  # noqa: E501
 
-        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
+        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\" - `sub_organization_groups`   - \"create\"   - \"edit_delete\" - `create_sub_organizations`   - \"all\" - `manage_sub_organizations`   - \"all\" - `analytics`   - \"download_data\"   - \"create_alerts\"   - \"my_looks\"   - \"explore_create\" - `security`   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.invite_admin_user(send_invitation, async_req=True)
@@ -2365,7 +2668,7 @@ class MasterAccountApi(object):
     def invite_admin_user_with_http_info(self, send_invitation, **kwargs):  # noqa: E501
         """Send invitation to an admin user  # noqa: E501
 
-        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
+        `This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\" - `sub_organization_groups`   - \"create\"   - \"edit_delete\" - `create_sub_organizations`   - \"all\" - `manage_sub_organizations`   - \"all\" - `analytics`   - \"download_data\"   - \"create_alerts\"   - \"my_looks\"   - \"explore_create\" - `security`   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.invite_admin_user_with_http_info(send_invitation, async_req=True)

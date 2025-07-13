@@ -378,7 +378,7 @@ class TasksApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body12 body: Updated task details. (required)
+        :param Body14 body: Updated task details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -400,7 +400,7 @@ class TasksApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body12 body: Updated task details. (required)
+        :param Body14 body: Updated task details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -482,7 +482,7 @@ class TasksApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body11 body: Task name. (required)
+        :param Body13 body: Task name. (required)
         :return: InlineResponse2012
                  If the method is called asynchronously,
                  returns the request thread.
@@ -503,7 +503,7 @@ class TasksApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body11 body: Task name. (required)
+        :param Body13 body: Task name. (required)
         :return: InlineResponse2012
                  If the method is called asynchronously,
                  returns the request thread.

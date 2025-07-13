@@ -35,7 +35,7 @@ class SendTransacSms(object):
         'recipient': 'str',
         'content': 'str',
         'type': 'str',
-        'tag': 'str',
+        'tag': 'SendTransacSmsTag',
         'web_url': 'str',
         'unicode_enabled': 'bool',
         'organisation_prefix': 'str'
@@ -189,10 +189,9 @@ class SendTransacSms(object):
     def tag(self):
         """Gets the tag of this SendTransacSms.  # noqa: E501
 
-        Tag of the message  # noqa: E501
 
         :return: The tag of this SendTransacSms.  # noqa: E501
-        :rtype: str
+        :rtype: SendTransacSmsTag
         """
         return self._tag
 
@@ -200,10 +199,9 @@ class SendTransacSms(object):
     def tag(self, tag):
         """Sets the tag of this SendTransacSms.
 
-        Tag of the message  # noqa: E501
 
         :param tag: The tag of this SendTransacSms.  # noqa: E501
-        :type: str
+        :type: SendTransacSmsTag
         """
 
         self._tag = tag

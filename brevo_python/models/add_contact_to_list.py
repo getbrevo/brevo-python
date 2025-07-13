@@ -32,31 +32,36 @@ class AddContactToList(object):
     """
     swagger_types = {
         'emails': 'list[str]',
-        'ids': 'list[int]'
+        'ids': 'list[int]',
+        'ext_ids': 'list[str]'
     }
 
     attribute_map = {
         'emails': 'emails',
-        'ids': 'ids'
+        'ids': 'ids',
+        'ext_ids': 'extIds'
     }
 
-    def __init__(self, emails=None, ids=None):  # noqa: E501
+    def __init__(self, emails=None, ids=None, ext_ids=None):  # noqa: E501
         """AddContactToList - a model defined in Swagger"""  # noqa: E501
 
         self._emails = None
         self._ids = None
+        self._ext_ids = None
         self.discriminator = None
 
         if emails is not None:
             self.emails = emails
         if ids is not None:
             self.ids = ids
+        if ext_ids is not None:
+            self.ext_ids = ext_ids
 
     @property
     def emails(self):
         """Gets the emails of this AddContactToList.  # noqa: E501
 
-        Mandatory if IDs are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if IDs, EXT_ID attributes are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :return: The emails of this AddContactToList.  # noqa: E501
         :rtype: list[str]
@@ -67,7 +72,7 @@ class AddContactToList(object):
     def emails(self, emails):
         """Sets the emails of this AddContactToList.
 
-        Mandatory if IDs are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if IDs, EXT_ID attributes are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :param emails: The emails of this AddContactToList.  # noqa: E501
         :type: list[str]
@@ -79,7 +84,7 @@ class AddContactToList(object):
     def ids(self):
         """Gets the ids of this AddContactToList.  # noqa: E501
 
-        Mandatory if Emails are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if Emails, EXT_ID attributes are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 ids for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :return: The ids of this AddContactToList.  # noqa: E501
         :rtype: list[int]
@@ -90,13 +95,36 @@ class AddContactToList(object):
     def ids(self, ids):
         """Sets the ids of this AddContactToList.
 
-        Mandatory if Emails are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 emails for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+        Mandatory if Emails, EXT_ID attributes are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 ids for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
 
         :param ids: The ids of this AddContactToList.  # noqa: E501
         :type: list[int]
         """
 
         self._ids = ids
+
+    @property
+    def ext_ids(self):
+        """Gets the ext_ids of this AddContactToList.  # noqa: E501
+
+        Mandatory if Emails, IDs are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 extIds for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+
+        :return: The ext_ids of this AddContactToList.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._ext_ids
+
+    @ext_ids.setter
+    def ext_ids(self, ext_ids):
+        """Sets the ext_ids of this AddContactToList.
+
+        Mandatory if Emails, IDs are not passed, ignored otherwise. Emails to add to a list. You can pass a maximum of 150 extIds for addition in one request. If you need to add the emails in bulk, please prefer /contacts/import api.  # noqa: E501
+
+        :param ext_ids: The ext_ids of this AddContactToList.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._ext_ids = ext_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

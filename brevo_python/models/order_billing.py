@@ -178,7 +178,7 @@ class OrderBilling(object):
     def phone(self):
         """Gets the phone of this OrderBilling.  # noqa: E501
 
-        Phone number to contact for further details about the order, Mandatory if \"email\" field is not passed.  # noqa: E501
+        Billing phone number.  # noqa: E501
 
         :return: The phone of this OrderBilling.  # noqa: E501
         :rtype: str
@@ -189,7 +189,7 @@ class OrderBilling(object):
     def phone(self, phone):
         """Sets the phone of this OrderBilling.
 
-        Phone number to contact for further details about the order, Mandatory if \"email\" field is not passed.  # noqa: E501
+        Billing phone number.  # noqa: E501
 
         :param phone: The phone of this OrderBilling.  # noqa: E501
         :type: str

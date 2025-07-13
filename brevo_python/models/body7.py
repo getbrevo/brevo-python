@@ -31,128 +31,156 @@ class Body7(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'link_contact_ids': 'list[int]',
-        'unlink_contact_ids': 'list[int]',
-        'link_deals_ids': 'list[str]',
-        'unlink_deals_ids': 'list[str]'
+        'name': 'str',
+        'attributes': 'object',
+        'country_code': 'int',
+        'linked_contacts_ids': 'list[int]',
+        'linked_deals_ids': 'list[str]'
     }
 
     attribute_map = {
-        'link_contact_ids': 'linkContactIds',
-        'unlink_contact_ids': 'unlinkContactIds',
-        'link_deals_ids': 'linkDealsIds',
-        'unlink_deals_ids': 'unlinkDealsIds'
+        'name': 'name',
+        'attributes': 'attributes',
+        'country_code': 'countryCode',
+        'linked_contacts_ids': 'linkedContactsIds',
+        'linked_deals_ids': 'linkedDealsIds'
     }
 
-    def __init__(self, link_contact_ids=None, unlink_contact_ids=None, link_deals_ids=None, unlink_deals_ids=None):  # noqa: E501
+    def __init__(self, name=None, attributes=None, country_code=None, linked_contacts_ids=None, linked_deals_ids=None):  # noqa: E501
         """Body7 - a model defined in Swagger"""  # noqa: E501
 
-        self._link_contact_ids = None
-        self._unlink_contact_ids = None
-        self._link_deals_ids = None
-        self._unlink_deals_ids = None
+        self._name = None
+        self._attributes = None
+        self._country_code = None
+        self._linked_contacts_ids = None
+        self._linked_deals_ids = None
         self.discriminator = None
 
-        if link_contact_ids is not None:
-            self.link_contact_ids = link_contact_ids
-        if unlink_contact_ids is not None:
-            self.unlink_contact_ids = unlink_contact_ids
-        if link_deals_ids is not None:
-            self.link_deals_ids = link_deals_ids
-        if unlink_deals_ids is not None:
-            self.unlink_deals_ids = unlink_deals_ids
+        if name is not None:
+            self.name = name
+        if attributes is not None:
+            self.attributes = attributes
+        if country_code is not None:
+            self.country_code = country_code
+        if linked_contacts_ids is not None:
+            self.linked_contacts_ids = linked_contacts_ids
+        if linked_deals_ids is not None:
+            self.linked_deals_ids = linked_deals_ids
 
     @property
-    def link_contact_ids(self):
-        """Gets the link_contact_ids of this Body7.  # noqa: E501
+    def name(self):
+        """Gets the name of this Body7.  # noqa: E501
 
-        Contact ids for contacts to be linked with company  # noqa: E501
+        Name of company  # noqa: E501
 
-        :return: The link_contact_ids of this Body7.  # noqa: E501
+        :return: The name of this Body7.  # noqa: E501
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Sets the name of this Body7.
+
+        Name of company  # noqa: E501
+
+        :param name: The name of this Body7.  # noqa: E501
+        :type: str
+        """
+
+        self._name = name
+
+    @property
+    def attributes(self):
+        """Gets the attributes of this Body7.  # noqa: E501
+
+        Attributes for company update  # noqa: E501
+
+        :return: The attributes of this Body7.  # noqa: E501
+        :rtype: object
+        """
+        return self._attributes
+
+    @attributes.setter
+    def attributes(self, attributes):
+        """Sets the attributes of this Body7.
+
+        Attributes for company update  # noqa: E501
+
+        :param attributes: The attributes of this Body7.  # noqa: E501
+        :type: object
+        """
+
+        self._attributes = attributes
+
+    @property
+    def country_code(self):
+        """Gets the country_code of this Body7.  # noqa: E501
+
+        Country code if phone_number is passed in attributes.  # noqa: E501
+
+        :return: The country_code of this Body7.  # noqa: E501
+        :rtype: int
+        """
+        return self._country_code
+
+    @country_code.setter
+    def country_code(self, country_code):
+        """Sets the country_code of this Body7.
+
+        Country code if phone_number is passed in attributes.  # noqa: E501
+
+        :param country_code: The country_code of this Body7.  # noqa: E501
+        :type: int
+        """
+
+        self._country_code = country_code
+
+    @property
+    def linked_contacts_ids(self):
+        """Gets the linked_contacts_ids of this Body7.  # noqa: E501
+
+        Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
+
+        :return: The linked_contacts_ids of this Body7.  # noqa: E501
         :rtype: list[int]
         """
-        return self._link_contact_ids
+        return self._linked_contacts_ids
 
-    @link_contact_ids.setter
-    def link_contact_ids(self, link_contact_ids):
-        """Sets the link_contact_ids of this Body7.
+    @linked_contacts_ids.setter
+    def linked_contacts_ids(self, linked_contacts_ids):
+        """Sets the linked_contacts_ids of this Body7.
 
-        Contact ids for contacts to be linked with company  # noqa: E501
+        Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :param link_contact_ids: The link_contact_ids of this Body7.  # noqa: E501
+        :param linked_contacts_ids: The linked_contacts_ids of this Body7.  # noqa: E501
         :type: list[int]
         """
 
-        self._link_contact_ids = link_contact_ids
+        self._linked_contacts_ids = linked_contacts_ids
 
     @property
-    def unlink_contact_ids(self):
-        """Gets the unlink_contact_ids of this Body7.  # noqa: E501
+    def linked_deals_ids(self):
+        """Gets the linked_deals_ids of this Body7.  # noqa: E501
 
-        Contact ids for contacts to be unlinked from company  # noqa: E501
+        Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :return: The unlink_contact_ids of this Body7.  # noqa: E501
-        :rtype: list[int]
-        """
-        return self._unlink_contact_ids
-
-    @unlink_contact_ids.setter
-    def unlink_contact_ids(self, unlink_contact_ids):
-        """Sets the unlink_contact_ids of this Body7.
-
-        Contact ids for contacts to be unlinked from company  # noqa: E501
-
-        :param unlink_contact_ids: The unlink_contact_ids of this Body7.  # noqa: E501
-        :type: list[int]
-        """
-
-        self._unlink_contact_ids = unlink_contact_ids
-
-    @property
-    def link_deals_ids(self):
-        """Gets the link_deals_ids of this Body7.  # noqa: E501
-
-        Deals ids for deals to be linked with company  # noqa: E501
-
-        :return: The link_deals_ids of this Body7.  # noqa: E501
+        :return: The linked_deals_ids of this Body7.  # noqa: E501
         :rtype: list[str]
         """
-        return self._link_deals_ids
+        return self._linked_deals_ids
 
-    @link_deals_ids.setter
-    def link_deals_ids(self, link_deals_ids):
-        """Sets the link_deals_ids of this Body7.
+    @linked_deals_ids.setter
+    def linked_deals_ids(self, linked_deals_ids):
+        """Sets the linked_deals_ids of this Body7.
 
-        Deals ids for deals to be linked with company  # noqa: E501
+        Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.  # noqa: E501
 
-        :param link_deals_ids: The link_deals_ids of this Body7.  # noqa: E501
+        :param linked_deals_ids: The linked_deals_ids of this Body7.  # noqa: E501
         :type: list[str]
         """
 
-        self._link_deals_ids = link_deals_ids
-
-    @property
-    def unlink_deals_ids(self):
-        """Gets the unlink_deals_ids of this Body7.  # noqa: E501
-
-        Deals ids for deals to be unlinked from company  # noqa: E501
-
-        :return: The unlink_deals_ids of this Body7.  # noqa: E501
-        :rtype: list[str]
-        """
-        return self._unlink_deals_ids
-
-    @unlink_deals_ids.setter
-    def unlink_deals_ids(self, unlink_deals_ids):
-        """Sets the unlink_deals_ids of this Body7.
-
-        Deals ids for deals to be unlinked from company  # noqa: E501
-
-        :param unlink_deals_ids: The unlink_deals_ids of this Body7.  # noqa: E501
-        :type: list[str]
-        """
-
-        self._unlink_deals_ids = unlink_deals_ids
+        self._linked_deals_ids = linked_deals_ids
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -37,10 +37,11 @@ class Order(object):
         'status': 'str',
         'amount': 'float',
         'store_id': 'str',
+        'identifiers': 'OrderIdentifiers',
         'products': 'list[OrderProducts]',
-        'email': 'str',
         'billing': 'OrderBilling',
-        'coupons': 'list[str]'
+        'coupons': 'list[str]',
+        'meta_info': 'dict(str, object)'
     }
 
     attribute_map = {
@@ -50,13 +51,14 @@ class Order(object):
         'status': 'status',
         'amount': 'amount',
         'store_id': 'storeId',
+        'identifiers': 'identifiers',
         'products': 'products',
-        'email': 'email',
         'billing': 'billing',
-        'coupons': 'coupons'
+        'coupons': 'coupons',
+        'meta_info': 'metaInfo'
     }
 
-    def __init__(self, id=None, created_at=None, updated_at=None, status=None, amount=None, store_id=None, products=None, email=None, billing=None, coupons=None):  # noqa: E501
+    def __init__(self, id=None, created_at=None, updated_at=None, status=None, amount=None, store_id=None, identifiers=None, products=None, billing=None, coupons=None, meta_info=None):  # noqa: E501
         """Order - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
@@ -65,10 +67,11 @@ class Order(object):
         self._status = None
         self._amount = None
         self._store_id = None
+        self._identifiers = None
         self._products = None
-        self._email = None
         self._billing = None
         self._coupons = None
+        self._meta_info = None
         self.discriminator = None
 
         self.id = id
@@ -78,13 +81,15 @@ class Order(object):
         self.amount = amount
         if store_id is not None:
             self.store_id = store_id
+        if identifiers is not None:
+            self.identifiers = identifiers
         self.products = products
-        if email is not None:
-            self.email = email
         if billing is not None:
             self.billing = billing
         if coupons is not None:
             self.coupons = coupons
+        if meta_info is not None:
+            self.meta_info = meta_info
 
     @property
     def id(self):
@@ -235,6 +240,27 @@ class Order(object):
         self._store_id = store_id
 
     @property
+    def identifiers(self):
+        """Gets the identifiers of this Order.  # noqa: E501
+
+
+        :return: The identifiers of this Order.  # noqa: E501
+        :rtype: OrderIdentifiers
+        """
+        return self._identifiers
+
+    @identifiers.setter
+    def identifiers(self, identifiers):
+        """Sets the identifiers of this Order.
+
+
+        :param identifiers: The identifiers of this Order.  # noqa: E501
+        :type: OrderIdentifiers
+        """
+
+        self._identifiers = identifiers
+
+    @property
     def products(self):
         """Gets the products of this Order.  # noqa: E501
 
@@ -256,29 +282,6 @@ class Order(object):
             raise ValueError("Invalid value for `products`, must not be `None`")  # noqa: E501
 
         self._products = products
-
-    @property
-    def email(self):
-        """Gets the email of this Order.  # noqa: E501
-
-        Email of the contact, Mandatory if \"phone\" field is not passed in \"billing\" parameter.  # noqa: E501
-
-        :return: The email of this Order.  # noqa: E501
-        :rtype: str
-        """
-        return self._email
-
-    @email.setter
-    def email(self, email):
-        """Sets the email of this Order.
-
-        Email of the contact, Mandatory if \"phone\" field is not passed in \"billing\" parameter.  # noqa: E501
-
-        :param email: The email of this Order.  # noqa: E501
-        :type: str
-        """
-
-        self._email = email
 
     @property
     def billing(self):
@@ -323,6 +326,29 @@ class Order(object):
         """
 
         self._coupons = coupons
+
+    @property
+    def meta_info(self):
+        """Gets the meta_info of this Order.  # noqa: E501
+
+        Meta data of order to store additional detal such as custom message, customer type, source.  # noqa: E501
+
+        :return: The meta_info of this Order.  # noqa: E501
+        :rtype: dict(str, object)
+        """
+        return self._meta_info
+
+    @meta_info.setter
+    def meta_info(self, meta_info):
+        """Sets the meta_info of this Order.
+
+        Meta data of order to store additional detal such as custom message, customer type, source.  # noqa: E501
+
+        :param meta_info: The meta_info of this Order.  # noqa: E501
+        :type: dict(str, object)
+        """
+
+        self._meta_info = meta_info
 
     def to_dict(self):
         """Returns the model properties as a dict"""

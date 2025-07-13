@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **meta_info** | **object** | Meta data of product such as description, vendor, producer, stock level, etc. | [optional] 
 **s3_thumb_editor** | **str** | S3 thumbnail url of original image in 600x400 dimension for editor section | 
 **is_deleted** | **bool** | product deleted from the shop&#39;s database | [optional] 
+**stock** | **float** | Current stock value of the product from the shop&#39;s database | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

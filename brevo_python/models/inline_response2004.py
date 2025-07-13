@@ -31,45 +31,44 @@ class InlineResponse2004(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'code': 'str'
+        'process_id': 'int'
     }
 
     attribute_map = {
-        'code': 'code'
+        'process_id': 'processId'
     }
 
-    def __init__(self, code=None):  # noqa: E501
+    def __init__(self, process_id=None):  # noqa: E501
         """InlineResponse2004 - a model defined in Swagger"""  # noqa: E501
 
-        self._code = None
+        self._process_id = None
         self.discriminator = None
 
-        self.code = code
+        if process_id is not None:
+            self.process_id = process_id
 
     @property
-    def code(self):
-        """Gets the code of this InlineResponse2004.  # noqa: E501
+    def process_id(self):
+        """Gets the process_id of this InlineResponse2004.  # noqa: E501
 
-        ISO 4217 compliant display currency code  # noqa: E501
+        The ID of the import process  # noqa: E501
 
-        :return: The code of this InlineResponse2004.  # noqa: E501
-        :rtype: str
+        :return: The process_id of this InlineResponse2004.  # noqa: E501
+        :rtype: int
         """
-        return self._code
+        return self._process_id
 
-    @code.setter
-    def code(self, code):
-        """Sets the code of this InlineResponse2004.
+    @process_id.setter
+    def process_id(self, process_id):
+        """Sets the process_id of this InlineResponse2004.
 
-        ISO 4217 compliant display currency code  # noqa: E501
+        The ID of the import process  # noqa: E501
 
-        :param code: The code of this InlineResponse2004.  # noqa: E501
-        :type: str
+        :param process_id: The process_id of this InlineResponse2004.  # noqa: E501
+        :type: int
         """
-        if code is None:
-            raise ValueError("Invalid value for `code`, must not be `None`")  # noqa: E501
 
-        self._code = code
+        self._process_id = process_id
 
     def to_dict(self):
         """Returns the model properties as a dict"""

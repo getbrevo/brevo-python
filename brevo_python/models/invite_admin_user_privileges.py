@@ -72,7 +72,7 @@ class InviteAdminUserPrivileges(object):
         :param feature: The feature of this InviteAdminUserPrivileges.  # noqa: E501
         :type: str
         """
-        allowed_values = ["my_plan", "api", "user_management", "app_management"]  # noqa: E501
+        allowed_values = ["my_plan", "api", "user_management", "app_management", "sub_organization_groups", "create_sub_organizations", "manage_sub_organizations", "analytics", "security"]  # noqa: E501
         if feature not in allowed_values:
             raise ValueError(
                 "Invalid value for `feature` ({0}), must be one of {1}"  # noqa: E501
@@ -101,7 +101,7 @@ class InviteAdminUserPrivileges(object):
         :param permissions: The permissions of this InviteAdminUserPrivileges.  # noqa: E501
         :type: list[str]
         """
-        allowed_values = ["all", "none"]  # noqa: E501
+        allowed_values = ["all", "none", "create", "edit_delete", "download_data", "create_alerts"]  # noqa: E501
         if not set(permissions).issubset(set(allowed_values)):
             raise ValueError(
                 "Invalid values for `permissions` [{0}], must be a subset of [{1}]"  # noqa: E501

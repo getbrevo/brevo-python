@@ -1859,6 +1859,103 @@ class TransactionalEmailsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def post_preview_smtp_email_templates(self, fetch_template_preview, **kwargs):  # noqa: E501
+        """Generate the rendered preview of transactional template  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.post_preview_smtp_email_templates(fetch_template_preview, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param FetchTemplatePreview fetch_template_preview: Values to fetch Template preview (required)
+        :return: TemplatePreview
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.post_preview_smtp_email_templates_with_http_info(fetch_template_preview, **kwargs)  # noqa: E501
+        else:
+            (data) = self.post_preview_smtp_email_templates_with_http_info(fetch_template_preview, **kwargs)  # noqa: E501
+            return data
+
+    def post_preview_smtp_email_templates_with_http_info(self, fetch_template_preview, **kwargs):  # noqa: E501
+        """Generate the rendered preview of transactional template  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.post_preview_smtp_email_templates_with_http_info(fetch_template_preview, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param FetchTemplatePreview fetch_template_preview: Values to fetch Template preview (required)
+        :return: TemplatePreview
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['fetch_template_preview']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method post_preview_smtp_email_templates" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'fetch_template_preview' is set
+        if ('fetch_template_preview' not in params or
+                params['fetch_template_preview'] is None):
+            raise ValueError("Missing the required parameter `fetch_template_preview` when calling `post_preview_smtp_email_templates`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'fetch_template_preview' in params:
+            body_params = params['fetch_template_preview']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/smtp/template/preview', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TemplatePreview',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def send_test_template(self, template_id, send_test_email, **kwargs):  # noqa: E501
         """Send a template to your test list  # noqa: E501
 
@@ -2167,7 +2264,7 @@ class TransactionalEmailsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: MessageId or Email of the transactional log(s) to delete (required)
+        :param str identifier: MessageId of the transactional log(s) to delete (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2188,7 +2285,7 @@ class TransactionalEmailsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: MessageId or Email of the transactional log(s) to delete (required)
+        :param str identifier: MessageId of the transactional log(s) to delete (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.

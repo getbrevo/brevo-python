@@ -43,7 +43,7 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
-        :param AddContactToList contact_emails: Emails addresses OR IDs of the contacts (required)
+        :param AddContactToList contact_emails: Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
         :return: PostContactInfo
                  If the method is called asynchronously,
                  returns the request thread.
@@ -65,7 +65,7 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
-        :param AddContactToList contact_emails: Emails addresses OR IDs of the contacts (required)
+        :param AddContactToList contact_emails: Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
         :return: PostContactInfo
                  If the method is called asynchronously,
                  returns the request thread.
@@ -254,6 +254,7 @@ class ContactsApi(object):
     def create_contact(self, create_contact, **kwargs):  # noqa: E501
         """Create a contact  # noqa: E501
 
+        Creates new contacts on Brevo. Contacts can be created by passing either - <br><br> 1. email address of the contact (email_id),  <br> 2. phone number of the contact (to be passed as \"SMS\" field in \"attributes\" along with proper country code), For example- {\"SMS\":\"+91xxxxxxxxxx\"} or {\"SMS\":\"0091xxxxxxxxxx\"} <br> 3. ext_id <br>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.create_contact(create_contact, async_req=True)
@@ -275,6 +276,7 @@ class ContactsApi(object):
     def create_contact_with_http_info(self, create_contact, **kwargs):  # noqa: E501
         """Create a contact  # noqa: E501
 
+        Creates new contacts on Brevo. Contacts can be created by passing either - <br><br> 1. email address of the contact (email_id),  <br> 2. phone number of the contact (to be passed as \"SMS\" field in \"attributes\" along with proper country code), For example- {\"SMS\":\"+91xxxxxxxxxx\"} or {\"SMS\":\"0091xxxxxxxxxx\"} <br> 3. ext_id <br>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.create_contact_with_http_info(create_contact, async_req=True)
@@ -747,13 +749,15 @@ class ContactsApi(object):
     def delete_contact(self, identifier, **kwargs):  # noqa: E501
         """Delete a contact  # noqa: E501
 
+        There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_contact(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+        :param str identifier_type: email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -768,19 +772,21 @@ class ContactsApi(object):
     def delete_contact_with_http_info(self, identifier, **kwargs):  # noqa: E501
         """Delete a contact  # noqa: E501
 
+        There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_contact_with_http_info(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+        :param str identifier_type: email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['identifier']  # noqa: E501
+        all_params = ['identifier', 'identifier_type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -807,6 +813,8 @@ class ContactsApi(object):
             path_params['identifier'] = params['identifier']  # noqa: E501
 
         query_params = []
+        if 'identifier_type' in params:
+            query_params.append(('identifierType', params['identifier_type']))  # noqa: E501
 
         header_params = {}
 
@@ -1035,6 +1043,119 @@ class ContactsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def delete_multi_attribute_options(self, attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, **kwargs):  # noqa: E501
+        """Delete a multiple-choice attribute option  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_multi_attribute_options(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str attribute_type: Type of the attribute (required)
+        :param str multiple_choice_attribute: Name of the existing multiple-choice attribute (required)
+        :param str multiple_choice_attribute_option: Name of the existing multiple-choice attribute option that you want to delete (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_multi_attribute_options_with_http_info(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_multi_attribute_options_with_http_info(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, **kwargs)  # noqa: E501
+            return data
+
+    def delete_multi_attribute_options_with_http_info(self, attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, **kwargs):  # noqa: E501
+        """Delete a multiple-choice attribute option  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_multi_attribute_options_with_http_info(attribute_type, multiple_choice_attribute, multiple_choice_attribute_option, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str attribute_type: Type of the attribute (required)
+        :param str multiple_choice_attribute: Name of the existing multiple-choice attribute (required)
+        :param str multiple_choice_attribute_option: Name of the existing multiple-choice attribute option that you want to delete (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['attribute_type', 'multiple_choice_attribute', 'multiple_choice_attribute_option']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_multi_attribute_options" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'attribute_type' is set
+        if ('attribute_type' not in params or
+                params['attribute_type'] is None):
+            raise ValueError("Missing the required parameter `attribute_type` when calling `delete_multi_attribute_options`")  # noqa: E501
+        # verify the required parameter 'multiple_choice_attribute' is set
+        if ('multiple_choice_attribute' not in params or
+                params['multiple_choice_attribute'] is None):
+            raise ValueError("Missing the required parameter `multiple_choice_attribute` when calling `delete_multi_attribute_options`")  # noqa: E501
+        # verify the required parameter 'multiple_choice_attribute_option' is set
+        if ('multiple_choice_attribute_option' not in params or
+                params['multiple_choice_attribute_option'] is None):
+            raise ValueError("Missing the required parameter `multiple_choice_attribute_option` when calling `delete_multi_attribute_options`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'attribute_type' in params:
+            path_params['attributeType'] = params['attribute_type']  # noqa: E501
+        if 'multiple_choice_attribute' in params:
+            path_params['multipleChoiceAttribute'] = params['multiple_choice_attribute']  # noqa: E501
+        if 'multiple_choice_attribute_option' in params:
+            path_params['multipleChoiceAttributeOption'] = params['multiple_choice_attribute_option']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/contacts/attributes/{attributeType}/{multipleChoiceAttribute}/{multipleChoiceAttributeOption}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def get_attributes(self, **kwargs):  # noqa: E501
         """List all attributes  # noqa: E501
 
@@ -1127,14 +1248,15 @@ class ContactsApi(object):
     def get_contact_info(self, identifier, **kwargs):  # noqa: E501
         """Get a contact's details  # noqa: E501
 
-        Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.  # noqa: E501
+        There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute <br><br>Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats ``https://developers.brevo.com/reference/contacts-7#getcontactstats`` endpoint with the appropriate date ranges.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_contact_info(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+        :param str identifier_type: email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
         :param str start_date: **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate 
         :param str end_date: **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. 
         :return: GetExtendedContactDetails
@@ -1151,14 +1273,15 @@ class ContactsApi(object):
     def get_contact_info_with_http_info(self, identifier, **kwargs):  # noqa: E501
         """Get a contact's details  # noqa: E501
 
-        Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.  # noqa: E501
+        There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute <br><br>Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats ``https://developers.brevo.com/reference/contacts-7#getcontactstats`` endpoint with the appropriate date ranges.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_contact_info_with_http_info(identifier, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+        :param str identifier_type: email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
         :param str start_date: **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate 
         :param str end_date: **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. 
         :return: GetExtendedContactDetails
@@ -1166,7 +1289,7 @@ class ContactsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['identifier', 'start_date', 'end_date']  # noqa: E501
+        all_params = ['identifier', 'identifier_type', 'start_date', 'end_date']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1193,6 +1316,8 @@ class ContactsApi(object):
             path_params['identifier'] = params['identifier']  # noqa: E501
 
         query_params = []
+        if 'identifier_type' in params:
+            query_params.append(('identifierType', params['identifier_type']))  # noqa: E501
         if 'start_date' in params:
             query_params.append(('startDate', params['start_date']))  # noqa: E501
         if 'end_date' in params:
@@ -1352,7 +1477,7 @@ class ContactsApi(object):
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :param int segment_id: Id of the segment. **Either listIds or segmentId can be passed.**
         :param list[int] list_ids: Ids of the list. **Either listIds or segmentId can be passed.**
-        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))** 
+        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"), filter=equals(GENDER, \"1\"), filter=equals(GENDER, \"MALE\"), filter=equals(COUNTRY,\"USA, INDIA\")** 
         :return: GetContacts
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1380,7 +1505,7 @@ class ContactsApi(object):
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :param int segment_id: Id of the segment. **Either listIds or segmentId can be passed.**
         :param list[int] list_ids: Ids of the list. **Either listIds or segmentId can be passed.**
-        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"))** 
+        :param str filter: Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"), filter=equals(GENDER, \"1\"), filter=equals(GENDER, \"MALE\"), filter=equals(COUNTRY,\"USA, INDIA\")** 
         :return: GetContacts
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1789,17 +1914,17 @@ class ContactsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_folders(self, limit, offset, **kwargs):  # noqa: E501
+    def get_folders(self, **kwargs):  # noqa: E501
         """Get all folders  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_folders(limit, offset, async_req=True)
+        >>> thread = api.get_folders(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param int limit: Number of documents per page (required)
-        :param int offset: Index of the first document of the page (required)
+        :param int limit: Number of documents per page
+        :param int offset: Index of the first document of the page
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :return: GetFolders
                  If the method is called asynchronously,
@@ -1807,22 +1932,22 @@ class ContactsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_folders_with_http_info(limit, offset, **kwargs)  # noqa: E501
+            return self.get_folders_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.get_folders_with_http_info(limit, offset, **kwargs)  # noqa: E501
+            (data) = self.get_folders_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def get_folders_with_http_info(self, limit, offset, **kwargs):  # noqa: E501
+    def get_folders_with_http_info(self, **kwargs):  # noqa: E501
         """Get all folders  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_folders_with_http_info(limit, offset, async_req=True)
+        >>> thread = api.get_folders_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param int limit: Number of documents per page (required)
-        :param int offset: Index of the first document of the page (required)
+        :param int limit: Number of documents per page
+        :param int offset: Index of the first document of the page
         :param str sort: Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
         :return: GetFolders
                  If the method is called asynchronously,
@@ -1844,14 +1969,6 @@ class ContactsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'limit' is set
-        if ('limit' not in params or
-                params['limit'] is None):
-            raise ValueError("Missing the required parameter `limit` when calling `get_folders`")  # noqa: E501
-        # verify the required parameter 'offset' is set
-        if ('offset' not in params or
-                params['offset'] is None):
-            raise ValueError("Missing the required parameter `offset` when calling `get_folders`")  # noqa: E501
 
         if 'limit' in params and params['limit'] > 50:  # noqa: E501
             raise ValueError("Invalid value for parameter `limit` when calling `get_folders`, must be a value less than or equal to `50`")  # noqa: E501
@@ -2334,7 +2451,7 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
-        :param RemoveContactFromList contact_emails: Emails addresses OR IDs of the contacts (required)
+        :param RemoveContactFromList contact_emails: Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
         :return: PostContactInfo
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2356,7 +2473,7 @@ class ContactsApi(object):
 
         :param async_req bool
         :param int list_id: Id of the list (required)
-        :param RemoveContactFromList contact_emails: Emails addresses OR IDs of the contacts (required)
+        :param RemoveContactFromList contact_emails: Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
         :return: PostContactInfo
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2741,14 +2858,16 @@ class ContactsApi(object):
     def update_contact(self, identifier, update_contact, **kwargs):  # noqa: E501
         """Update a contact  # noqa: E501
 
+        There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.update_contact(identifier, update_contact, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
         :param UpdateContact update_contact: Values to update a contact (required)
+        :param str identifier_type: email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2763,20 +2882,22 @@ class ContactsApi(object):
     def update_contact_with_http_info(self, identifier, update_contact, **kwargs):  # noqa: E501
         """Update a contact  # noqa: E501
 
+        There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.update_contact_with_http_info(identifier, update_contact, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str identifier: Email (urlencoded) OR ID of the contact (required)
+        :param str identifier: Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
         :param UpdateContact update_contact: Values to update a contact (required)
+        :param str identifier_type: email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['identifier', 'update_contact']  # noqa: E501
+        all_params = ['identifier', 'update_contact', 'identifier_type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2807,6 +2928,8 @@ class ContactsApi(object):
             path_params['identifier'] = params['identifier']  # noqa: E501
 
         query_params = []
+        if 'identifier_type' in params:
+            query_params.append(('identifierType', params['identifier_type']))  # noqa: E501
 
         header_params = {}
 

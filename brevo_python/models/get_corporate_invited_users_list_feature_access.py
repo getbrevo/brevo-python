@@ -34,23 +34,38 @@ class GetCorporateInvitedUsersListFeatureAccess(object):
         'user_management': 'list[str]',
         'api_keys': 'list[str]',
         'my_plan': 'list[str]',
-        'apps_management': 'list[str]'
+        'apps_management': 'list[str]',
+        'sub_organization_groups': 'list[str]',
+        'create_sub_organizations': 'list[str]',
+        'manage_sub_organizations': 'list[str]',
+        'analytics': 'list[str]',
+        'security': 'list[str]'
     }
 
     attribute_map = {
         'user_management': 'user_management',
         'api_keys': 'api_keys',
         'my_plan': 'my_plan',
-        'apps_management': 'apps_management'
+        'apps_management': 'apps_management',
+        'sub_organization_groups': 'sub_organization_groups',
+        'create_sub_organizations': 'create_sub_organizations',
+        'manage_sub_organizations': 'manage_sub_organizations',
+        'analytics': 'analytics',
+        'security': 'security'
     }
 
-    def __init__(self, user_management=None, api_keys=None, my_plan=None, apps_management=None):  # noqa: E501
+    def __init__(self, user_management=None, api_keys=None, my_plan=None, apps_management=None, sub_organization_groups=None, create_sub_organizations=None, manage_sub_organizations=None, analytics=None, security=None):  # noqa: E501
         """GetCorporateInvitedUsersListFeatureAccess - a model defined in Swagger"""  # noqa: E501
 
         self._user_management = None
         self._api_keys = None
         self._my_plan = None
         self._apps_management = None
+        self._sub_organization_groups = None
+        self._create_sub_organizations = None
+        self._manage_sub_organizations = None
+        self._analytics = None
+        self._security = None
         self.discriminator = None
 
         if user_management is not None:
@@ -61,6 +76,16 @@ class GetCorporateInvitedUsersListFeatureAccess(object):
             self.my_plan = my_plan
         if apps_management is not None:
             self.apps_management = apps_management
+        if sub_organization_groups is not None:
+            self.sub_organization_groups = sub_organization_groups
+        if create_sub_organizations is not None:
+            self.create_sub_organizations = create_sub_organizations
+        if manage_sub_organizations is not None:
+            self.manage_sub_organizations = manage_sub_organizations
+        if analytics is not None:
+            self.analytics = analytics
+        if security is not None:
+            self.security = security
 
     @property
     def user_management(self):
@@ -153,6 +178,121 @@ class GetCorporateInvitedUsersListFeatureAccess(object):
         """
 
         self._apps_management = apps_management
+
+    @property
+    def sub_organization_groups(self):
+        """Gets the sub_organization_groups of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+
+        Group creation, modification or deletion accessibility  # noqa: E501
+
+        :return: The sub_organization_groups of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._sub_organization_groups
+
+    @sub_organization_groups.setter
+    def sub_organization_groups(self, sub_organization_groups):
+        """Sets the sub_organization_groups of this GetCorporateInvitedUsersListFeatureAccess.
+
+        Group creation, modification or deletion accessibility  # noqa: E501
+
+        :param sub_organization_groups: The sub_organization_groups of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._sub_organization_groups = sub_organization_groups
+
+    @property
+    def create_sub_organizations(self):
+        """Gets the create_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+
+        Authorization to create sub-organization in the admin account. If the user creating the sub-organization, belongs to a group, the user must choose a group at the sub-organization creation.  # noqa: E501
+
+        :return: The create_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._create_sub_organizations
+
+    @create_sub_organizations.setter
+    def create_sub_organizations(self, create_sub_organizations):
+        """Sets the create_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.
+
+        Authorization to create sub-organization in the admin account. If the user creating the sub-organization, belongs to a group, the user must choose a group at the sub-organization creation.  # noqa: E501
+
+        :param create_sub_organizations: The create_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._create_sub_organizations = create_sub_organizations
+
+    @property
+    def manage_sub_organizations(self):
+        """Gets the manage_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+
+        Authorization to manage and access sub-organizations in the admin account.  # noqa: E501
+
+        :return: The manage_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._manage_sub_organizations
+
+    @manage_sub_organizations.setter
+    def manage_sub_organizations(self, manage_sub_organizations):
+        """Sets the manage_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.
+
+        Authorization to manage and access sub-organizations in the admin account.  # noqa: E501
+
+        :param manage_sub_organizations: The manage_sub_organizations of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._manage_sub_organizations = manage_sub_organizations
+
+    @property
+    def analytics(self):
+        """Gets the analytics of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+
+        Analytics dashboard accessibility  # noqa: E501
+
+        :return: The analytics of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._analytics
+
+    @analytics.setter
+    def analytics(self, analytics):
+        """Sets the analytics of this GetCorporateInvitedUsersListFeatureAccess.
+
+        Analytics dashboard accessibility  # noqa: E501
+
+        :param analytics: The analytics of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._analytics = analytics
+
+    @property
+    def security(self):
+        """Gets the security of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+
+        Security page accessibility  # noqa: E501
+
+        :return: The security of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._security
+
+    @security.setter
+    def security(self, security):
+        """Sets the security of this GetCorporateInvitedUsersListFeatureAccess.
+
+        Security page accessibility  # noqa: E501
+
+        :param security: The security of this GetCorporateInvitedUsersListFeatureAccess.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._security = security
 
     def to_dict(self):
         """Returns the model properties as a dict"""

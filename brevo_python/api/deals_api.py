@@ -122,6 +122,103 @@ class DealsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def crm_attributes_post(self, body, **kwargs):  # noqa: E501
+        """Create a deal/company attribute  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_attributes_post(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body9 body: Attribute creation data for company (required)
+        :return: InlineResponse2003
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.crm_attributes_post_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.crm_attributes_post_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def crm_attributes_post_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Create a deal/company attribute  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.crm_attributes_post_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Body9 body: Attribute creation data for company (required)
+        :return: InlineResponse2003
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method crm_attributes_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `crm_attributes_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api-key', 'partner-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/crm/attributes', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='InlineResponse2003',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def crm_deals_get(self, **kwargs):  # noqa: E501
         """Get all deals  # noqa: E501
 
@@ -134,6 +231,8 @@ class DealsApi(object):
         :param str filters_attributes_deal_name: Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
         :param str filters_linked_companies_ids: Filter by linked companies ids
         :param str filters_linked_contacts_ids: Filter by linked companies ids
+        :param str modified_since: Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+        :param str created_since: Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param int offset: Index of the first document of the page
         :param int limit: Number of documents per page
         :param str sort: Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
@@ -161,6 +260,8 @@ class DealsApi(object):
         :param str filters_attributes_deal_name: Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
         :param str filters_linked_companies_ids: Filter by linked companies ids
         :param str filters_linked_contacts_ids: Filter by linked companies ids
+        :param str modified_since: Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+        :param str created_since: Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
         :param int offset: Index of the first document of the page
         :param int limit: Number of documents per page
         :param str sort: Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
@@ -170,7 +271,7 @@ class DealsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['filters_attributes_deal_name', 'filters_linked_companies_ids', 'filters_linked_contacts_ids', 'offset', 'limit', 'sort', 'sort_by']  # noqa: E501
+        all_params = ['filters_attributes_deal_name', 'filters_linked_companies_ids', 'filters_linked_contacts_ids', 'modified_since', 'created_since', 'offset', 'limit', 'sort', 'sort_by']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -197,6 +298,10 @@ class DealsApi(object):
             query_params.append(('filters[linkedCompaniesIds]', params['filters_linked_companies_ids']))  # noqa: E501
         if 'filters_linked_contacts_ids' in params:
             query_params.append(('filters[linkedContactsIds]', params['filters_linked_contacts_ids']))  # noqa: E501
+        if 'modified_since' in params:
+            query_params.append(('modifiedSince', params['modified_since']))  # noqa: E501
+        if 'created_since' in params:
+            query_params.append(('createdSince', params['created_since']))  # noqa: E501
         if 'offset' in params:
             query_params.append(('offset', params['offset']))  # noqa: E501
         if 'limit' in params:
@@ -443,7 +548,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body9 body: Updated deal details. (required)
+        :param Body11 body: Updated deal details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -465,7 +570,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body9 body: Updated deal details. (required)
+        :param Body11 body: Updated deal details. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -550,7 +655,7 @@ class DealsApi(object):
         :param async_req bool
         :param file file: The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
         :param str mapping: The mapping options in JSON format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
-        :return: InlineResponse2003
+        :return: InlineResponse2004
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -573,7 +678,7 @@ class DealsApi(object):
         :param async_req bool
         :param file file: The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
         :param str mapping: The mapping options in JSON format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
-        :return: InlineResponse2003
+        :return: InlineResponse2004
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -637,7 +742,7 @@ class DealsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2003',  # noqa: E501
+            response_type='InlineResponse2004',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -655,7 +760,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body10 body: Linked / Unlinked contacts and companies ids. (required)
+        :param Body12 body: Linked / Unlinked contacts and companies ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -677,7 +782,7 @@ class DealsApi(object):
 
         :param async_req bool
         :param str id: (required)
-        :param Body10 body: Linked / Unlinked contacts and companies ids. (required)
+        :param Body12 body: Linked / Unlinked contacts and companies ids. (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -759,7 +864,7 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body8 body: Deal create data. (required)
+        :param Body10 body: Deal create data. (required)
         :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
@@ -780,7 +885,7 @@ class DealsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body8 body: Deal create data. (required)
+        :param Body10 body: Deal create data. (required)
         :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.

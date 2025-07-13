@@ -42,7 +42,8 @@ class CreateUpdateProduct(object):
         'meta_info': 'dict(str, str)',
         'update_enabled': 'bool',
         'deleted_at': 'str',
-        'is_deleted': 'bool'
+        'is_deleted': 'bool',
+        'stock': 'float'
     }
 
     attribute_map = {
@@ -57,10 +58,11 @@ class CreateUpdateProduct(object):
         'meta_info': 'metaInfo',
         'update_enabled': 'updateEnabled',
         'deleted_at': 'deletedAt',
-        'is_deleted': 'isDeleted'
+        'is_deleted': 'isDeleted',
+        'stock': 'stock'
     }
 
-    def __init__(self, id=None, name=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, meta_info=None, update_enabled=False, deleted_at=None, is_deleted=None):  # noqa: E501
+    def __init__(self, id=None, name=None, url=None, image_url=None, sku=None, price=None, categories=None, parent_id=None, meta_info=None, update_enabled=False, deleted_at=None, is_deleted=None, stock=None):  # noqa: E501
         """CreateUpdateProduct - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
@@ -75,6 +77,7 @@ class CreateUpdateProduct(object):
         self._update_enabled = None
         self._deleted_at = None
         self._is_deleted = None
+        self._stock = None
         self.discriminator = None
 
         self.id = id
@@ -99,6 +102,8 @@ class CreateUpdateProduct(object):
             self.deleted_at = deleted_at
         if is_deleted is not None:
             self.is_deleted = is_deleted
+        if stock is not None:
+            self.stock = stock
 
     @property
     def id(self):
@@ -292,7 +297,7 @@ class CreateUpdateProduct(object):
     def meta_info(self):
         """Gets the meta_info of this CreateUpdateProduct.  # noqa: E501
 
-        Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 10.  # noqa: E501
+        Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.  # noqa: E501
 
         :return: The meta_info of this CreateUpdateProduct.  # noqa: E501
         :rtype: dict(str, str)
@@ -303,7 +308,7 @@ class CreateUpdateProduct(object):
     def meta_info(self, meta_info):
         """Sets the meta_info of this CreateUpdateProduct.
 
-        Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 10.  # noqa: E501
+        Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.  # noqa: E501
 
         :param meta_info: The meta_info of this CreateUpdateProduct.  # noqa: E501
         :type: dict(str, str)
@@ -379,6 +384,29 @@ class CreateUpdateProduct(object):
         """
 
         self._is_deleted = is_deleted
+
+    @property
+    def stock(self):
+        """Gets the stock of this CreateUpdateProduct.  # noqa: E501
+
+        Current stock value of the product from the shop's database  # noqa: E501
+
+        :return: The stock of this CreateUpdateProduct.  # noqa: E501
+        :rtype: float
+        """
+        return self._stock
+
+    @stock.setter
+    def stock(self, stock):
+        """Sets the stock of this CreateUpdateProduct.
+
+        Current stock value of the product from the shop's database  # noqa: E501
+
+        :param stock: The stock of this CreateUpdateProduct.  # noqa: E501
+        :type: float
+        """
+
+        self._stock = stock
 
     def to_dict(self):
         """Returns the model properties as a dict"""

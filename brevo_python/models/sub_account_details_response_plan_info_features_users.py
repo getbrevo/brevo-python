@@ -56,7 +56,7 @@ class SubAccountDetailsResponsePlanInfoFeaturesUsers(object):
     def quantity(self):
         """Gets the quantity of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
 
-        Quantity of multi-account's provided  # noqa: E501
+        Quantity of marketing users provided  # noqa: E501
 
         :return: The quantity of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
         :rtype: int
@@ -67,7 +67,7 @@ class SubAccountDetailsResponsePlanInfoFeaturesUsers(object):
     def quantity(self, quantity):
         """Sets the quantity of this SubAccountDetailsResponsePlanInfoFeaturesUsers.
 
-        Quantity of multi-account's provided  # noqa: E501
+        Quantity of marketing users provided  # noqa: E501
 
         :param quantity: The quantity of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
         :type: int
@@ -79,7 +79,7 @@ class SubAccountDetailsResponsePlanInfoFeaturesUsers(object):
     def remaining(self):
         """Gets the remaining of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
 
-        Available multi-accounts for use  # noqa: E501
+        Available marketing users for use  # noqa: E501
 
         :return: The remaining of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
         :rtype: int
@@ -90,7 +90,7 @@ class SubAccountDetailsResponsePlanInfoFeaturesUsers(object):
     def remaining(self, remaining):
         """Sets the remaining of this SubAccountDetailsResponsePlanInfoFeaturesUsers.
 
-        Available multi-accounts for use  # noqa: E501
+        Available marketing users for use  # noqa: E501
 
         :param remaining: The remaining of this SubAccountDetailsResponsePlanInfoFeaturesUsers.  # noqa: E501
         :type: int

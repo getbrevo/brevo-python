@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**corporate_group_id_put**](MasterAccountApi.md#corporate_group_id_put) | **PUT** /corporate/group/{id} | Update a group of sub-accounts
 [**corporate_group_post**](MasterAccountApi.md#corporate_group_post) | **POST** /corporate/group | Create a new group of sub-accounts
 [**corporate_group_unlink_group_id_sub_accounts_put**](MasterAccountApi.md#corporate_group_unlink_group_id_sub_accounts_put) | **PUT** /corporate/group/unlink/{groupId}/subAccounts | Delete sub-account from group
+[**corporate_ip_get**](MasterAccountApi.md#corporate_ip_get) | **GET** /corporate/ip | List of all IPs
 [**corporate_master_account_get**](MasterAccountApi.md#corporate_master_account_get) | **GET** /corporate/masterAccount | Get the details of requested master account
 [**corporate_sso_token_post**](MasterAccountApi.md#corporate_sso_token_post) | **POST** /corporate/ssoToken | Generate SSO token to access admin account
 [**corporate_sub_account_get**](MasterAccountApi.md#corporate_sub_account_get) | **GET** /corporate/subAccount | Get the list of all the sub-accounts of the master account.
@@ -21,6 +22,8 @@ Method | HTTP request | Description
 [**corporate_sub_account_key_post**](MasterAccountApi.md#corporate_sub_account_key_post) | **POST** /corporate/subAccount/key | Create an API key for a sub-account
 [**corporate_sub_account_post**](MasterAccountApi.md#corporate_sub_account_post) | **POST** /corporate/subAccount | Create a new sub-account under a master account.
 [**corporate_sub_account_sso_token_post**](MasterAccountApi.md#corporate_sub_account_sso_token_post) | **POST** /corporate/subAccount/ssoToken | Generate SSO token to access sub-account
+[**corporate_sub_accounts_plan_put**](MasterAccountApi.md#corporate_sub_accounts_plan_put) | **PUT** /corporate/subAccounts/plan | Update sub-accounts plan
+[**corporate_user_email_permissions_put**](MasterAccountApi.md#corporate_user_email_permissions_put) | **PUT** /corporate/user/{email}/permissions | Change admin user permissions
 [**corporate_user_invitation_action_email_put**](MasterAccountApi.md#corporate_user_invitation_action_email_put) | **PUT** /corporate/user/invitation/{action}/{email} | Resend / cancel admin user invitation
 [**corporate_user_revoke_email_delete**](MasterAccountApi.md#corporate_user_revoke_email_delete) | **DELETE** /corporate/user/revoke/{email} | Revoke an admin user
 [**get_account_activity**](MasterAccountApi.md#get_account_activity) | **GET** /organization/activities | Get user activity logs
@@ -310,6 +313,60 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **str**| Id of the group | 
  **body** | [**Body4**](Body4.md)| List of sub-account ids | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **corporate_ip_get**
+> corporate_ip_get()
+
+List of all IPs
+
+This endpoint allows you to retrieve the list of active IPs on your Admin account
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.MasterAccountApi(brevo_python.ApiClient(configuration))
+
+try:
+    # List of all IPs
+    api_instance.corporate_ip_get()
+except ApiException as e:
+    print("Exception when calling MasterAccountApi->corporate_ip_get: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -1030,6 +1087,124 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **corporate_sub_accounts_plan_put**
+> corporate_sub_accounts_plan_put(update_plan_details)
+
+Update sub-accounts plan
+
+This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1\" to set the consumable in unlimited mode.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.MasterAccountApi(brevo_python.ApiClient(configuration))
+update_plan_details = brevo_python.SubAccountsUpdatePlanRequest() # SubAccountsUpdatePlanRequest | Values to update sub-accounts plan
+
+try:
+    # Update sub-accounts plan
+    api_instance.corporate_sub_accounts_plan_put(update_plan_details)
+except ApiException as e:
+    print("Exception when calling MasterAccountApi->corporate_sub_accounts_plan_put: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_plan_details** | [**SubAccountsUpdatePlanRequest**](SubAccountsUpdatePlanRequest.md)| Values to update sub-accounts plan | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **corporate_user_email_permissions_put**
+> corporate_user_email_permissions_put(email, body)
+
+Change admin user permissions
+
+This endpoint will allow you to change the permissions of Admin users of your Admin account
+
+### Example
+```python
+from __future__ import print_function
+import time
+import brevo_python
+from brevo_python.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: api-key
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api-key'] = 'Bearer'
+# Configure API key authorization: partner-key
+configuration = brevo_python.Configuration()
+configuration.api_key['partner-key'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['partner-key'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = brevo_python.MasterAccountApi(brevo_python.ApiClient(configuration))
+email = 'email_example' # str | Email address of Admin user
+body = brevo_python.Body5() # Body5 | Values to update an admin user permissions
+
+try:
+    # Change admin user permissions
+    api_instance.corporate_user_email_permissions_put(email, body)
+except ApiException as e:
+    print("Exception when calling MasterAccountApi->corporate_user_email_permissions_put: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **str**| Email address of Admin user | 
+ **body** | [**Body5**](Body5.md)| Values to update an admin user permissions | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **corporate_user_invitation_action_email_put**
 > InlineResponse200 corporate_user_invitation_action_email_put(action, email)
 
@@ -1150,7 +1325,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_account_activity**
-> GetAccountActivity get_account_activity(start_date=start_date, end_date=end_date, limit=limit, offset=offset)
+> GetAccountActivity get_account_activity(start_date=start_date, end_date=end_date, email=email, limit=limit, offset=offset)
 
 Get user activity logs
 
@@ -1177,12 +1352,13 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 api_instance = brevo_python.MasterAccountApi(brevo_python.ApiClient(configuration))
 start_date = 'start_date_example' # str | Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
 end_date = 'end_date_example' # str | Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+email = 'email_example' # str | Enter the user's email address to filter their activity in the account. (optional)
 limit = 10 # int | Number of documents per page (optional) (default to 10)
 offset = 0 # int | Index of the first document in the page. (optional) (default to 0)
 
 try:
     # Get user activity logs
-    api_response = api_instance.get_account_activity(start_date=start_date, end_date=end_date, limit=limit, offset=offset)
+    api_response = api_instance.get_account_activity(start_date=start_date, end_date=end_date, email=email, limit=limit, offset=offset)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling MasterAccountApi->get_account_activity: %s\n" % e)
@@ -1194,6 +1370,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **start_date** | **str**| Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. | [optional] 
  **end_date** | **str**| Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. | [optional] 
+ **email** | **str**| Enter the user&#39;s email address to filter their activity in the account. | [optional] 
  **limit** | **int**| Number of documents per page | [optional] [default to 10]
  **offset** | **int**| Index of the first document in the page. | [optional] [default to 0]
 
@@ -1271,6 +1448,8 @@ This endpoint does not need any parameter.
 > GetCorporateUserPermission get_corporate_user_permission(email)
 
 Check admin user permissions
+
+This endpoint will provide the list of admin user permissions
 
 ### Example
 ```python
@@ -1384,7 +1563,7 @@ This endpoint does not need any parameter.
 
 Send invitation to an admin user
 
-`This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user. 
+`This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - `my_plan`:   - \"all\" - `api`:   - \"none\" - `user_management`:   - \"all\" - `app_management` | Not available in ENTv2:   - \"all\" - `sub_organization_groups`   - \"create\"   - \"edit_delete\" - `create_sub_organizations`   - \"all\" - `manage_sub_organizations`   - \"all\" - `analytics`   - \"download_data\"   - \"create_alerts\"   - \"my_looks\"   - \"explore_create\" - `security`   - \"all\"  **Note**: - If `all_features_access: false` then only privileges are required otherwise if `true` then it's assumed that all permissions will be there for the invited admin user. 
 
 ### Example
 ```python

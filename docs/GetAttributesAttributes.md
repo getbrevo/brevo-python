@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | **str** | Type of the attribute | [optional] 
 **enumeration** | [**list[GetAttributesEnumeration]**](GetAttributesEnumeration.md) | Parameter only available for \&quot;category\&quot; type attributes. | [optional] 
 **calculated_value** | **str** | Calculated value formula | [optional] 
+**multi_category_options** | **list[str]** | Parameter only available for \&quot;multiple-choice\&quot; type attributes. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

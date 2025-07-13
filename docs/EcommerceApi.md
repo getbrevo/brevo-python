@@ -11,9 +11,9 @@ Method | HTTP request | Description
 [**create_update_category**](EcommerceApi.md#create_update_category) | **POST** /categories | Create/Update a category
 [**create_update_product**](EcommerceApi.md#create_update_product) | **POST** /products | Create/Update a product
 [**ecommerce_activate_post**](EcommerceApi.md#ecommerce_activate_post) | **POST** /ecommerce/activate | Activate the eCommerce app
-[**ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_metrics_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign
-[**ecommerce_attribution_metrics_get**](EcommerceApi.md#ecommerce_attribution_metrics_get) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns
-[**ecommerce_attribution_products_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_products_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign
+[**ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_metrics_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign or workflow
+[**ecommerce_attribution_metrics_get**](EcommerceApi.md#ecommerce_attribution_metrics_get) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns or workflows
+[**ecommerce_attribution_products_conversion_source_conversion_source_id_get**](EcommerceApi.md#ecommerce_attribution_products_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign or workflow
 [**ecommerce_config_display_currency_get**](EcommerceApi.md#ecommerce_config_display_currency_get) | **GET** /ecommerce/config/displayCurrency | Get the ISO 4217 compliant display currency code for your Brevo account
 [**get_categories**](EcommerceApi.md#get_categories) | **GET** /categories | Return all your categories
 [**get_category_info**](EcommerceApi.md#get_category_info) | **GET** /categories/{id} | Get a category details
@@ -422,9 +422,9 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**
-> InlineResponse2006 ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+> InlineResponse2007 ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
 
-Get detailed attribution metrics for a single Brevo campaign
+Get detailed attribution metrics for a single Brevo campaign or workflow
 
 ### Example
 ```python
@@ -447,11 +447,11 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
-conversion_source = 'conversion_source_example' # str | The Brevo campaign type for which data will be retrieved
-conversion_source_id = 8.14 # float | The Brevo campaign id for which data will be retrieved
+conversion_source = 'conversion_source_example' # str | The Brevo campaign type or workflow type for which data will be retrieved
+conversion_source_id = 'conversion_source_id_example' # str | The Brevo campaign or automation workflow id for which data will be retrieved
 
 try:
-    # Get detailed attribution metrics for a single Brevo campaign
+    # Get detailed attribution metrics for a single Brevo campaign or workflow
     api_response = api_instance.ecommerce_attribution_metrics_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
     pprint(api_response)
 except ApiException as e:
@@ -462,12 +462,12 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversion_source** | **str**| The Brevo campaign type for which data will be retrieved | 
- **conversion_source_id** | **float**| The Brevo campaign id for which data will be retrieved | 
+ **conversion_source** | **str**| The Brevo campaign type or workflow type for which data will be retrieved | 
+ **conversion_source_id** | **str**| The Brevo campaign or automation workflow id for which data will be retrieved | 
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -481,9 +481,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ecommerce_attribution_metrics_get**
-> InlineResponse2005 ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id)
+> InlineResponse2006 ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id, sms_campaign_id=sms_campaign_id, automation_workflow_email_id=automation_workflow_email_id, automation_workflow_sms_id=automation_workflow_sms_id)
 
-Get attribution metrics for one or more Brevo campaigns
+Get attribution metrics for one or more Brevo campaigns or workflows
 
 ### Example
 ```python
@@ -508,11 +508,14 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
 period_from = '2013-10-20T19:20:30+01:00' # datetime | When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
 period_to = '2013-10-20T19:20:30+01:00' # datetime | When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
-email_campaign_id = [3.4] # list[float] | The email campaign id(s) to get metrics for (optional)
+email_campaign_id = ['email_campaign_id_example'] # list[str] | The email campaign ID(s) to get metrics for (optional)
+sms_campaign_id = ['sms_campaign_id_example'] # list[str] | The SMS campaign ID(s) to get metrics for (optional)
+automation_workflow_email_id = ['automation_workflow_email_id_example'] # list[str] | The automation workflow ID(s) to get email attribution metrics for (optional)
+automation_workflow_sms_id = ['automation_workflow_sms_id_example'] # list[str] | The automation workflow ID(s) to get SMS attribution metrics for (optional)
 
 try:
-    # Get attribution metrics for one or more Brevo campaigns
-    api_response = api_instance.ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id)
+    # Get attribution metrics for one or more Brevo campaigns or workflows
+    api_response = api_instance.ecommerce_attribution_metrics_get(period_from=period_from, period_to=period_to, email_campaign_id=email_campaign_id, sms_campaign_id=sms_campaign_id, automation_workflow_email_id=automation_workflow_email_id, automation_workflow_sms_id=automation_workflow_sms_id)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling EcommerceApi->ecommerce_attribution_metrics_get: %s\n" % e)
@@ -524,11 +527,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **period_from** | **datetime**| When getting metrics for a specific period, define the starting datetime in RFC3339 format | [optional] 
  **period_to** | **datetime**| When getting metrics for a specific period, define the end datetime in RFC3339 format | [optional] 
- **email_campaign_id** | [**list[float]**](float.md)| The email campaign id(s) to get metrics for | [optional] 
+ **email_campaign_id** | [**list[str]**](str.md)| The email campaign ID(s) to get metrics for | [optional] 
+ **sms_campaign_id** | [**list[str]**](str.md)| The SMS campaign ID(s) to get metrics for | [optional] 
+ **automation_workflow_email_id** | [**list[str]**](str.md)| The automation workflow ID(s) to get email attribution metrics for | [optional] 
+ **automation_workflow_sms_id** | [**list[str]**](str.md)| The automation workflow ID(s) to get SMS attribution metrics for | [optional] 
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2006**](InlineResponse2006.md)
 
 ### Authorization
 
@@ -542,9 +548,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ecommerce_attribution_products_conversion_source_conversion_source_id_get**
-> InlineResponse2007 ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
+> InlineResponse2008 ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
 
-Get attributed product sales for a single Brevo campaign
+Get attributed product sales for a single Brevo campaign or workflow
 
 ### Example
 ```python
@@ -567,11 +573,11 @@ configuration.api_key['partner-key'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = brevo_python.EcommerceApi(brevo_python.ApiClient(configuration))
-conversion_source = 'conversion_source_example' # str | The Brevo campaign type for which data will be retrieved
-conversion_source_id = 8.14 # float | The Brevo campaign id for which data will be retrieved
+conversion_source = 'conversion_source_example' # str | The Brevo campaign or automation workflow type for which data will be retrieved
+conversion_source_id = 'conversion_source_id_example' # str | The Brevo campaign or automation workflow id for which data will be retrieved
 
 try:
-    # Get attributed product sales for a single Brevo campaign
+    # Get attributed product sales for a single Brevo campaign or workflow
     api_response = api_instance.ecommerce_attribution_products_conversion_source_conversion_source_id_get(conversion_source, conversion_source_id)
     pprint(api_response)
 except ApiException as e:
@@ -582,12 +588,12 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversion_source** | **str**| The Brevo campaign type for which data will be retrieved | 
- **conversion_source_id** | **float**| The Brevo campaign id for which data will be retrieved | 
+ **conversion_source** | **str**| The Brevo campaign or automation workflow type for which data will be retrieved | 
+ **conversion_source_id** | **str**| The Brevo campaign or automation workflow id for which data will be retrieved | 
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -601,7 +607,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ecommerce_config_display_currency_get**
-> InlineResponse2004 ecommerce_config_display_currency_get()
+> InlineResponse2005 ecommerce_config_display_currency_get()
 
 Get the ISO 4217 compliant display currency code for your Brevo account
 
@@ -640,7 +646,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 

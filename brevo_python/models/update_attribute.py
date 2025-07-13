@@ -84,7 +84,7 @@ class UpdateAttribute(object):
     def enumeration(self):
         """Gets the enumeration of this UpdateAttribute.  # noqa: E501
 
-        List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
+        List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
 
         :return: The enumeration of this UpdateAttribute.  # noqa: E501
         :rtype: list[UpdateAttributeEnumeration]
@@ -95,7 +95,7 @@ class UpdateAttribute(object):
     def enumeration(self, enumeration):
         """Sets the enumeration of this UpdateAttribute.
 
-        List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
+        List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]  # noqa: E501
 
         :param enumeration: The enumeration of this UpdateAttribute.  # noqa: E501
         :type: list[UpdateAttributeEnumeration]
@@ -107,7 +107,7 @@ class UpdateAttribute(object):
     def multi_category_options(self):
         """Gets the multi_category_options of this UpdateAttribute.  # noqa: E501
 
-        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes**. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters **. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
 
         :return: The multi_category_options of this UpdateAttribute.  # noqa: E501
         :rtype: list[str]
@@ -118,7 +118,7 @@ class UpdateAttribute(object):
     def multi_category_options(self, multi_category_options):
         """Sets the multi_category_options of this UpdateAttribute.
 
-        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes**. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
+        Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters **. For example: **[\"USA\",\"INDIA\"]**   # noqa: E501
 
         :param multi_category_options: The multi_category_options of this UpdateAttribute.  # noqa: E501
         :type: list[str]

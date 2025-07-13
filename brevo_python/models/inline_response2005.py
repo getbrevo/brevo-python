@@ -31,72 +31,45 @@ class InlineResponse2005(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'results': 'list[ConversionSourceMetrics]',
-        'totals': 'InlineResponse2005Totals'
+        'code': 'str'
     }
 
     attribute_map = {
-        'results': 'results',
-        'totals': 'totals'
+        'code': 'code'
     }
 
-    def __init__(self, results=None, totals=None):  # noqa: E501
+    def __init__(self, code=None):  # noqa: E501
         """InlineResponse2005 - a model defined in Swagger"""  # noqa: E501
 
-        self._results = None
-        self._totals = None
+        self._code = None
         self.discriminator = None
 
-        self.results = results
-        self.totals = totals
+        self.code = code
 
     @property
-    def results(self):
-        """Gets the results of this InlineResponse2005.  # noqa: E501
+    def code(self):
+        """Gets the code of this InlineResponse2005.  # noqa: E501
 
-        List of conversion attribution metrics  # noqa: E501
+        ISO 4217 compliant display currency code  # noqa: E501
 
-        :return: The results of this InlineResponse2005.  # noqa: E501
-        :rtype: list[ConversionSourceMetrics]
+        :return: The code of this InlineResponse2005.  # noqa: E501
+        :rtype: str
         """
-        return self._results
+        return self._code
 
-    @results.setter
-    def results(self, results):
-        """Sets the results of this InlineResponse2005.
+    @code.setter
+    def code(self, code):
+        """Sets the code of this InlineResponse2005.
 
-        List of conversion attribution metrics  # noqa: E501
+        ISO 4217 compliant display currency code  # noqa: E501
 
-        :param results: The results of this InlineResponse2005.  # noqa: E501
-        :type: list[ConversionSourceMetrics]
+        :param code: The code of this InlineResponse2005.  # noqa: E501
+        :type: str
         """
-        if results is None:
-            raise ValueError("Invalid value for `results`, must not be `None`")  # noqa: E501
+        if code is None:
+            raise ValueError("Invalid value for `code`, must not be `None`")  # noqa: E501
 
-        self._results = results
-
-    @property
-    def totals(self):
-        """Gets the totals of this InlineResponse2005.  # noqa: E501
-
-
-        :return: The totals of this InlineResponse2005.  # noqa: E501
-        :rtype: InlineResponse2005Totals
-        """
-        return self._totals
-
-    @totals.setter
-    def totals(self, totals):
-        """Sets the totals of this InlineResponse2005.
-
-
-        :param totals: The totals of this InlineResponse2005.  # noqa: E501
-        :type: InlineResponse2005Totals
-        """
-        if totals is None:
-            raise ValueError("Invalid value for `totals`, must not be `None`")  # noqa: E501
-
-        self._totals = totals
+        self._code = code
 
     def to_dict(self):
         """Returns the model properties as a dict"""

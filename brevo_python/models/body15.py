@@ -34,31 +34,41 @@ class Body15(object):
         'visitor_id': 'str',
         'text': 'str',
         'agent_id': 'str',
-        'group_id': 'str'
+        'received_from': 'str',
+        'agent_email': 'str',
+        'agent_name': 'str'
     }
 
     attribute_map = {
         'visitor_id': 'visitorId',
         'text': 'text',
         'agent_id': 'agentId',
-        'group_id': 'groupId'
+        'received_from': 'receivedFrom',
+        'agent_email': 'agentEmail',
+        'agent_name': 'agentName'
     }
 
-    def __init__(self, visitor_id=None, text=None, agent_id=None, group_id=None):  # noqa: E501
+    def __init__(self, visitor_id=None, text=None, agent_id=None, received_from=None, agent_email=None, agent_name=None):  # noqa: E501
         """Body15 - a model defined in Swagger"""  # noqa: E501
 
         self._visitor_id = None
         self._text = None
         self._agent_id = None
-        self._group_id = None
+        self._received_from = None
+        self._agent_email = None
+        self._agent_name = None
         self.discriminator = None
 
         self.visitor_id = visitor_id
         self.text = text
         if agent_id is not None:
             self.agent_id = agent_id
-        if group_id is not None:
-            self.group_id = group_id
+        if received_from is not None:
+            self.received_from = received_from
+        if agent_email is not None:
+            self.agent_email = agent_email
+        if agent_name is not None:
+            self.agent_name = agent_name
 
     @property
     def visitor_id(self):
@@ -114,7 +124,7 @@ class Body15(object):
     def agent_id(self):
         """Gets the agent_id of this Body15.  # noqa: E501
 
-        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Optional if `groupId` is set.  # noqa: E501
+        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).  # noqa: E501
 
         :return: The agent_id of this Body15.  # noqa: E501
         :rtype: str
@@ -125,7 +135,7 @@ class Body15(object):
     def agent_id(self, agent_id):
         """Sets the agent_id of this Body15.
 
-        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Optional if `groupId` is set.  # noqa: E501
+        agent ID. It can be found on agent’s page or received <a href=\"https://developers.brevo.com/docs/conversations-webhooks\">from a webhook</a>. Alternatively, you can use `agentEmail` + `agentName` + `receivedFrom` instead (all 3 fields required).  # noqa: E501
 
         :param agent_id: The agent_id of this Body15.  # noqa: E501
         :type: str
@@ -134,27 +144,73 @@ class Body15(object):
         self._agent_id = agent_id
 
     @property
-    def group_id(self):
-        """Gets the group_id of this Body15.  # noqa: E501
+    def received_from(self):
+        """Gets the received_from of this Body15.  # noqa: E501
 
-        group ID. It can be found on group’s page. Optional if `agentId` is set.  # noqa: E501
+        mark your messages to distinguish messages created by you from the others.  # noqa: E501
 
-        :return: The group_id of this Body15.  # noqa: E501
+        :return: The received_from of this Body15.  # noqa: E501
         :rtype: str
         """
-        return self._group_id
+        return self._received_from
 
-    @group_id.setter
-    def group_id(self, group_id):
-        """Sets the group_id of this Body15.
+    @received_from.setter
+    def received_from(self, received_from):
+        """Sets the received_from of this Body15.
 
-        group ID. It can be found on group’s page. Optional if `agentId` is set.  # noqa: E501
+        mark your messages to distinguish messages created by you from the others.  # noqa: E501
 
-        :param group_id: The group_id of this Body15.  # noqa: E501
+        :param received_from: The received_from of this Body15.  # noqa: E501
         :type: str
         """
 
-        self._group_id = group_id
+        self._received_from = received_from
+
+    @property
+    def agent_email(self):
+        """Gets the agent_email of this Body15.  # noqa: E501
+
+        agent email. When sending messages from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address.  # noqa: E501
+
+        :return: The agent_email of this Body15.  # noqa: E501
+        :rtype: str
+        """
+        return self._agent_email
+
+    @agent_email.setter
+    def agent_email(self, agent_email):
+        """Sets the agent_email of this Body15.
+
+        agent email. When sending messages from a standalone system, it’s hard to maintain a 1-to-1 relationship between the users of both systems. In this case, an agent can be specified by their email address.  # noqa: E501
+
+        :param agent_email: The agent_email of this Body15.  # noqa: E501
+        :type: str
+        """
+
+        self._agent_email = agent_email
+
+    @property
+    def agent_name(self):
+        """Gets the agent_name of this Body15.  # noqa: E501
+
+        agent name  # noqa: E501
+
+        :return: The agent_name of this Body15.  # noqa: E501
+        :rtype: str
+        """
+        return self._agent_name
+
+    @agent_name.setter
+    def agent_name(self, agent_name):
+        """Sets the agent_name of this Body15.
+
+        agent name  # noqa: E501
+
+        :param agent_name: The agent_name of this Body15.  # noqa: E501
+        :type: str
+        """
+
+        self._agent_name = agent_name
 
     def to_dict(self):
         """Returns the model properties as a dict"""

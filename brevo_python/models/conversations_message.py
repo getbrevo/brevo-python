@@ -34,41 +34,86 @@ class ConversationsMessage(object):
         'id': 'str',
         'type': 'str',
         'text': 'str',
+        'subject': 'str',
         'visitor_id': 'str',
         'agent_id': 'str',
         'agent_name': 'str',
         'created_at': 'int',
         'is_pushed': 'bool',
+        'is_trigger': 'bool',
+        'is_missed': 'bool',
+        'is_missed_by_visitor': 'bool',
+        'agent_userpic': 'str',
         'received_from': 'str',
-        'file': 'ConversationsMessageFile'
+        'file': 'ConversationsMessageFile',
+        '_from': 'ConversationsMessageFrom',
+        'to': 'list[ConversationsMessageTo]',
+        'reply_to': 'ConversationsMessageReplyTo',
+        'cc': 'list[ConversationsMessageTo]',
+        'bcc': 'list[ConversationsMessageTo]',
+        'source_message_id': 'str',
+        'forwarded_to_source_status': 'ConversationsMessageForwardedToSourceStatus',
+        'integrations': 'object',
+        'is_bot': 'bool',
+        'attachments': 'list[ConversationsMessageAttachments]'
     }
 
     attribute_map = {
         'id': 'id',
         'type': 'type',
         'text': 'text',
+        'subject': 'subject',
         'visitor_id': 'visitorId',
         'agent_id': 'agentId',
         'agent_name': 'agentName',
         'created_at': 'createdAt',
         'is_pushed': 'isPushed',
+        'is_trigger': 'isTrigger',
+        'is_missed': 'isMissed',
+        'is_missed_by_visitor': 'isMissedByVisitor',
+        'agent_userpic': 'agentUserpic',
         'received_from': 'receivedFrom',
-        'file': 'file'
+        'file': 'file',
+        '_from': 'from',
+        'to': 'to',
+        'reply_to': 'replyTo',
+        'cc': 'cc',
+        'bcc': 'bcc',
+        'source_message_id': 'sourceMessageId',
+        'forwarded_to_source_status': 'forwardedToSourceStatus',
+        'integrations': 'integrations',
+        'is_bot': 'isBot',
+        'attachments': 'attachments'
     }
 
-    def __init__(self, id=None, type=None, text=None, visitor_id=None, agent_id=None, agent_name=None, created_at=None, is_pushed=None, received_from=None, file=None):  # noqa: E501
+    def __init__(self, id=None, type=None, text=None, subject=None, visitor_id=None, agent_id=None, agent_name=None, created_at=None, is_pushed=None, is_trigger=None, is_missed=None, is_missed_by_visitor=None, agent_userpic=None, received_from=None, file=None, _from=None, to=None, reply_to=None, cc=None, bcc=None, source_message_id=None, forwarded_to_source_status=None, integrations=None, is_bot=None, attachments=None):  # noqa: E501
         """ConversationsMessage - a model defined in Swagger"""  # noqa: E501
 
         self._id = None
         self._type = None
         self._text = None
+        self._subject = None
         self._visitor_id = None
         self._agent_id = None
         self._agent_name = None
         self._created_at = None
         self._is_pushed = None
+        self._is_trigger = None
+        self._is_missed = None
+        self._is_missed_by_visitor = None
+        self._agent_userpic = None
         self._received_from = None
         self._file = None
+        self.__from = None
+        self._to = None
+        self._reply_to = None
+        self._cc = None
+        self._bcc = None
+        self._source_message_id = None
+        self._forwarded_to_source_status = None
+        self._integrations = None
+        self._is_bot = None
+        self._attachments = None
         self.discriminator = None
 
         if id is not None:
@@ -77,6 +122,8 @@ class ConversationsMessage(object):
             self.type = type
         if text is not None:
             self.text = text
+        if subject is not None:
+            self.subject = subject
         if visitor_id is not None:
             self.visitor_id = visitor_id
         if agent_id is not None:
@@ -87,10 +134,38 @@ class ConversationsMessage(object):
             self.created_at = created_at
         if is_pushed is not None:
             self.is_pushed = is_pushed
+        if is_trigger is not None:
+            self.is_trigger = is_trigger
+        if is_missed is not None:
+            self.is_missed = is_missed
+        if is_missed_by_visitor is not None:
+            self.is_missed_by_visitor = is_missed_by_visitor
+        if agent_userpic is not None:
+            self.agent_userpic = agent_userpic
         if received_from is not None:
             self.received_from = received_from
         if file is not None:
             self.file = file
+        if _from is not None:
+            self._from = _from
+        if to is not None:
+            self.to = to
+        if reply_to is not None:
+            self.reply_to = reply_to
+        if cc is not None:
+            self.cc = cc
+        if bcc is not None:
+            self.bcc = bcc
+        if source_message_id is not None:
+            self.source_message_id = source_message_id
+        if forwarded_to_source_status is not None:
+            self.forwarded_to_source_status = forwarded_to_source_status
+        if integrations is not None:
+            self.integrations = integrations
+        if is_bot is not None:
+            self.is_bot = is_bot
+        if attachments is not None:
+            self.attachments = attachments
 
     @property
     def id(self):
@@ -166,6 +241,29 @@ class ConversationsMessage(object):
         """
 
         self._text = text
+
+    @property
+    def subject(self):
+        """Gets the subject of this ConversationsMessage.  # noqa: E501
+
+        The subject line of the email message (only for messages sent to email threads).  # noqa: E501
+
+        :return: The subject of this ConversationsMessage.  # noqa: E501
+        :rtype: str
+        """
+        return self._subject
+
+    @subject.setter
+    def subject(self, subject):
+        """Sets the subject of this ConversationsMessage.
+
+        The subject line of the email message (only for messages sent to email threads).  # noqa: E501
+
+        :param subject: The subject of this ConversationsMessage.  # noqa: E501
+        :type: str
+        """
+
+        self._subject = subject
 
     @property
     def visitor_id(self):
@@ -285,6 +383,98 @@ class ConversationsMessage(object):
         self._is_pushed = is_pushed
 
     @property
+    def is_trigger(self):
+        """Gets the is_trigger of this ConversationsMessage.  # noqa: E501
+
+        `true` for automatic messages from “Targeted chats & triggers” and API (https://developers.brevo.com/docs/javascript-api-reference#sendautomessage)  # noqa: E501
+
+        :return: The is_trigger of this ConversationsMessage.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_trigger
+
+    @is_trigger.setter
+    def is_trigger(self, is_trigger):
+        """Sets the is_trigger of this ConversationsMessage.
+
+        `true` for automatic messages from “Targeted chats & triggers” and API (https://developers.brevo.com/docs/javascript-api-reference#sendautomessage)  # noqa: E501
+
+        :param is_trigger: The is_trigger of this ConversationsMessage.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_trigger = is_trigger
+
+    @property
+    def is_missed(self):
+        """Gets the is_missed of this ConversationsMessage.  # noqa: E501
+
+        `true` for missed and offline messages.  # noqa: E501
+
+        :return: The is_missed of this ConversationsMessage.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_missed
+
+    @is_missed.setter
+    def is_missed(self, is_missed):
+        """Sets the is_missed of this ConversationsMessage.
+
+        `true` for missed and offline messages.  # noqa: E501
+
+        :param is_missed: The is_missed of this ConversationsMessage.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_missed = is_missed
+
+    @property
+    def is_missed_by_visitor(self):
+        """Gets the is_missed_by_visitor of this ConversationsMessage.  # noqa: E501
+
+        `true` for unread agent’s messages in finished chats.  # noqa: E501
+
+        :return: The is_missed_by_visitor of this ConversationsMessage.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_missed_by_visitor
+
+    @is_missed_by_visitor.setter
+    def is_missed_by_visitor(self, is_missed_by_visitor):
+        """Sets the is_missed_by_visitor of this ConversationsMessage.
+
+        `true` for unread agent’s messages in finished chats.  # noqa: E501
+
+        :param is_missed_by_visitor: The is_missed_by_visitor of this ConversationsMessage.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_missed_by_visitor = is_missed_by_visitor
+
+    @property
+    def agent_userpic(self):
+        """Gets the agent_userpic of this ConversationsMessage.  # noqa: E501
+
+        Only set if the agent has uploaded a profile picture.  # noqa: E501
+
+        :return: The agent_userpic of this ConversationsMessage.  # noqa: E501
+        :rtype: str
+        """
+        return self._agent_userpic
+
+    @agent_userpic.setter
+    def agent_userpic(self, agent_userpic):
+        """Sets the agent_userpic of this ConversationsMessage.
+
+        Only set if the agent has uploaded a profile picture.  # noqa: E501
+
+        :param agent_userpic: The agent_userpic of this ConversationsMessage.  # noqa: E501
+        :type: str
+        """
+
+        self._agent_userpic = agent_userpic
+
+    @property
     def received_from(self):
         """Gets the received_from of this ConversationsMessage.  # noqa: E501
 
@@ -327,6 +517,230 @@ class ConversationsMessage(object):
         """
 
         self._file = file
+
+    @property
+    def _from(self):
+        """Gets the _from of this ConversationsMessage.  # noqa: E501
+
+
+        :return: The _from of this ConversationsMessage.  # noqa: E501
+        :rtype: ConversationsMessageFrom
+        """
+        return self.__from
+
+    @_from.setter
+    def _from(self, _from):
+        """Sets the _from of this ConversationsMessage.
+
+
+        :param _from: The _from of this ConversationsMessage.  # noqa: E501
+        :type: ConversationsMessageFrom
+        """
+
+        self.__from = _from
+
+    @property
+    def to(self):
+        """Gets the to of this ConversationsMessage.  # noqa: E501
+
+        An array containing details of the recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :return: The to of this ConversationsMessage.  # noqa: E501
+        :rtype: list[ConversationsMessageTo]
+        """
+        return self._to
+
+    @to.setter
+    def to(self, to):
+        """Sets the to of this ConversationsMessage.
+
+        An array containing details of the recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :param to: The to of this ConversationsMessage.  # noqa: E501
+        :type: list[ConversationsMessageTo]
+        """
+
+        self._to = to
+
+    @property
+    def reply_to(self):
+        """Gets the reply_to of this ConversationsMessage.  # noqa: E501
+
+
+        :return: The reply_to of this ConversationsMessage.  # noqa: E501
+        :rtype: ConversationsMessageReplyTo
+        """
+        return self._reply_to
+
+    @reply_to.setter
+    def reply_to(self, reply_to):
+        """Sets the reply_to of this ConversationsMessage.
+
+
+        :param reply_to: The reply_to of this ConversationsMessage.  # noqa: E501
+        :type: ConversationsMessageReplyTo
+        """
+
+        self._reply_to = reply_to
+
+    @property
+    def cc(self):
+        """Gets the cc of this ConversationsMessage.  # noqa: E501
+
+        An array containing details of the carbon copy (CC) recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :return: The cc of this ConversationsMessage.  # noqa: E501
+        :rtype: list[ConversationsMessageTo]
+        """
+        return self._cc
+
+    @cc.setter
+    def cc(self, cc):
+        """Sets the cc of this ConversationsMessage.
+
+        An array containing details of the carbon copy (CC) recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :param cc: The cc of this ConversationsMessage.  # noqa: E501
+        :type: list[ConversationsMessageTo]
+        """
+
+        self._cc = cc
+
+    @property
+    def bcc(self):
+        """Gets the bcc of this ConversationsMessage.  # noqa: E501
+
+        An array containing details of the blind carbon copy (BCC) recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :return: The bcc of this ConversationsMessage.  # noqa: E501
+        :rtype: list[ConversationsMessageTo]
+        """
+        return self._bcc
+
+    @bcc.setter
+    def bcc(self, bcc):
+        """Sets the bcc of this ConversationsMessage.
+
+        An array containing details of the blind carbon copy (BCC) recipients (applicable only to messages in email threads).  # noqa: E501
+
+        :param bcc: The bcc of this ConversationsMessage.  # noqa: E501
+        :type: list[ConversationsMessageTo]
+        """
+
+        self._bcc = bcc
+
+    @property
+    def source_message_id(self):
+        """Gets the source_message_id of this ConversationsMessage.  # noqa: E501
+
+        The ID of the message assigned by the integration source.  # noqa: E501
+
+        :return: The source_message_id of this ConversationsMessage.  # noqa: E501
+        :rtype: str
+        """
+        return self._source_message_id
+
+    @source_message_id.setter
+    def source_message_id(self, source_message_id):
+        """Sets the source_message_id of this ConversationsMessage.
+
+        The ID of the message assigned by the integration source.  # noqa: E501
+
+        :param source_message_id: The source_message_id of this ConversationsMessage.  # noqa: E501
+        :type: str
+        """
+
+        self._source_message_id = source_message_id
+
+    @property
+    def forwarded_to_source_status(self):
+        """Gets the forwarded_to_source_status of this ConversationsMessage.  # noqa: E501
+
+
+        :return: The forwarded_to_source_status of this ConversationsMessage.  # noqa: E501
+        :rtype: ConversationsMessageForwardedToSourceStatus
+        """
+        return self._forwarded_to_source_status
+
+    @forwarded_to_source_status.setter
+    def forwarded_to_source_status(self, forwarded_to_source_status):
+        """Sets the forwarded_to_source_status of this ConversationsMessage.
+
+
+        :param forwarded_to_source_status: The forwarded_to_source_status of this ConversationsMessage.  # noqa: E501
+        :type: ConversationsMessageForwardedToSourceStatus
+        """
+
+        self._forwarded_to_source_status = forwarded_to_source_status
+
+    @property
+    def integrations(self):
+        """Gets the integrations of this ConversationsMessage.  # noqa: E501
+
+        Integration details.  # noqa: E501
+
+        :return: The integrations of this ConversationsMessage.  # noqa: E501
+        :rtype: object
+        """
+        return self._integrations
+
+    @integrations.setter
+    def integrations(self, integrations):
+        """Sets the integrations of this ConversationsMessage.
+
+        Integration details.  # noqa: E501
+
+        :param integrations: The integrations of this ConversationsMessage.  # noqa: E501
+        :type: object
+        """
+
+        self._integrations = integrations
+
+    @property
+    def is_bot(self):
+        """Gets the is_bot of this ConversationsMessage.  # noqa: E501
+
+        `true` for automated messages generated by an AI bot.  # noqa: E501
+
+        :return: The is_bot of this ConversationsMessage.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_bot
+
+    @is_bot.setter
+    def is_bot(self, is_bot):
+        """Sets the is_bot of this ConversationsMessage.
+
+        `true` for automated messages generated by an AI bot.  # noqa: E501
+
+        :param is_bot: The is_bot of this ConversationsMessage.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_bot = is_bot
+
+    @property
+    def attachments(self):
+        """Gets the attachments of this ConversationsMessage.  # noqa: E501
+
+        An array of file attachments.  # noqa: E501
+
+        :return: The attachments of this ConversationsMessage.  # noqa: E501
+        :rtype: list[ConversationsMessageAttachments]
+        """
+        return self._attachments
+
+    @attachments.setter
+    def attachments(self, attachments):
+        """Sets the attachments of this ConversationsMessage.
+
+        An array of file attachments.  # noqa: E501
+
+        :param attachments: The attachments of this ConversationsMessage.  # noqa: E501
+        :type: list[ConversationsMessageAttachments]
+        """
+
+        self._attachments = attachments
 
     def to_dict(self):
         """Returns the model properties as a dict"""
