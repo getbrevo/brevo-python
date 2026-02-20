@@ -1,3 +1,5 @@
+> ⚠️ A new major version of the Brevo Python SDK has been released. Consider [to migrate](https://github.com/getbrevo/brevo-python/tree/v4). The below >version will continue to receive support and security updates.
+
 # Brevo's API v3 Python Library
 
 Brevo's API exposes the entire Brevo features via a standardized programmatic interface. Please refer to the full [documentation](https://developers.brevo.com) to learn more.
