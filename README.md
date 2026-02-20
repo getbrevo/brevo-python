@@ -1,1025 +1,223 @@
-# Brevo Python Library
+# Brevo Python SDK
+![](banner.png)
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fgetbrevo%2Fbrevo-python)
-[![pypi](https://img.shields.io/pypi/v/brevo-python)](https://pypi.python.org/pypi/brevo-python)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![PyPI version](https://img.shields.io/pypi/v/brevo-python)](https://pypi.org/project/brevo-python/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/brevo-python)](https://pypi.org/project/brevo-python/)
+[![Python versions](https://img.shields.io/pypi/pyversions/brevo-python)](https://pypi.org/project/brevo-python/)
 
-The Brevo Python library provides convenient access to the Brevo APIs from Python.
+[Website](https://brevo.com) · [API Reference](https://developers.brevo.com) · [Support](mailto:support@brevo.com)
 
-## Table of Contents
-
-- [Requirements](#requirements)
-- [Installation Usage](#installation-usage)
-- [Getting Started](#getting-started)
-- [Documentation for Api Endpoints](#documentation-for-api-endpoints)
-- [Documentation for Models](#documentation-for-models)
-- [Documentation for Authorization](#documentation-for-authorization)
-- [Api Key](#api-key)
-- [Partner Key](#partner-key)
-- [Support and Feedback](#support-and-feedback)
-- [Author](#author)
-- [Installation](#installation)
-- [Reference](#reference)
-- [Usage](#usage)
-- [Async Client](#async-client)
-- [Exception Handling](#exception-handling)
-- [Advanced](#advanced)
-  - [Access Raw Response Data](#access-raw-response-data)
-  - [Retries](#retries)
-  - [Timeouts](#timeouts)
-  - [Custom Client](#custom-client)
-- [Contributing](#contributing)
-
-## Requirements.
-
-Compatible from Python version 2.7 to 3.4+
-
-## Installation & Usage
-### pip install
-
-The package is available by running :
-
-```sh
-pip install brevo-python
-```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
-
-Then import the package:
-```python
-import brevo_python 
-```
-
-### Setuptools
-
-Install via [Setuptools](http://pypi.python.org/pypi/setuptools).
-
-```sh
-python setup.py install --user
-```
-(or `sudo python setup.py install` to install the package for all users)
-
-Then import the package:
-```python
-import brevo_python
-```
-
-## Getting Started
-
-Please follow the [installation procedure](#installation--usage) and then run the following:
-
-```python
-from __future__ import print_function
-import time
-import brevo_python
-from brevo_python.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: api-key
-configuration = brevo_python.Configuration()
-configuration.api_key['api-key'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api-key'] = 'Bearer'
-# Configure API key authorization: partner-key
-configuration = brevo_python.Configuration()
-configuration.api_key['partner-key'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['partner-key'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = brevo_python.AccountApi(brevo_python.ApiClient(configuration))
-
-try:
-    # Get your account information, plan and credits details
-    api_response = api_instance.get_account()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AccountApi->get_account: %s\n" % e)
-
-```
-
-## Documentation for API Endpoints
-
-All URIs are relative to *https://api.brevo.com/v3*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*AccountApi* | [**get_account**](docs/AccountApi.md#get_account) | **GET** /account | Get your account information, plan and credits details
-*AccountApi* | [**get_account_activity**](docs/AccountApi.md#get_account_activity) | **GET** /organization/activities | Get user activity logs
-*BalanceApi* | [**begin_transaction**](docs/BalanceApi.md#begin_transaction) | **POST** /loyalty/balance/programs/{pid}/transactions | Create new transaction
-*BalanceApi* | [**cancel_transaction**](docs/BalanceApi.md#cancel_transaction) | **POST** /loyalty/balance/programs/{pid}/transactions/{tid}/cancel | Cancel transaction
-*BalanceApi* | [**complete_transaction**](docs/BalanceApi.md#complete_transaction) | **POST** /loyalty/balance/programs/{pid}/transactions/{tid}/complete | Complete transaction
-*BalanceApi* | [**create_balance_limit**](docs/BalanceApi.md#create_balance_limit) | **POST** /loyalty/balance/programs/{pid}/balance-definitions/{bdid}/limits | Create balance limits
-*BalanceApi* | [**create_balance_order**](docs/BalanceApi.md#create_balance_order) | **POST** /loyalty/balance/programs/{pid}/create-order | Create balance order
-*BalanceApi* | [**delete_balance_definition**](docs/BalanceApi.md#delete_balance_definition) | **DELETE** /loyalty/balance/programs/{pid}/balance-definitions/{bdid} | Delete balance definition
-*BalanceApi* | [**delete_balance_limit**](docs/BalanceApi.md#delete_balance_limit) | **DELETE** /loyalty/balance/programs/{pid}/balance-definitions/{bdid}/limits/{blid} | Delete balance limit
-*BalanceApi* | [**get_balance_definition**](docs/BalanceApi.md#get_balance_definition) | **GET** /loyalty/balance/programs/{pid}/balance-definitions/{bdid} | Get balance definition
-*BalanceApi* | [**get_balance_definition_list**](docs/BalanceApi.md#get_balance_definition_list) | **GET** /loyalty/balance/programs/{pid}/balance-definitions | Get balance definition list
-*BalanceApi* | [**get_balance_limit**](docs/BalanceApi.md#get_balance_limit) | **GET** /loyalty/balance/programs/{pid}/balance-definitions/{bdid}/limits/{blid} | Get balance limits
-*BalanceApi* | [**get_contact_balances**](docs/BalanceApi.md#get_contact_balances) | **GET** /loyalty/balance/programs/{pid}/contact-balances | Get balance list
-*BalanceApi* | [**get_subscription_balances**](docs/BalanceApi.md#get_subscription_balances) | **GET** /loyalty/balance/programs/{pid}/subscriptions/{cid}/balances | Get subscription balances
-*BalanceApi* | [**loyalty_balance_programs_pid_active_balance_get**](docs/BalanceApi.md#loyalty_balance_programs_pid_active_balance_get) | **GET** /loyalty/balance/programs/{pid}/active-balance | Get Active Balances API
-*BalanceApi* | [**loyalty_balance_programs_pid_balance_definitions_post**](docs/BalanceApi.md#loyalty_balance_programs_pid_balance_definitions_post) | **POST** /loyalty/balance/programs/{pid}/balance-definitions | Create balance definition
-*BalanceApi* | [**loyalty_balance_programs_pid_subscriptions_cid_balances_post**](docs/BalanceApi.md#loyalty_balance_programs_pid_subscriptions_cid_balances_post) | **POST** /loyalty/balance/programs/{pid}/subscriptions/{cid}/balances | Create subscription balances
-*BalanceApi* | [**loyalty_balance_programs_pid_transaction_history_get**](docs/BalanceApi.md#loyalty_balance_programs_pid_transaction_history_get) | **GET** /loyalty/balance/programs/{pid}/transaction-history | Get Transaction History API
-*BalanceApi* | [**update_balance_definition**](docs/BalanceApi.md#update_balance_definition) | **PUT** /loyalty/balance/programs/{pid}/balance-definitions/{bdid} | Update balance definition
-*BalanceApi* | [**update_balance_limit**](docs/BalanceApi.md#update_balance_limit) | **PUT** /loyalty/balance/programs/{pid}/balance-definitions/{bdid}/limits/{blid} | Updates balance limit
-*CompaniesApi* | [**companies_get**](docs/CompaniesApi.md#companies_get) | **GET** /companies | Get all companies
-*CompaniesApi* | [**companies_id_delete**](docs/CompaniesApi.md#companies_id_delete) | **DELETE** /companies/{id} | Delete a company
-*CompaniesApi* | [**companies_id_get**](docs/CompaniesApi.md#companies_id_get) | **GET** /companies/{id} | Get a company
-*CompaniesApi* | [**companies_id_patch**](docs/CompaniesApi.md#companies_id_patch) | **PATCH** /companies/{id} | Update a company
-*CompaniesApi* | [**companies_import_post**](docs/CompaniesApi.md#companies_import_post) | **POST** /companies/import | Import companies(creation and updation)
-*CompaniesApi* | [**companies_link_unlink_id_patch**](docs/CompaniesApi.md#companies_link_unlink_id_patch) | **PATCH** /companies/link-unlink/{id} | Link and Unlink company with contacts and deals
-*CompaniesApi* | [**companies_post**](docs/CompaniesApi.md#companies_post) | **POST** /companies | Create a company
-*CompaniesApi* | [**crm_attributes_companies_get**](docs/CompaniesApi.md#crm_attributes_companies_get) | **GET** /crm/attributes/companies | Get company attributes
-*CompaniesApi* | [**crm_attributes_post**](docs/CompaniesApi.md#crm_attributes_post) | **POST** /crm/attributes | Create a deal/company attribute
-*ContactsApi* | [**add_contact_to_list**](docs/ContactsApi.md#add_contact_to_list) | **POST** /contacts/lists/{listId}/contacts/add | Add existing contacts to a list
-*ContactsApi* | [**create_attribute**](docs/ContactsApi.md#create_attribute) | **POST** /contacts/attributes/{attributeCategory}/{attributeName} | Create contact attribute
-*ContactsApi* | [**create_contact**](docs/ContactsApi.md#create_contact) | **POST** /contacts | Create a contact
-*ContactsApi* | [**create_doi_contact**](docs/ContactsApi.md#create_doi_contact) | **POST** /contacts/doubleOptinConfirmation | Create Contact via DOI (Double-Opt-In) Flow
-*ContactsApi* | [**create_folder**](docs/ContactsApi.md#create_folder) | **POST** /contacts/folders | Create a folder
-*ContactsApi* | [**create_list**](docs/ContactsApi.md#create_list) | **POST** /contacts/lists | Create a list
-*ContactsApi* | [**delete_attribute**](docs/ContactsApi.md#delete_attribute) | **DELETE** /contacts/attributes/{attributeCategory}/{attributeName} | Delete an attribute
-*ContactsApi* | [**delete_contact**](docs/ContactsApi.md#delete_contact) | **DELETE** /contacts/{identifier} | Delete a contact
-*ContactsApi* | [**delete_folder**](docs/ContactsApi.md#delete_folder) | **DELETE** /contacts/folders/{folderId} | Delete a folder (and all its lists)
-*ContactsApi* | [**delete_list**](docs/ContactsApi.md#delete_list) | **DELETE** /contacts/lists/{listId} | Delete a list
-*ContactsApi* | [**delete_multi_attribute_options**](docs/ContactsApi.md#delete_multi_attribute_options) | **DELETE** /contacts/attributes/{attributeType}/{multipleChoiceAttribute}/{multipleChoiceAttributeOption} | Delete a multiple-choice attribute option
-*ContactsApi* | [**get_attributes**](docs/ContactsApi.md#get_attributes) | **GET** /contacts/attributes | List all attributes
-*ContactsApi* | [**get_contact_info**](docs/ContactsApi.md#get_contact_info) | **GET** /contacts/{identifier} | Get a contact&#39;s details
-*ContactsApi* | [**get_contact_stats**](docs/ContactsApi.md#get_contact_stats) | **GET** /contacts/{identifier}/campaignStats | Get email campaigns&#39; statistics for a contact
-*ContactsApi* | [**get_contacts**](docs/ContactsApi.md#get_contacts) | **GET** /contacts | Get all the contacts
-*ContactsApi* | [**get_contacts_from_list**](docs/ContactsApi.md#get_contacts_from_list) | **GET** /contacts/lists/{listId}/contacts | Get contacts in a list
-*ContactsApi* | [**get_folder**](docs/ContactsApi.md#get_folder) | **GET** /contacts/folders/{folderId} | Returns a folder&#39;s details
-*ContactsApi* | [**get_folder_lists**](docs/ContactsApi.md#get_folder_lists) | **GET** /contacts/folders/{folderId}/lists | Get lists in a folder
-*ContactsApi* | [**get_folders**](docs/ContactsApi.md#get_folders) | **GET** /contacts/folders | Get all folders
-*ContactsApi* | [**get_list**](docs/ContactsApi.md#get_list) | **GET** /contacts/lists/{listId} | Get a list&#39;s details
-*ContactsApi* | [**get_lists**](docs/ContactsApi.md#get_lists) | **GET** /contacts/lists | Get all the lists
-*ContactsApi* | [**get_segments**](docs/ContactsApi.md#get_segments) | **GET** /contacts/segments | Get all the Segments
-*ContactsApi* | [**import_contacts**](docs/ContactsApi.md#import_contacts) | **POST** /contacts/import | Import contacts
-*ContactsApi* | [**remove_contact_from_list**](docs/ContactsApi.md#remove_contact_from_list) | **POST** /contacts/lists/{listId}/contacts/remove | Delete a contact from a list
-*ContactsApi* | [**request_contact_export**](docs/ContactsApi.md#request_contact_export) | **POST** /contacts/export | Export contacts
-*ContactsApi* | [**update_attribute**](docs/ContactsApi.md#update_attribute) | **PUT** /contacts/attributes/{attributeCategory}/{attributeName} | Update contact attribute
-*ContactsApi* | [**update_batch_contacts**](docs/ContactsApi.md#update_batch_contacts) | **POST** /contacts/batch | Update multiple contacts
-*ContactsApi* | [**update_contact**](docs/ContactsApi.md#update_contact) | **PUT** /contacts/{identifier} | Update a contact
-*ContactsApi* | [**update_folder**](docs/ContactsApi.md#update_folder) | **PUT** /contacts/folders/{folderId} | Update a folder
-*ContactsApi* | [**update_list**](docs/ContactsApi.md#update_list) | **PUT** /contacts/lists/{listId} | Update a list
-*ConversationsApi* | [**conversations_agent_online_ping_post**](docs/ConversationsApi.md#conversations_agent_online_ping_post) | **POST** /conversations/agentOnlinePing | Sets agent’s status to online for 2-3 minutes
-*ConversationsApi* | [**conversations_messages_id_delete**](docs/ConversationsApi.md#conversations_messages_id_delete) | **DELETE** /conversations/messages/{id} | Delete a message sent by an agent
-*ConversationsApi* | [**conversations_messages_id_get**](docs/ConversationsApi.md#conversations_messages_id_get) | **GET** /conversations/messages/{id} | Get a message
-*ConversationsApi* | [**conversations_messages_id_put**](docs/ConversationsApi.md#conversations_messages_id_put) | **PUT** /conversations/messages/{id} | Update a message sent by an agent
-*ConversationsApi* | [**conversations_messages_post**](docs/ConversationsApi.md#conversations_messages_post) | **POST** /conversations/messages | Send a message as an agent
-*ConversationsApi* | [**conversations_pushed_messages_id_delete**](docs/ConversationsApi.md#conversations_pushed_messages_id_delete) | **DELETE** /conversations/pushedMessages/{id} | Delete an automated message
-*ConversationsApi* | [**conversations_pushed_messages_id_get**](docs/ConversationsApi.md#conversations_pushed_messages_id_get) | **GET** /conversations/pushedMessages/{id} | Get an automated message
-*ConversationsApi* | [**conversations_pushed_messages_id_put**](docs/ConversationsApi.md#conversations_pushed_messages_id_put) | **PUT** /conversations/pushedMessages/{id} | Update an automated message
-*ConversationsApi* | [**conversations_pushed_messages_post**](docs/ConversationsApi.md#conversations_pushed_messages_post) | **POST** /conversations/pushedMessages | Send an automated message to a visitor
-*CouponsApi* | [**create_coupon_collection**](docs/CouponsApi.md#create_coupon_collection) | **POST** /couponCollections | Create а coupon collection
-*CouponsApi* | [**create_coupons**](docs/CouponsApi.md#create_coupons) | **POST** /coupons | Create coupons for a coupon collection
-*CouponsApi* | [**get_coupon_collection**](docs/CouponsApi.md#get_coupon_collection) | **GET** /couponCollections/{id} | Get a coupon collection by id
-*CouponsApi* | [**get_coupon_collections**](docs/CouponsApi.md#get_coupon_collections) | **GET** /couponCollections | Get all your coupon collections
-*CouponsApi* | [**update_coupon_collection**](docs/CouponsApi.md#update_coupon_collection) | **PATCH** /couponCollections/{id} | Update a coupon collection by id
-*CustomObjectsApi* | [**getrecords**](docs/CustomObjectsApi.md#getrecords) | **GET** /objects/{object_type}/records | Get the list of object records and total records count for an object.
-*CustomObjectsApi* | [**upsertrecords**](docs/CustomObjectsApi.md#upsertrecords) | **POST** /objects/{object_type}/batch/upsert | Create/Update object records in bulk
-*DealsApi* | [**crm_attributes_deals_get**](docs/DealsApi.md#crm_attributes_deals_get) | **GET** /crm/attributes/deals | Get deal attributes
-*DealsApi* | [**crm_attributes_post**](docs/DealsApi.md#crm_attributes_post) | **POST** /crm/attributes | Create a deal/company attribute
-*DealsApi* | [**crm_deals_get**](docs/DealsApi.md#crm_deals_get) | **GET** /crm/deals | Get all deals
-*DealsApi* | [**crm_deals_id_delete**](docs/DealsApi.md#crm_deals_id_delete) | **DELETE** /crm/deals/{id} | Delete a deal
-*DealsApi* | [**crm_deals_id_get**](docs/DealsApi.md#crm_deals_id_get) | **GET** /crm/deals/{id} | Get a deal
-*DealsApi* | [**crm_deals_id_patch**](docs/DealsApi.md#crm_deals_id_patch) | **PATCH** /crm/deals/{id} | Update a deal
-*DealsApi* | [**crm_deals_import_post**](docs/DealsApi.md#crm_deals_import_post) | **POST** /crm/deals/import | Import deals(creation and updation)
-*DealsApi* | [**crm_deals_link_unlink_id_patch**](docs/DealsApi.md#crm_deals_link_unlink_id_patch) | **PATCH** /crm/deals/link-unlink/{id} | Link and Unlink a deal with contacts and companies
-*DealsApi* | [**crm_deals_post**](docs/DealsApi.md#crm_deals_post) | **POST** /crm/deals | Create a deal
-*DealsApi* | [**crm_pipeline_details_all_get**](docs/DealsApi.md#crm_pipeline_details_all_get) | **GET** /crm/pipeline/details/all | Get all pipelines
-*DealsApi* | [**crm_pipeline_details_get**](docs/DealsApi.md#crm_pipeline_details_get) | **GET** /crm/pipeline/details | Get pipeline stages
-*DealsApi* | [**crm_pipeline_details_pipeline_id_get**](docs/DealsApi.md#crm_pipeline_details_pipeline_id_get) | **GET** /crm/pipeline/details/{pipelineID} | Get a pipeline
-*DomainsApi* | [**authenticate_domain**](docs/DomainsApi.md#authenticate_domain) | **PUT** /senders/domains/{domainName}/authenticate | Authenticate a domain
-*DomainsApi* | [**create_domain**](docs/DomainsApi.md#create_domain) | **POST** /senders/domains | Create a new domain
-*DomainsApi* | [**delete_domain**](docs/DomainsApi.md#delete_domain) | **DELETE** /senders/domains/{domainName} | Delete a domain
-*DomainsApi* | [**get_domain_configuration**](docs/DomainsApi.md#get_domain_configuration) | **GET** /senders/domains/{domainName} | Validate domain configuration
-*DomainsApi* | [**get_domains**](docs/DomainsApi.md#get_domains) | **GET** /senders/domains | Get the list of all your domains
-*EcommerceApi* | [**create_batch_order**](docs/EcommerceApi.md#create_batch_order) | **POST** /orders/status/batch | Create orders in batch
-*EcommerceApi* | [**create_order**](docs/EcommerceApi.md#create_order) | **POST** /orders/status | Managing the status of the order
-*EcommerceApi* | [**create_update_batch_category**](docs/EcommerceApi.md#create_update_batch_category) | **POST** /categories/batch | Create categories in batch
-*EcommerceApi* | [**create_update_batch_products**](docs/EcommerceApi.md#create_update_batch_products) | **POST** /products/batch | Create products in batch
-*EcommerceApi* | [**create_update_category**](docs/EcommerceApi.md#create_update_category) | **POST** /categories | Create/Update a category
-*EcommerceApi* | [**create_update_product**](docs/EcommerceApi.md#create_update_product) | **POST** /products | Create/Update a product
-*EcommerceApi* | [**ecommerce_activate_post**](docs/EcommerceApi.md#ecommerce_activate_post) | **POST** /ecommerce/activate | Activate the eCommerce app
-*EcommerceApi* | [**ecommerce_attribution_metrics_conversion_source_conversion_source_id_get**](docs/EcommerceApi.md#ecommerce_attribution_metrics_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign or workflow
-*EcommerceApi* | [**ecommerce_attribution_metrics_get**](docs/EcommerceApi.md#ecommerce_attribution_metrics_get) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns or workflows
-*EcommerceApi* | [**ecommerce_attribution_products_conversion_source_conversion_source_id_get**](docs/EcommerceApi.md#ecommerce_attribution_products_conversion_source_conversion_source_id_get) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign or workflow
-*EcommerceApi* | [**ecommerce_config_display_currency_get**](docs/EcommerceApi.md#ecommerce_config_display_currency_get) | **GET** /ecommerce/config/displayCurrency | Get the ISO 4217 compliant display currency code for your Brevo account
-*EcommerceApi* | [**get_categories**](docs/EcommerceApi.md#get_categories) | **GET** /categories | Return all your categories
-*EcommerceApi* | [**get_category_info**](docs/EcommerceApi.md#get_category_info) | **GET** /categories/{id} | Get a category details
-*EcommerceApi* | [**get_orders**](docs/EcommerceApi.md#get_orders) | **GET** /orders | Get order details
-*EcommerceApi* | [**get_product_info**](docs/EcommerceApi.md#get_product_info) | **GET** /products/{id} | Get a product&#39;s details
-*EcommerceApi* | [**get_products**](docs/EcommerceApi.md#get_products) | **GET** /products | Return all your products
-*EcommerceApi* | [**set_config_display_currency**](docs/EcommerceApi.md#set_config_display_currency) | **POST** /ecommerce/config/displayCurrency | Set the ISO 4217 compliant display currency code for your Brevo account
-*EmailCampaignsApi* | [**create_email_campaign**](docs/EmailCampaignsApi.md#create_email_campaign) | **POST** /emailCampaigns | Create an email campaign
-*EmailCampaignsApi* | [**delete_email_campaign**](docs/EmailCampaignsApi.md#delete_email_campaign) | **DELETE** /emailCampaigns/{campaignId} | Delete an email campaign
-*EmailCampaignsApi* | [**email_export_recipients**](docs/EmailCampaignsApi.md#email_export_recipients) | **POST** /emailCampaigns/{campaignId}/exportRecipients | Export the recipients of an email campaign
-*EmailCampaignsApi* | [**get_ab_test_campaign_result**](docs/EmailCampaignsApi.md#get_ab_test_campaign_result) | **GET** /emailCampaigns/{campaignId}/abTestCampaignResult | Get an A/B test email campaign results
-*EmailCampaignsApi* | [**get_email_campaign**](docs/EmailCampaignsApi.md#get_email_campaign) | **GET** /emailCampaigns/{campaignId} | Get an email campaign report
-*EmailCampaignsApi* | [**get_email_campaigns**](docs/EmailCampaignsApi.md#get_email_campaigns) | **GET** /emailCampaigns | Return all your created email campaigns
-*EmailCampaignsApi* | [**get_shared_template_url**](docs/EmailCampaignsApi.md#get_shared_template_url) | **GET** /emailCampaigns/{campaignId}/sharedUrl | Get a shared template url
-*EmailCampaignsApi* | [**send_email_campaign_now**](docs/EmailCampaignsApi.md#send_email_campaign_now) | **POST** /emailCampaigns/{campaignId}/sendNow | Send an email campaign immediately, based on campaignId
-*EmailCampaignsApi* | [**send_report**](docs/EmailCampaignsApi.md#send_report) | **POST** /emailCampaigns/{campaignId}/sendReport | Send the report of a campaign
-*EmailCampaignsApi* | [**send_test_email**](docs/EmailCampaignsApi.md#send_test_email) | **POST** /emailCampaigns/{campaignId}/sendTest | Send an email campaign to your test list
-*EmailCampaignsApi* | [**update_campaign_status**](docs/EmailCampaignsApi.md#update_campaign_status) | **PUT** /emailCampaigns/{campaignId}/status | Update an email campaign status
-*EmailCampaignsApi* | [**update_email_campaign**](docs/EmailCampaignsApi.md#update_email_campaign) | **PUT** /emailCampaigns/{campaignId} | Update an email campaign
-*EmailCampaignsApi* | [**upload_image_to_gallery**](docs/EmailCampaignsApi.md#upload_image_to_gallery) | **POST** /emailCampaigns/images | Upload an image to your account&#39;s image gallery
-*EventsApi* | [**create_event**](docs/EventsApi.md#create_event) | **POST** /events | Create an event
-*ExternalFeedsApi* | [**create_external_feed**](docs/ExternalFeedsApi.md#create_external_feed) | **POST** /feeds | Create an external feed
-*ExternalFeedsApi* | [**delete_external_feed**](docs/ExternalFeedsApi.md#delete_external_feed) | **DELETE** /feeds/{uuid} | Delete an external feed
-*ExternalFeedsApi* | [**get_all_external_feeds**](docs/ExternalFeedsApi.md#get_all_external_feeds) | **GET** /feeds | Fetch all external feeds
-*ExternalFeedsApi* | [**get_external_feed_by_uuid**](docs/ExternalFeedsApi.md#get_external_feed_by_uuid) | **GET** /feeds/{uuid} | Get an external feed by UUID
-*ExternalFeedsApi* | [**update_external_feed**](docs/ExternalFeedsApi.md#update_external_feed) | **PUT** /feeds/{uuid} | Update an external feed
-*FilesApi* | [**crm_files_get**](docs/FilesApi.md#crm_files_get) | **GET** /crm/files | Get all files
-*FilesApi* | [**crm_files_id_data_get**](docs/FilesApi.md#crm_files_id_data_get) | **GET** /crm/files/{id}/data | Get file details
-*FilesApi* | [**crm_files_id_delete**](docs/FilesApi.md#crm_files_id_delete) | **DELETE** /crm/files/{id} | Delete a file
-*FilesApi* | [**crm_files_id_get**](docs/FilesApi.md#crm_files_id_get) | **GET** /crm/files/{id} | Download a file
-*FilesApi* | [**crm_files_post**](docs/FilesApi.md#crm_files_post) | **POST** /crm/files | Upload a file
-*InboundParsingApi* | [**get_inbound_email_attachment**](docs/InboundParsingApi.md#get_inbound_email_attachment) | **GET** /inbound/attachments/{downloadToken} | Retrieve inbound attachment with download token.
-*InboundParsingApi* | [**get_inbound_email_events**](docs/InboundParsingApi.md#get_inbound_email_events) | **GET** /inbound/events | Get the list of all the events for the received emails.
-*InboundParsingApi* | [**get_inbound_email_events_by_uuid**](docs/InboundParsingApi.md#get_inbound_email_events_by_uuid) | **GET** /inbound/events/{uuid} | Fetch all events history for one particular received email.
-*MasterAccountApi* | [**corporate_group_id_delete**](docs/MasterAccountApi.md#corporate_group_id_delete) | **DELETE** /corporate/group/{id} | Delete a group
-*MasterAccountApi* | [**corporate_group_id_get**](docs/MasterAccountApi.md#corporate_group_id_get) | **GET** /corporate/group/{id} | GET a group details
-*MasterAccountApi* | [**corporate_group_id_put**](docs/MasterAccountApi.md#corporate_group_id_put) | **PUT** /corporate/group/{id} | Update a group of sub-accounts
-*MasterAccountApi* | [**corporate_group_post**](docs/MasterAccountApi.md#corporate_group_post) | **POST** /corporate/group | Create a new group of sub-accounts
-*MasterAccountApi* | [**corporate_group_unlink_group_id_sub_accounts_put**](docs/MasterAccountApi.md#corporate_group_unlink_group_id_sub_accounts_put) | **PUT** /corporate/group/unlink/{groupId}/subAccounts | Delete sub-account from group
-*MasterAccountApi* | [**corporate_ip_get**](docs/MasterAccountApi.md#corporate_ip_get) | **GET** /corporate/ip | List of all IPs
-*MasterAccountApi* | [**corporate_master_account_get**](docs/MasterAccountApi.md#corporate_master_account_get) | **GET** /corporate/masterAccount | Get the details of requested master account
-*MasterAccountApi* | [**corporate_sso_token_post**](docs/MasterAccountApi.md#corporate_sso_token_post) | **POST** /corporate/ssoToken | Generate SSO token to access admin account
-*MasterAccountApi* | [**corporate_sub_account_get**](docs/MasterAccountApi.md#corporate_sub_account_get) | **GET** /corporate/subAccount | Get the list of all the sub-accounts of the master account.
-*MasterAccountApi* | [**corporate_sub_account_id_applications_toggle_put**](docs/MasterAccountApi.md#corporate_sub_account_id_applications_toggle_put) | **PUT** /corporate/subAccount/{id}/applications/toggle | Enable/disable sub-account application(s)
-*MasterAccountApi* | [**corporate_sub_account_id_delete**](docs/MasterAccountApi.md#corporate_sub_account_id_delete) | **DELETE** /corporate/subAccount/{id} | Delete a sub-account
-*MasterAccountApi* | [**corporate_sub_account_id_get**](docs/MasterAccountApi.md#corporate_sub_account_id_get) | **GET** /corporate/subAccount/{id} | Get sub-account details
-*MasterAccountApi* | [**corporate_sub_account_id_plan_put**](docs/MasterAccountApi.md#corporate_sub_account_id_plan_put) | **PUT** /corporate/subAccount/{id}/plan | Update sub-account plan
-*MasterAccountApi* | [**corporate_sub_account_ip_associate_post**](docs/MasterAccountApi.md#corporate_sub_account_ip_associate_post) | **POST** /corporate/subAccount/ip/associate | Associate an IP to sub-accounts
-*MasterAccountApi* | [**corporate_sub_account_ip_dissociate_put**](docs/MasterAccountApi.md#corporate_sub_account_ip_dissociate_put) | **PUT** /corporate/subAccount/ip/dissociate | Dissociate an IP from sub-accounts
-*MasterAccountApi* | [**corporate_sub_account_key_post**](docs/MasterAccountApi.md#corporate_sub_account_key_post) | **POST** /corporate/subAccount/key | Create an API key for a sub-account
-*MasterAccountApi* | [**corporate_sub_account_post**](docs/MasterAccountApi.md#corporate_sub_account_post) | **POST** /corporate/subAccount | Create a new sub-account under a master account.
-*MasterAccountApi* | [**corporate_sub_account_sso_token_post**](docs/MasterAccountApi.md#corporate_sub_account_sso_token_post) | **POST** /corporate/subAccount/ssoToken | Generate SSO token to access sub-account
-*MasterAccountApi* | [**corporate_sub_accounts_plan_put**](docs/MasterAccountApi.md#corporate_sub_accounts_plan_put) | **PUT** /corporate/subAccounts/plan | Update sub-accounts plan
-*MasterAccountApi* | [**corporate_user_email_permissions_put**](docs/MasterAccountApi.md#corporate_user_email_permissions_put) | **PUT** /corporate/user/{email}/permissions | Change admin user permissions
-*MasterAccountApi* | [**corporate_user_invitation_action_email_put**](docs/MasterAccountApi.md#corporate_user_invitation_action_email_put) | **PUT** /corporate/user/invitation/{action}/{email} | Resend / cancel admin user invitation
-*MasterAccountApi* | [**corporate_user_revoke_email_delete**](docs/MasterAccountApi.md#corporate_user_revoke_email_delete) | **DELETE** /corporate/user/revoke/{email} | Revoke an admin user
-*MasterAccountApi* | [**get_account_activity**](docs/MasterAccountApi.md#get_account_activity) | **GET** /organization/activities | Get user activity logs
-*MasterAccountApi* | [**get_corporate_invited_users_list**](docs/MasterAccountApi.md#get_corporate_invited_users_list) | **GET** /corporate/invited/users | Get the list of all admin users
-*MasterAccountApi* | [**get_corporate_user_permission**](docs/MasterAccountApi.md#get_corporate_user_permission) | **GET** /corporate/user/{email}/permissions | Check admin user permissions
-*MasterAccountApi* | [**get_sub_account_groups**](docs/MasterAccountApi.md#get_sub_account_groups) | **GET** /corporate/groups | Get the list of groups
-*MasterAccountApi* | [**invite_admin_user**](docs/MasterAccountApi.md#invite_admin_user) | **POST** /corporate/user/invitation/send | Send invitation to an admin user
-*NotesApi* | [**crm_notes_get**](docs/NotesApi.md#crm_notes_get) | **GET** /crm/notes | Get all notes
-*NotesApi* | [**crm_notes_id_delete**](docs/NotesApi.md#crm_notes_id_delete) | **DELETE** /crm/notes/{id} | Delete a note
-*NotesApi* | [**crm_notes_id_get**](docs/NotesApi.md#crm_notes_id_get) | **GET** /crm/notes/{id} | Get a note
-*NotesApi* | [**crm_notes_id_patch**](docs/NotesApi.md#crm_notes_id_patch) | **PATCH** /crm/notes/{id} | Update a note
-*NotesApi* | [**crm_notes_post**](docs/NotesApi.md#crm_notes_post) | **POST** /crm/notes | Create a note
-*PaymentsApi* | [**create_payment_request**](docs/PaymentsApi.md#create_payment_request) | **POST** /payments/requests | Create a payment request
-*PaymentsApi* | [**delete_payment_request**](docs/PaymentsApi.md#delete_payment_request) | **DELETE** /payments/requests/{id} | Delete a payment request.
-*PaymentsApi* | [**get_payment_request**](docs/PaymentsApi.md#get_payment_request) | **GET** /payments/requests/{id} | Get payment request details
-*ProcessApi* | [**get_process**](docs/ProcessApi.md#get_process) | **GET** /processes/{processId} | Return the informations for a process
-*ProcessApi* | [**get_processes**](docs/ProcessApi.md#get_processes) | **GET** /processes | Return all the processes for your account
-*ProgramApi* | [**create_new_lp**](docs/ProgramApi.md#create_new_lp) | **POST** /loyalty/config/programs | Create loyalty program
-*ProgramApi* | [**delete_contact_members**](docs/ProgramApi.md#delete_contact_members) | **DELETE** /loyalty/config/programs/{pid}/subscription-members | Delete subscription member
-*ProgramApi* | [**delete_loyalty_program**](docs/ProgramApi.md#delete_loyalty_program) | **DELETE** /loyalty/config/programs/{pid} | Delete Loyalty Program
-*ProgramApi* | [**get_loyalty_program_info**](docs/ProgramApi.md#get_loyalty_program_info) | **GET** /loyalty/config/programs/{pid} | Get loyalty program Info
-*ProgramApi* | [**get_lp_list**](docs/ProgramApi.md#get_lp_list) | **GET** /loyalty/config/programs | Get loyalty program list
-*ProgramApi* | [**get_parameter_subscription_info**](docs/ProgramApi.md#get_parameter_subscription_info) | **GET** /loyalty/config/programs/{pid}/account-info | Get Subscription Data
-*ProgramApi* | [**partially_update_loyalty_program**](docs/ProgramApi.md#partially_update_loyalty_program) | **PATCH** /loyalty/config/programs/{pid} | Partially update loyalty program
-*ProgramApi* | [**publish_loyalty_program**](docs/ProgramApi.md#publish_loyalty_program) | **POST** /loyalty/config/programs/{pid}/publish | Publish loyalty program
-*ProgramApi* | [**subscribe_member_to_a_subscription**](docs/ProgramApi.md#subscribe_member_to_a_subscription) | **POST** /loyalty/config/programs/{pid}/subscription-members | Create subscription member
-*ProgramApi* | [**subscribe_to_loyalty_program**](docs/ProgramApi.md#subscribe_to_loyalty_program) | **POST** /loyalty/config/programs/{pid}/subscriptions | Create subscription
-*ProgramApi* | [**update_loyalty_program**](docs/ProgramApi.md#update_loyalty_program) | **PUT** /loyalty/config/programs/{pid} | Update loyalty program
-*RewardApi* | [**get_code_count**](docs/RewardApi.md#get_code_count) | **GET** /loyalty/offer/programs/{pid}/code-pools/{cpid}/codes-count | Get code count
-*RewardApi* | [**loyalty_offer_programs_pid_offers_get**](docs/RewardApi.md#loyalty_offer_programs_pid_offers_get) | **GET** /loyalty/offer/programs/{pid}/offers | Get Reward Page API
-*RewardApi* | [**loyalty_offer_programs_pid_offers_post**](docs/RewardApi.md#loyalty_offer_programs_pid_offers_post) | **POST** /loyalty/offer/programs/{pid}/offers | Create a reward
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_attribute_post**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_attribute_post) | **POST** /loyalty/offer/programs/{pid}/rewards/attribute | Create a voucher
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_redeem_post**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_redeem_post) | **POST** /loyalty/offer/programs/{pid}/rewards/redeem | Create redeem voucher request
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_redeem_tid_complete_post**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_redeem_tid_complete_post) | **POST** /loyalty/offer/programs/{pid}/rewards/redeem/{tid}/complete | Complete redeem voucher request
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_revoke_delete**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_revoke_delete) | **DELETE** /loyalty/offer/programs/{pid}/rewards/revoke | Revoke vouchers
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_rid_get**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_rid_get) | **GET** /loyalty/offer/programs/{pid}/rewards/{rid} | Get reward information
-*RewardApi* | [**loyalty_offer_programs_pid_rewards_validate_post**](docs/RewardApi.md#loyalty_offer_programs_pid_rewards_validate_post) | **POST** /loyalty/offer/programs/{pid}/rewards/validate | Validate a reward
-*RewardApi* | [**loyalty_offer_programs_pid_vouchers_get**](docs/RewardApi.md#loyalty_offer_programs_pid_vouchers_get) | **GET** /loyalty/offer/programs/{pid}/vouchers | Get voucher for a contact
-*SMSCampaignsApi* | [**create_sms_campaign**](docs/SMSCampaignsApi.md#create_sms_campaign) | **POST** /smsCampaigns | Creates an SMS campaign
-*SMSCampaignsApi* | [**delete_sms_campaign**](docs/SMSCampaignsApi.md#delete_sms_campaign) | **DELETE** /smsCampaigns/{campaignId} | Delete an SMS campaign
-*SMSCampaignsApi* | [**get_sms_campaign**](docs/SMSCampaignsApi.md#get_sms_campaign) | **GET** /smsCampaigns/{campaignId} | Get an SMS campaign
-*SMSCampaignsApi* | [**get_sms_campaigns**](docs/SMSCampaignsApi.md#get_sms_campaigns) | **GET** /smsCampaigns | Returns the information for all your created SMS campaigns
-*SMSCampaignsApi* | [**request_sms_recipient_export**](docs/SMSCampaignsApi.md#request_sms_recipient_export) | **POST** /smsCampaigns/{campaignId}/exportRecipients | Export an SMS campaign&#39;s recipients
-*SMSCampaignsApi* | [**send_sms_campaign_now**](docs/SMSCampaignsApi.md#send_sms_campaign_now) | **POST** /smsCampaigns/{campaignId}/sendNow | Send your SMS campaign immediately
-*SMSCampaignsApi* | [**send_sms_report**](docs/SMSCampaignsApi.md#send_sms_report) | **POST** /smsCampaigns/{campaignId}/sendReport | Send an SMS campaign&#39;s report
-*SMSCampaignsApi* | [**send_test_sms**](docs/SMSCampaignsApi.md#send_test_sms) | **POST** /smsCampaigns/{campaignId}/sendTest | Send a test SMS campaign
-*SMSCampaignsApi* | [**update_sms_campaign**](docs/SMSCampaignsApi.md#update_sms_campaign) | **PUT** /smsCampaigns/{campaignId} | Update an SMS campaign
-*SMSCampaignsApi* | [**update_sms_campaign_status**](docs/SMSCampaignsApi.md#update_sms_campaign_status) | **PUT** /smsCampaigns/{campaignId}/status | Update a campaign&#39;s status
-*SendersApi* | [**create_sender**](docs/SendersApi.md#create_sender) | **POST** /senders | Create a new sender
-*SendersApi* | [**delete_sender**](docs/SendersApi.md#delete_sender) | **DELETE** /senders/{senderId} | Delete a sender
-*SendersApi* | [**get_ips**](docs/SendersApi.md#get_ips) | **GET** /senders/ips | Get all the dedicated IPs for your account
-*SendersApi* | [**get_ips_from_sender**](docs/SendersApi.md#get_ips_from_sender) | **GET** /senders/{senderId}/ips | Get all the dedicated IPs for a sender
-*SendersApi* | [**get_senders**](docs/SendersApi.md#get_senders) | **GET** /senders | Get the list of all your senders
-*SendersApi* | [**update_sender**](docs/SendersApi.md#update_sender) | **PUT** /senders/{senderId} | Update a sender
-*SendersApi* | [**validate_sender_by_otp**](docs/SendersApi.md#validate_sender_by_otp) | **PUT** /senders/{senderId}/validate | Update a sender
-*TasksApi* | [**crm_tasks_get**](docs/TasksApi.md#crm_tasks_get) | **GET** /crm/tasks | Get all tasks
-*TasksApi* | [**crm_tasks_id_delete**](docs/TasksApi.md#crm_tasks_id_delete) | **DELETE** /crm/tasks/{id} | Delete a task
-*TasksApi* | [**crm_tasks_id_get**](docs/TasksApi.md#crm_tasks_id_get) | **GET** /crm/tasks/{id} | Get a task
-*TasksApi* | [**crm_tasks_id_patch**](docs/TasksApi.md#crm_tasks_id_patch) | **PATCH** /crm/tasks/{id} | Update a task
-*TasksApi* | [**crm_tasks_post**](docs/TasksApi.md#crm_tasks_post) | **POST** /crm/tasks | Create a task
-*TasksApi* | [**crm_tasktypes_get**](docs/TasksApi.md#crm_tasktypes_get) | **GET** /crm/tasktypes | Get all task types
-*TierApi* | [**add_subscription_to_tier**](docs/TierApi.md#add_subscription_to_tier) | **POST** /loyalty/tier/programs/{pid}/contacts/{cid}/tiers/{tid} | Assign a tier
-*TierApi* | [**create_tier_for_tier_group**](docs/TierApi.md#create_tier_for_tier_group) | **POST** /loyalty/tier/programs/{pid}/tier-groups/{gid}/tiers | Create a tier
-*TierApi* | [**create_tier_group**](docs/TierApi.md#create_tier_group) | **POST** /loyalty/tier/programs/{pid}/tier-groups | Create a tier group
-*TierApi* | [**delete_tier**](docs/TierApi.md#delete_tier) | **DELETE** /loyalty/tier/programs/{pid}/tiers/{tid} | Delete tier
-*TierApi* | [**delete_tier_group**](docs/TierApi.md#delete_tier_group) | **DELETE** /loyalty/tier/programs/{pid}/tier-groups/{gid} | Delete tier group
-*TierApi* | [**get_list_of_tier_groups**](docs/TierApi.md#get_list_of_tier_groups) | **GET** /loyalty/tier/programs/{pid}/tier-groups | List tier groups
-*TierApi* | [**get_loyalty_program_tier**](docs/TierApi.md#get_loyalty_program_tier) | **GET** /loyalty/tier/programs/{pid}/tiers | List tiers
-*TierApi* | [**get_tier_group**](docs/TierApi.md#get_tier_group) | **GET** /loyalty/tier/programs/{pid}/tier-groups/{gid} | Get tier group
-*TierApi* | [**update_tier**](docs/TierApi.md#update_tier) | **PUT** /loyalty/tier/programs/{pid}/tiers/{tid} | Update tier
-*TierApi* | [**update_tier_group**](docs/TierApi.md#update_tier_group) | **PUT** /loyalty/tier/programs/{pid}/tier-groups/{gid} | Update tier group
-*TransactionalSMSApi* | [**get_sms_events**](docs/TransactionalSMSApi.md#get_sms_events) | **GET** /transactionalSMS/statistics/events | Get all your SMS activity (unaggregated events)
-*TransactionalSMSApi* | [**get_transac_aggregated_sms_report**](docs/TransactionalSMSApi.md#get_transac_aggregated_sms_report) | **GET** /transactionalSMS/statistics/aggregatedReport | Get your SMS activity aggregated over a period of time
-*TransactionalSMSApi* | [**get_transac_sms_report**](docs/TransactionalSMSApi.md#get_transac_sms_report) | **GET** /transactionalSMS/statistics/reports | Get your SMS activity aggregated per day
-*TransactionalSMSApi* | [**send_async_transactional_sms**](docs/TransactionalSMSApi.md#send_async_transactional_sms) | **POST** /transactionalSMS/send | Send SMS message asynchronously to a mobile number
-*TransactionalSMSApi* | [**send_transac_sms**](docs/TransactionalSMSApi.md#send_transac_sms) | **POST** /transactionalSMS/sms | Send SMS message to a mobile number
-*TransactionalWhatsAppApi* | [**get_whatsapp_event_report**](docs/TransactionalWhatsAppApi.md#get_whatsapp_event_report) | **GET** /whatsapp/statistics/events | Get all your WhatsApp activity (unaggregated events)
-*TransactionalWhatsAppApi* | [**send_whatsapp_message**](docs/TransactionalWhatsAppApi.md#send_whatsapp_message) | **POST** /whatsapp/sendMessage | Send a WhatsApp message
-*TransactionalEmailsApi* | [**block_new_domain**](docs/TransactionalEmailsApi.md#block_new_domain) | **POST** /smtp/blockedDomains | Add a new domain to the list of blocked domains
-*TransactionalEmailsApi* | [**create_smtp_template**](docs/TransactionalEmailsApi.md#create_smtp_template) | **POST** /smtp/templates | Create an email template
-*TransactionalEmailsApi* | [**delete_blocked_domain**](docs/TransactionalEmailsApi.md#delete_blocked_domain) | **DELETE** /smtp/blockedDomains/{domain} | Unblock an existing domain from the list of blocked domains
-*TransactionalEmailsApi* | [**delete_hardbounces**](docs/TransactionalEmailsApi.md#delete_hardbounces) | **POST** /smtp/deleteHardbounces | Delete hardbounces
-*TransactionalEmailsApi* | [**delete_scheduled_email_by_id**](docs/TransactionalEmailsApi.md#delete_scheduled_email_by_id) | **DELETE** /smtp/email/{identifier} | Delete scheduled emails by batchId or messageId
-*TransactionalEmailsApi* | [**delete_smtp_template**](docs/TransactionalEmailsApi.md#delete_smtp_template) | **DELETE** /smtp/templates/{templateId} | Delete an inactive email template
-*TransactionalEmailsApi* | [**get_aggregated_smtp_report**](docs/TransactionalEmailsApi.md#get_aggregated_smtp_report) | **GET** /smtp/statistics/aggregatedReport | Get your transactional email activity aggregated over a period of time
-*TransactionalEmailsApi* | [**get_blocked_domains**](docs/TransactionalEmailsApi.md#get_blocked_domains) | **GET** /smtp/blockedDomains | Get the list of blocked domains
-*TransactionalEmailsApi* | [**get_email_event_report**](docs/TransactionalEmailsApi.md#get_email_event_report) | **GET** /smtp/statistics/events | Get all your transactional email activity (unaggregated events)
-*TransactionalEmailsApi* | [**get_scheduled_email_by_batch_id**](docs/TransactionalEmailsApi.md#get_scheduled_email_by_batch_id) | **GET** /smtp/emailStatus/{batchId} | Fetch scheduled emails by batchId
-*TransactionalEmailsApi* | [**get_scheduled_email_by_message_id**](docs/TransactionalEmailsApi.md#get_scheduled_email_by_message_id) | **GET** /smtp/emailStatus/{messageId} | Fetch scheduled email by messageId
-*TransactionalEmailsApi* | [**get_smtp_report**](docs/TransactionalEmailsApi.md#get_smtp_report) | **GET** /smtp/statistics/reports | Get your transactional email activity aggregated per day
-*TransactionalEmailsApi* | [**get_smtp_template**](docs/TransactionalEmailsApi.md#get_smtp_template) | **GET** /smtp/templates/{templateId} | Returns the template information
-*TransactionalEmailsApi* | [**get_smtp_templates**](docs/TransactionalEmailsApi.md#get_smtp_templates) | **GET** /smtp/templates | Get the list of email templates
-*TransactionalEmailsApi* | [**get_transac_blocked_contacts**](docs/TransactionalEmailsApi.md#get_transac_blocked_contacts) | **GET** /smtp/blockedContacts | Get the list of blocked or unsubscribed transactional contacts
-*TransactionalEmailsApi* | [**get_transac_email_content**](docs/TransactionalEmailsApi.md#get_transac_email_content) | **GET** /smtp/emails/{uuid} | Get the personalized content of a sent transactional email
-*TransactionalEmailsApi* | [**get_transac_emails_list**](docs/TransactionalEmailsApi.md#get_transac_emails_list) | **GET** /smtp/emails | Get the list of transactional emails on the basis of allowed filters
-*TransactionalEmailsApi* | [**post_preview_smtp_email_templates**](docs/TransactionalEmailsApi.md#post_preview_smtp_email_templates) | **POST** /smtp/template/preview | Generate the rendered preview of transactional template
-*TransactionalEmailsApi* | [**send_test_template**](docs/TransactionalEmailsApi.md#send_test_template) | **POST** /smtp/templates/{templateId}/sendTest | Send a template to your test list
-*TransactionalEmailsApi* | [**send_transac_email**](docs/TransactionalEmailsApi.md#send_transac_email) | **POST** /smtp/email | Send a transactional email
-*TransactionalEmailsApi* | [**smtp_blocked_contacts_email_delete**](docs/TransactionalEmailsApi.md#smtp_blocked_contacts_email_delete) | **DELETE** /smtp/blockedContacts/{email} | Unblock or resubscribe a transactional contact
-*TransactionalEmailsApi* | [**smtp_log_identifier_delete**](docs/TransactionalEmailsApi.md#smtp_log_identifier_delete) | **DELETE** /smtp/log/{identifier} | Delete an SMTP transactional log
-*TransactionalEmailsApi* | [**update_smtp_template**](docs/TransactionalEmailsApi.md#update_smtp_template) | **PUT** /smtp/templates/{templateId} | Update an email template
-*UserApi* | [**edit_user_permission**](docs/UserApi.md#edit_user_permission) | **POST** /organization/user/update/permissions | Update permission for a user
-*UserApi* | [**get_invited_users_list**](docs/UserApi.md#get_invited_users_list) | **GET** /organization/invited/users | Get the list of all your users
-*UserApi* | [**get_user_permission**](docs/UserApi.md#get_user_permission) | **GET** /organization/user/{email}/permissions | Check user permission
-*UserApi* | [**inviteuser**](docs/UserApi.md#inviteuser) | **POST** /organization/user/invitation/send | Send invitation to user
-*UserApi* | [**put_revoke_user_permission**](docs/UserApi.md#put_revoke_user_permission) | **PUT** /organization/user/invitation/revoke/{email} | Revoke user permission
-*UserApi* | [**putresendcancelinvitation**](docs/UserApi.md#putresendcancelinvitation) | **PUT** /organization/user/invitation/{action}/{email} | Resend / Cancel invitation
-*WebhooksApi* | [**create_webhook**](docs/WebhooksApi.md#create_webhook) | **POST** /webhooks | Create a webhook
-*WebhooksApi* | [**delete_webhook**](docs/WebhooksApi.md#delete_webhook) | **DELETE** /webhooks/{webhookId} | Delete a webhook
-*WebhooksApi* | [**export_webhooks_history**](docs/WebhooksApi.md#export_webhooks_history) | **POST** /webhooks/export | Export all webhook events
-*WebhooksApi* | [**get_webhook**](docs/WebhooksApi.md#get_webhook) | **GET** /webhooks/{webhookId} | Get a webhook details
-*WebhooksApi* | [**get_webhooks**](docs/WebhooksApi.md#get_webhooks) | **GET** /webhooks | Get all webhooks
-*WebhooksApi* | [**update_webhook**](docs/WebhooksApi.md#update_webhook) | **PUT** /webhooks/{webhookId} | Update a webhook
-*WhatsAppCampaignsApi* | [**create_whats_app_campaign**](docs/WhatsAppCampaignsApi.md#create_whats_app_campaign) | **POST** /whatsappCampaigns | Create and Send a WhatsApp campaign
-*WhatsAppCampaignsApi* | [**create_whats_app_template**](docs/WhatsAppCampaignsApi.md#create_whats_app_template) | **POST** /whatsppCampaigns/template | Create a WhatsApp template
-*WhatsAppCampaignsApi* | [**delete_whats_app_campaign**](docs/WhatsAppCampaignsApi.md#delete_whats_app_campaign) | **DELETE** /whatsappCampaigns/{campaignId} | Delete a WhatsApp campaign
-*WhatsAppCampaignsApi* | [**get_whats_app_campaign**](docs/WhatsAppCampaignsApi.md#get_whats_app_campaign) | **GET** /whatsappCampaigns/{campaignId} | Get a WhatsApp campaign
-*WhatsAppCampaignsApi* | [**get_whats_app_campaigns**](docs/WhatsAppCampaignsApi.md#get_whats_app_campaigns) | **GET** /whatsappCampaigns | Return all your created WhatsApp campaigns
-*WhatsAppCampaignsApi* | [**get_whats_app_config**](docs/WhatsAppCampaignsApi.md#get_whats_app_config) | **GET** /whatsappCampaigns/config | Get your WhatsApp API account information
-*WhatsAppCampaignsApi* | [**get_whats_app_templates**](docs/WhatsAppCampaignsApi.md#get_whats_app_templates) | **GET** /whatsappCampaigns/template-list | Return all your created WhatsApp templates
-*WhatsAppCampaignsApi* | [**send_whats_app_template_approval**](docs/WhatsAppCampaignsApi.md#send_whats_app_template_approval) | **POST** /whatsappCampaigns/template/approval/{templateId} | Send your WhatsApp template for approval
-*WhatsAppCampaignsApi* | [**update_whats_app_campaign**](docs/WhatsAppCampaignsApi.md#update_whats_app_campaign) | **PUT** /whatsappCampaigns/{campaignId} | Update a WhatsApp campaign
-
-
-## Documentation For Models
-
- - [AbTestCampaignResult](docs/AbTestCampaignResult.md)
- - [AbTestCampaignResultClickedLinks](docs/AbTestCampaignResultClickedLinks.md)
- - [AbTestCampaignResultStatistics](docs/AbTestCampaignResultStatistics.md)
- - [AbTestVersionClicks](docs/AbTestVersionClicks.md)
- - [AbTestVersionClicksInner](docs/AbTestVersionClicksInner.md)
- - [AbTestVersionStats](docs/AbTestVersionStats.md)
- - [AddChildDomain](docs/AddChildDomain.md)
- - [AddContactToList](docs/AddContactToList.md)
- - [AddSubscriptionMemberPayload](docs/AddSubscriptionMemberPayload.md)
- - [AggregateBalance](docs/AggregateBalance.md)
- - [AuthenticateDomainModel](docs/AuthenticateDomainModel.md)
- - [Balance](docs/Balance.md)
- - [BalanceDataPerContact](docs/BalanceDataPerContact.md)
- - [BalanceDefinition](docs/BalanceDefinition.md)
- - [BalanceDefinitionPage](docs/BalanceDefinitionPage.md)
- - [BalanceLimit](docs/BalanceLimit.md)
- - [BalanceOrder](docs/BalanceOrder.md)
- - [BlockDomain](docs/BlockDomain.md)
- - [Body](docs/Body.md)
- - [Body1](docs/Body1.md)
- - [Body10](docs/Body10.md)
- - [Body11](docs/Body11.md)
- - [Body12](docs/Body12.md)
- - [Body13](docs/Body13.md)
- - [Body14](docs/Body14.md)
- - [Body15](docs/Body15.md)
- - [Body16](docs/Body16.md)
- - [Body17](docs/Body17.md)
- - [Body18](docs/Body18.md)
- - [Body19](docs/Body19.md)
- - [Body2](docs/Body2.md)
- - [Body3](docs/Body3.md)
- - [Body4](docs/Body4.md)
- - [Body5](docs/Body5.md)
- - [Body6](docs/Body6.md)
- - [Body7](docs/Body7.md)
- - [Body8](docs/Body8.md)
- - [Body9](docs/Body9.md)
- - [BodyVariablesItems](docs/BodyVariablesItems.md)
- - [Cart](docs/Cart.md)
- - [CompaniesList](docs/CompaniesList.md)
- - [Company](docs/Company.md)
- - [CompanyAttributes](docs/CompanyAttributes.md)
- - [CompanyAttributesInner](docs/CompanyAttributesInner.md)
- - [ComponentItems](docs/ComponentItems.md)
- - [Configuration](docs/Configuration.md)
- - [ContactBalancesResp](docs/ContactBalancesResp.md)
- - [ContactErrorModel](docs/ContactErrorModel.md)
- - [ConversationsMessage](docs/ConversationsMessage.md)
- - [ConversationsMessageAttachments](docs/ConversationsMessageAttachments.md)
- - [ConversationsMessageFile](docs/ConversationsMessageFile.md)
- - [ConversationsMessageFileImageInfo](docs/ConversationsMessageFileImageInfo.md)
- - [ConversationsMessageForwardedToSourceStatus](docs/ConversationsMessageForwardedToSourceStatus.md)
- - [ConversationsMessageFrom](docs/ConversationsMessageFrom.md)
- - [ConversationsMessageReplyTo](docs/ConversationsMessageReplyTo.md)
- - [ConversationsMessageTo](docs/ConversationsMessageTo.md)
- - [ConversionSourceMetrics](docs/ConversionSourceMetrics.md)
- - [ConversionSourceProduct](docs/ConversionSourceProduct.md)
- - [CorporateGroupDetailsResponse](docs/CorporateGroupDetailsResponse.md)
- - [CorporateGroupDetailsResponseGroup](docs/CorporateGroupDetailsResponseGroup.md)
- - [CorporateGroupDetailsResponseSubaccounts](docs/CorporateGroupDetailsResponseSubaccounts.md)
- - [CorporateGroupDetailsResponseUsers](docs/CorporateGroupDetailsResponseUsers.md)
- - [CorporateuseremailpermissionsPrivileges](docs/CorporateuseremailpermissionsPrivileges.md)
- - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
- - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
- - [CreateAttribute](docs/CreateAttribute.md)
- - [CreateAttributeEnumeration](docs/CreateAttributeEnumeration.md)
- - [CreateBalanceDefinitionPayload](docs/CreateBalanceDefinitionPayload.md)
- - [CreateBalanceLimitPayload](docs/CreateBalanceLimitPayload.md)
- - [CreateBalancePayload](docs/CreateBalancePayload.md)
- - [CreateCategoryModel](docs/CreateCategoryModel.md)
- - [CreateChild](docs/CreateChild.md)
- - [CreateContact](docs/CreateContact.md)
- - [CreateCouponCollection](docs/CreateCouponCollection.md)
- - [CreateCoupons](docs/CreateCoupons.md)
- - [CreateDoiContact](docs/CreateDoiContact.md)
- - [CreateDomain](docs/CreateDomain.md)
- - [CreateDomainModel](docs/CreateDomainModel.md)
- - [CreateDomainModelDnsRecords](docs/CreateDomainModelDnsRecords.md)
- - [CreateDomainModelDnsRecordsDkimRecord](docs/CreateDomainModelDnsRecordsDkimRecord.md)
- - [CreateEmailCampaign](docs/CreateEmailCampaign.md)
- - [CreateEmailCampaignEmailExpirationDate](docs/CreateEmailCampaignEmailExpirationDate.md)
- - [CreateEmailCampaignRecipients](docs/CreateEmailCampaignRecipients.md)
- - [CreateEmailCampaignSender](docs/CreateEmailCampaignSender.md)
- - [CreateExternalFeed](docs/CreateExternalFeed.md)
- - [CreateList](docs/CreateList.md)
- - [CreateLoyaltyProgramPayload](docs/CreateLoyaltyProgramPayload.md)
- - [CreateModel](docs/CreateModel.md)
- - [CreateOrderPayload](docs/CreateOrderPayload.md)
- - [CreatePaymentRequest](docs/CreatePaymentRequest.md)
- - [CreatePaymentResponse](docs/CreatePaymentResponse.md)
- - [CreateProductModel](docs/CreateProductModel.md)
- - [CreateSender](docs/CreateSender.md)
- - [CreateSenderIps](docs/CreateSenderIps.md)
- - [CreateSenderModel](docs/CreateSenderModel.md)
- - [CreateSmsCampaign](docs/CreateSmsCampaign.md)
- - [CreateSmsCampaignRecipients](docs/CreateSmsCampaignRecipients.md)
- - [CreateSmtpEmail](docs/CreateSmtpEmail.md)
- - [CreateSmtpTemplate](docs/CreateSmtpTemplate.md)
- - [CreateSmtpTemplateSender](docs/CreateSmtpTemplateSender.md)
- - [CreateSubAccount](docs/CreateSubAccount.md)
- - [CreateSubAccountResponse](docs/CreateSubAccountResponse.md)
- - [CreateSubscriptionPayload](docs/CreateSubscriptionPayload.md)
- - [CreateSubscriptionResponse](docs/CreateSubscriptionResponse.md)
- - [CreateTierGroupRequest](docs/CreateTierGroupRequest.md)
- - [CreateTransactionPayload](docs/CreateTransactionPayload.md)
- - [CreateUpdateBatchCategory](docs/CreateUpdateBatchCategory.md)
- - [CreateUpdateBatchCategoryModel](docs/CreateUpdateBatchCategoryModel.md)
- - [CreateUpdateBatchProducts](docs/CreateUpdateBatchProducts.md)
- - [CreateUpdateBatchProductsModel](docs/CreateUpdateBatchProductsModel.md)
- - [CreateUpdateCategories](docs/CreateUpdateCategories.md)
- - [CreateUpdateCategory](docs/CreateUpdateCategory.md)
- - [CreateUpdateContactModel](docs/CreateUpdateContactModel.md)
- - [CreateUpdateFolder](docs/CreateUpdateFolder.md)
- - [CreateUpdateProduct](docs/CreateUpdateProduct.md)
- - [CreateUpdateProducts](docs/CreateUpdateProducts.md)
- - [CreateWebhook](docs/CreateWebhook.md)
- - [CreateWhatsAppCampaign](docs/CreateWhatsAppCampaign.md)
- - [CreateWhatsAppCampaignRecipients](docs/CreateWhatsAppCampaignRecipients.md)
- - [CreateWhatsAppTemplate](docs/CreateWhatsAppTemplate.md)
- - [CreatedBatchId](docs/CreatedBatchId.md)
- - [CreatedProcessId](docs/CreatedProcessId.md)
- - [Deal](docs/Deal.md)
- - [DealAttributes](docs/DealAttributes.md)
- - [DealAttributesInner](docs/DealAttributesInner.md)
- - [DealsList](docs/DealsList.md)
- - [DeleteHardbounces](docs/DeleteHardbounces.md)
- - [EmailExportRecipients](docs/EmailExportRecipients.md)
- - [ErrorModel](docs/ErrorModel.md)
- - [ErrorResponse](docs/ErrorResponse.md)
- - [Event](docs/Event.md)
- - [EventIdentifiers](docs/EventIdentifiers.md)
- - [ExportWebhooksHistory](docs/ExportWebhooksHistory.md)
- - [FetchTemplatePreview](docs/FetchTemplatePreview.md)
- - [FileData](docs/FileData.md)
- - [FileDownloadableLink](docs/FileDownloadableLink.md)
- - [FileList](docs/FileList.md)
- - [GetAccountActivity](docs/GetAccountActivity.md)
- - [GetAccountActivityLogs](docs/GetAccountActivityLogs.md)
- - [GetAccountMarketingAutomation](docs/GetAccountMarketingAutomation.md)
- - [GetAccountPlan](docs/GetAccountPlan.md)
- - [GetAccountRelay](docs/GetAccountRelay.md)
- - [GetAccountRelayData](docs/GetAccountRelayData.md)
- - [GetAggregatedReport](docs/GetAggregatedReport.md)
- - [GetAllExternalFeeds](docs/GetAllExternalFeeds.md)
- - [GetAllExternalFeedsFeeds](docs/GetAllExternalFeedsFeeds.md)
- - [GetAttributes](docs/GetAttributes.md)
- - [GetAttributesAttributes](docs/GetAttributesAttributes.md)
- - [GetAttributesEnumeration](docs/GetAttributesEnumeration.md)
- - [GetBlockedDomains](docs/GetBlockedDomains.md)
- - [GetCampaignOverview](docs/GetCampaignOverview.md)
- - [GetCampaignRecipients](docs/GetCampaignRecipients.md)
- - [GetCampaignStats](docs/GetCampaignStats.md)
- - [GetCategories](docs/GetCategories.md)
- - [GetCategoryDetails](docs/GetCategoryDetails.md)
- - [GetChildDomain](docs/GetChildDomain.md)
- - [GetClient](docs/GetClient.md)
- - [GetContactCampaignStats](docs/GetContactCampaignStats.md)
- - [GetContactCampaignStatsClicked](docs/GetContactCampaignStatsClicked.md)
- - [GetContactCampaignStatsOpened](docs/GetContactCampaignStatsOpened.md)
- - [GetContactCampaignStatsTransacAttributes](docs/GetContactCampaignStatsTransacAttributes.md)
- - [GetContactCampaignStatsUnsubscriptions](docs/GetContactCampaignStatsUnsubscriptions.md)
- - [GetContactDetails](docs/GetContactDetails.md)
- - [GetContacts](docs/GetContacts.md)
- - [GetCorporateInvitedUsersList](docs/GetCorporateInvitedUsersList.md)
- - [GetCorporateInvitedUsersListFeatureAccess](docs/GetCorporateInvitedUsersListFeatureAccess.md)
- - [GetCorporateInvitedUsersListGroups](docs/GetCorporateInvitedUsersListGroups.md)
- - [GetCorporateInvitedUsersListUsers](docs/GetCorporateInvitedUsersListUsers.md)
- - [GetCorporateUserPermission](docs/GetCorporateUserPermission.md)
- - [GetCorporateUserPermissionFeatureAccess](docs/GetCorporateUserPermissionFeatureAccess.md)
- - [GetCorporateUserPermissionGroups](docs/GetCorporateUserPermissionGroups.md)
- - [GetCouponCollection](docs/GetCouponCollection.md)
- - [GetDeviceBrowserStats](docs/GetDeviceBrowserStats.md)
- - [GetDomainConfigurationModel](docs/GetDomainConfigurationModel.md)
- - [GetDomainsList](docs/GetDomainsList.md)
- - [GetDomainsListDomains](docs/GetDomainsListDomains.md)
- - [GetEmailCampaigns](docs/GetEmailCampaigns.md)
- - [GetEmailEventReport](docs/GetEmailEventReport.md)
- - [GetEmailEventReportEvents](docs/GetEmailEventReportEvents.md)
- - [GetExtendedCampaignOverviewSender](docs/GetExtendedCampaignOverviewSender.md)
- - [GetExtendedCampaignStats](docs/GetExtendedCampaignStats.md)
- - [GetExtendedClientAddress](docs/GetExtendedClientAddress.md)
- - [GetExtendedContactDetailsStatistics](docs/GetExtendedContactDetailsStatistics.md)
- - [GetExtendedContactDetailsStatisticsClicked](docs/GetExtendedContactDetailsStatisticsClicked.md)
- - [GetExtendedContactDetailsStatisticsDelivered](docs/GetExtendedContactDetailsStatisticsDelivered.md)
- - [GetExtendedContactDetailsStatisticsLinks](docs/GetExtendedContactDetailsStatisticsLinks.md)
- - [GetExtendedContactDetailsStatisticsMessagesSent](docs/GetExtendedContactDetailsStatisticsMessagesSent.md)
- - [GetExtendedContactDetailsStatisticsOpened](docs/GetExtendedContactDetailsStatisticsOpened.md)
- - [GetExtendedContactDetailsStatisticsUnsubscriptions](docs/GetExtendedContactDetailsStatisticsUnsubscriptions.md)
- - [GetExtendedContactDetailsStatisticsUnsubscriptionsAdminUnsubscription](docs/GetExtendedContactDetailsStatisticsUnsubscriptionsAdminUnsubscription.md)
- - [GetExtendedContactDetailsStatisticsUnsubscriptionsUserUnsubscription](docs/GetExtendedContactDetailsStatisticsUnsubscriptionsUserUnsubscription.md)
- - [GetExtendedListCampaignStats](docs/GetExtendedListCampaignStats.md)
- - [GetExternalFeedByUUID](docs/GetExternalFeedByUUID.md)
- - [GetExternalFeedByUUIDHeaders](docs/GetExternalFeedByUUIDHeaders.md)
- - [GetFolder](docs/GetFolder.md)
- - [GetFolderLists](docs/GetFolderLists.md)
- - [GetFolders](docs/GetFolders.md)
- - [GetInboundEmailEvents](docs/GetInboundEmailEvents.md)
- - [GetInboundEmailEventsByUuid](docs/GetInboundEmailEventsByUuid.md)
- - [GetInboundEmailEventsByUuidAttachments](docs/GetInboundEmailEventsByUuidAttachments.md)
- - [GetInboundEmailEventsByUuidLogs](docs/GetInboundEmailEventsByUuidLogs.md)
- - [GetInboundEmailEventsEvents](docs/GetInboundEmailEventsEvents.md)
- - [GetInvitedUsersList](docs/GetInvitedUsersList.md)
- - [GetInvitedUsersListFeatureAccess](docs/GetInvitedUsersListFeatureAccess.md)
- - [GetInvitedUsersListUsers](docs/GetInvitedUsersListUsers.md)
- - [GetIp](docs/GetIp.md)
- - [GetIpFromSender](docs/GetIpFromSender.md)
- - [GetIps](docs/GetIps.md)
- - [GetIpsFromSender](docs/GetIpsFromSender.md)
- - [GetList](docs/GetList.md)
- - [GetLists](docs/GetLists.md)
- - [GetOrders](docs/GetOrders.md)
- - [GetPaymentRequest](docs/GetPaymentRequest.md)
- - [GetProcess](docs/GetProcess.md)
- - [GetProcesses](docs/GetProcesses.md)
- - [GetProductDetails](docs/GetProductDetails.md)
- - [GetProducts](docs/GetProducts.md)
- - [GetReports](docs/GetReports.md)
- - [GetReportsReports](docs/GetReportsReports.md)
- - [GetScheduledEmailByBatchId](docs/GetScheduledEmailByBatchId.md)
- - [GetScheduledEmailByBatchIdBatches](docs/GetScheduledEmailByBatchIdBatches.md)
- - [GetScheduledEmailByMessageId](docs/GetScheduledEmailByMessageId.md)
- - [GetSegment](docs/GetSegment.md)
- - [GetSegments](docs/GetSegments.md)
- - [GetSendersList](docs/GetSendersList.md)
- - [GetSendersListIps](docs/GetSendersListIps.md)
- - [GetSendersListSenders](docs/GetSendersListSenders.md)
- - [GetSharedTemplateUrl](docs/GetSharedTemplateUrl.md)
- - [GetSmsCampaignOverview](docs/GetSmsCampaignOverview.md)
- - [GetSmsCampaignStats](docs/GetSmsCampaignStats.md)
- - [GetSmsCampaigns](docs/GetSmsCampaigns.md)
- - [GetSmsEventReport](docs/GetSmsEventReport.md)
- - [GetSmsEventReportEvents](docs/GetSmsEventReportEvents.md)
- - [GetSmtpTemplateOverview](docs/GetSmtpTemplateOverview.md)
- - [GetSmtpTemplateOverviewSender](docs/GetSmtpTemplateOverviewSender.md)
- - [GetSmtpTemplates](docs/GetSmtpTemplates.md)
- - [GetSsoToken](docs/GetSsoToken.md)
- - [GetStatsByBrowser](docs/GetStatsByBrowser.md)
- - [GetStatsByDevice](docs/GetStatsByDevice.md)
- - [GetStatsByDomain](docs/GetStatsByDomain.md)
- - [GetTransacAggregatedSmsReport](docs/GetTransacAggregatedSmsReport.md)
- - [GetTransacBlockedContacts](docs/GetTransacBlockedContacts.md)
- - [GetTransacBlockedContactsContacts](docs/GetTransacBlockedContactsContacts.md)
- - [GetTransacBlockedContactsReason](docs/GetTransacBlockedContactsReason.md)
- - [GetTransacEmailContent](docs/GetTransacEmailContent.md)
- - [GetTransacEmailContentEvents](docs/GetTransacEmailContentEvents.md)
- - [GetTransacEmailsList](docs/GetTransacEmailsList.md)
- - [GetTransacEmailsListTransactionalEmails](docs/GetTransacEmailsListTransactionalEmails.md)
- - [GetTransacSmsReport](docs/GetTransacSmsReport.md)
- - [GetTransacSmsReportReports](docs/GetTransacSmsReportReports.md)
- - [GetUserPermission](docs/GetUserPermission.md)
- - [GetUserPermissionPrivileges](docs/GetUserPermissionPrivileges.md)
- - [GetWATemplates](docs/GetWATemplates.md)
- - [GetWATemplatesTemplates](docs/GetWATemplatesTemplates.md)
- - [GetWebhook](docs/GetWebhook.md)
- - [GetWebhookAuth](docs/GetWebhookAuth.md)
- - [GetWebhookHeaders](docs/GetWebhookHeaders.md)
- - [GetWebhooks](docs/GetWebhooks.md)
- - [GetWhatsAppConfig](docs/GetWhatsAppConfig.md)
- - [GetWhatsappCampaignOverview](docs/GetWhatsappCampaignOverview.md)
- - [GetWhatsappCampaigns](docs/GetWhatsappCampaigns.md)
- - [GetWhatsappCampaignsCampaigns](docs/GetWhatsappCampaignsCampaigns.md)
- - [GetWhatsappEventReport](docs/GetWhatsappEventReport.md)
- - [GetWhatsappEventReportEvents](docs/GetWhatsappEventReportEvents.md)
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
- - [InlineResponse2002](docs/InlineResponse2002.md)
- - [InlineResponse2003](docs/InlineResponse2003.md)
- - [InlineResponse2004](docs/InlineResponse2004.md)
- - [InlineResponse2005](docs/InlineResponse2005.md)
- - [InlineResponse2006](docs/InlineResponse2006.md)
- - [InlineResponse2006Totals](docs/InlineResponse2006Totals.md)
- - [InlineResponse2007](docs/InlineResponse2007.md)
- - [InlineResponse2008](docs/InlineResponse2008.md)
- - [InlineResponse2009](docs/InlineResponse2009.md)
- - [InlineResponse201](docs/InlineResponse201.md)
- - [InlineResponse2011](docs/InlineResponse2011.md)
- - [InlineResponse2012](docs/InlineResponse2012.md)
- - [InlineResponse2013](docs/InlineResponse2013.md)
- - [InlineResponse2014](docs/InlineResponse2014.md)
- - [InlineResponse2015](docs/InlineResponse2015.md)
- - [InlineResponse400](docs/InlineResponse400.md)
- - [InviteAdminUser](docs/InviteAdminUser.md)
- - [InviteAdminUserPrivileges](docs/InviteAdminUserPrivileges.md)
- - [Inviteuser](docs/Inviteuser.md)
- - [InviteuserPrivileges](docs/InviteuserPrivileges.md)
- - [LoyaltyProgram](docs/LoyaltyProgram.md)
- - [LoyaltyProgramPage](docs/LoyaltyProgramPage.md)
- - [LoyaltyProgramValidationError](docs/LoyaltyProgramValidationError.md)
- - [LoyaltyTierPage](docs/LoyaltyTierPage.md)
- - [MainAttributeRewardPayload](docs/MainAttributeRewardPayload.md)
- - [MainBillingPayload](docs/MainBillingPayload.md)
- - [MainCodeCountHttpResponse](docs/MainCodeCountHttpResponse.md)
- - [MainCreateRedeemPayload](docs/MainCreateRedeemPayload.md)
- - [MainCreateRewardPayload](docs/MainCreateRewardPayload.md)
- - [MainCreateRewardResponse](docs/MainCreateRewardResponse.md)
- - [MainErrorResponse](docs/MainErrorResponse.md)
- - [MainFilter](docs/MainFilter.md)
- - [MainGenerator](docs/MainGenerator.md)
- - [MainGetContactRewardsPayload](docs/MainGetContactRewardsPayload.md)
- - [MainIdentifiersPayload](docs/MainIdentifiersPayload.md)
- - [MainLimit](docs/MainLimit.md)
- - [MainModelContactReward](docs/MainModelContactReward.md)
- - [MainModelContactRewardsResp](docs/MainModelContactRewardsResp.md)
- - [MainNodeResponse](docs/MainNodeResponse.md)
- - [MainOrderPayload](docs/MainOrderPayload.md)
- - [MainProduct](docs/MainProduct.md)
- - [MainProductPayload](docs/MainProductPayload.md)
- - [MainRedeem](docs/MainRedeem.md)
- - [MainResultParameterResponse](docs/MainResultParameterResponse.md)
- - [MainReward](docs/MainReward.md)
- - [MainRewardAttribution](docs/MainRewardAttribution.md)
- - [MainRewardConfigurations](docs/MainRewardConfigurations.md)
- - [MainRewardPage](docs/MainRewardPage.md)
- - [MainRewardPageObj](docs/MainRewardPageObj.md)
- - [MainRewardValidate](docs/MainRewardValidate.md)
- - [MainRule](docs/MainRule.md)
- - [MainRuleConditionResponse](docs/MainRuleConditionResponse.md)
- - [MainRuleEventResponse](docs/MainRuleEventResponse.md)
- - [MainRuleResultResponse](docs/MainRuleResultResponse.md)
- - [MainValidateRewardPayload](docs/MainValidateRewardPayload.md)
- - [MainValueResponse](docs/MainValueResponse.md)
- - [MainVoucherRevokePayload](docs/MainVoucherRevokePayload.md)
- - [MasterDetailsResponse](docs/MasterDetailsResponse.md)
- - [MasterDetailsResponseBillingInfo](docs/MasterDetailsResponseBillingInfo.md)
- - [MasterDetailsResponseBillingInfoAddress](docs/MasterDetailsResponseBillingInfoAddress.md)
- - [MasterDetailsResponseBillingInfoName](docs/MasterDetailsResponseBillingInfoName.md)
- - [MasterDetailsResponsePlanInfo](docs/MasterDetailsResponsePlanInfo.md)
- - [MasterDetailsResponsePlanInfoFeatures](docs/MasterDetailsResponsePlanInfoFeatures.md)
- - [MemberContact](docs/MemberContact.md)
- - [ModelSubscriptionBalanceResp](docs/ModelSubscriptionBalanceResp.md)
- - [Note](docs/Note.md)
- - [NoteData](docs/NoteData.md)
- - [NoteId](docs/NoteId.md)
- - [NoteList](docs/NoteList.md)
- - [Notification](docs/Notification.md)
- - [Order](docs/Order.md)
- - [OrderBatch](docs/OrderBatch.md)
- - [OrderBilling](docs/OrderBilling.md)
- - [OrderIdentifiers](docs/OrderIdentifiers.md)
- - [OrderProducts](docs/OrderProducts.md)
- - [Otp](docs/Otp.md)
- - [PatchLoyaltyProgramPayload](docs/PatchLoyaltyProgramPayload.md)
- - [Pipeline](docs/Pipeline.md)
- - [PipelineStage](docs/PipelineStage.md)
- - [Pipelines](docs/Pipelines.md)
- - [PostContactInfo](docs/PostContactInfo.md)
- - [PostContactInfoContacts](docs/PostContactInfoContacts.md)
- - [PostSendFailed](docs/PostSendFailed.md)
- - [PostSendSmsTestFailed](docs/PostSendSmsTestFailed.md)
- - [PutRevokeUserPermission](docs/PutRevokeUserPermission.md)
- - [Putresendcancelinvitation](docs/Putresendcancelinvitation.md)
- - [RemoveContactFromList](docs/RemoveContactFromList.md)
- - [RequestContactExport](docs/RequestContactExport.md)
- - [RequestContactExportCustomContactFilter](docs/RequestContactExportCustomContactFilter.md)
- - [RequestContactImport](docs/RequestContactImport.md)
- - [RequestContactImportJsonBody](docs/RequestContactImportJsonBody.md)
- - [RequestContactImportNewList](docs/RequestContactImportNewList.md)
- - [RequestSmsRecipientExport](docs/RequestSmsRecipientExport.md)
- - [ScheduleSmtpEmail](docs/ScheduleSmtpEmail.md)
- - [SendReport](docs/SendReport.md)
- - [SendReportEmail](docs/SendReportEmail.md)
- - [SendSms](docs/SendSms.md)
- - [SendSmtpEmail](docs/SendSmtpEmail.md)
- - [SendSmtpEmailAttachment](docs/SendSmtpEmailAttachment.md)
- - [SendSmtpEmailBcc](docs/SendSmtpEmailBcc.md)
- - [SendSmtpEmailCc](docs/SendSmtpEmailCc.md)
- - [SendSmtpEmailMessageVersions](docs/SendSmtpEmailMessageVersions.md)
- - [SendSmtpEmailReplyTo](docs/SendSmtpEmailReplyTo.md)
- - [SendSmtpEmailReplyTo1](docs/SendSmtpEmailReplyTo1.md)
- - [SendSmtpEmailSender](docs/SendSmtpEmailSender.md)
- - [SendSmtpEmailTo](docs/SendSmtpEmailTo.md)
- - [SendSmtpEmailTo1](docs/SendSmtpEmailTo1.md)
- - [SendTestEmail](docs/SendTestEmail.md)
- - [SendTestSms](docs/SendTestSms.md)
- - [SendTransacSms](docs/SendTransacSms.md)
- - [SendTransacSmsTag](docs/SendTransacSmsTag.md)
- - [SendWhatsappMessage](docs/SendWhatsappMessage.md)
- - [SetConfigDisplayCurrency](docs/SetConfigDisplayCurrency.md)
- - [SsoTokenRequest](docs/SsoTokenRequest.md)
- - [SsoTokenRequestCorporate](docs/SsoTokenRequestCorporate.md)
- - [SubAccountAppsToggleRequest](docs/SubAccountAppsToggleRequest.md)
- - [SubAccountDetailsResponse](docs/SubAccountDetailsResponse.md)
- - [SubAccountDetailsResponseGroups](docs/SubAccountDetailsResponseGroups.md)
- - [SubAccountDetailsResponsePlanInfo](docs/SubAccountDetailsResponsePlanInfo.md)
- - [SubAccountDetailsResponsePlanInfoCredits](docs/SubAccountDetailsResponsePlanInfoCredits.md)
- - [SubAccountDetailsResponsePlanInfoCreditsEmails](docs/SubAccountDetailsResponsePlanInfoCreditsEmails.md)
- - [SubAccountDetailsResponsePlanInfoCreditsExternalFeeds](docs/SubAccountDetailsResponsePlanInfoCreditsExternalFeeds.md)
- - [SubAccountDetailsResponsePlanInfoCreditsSms](docs/SubAccountDetailsResponsePlanInfoCreditsSms.md)
- - [SubAccountDetailsResponsePlanInfoCreditsWhatsapp](docs/SubAccountDetailsResponsePlanInfoCreditsWhatsapp.md)
- - [SubAccountDetailsResponsePlanInfoCreditsWpSubscribers](docs/SubAccountDetailsResponsePlanInfoCreditsWpSubscribers.md)
- - [SubAccountDetailsResponsePlanInfoFeatures](docs/SubAccountDetailsResponsePlanInfoFeatures.md)
- - [SubAccountDetailsResponsePlanInfoFeaturesInbox](docs/SubAccountDetailsResponsePlanInfoFeaturesInbox.md)
- - [SubAccountDetailsResponsePlanInfoFeaturesLandingPage](docs/SubAccountDetailsResponsePlanInfoFeaturesLandingPage.md)
- - [SubAccountDetailsResponsePlanInfoFeaturesSalesUsers](docs/SubAccountDetailsResponsePlanInfoFeaturesSalesUsers.md)
- - [SubAccountDetailsResponsePlanInfoFeaturesUsers](docs/SubAccountDetailsResponsePlanInfoFeaturesUsers.md)
- - [SubAccountUpdatePlanRequest](docs/SubAccountUpdatePlanRequest.md)
- - [SubAccountUpdatePlanRequestCredits](docs/SubAccountUpdatePlanRequestCredits.md)
- - [SubAccountUpdatePlanRequestFeatures](docs/SubAccountUpdatePlanRequestFeatures.md)
- - [SubAccountsResponse](docs/SubAccountsResponse.md)
- - [SubAccountsResponseGroups](docs/SubAccountsResponseGroups.md)
- - [SubAccountsResponseSubAccounts](docs/SubAccountsResponseSubAccounts.md)
- - [SubAccountsUpdatePlanRequest](docs/SubAccountsUpdatePlanRequest.md)
- - [SubAccountsUpdatePlanRequestCredits](docs/SubAccountsUpdatePlanRequestCredits.md)
- - [SubAccountsUpdatePlanRequestFeatures](docs/SubAccountsUpdatePlanRequestFeatures.md)
- - [Subscription](docs/Subscription.md)
- - [SubscriptionAggregateBalance](docs/SubscriptionAggregateBalance.md)
- - [SubscriptionAttributedReward](docs/SubscriptionAttributedReward.md)
- - [SubscriptionBalances](docs/SubscriptionBalances.md)
- - [SubscriptionHandlerInfo](docs/SubscriptionHandlerInfo.md)
- - [SubscriptionMember](docs/SubscriptionMember.md)
- - [SubscriptionTier](docs/SubscriptionTier.md)
- - [Task](docs/Task.md)
- - [TaskList](docs/TaskList.md)
- - [TaskReminder](docs/TaskReminder.md)
- - [TaskTypes](docs/TaskTypes.md)
- - [TemplatePreview](docs/TemplatePreview.md)
- - [Tier](docs/Tier.md)
- - [TierAccessConditions](docs/TierAccessConditions.md)
- - [TierForContact](docs/TierForContact.md)
- - [TierGroup](docs/TierGroup.md)
- - [TierGroupPage](docs/TierGroupPage.md)
- - [TierRequest](docs/TierRequest.md)
- - [TierRequestAccessConditions](docs/TierRequestAccessConditions.md)
- - [TierRequestPutPayload](docs/TierRequestPutPayload.md)
- - [TierRequestTierRewards](docs/TierRequestTierRewards.md)
- - [TierTierRewards](docs/TierTierRewards.md)
- - [Transaction](docs/Transaction.md)
- - [TransactionHistory](docs/TransactionHistory.md)
- - [TransactionHistoryResp](docs/TransactionHistoryResp.md)
- - [UnauthorizedResponse](docs/UnauthorizedResponse.md)
- - [UpdateAttribute](docs/UpdateAttribute.md)
- - [UpdateAttributeEnumeration](docs/UpdateAttributeEnumeration.md)
- - [UpdateBalanceDefinitionPayload](docs/UpdateBalanceDefinitionPayload.md)
- - [UpdateBalanceLimitPayload](docs/UpdateBalanceLimitPayload.md)
- - [UpdateBatchContacts](docs/UpdateBatchContacts.md)
- - [UpdateBatchContactsContacts](docs/UpdateBatchContactsContacts.md)
- - [UpdateBatchContactsModel](docs/UpdateBatchContactsModel.md)
- - [UpdateCampaignStatus](docs/UpdateCampaignStatus.md)
- - [UpdateChild](docs/UpdateChild.md)
- - [UpdateContact](docs/UpdateContact.md)
- - [UpdateCouponCollection](docs/UpdateCouponCollection.md)
- - [UpdateEmailCampaign](docs/UpdateEmailCampaign.md)
- - [UpdateEmailCampaignEmailExpirationDate](docs/UpdateEmailCampaignEmailExpirationDate.md)
- - [UpdateEmailCampaignRecipients](docs/UpdateEmailCampaignRecipients.md)
- - [UpdateEmailCampaignSender](docs/UpdateEmailCampaignSender.md)
- - [UpdateExternalFeed](docs/UpdateExternalFeed.md)
- - [UpdateList](docs/UpdateList.md)
- - [UpdateLoyaltyProgramPayload](docs/UpdateLoyaltyProgramPayload.md)
- - [UpdateSender](docs/UpdateSender.md)
- - [UpdateSmsCampaign](docs/UpdateSmsCampaign.md)
- - [UpdateSmtpTemplate](docs/UpdateSmtpTemplate.md)
- - [UpdateSmtpTemplateSender](docs/UpdateSmtpTemplateSender.md)
- - [UpdateTierGroupRequest](docs/UpdateTierGroupRequest.md)
- - [UpdateWebhook](docs/UpdateWebhook.md)
- - [UpdateWhatsAppCampaign](docs/UpdateWhatsAppCampaign.md)
- - [UploadImageModel](docs/UploadImageModel.md)
- - [UploadImageToGallery](docs/UploadImageToGallery.md)
- - [ValidationErrors](docs/ValidationErrors.md)
- - [VariablesItems](docs/VariablesItems.md)
- - [WhatsappCampStats](docs/WhatsappCampStats.md)
- - [WhatsappCampTemplate](docs/WhatsappCampTemplate.md)
- - [GetExtendedCampaignOverview](docs/GetExtendedCampaignOverview.md)
- - [GetExtendedClient](docs/GetExtendedClient.md)
- - [GetExtendedContactDetails](docs/GetExtendedContactDetails.md)
- - [GetExtendedList](docs/GetExtendedList.md)
- - [GetSmsCampaign](docs/GetSmsCampaign.md)
- - [GetAccount](docs/GetAccount.md)
- - [GetEmailCampaign](docs/GetEmailCampaign.md)
-
-
-## Documentation For Authorization
-
-
-## api-key
-
-- **Type**: API key
-- **API key parameter name**: api-key
-- **Location**: HTTP header
-
-## partner-key
-
-- **Type**: API key
-- **API key parameter name**: partner-key
-- **Location**: HTTP header
-
-## Support and Feedback
-
-Be sure to visit the Brevo official [documentation website](https://brevo.readme.io/docs ) for additional information about our API.
-
-If you find a bug, please post the issue on [Github](https://github.com/getbrevo/brevo-python/issues).
-
-As always, if you need additional assistance, drop us a note [here](https://account.brevo.com/support).
-
-## Author
-
-contact@brevo.com
-
+---
 
 ## Installation
 
-```sh
+```bash
 pip install brevo-python
 ```
 
-## Reference
+## Quick start
 
-A full reference for this library is available [here](https://github.com/getbrevo/brevo-python/blob/HEAD/./reference.md).
+```python
+from brevo import Brevo
 
-## Usage
+client = Brevo(api_key="your-api-key")
 
-Instantiate and use the client with the following:
+result = client.transactional_emails.send_a_transactional_email(
+    subject="Hello",
+    text_content="Hello world!",
+    sender={"name": "Sender", "email": "sender@example.com"},
+    to=[{"email": "recipient@example.com"}],
+)
+
+print("Email sent:", result)
+```
+
+---
+
+## Configuration
 
 ```python
 from brevo import Brevo
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
-)
-client.master_account.create_a_new_group_of_sub_accounts(
-    group_name="My group",
+    api_key="your-api-key",
+    timeout=30.0,        # 30 seconds
 )
 ```
 
-## Async Client
+---
 
-The SDK also exports an `async` client so that you can make non-blocking calls to our API. Note that if you are constructing an Async httpx client class to pass into this client, use `httpx.AsyncClient()` instead of `httpx.Client()` (e.g. for the `httpx_client` parameter of this client).
+## Error handling
 
-```python
-import asyncio
-
-from brevo import AsyncBrevo
-
-client = AsyncBrevo(
-    api_key="YOUR_API_KEY",
-)
-
-
-async def main() -> None:
-    await client.master_account.create_a_new_group_of_sub_accounts(
-        group_name="My group",
-    )
-
-
-asyncio.run(main())
-```
-
-## Exception Handling
-
-When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
-will be thrown.
+The SDK raises `ApiError` (or a subclass) for non-success HTTP status codes.
 
 ```python
 from brevo.core.api_error import ApiError
 
 try:
-    client.master_account.create_a_new_group_of_sub_accounts(...)
+    client.transactional_emails.send_a_transactional_email(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
 ```
 
-## Advanced
+**Error properties:**
+- `status_code`: HTTP status code
+- `body`: Parsed error response body
 
-### Access Raw Response Data
+---
 
-The SDK provides access to raw response data, including headers, through the `.with_raw_response` property.
-The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
+## Async client
+
+The SDK exports an `AsyncBrevo` client for non-blocking calls. If you pass a custom httpx client, use `httpx.AsyncClient()` instead of `httpx.Client()`.
 
 ```python
-from brevo import Brevo
+import asyncio
+from brevo import AsyncBrevo
 
-client = Brevo(
-    ...,
-)
-response = (
-    client.master_account.with_raw_response.create_a_new_group_of_sub_accounts(
-        ...
+client = AsyncBrevo(api_key="your-api-key")
+
+async def main() -> None:
+    result = await client.transactional_emails.send_a_transactional_email(
+        subject="Hello",
+        text_content="Hello world!",
+        sender={"name": "Sender", "email": "sender@example.com"},
+        to=[{"email": "recipient@example.com"}],
     )
-)
-print(response.headers)  # access the response headers
-print(response.status_code)  # access the response status code
-print(response.data)  # access the underlying object
+    print("Email sent:", result)
+
+asyncio.run(main())
 ```
 
-### Retries
+---
 
-The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
-retry limit (default: 2).
+## Retries
 
-A request is deemed retryable when any of the following HTTP status codes is returned:
-
-- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
-- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
-- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
-
-Use the `max_retries` request option to configure this behavior.
+Automatic retries with exponential backoff are enabled by default (2 retries).
 
 ```python
-client.master_account.create_a_new_group_of_sub_accounts(..., request_options={
-    "max_retries": 1
+# Client-level
+client = Brevo(
+    api_key="your-api-key",
+)
+
+# Request-level
+client.transactional_emails.send_a_transactional_email(..., request_options={
+    "max_retries": 5
 })
 ```
 
-### Timeouts
+**Retryable status codes:** `408`, `429`, `5xx`
 
-The SDK defaults to a 60 second timeout. You can configure this with a timeout option at the client or request level.
+<details>
+<summary>How retries work</summary>
+
+- Exponential backoff with jitter
+- Can be disabled per request with `max_retries: 0`
+
+</details>
+
+---
+
+## Timeouts
+
+Default timeout is 60 seconds. Configure at client or request level.
 
 ```python
-
 from brevo import Brevo
 
+# Client-level
 client = Brevo(
-    ...,
-    timeout=20.0,
+    api_key="your-api-key",
+    timeout=30.0,
 )
 
-
-# Override timeout for a specific method
-client.master_account.create_a_new_group_of_sub_accounts(..., request_options={
-    "timeout_in_seconds": 1
+# Request-level
+client.transactional_emails.send_a_transactional_email(..., request_options={
+    "timeout_in_seconds": 10
 })
 ```
 
-### Custom Client
+**Recommended values:**
+- Standard API calls: `30-60s` (default)
+- Quick operations: `10-15s`
+- Bulk operations: `120-300s`
 
-You can override the `httpx` client to customize it for your use-case. Some common use-cases include support for proxies
-and transports.
+---
+
+## Request options
+
+### Additional headers
+
+```python
+client.transactional_emails.send_a_transactional_email(..., request_options={
+    "additional_headers": {
+        "X-Custom-Header": "custom-value"
+    }
+})
+```
+
+### Additional query parameters
+
+```python
+client.transactional_emails.send_a_transactional_email(..., request_options={
+    "additional_query_parameters": {
+        "custom_param": "value"
+    }
+})
+```
+
+---
+
+## Raw response access
+
+The SDK provides access to raw response data, including headers, through `.with_raw_response`.
+
+```python
+from brevo import Brevo
+
+client = Brevo(api_key="your-api-key")
+
+response = client.transactional_emails.with_raw_response.send_a_transactional_email(...)
+
+print(response.headers)
+print(response.status_code)
+print(response.data)
+```
+
+---
+
+## Type hints
+
+The SDK ships with full type annotations. All request and response types are importable from the `brevo` package for use in your own type hints.
+
+```python
+from brevo import Brevo
+
+client = Brevo(api_key="your-api-key")
+
+client.transactional_emails.send_a_transactional_email(
+    subject="First email",
+    text_content="Hello world!",
+    sender={"name": "Bob Wilson", "email": "bob.wilson@example.com"},
+    to=[{"email": "sarah.davis@example.com", "name": "Sarah Davis"}],
+)
+```
+
+---
+
+## Custom HTTP client
+
+Override the `httpx` client for proxies, custom transports, or mTLS.
 
 ```python
 import httpx
 from brevo import Brevo
 
 client = Brevo(
-    ...,
+    api_key="your-api-key",
     httpx_client=httpx.Client(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
@@ -1027,12 +225,128 @@ client = Brevo(
 )
 ```
 
+<details>
+<summary>Async custom client</summary>
+
+```python
+import httpx
+from brevo import AsyncBrevo
+
+client = AsyncBrevo(
+    api_key="your-api-key",
+    httpx_client=httpx.AsyncClient(
+        proxy="http://my.test.proxy.example.com",
+    ),
+)
+```
+
+</details>
+
+---
+
+## Requirements
+
+- Python 3.8+
+- `httpx` >= 0.21.2
+- `pydantic` >= 1.9.2
+- `typing_extensions` >= 4.0.0
+
+---
+
+## Migration from v1.x
+
+<details>
+<summary>View migration guide</summary>
+
+This version includes breaking changes.
+
+**Key changes:**
+- New client initialization via single `Brevo(api_key="...")` entry point
+- Native async support with `AsyncBrevo`
+- Pydantic-based typed models
+- Automatic retries with exponential backoff
+- `httpx` replaces `urllib3`
+
+**Import path:**
+
+| v1.x | v4.x |
+|---|---|
+| `import brevo_python` | `from brevo import Brevo` |
+
+**Client initialization:**
+
+```python
+# v1.x
+import brevo_python
+from brevo_python.rest import ApiException
+
+configuration = brevo_python.Configuration()
+configuration.api_key['api-key'] = 'YOUR_API_KEY'
+api_instance = brevo_python.AccountApi(brevo_python.ApiClient(configuration))
+api_response = api_instance.get_account()
+```
+
+```python
+# v4.x
+from brevo import Brevo
+
+client = Brevo(api_key="YOUR_API_KEY")
+account = client.account.get_your_account_information_plan_and_credits_details()
+```
+
+**Error handling:**
+
+```python
+# v1.x
+from brevo_python.rest import ApiException
+try:
+    api_response = api_instance.get_account()
+except ApiException as e:
+    print("Exception: %s\n" % e)
+```
+
+```python
+# v4.x
+from brevo.core.api_error import ApiError
+try:
+    account = client.account.get_your_account_information_plan_and_credits_details()
+except ApiError as e:
+    print(e.status_code)
+    print(e.body)
+```
+
+**Summary:**
+
+| Area | v1.x (`brevo_python`) | v4.x (`brevo`) |
+|---|---|---|
+| Module | `import brevo_python` | `from brevo import Brevo` |
+| Client | `AccountApi(ApiClient(config))` | `Brevo(api_key="...")` |
+| Config | `Configuration()` + `api_key['api-key']` | Constructor parameter `api_key` |
+| Errors | `ApiException` | `ApiError` with `.status_code`, `.body` |
+| HTTP | `urllib3` | `httpx` |
+| Async | Not available | `AsyncBrevo` |
+| Retries | Not built-in | Automatic with exponential backoff |
+| Timeouts | Manual | 60s default, configurable |
+| Python | 2.7, 3.4+ | 3.8+ |
+| Build | `setup.py` | `pyproject.toml` (Poetry) |
+
+</details>
+
+> [!WARNING]
+> The legacy v1.x SDK (`brevo-python` < 4.0) will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
+
+---
+
 ## Contributing
 
-While we value open-source contributions to this SDK, this library is generated programmatically.
-Additions made directly to this library would have to be moved over to our generation code,
-otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
-a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
-an issue first to discuss with us!
+This library is generated programmatically. Changes made directly to the library would be overwritten. Please open an issue first to discuss changes.
 
-On the other hand, contributions to the README are always very welcome!
+Contributions to this README are always welcome!
+
+---
+
+## Support
+
+- [API Reference](https://developers.brevo.com)
+- [GitHub Issues](https://github.com/getbrevo/brevo-python/issues)
+- [Email Support](mailto:support@brevo.com)
