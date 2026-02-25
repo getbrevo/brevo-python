@@ -1,6 +1,7 @@
 > ⚠️ A new major version of the Brevo Python SDK has been released. Consider [to migrate](https://github.com/getbrevo/brevo-python/tree/v4). The below version will continue to receive support and security updates.
 >
 > **Important: Version 4.x is the current major version.**
+>
 > - For the new SDK (v4.0.0+), use `import brevo`.
 > - The legacy SDK (v3.x and below) used `import brevo_python`.
 
@@ -20,7 +21,7 @@ pip install brevo-python
 
 ## Getting Started
 
-### For SDK v4.0.0 and above (Recommended)
+### For SDK v4.x and above (Recommended)
 
 Import the new package name and initialize the `Brevo` client:
 
