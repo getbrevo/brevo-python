@@ -215,9 +215,9 @@ class WebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ExportWebhooksHistoryResponse:
         """
-        <Note title="This feature is available for Professional and Enterprise plans">
-        To have it activated please send us a request and we will activate it for your account.
-        </Note>
+        <Note>This is an enterprise feature.
+
+        To have it activated please send us a request and we will activate it for your account.</Note>
 
         Exports webhook event history to CSV format for analysis and reporting.
 
@@ -401,6 +401,7 @@ class WebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
+            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -684,9 +685,9 @@ class AsyncWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ExportWebhooksHistoryResponse:
         """
-        <Note title="This feature is available for Professional and Enterprise plans">
-        To have it activated please send us a request and we will activate it for your account.
-        </Note>
+        <Note>This is an enterprise feature.
+
+        To have it activated please send us a request and we will activate it for your account.</Note>
 
         Exports webhook event history to CSV format for analysis and reporting.
 
@@ -888,6 +889,7 @@ class AsyncWebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
+            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks

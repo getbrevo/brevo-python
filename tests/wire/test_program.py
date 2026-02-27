@@ -57,6 +57,14 @@ def test_program_get_parameter_subscription_info() -> None:
     verify_request_count(test_id, "GET", "/loyalty/config/programs/pid/account-info", None, 1)
 
 
+def test_program_delete_contact_subscription() -> None:
+    """Test deleteContactSubscription endpoint with WireMock"""
+    test_id = "program.delete_contact_subscription.0"
+    client = get_client(test_id)
+    client.program.delete_contact_subscription(pid="pid", cid=1)
+    verify_request_count(test_id, "DELETE", "/loyalty/config/programs/pid/contact/1", None, 1)
+
+
 def test_program_publish_loyalty_program() -> None:
     """Test publishLoyaltyProgram endpoint with WireMock"""
     test_id = "program.publish_loyalty_program.0"
