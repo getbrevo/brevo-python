@@ -112,7 +112,7 @@ def test_ecommerce_create_order() -> None:
         amount=308.42,
         created_at="2021-07-29T20:59:23.383Z",
         id="14",
-        products=[{"price": 99.99, "product_id": "P1", "quantity": 10}],
+        products=[{"quantity": 10}],
         status="completed",
         updated_at="2021-07-30T10:59:23.383Z",
     )
@@ -129,7 +129,7 @@ def test_ecommerce_create_batch_order() -> None:
                 "amount": 308.42,
                 "created_at": "2021-07-29T20:59:23.383Z",
                 "id": "14",
-                "products": [{"price": 99.99, "product_id": "P1", "quantity": 10}],
+                "products": [{"quantity": 10}],
                 "status": "completed",
                 "updated_at": "2021-07-30T10:59:23.383Z",
             }

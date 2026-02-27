@@ -23,9 +23,6 @@ from .types.get_contact_balances_response import GetContactBalancesResponse
 from .types.get_loyalty_balance_programs_pid_transaction_history_request_sort import (
     GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort,
 )
-from .types.get_loyalty_balance_programs_pid_transaction_history_request_sort_field import (
-    GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField,
-)
 from .types.get_loyalty_balance_programs_pid_transaction_history_response import (
     GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
 )
@@ -1030,7 +1027,7 @@ class BalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField] = None,
+        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
         filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1055,7 +1052,7 @@ class BalanceClient:
         offset : typing.Optional[int]
             Skip a number of records
 
-        sort_field : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField]
+        sort_field : typing.Optional[typing.Literal["createdAt"]]
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
@@ -1082,7 +1079,7 @@ class BalanceClient:
         client.balance.get_transaction_history_api(
             pid="pid",
             contact_id=1,
-            balance_definition_id="balance_definition_id",
+            balance_definition_id="balanceDefinitionId",
         )
         """
         _response = self._raw_client.get_transaction_history_api(
@@ -2328,7 +2325,7 @@ class AsyncBalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField] = None,
+        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
         filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -2353,7 +2350,7 @@ class AsyncBalanceClient:
         offset : typing.Optional[int]
             Skip a number of records
 
-        sort_field : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField]
+        sort_field : typing.Optional[typing.Literal["createdAt"]]
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
@@ -2385,7 +2382,7 @@ class AsyncBalanceClient:
             await client.balance.get_transaction_history_api(
                 pid="pid",
                 contact_id=1,
-                balance_definition_id="balance_definition_id",
+                balance_definition_id="balanceDefinitionId",
             )
 
 

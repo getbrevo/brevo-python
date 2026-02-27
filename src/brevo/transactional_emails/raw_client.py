@@ -100,7 +100,7 @@ class RawTransactionalEmailsClient:
                 "endDate": end_date,
                 "limit": limit,
                 "offset": offset,
-                "senders": senders,
+                "senders": ",".join(map(str, senders)) if isinstance(senders, (list, tuple, set)) else senders,
                 "sort": sort,
             },
             request_options=request_options,
@@ -777,13 +777,9 @@ class RawTransactionalEmailsClient:
         self, uuid_: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetTransacEmailContentResponse]:
         """
-        <Note title="How to get uuid?">
-        You can get the uuid using either of the following methods:
-
+        <Note title="How to get uuid">You can get the uuid using either of the following methods:
         Send a GET request to https://api.brevo.com/v3/smtp/emails and pass the message_id in the url. Use your api-key to authenticate the request and you will get your uuid as a response.
-
-        The uuid can also be fetched from the transactional logs page in your Brevo account, from the address URL.
-        </Note>
+        The uuid can also be fetched from the transactional logs page in your Brevo account, from the address URL.</Note>
 
         Parameters
         ----------
@@ -1696,7 +1692,7 @@ class AsyncRawTransactionalEmailsClient:
                 "endDate": end_date,
                 "limit": limit,
                 "offset": offset,
-                "senders": senders,
+                "senders": ",".join(map(str, senders)) if isinstance(senders, (list, tuple, set)) else senders,
                 "sort": sort,
             },
             request_options=request_options,
@@ -2373,13 +2369,9 @@ class AsyncRawTransactionalEmailsClient:
         self, uuid_: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetTransacEmailContentResponse]:
         """
-        <Note title="How to get uuid?">
-        You can get the uuid using either of the following methods:
-
+        <Note title="How to get uuid">You can get the uuid using either of the following methods:
         Send a GET request to https://api.brevo.com/v3/smtp/emails and pass the message_id in the url. Use your api-key to authenticate the request and you will get your uuid as a response.
-
-        The uuid can also be fetched from the transactional logs page in your Brevo account, from the address URL.
-        </Note>
+        The uuid can also be fetched from the transactional logs page in your Brevo account, from the address URL.</Note>
 
         Parameters
         ----------
