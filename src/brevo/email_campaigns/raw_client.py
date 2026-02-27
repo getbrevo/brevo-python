@@ -63,11 +63,8 @@ class RawEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetEmailCampaignsResponse]:
         """
-        <Note>
-        The response payload for this endpoint has changed
-
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).
-        </Note>
+        <Note>The response payload for this endpoint has changed
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
 
         Parameters
         ----------
@@ -1277,11 +1274,8 @@ class AsyncRawEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetEmailCampaignsResponse]:
         """
-        <Note>
-        The response payload for this endpoint has changed
-
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).
-        </Note>
+        <Note>The response payload for this endpoint has changed
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
 
         Parameters
         ----------

@@ -67,6 +67,22 @@ def test_companies_create_a_company_deal_attribute() -> None:
     verify_request_count(test_id, "POST", "/crm/attributes", None, 1)
 
 
+def test_companies_delete_an_attribute() -> None:
+    """Test deleteAnAttribute endpoint with WireMock"""
+    test_id = "companies.delete_an_attribute.0"
+    client = get_client(test_id)
+    client.companies.delete_an_attribute(id="id")
+    verify_request_count(test_id, "DELETE", "/crm/attributes/id", None, 1)
+
+
+def test_companies_update_an_attribute() -> None:
+    """Test updateAnAttribute endpoint with WireMock"""
+    test_id = "companies.update_an_attribute.0"
+    client = get_client(test_id)
+    client.companies.update_an_attribute(id="id")
+    verify_request_count(test_id, "PATCH", "/crm/attributes/id", None, 1)
+
+
 def test_companies_get_company_attributes() -> None:
     """Test getCompanyAttributes endpoint with WireMock"""
     test_id = "companies.get_company_attributes.0"

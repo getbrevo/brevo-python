@@ -13,7 +13,7 @@ class UpsertrecordsRequestRecordsItem(UncheckedBaseModel):
     associations: typing.Optional[typing.List[UpsertrecordsRequestRecordsItemAssociationsItem]] = None
     attributes: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
-    Attributes attached with the object record. Only the already created attributes will be used with records. Minimum 1 attribute is required.
+    Attributes attached with the object record. Only the already created attributes will be used with records. Pass the value with the attributes key you want to set or update for the object record. Minimum 1 attribute is required.
     """
 
     identifiers: typing.Optional[UpsertrecordsRequestRecordsItemIdentifiers] = pydantic.Field(default=None)

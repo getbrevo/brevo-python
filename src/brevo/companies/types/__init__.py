@@ -9,6 +9,8 @@ if typing.TYPE_CHECKING:
     from .get_companies_request_sort import GetCompaniesRequestSort
     from .get_companies_response import GetCompaniesResponse
     from .get_crm_attributes_companies_response_item import GetCrmAttributesCompaniesResponseItem
+    from .patch_crm_attributes_id_request_object_type import PatchCrmAttributesIdRequestObjectType
+    from .patch_crm_attributes_id_request_options_labels_item import PatchCrmAttributesIdRequestOptionsLabelsItem
     from .post_companies_import_response import PostCompaniesImportResponse
     from .post_companies_response import PostCompaniesResponse
     from .post_crm_attributes_request_attribute_type import PostCrmAttributesRequestAttributeType
@@ -18,6 +20,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetCompaniesRequestSort": ".get_companies_request_sort",
     "GetCompaniesResponse": ".get_companies_response",
     "GetCrmAttributesCompaniesResponseItem": ".get_crm_attributes_companies_response_item",
+    "PatchCrmAttributesIdRequestObjectType": ".patch_crm_attributes_id_request_object_type",
+    "PatchCrmAttributesIdRequestOptionsLabelsItem": ".patch_crm_attributes_id_request_options_labels_item",
     "PostCompaniesImportResponse": ".post_companies_import_response",
     "PostCompaniesResponse": ".post_companies_response",
     "PostCrmAttributesRequestAttributeType": ".post_crm_attributes_request_attribute_type",
@@ -51,6 +55,8 @@ __all__ = [
     "GetCompaniesRequestSort",
     "GetCompaniesResponse",
     "GetCrmAttributesCompaniesResponseItem",
+    "PatchCrmAttributesIdRequestObjectType",
+    "PatchCrmAttributesIdRequestOptionsLabelsItem",
     "PostCompaniesImportResponse",
     "PostCompaniesResponse",
     "PostCrmAttributesRequestAttributeType",
