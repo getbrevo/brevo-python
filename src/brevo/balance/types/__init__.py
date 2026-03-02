@@ -21,6 +21,9 @@ if typing.TYPE_CHECKING:
     from .get_loyalty_balance_programs_pid_transaction_history_request_sort import (
         GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort,
     )
+    from .get_loyalty_balance_programs_pid_transaction_history_request_sort_field import (
+        GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField,
+    )
     from .get_loyalty_balance_programs_pid_transaction_history_response import (
         GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
     )
@@ -83,6 +86,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetContactBalancesResponse": ".get_contact_balances_response",
     "GetContactBalancesResponseBalancesItem": ".get_contact_balances_response_balances_item",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort": ".get_loyalty_balance_programs_pid_transaction_history_request_sort",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField": ".get_loyalty_balance_programs_pid_transaction_history_request_sort_field",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponse": ".get_loyalty_balance_programs_pid_transaction_history_response",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem": ".get_loyalty_balance_programs_pid_transaction_history_response_transaction_history_item",
     "GetSubscriptionBalancesResponse": ".get_subscription_balances_response",
@@ -141,6 +145,7 @@ __all__ = [
     "GetContactBalancesResponse",
     "GetContactBalancesResponseBalancesItem",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponse",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem",
     "GetSubscriptionBalancesResponse",

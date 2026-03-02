@@ -45,12 +45,20 @@ class TransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        template_id: typing.Optional[int] = OMIT,
+        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendAsyncTransactionalSmsResponse:
         """
-        <Note>If the user includes stop code in the Transactional SMS, then it will be switched to Marketing SMS automatically and it will be interpreted as a Marketing SMS. To send Transactional SMS as Transactional, it is important not to use stop code.
-        Note: For adding a stop code, client has to add reply STOP to [STOP_CODE] and the [STOP_CODE] will be replaced with the number.</Note>
-        <Note title="For end users in France">Transactional SMS can be sent at any time without time restrictions. However, if a message is categorized as Marketing, it must adhere to specific time restrictions. Messages sent outside of these restricted hours will experience delays and will be processed during allowable times. Specifically, Marketing SMS cannot be processed between 10pm and 8am, on Sundays, and on French public holidays.</Note>
+        <Note>
+        If the user includes stop code in the Transactional SMS, then it will be switched to Marketing SMS automatically and it will be interpreted as a Marketing SMS. To send Transactional SMS as Transactional, it is important not to use stop code.
+
+        Note: For adding a stop code, client has to add reply STOP to [STOP_CODE] and the [STOP_CODE] will be replaced with the number.
+        </Note>
+
+        <Note title="For end users in France">
+        Transactional SMS can be sent at any time without time restrictions. However, if a message is categorized as Marketing, it must adhere to specific time restrictions. Messages sent outside of these restricted hours will experience delays and will be processed during allowable times. Specifically, Marketing SMS cannot be processed between 10pm and 8am, on Sundays, and on French public holidays.
+        </Note>
 
         Parameters
         ----------
@@ -74,6 +82,12 @@ class TransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        template_id : typing.Optional[int]
+            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
+
+        content : typing.Optional[str]
+            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -103,6 +117,8 @@ class TransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            template_id=template_id,
+            content=content,
             request_options=request_options,
         )
         return _response.data
@@ -117,6 +133,8 @@ class TransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        template_id: typing.Optional[int] = OMIT,
+        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacSmsResponse:
         """
@@ -142,6 +160,12 @@ class TransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        template_id : typing.Optional[int]
+            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
+
+        content : typing.Optional[str]
+            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -171,6 +195,8 @@ class TransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            template_id=template_id,
+            content=content,
             request_options=request_options,
         )
         return _response.data
@@ -372,12 +398,20 @@ class AsyncTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        template_id: typing.Optional[int] = OMIT,
+        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendAsyncTransactionalSmsResponse:
         """
-        <Note>If the user includes stop code in the Transactional SMS, then it will be switched to Marketing SMS automatically and it will be interpreted as a Marketing SMS. To send Transactional SMS as Transactional, it is important not to use stop code.
-        Note: For adding a stop code, client has to add reply STOP to [STOP_CODE] and the [STOP_CODE] will be replaced with the number.</Note>
-        <Note title="For end users in France">Transactional SMS can be sent at any time without time restrictions. However, if a message is categorized as Marketing, it must adhere to specific time restrictions. Messages sent outside of these restricted hours will experience delays and will be processed during allowable times. Specifically, Marketing SMS cannot be processed between 10pm and 8am, on Sundays, and on French public holidays.</Note>
+        <Note>
+        If the user includes stop code in the Transactional SMS, then it will be switched to Marketing SMS automatically and it will be interpreted as a Marketing SMS. To send Transactional SMS as Transactional, it is important not to use stop code.
+
+        Note: For adding a stop code, client has to add reply STOP to [STOP_CODE] and the [STOP_CODE] will be replaced with the number.
+        </Note>
+
+        <Note title="For end users in France">
+        Transactional SMS can be sent at any time without time restrictions. However, if a message is categorized as Marketing, it must adhere to specific time restrictions. Messages sent outside of these restricted hours will experience delays and will be processed during allowable times. Specifically, Marketing SMS cannot be processed between 10pm and 8am, on Sundays, and on French public holidays.
+        </Note>
 
         Parameters
         ----------
@@ -401,6 +435,12 @@ class AsyncTransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        template_id : typing.Optional[int]
+            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
+
+        content : typing.Optional[str]
+            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -438,6 +478,8 @@ class AsyncTransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            template_id=template_id,
+            content=content,
             request_options=request_options,
         )
         return _response.data
@@ -452,6 +494,8 @@ class AsyncTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        template_id: typing.Optional[int] = OMIT,
+        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacSmsResponse:
         """
@@ -477,6 +521,12 @@ class AsyncTransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        template_id : typing.Optional[int]
+            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
+
+        content : typing.Optional[str]
+            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -514,6 +564,8 @@ class AsyncTransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            template_id=template_id,
+            content=content,
             request_options=request_options,
         )
         return _response.data

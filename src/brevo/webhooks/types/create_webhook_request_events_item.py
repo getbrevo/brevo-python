@@ -21,7 +21,6 @@ CreateWebhookRequestEventsItem = typing.Union[
         "contactUpdated",
         "contactDeleted",
         "inboundEmailProcessed",
-        "reply",
     ],
     typing.Any,
 ]
