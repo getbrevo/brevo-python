@@ -15,8 +15,7 @@ class UpsertrecordsResponse(UncheckedBaseModel):
         typing.Optional[int],
         FieldMetadata(alias="processId"),
         pydantic.Field(
-            alias="processId",
-            description="Unique Id for the batch process used to track the status of the batch. **How to use this processId:**   Refer to the [Get process status API](https://developers.brevo.com/reference/get-process) to check the execution status of this batch using the returned `processId`.",
+            alias="processId", description="Unique Id for the batch process used to track the status of the batch."
         ),
     ] = None
 

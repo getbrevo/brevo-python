@@ -149,12 +149,12 @@ def test_balance_get_transaction_history_api() -> None:
     """Test getTransactionHistoryApi endpoint with WireMock"""
     test_id = "balance.get_transaction_history_api.0"
     client = get_client(test_id)
-    client.balance.get_transaction_history_api(pid="pid", contact_id=1, balance_definition_id="balanceDefinitionId")
+    client.balance.get_transaction_history_api(pid="pid", contact_id=1, balance_definition_id="balance_definition_id")
     verify_request_count(
         test_id,
         "GET",
         "/loyalty/balance/programs/pid/transaction-history",
-        {"contactId": "1", "balanceDefinitionId": "balanceDefinitionId"},
+        {"contact_id": "1", "balance_definition_id": "balance_definition_id"},
         1,
     )
 
