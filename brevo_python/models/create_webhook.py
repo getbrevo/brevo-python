@@ -155,13 +155,6 @@ class CreateWebhook(object):
         """
         if events is None:
             raise ValueError("Invalid value for `events`, must not be `None`")  # noqa: E501
-        allowed_values = ["sent", "hardBounce", "softBounce", "blocked", "spam", "delivered", "request", "click", "invalid", "deferred", "opened", "uniqueOpened", "unsubscribed", "listAddition", "contactUpdated", "contactDeleted", "inboundEmailProcessed"]  # noqa: E501
-        if not set(events).issubset(set(allowed_values)):
-            raise ValueError(
-                "Invalid values for `events` [{0}], must be a subset of [{1}]"  # noqa: E501
-                .format(", ".join(map(str, set(events) - set(allowed_values))),  # noqa: E501
-                        ", ".join(map(str, allowed_values)))
-            )
 
         self._events = events
 
