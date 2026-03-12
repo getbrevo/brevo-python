@@ -3,8 +3,6 @@
 import typing
 
 UpdateCampaignStatusStatus = typing.Union[
-    typing.Literal[
-        "suspended", "archive", "darchive", "sent", "queued", "replicate", "replicateTemplate", "cancel", "draft"
-    ],
+    typing.Literal["suspended", "archive", "darchive", "sent", "queued", "replicate", "replicateTemplate", "draft"],
     typing.Any,
 ]

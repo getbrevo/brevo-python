@@ -5,10 +5,7 @@ def test_transactionalSms_send_async_transactional_sms() -> None:
     """Test sendAsyncTransactionalSms endpoint with WireMock"""
     test_id = "transactional_sms.send_async_transactional_sms.0"
     client = get_client(test_id)
-    client.transactional_sms.send_async_transactional_sms(
-        recipient="33689965433",
-        sender="MyShop",
-    )
+    client.transactional_sms.send_async_transactional_sms(recipient="33689965433", sender="MyShop")
     verify_request_count(test_id, "POST", "/transactionalSMS/send", None, 1)
 
 
@@ -16,10 +13,7 @@ def test_transactionalSms_send_transac_sms() -> None:
     """Test sendTransacSms endpoint with WireMock"""
     test_id = "transactional_sms.send_transac_sms.0"
     client = get_client(test_id)
-    client.transactional_sms.send_transac_sms(
-        recipient="33689965433",
-        sender="MyShop",
-    )
+    client.transactional_sms.send_transac_sms(recipient="33689965433", sender="MyShop")
     verify_request_count(test_id, "POST", "/transactionalSMS/sms", None, 1)
 
 

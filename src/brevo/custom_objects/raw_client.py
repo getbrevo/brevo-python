@@ -7,7 +7,6 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
@@ -23,7 +22,6 @@ from .types.getrecords_request_sort import GetrecordsRequestSort
 from .types.getrecords_response import GetrecordsResponse
 from .types.upsertrecords_request_records_item import UpsertrecordsRequestRecordsItem
 from .types.upsertrecords_response import UpsertrecordsResponse
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -41,8 +39,12 @@ class RawCustomObjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[UpsertrecordsResponse]:
         """
-        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
-        This feature is in beta. These are subject to change.</Note>
+        <Note title="Enterprise access only">
+        Custom objects are only available to Enterprise plans.
+
+        This feature is in beta. These are subject to change.
+        </Note>
+
         This API allows bulk upsert of object records in a single request. Each object record may include
           - Attributes
           - Identifiers
@@ -56,8 +58,8 @@ class RawCustomObjectsClient:
           - Max 500 attributes defined per object record upsert request
             - This is coherent with schema limitation: an object cannot have more than 500 attributes.
             - Worth noting: Nothing happens If an attribute is mentioned in the request, but was not previously defined for the object schema (no error, no attribute creation)
-          - Max 10 associations defined per associated object type, in each record of the request
-            - This is not a schema limitation. You can associate an object record to an unlimited number of other object records by running multiple requests.
+          - Max 10 associations defined per object record upsert request
+            - This is coherent with schema limitation: an object cannot have more than 10 associations with other objects. and each object record can be linked to max 10 other records.
         **Errors:**
             - Make sure both object records exist before associating them, else the API will return an error.
             - This route does not create objects. The object where the object records are upserted by this API must be created already else the API will return an error "invalid object type".
@@ -149,10 +151,6 @@ class RawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def getrecords(
@@ -166,8 +164,12 @@ class RawCustomObjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetrecordsResponse]:
         """
-        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
-        This feature is in beta. These are subject to change.</Note>
+        <Note title="Enterprise access only">
+        Custom objects are only available to Enterprise plans.
+
+        This feature is in beta. These are subject to change.
+        </Note>
+
         This API retrieves a list of object records along with their associated records and provides the total count of records for the specified object. **Note**: Contact as object type is not supported in this endpoint.
 
         Parameters
@@ -263,10 +265,6 @@ class RawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def batch_delete_object_records(
@@ -368,10 +366,6 @@ class RawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -387,8 +381,12 @@ class AsyncRawCustomObjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[UpsertrecordsResponse]:
         """
-        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
-        This feature is in beta. These are subject to change.</Note>
+        <Note title="Enterprise access only">
+        Custom objects are only available to Enterprise plans.
+
+        This feature is in beta. These are subject to change.
+        </Note>
+
         This API allows bulk upsert of object records in a single request. Each object record may include
           - Attributes
           - Identifiers
@@ -402,8 +400,8 @@ class AsyncRawCustomObjectsClient:
           - Max 500 attributes defined per object record upsert request
             - This is coherent with schema limitation: an object cannot have more than 500 attributes.
             - Worth noting: Nothing happens If an attribute is mentioned in the request, but was not previously defined for the object schema (no error, no attribute creation)
-          - Max 10 associations defined per associated object type, in each record of the request
-            - This is not a schema limitation. You can associate an object record to an unlimited number of other object records by running multiple requests.
+          - Max 10 associations defined per object record upsert request
+            - This is coherent with schema limitation: an object cannot have more than 10 associations with other objects. and each object record can be linked to max 10 other records.
         **Errors:**
             - Make sure both object records exist before associating them, else the API will return an error.
             - This route does not create objects. The object where the object records are upserted by this API must be created already else the API will return an error "invalid object type".
@@ -495,10 +493,6 @@ class AsyncRawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def getrecords(
@@ -512,8 +506,12 @@ class AsyncRawCustomObjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetrecordsResponse]:
         """
-        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
-        This feature is in beta. These are subject to change.</Note>
+        <Note title="Enterprise access only">
+        Custom objects are only available to Enterprise plans.
+
+        This feature is in beta. These are subject to change.
+        </Note>
+
         This API retrieves a list of object records along with their associated records and provides the total count of records for the specified object. **Note**: Contact as object type is not supported in this endpoint.
 
         Parameters
@@ -609,10 +607,6 @@ class AsyncRawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def batch_delete_object_records(
@@ -714,8 +708,4 @@ class AsyncRawCustomObjectsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

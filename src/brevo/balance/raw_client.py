@@ -8,7 +8,6 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from ..errors.failed_dependency_error import FailedDependencyError
@@ -34,6 +33,9 @@ from .types.get_balance_limit_request_version import GetBalanceLimitRequestVersi
 from .types.get_contact_balances_response import GetContactBalancesResponse
 from .types.get_loyalty_balance_programs_pid_transaction_history_request_sort import (
     GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort,
+)
+from .types.get_loyalty_balance_programs_pid_transaction_history_request_sort_field import (
+    GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField,
 )
 from .types.get_loyalty_balance_programs_pid_transaction_history_response import (
     GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
@@ -79,7 +81,6 @@ from .types.update_balance_definition_request_unit import UpdateBalanceDefinitio
 from .types.update_balance_limit_request_constraint_type import UpdateBalanceLimitRequestConstraintType
 from .types.update_balance_limit_request_duration_unit import UpdateBalanceLimitRequestDurationUnit
 from .types.update_balance_limit_request_transaction_type import UpdateBalanceLimitRequestTransactionType
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -216,10 +217,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_balance_definition_list(
@@ -333,10 +330,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_balance_definition(
@@ -530,10 +523,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_balance_definition(
@@ -642,10 +631,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_balance_definition(
@@ -852,10 +837,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_balance_definition(
@@ -945,10 +926,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_balance_limit(
@@ -1086,10 +1063,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_balance_limit(
@@ -1202,10 +1175,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_balance_limit(
@@ -1347,10 +1316,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_balance_limit(
@@ -1443,10 +1408,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_contact_balances(
@@ -1541,10 +1502,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_balance_order(
@@ -1672,10 +1629,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_subscription_balances(
@@ -1773,10 +1726,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_subscription_balances(
@@ -1884,10 +1833,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_transaction_history_api(
@@ -1898,7 +1843,7 @@ class RawBalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
+        sort_field: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
         filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1923,7 +1868,7 @@ class RawBalanceClient:
         offset : typing.Optional[int]
             Skip a number of records
 
-        sort_field : typing.Optional[typing.Literal["createdAt"]]
+        sort_field : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField]
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
@@ -1946,10 +1891,10 @@ class RawBalanceClient:
             params={
                 "limit": limit,
                 "offset": offset,
-                "sortField": sort_field,
+                "sort_field": sort_field,
                 "sort": sort,
-                "contactId": contact_id,
-                "balanceDefinitionId": balance_definition_id,
+                "contact_id": contact_id,
+                "balance_definition_id": balance_definition_id,
                 "filters": filters,
             },
             request_options=request_options,
@@ -2022,10 +1967,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def begin_transaction(
@@ -2174,10 +2115,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def cancel_transaction(
@@ -2275,10 +2212,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def complete_transaction(
@@ -2376,10 +2309,6 @@ class RawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -2514,10 +2443,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_balance_definition_list(
@@ -2631,10 +2556,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_balance_definition(
@@ -2828,10 +2749,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_balance_definition(
@@ -2940,10 +2857,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_balance_definition(
@@ -3150,10 +3063,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_balance_definition(
@@ -3243,10 +3152,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_balance_limit(
@@ -3384,10 +3289,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_balance_limit(
@@ -3500,10 +3401,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_balance_limit(
@@ -3645,10 +3542,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_balance_limit(
@@ -3741,10 +3634,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_contact_balances(
@@ -3839,10 +3728,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_balance_order(
@@ -3970,10 +3855,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_subscription_balances(
@@ -4071,10 +3952,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_subscription_balances(
@@ -4182,10 +4059,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_transaction_history_api(
@@ -4196,7 +4069,7 @@ class AsyncRawBalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
+        sort_field: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
         filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -4221,7 +4094,7 @@ class AsyncRawBalanceClient:
         offset : typing.Optional[int]
             Skip a number of records
 
-        sort_field : typing.Optional[typing.Literal["createdAt"]]
+        sort_field : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField]
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
@@ -4244,10 +4117,10 @@ class AsyncRawBalanceClient:
             params={
                 "limit": limit,
                 "offset": offset,
-                "sortField": sort_field,
+                "sort_field": sort_field,
                 "sort": sort,
-                "contactId": contact_id,
-                "balanceDefinitionId": balance_definition_id,
+                "contact_id": contact_id,
+                "balance_definition_id": balance_definition_id,
                 "filters": filters,
             },
             request_options=request_options,
@@ -4320,10 +4193,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def begin_transaction(
@@ -4472,10 +4341,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def cancel_transaction(
@@ -4573,10 +4438,6 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def complete_transaction(
@@ -4674,8 +4535,4 @@ class AsyncRawBalanceClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

@@ -9,9 +9,7 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
-from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.not_found_error import NotFoundError
@@ -19,14 +17,11 @@ from ..types.company import Company
 from .types.get_companies_request_sort import GetCompaniesRequestSort
 from .types.get_companies_response import GetCompaniesResponse
 from .types.get_crm_attributes_companies_response_item import GetCrmAttributesCompaniesResponseItem
-from .types.patch_crm_attributes_id_request_object_type import PatchCrmAttributesIdRequestObjectType
-from .types.patch_crm_attributes_id_request_options_labels_item import PatchCrmAttributesIdRequestOptionsLabelsItem
 from .types.post_companies_import_response import PostCompaniesImportResponse
 from .types.post_companies_response import PostCompaniesResponse
 from .types.post_crm_attributes_request_attribute_type import PostCrmAttributesRequestAttributeType
 from .types.post_crm_attributes_request_object_type import PostCrmAttributesRequestObjectType
 from .types.post_crm_attributes_response import PostCrmAttributesResponse
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -128,10 +123,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_a_company(
@@ -210,10 +201,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def import_companies_creation_and_updation(
@@ -284,10 +271,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def link_and_unlink_company_with_contact_and_deal(
@@ -356,10 +339,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_a_company(
@@ -419,10 +398,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_a_company(
@@ -474,10 +449,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_a_company(
@@ -570,10 +541,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_a_company_deal_attribute(
@@ -652,148 +619,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def delete_an_attribute(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[None]:
-        """
-        Parameters
-        ----------
-        id : str
-            Attribute ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[None]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def update_an_attribute(
-        self,
-        id: str,
-        *,
-        label: typing.Optional[str] = OMIT,
-        options_labels: typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]] = OMIT,
-        object_type: typing.Optional[PatchCrmAttributesIdRequestObjectType] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[None]:
-        """
-        Parameters
-        ----------
-        id : str
-            Attribute ID
-
-        label : typing.Optional[str]
-            Attribute display label
-
-        options_labels : typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]]
-            Updated labels for selectable options
-
-        object_type : typing.Optional[PatchCrmAttributesIdRequestObjectType]
-            The type of object the attribute belongs to, it cannot be updated after creation
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[None]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
-            method="PATCH",
-            json={
-                "label": label,
-                "optionsLabels": convert_and_respect_annotation_metadata(
-                    object_=options_labels,
-                    annotation=typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem],
-                    direction="write",
-                ),
-                "objectType": object_type,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_company_attributes(
@@ -828,10 +653,6 @@ class RawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -931,10 +752,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_a_company(
@@ -1013,10 +830,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def import_companies_creation_and_updation(
@@ -1087,10 +900,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def link_and_unlink_company_with_contact_and_deal(
@@ -1159,10 +968,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_a_company(
@@ -1222,10 +1027,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_a_company(
@@ -1277,10 +1078,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_a_company(
@@ -1373,10 +1170,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_a_company_deal_attribute(
@@ -1455,148 +1248,6 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def delete_an_attribute(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
-        """
-        Parameters
-        ----------
-        id : str
-            Attribute ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[None]
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def update_an_attribute(
-        self,
-        id: str,
-        *,
-        label: typing.Optional[str] = OMIT,
-        options_labels: typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]] = OMIT,
-        object_type: typing.Optional[PatchCrmAttributesIdRequestObjectType] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[None]:
-        """
-        Parameters
-        ----------
-        id : str
-            Attribute ID
-
-        label : typing.Optional[str]
-            Attribute display label
-
-        options_labels : typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]]
-            Updated labels for selectable options
-
-        object_type : typing.Optional[PatchCrmAttributesIdRequestObjectType]
-            The type of object the attribute belongs to, it cannot be updated after creation
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[None]
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
-            method="PATCH",
-            json={
-                "label": label,
-                "optionsLabels": convert_and_respect_annotation_metadata(
-                    object_=options_labels,
-                    annotation=typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem],
-                    direction="write",
-                ),
-                "objectType": object_type,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_company_attributes(
@@ -1631,8 +1282,4 @@ class AsyncRawCompaniesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

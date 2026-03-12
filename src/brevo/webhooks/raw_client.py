@@ -7,7 +7,6 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
@@ -29,7 +28,6 @@ from .types.get_webhooks_response import GetWebhooksResponse
 from .types.update_webhook_request_auth import UpdateWebhookRequestAuth
 from .types.update_webhook_request_events_item import UpdateWebhookRequestEventsItem
 from .types.update_webhook_request_headers_item import UpdateWebhookRequestHeadersItem
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -112,10 +110,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_webhook(
@@ -164,7 +158,6 @@ class RawWebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
-            #### `reply`
 
         url : str
             URL of the webhook
@@ -247,10 +240,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def export_webhooks_history(
@@ -269,16 +258,22 @@ class RawWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ExportWebhooksHistoryResponse]:
         """
-        <Note>
-        This is an enterprise feature. Contact us to activate it for your account.
+        <Note title="This feature is available for Professional and Enterprise plans">
+        To have it activated please send us a request and we will activate it for your account.
         </Note>
 
-        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
+        Exports webhook event history to CSV format for analysis and reporting.
 
-        Use this endpoint to:
-        - Export webhook event history filtered by date range, event type, or email address
-        - Generate reports for compliance, auditing, or performance analysis
-        - Track delivery patterns and webhook reliability over time
+        Use this to:
+        - Generate comprehensive webhook event reports
+        - Analyze webhook delivery patterns and success rates
+        - Export event data for external analysis tools
+        - Create historical reports for compliance and auditing
+        - Track webhook performance and reliability metrics
+
+        Key information returned:
+        - Process ID for tracking export completion
+        - CSV file will be delivered to specified webhook URL
 
         Parameters
         ----------
@@ -369,10 +364,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_webhook(
@@ -448,10 +439,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_webhook(
@@ -506,7 +493,6 @@ class RawWebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
-            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -571,10 +557,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_webhook(
@@ -637,10 +619,6 @@ class RawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -721,10 +699,6 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_webhook(
@@ -773,7 +747,6 @@ class AsyncRawWebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
-            #### `reply`
 
         url : str
             URL of the webhook
@@ -856,10 +829,6 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def export_webhooks_history(
@@ -878,16 +847,22 @@ class AsyncRawWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ExportWebhooksHistoryResponse]:
         """
-        <Note>
-        This is an enterprise feature. Contact us to activate it for your account.
+        <Note title="This feature is available for Professional and Enterprise plans">
+        To have it activated please send us a request and we will activate it for your account.
         </Note>
 
-        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
+        Exports webhook event history to CSV format for analysis and reporting.
 
-        Use this endpoint to:
-        - Export webhook event history filtered by date range, event type, or email address
-        - Generate reports for compliance, auditing, or performance analysis
-        - Track delivery patterns and webhook reliability over time
+        Use this to:
+        - Generate comprehensive webhook event reports
+        - Analyze webhook delivery patterns and success rates
+        - Export event data for external analysis tools
+        - Create historical reports for compliance and auditing
+        - Track webhook performance and reliability metrics
+
+        Key information returned:
+        - Process ID for tracking export completion
+        - CSV file will be delivered to specified webhook URL
 
         Parameters
         ----------
@@ -978,10 +953,6 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_webhook(
@@ -1057,10 +1028,6 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_webhook(
@@ -1115,7 +1082,6 @@ class AsyncRawWebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
-            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -1180,10 +1146,6 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_webhook(
@@ -1246,8 +1208,4 @@ class AsyncRawWebhooksClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

@@ -5,7 +5,6 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from .raw_client import AsyncRawEventClient, RawEventClient
-from .types.create_batch_events_request_item import CreateBatchEventsRequestItem
 from .types.create_event_request_contact_properties_value import CreateEventRequestContactPropertiesValue
 from .types.create_event_request_event_properties_value import CreateEventRequestEventPropertiesValue
 from .types.create_event_request_identifiers import CreateEventRequestIdentifiers
@@ -95,49 +94,6 @@ class EventClient:
         )
         return _response.data
 
-    def create_batch_events(
-        self,
-        *,
-        request: typing.Sequence[CreateBatchEventsRequestItem],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> None:
-        """
-        Create multiple events to track contacts' interactions in a single request.
-
-        Parameters
-        ----------
-        request : typing.Sequence[CreateBatchEventsRequestItem]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        from brevo import Brevo
-        from brevo.event import (
-            CreateBatchEventsRequestItem,
-            CreateBatchEventsRequestItemIdentifiers,
-        )
-
-        client = Brevo(
-            api_key="YOUR_API_KEY",
-        )
-        client.event.create_batch_events(
-            request=[
-                CreateBatchEventsRequestItem(
-                    event_name="order_created",
-                    identifiers=CreateBatchEventsRequestItemIdentifiers(),
-                )
-            ],
-        )
-        """
-        _response = self._raw_client.create_batch_events(request=request, request_options=request_options)
-        return _response.data
-
 
 class AsyncEventClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -225,55 +181,4 @@ class AsyncEventClient:
             object=object,
             request_options=request_options,
         )
-        return _response.data
-
-    async def create_batch_events(
-        self,
-        *,
-        request: typing.Sequence[CreateBatchEventsRequestItem],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> None:
-        """
-        Create multiple events to track contacts' interactions in a single request.
-
-        Parameters
-        ----------
-        request : typing.Sequence[CreateBatchEventsRequestItem]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        import asyncio
-
-        from brevo import AsyncBrevo
-        from brevo.event import (
-            CreateBatchEventsRequestItem,
-            CreateBatchEventsRequestItemIdentifiers,
-        )
-
-        client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.event.create_batch_events(
-                request=[
-                    CreateBatchEventsRequestItem(
-                        event_name="order_created",
-                        identifiers=CreateBatchEventsRequestItemIdentifiers(),
-                    )
-                ],
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.create_batch_events(request=request, request_options=request_options)
         return _response.data

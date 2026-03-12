@@ -64,8 +64,11 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignsResponse:
         """
-        <Note>The response payload for this endpoint has changed
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
+        <Note>
+        The response payload for this endpoint has changed
+
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).
+        </Note>
 
         Parameters
         ----------
@@ -366,7 +369,6 @@ class EmailCampaignsClient:
         campaign_id: int,
         *,
         statistics: typing.Optional[GetEmailCampaignRequestStatistics] = None,
-        exclude_html_content: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignResponse:
         """
@@ -377,9 +379,6 @@ class EmailCampaignsClient:
 
         statistics : typing.Optional[GetEmailCampaignRequestStatistics]
             Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
-
-        exclude_html_content : typing.Optional[bool]
-            Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -401,10 +400,7 @@ class EmailCampaignsClient:
         )
         """
         _response = self._raw_client.get_email_campaign(
-            campaign_id,
-            statistics=statistics,
-            exclude_html_content=exclude_html_content,
-            request_options=request_options,
+            campaign_id, statistics=statistics, request_options=request_options
         )
         return _response.data
 
@@ -929,8 +925,11 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignsResponse:
         """
-        <Note>The response payload for this endpoint has changed
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
+        <Note>
+        The response payload for this endpoint has changed
+
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).
+        </Note>
 
         Parameters
         ----------
@@ -1255,7 +1254,6 @@ class AsyncEmailCampaignsClient:
         campaign_id: int,
         *,
         statistics: typing.Optional[GetEmailCampaignRequestStatistics] = None,
-        exclude_html_content: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignResponse:
         """
@@ -1266,9 +1264,6 @@ class AsyncEmailCampaignsClient:
 
         statistics : typing.Optional[GetEmailCampaignRequestStatistics]
             Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
-
-        exclude_html_content : typing.Optional[bool]
-            Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1298,10 +1293,7 @@ class AsyncEmailCampaignsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_email_campaign(
-            campaign_id,
-            statistics=statistics,
-            exclude_html_content=exclude_html_content,
-            request_options=request_options,
+            campaign_id, statistics=statistics, request_options=request_options
         )
         return _response.data
 

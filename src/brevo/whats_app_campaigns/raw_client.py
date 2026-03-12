@@ -7,7 +7,6 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
@@ -27,7 +26,6 @@ from .types.get_whats_app_templates_request_source import GetWhatsAppTemplatesRe
 from .types.get_whats_app_templates_response import GetWhatsAppTemplatesResponse
 from .types.update_whats_app_campaign_request_campaign_status import UpdateWhatsAppCampaignRequestCampaignStatus
 from .types.update_whats_app_campaign_request_recipients import UpdateWhatsAppCampaignRequestRecipients
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -109,10 +107,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_whats_app_campaign(
@@ -125,11 +119,19 @@ class RawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateWhatsAppCampaignResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
+
+        <Note>
+        This API requires the List and Segment ids as recipients in Body params. You can use the below Contact endpoints to get the required information.
+
         [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+
+        [Get all the Segments](https://developers.brevo.com/reference/getsegments)
+        </Note>
 
         Parameters
         ----------
@@ -194,18 +196,17 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_whats_app_config(
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetWhatsAppConfigResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -246,10 +247,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_whats_app_template(
@@ -265,8 +262,11 @@ class RawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateWhatsAppTemplateResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -342,10 +342,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_whats_app_templates(
@@ -425,18 +421,17 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def send_whats_app_template_approval(
         self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[None]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -472,21 +467,17 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_whats_app_campaign(
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetWhatsAppCampaignResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
-        [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -541,10 +532,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_whats_app_campaign(
@@ -558,11 +545,19 @@ class RawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
+
+        <Note>
+        This API requires the List and Segment ids as recipients in Body params. You can use the below Contact endpoints to get the required information.
+
         [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+
+        [Get all the Segments](https://developers.brevo.com/reference/getsegments)
+        </Note>
 
         Parameters
         ----------
@@ -622,10 +617,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_whats_app_campaign(
@@ -677,10 +668,6 @@ class RawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -760,10 +747,6 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_whats_app_campaign(
@@ -776,11 +759,19 @@ class AsyncRawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateWhatsAppCampaignResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
+
+        <Note>
+        This API requires the List and Segment ids as recipients in Body params. You can use the below Contact endpoints to get the required information.
+
         [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+
+        [Get all the Segments](https://developers.brevo.com/reference/getsegments)
+        </Note>
 
         Parameters
         ----------
@@ -845,18 +836,17 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_whats_app_config(
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetWhatsAppConfigResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -897,10 +887,6 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_whats_app_template(
@@ -916,8 +902,11 @@ class AsyncRawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateWhatsAppTemplateResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -993,10 +982,6 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_whats_app_templates(
@@ -1076,18 +1061,17 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def send_whats_app_template_approval(
         self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating WhatsApp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -1123,21 +1107,17 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_whats_app_campaign(
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetWhatsAppCampaignResponse]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
-        [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
 
         Parameters
         ----------
@@ -1192,10 +1172,6 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_whats_app_campaign(
@@ -1209,11 +1185,19 @@ class AsyncRawWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
-        <Note>You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
-        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account</Note>
-        <Note>This API requires the List and Segment ids as recipients in Body params.You can use the below Contact endpoints to get the required information.
+        <Note>
+        You can use this API for WhatsApp only if you have setup your WhatsApp account on Brevo platform. To setup your WhatsApp account, follow the steps in the guide below.
+
+        [Activating Whatsapp](https://developers.brevo.com/docs/whatsapp-campaigns-1) in your account
+        </Note>
+
+        <Note>
+        This API requires the List and Segment ids as recipients in Body params. You can use the below Contact endpoints to get the required information.
+
         [Get all the Lists](https://developers.brevo.com/reference/getlists-1)
-        [Get all the Segments](https://developers.brevo.com/reference/getsegments)</Note>
+
+        [Get all the Segments](https://developers.brevo.com/reference/getsegments)
+        </Note>
 
         Parameters
         ----------
@@ -1273,10 +1257,6 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_whats_app_campaign(
@@ -1328,8 +1308,4 @@ class AsyncRawWhatsAppCampaignsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

@@ -637,6 +637,7 @@ class EcommerceClient:
                 OrderProductsItem(
                     price=99.99,
                     product_id="P1",
+                    quantity=10.0,
                 )
             ],
             status="completed",
@@ -706,6 +707,7 @@ class EcommerceClient:
                         OrderProductsItem(
                             price=99.99,
                             product_id="P1",
+                            quantity=10.0,
                         )
                     ],
                     status="completed",
@@ -1720,6 +1722,7 @@ class AsyncEcommerceClient:
                     OrderProductsItem(
                         price=99.99,
                         product_id="P1",
+                        quantity=10.0,
                     )
                 ],
                 status="completed",
@@ -1797,6 +1800,7 @@ class AsyncEcommerceClient:
                             OrderProductsItem(
                                 price=99.99,
                                 product_id="P1",
+                                quantity=10.0,
                             )
                         ],
                         status="completed",

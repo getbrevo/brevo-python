@@ -16,8 +16,6 @@ if typing.TYPE_CHECKING:
         BalanceDefinitionBalanceAvailabilityDurationModifier,
     )
     from .balance_limit import BalanceLimit
-    from .batch_events_response import BatchEventsResponse
-    from .batch_events_response_errors_item import BatchEventsResponseErrorsItem
     from .cart import Cart
     from .company import Company
     from .configuration import Configuration
@@ -131,8 +129,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BalanceDefinition": ".balance_definition",
     "BalanceDefinitionBalanceAvailabilityDurationModifier": ".balance_definition_balance_availability_duration_modifier",
     "BalanceLimit": ".balance_limit",
-    "BatchEventsResponse": ".batch_events_response",
-    "BatchEventsResponseErrorsItem": ".batch_events_response_errors_item",
     "Cart": ".cart",
     "Company": ".company",
     "Configuration": ".configuration",
@@ -270,8 +266,6 @@ __all__ = [
     "BalanceDefinition",
     "BalanceDefinitionBalanceAvailabilityDurationModifier",
     "BalanceLimit",
-    "BatchEventsResponse",
-    "BatchEventsResponseErrorsItem",
     "Cart",
     "Company",
     "Configuration",

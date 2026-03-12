@@ -8,7 +8,6 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
@@ -16,7 +15,6 @@ from ..errors.not_found_error import NotFoundError
 from .types.get_inbound_email_events_by_uuid_response import GetInboundEmailEventsByUuidResponse
 from .types.get_inbound_email_events_request_sort import GetInboundEmailEventsRequestSort
 from .types.get_inbound_email_events_response import GetInboundEmailEventsResponse
-from pydantic import ValidationError
 
 
 class RawInboundParsingClient:
@@ -102,10 +100,6 @@ class RawInboundParsingClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_inbound_email_events_by_uuid(
@@ -156,10 +150,6 @@ class RawInboundParsingClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     @contextlib.contextmanager
@@ -222,13 +212,6 @@ class RawInboundParsingClient:
                 except JSONDecodeError:
                     raise ApiError(
                         status_code=_response.status_code, headers=dict(_response.headers), body=_response.text
-                    )
-                except ValidationError as e:
-                    raise ParsingError(
-                        status_code=_response.status_code,
-                        headers=dict(_response.headers),
-                        body=_response.json(),
-                        cause=e,
                     )
                 raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
@@ -318,10 +301,6 @@ class AsyncRawInboundParsingClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_inbound_email_events_by_uuid(
@@ -372,10 +351,6 @@ class AsyncRawInboundParsingClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     @contextlib.asynccontextmanager
@@ -439,13 +414,6 @@ class AsyncRawInboundParsingClient:
                 except JSONDecodeError:
                     raise ApiError(
                         status_code=_response.status_code, headers=dict(_response.headers), body=_response.text
-                    )
-                except ValidationError as e:
-                    raise ParsingError(
-                        status_code=_response.status_code,
-                        headers=dict(_response.headers),
-                        body=_response.json(),
-                        cause=e,
                     )
                 raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
