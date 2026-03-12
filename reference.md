@@ -1,6 +1,6 @@
 # Reference
 ## Account
-<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account</a>() -&gt; AsyncHttpResponse[GetAccountResponse]</code></summary>
+<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account</a>() -> GetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -54,10 +54,13 @@ Retrieves details of your Brevo account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.account.get_account()
 
 ```
@@ -86,7 +89,7 @@ client.account.get_account()
 </dl>
 </details>
 
-<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account_activity</a>(...) -&gt; AsyncHttpResponse[GetAccountActivityResponse]</code></summary>
+<details><summary><code>client.account.<a href="src/brevo/account/client.py">get_account_activity</a>(...) -> GetAccountActivityResponse</code></summary>
 <dl>
 <dd>
 
@@ -130,10 +133,13 @@ Note: Requires Enterprise plan for access to organization activity logs.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.account.get_account_activity()
 
 ```
@@ -212,7 +218,7 @@ can be selected is one month.
 </details>
 
 ## MasterAccount
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_group_of_sub_accounts</a>(...) -&gt; AsyncHttpResponse[PostCorporateGroupResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_group_of_sub_accounts</a>(...) -> PostCorporateGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -240,10 +246,13 @@ This endpoint allows to create a group of sub-accounts
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.create_a_new_group_of_sub_accounts(
     group_name="My group",
 )
@@ -270,7 +279,7 @@ client.master_account.create_a_new_group_of_sub_accounts(
 <dl>
 <dd>
 
-**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — Pass the list of sub-account Ids to be included in the group
+**sub_account_ids:** `typing.Optional[typing.List[int]]` — Pass the list of sub-account Ids to be included in the group
     
 </dd>
 </dl>
@@ -290,7 +299,7 @@ client.master_account.create_a_new_group_of_sub_accounts(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_sub_account_from_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_sub_account_from_group</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -318,13 +327,20 @@ This endpoint allows you to remove a sub-organization from a group.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.delete_sub_account_from_group(
     group_id="groupId",
-    sub_account_ids=[423432, 234323, 87678],
+    sub_account_ids=[
+        423432,
+        234323,
+        87678
+    ],
 )
 
 ```
@@ -349,7 +365,7 @@ client.master_account.delete_sub_account_from_group(
 <dl>
 <dd>
 
-**sub_account_ids:** `typing.Sequence[int]` — List of sub-account ids
+**sub_account_ids:** `typing.List[int]` — List of sub-account ids
     
 </dd>
 </dl>
@@ -369,7 +385,7 @@ client.master_account.delete_sub_account_from_group(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_a_group_details</a>(...) -&gt; AsyncHttpResponse[GetCorporateGroupIdResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_a_group_details</a>(...) -> GetCorporateGroupIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -398,10 +414,13 @@ the list of sub-organizations and the user associated with the group.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_a_group_details(
     id="id",
 )
@@ -440,7 +459,7 @@ client.master_account.get_a_group_details(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_a_group_of_sub_accounts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_a_group_of_sub_accounts</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -468,10 +487,13 @@ This endpoint allows to update a group of sub-accounts
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.update_a_group_of_sub_accounts(
     id="id",
 )
@@ -506,7 +528,7 @@ client.master_account.update_a_group_of_sub_accounts(
 <dl>
 <dd>
 
-**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — Pass the list of sub-account Ids to be included in the group
+**sub_account_ids:** `typing.Optional[typing.List[int]]` — Pass the list of sub-account Ids to be included in the group
     
 </dd>
 </dl>
@@ -526,7 +548,7 @@ client.master_account.update_a_group_of_sub_accounts(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_group</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -557,10 +579,13 @@ once deleted.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.delete_a_group(
     id="id",
 )
@@ -599,7 +624,7 @@ client.master_account.delete_a_group(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_groups</a>() -&gt; AsyncHttpResponse[typing.List[GetSubAccountGroupsResponseItem]]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_groups</a>() -> typing.List[GetSubAccountGroupsResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -627,10 +652,13 @@ This endpoint allows you to list all groups created on your Admin account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_sub_account_groups()
 
 ```
@@ -659,7 +687,7 @@ client.master_account.get_sub_account_groups()
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_invited_users_list</a>(...) -&gt; AsyncHttpResponse[GetCorporateInvitedUsersListResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_invited_users_list</a>(...) -> GetCorporateInvitedUsersListResponse</code></summary>
 <dl>
 <dd>
 
@@ -689,10 +717,13 @@ offset and limit.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_corporate_invited_users_list()
 
 ```
@@ -754,7 +785,7 @@ default limit is 20, but max allowed limit is 100.
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">list_of_all_i_ps</a>() -&gt; AsyncHttpResponse[typing.List[GetCorporateIpResponseItem]]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">list_of_all_i_ps</a>() -> typing.List[GetCorporateIpResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -783,10 +814,13 @@ account
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.list_of_all_i_ps()
 
 ```
@@ -815,7 +849,7 @@ client.master_account.list_of_all_i_ps()
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_details_of_requested_master_account</a>() -&gt; AsyncHttpResponse[GetCorporateMasterAccountResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_details_of_requested_master_account</a>() -> GetCorporateMasterAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -843,10 +877,13 @@ This endpoint will provide the details of the master account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_the_details_of_requested_master_account()
 
 ```
@@ -875,7 +912,7 @@ client.master_account.get_the_details_of_requested_master_account()
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_admin_account</a>(...) -&gt; AsyncHttpResponse[GetSsoToken]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_admin_account</a>(...) -> GetSsoToken</code></summary>
 <dl>
 <dd>
 
@@ -906,10 +943,13 @@ https://account-app.brevo.com/account/login/corporate/sso/[token], where
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.generate_sso_token_to_access_admin_account(
     email="vipin+ent-user@brevo.com",
 )
@@ -948,7 +988,7 @@ client.master_account.generate_sso_token_to_access_admin_account(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_list_of_all_the_sub_accounts_of_the_master_account</a>(...) -&gt; AsyncHttpResponse[GetCorporateSubAccountResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_the_list_of_all_the_sub_accounts_of_the_master_account</a>(...) -> GetCorporateSubAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -977,10 +1017,13 @@ account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_the_list_of_all_the_sub_accounts_of_the_master_account(
     offset=1,
     limit=1,
@@ -1028,7 +1071,7 @@ client.master_account.get_the_list_of_all_the_sub_accounts_of_the_master_account
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_sub_account_under_a_master_account</a>(...) -&gt; AsyncHttpResponse[PostCorporateSubAccountResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_a_new_sub_account_under_a_master_account</a>(...) -> PostCorporateSubAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -1056,14 +1099,20 @@ This endpoint will create a new sub-account under a master account
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.create_a_new_sub_account_under_a_master_account(
     company_name="Test Sub-account",
     email="test-sub@example.com",
-    group_ids=["5f8f8c3b5f56a02d4433b3a7", "5f8f8c3b5f56a02d4433b3a8"],
+    group_ids=[
+        "5f8f8c3b5f56a02d4433b3a7",
+        "5f8f8c3b5f56a02d4433b3a8"
+    ],
     language="fr",
     timezone="Europe/Paris",
 )
@@ -1098,7 +1147,7 @@ client.master_account.create_a_new_sub_account_under_a_master_account(
 <dl>
 <dd>
 
-**group_ids:** `typing.Optional[typing.Sequence[str]]` — Set the group(s) for the sub-account
+**group_ids:** `typing.Optional[typing.List[str]]` — Set the group(s) for the sub-account
     
 </dd>
 </dl>
@@ -1134,7 +1183,7 @@ client.master_account.create_a_new_sub_account_under_a_master_account(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">associate_an_ip_to_sub_accounts</a>(...) -&gt; AsyncHttpResponse[typing.Dict[str, typing.Any]]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">associate_an_ip_to_sub_accounts</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
 <dd>
 
@@ -1162,12 +1211,19 @@ This endpoint allows to associate an IP to sub-accounts
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.associate_an_ip_to_sub_accounts(
-    ids=[234322, 325553, 893432],
+    ids=[
+        234322,
+        325553,
+        893432
+    ],
     ip="103.11.32.88",
 )
 
@@ -1185,7 +1241,7 @@ client.master_account.associate_an_ip_to_sub_accounts(
 <dl>
 <dd>
 
-**ids:** `typing.Sequence[int]` 
+**ids:** `typing.List[int]` 
 
 Pass the list of sub-account Ids to be associated with the IP
 address
@@ -1216,7 +1272,7 @@ address
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">dissociate_an_ip_to_sub_accounts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">dissociate_an_ip_to_sub_accounts</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1244,12 +1300,19 @@ This endpoint allows to dissociate an IP from sub-accounts
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.dissociate_an_ip_to_sub_accounts(
-    ids=[234322, 325553, 893432],
+    ids=[
+        234322,
+        325553,
+        893432
+    ],
     ip="103.11.32.88",
 )
 
@@ -1267,7 +1330,7 @@ client.master_account.dissociate_an_ip_to_sub_accounts(
 <dl>
 <dd>
 
-**ids:** `typing.Sequence[int]` 
+**ids:** `typing.List[int]` 
 
 Pass the list of sub-account Ids to be dissociated from the IP
 address
@@ -1298,7 +1361,7 @@ address
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_an_api_key_for_a_sub_account</a>(...) -&gt; AsyncHttpResponse[PostCorporateSubAccountKeyResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">create_an_api_key_for_a_sub_account</a>(...) -> PostCorporateSubAccountKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -1326,10 +1389,13 @@ This endpoint will generate an API v3 key for a sub-account
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.create_an_api_key_for_a_sub_account(
     id=3232323,
     name="My Api Key",
@@ -1377,7 +1443,7 @@ client.master_account.create_an_api_key_for_a_sub_account(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_sub_account</a>(...) -&gt; AsyncHttpResponse[GetSsoToken]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">generate_sso_token_to_access_sub_account</a>(...) -> GetSsoToken</code></summary>
 <dl>
 <dd>
 
@@ -1408,10 +1474,13 @@ https://account-app.brevo.com/account/login/sub-account/sso/[token], where
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.generate_sso_token_to_access_sub_account(
     id=3232323,
 )
@@ -1487,7 +1556,7 @@ directly on this target URL after login
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_details</a>(...) -&gt; AsyncHttpResponse[GetCorporateSubAccountIdResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_sub_account_details</a>(...) -> GetCorporateSubAccountIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -1515,10 +1584,13 @@ This endpoint will provide the details for the specified sub-account company
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_sub_account_details(
     id=1000000,
 )
@@ -1557,7 +1629,7 @@ client.master_account.get_sub_account_details(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_sub_account</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">delete_a_sub_account</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1571,10 +1643,13 @@ client.master_account.get_sub_account_details(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.delete_a_sub_account(
     id=1000000,
 )
@@ -1613,7 +1688,7 @@ client.master_account.delete_a_sub_account(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">enable_disable_sub_account_application_s</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">enable_disable_sub_account_application_s</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1642,10 +1717,13 @@ sub-account
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.enable_disable_sub_account_application_s(
     id=1000000,
     landing_pages=True,
@@ -1823,7 +1901,7 @@ sub-account
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_account_plan</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_account_plan</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1854,21 +1932,21 @@ unlimited mode.
 
 ```python
 from brevo import Brevo
-from brevo.master_account import (
-    PutCorporateSubAccountIdPlanRequestCredits,
-    PutCorporateSubAccountIdPlanRequestFeatures,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.master_account import PutCorporateSubAccountIdPlanRequestCredits, PutCorporateSubAccountIdPlanRequestFeatures
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.update_sub_account_plan(
     id=1000000,
     credits=PutCorporateSubAccountIdPlanRequestCredits(
         email=5000,
         external_feeds=1,
-        sms=2000.0,
-        whatsapp=100.0,
+        sms=2000,
+        whatsapp=100,
         wp_subscribers=-1,
     ),
     features=PutCorporateSubAccountIdPlanRequestFeatures(
@@ -1929,7 +2007,7 @@ client.master_account.update_sub_account_plan(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_accounts_plan</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">update_sub_accounts_plan</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1960,20 +2038,20 @@ unlimited mode.
 
 ```python
 from brevo import Brevo
-from brevo.master_account import (
-    PutCorporateSubAccountsPlanRequestCredits,
-    PutCorporateSubAccountsPlanRequestFeatures,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.master_account import PutCorporateSubAccountsPlanRequestCredits, PutCorporateSubAccountsPlanRequestFeatures
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.update_sub_accounts_plan(
     credits=PutCorporateSubAccountsPlanRequestCredits(
         email=5000,
         external_feeds=1,
-        sms=2000.0,
-        whatsapp=100.0,
+        sms=2000,
+        whatsapp=100,
         wp_subscribers=-1,
     ),
     features=PutCorporateSubAccountsPlanRequestFeatures(
@@ -1981,7 +2059,11 @@ client.master_account.update_sub_accounts_plan(
         sales_users=6,
         users=15,
     ),
-    sub_account_ids=[4534345, 987893, 876785],
+    sub_account_ids=[
+        4534345,
+        987893,
+        876785
+    ],
 )
 
 ```
@@ -2014,7 +2096,7 @@ client.master_account.update_sub_accounts_plan(
 <dl>
 <dd>
 
-**sub_account_ids:** `typing.Optional[typing.Sequence[int]]` — List of sub-account ids
+**sub_account_ids:** `typing.Optional[typing.List[int]]` — List of sub-account ids
     
 </dd>
 </dl>
@@ -2034,7 +2116,7 @@ client.master_account.update_sub_accounts_plan(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">invite_admin_user</a>(...) -&gt; AsyncHttpResponse[InviteAdminUserResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">invite_admin_user</a>(...) -> InviteAdminUserResponse</code></summary>
 <dl>
 <dd>
 
@@ -2087,15 +2169,20 @@ there for the invited admin user.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.master_account import InviteAdminUserRequestPrivilegesItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.invite_admin_user(
     all_features_access=True,
     email="inviteuser@example.com",
-    privileges=[InviteAdminUserRequestPrivilegesItem()],
+    privileges=[
+        InviteAdminUserRequestPrivilegesItem()
+    ],
 )
 
 ```
@@ -2128,7 +2215,7 @@ client.master_account.invite_admin_user(
 <dl>
 <dd>
 
-**privileges:** `typing.Sequence[InviteAdminUserRequestPrivilegesItem]` 
+**privileges:** `typing.List[InviteAdminUserRequestPrivilegesItem]` 
     
 </dd>
 </dl>
@@ -2136,7 +2223,7 @@ client.master_account.invite_admin_user(
 <dl>
 <dd>
 
-**group_ids:** `typing.Optional[typing.Sequence[str]]` — Ids of Group
+**group_ids:** `typing.Optional[typing.List[str]]` — Ids of Group
     
 </dd>
 </dl>
@@ -2156,7 +2243,7 @@ client.master_account.invite_admin_user(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">resend_cancel_admin_user_invitation</a>(...) -&gt; AsyncHttpResponse[PutCorporateUserInvitationActionEmailResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">resend_cancel_admin_user_invitation</a>(...) -> PutCorporateUserInvitationActionEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -2186,10 +2273,13 @@ This endpoint will allow the user to:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.resend_cancel_admin_user_invitation(
     action="resend",
     email="email",
@@ -2237,7 +2327,7 @@ client.master_account.resend_cancel_admin_user_invitation(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">revoke_an_admin_user</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">revoke_an_admin_user</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2266,10 +2356,13 @@ account
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.revoke_an_admin_user(
     email="email",
 )
@@ -2308,7 +2401,7 @@ client.master_account.revoke_an_admin_user(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_user_permission</a>(...) -&gt; AsyncHttpResponse[GetCorporateUserPermissionResponse]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">get_corporate_user_permission</a>(...) -> GetCorporateUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2336,10 +2429,13 @@ This endpoint will provide the list of admin user permissions
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.get_corporate_user_permission(
     email="email",
 )
@@ -2378,7 +2474,7 @@ client.master_account.get_corporate_user_permission(
 </dl>
 </details>
 
-<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">change_admin_user_permissions</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.master_account.<a href="src/brevo/master_account/client.py">change_admin_user_permissions</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2407,48 +2503,66 @@ your Admin account
 
 ```python
 from brevo import Brevo
-from brevo.master_account import (
-    PutCorporateUserEmailPermissionsRequestPrivilegesItem,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.master_account import PutCorporateUserEmailPermissionsRequestPrivilegesItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.master_account.change_admin_user_permissions(
     email="email",
     all_features_access=False,
     privileges=[
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="user_management",
-            permissions=["all"],
+            permissions=[
+                "all"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="api",
-            permissions=["all"],
+            permissions=[
+                "all"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="my_plan",
-            permissions=["none"],
+            permissions=[
+                "none"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="apps_management",
-            permissions=["all"],
+            permissions=[
+                "all"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="create_sub_organizations",
-            permissions=["all"],
+            permissions=[
+                "all"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="sub_organization_groups",
-            permissions=["create", "edit_delete"],
+            permissions=[
+                "create",
+                "edit_delete"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="manage_sub_organizations",
-            permissions=["all"],
+            permissions=[
+                "all"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="security",
-            permissions=["none"],
+            permissions=[
+                "none"
+            ],
         ),
         PutCorporateUserEmailPermissionsRequestPrivilegesItem(
             feature="analytics",
@@ -2456,9 +2570,9 @@ client.master_account.change_admin_user_permissions(
                 "create_alerts",
                 "download_data",
                 "my_looks",
-                "explore_create",
+                "explore_create"
             ],
-        ),
+        )
     ],
 )
 
@@ -2492,7 +2606,7 @@ client.master_account.change_admin_user_permissions(
 <dl>
 <dd>
 
-**privileges:** `typing.Sequence[PutCorporateUserEmailPermissionsRequestPrivilegesItem]` 
+**privileges:** `typing.List[PutCorporateUserEmailPermissionsRequestPrivilegesItem]` 
     
 </dd>
 </dl>
@@ -2513,7 +2627,7 @@ client.master_account.change_admin_user_permissions(
 </details>
 
 ## User
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_invited_users_list</a>() -&gt; AsyncHttpResponse[GetInvitedUsersListResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_invited_users_list</a>() -> GetInvitedUsersListResponse</code></summary>
 <dl>
 <dd>
 
@@ -2527,10 +2641,13 @@ client.master_account.change_admin_user_permissions(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.get_invited_users_list()
 
 ```
@@ -2559,7 +2676,7 @@ client.user.get_invited_users_list()
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">put_revoke_user_permission</a>(...) -&gt; AsyncHttpResponse[PutRevokeUserPermissionResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">put_revoke_user_permission</a>(...) -> PutRevokeUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2573,10 +2690,13 @@ client.user.get_invited_users_list()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.put_revoke_user_permission(
     email="email",
 )
@@ -2615,7 +2735,7 @@ client.user.put_revoke_user_permission(
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">inviteuser</a>(...) -&gt; AsyncHttpResponse[InviteuserResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">inviteuser</a>(...) -> InviteuserResponse</code></summary>
 <dl>
 <dd>
 
@@ -2710,14 +2830,19 @@ accordingly.
 
 ```python
 from brevo import Brevo, InviteuserPrivilegesItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.inviteuser(
     all_features_access=True,
     email="inviteuser@example.com",
-    privileges=[InviteuserPrivilegesItem()],
+    privileges=[
+        InviteuserPrivilegesItem()
+    ],
 )
 
 ```
@@ -2734,23 +2859,7 @@ client.user.inviteuser(
 <dl>
 <dd>
 
-**all_features_access:** `bool` — All access to the features
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**email:** `str` — Email address for the organization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**privileges:** `typing.Sequence[InviteuserPrivilegesItem]` 
+**request:** `Inviteuser` 
     
 </dd>
 </dl>
@@ -2770,7 +2879,7 @@ client.user.inviteuser(
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">putresendcancelinvitation</a>(...) -&gt; AsyncHttpResponse[PutresendcancelinvitationResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">putresendcancelinvitation</a>(...) -> PutresendcancelinvitationResponse</code></summary>
 <dl>
 <dd>
 
@@ -2784,10 +2893,13 @@ client.user.inviteuser(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.putresendcancelinvitation(
     action="resend",
     email="email",
@@ -2835,7 +2947,7 @@ client.user.putresendcancelinvitation(
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">edit_user_permission</a>(...) -&gt; AsyncHttpResponse[EditUserPermissionResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">edit_user_permission</a>(...) -> EditUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2929,14 +3041,19 @@ Please select the features and permissions accordingly.
 
 ```python
 from brevo import Brevo, InviteuserPrivilegesItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.edit_user_permission(
     all_features_access=True,
     email="inviteuser@example.com",
-    privileges=[InviteuserPrivilegesItem()],
+    privileges=[
+        InviteuserPrivilegesItem()
+    ],
 )
 
 ```
@@ -2953,23 +3070,7 @@ client.user.edit_user_permission(
 <dl>
 <dd>
 
-**all_features_access:** `bool` — All access to the features
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**email:** `str` — Email address for the organization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**privileges:** `typing.Sequence[InviteuserPrivilegesItem]` 
+**request:** `Inviteuser` 
     
 </dd>
 </dl>
@@ -2989,7 +3090,7 @@ client.user.edit_user_permission(
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_user_permission</a>(...) -&gt; AsyncHttpResponse[GetUserPermissionResponse]</code></summary>
+<details><summary><code>client.user.<a href="src/brevo/user/client.py">get_user_permission</a>(...) -> GetUserPermissionResponse</code></summary>
 <dl>
 <dd>
 
@@ -3003,10 +3104,13 @@ client.user.edit_user_permission(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.user.get_user_permission(
     email="email",
 )
@@ -3046,7 +3150,7 @@ client.user.get_user_permission(
 </details>
 
 ## Process
-<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_processes</a>(...) -&gt; AsyncHttpResponse[GetProcessesResponse]</code></summary>
+<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_processes</a>(...) -> GetProcessesResponse</code></summary>
 <dl>
 <dd>
 
@@ -3097,10 +3201,13 @@ Retrieves a list of background processes from your Brevo account with filtering 
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.process.get_processes()
 
 ```
@@ -3156,7 +3263,7 @@ Default order is **descending** if `sort` is not passed
 </dl>
 </details>
 
-<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_process</a>(...) -&gt; AsyncHttpResponse[GetProcessResponse]</code></summary>
+<details><summary><code>client.process.<a href="src/brevo/process/client.py">get_process</a>(...) -> GetProcessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3206,10 +3313,13 @@ Retrieves detailed information about a specific background process.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.process.get_process(
     process_id=1000000,
 )
@@ -3249,7 +3359,7 @@ client.process.get_process(
 </details>
 
 ## Senders
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_senders</a>(...) -&gt; AsyncHttpResponse[GetSendersResponse]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_senders</a>(...) -> GetSendersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3297,10 +3407,13 @@ Retrieves a list of all email senders from your Brevo account with optional filt
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.get_senders()
 
 ```
@@ -3345,7 +3458,7 @@ client.senders.get_senders()
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">create_sender</a>(...) -&gt; AsyncHttpResponse[CreateSenderResponse]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">create_sender</a>(...) -> CreateSenderResponse</code></summary>
 <dl>
 <dd>
 
@@ -3391,10 +3504,13 @@ Creates a new email sender in your Brevo account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.create_sender(
     email="support@example.com",
     name="Support Team",
@@ -3433,7 +3549,7 @@ sent to this address.
 <dl>
 <dd>
 
-**ips:** `typing.Optional[typing.Sequence[CreateSenderRequestIpsItem]]` 
+**ips:** `typing.Optional[typing.List[CreateSenderRequestIpsItem]]` 
 
 **Mandatory in case of dedicated IP**. IPs to associate to the
 sender. Not required for standard accounts.
@@ -3456,7 +3572,7 @@ sender. Not required for standard accounts.
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips</a>() -&gt; AsyncHttpResponse[GetIpsResponse]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips</a>() -> GetIpsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3497,10 +3613,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.get_ips()
 
 ```
@@ -3529,7 +3648,7 @@ client.senders.get_ips()
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">update_sender</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">update_sender</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3567,27 +3686,16 @@ Key information returned:
 
 ```python
 from brevo import Brevo
-from brevo.senders import UpdateSenderRequestIpsItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.update_sender(
     sender_id=1000000,
-    email="campaigns@enterprise.com",
-    ips=[
-        UpdateSenderRequestIpsItem(
-            domain="enterprise.com",
-            ip="192.168.1.100",
-            weight=70,
-        ),
-        UpdateSenderRequestIpsItem(
-            domain="mail.enterprise.com",
-            ip="192.168.1.101",
-            weight=30,
-        ),
-    ],
-    name="Multi-IP Sender",
+    name="New Support Team",
 )
 
 ```
@@ -3620,7 +3728,7 @@ client.senders.update_sender(
 <dl>
 <dd>
 
-**ips:** `typing.Optional[typing.Sequence[UpdateSenderRequestIpsItem]]` 
+**ips:** `typing.Optional[typing.List[UpdateSenderRequestIpsItem]]` 
 
 **Only in case of dedicated IP**. IPs to associate to the
 sender. If passed, will replace all the existing IPs. Not required for standard accounts.
@@ -3651,7 +3759,7 @@ sender. If passed, will replace all the existing IPs. Not required for standard 
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">delete_sender</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">delete_sender</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3687,10 +3795,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.delete_sender(
     sender_id=1000000,
 )
@@ -3729,7 +3840,7 @@ client.senders.delete_sender(
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips_from_sender</a>(...) -&gt; AsyncHttpResponse[GetIpsFromSenderResponse]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">get_ips_from_sender</a>(...) -> GetIpsFromSenderResponse</code></summary>
 <dl>
 <dd>
 
@@ -3768,10 +3879,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.get_ips_from_sender(
     sender_id=1000000,
 )
@@ -3810,7 +3924,7 @@ client.senders.get_ips_from_sender(
 </dl>
 </details>
 
-<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">validate_sender_by_otp</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.senders.<a href="src/brevo/senders/client.py">validate_sender_by_otp</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3848,13 +3962,16 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.senders.validate_sender_by_otp(
     sender_id=1000000,
-    otp=789012,
+    otp=123456,
 )
 
 ```
@@ -3900,7 +4017,7 @@ client.senders.validate_sender_by_otp(
 </details>
 
 ## Domains
-<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domains</a>() -&gt; AsyncHttpResponse[GetDomainsResponse]</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domains</a>() -> GetDomainsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3942,10 +4059,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.domains.get_domains()
 
 ```
@@ -3974,7 +4094,7 @@ client.domains.get_domains()
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">create_domain</a>(...) -&gt; AsyncHttpResponse[CreateDomainResponse]</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">create_domain</a>(...) -> CreateDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -4014,10 +4134,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.domains.create_domain(
     name="mycompany.com",
 )
@@ -4056,7 +4179,7 @@ client.domains.create_domain(
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domain_configuration</a>(...) -&gt; AsyncHttpResponse[GetDomainConfigurationResponse]</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">get_domain_configuration</a>(...) -> GetDomainConfigurationResponse</code></summary>
 <dl>
 <dd>
 
@@ -4095,10 +4218,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.domains.get_domain_configuration(
     domain_name="domainName",
 )
@@ -4137,7 +4263,7 @@ client.domains.get_domain_configuration(
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">delete_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">delete_domain</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4173,10 +4299,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.domains.delete_domain(
     domain_name="domainName",
 )
@@ -4215,7 +4344,7 @@ client.domains.delete_domain(
 </dl>
 </details>
 
-<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">authenticate_domain</a>(...) -&gt; AsyncHttpResponse[AuthenticateDomainResponse]</code></summary>
+<details><summary><code>client.domains.<a href="src/brevo/domains/client.py">authenticate_domain</a>(...) -> AuthenticateDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -4253,10 +4382,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.domains.authenticate_domain(
     domain_name="domainName",
 )
@@ -4296,7 +4428,7 @@ client.domains.authenticate_domain(
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhooks</a>(...) -&gt; AsyncHttpResponse[GetWebhooksResponse]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhooks</a>(...) -> GetWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -4338,10 +4470,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.get_webhooks()
 
 ```
@@ -4386,7 +4521,7 @@ client.webhooks.get_webhooks()
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">create_webhook</a>(...) -&gt; AsyncHttpResponse[CreateWebhookResponse]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">create_webhook</a>(...) -> CreateWebhookResponse</code></summary>
 <dl>
 <dd>
 
@@ -4425,12 +4560,17 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.create_webhook(
-    events=["sent"],
+    events=[
+        "sent"
+    ],
     url="http://requestb.in/173lyyx1",
 )
 
@@ -4448,7 +4588,7 @@ client.webhooks.create_webhook(
 <dl>
 <dd>
 
-**events:** `typing.Sequence[CreateWebhookRequestEventsItem]` 
+**events:** `typing.List[CreateWebhookRequestEventsItem]` 
 
 - Events triggering the webhook. Possible values for
 **Transactional** type webhook: #### `sent` OR `request`,
@@ -4523,7 +4663,7 @@ Inbound domain of webhook, required in case of event type
 <dl>
 <dd>
 
-**headers:** `typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
+**headers:** `typing.Optional[typing.List[CreateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
     
 </dd>
 </dl>
@@ -4551,7 +4691,7 @@ Inbound domain of webhook, required in case of event type
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">export_webhooks_history</a>(...) -&gt; AsyncHttpResponse[ExportWebhooksHistoryResponse]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">export_webhooks_history</a>(...) -> ExportWebhooksHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -4594,10 +4734,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.export_webhooks_history(
     event="invalid_parameter",
     notify_url="https://brevo.com",
@@ -4722,7 +4865,7 @@ Mandatory if endDate is used. Starting date of the history
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhook</a>(...) -&gt; AsyncHttpResponse[GetWebhook]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">get_webhook</a>(...) -> GetWebhook</code></summary>
 <dl>
 <dd>
 
@@ -4764,10 +4907,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.get_webhook(
     webhook_id=1000000,
 )
@@ -4806,7 +4952,7 @@ client.webhooks.get_webhook(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">update_webhook</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">update_webhook</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4844,10 +4990,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.update_webhook(
     webhook_id=1000000,
 )
@@ -4906,7 +5055,7 @@ client.webhooks.update_webhook(
 <dl>
 <dd>
 
-**events:** `typing.Optional[typing.Sequence[UpdateWebhookRequestEventsItem]]` 
+**events:** `typing.Optional[typing.List[UpdateWebhookRequestEventsItem]]` 
 
 - Events triggering the webhook. Possible values for
 **Transactional** type webhook: #### `sent` OR `request`,
@@ -4923,7 +5072,7 @@ for **Inbound** type webhook: #### `inboundEmailProcessed`
 <dl>
 <dd>
 
-**headers:** `typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
+**headers:** `typing.Optional[typing.List[UpdateWebhookRequestHeadersItem]]` — Custom headers to be send with webhooks
     
 </dd>
 </dl>
@@ -4951,7 +5100,7 @@ for **Inbound** type webhook: #### `inboundEmailProcessed`
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">delete_webhook</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/brevo/webhooks/client.py">delete_webhook</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4988,10 +5137,13 @@ Key information returned:
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.webhooks.delete_webhook(
     webhook_id=1000000,
 )
@@ -5031,7 +5183,7 @@ client.webhooks.delete_webhook(
 </details>
 
 ## ExternalFeeds
-<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_all_external_feeds</a>(...) -&gt; AsyncHttpResponse[GetAllExternalFeedsResponse]</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_all_external_feeds</a>(...) -> GetAllExternalFeedsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5082,21 +5234,19 @@ Retrieves all external feeds from your Brevo account with filtering and paginati
 <dd>
 
 ```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 import datetime
 
-from brevo import Brevo
-
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.external_feeds.get_all_external_feeds(
     search="product",
-    start_date=datetime.date.fromisoformat(
-        "2024-01-01",
-    ),
-    end_date=datetime.date.fromisoformat(
-        "2024-01-31",
-    ),
+    start_date=datetime.date.fromisoformat("2024-01-01"),
+    end_date=datetime.date.fromisoformat("2024-01-31"),
 )
 
 ```
@@ -5121,7 +5271,7 @@ client.external_feeds.get_all_external_feeds(
 <dl>
 <dd>
 
-**start_date:** `typing.Optional[dt.date]` 
+**start_date:** `typing.Optional[datetime.date]` 
 
 Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which
 you want to fetch the list. Can be maximum 30 days older than current
@@ -5133,7 +5283,7 @@ date.
 <dl>
 <dd>
 
-**end_date:** `typing.Optional[dt.date]` 
+**end_date:** `typing.Optional[datetime.date]` 
 
 Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which
 you want to fetch the list. Maximum time period that can be selected is
@@ -5192,7 +5342,7 @@ Default order is **descending** if `sort` is not passed.
 </dl>
 </details>
 
-<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">create_external_feed</a>(...) -&gt; AsyncHttpResponse[CreateExternalFeedResponse]</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">create_external_feed</a>(...) -> CreateExternalFeedResponse</code></summary>
 <dl>
 <dd>
 
@@ -5240,13 +5390,16 @@ Creates a new external feed for dynamic content in email campaigns.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.external_feeds.create_external_feed(
-    name="Internal Blog Feed",
-    url="https://blog.example.com/api/posts",
+    name="Public API Feed",
+    url="https://jsonplaceholder.typicode.com/posts",
     auth_type="noAuth",
     max_retries=3,
     cache=True,
@@ -5330,7 +5483,7 @@ client.external_feeds.create_external_feed(
 <dl>
 <dd>
 
-**headers:** `typing.Optional[typing.Sequence[CreateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
+**headers:** `typing.Optional[typing.List[CreateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
     
 </dd>
 </dl>
@@ -5350,7 +5503,7 @@ client.external_feeds.create_external_feed(
 </dl>
 </details>
 
-<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_external_feed_by_uuid</a>(...) -&gt; AsyncHttpResponse[GetExternalFeedByUuidResponse]</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">get_external_feed_by_uuid</a>(...) -> GetExternalFeedByUuidResponse</code></summary>
 <dl>
 <dd>
 
@@ -5399,10 +5552,13 @@ Retrieves details of a specific external feed by its UUID.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.external_feeds.get_external_feed_by_uuid(
     uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
 )
@@ -5421,7 +5577,7 @@ client.external_feeds.get_external_feed_by_uuid(
 <dl>
 <dd>
 
-**uuid_:** `str` — UUID of the feed to fetch
+**uuid:** `str` — UUID of the feed to fetch
     
 </dd>
 </dl>
@@ -5441,7 +5597,7 @@ client.external_feeds.get_external_feed_by_uuid(
 </dl>
 </details>
 
-<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">update_external_feed</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">update_external_feed</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5486,29 +5642,17 @@ Updates configuration of an existing external feed.
 
 ```python
 from brevo import Brevo
-from brevo.external_feeds import UpdateExternalFeedRequestHeadersItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.external_feeds.update_external_feed(
     uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
-    name="Enterprise Product Feed",
-    url="https://enterprise-api.company.com/catalog",
-    auth_type="token",
-    token="enterprise789token123",
-    headers=[
-        UpdateExternalFeedRequestHeadersItem(
-            name="Authorization",
-            value="Bearer enterprise789token123",
-        ),
-        UpdateExternalFeedRequestHeadersItem(
-            name="Accept",
-            value="application/json",
-        ),
-    ],
-    max_retries=3,
-    cache=True,
+    name="Updated Product Catalog",
+    url="https://api.newstore.com/products/v2",
 )
 
 ```
@@ -5525,7 +5669,7 @@ client.external_feeds.update_external_feed(
 <dl>
 <dd>
 
-**uuid_:** `str` — UUID of the feed to update
+**uuid:** `str` — UUID of the feed to update
     
 </dd>
 </dl>
@@ -5581,7 +5725,7 @@ client.external_feeds.update_external_feed(
 <dl>
 <dd>
 
-**headers:** `typing.Optional[typing.Sequence[UpdateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
+**headers:** `typing.Optional[typing.List[UpdateExternalFeedRequestHeadersItem]]` — Custom HTTP headers for the feed request
     
 </dd>
 </dl>
@@ -5617,7 +5761,7 @@ client.external_feeds.update_external_feed(
 </dl>
 </details>
 
-<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">delete_external_feed</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.external_feeds.<a href="src/brevo/external_feeds/client.py">delete_external_feed</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5661,10 +5805,13 @@ Deletes an external feed from your Brevo account.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.external_feeds.delete_external_feed(
     uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
 )
@@ -5683,7 +5830,7 @@ client.external_feeds.delete_external_feed(
 <dl>
 <dd>
 
-**uuid_:** `str` — UUID of the feed to delete
+**uuid:** `str` — UUID of the feed to delete
     
 </dd>
 </dl>
@@ -5704,7 +5851,7 @@ client.external_feeds.delete_external_feed(
 </details>
 
 ## CustomObjects
-<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">upsertrecords</a>(...) -&gt; AsyncHttpResponse[UpsertrecordsResponse]</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">upsertrecords</a>(...) -> UpsertrecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5755,14 +5902,19 @@ This API allows bulk upsert of object records in a single request. Each object r
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.custom_objects import UpsertrecordsRequestRecordsItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.custom_objects.upsertrecords(
     object_type="vehicle",
-    records=[UpsertrecordsRequestRecordsItem()],
+    records=[
+        UpsertrecordsRequestRecordsItem()
+    ],
 )
 
 ```
@@ -5787,7 +5939,7 @@ client.custom_objects.upsertrecords(
 <dl>
 <dd>
 
-**records:** `typing.Sequence[UpsertrecordsRequestRecordsItem]` — List of object records to be upsert. Each record can have attributes, identifiers, and associations.
+**records:** `typing.List[UpsertrecordsRequestRecordsItem]` — List of object records to be upsert. Each record can have attributes, identifiers, and associations.
     
 </dd>
 </dl>
@@ -5807,7 +5959,7 @@ client.custom_objects.upsertrecords(
 </dl>
 </details>
 
-<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">getrecords</a>(...) -&gt; AsyncHttpResponse[GetrecordsResponse]</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">getrecords</a>(...) -> GetrecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5841,10 +5993,13 @@ This API retrieves a list of object records along with their associated records 
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.custom_objects.getrecords(
     object_type="vehicle",
     limit=1000000,
@@ -5917,7 +6072,7 @@ client.custom_objects.getrecords(
 </dl>
 </details>
 
-<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">batch_delete_object_records</a>(...) -&gt; AsyncHttpResponse[BatchDeleteObjectRecordsResponse]</code></summary>
+<details><summary><code>client.custom_objects.<a href="src/brevo/custom_objects/client.py">batch_delete_object_records</a>(...) -> BatchDeleteObjectRecordsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5947,17 +6102,18 @@ The request is accepted and processed asynchronously.   You can track the status
 
 ```python
 from brevo import Brevo
-from brevo.custom_objects import (
-    BatchDeleteObjectRecordsRequestIdentifiersExtIds,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.custom_objects import BatchDeleteObjectRecordsRequestIdentifiersIds
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.custom_objects.batch_delete_object_records(
     object_type="vehicle",
-    identifiers=BatchDeleteObjectRecordsRequestIdentifiersExtIds(
-        ext_ids=["ext-001", "ext-002"],
+    identifiers=BatchDeleteObjectRecordsRequestIdentifiersIds(
+        ids=[],
     ),
 )
 
@@ -6004,7 +6160,7 @@ client.custom_objects.batch_delete_object_records(
 </details>
 
 ## Contacts
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts</a>(...) -&gt; AsyncHttpResponse[GetContacts]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts</a>(...) -> GetContacts</code></summary>
 <dl>
 <dd>
 
@@ -6038,10 +6194,13 @@ Accepted Number Formats
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_contacts()
 
 ```
@@ -6134,7 +6293,7 @@ client.contacts.get_contacts()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_contact</a>(...) -&gt; AsyncHttpResponse[CreateContactResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_contact</a>(...) -> CreateContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -6162,10 +6321,13 @@ Creates new contacts on Brevo. Contacts can be created by passing either - <br><
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.create_contact()
 
 ```
@@ -6214,7 +6376,7 @@ client.contacts.create_contact()
 <dl>
 <dd>
 
-**list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to add the contact to
+**list_ids:** `typing.Optional[typing.List[int]]` — Ids of the lists to add the contact to
     
 </dd>
 </dl>
@@ -6230,7 +6392,7 @@ client.contacts.create_contact()
 <dl>
 <dd>
 
-**smtp_blacklist_sender:** `typing.Optional[typing.Sequence[str]]` — transactional email forbidden sender for contact. Use only for email Contact ( only available if updateEnabled = true )
+**smtp_blacklist_sender:** `typing.Optional[typing.List[str]]` — transactional email forbidden sender for contact. Use only for email Contact ( only available if updateEnabled = true )
     
 </dd>
 </dl>
@@ -6258,7 +6420,7 @@ client.contacts.create_contact()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_attributes</a>() -&gt; AsyncHttpResponse[GetAttributesResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_attributes</a>() -> GetAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6272,10 +6434,13 @@ client.contacts.create_contact()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_attributes()
 
 ```
@@ -6304,7 +6469,7 @@ client.contacts.get_attributes()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_attribute</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6318,10 +6483,13 @@ client.contacts.get_attributes()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.create_attribute(
     attribute_category="normal",
     attribute_name="attributeName",
@@ -6357,7 +6525,7 @@ client.contacts.create_attribute(
 <dl>
 <dd>
 
-**enumeration:** `typing.Optional[typing.Sequence[CreateAttributeRequestEnumerationItem]]` — List of values and labels that the attribute can take. **Use only if the attribute's category is "category"**. None of the category options can exceed max 200 characters. For example: **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+**enumeration:** `typing.Optional[typing.List[CreateAttributeRequestEnumerationItem]]` — List of values and labels that the attribute can take. **Use only if the attribute's category is "category"**. None of the category options can exceed max 200 characters. For example: **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
     
 </dd>
 </dl>
@@ -6373,7 +6541,7 @@ client.contacts.create_attribute(
 <dl>
 <dd>
 
-**multi_category_options:** `typing.Optional[typing.Sequence[str]]` — List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is "normal" and attribute's type is "multiple-choice". None of the multicategory options can exceed max 200 characters.** For example: **["USA","INDIA"]**
+**multi_category_options:** `typing.Optional[typing.List[str]]` — List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is "normal" and attribute's type is "multiple-choice". None of the multicategory options can exceed max 200 characters.** For example: **["USA","INDIA"]**
     
 </dd>
 </dl>
@@ -6409,7 +6577,7 @@ client.contacts.create_attribute(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_attribute</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6423,10 +6591,13 @@ client.contacts.create_attribute(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.update_attribute(
     attribute_category="category",
     attribute_name="attributeName",
@@ -6462,7 +6633,7 @@ client.contacts.update_attribute(
 <dl>
 <dd>
 
-**enumeration:** `typing.Optional[typing.Sequence[UpdateAttributeRequestEnumerationItem]]` — List of the values and labels that the attribute can take. **Use only if the attribute's category is "category"** None of the category options can exceed max 200 characters. For example, **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
+**enumeration:** `typing.Optional[typing.List[UpdateAttributeRequestEnumerationItem]]` — List of the values and labels that the attribute can take. **Use only if the attribute's category is "category"** None of the category options can exceed max 200 characters. For example, **[{"value":1, "label":"male"}, {"value":2, "label":"female"}]**
     
 </dd>
 </dl>
@@ -6470,7 +6641,7 @@ client.contacts.update_attribute(
 <dl>
 <dd>
 
-**multi_category_options:** `typing.Optional[typing.Sequence[str]]` — Use this option to add multiple-choice attributes options only if the attribute's category is "normal". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters.**. For example: **["USA","INDIA"]**
+**multi_category_options:** `typing.Optional[typing.List[str]]` — Use this option to add multiple-choice attributes options only if the attribute's category is "normal". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters.**. For example: **["USA","INDIA"]**
     
 </dd>
 </dl>
@@ -6498,7 +6669,7 @@ client.contacts.update_attribute(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_attribute</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_attribute</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6512,10 +6683,13 @@ client.contacts.update_attribute(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.delete_attribute(
     attribute_category="normal",
     attribute_name="attributeName",
@@ -6563,7 +6737,7 @@ client.contacts.delete_attribute(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_multi_attribute_options</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_multi_attribute_options</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6577,10 +6751,13 @@ client.contacts.delete_attribute(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.delete_multi_attribute_options(
     multiple_choice_attribute="multipleChoiceAttribute",
     multiple_choice_attribute_option="multipleChoiceAttributeOption",
@@ -6596,6 +6773,14 @@ client.contacts.delete_multi_attribute_options(
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**attribute_type:** `typing.Literal` — Type of the attribute
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -6628,7 +6813,7 @@ client.contacts.delete_multi_attribute_options(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_batch_contacts</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_batch_contacts</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6642,10 +6827,13 @@ client.contacts.delete_multi_attribute_options(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.update_batch_contacts()
 
 ```
@@ -6662,7 +6850,7 @@ client.contacts.update_batch_contacts()
 <dl>
 <dd>
 
-**contacts:** `typing.Optional[typing.Sequence[UpdateBatchContactsRequestContactsItem]]` — List of contacts to be updated
+**contacts:** `typing.Optional[typing.List[UpdateBatchContactsRequestContactsItem]]` — List of contacts to be updated
     
 </dd>
 </dl>
@@ -6682,7 +6870,7 @@ client.contacts.update_batch_contacts()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_doi_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_doi_contact</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6712,13 +6900,18 @@ attributes param in this endpoint is an object containing key-value pairs where 
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.create_doi_contact(
     email="elly@example.com",
-    include_list_ids=[36],
+    include_list_ids=[
+        36
+    ],
     redirection_url="http://requestb.in/173lyyx1",
     template_id=2,
 )
@@ -6745,7 +6938,7 @@ client.contacts.create_doi_contact(
 <dl>
 <dd>
 
-**include_list_ids:** `typing.Sequence[int]` — Lists under user account where contact should be added
+**include_list_ids:** `typing.List[int]` — Lists under user account where contact should be added
     
 </dd>
 </dl>
@@ -6777,7 +6970,7 @@ client.contacts.create_doi_contact(
 <dl>
 <dd>
 
-**exclude_list_ids:** `typing.Optional[typing.Sequence[int]]` — Lists under user account where contact should not be added
+**exclude_list_ids:** `typing.Optional[typing.List[int]]` — Lists under user account where contact should not be added
     
 </dd>
 </dl>
@@ -6797,7 +6990,7 @@ client.contacts.create_doi_contact(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">request_contact_export</a>(...) -&gt; AsyncHttpResponse[RequestContactExportResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">request_contact_export</a>(...) -> RequestContactExportResponse</code></summary>
 <dl>
 <dd>
 
@@ -6825,11 +7018,14 @@ It returns the background process ID which on completion calls the notify URL th
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.contacts import RequestContactExportRequestCustomContactFilter
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.request_contact_export(
     custom_contact_filter=RequestContactExportRequestCustomContactFilter(),
 )
@@ -6864,7 +7060,7 @@ client.contacts.request_contact_export(
 <dl>
 <dd>
 
-**export_attributes:** `typing.Optional[typing.Sequence[str]]` — List of all the attributes that you want to export. **These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. ** For example: **['fname', 'lname', 'email']**
+**export_attributes:** `typing.Optional[typing.List[str]]` — List of all the attributes that you want to export. **These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. ** For example: **['fname', 'lname', 'email']**
     
 </dd>
 </dl>
@@ -6880,7 +7076,7 @@ client.contacts.request_contact_export(
 <dl>
 <dd>
 
-**export_metadata:** `typing.Optional[typing.Sequence[str]]` — Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.
+**export_metadata:** `typing.Optional[typing.List[str]]` — Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.
     
 </dd>
 </dl>
@@ -6896,7 +7092,7 @@ client.contacts.request_contact_export(
 <dl>
 <dd>
 
-**export_subscription_status:** `typing.Optional[typing.Sequence[str]]` — Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.
+**export_subscription_status:** `typing.Optional[typing.List[str]]` — Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.
     
 </dd>
 </dl>
@@ -6924,7 +7120,7 @@ client.contacts.request_contact_export(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folders</a>(...) -&gt; AsyncHttpResponse[GetFoldersResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folders</a>(...) -> GetFoldersResponse</code></summary>
 <dl>
 <dd>
 
@@ -6962,10 +7158,13 @@ The uniqueSubscribers field is deprecated
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_folders()
 
 ```
@@ -7018,7 +7217,7 @@ client.contacts.get_folders()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_folder</a>(...) -&gt; AsyncHttpResponse[CreateFolderResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_folder</a>(...) -> CreateFolderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7032,10 +7231,13 @@ client.contacts.get_folders()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.create_folder()
 
 ```
@@ -7052,7 +7254,7 @@ client.contacts.create_folder()
 <dl>
 <dd>
 
-**name:** `typing.Optional[str]` — Name of the folder
+**request:** `CreateUpdateFolder` 
     
 </dd>
 </dl>
@@ -7072,7 +7274,7 @@ client.contacts.create_folder()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder</a>(...) -&gt; AsyncHttpResponse[GetFolder]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder</a>(...) -> GetFolder</code></summary>
 <dl>
 <dd>
 
@@ -7106,10 +7308,13 @@ These are non breaking changes. The default value for the attributes will be 0.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_folder(
     folder_id=1000000,
 )
@@ -7148,7 +7353,7 @@ client.contacts.get_folder(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_folder</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_folder</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7162,10 +7367,13 @@ client.contacts.get_folder(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.update_folder(
     folder_id=1000000,
 )
@@ -7192,7 +7400,7 @@ client.contacts.update_folder(
 <dl>
 <dd>
 
-**name:** `typing.Optional[str]` — Name of the folder
+**request:** `CreateUpdateFolder` 
     
 </dd>
 </dl>
@@ -7212,7 +7420,7 @@ client.contacts.update_folder(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_folder</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_folder</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7226,10 +7434,13 @@ client.contacts.update_folder(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.delete_folder(
     folder_id=1000000,
 )
@@ -7268,7 +7479,7 @@ client.contacts.delete_folder(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder_lists</a>(...) -&gt; AsyncHttpResponse[GetFolderListsResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_folder_lists</a>(...) -> GetFolderListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7302,10 +7513,13 @@ These are non breaking changes. The default value for the attributes will be 0.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_folder_lists(
     folder_id=1000000,
 )
@@ -7368,7 +7582,7 @@ client.contacts.get_folder_lists(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">import_contacts</a>(...) -&gt; AsyncHttpResponse[ImportContactsResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">import_contacts</a>(...) -> ImportContactsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7396,10 +7610,13 @@ It returns the background process ID which on completion calls the notify URL th
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.import_contacts()
 
 ```
@@ -7456,7 +7673,7 @@ client.contacts.import_contacts()
 <dl>
 <dd>
 
-**json_body:** `typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]]` — **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.
+**json_body:** `typing.Optional[typing.List[ImportContactsRequestJsonBodyItem]]` — **Mandatory if fileUrl and fileBody is not defined.** JSON content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.
     
 </dd>
 </dl>
@@ -7464,7 +7681,7 @@ client.contacts.import_contacts()
 <dl>
 <dd>
 
-**list_ids:** `typing.Optional[typing.Sequence[int]]` — **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+**list_ids:** `typing.Optional[typing.List[int]]` — **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
     
 </dd>
 </dl>
@@ -7516,7 +7733,7 @@ client.contacts.import_contacts()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_lists</a>(...) -&gt; AsyncHttpResponse[GetListsResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_lists</a>(...) -> GetListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7550,10 +7767,13 @@ These are non breaking changes. The default value for the attributes will be 0.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_lists()
 
 ```
@@ -7606,7 +7826,7 @@ client.contacts.get_lists()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_list</a>(...) -&gt; AsyncHttpResponse[CreateListResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_list</a>(...) -> CreateListResponse</code></summary>
 <dl>
 <dd>
 
@@ -7620,10 +7840,13 @@ client.contacts.get_lists()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.create_list(
     folder_id=2,
     name="Magento Customer - ES",
@@ -7671,7 +7894,7 @@ client.contacts.create_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_list</a>(...) -&gt; AsyncHttpResponse[GetListResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_list</a>(...) -> GetListResponse</code></summary>
 <dl>
 <dd>
 
@@ -7685,10 +7908,13 @@ client.contacts.create_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_list(
     list_id=1000000,
 )
@@ -7743,7 +7969,7 @@ client.contacts.get_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_list</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7757,10 +7983,13 @@ client.contacts.get_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.update_list(
     list_id=1000000,
 )
@@ -7815,7 +8044,7 @@ client.contacts.update_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_list</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7829,10 +8058,13 @@ client.contacts.update_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.delete_list(
     list_id=1000000,
 )
@@ -7871,7 +8103,7 @@ client.contacts.delete_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts_from_list</a>(...) -&gt; AsyncHttpResponse[GetContacts]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contacts_from_list</a>(...) -> GetContacts</code></summary>
 <dl>
 <dd>
 
@@ -7885,10 +8117,13 @@ client.contacts.delete_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_contacts_from_list(
     list_id=1000000,
 )
@@ -7959,7 +8194,7 @@ client.contacts.get_contacts_from_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">add_contact_to_list</a>(...) -&gt; AsyncHttpResponse[PostContactInfo]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">add_contact_to_list</a>(...) -> PostContactInfo</code></summary>
 <dl>
 <dd>
 
@@ -7973,15 +8208,21 @@ client.contacts.get_contacts_from_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.contacts import AddContactToListRequestBodyEmails
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.add_contact_to_list(
     list_id=1000000,
     request=AddContactToListRequestBodyEmails(
-        emails=["jeff32@example.com", "jim56@example.com"],
+        emails=[
+            "jeff32@example.com",
+            "jim56@example.com"
+        ],
     ),
 )
 
@@ -8027,7 +8268,7 @@ client.contacts.add_contact_to_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">remove_contact_from_list</a>(...) -&gt; AsyncHttpResponse[PostContactInfo]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">remove_contact_from_list</a>(...) -> PostContactInfo</code></summary>
 <dl>
 <dd>
 
@@ -8041,16 +8282,17 @@ client.contacts.add_contact_to_list(
 
 ```python
 from brevo import Brevo
-from brevo.contacts import RemoveContactFromListRequestBodyAll
+from brevo.environment import BrevoEnvironment
+from brevo.contacts import RemoveContactFromListRequestBodyEmails
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.remove_contact_from_list(
     list_id=1000000,
-    request=RemoveContactFromListRequestBodyAll(
-        all_=True,
-    ),
+    request=RemoveContactFromListRequestBodyEmails(),
 )
 
 ```
@@ -8095,7 +8337,7 @@ client.contacts.remove_contact_from_list(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_segments</a>(...) -&gt; AsyncHttpResponse[GetSegmentsResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_segments</a>(...) -> GetSegmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8109,10 +8351,13 @@ client.contacts.remove_contact_from_list(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_segments()
 
 ```
@@ -8165,7 +8410,7 @@ client.contacts.get_segments()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_info</a>(...) -&gt; AsyncHttpResponse[GetContactInfoResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_info</a>(...) -> GetContactInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -8201,10 +8446,13 @@ There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/co
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_contact_info(
     identifier="identifier",
 )
@@ -8267,7 +8515,7 @@ client.contacts.get_contact_info(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">update_contact</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -8295,10 +8543,13 @@ There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.update_contact(
     identifier="identifier",
 )
@@ -8357,7 +8608,7 @@ client.contacts.update_contact(
 <dl>
 <dd>
 
-**list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to add the contact to
+**list_ids:** `typing.Optional[typing.List[int]]` — Ids of the lists to add the contact to
     
 </dd>
 </dl>
@@ -8373,7 +8624,7 @@ client.contacts.update_contact(
 <dl>
 <dd>
 
-**smtp_blacklist_sender:** `typing.Optional[typing.Sequence[str]]` — transactional email forbidden sender for contact. Use only for email Contact
+**smtp_blacklist_sender:** `typing.Optional[typing.List[str]]` — transactional email forbidden sender for contact. Use only for email Contact
     
 </dd>
 </dl>
@@ -8381,7 +8632,7 @@ client.contacts.update_contact(
 <dl>
 <dd>
 
-**unlink_list_ids:** `typing.Optional[typing.Sequence[int]]` — Ids of the lists to remove the contact from
+**unlink_list_ids:** `typing.Optional[typing.List[int]]` — Ids of the lists to remove the contact from
     
 </dd>
 </dl>
@@ -8401,7 +8652,7 @@ client.contacts.update_contact(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">delete_contact</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -8429,10 +8680,13 @@ There are 2 ways to delete a contact <br><br> Option 1- https://api.brevo.com/v3
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.delete_contact(
     identifier="identifier",
 )
@@ -8479,7 +8733,7 @@ client.contacts.delete_contact(
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_stats</a>(...) -&gt; AsyncHttpResponse[GetContactStatsResponse]</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">get_contact_stats</a>(...) -> GetContactStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -8493,10 +8747,13 @@ client.contacts.delete_contact(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.contacts.get_contact_stats(
     identifier="identifier",
 )
@@ -8552,7 +8809,7 @@ client.contacts.get_contact_stats(
 </details>
 
 ## Conversations
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">sets_agents_status_to_online_for23minutes</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">sets_agents_status_to_online_for23minutes</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -8580,14 +8837,15 @@ We recommend pinging this endpoint every minute for as long as the agent has to 
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.sets_agents_status_to_online_for23minutes(
-    agent_email="liz@getwear.com",
-    agent_name="Liz",
-    received_from="SuperAwesomeHelpdesk",
+    agent_id="d9nKoegKSjmCtyK78",
 )
 
 ```
@@ -8648,7 +8906,7 @@ client.conversations.sets_agents_status_to_online_for23minutes(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_a_message_as_an_agent</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_a_message_as_an_agent</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -8662,13 +8920,15 @@ client.conversations.sets_agents_status_to_online_for23minutes(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.send_a_message_as_an_agent(
     agent_id="d9nKoegKSjmCtyK78",
-    received_from="SuperAwesomeHelpdesk",
     text="Hello! How can I help you?",
     visitor_id="kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
 )
@@ -8747,7 +9007,7 @@ client.conversations.send_a_message_as_an_agent(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_a_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_a_message</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -8761,10 +9021,13 @@ client.conversations.send_a_message_as_an_agent(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.get_a_message(
     id="id",
 )
@@ -8803,7 +9066,7 @@ client.conversations.get_a_message(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_a_message_sent_by_an_agent</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_a_message_sent_by_an_agent</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -8831,10 +9094,13 @@ Only agents’ messages can be edited.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.update_a_message_sent_by_an_agent(
     id="id",
     text="Good morning! How can I help you?",
@@ -8882,7 +9148,7 @@ client.conversations.update_a_message_sent_by_an_agent(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_a_message_sent_by_an_agent</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_a_message_sent_by_an_agent</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -8910,10 +9176,13 @@ Only agents’ messages can be deleted.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.delete_a_message_sent_by_an_agent(
     id="id",
 )
@@ -8952,7 +9221,7 @@ client.conversations.delete_a_message_sent_by_an_agent(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_an_automated_message_to_a_visitor</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">send_an_automated_message_to_a_visitor</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -8980,12 +9249,15 @@ Example of automated messages: order status, announce new features in your web a
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.send_an_automated_message_to_a_visitor(
-    agent_id="d9nKoegKSjmCtyK78",
+    group_id="PjRBMhWGen6aRHjif",
     text="Your order has shipped! Here’s your tracking number: 9114 5847 3325 9667 4328 88",
     visitor_id="kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
 )
@@ -9048,7 +9320,7 @@ client.conversations.send_an_automated_message_to_a_visitor(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_an_automated_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">get_an_automated_message</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -9062,10 +9334,13 @@ client.conversations.send_an_automated_message_to_a_visitor(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.get_an_automated_message(
     id="id",
 )
@@ -9104,7 +9379,7 @@ client.conversations.get_an_automated_message(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_an_automated_message</a>(...) -&gt; AsyncHttpResponse[ConversationsMessage]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">update_an_automated_message</a>(...) -> ConversationsMessage</code></summary>
 <dl>
 <dd>
 
@@ -9118,10 +9393,13 @@ client.conversations.get_an_automated_message(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.update_an_automated_message(
     id="id",
     text="Your order has shipped! Here’s your tracking number: 9114 5847 4668 7775 9233 54",
@@ -9169,7 +9447,7 @@ client.conversations.update_an_automated_message(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_an_automated_message</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">delete_an_automated_message</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -9183,10 +9461,13 @@ client.conversations.update_an_automated_message(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.delete_an_automated_message(
     id="id",
 )
@@ -9225,7 +9506,7 @@ client.conversations.delete_an_automated_message(
 </dl>
 </details>
 
-<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">set_visitor_group_assignment</a>(...) -&gt; AsyncHttpResponse[PutConversationsVisitorGroupResponse]</code></summary>
+<details><summary><code>client.conversations.<a href="src/brevo/conversations/client.py">set_visitor_group_assignment</a>(...) -> PutConversationsVisitorGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -9253,10 +9534,13 @@ Assigns a visitor to a specific agent group or removes them from their current g
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.conversations.set_visitor_group_assignment(
     group_id="PjRBMhWGen6aRHjif",
 )
@@ -9296,7 +9580,7 @@ client.conversations.set_visitor_group_assignment(
 </details>
 
 ## Ecommerce
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_categories</a>(...) -&gt; AsyncHttpResponse[GetCategoriesResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_categories</a>(...) -> GetCategoriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9310,10 +9594,13 @@ client.conversations.set_visitor_group_assignment(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_categories()
 
 ```
@@ -9406,7 +9693,7 @@ client.ecommerce.get_categories()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_category</a>(...) -&gt; AsyncHttpResponse[CreateUpdateCategoryResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_category</a>(...) -> CreateUpdateCategoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -9420,10 +9707,13 @@ client.ecommerce.get_categories()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_update_category(
     id="CAT123",
 )
@@ -9502,7 +9792,7 @@ client.ecommerce.create_update_category(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_category</a>(...) -&gt; AsyncHttpResponse[CreateUpdateBatchCategoryResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_category</a>(...) -> CreateUpdateBatchCategoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -9516,11 +9806,14 @@ client.ecommerce.create_update_category(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.ecommerce import CreateUpdateBatchCategoryRequestCategoriesItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_update_batch_category(
     categories=[
         CreateUpdateBatchCategoryRequestCategoriesItem(
@@ -9543,7 +9836,7 @@ client.ecommerce.create_update_batch_category(
 <dl>
 <dd>
 
-**categories:** `typing.Sequence[CreateUpdateBatchCategoryRequestCategoriesItem]` — array of categories objects
+**categories:** `typing.List[CreateUpdateBatchCategoryRequestCategoriesItem]` — array of categories objects
     
 </dd>
 </dl>
@@ -9571,7 +9864,7 @@ client.ecommerce.create_update_batch_category(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_category_info</a>(...) -&gt; AsyncHttpResponse[GetCategoryDetails]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_category_info</a>(...) -> GetCategoryDetails</code></summary>
 <dl>
 <dd>
 
@@ -9585,10 +9878,13 @@ client.ecommerce.create_update_batch_category(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_category_info(
     id="id",
 )
@@ -9627,7 +9923,7 @@ client.ecommerce.get_category_info(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">activate_the_e_commerce_app</a>() -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">activate_the_e_commerce_app</a>()</code></summary>
 <dl>
 <dd>
 
@@ -9655,10 +9951,13 @@ Getting access to Brevo eCommerce.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.activate_the_e_commerce_app()
 
 ```
@@ -9687,7 +9986,7 @@ client.ecommerce.activate_the_e_commerce_app()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows</a>(...) -&gt; AsyncHttpResponse[GetEcommerceAttributionMetricsResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows</a>(...) -> GetEcommerceAttributionMetricsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9700,20 +9999,18 @@ client.ecommerce.activate_the_e_commerce_app()
 <dd>
 
 ```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 import datetime
 
-from brevo import Brevo
-
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
-    period_from=datetime.datetime.fromisoformat(
-        "2022-01-02 00:00:00+00:00",
-    ),
-    period_to=datetime.datetime.fromisoformat(
-        "2022-01-03 00:00:00+00:00",
-    ),
+    period_from=datetime.datetime.fromisoformat("2022-01-02T00:00:00+00:00"),
+    period_to=datetime.datetime.fromisoformat("2022-01-03T00:00:00+00:00"),
 )
 
 ```
@@ -9730,7 +10027,7 @@ client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_work
 <dl>
 <dd>
 
-**period_from:** `typing.Optional[dt.datetime]` — When getting metrics for a specific period, define the starting datetime in RFC3339 format
+**period_from:** `typing.Optional[datetime.datetime]` — When getting metrics for a specific period, define the starting datetime in RFC3339 format
     
 </dd>
 </dl>
@@ -9738,7 +10035,7 @@ client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_work
 <dl>
 <dd>
 
-**period_to:** `typing.Optional[dt.datetime]` — When getting metrics for a specific period, define the end datetime in RFC3339 format
+**period_to:** `typing.Optional[datetime.datetime]` — When getting metrics for a specific period, define the end datetime in RFC3339 format
     
 </dd>
 </dl>
@@ -9790,9 +10087,7 @@ client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_work
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow</a>(...) -&gt; AsyncHttpResponse[
-    GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse
-]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow</a>(...) -> GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -9806,10 +10101,13 @@ client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_work
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or_workflow(
     conversion_source="email_campaign",
     conversion_source_id="sale",
@@ -9857,9 +10155,7 @@ client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow</a>(...) -&gt; AsyncHttpResponse[
-    GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse
-]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow</a>(...) -> GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -9873,10 +10169,13 @@ client.ecommerce.get_detailed_attribution_metrics_for_a_single_brevo_campaign_or
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_workflow(
     conversion_source="email_campaign",
     conversion_source_id="sale",
@@ -9924,7 +10223,7 @@ client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_wor
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_the_iso4217compliant_display_currency_code_for_your_brevo_account</a>() -&gt; AsyncHttpResponse[GetEcommerceConfigDisplayCurrencyResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_the_iso4217compliant_display_currency_code_for_your_brevo_account</a>() -> GetEcommerceConfigDisplayCurrencyResponse</code></summary>
 <dl>
 <dd>
 
@@ -9938,10 +10237,13 @@ client.ecommerce.get_attributed_product_sales_for_a_single_brevo_campaign_or_wor
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_account()
 
 ```
@@ -9970,7 +10272,7 @@ client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_a
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">set_config_display_currency</a>(...) -&gt; AsyncHttpResponse[SetConfigDisplayCurrencyResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">set_config_display_currency</a>(...) -> SetConfigDisplayCurrencyResponse</code></summary>
 <dl>
 <dd>
 
@@ -9984,10 +10286,13 @@ client.ecommerce.get_the_iso4217compliant_display_currency_code_for_your_brevo_a
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.set_config_display_currency(
     code="EUR",
 )
@@ -10026,7 +10331,7 @@ client.ecommerce.set_config_display_currency(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_orders</a>(...) -&gt; AsyncHttpResponse[typing.Any]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_orders</a>(...) -> typing.Any</code></summary>
 <dl>
 <dd>
 
@@ -10054,10 +10359,13 @@ Get all the orders
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_orders()
 
 ```
@@ -10126,7 +10434,7 @@ client.ecommerce.get_orders()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_order</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_order</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10154,10 +10462,13 @@ Manages the transactional status of the order
 
 ```python
 from brevo import Brevo, OrderProductsItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_order(
     amount=308.42,
     created_at="2021-07-29T20:59:23.383Z",
@@ -10166,7 +10477,7 @@ client.ecommerce.create_order(
         OrderProductsItem(
             price=99.99,
             product_id="P1",
-            quantity=10.0,
+            quantity=10,
         )
     ],
     status="completed",
@@ -10187,87 +10498,7 @@ client.ecommerce.create_order(
 <dl>
 <dd>
 
-**amount:** `float` — Total amount of the order, including all shipping expenses, tax and the price of items.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**created_at:** `str` — Event occurrence UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when order is actually created.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**id:** `str` — Unique ID of the order.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**products:** `typing.Sequence[OrderProductsItem]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**status:** `str` — State of the order.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**updated_at:** `str` — Event updated UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when the status of the order is actually changed/updated.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**billing:** `typing.Optional[OrderBilling]` — Billing details of an order.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**coupons:** `typing.Optional[typing.Sequence[str]]` — Coupons applied to the order. Stored case insensitive.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**identifiers:** `typing.Optional[OrderIdentifiers]` — Identifies the contact associated with the order.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**meta_info:** `typing.Optional[typing.Dict[str, OrderMetaInfoValue]]` — Meta data of order to store additional detal such as custom message, customer type, source.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**store_id:** `typing.Optional[str]` — ID of store where the order is placed
+**request:** `Order` 
     
 </dd>
 </dl>
@@ -10287,7 +10518,7 @@ client.ecommerce.create_order(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_batch_order</a>(...) -&gt; AsyncHttpResponse[CreateBatchOrderResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_batch_order</a>(...) -> CreateBatchOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -10315,10 +10546,13 @@ Create multiple orders at one time instead of one order at a time
 
 ```python
 from brevo import Brevo, Order, OrderProductsItem
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_batch_order(
     orders=[
         Order(
@@ -10329,7 +10563,7 @@ client.ecommerce.create_batch_order(
                 OrderProductsItem(
                     price=99.99,
                     product_id="P1",
-                    quantity=10.0,
+                    quantity=10,
                 )
             ],
             status="completed",
@@ -10352,7 +10586,7 @@ client.ecommerce.create_batch_order(
 <dl>
 <dd>
 
-**orders:** `typing.Sequence[Order]` — array of order objects
+**orders:** `typing.List[Order]` — array of order objects
     
 </dd>
 </dl>
@@ -10388,7 +10622,7 @@ client.ecommerce.create_batch_order(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_products</a>(...) -&gt; AsyncHttpResponse[GetProductsResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_products</a>(...) -> GetProductsResponse</code></summary>
 <dl>
 <dd>
 
@@ -10402,10 +10636,13 @@ client.ecommerce.create_batch_order(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_products()
 
 ```
@@ -10554,7 +10791,7 @@ client.ecommerce.get_products()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_product</a>(...) -&gt; AsyncHttpResponse[CreateUpdateProductResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_product</a>(...) -> CreateUpdateProductResponse</code></summary>
 <dl>
 <dd>
 
@@ -10568,10 +10805,13 @@ client.ecommerce.get_products()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_update_product(
     id="P11",
     name="Iphone 11",
@@ -10607,7 +10847,7 @@ client.ecommerce.create_update_product(
 <dl>
 <dd>
 
-**categories:** `typing.Optional[typing.Sequence[str]]` — Category ID-s of the product
+**categories:** `typing.Optional[typing.List[str]]` — Category ID-s of the product
     
 </dd>
 </dl>
@@ -10707,7 +10947,7 @@ client.ecommerce.create_update_product(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_products</a>(...) -&gt; AsyncHttpResponse[CreateUpdateBatchProductsResponse]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_batch_products</a>(...) -> CreateUpdateBatchProductsResponse</code></summary>
 <dl>
 <dd>
 
@@ -10721,11 +10961,14 @@ client.ecommerce.create_update_product(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.ecommerce import CreateUpdateBatchProductsRequestProductsItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_update_batch_products(
     products=[
         CreateUpdateBatchProductsRequestProductsItem(
@@ -10749,7 +10992,7 @@ client.ecommerce.create_update_batch_products(
 <dl>
 <dd>
 
-**products:** `typing.Sequence[CreateUpdateBatchProductsRequestProductsItem]` — array of products objects
+**products:** `typing.List[CreateUpdateBatchProductsRequestProductsItem]` — array of products objects
     
 </dd>
 </dl>
@@ -10777,7 +11020,7 @@ client.ecommerce.create_update_batch_products(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_product_info</a>(...) -&gt; AsyncHttpResponse[GetProductDetails]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">get_product_info</a>(...) -> GetProductDetails</code></summary>
 <dl>
 <dd>
 
@@ -10791,10 +11034,13 @@ client.ecommerce.create_update_batch_products(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.get_product_info(
     id="id",
 )
@@ -10833,7 +11079,7 @@ client.ecommerce.get_product_info(
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_product_alert</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_product_alert</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10847,10 +11093,13 @@ client.ecommerce.get_product_info(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.ecommerce.create_product_alert(
     id="id",
 )
@@ -10870,6 +11119,14 @@ client.ecommerce.create_product_alert(
 <dd>
 
 **id:** `str` — Product ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Literal` — Alert type
     
 </dd>
 </dl>
@@ -10898,7 +11155,7 @@ client.ecommerce.create_product_alert(
 </details>
 
 ## Coupons
-<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collections</a>(...) -&gt; AsyncHttpResponse[GetCouponCollection]</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collections</a>(...) -> GetCouponCollection</code></summary>
 <dl>
 <dd>
 
@@ -10912,10 +11169,13 @@ client.ecommerce.create_product_alert(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.coupons.get_coupon_collections()
 
 ```
@@ -10976,7 +11236,7 @@ client.coupons.get_coupon_collections()
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupon_collection</a>(...) -&gt; AsyncHttpResponse[CreateCouponCollectionResponse]</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupon_collection</a>(...) -> CreateCouponCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -10990,10 +11250,13 @@ client.coupons.get_coupon_collections()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.coupons.create_coupon_collection(
     default_coupon="Winter",
     name="10%OFF",
@@ -11029,7 +11292,7 @@ client.coupons.create_coupon_collection(
 <dl>
 <dd>
 
-**expiration_date:** `typing.Optional[dt.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+**expiration_date:** `typing.Optional[datetime.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
     
 </dd>
 </dl>
@@ -11065,7 +11328,7 @@ client.coupons.create_coupon_collection(
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collection</a>(...) -&gt; AsyncHttpResponse[GetCouponCollection]</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">get_coupon_collection</a>(...) -> GetCouponCollection</code></summary>
 <dl>
 <dd>
 
@@ -11079,10 +11342,13 @@ client.coupons.create_coupon_collection(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.coupons.get_coupon_collection(
     id="id",
 )
@@ -11121,7 +11387,7 @@ client.coupons.get_coupon_collection(
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">update_coupon_collection</a>(...) -&gt; AsyncHttpResponse[UpdateCouponCollectionResponse]</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">update_coupon_collection</a>(...) -> UpdateCouponCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -11135,10 +11401,13 @@ client.coupons.get_coupon_collection(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.coupons.update_coupon_collection(
     id="id",
 )
@@ -11173,7 +11442,7 @@ client.coupons.update_coupon_collection(
 <dl>
 <dd>
 
-**expiration_date:** `typing.Optional[dt.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
+**expiration_date:** `typing.Optional[datetime.datetime]` — Specify an expiration date for the coupon collection in RFC3339 format. Use null to remove the expiration date.
     
 </dd>
 </dl>
@@ -11209,7 +11478,7 @@ client.coupons.update_coupon_collection(
 </dl>
 </details>
 
-<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupons</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.coupons.<a href="src/brevo/coupons/client.py">create_coupons</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -11223,13 +11492,18 @@ client.coupons.update_coupon_collection(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.coupons.create_coupons(
     collection_id="23befbae-1505-47a8-bd27-e30ef739f32c",
-    coupons=["Uf12AF"],
+    coupons=[
+        "Uf12AF"
+    ],
 )
 
 ```
@@ -11254,7 +11528,7 @@ client.coupons.create_coupons(
 <dl>
 <dd>
 
-**coupons:** `typing.Sequence[str]` 
+**coupons:** `typing.List[str]` 
     
 </dd>
 </dl>
@@ -11275,7 +11549,7 @@ client.coupons.create_coupons(
 </details>
 
 ## Payments
-<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">create_payment_request</a>(...) -&gt; AsyncHttpResponse[CreatePaymentRequestResponse]</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">create_payment_request</a>(...) -> CreatePaymentRequestResponse</code></summary>
 <dl>
 <dd>
 
@@ -11289,12 +11563,16 @@ client.coupons.create_coupons(
 
 ```python
 from brevo import Brevo, Cart
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.payments.create_payment_request(
     cart=Cart(
+        currency="EUR",
         specific_amount=1200,
     ),
     contact_id=43,
@@ -11375,7 +11653,7 @@ client.payments.create_payment_request(
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">get_payment_request</a>(...) -&gt; AsyncHttpResponse[GetPaymentRequestResponse]</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">get_payment_request</a>(...) -> GetPaymentRequestResponse</code></summary>
 <dl>
 <dd>
 
@@ -11389,10 +11667,13 @@ client.payments.create_payment_request(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.payments.get_payment_request(
     id="050db7b0-9bb7-4c1e-9c68-5a8dace8c1dc",
 )
@@ -11431,7 +11712,7 @@ client.payments.get_payment_request(
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">delete_payment_request</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.payments.<a href="src/brevo/payments/client.py">delete_payment_request</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -11445,10 +11726,13 @@ client.payments.get_payment_request(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.payments.delete_payment_request(
     id="9ae7d68a-565c-4695-9381-d8fb3e3a14cc",
 )
@@ -11488,7 +11772,7 @@ client.payments.delete_payment_request(
 </details>
 
 ## Event
-<details><summary><code>client.event.<a href="src/brevo/event/client.py">create_event</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.event.<a href="src/brevo/event/client.py">create_event</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -11516,11 +11800,14 @@ Create an event to track a contact's interaction.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.event import CreateEventRequestIdentifiers
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.event.create_event(
     event_name="video_played",
     identifiers=CreateEventRequestIdentifiers(),
@@ -11601,7 +11888,7 @@ client.event.create_event(
 </details>
 
 ## InboundParsing
-<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events</a>(...) -&gt; AsyncHttpResponse[GetInboundEmailEventsResponse]</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events</a>(...) -> GetInboundEmailEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11629,10 +11916,13 @@ This endpoint will show the list of all the events for the received emails.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.inbound_parsing.get_inbound_email_events()
 
 ```
@@ -11709,7 +11999,7 @@ client.inbound_parsing.get_inbound_email_events()
 </dl>
 </details>
 
-<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events_by_uuid</a>(...) -&gt; AsyncHttpResponse[GetInboundEmailEventsByUuidResponse]</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_events_by_uuid</a>(...) -> GetInboundEmailEventsByUuidResponse</code></summary>
 <dl>
 <dd>
 
@@ -11737,10 +12027,13 @@ This endpoint will show the list of all events history for one particular receiv
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.inbound_parsing.get_inbound_email_events_by_uuid(
     uuid_="uuid",
 )
@@ -11759,7 +12052,7 @@ client.inbound_parsing.get_inbound_email_events_by_uuid(
 <dl>
 <dd>
 
-**uuid_:** `str` — UUID to fetch events specific to received email
+**uuid:** `str` — UUID to fetch events specific to received email
     
 </dd>
 </dl>
@@ -11779,7 +12072,7 @@ client.inbound_parsing.get_inbound_email_events_by_uuid(
 </dl>
 </details>
 
-<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_attachment</a>(...) -&gt; typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[bytes]]]</code></summary>
+<details><summary><code>client.inbound_parsing.<a href="src/brevo/inbound_parsing/client.py">get_inbound_email_attachment</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -11807,10 +12100,13 @@ This endpoint will retrieve inbound attachment with download token.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.inbound_parsing.get_inbound_email_attachment(
     download_token="downloadToken",
 )
@@ -11837,7 +12133,7 @@ client.inbound_parsing.get_inbound_email_attachment(
 <dl>
 <dd>
 
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -11850,7 +12146,7 @@ client.inbound_parsing.get_inbound_email_attachment(
 </details>
 
 ## Balance
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_active_balances_api</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_active_balances_api</a>(...) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -11878,10 +12174,13 @@ Returns Active Balances
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_active_balances_api(
     pid="pid",
     contact_id=1,
@@ -11970,7 +12269,7 @@ client.balance.get_active_balances_api(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition_list</a>(...) -&gt; AsyncHttpResponse[GetBalanceDefinitionListResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition_list</a>(...) -> GetBalanceDefinitionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -11998,10 +12297,13 @@ Returns balance definition page
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_balance_definition_list(
     pid="pid",
 )
@@ -12080,7 +12382,7 @@ client.balance.get_balance_definition_list(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_definition</a>(...) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -12108,10 +12410,13 @@ Creates balance definition and returns information
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.create_balance_definition(
     pid="pid",
     name="name",
@@ -12156,9 +12461,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_availability_duration_modifier:** `typing.Optional[
-    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationModifier
-]` — Defines when the balance expires within the selected duration.
+**balance_availability_duration_modifier:** `typing.Optional[PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationModifier]` — Defines when the balance expires within the selected duration.
     
 </dd>
 </dl>
@@ -12166,9 +12469,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_availability_duration_unit:** `typing.Optional[
-    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationUnit
-]` — Unit of time for balance validity.
+**balance_availability_duration_unit:** `typing.Optional[PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceAvailabilityDurationUnit]` — Unit of time for balance validity.
     
 </dd>
 </dl>
@@ -12184,7 +12485,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_expiration_date:** `typing.Optional[dt.date]` — Fixed expiration date (`dd/mm` format) as an alternative to duration-based expiry.
+**balance_expiration_date:** `typing.Optional[datetime.date]` — Fixed expiration date (`dd/mm` format) as an alternative to duration-based expiry.
     
 </dd>
 </dl>
@@ -12192,9 +12493,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_option_amount_overtaking_strategy:** `typing.Optional[
-    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionAmountOvertakingStrategy
-]` — Defines whether partial credit is allowed when reaching max balance.
+**balance_option_amount_overtaking_strategy:** `typing.Optional[PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionAmountOvertakingStrategy]` — Defines whether partial credit is allowed when reaching max balance.
     
 </dd>
 </dl>
@@ -12202,9 +12501,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_option_credit_rounding:** `typing.Optional[
-    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionCreditRounding
-]` — Defines rounding strategy for credit transactions.
+**balance_option_credit_rounding:** `typing.Optional[PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionCreditRounding]` — Defines rounding strategy for credit transactions.
     
 </dd>
 </dl>
@@ -12212,9 +12509,7 @@ client.balance.create_balance_definition(
 <dl>
 <dd>
 
-**balance_option_debit_rounding:** `typing.Optional[
-    PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding
-]` — Defines rounding strategy for debit transactions.
+**balance_option_debit_rounding:** `typing.Optional[PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding]` — Defines rounding strategy for debit transactions.
     
 </dd>
 </dl>
@@ -12290,7 +12585,7 @@ client.balance.create_balance_definition(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition</a>(...) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -12318,10 +12613,13 @@ Returns balance definition
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_balance_definition(
     pid="pid",
     bdid="bdid",
@@ -12377,7 +12675,7 @@ client.balance.get_balance_definition(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_definition</a>(...) -&gt; AsyncHttpResponse[BalanceDefinition]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_definition</a>(...) -> BalanceDefinition</code></summary>
 <dl>
 <dd>
 
@@ -12405,10 +12703,13 @@ Updates Balance definition
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.update_balance_definition(
     pid="pid",
     bdid="bdid",
@@ -12462,9 +12763,7 @@ client.balance.update_balance_definition(
 <dl>
 <dd>
 
-**balance_availability_duration_modifier:** `typing.Optional[
-    UpdateBalanceDefinitionRequestBalanceAvailabilityDurationModifier
-]` — Defines when the balance expires within the selected duration.
+**balance_availability_duration_modifier:** `typing.Optional[UpdateBalanceDefinitionRequestBalanceAvailabilityDurationModifier]` — Defines when the balance expires within the selected duration.
     
 </dd>
 </dl>
@@ -12496,9 +12795,7 @@ client.balance.update_balance_definition(
 <dl>
 <dd>
 
-**balance_option_amount_overtaking_strategy:** `typing.Optional[
-    UpdateBalanceDefinitionRequestBalanceOptionAmountOvertakingStrategy
-]` — Defines whether partial credit is allowed when reaching max balance.
+**balance_option_amount_overtaking_strategy:** `typing.Optional[UpdateBalanceDefinitionRequestBalanceOptionAmountOvertakingStrategy]` — Defines whether partial credit is allowed when reaching max balance.
     
 </dd>
 </dl>
@@ -12590,7 +12887,7 @@ client.balance.update_balance_definition(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_definition</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_definition</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -12618,10 +12915,13 @@ Delete Balance definition
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.delete_balance_definition(
     pid="pid",
     bdid="bdid",
@@ -12669,7 +12969,7 @@ client.balance.delete_balance_definition(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_limit</a>(...) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -12697,10 +12997,13 @@ Creates balance limit and sends the created UUID along with the data
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.create_balance_limit(
     pid="pid",
     bdid="bdid",
@@ -12801,7 +13104,7 @@ client.balance.create_balance_limit(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_limit</a>(...) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -12829,10 +13132,13 @@ Fetches balance limits and send the created UUID along with the data
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_balance_limit(
     pid="pid",
     bdid="bdid",
@@ -12897,7 +13203,7 @@ client.balance.get_balance_limit(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_limit</a>(...) -&gt; AsyncHttpResponse[BalanceLimit]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">update_balance_limit</a>(...) -> BalanceLimit</code></summary>
 <dl>
 <dd>
 
@@ -12925,10 +13231,13 @@ Updates balance limit
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.update_balance_limit(
     pid="pid",
     bdid="bdid",
@@ -13038,7 +13347,7 @@ client.balance.update_balance_limit(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_limit</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">delete_balance_limit</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -13066,10 +13375,13 @@ Delete balance limit
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.delete_balance_limit(
     pid="pid",
     bdid="bdid",
@@ -13126,7 +13438,7 @@ client.balance.delete_balance_limit(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_contact_balances</a>(...) -&gt; AsyncHttpResponse[GetContactBalancesResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_contact_balances</a>(...) -> GetContactBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13154,10 +13466,13 @@ Returns balance list
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_contact_balances(
     pid="pid",
 )
@@ -13196,7 +13511,7 @@ client.balance.get_contact_balances(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_order</a>(...) -&gt; AsyncHttpResponse[CreateBalanceOrderResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_balance_order</a>(...) -> CreateBalanceOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -13224,10 +13539,13 @@ Returns created order
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.create_balance_order(
     pid="pid",
     amount=1.1,
@@ -13327,7 +13645,7 @@ client.balance.create_balance_order(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_subscription_balances</a>(...) -&gt; AsyncHttpResponse[GetSubscriptionBalancesResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_subscription_balances</a>(...) -> GetSubscriptionBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13355,10 +13673,13 @@ Returns subscription balances
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_subscription_balances(
     pid="pid",
     cid="cid",
@@ -13406,7 +13727,7 @@ client.balance.get_subscription_balances(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_subscription_balances</a>(...) -&gt; AsyncHttpResponse[PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">create_subscription_balances</a>(...) -> PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13434,10 +13755,13 @@ Creates a balance for a contact
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.create_subscription_balances(
     pid="pid",
     cid="cid",
@@ -13494,7 +13818,7 @@ client.balance.create_subscription_balances(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_transaction_history_api</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyBalanceProgramsPidTransactionHistoryResponse]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_transaction_history_api</a>(...) -> GetLoyaltyBalanceProgramsPidTransactionHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -13522,10 +13846,13 @@ Returns transaction history
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.get_transaction_history_api(
     pid="pid",
     contact_id=1,
@@ -13622,7 +13949,7 @@ client.balance.get_transaction_history_api(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">begin_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">begin_transaction</a>(...) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -13650,10 +13977,13 @@ Creates new transaction and returns information
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.begin_transaction(
     pid="pid",
     amount=1.1,
@@ -13766,7 +14096,7 @@ client.balance.begin_transaction(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">cancel_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">cancel_transaction</a>(...) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -13794,10 +14124,13 @@ Cancels transaction
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.cancel_transaction(
     pid="pid",
     tid="tid",
@@ -13845,7 +14178,7 @@ client.balance.cancel_transaction(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">complete_transaction</a>(...) -&gt; AsyncHttpResponse[Transaction]</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">complete_transaction</a>(...) -> Transaction</code></summary>
 <dl>
 <dd>
 
@@ -13873,10 +14206,13 @@ Completes transaction
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.balance.complete_transaction(
     pid="pid",
     tid="tid",
@@ -13925,7 +14261,7 @@ client.balance.complete_transaction(
 </details>
 
 ## Program
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_lp_list</a>(...) -&gt; AsyncHttpResponse[GetLpListResponse]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_lp_list</a>(...) -> GetLpListResponse</code></summary>
 <dl>
 <dd>
 
@@ -13953,10 +14289,13 @@ Returns list of loyalty programs
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.get_lp_list()
 
 ```
@@ -14017,7 +14356,7 @@ client.program.get_lp_list()
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">create_new_lp</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">create_new_lp</a>(...) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -14045,10 +14384,13 @@ Creates loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.create_new_lp(
     name="name",
 )
@@ -14111,7 +14453,7 @@ client.program.create_new_lp(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_loyalty_program_info</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_loyalty_program_info</a>(...) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -14139,10 +14481,13 @@ Returns loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.get_loyalty_program_info(
     pid="pid",
 )
@@ -14181,7 +14526,7 @@ client.program.get_loyalty_program_info(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">update_loyalty_program</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">update_loyalty_program</a>(...) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -14209,10 +14554,13 @@ Updates loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.update_loyalty_program(
     pid="pid",
     name="name",
@@ -14276,7 +14624,7 @@ client.program.update_loyalty_program(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_loyalty_program</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_loyalty_program</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -14304,10 +14652,13 @@ Deletes Loyalty Program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.delete_loyalty_program(
     pid="pid",
 )
@@ -14346,7 +14697,7 @@ client.program.delete_loyalty_program(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">partially_update_loyalty_program</a>(...) -&gt; AsyncHttpResponse[LoyaltyProgram]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">partially_update_loyalty_program</a>(...) -> LoyaltyProgram</code></summary>
 <dl>
 <dd>
 
@@ -14374,10 +14725,13 @@ Partially updates loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.partially_update_loyalty_program(
     pid="pid",
 )
@@ -14440,7 +14794,7 @@ client.program.partially_update_loyalty_program(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_parameter_subscription_info</a>(...) -&gt; AsyncHttpResponse[GetParameterSubscriptionInfoResponse]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">get_parameter_subscription_info</a>(...) -> GetParameterSubscriptionInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -14468,10 +14822,13 @@ Get Information of balances, tiers, rewards and subscription members for a subsc
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.get_parameter_subscription_info(
     pid="pid",
 )
@@ -14534,7 +14891,7 @@ client.program.get_parameter_subscription_info(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">publish_loyalty_program</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">publish_loyalty_program</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -14562,10 +14919,13 @@ Publishes loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.publish_loyalty_program(
     pid="pid",
 )
@@ -14604,7 +14964,7 @@ client.program.publish_loyalty_program(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_member_to_a_subscription</a>(...) -&gt; AsyncHttpResponse[SubscribeMemberToASubscriptionResponse]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_member_to_a_subscription</a>(...) -> SubscribeMemberToASubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -14632,13 +14992,18 @@ Add member to a subscription
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.subscribe_member_to_a_subscription(
     pid="pid",
-    member_contact_ids=[1],
+    member_contact_ids=[
+        1
+    ],
 )
 
 ```
@@ -14663,7 +15028,7 @@ client.program.subscribe_member_to_a_subscription(
 <dl>
 <dd>
 
-**member_contact_ids:** `typing.Sequence[int]` — Required, each item must be greater than or equal to 1
+**member_contact_ids:** `typing.List[int]` — Required, each item must be greater than or equal to 1
     
 </dd>
 </dl>
@@ -14699,7 +15064,7 @@ client.program.subscribe_member_to_a_subscription(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_contact_members</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">delete_contact_members</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -14727,10 +15092,13 @@ Deletes member from a subscription
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.delete_contact_members(
     pid="pid",
     member_contact_ids="memberContactIds",
@@ -14778,7 +15146,7 @@ client.program.delete_contact_members(
 </dl>
 </details>
 
-<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_to_loyalty_program</a>(...) -&gt; AsyncHttpResponse[SubscribeToLoyaltyProgramResponse]</code></summary>
+<details><summary><code>client.program.<a href="src/brevo/program/client.py">subscribe_to_loyalty_program</a>(...) -> SubscribeToLoyaltyProgramResponse</code></summary>
 <dl>
 <dd>
 
@@ -14806,10 +15174,13 @@ Subscribes to a loyalty program
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.program.subscribe_to_loyalty_program(
     pid="pid",
     contact_id=1,
@@ -14874,7 +15245,7 @@ client.program.subscribe_to_loyalty_program(
 </details>
 
 ## Reward
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_code_count</a>(...) -&gt; AsyncHttpResponse[GetCodeCountResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_code_count</a>(...) -> GetCodeCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -14902,10 +15273,13 @@ Get code count
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.get_code_count(
     pid="pid",
     cpid="cpid",
@@ -14953,7 +15327,7 @@ client.reward.get_code_count(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_page_api</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidOffersResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_page_api</a>(...) -> GetLoyaltyOfferProgramsPidOffersResponse</code></summary>
 <dl>
 <dd>
 
@@ -14981,10 +15355,13 @@ Returns a reward page
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.get_reward_page_api(
     pid="pid",
 )
@@ -15055,7 +15432,7 @@ client.reward.get_reward_page_api(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_reward</a>(...) -&gt; AsyncHttpResponse[CreateRewardResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_reward</a>(...) -> CreateRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -15083,10 +15460,13 @@ Creates a new reward in the loyalty program.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.create_reward(
     pid="pid",
     name="name",
@@ -15158,7 +15538,7 @@ client.reward.create_reward(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_voucher</a>(...) -&gt; AsyncHttpResponse[CreateVoucherResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">create_voucher</a>(...) -> CreateVoucherResponse</code></summary>
 <dl>
 <dd>
 
@@ -15186,10 +15566,13 @@ Create a voucher and attribute it to a specific membership.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.create_voucher(
     pid="pid",
     reward_id="rewardId",
@@ -15285,7 +15668,7 @@ client.reward.create_voucher(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">redeem_voucher</a>(...) -&gt; AsyncHttpResponse[Redeem]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">redeem_voucher</a>(...) -> Redeem</code></summary>
 <dl>
 <dd>
 
@@ -15313,10 +15696,13 @@ Creates a request to redeem a voucher.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.redeem_voucher(
     pid="pid",
 )
@@ -15419,7 +15805,7 @@ client.reward.redeem_voucher(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">complete_redeem_transaction</a>(...) -&gt; AsyncHttpResponse[Redeem]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">complete_redeem_transaction</a>(...) -> Redeem</code></summary>
 <dl>
 <dd>
 
@@ -15447,10 +15833,13 @@ Completes voucher redeem request.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.complete_redeem_transaction(
     pid="pid",
     tid="tid",
@@ -15498,7 +15887,7 @@ client.reward.complete_redeem_transaction(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">revoke_vouchers</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">revoke_vouchers</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -15526,10 +15915,13 @@ Revoke attributed vouchers.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.revoke_vouchers(
     pid="pid",
 )
@@ -15576,7 +15968,7 @@ client.reward.revoke_vouchers(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">validate_reward</a>(...) -&gt; AsyncHttpResponse[ValidateRewardResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">validate_reward</a>(...) -> ValidateRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -15604,10 +15996,13 @@ Validates a reward.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.validate_reward(
     pid="pid",
 )
@@ -15694,7 +16089,7 @@ client.reward.validate_reward(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_information</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidRewardsRidResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_reward_information</a>(...) -> GetLoyaltyOfferProgramsPidRewardsRidResponse</code></summary>
 <dl>
 <dd>
 
@@ -15722,10 +16117,13 @@ Returns reward information.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.get_reward_information(
     pid="pid",
     rid="rid",
@@ -15781,7 +16179,7 @@ client.reward.get_reward_information(
 </dl>
 </details>
 
-<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_voucher_for_a_contact</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyOfferProgramsPidVouchersResponse]</code></summary>
+<details><summary><code>client.reward.<a href="src/brevo/reward/client.py">get_voucher_for_a_contact</a>(...) -> GetLoyaltyOfferProgramsPidVouchersResponse</code></summary>
 <dl>
 <dd>
 
@@ -15809,10 +16207,13 @@ Get voucher for a contact
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.reward.get_voucher_for_a_contact(
     pid="pid",
     contact_id=1,
@@ -15909,7 +16310,7 @@ client.reward.get_voucher_for_a_contact(
 </details>
 
 ## Tier
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">add_subscription_to_tier</a>(...) -&gt; AsyncHttpResponse[AddSubscriptionToTierResponse]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">add_subscription_to_tier</a>(...) -> AddSubscriptionToTierResponse</code></summary>
 <dl>
 <dd>
 
@@ -15937,10 +16338,13 @@ Manually assigns a tier to a specific membership.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.add_subscription_to_tier(
     pid="pid",
     cid="cid",
@@ -15997,7 +16401,7 @@ client.tier.add_subscription_to_tier(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_list_of_tier_groups</a>(...) -&gt; AsyncHttpResponse[GetListOfTierGroupsResponse]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_list_of_tier_groups</a>(...) -> GetListOfTierGroupsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16025,10 +16429,13 @@ Returns the list of tier groups defined within the loyalty program.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.get_list_of_tier_groups(
     pid="pid",
 )
@@ -16075,7 +16482,7 @@ client.tier.get_list_of_tier_groups(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_group</a>(...) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -16103,10 +16510,13 @@ Creates a new tier group in a loyalty program. *(The changes will take effect wi
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.create_tier_group(
     pid="pid",
     name="name",
@@ -16150,7 +16560,7 @@ client.tier.create_tier_group(
 <dl>
 <dd>
 
-**tier_order:** `typing.Optional[typing.Sequence[str]]` — Order of the tiers in the group in ascending order
+**tier_order:** `typing.Optional[typing.List[str]]` — Order of the tiers in the group in ascending order
     
 </dd>
 </dl>
@@ -16178,7 +16588,7 @@ client.tier.create_tier_group(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_tier_group</a>(...) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -16206,10 +16616,13 @@ Returns tier group information.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.get_tier_group(
     pid="pid",
     gid="gid",
@@ -16265,7 +16678,7 @@ client.tier.get_tier_group(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier_group</a>(...) -&gt; AsyncHttpResponse[TierGroup]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier_group</a>(...) -> TierGroup</code></summary>
 <dl>
 <dd>
 
@@ -16293,16 +16706,21 @@ Updates a tier group from a loyalty program. *(The changes will take effect with
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.update_tier_group(
     pid="pid",
     gid="gid",
     downgrade_strategy="real_time",
     name="name",
-    tier_order=["tierOrder"],
+    tier_order=[
+        "tierOrder"
+    ],
     upgrade_strategy="real_time",
 )
 
@@ -16352,7 +16770,7 @@ client.tier.update_tier_group(
 <dl>
 <dd>
 
-**tier_order:** `typing.Sequence[str]` — Order of the tiers in the group in ascending order
+**tier_order:** `typing.List[str]` — Order of the tiers in the group in ascending order
     
 </dd>
 </dl>
@@ -16380,7 +16798,7 @@ client.tier.update_tier_group(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier_group</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier_group</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -16408,10 +16826,13 @@ Deletes a tier group from a loyalty program. *(The changes will take effect with
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.delete_tier_group(
     pid="pid",
     gid="gid",
@@ -16459,7 +16880,7 @@ client.tier.delete_tier_group(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_for_tier_group</a>(...) -&gt; AsyncHttpResponse[Tier]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">create_tier_for_tier_group</a>(...) -> Tier</code></summary>
 <dl>
 <dd>
 
@@ -16487,15 +16908,20 @@ Creates a new tier in a loyalty program tier group. *(The changes will take effe
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.tier import CreateTierForTierGroupRequestAccessConditionsItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.create_tier_for_tier_group(
     pid="pid",
     gid="gid",
-    access_conditions=[CreateTierForTierGroupRequestAccessConditionsItem()],
+    access_conditions=[
+        CreateTierForTierGroupRequestAccessConditionsItem()
+    ],
     name="name",
 )
 
@@ -16529,7 +16955,7 @@ client.tier.create_tier_for_tier_group(
 <dl>
 <dd>
 
-**access_conditions:** `typing.Sequence[CreateTierForTierGroupRequestAccessConditionsItem]` 
+**access_conditions:** `typing.List[CreateTierForTierGroupRequestAccessConditionsItem]` 
     
 </dd>
 </dl>
@@ -16553,7 +16979,7 @@ client.tier.create_tier_for_tier_group(
 <dl>
 <dd>
 
-**tier_rewards:** `typing.Optional[typing.Sequence[CreateTierForTierGroupRequestTierRewardsItem]]` 
+**tier_rewards:** `typing.Optional[typing.List[CreateTierForTierGroupRequestTierRewardsItem]]` 
     
 </dd>
 </dl>
@@ -16573,7 +16999,7 @@ client.tier.create_tier_for_tier_group(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_loyalty_program_tier</a>(...) -&gt; AsyncHttpResponse[GetLoyaltyProgramTierResponse]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">get_loyalty_program_tier</a>(...) -> GetLoyaltyProgramTierResponse</code></summary>
 <dl>
 <dd>
 
@@ -16601,10 +17027,13 @@ Returns the list of tiers defined within the loyalty program.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.get_loyalty_program_tier(
     pid="pid",
 )
@@ -16651,7 +17080,7 @@ client.tier.get_loyalty_program_tier(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier</a>(...) -&gt; AsyncHttpResponse[Tier]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">update_tier</a>(...) -> Tier</code></summary>
 <dl>
 <dd>
 
@@ -16679,20 +17108,24 @@ Modifies an existing tier for the specified tier group *(The changes will take e
 
 ```python
 from brevo import Brevo
-from brevo.tier import (
-    UpdateTierRequestAccessConditionsItem,
-    UpdateTierRequestTierRewardsItem,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.tier import UpdateTierRequestAccessConditionsItem, UpdateTierRequestTierRewardsItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.update_tier(
     pid="pid",
     tid="tid",
-    access_conditions=[UpdateTierRequestAccessConditionsItem()],
+    access_conditions=[
+        UpdateTierRequestAccessConditionsItem()
+    ],
     name="name",
-    tier_rewards=[UpdateTierRequestTierRewardsItem()],
+    tier_rewards=[
+        UpdateTierRequestTierRewardsItem()
+    ],
 )
 
 ```
@@ -16725,7 +17158,7 @@ client.tier.update_tier(
 <dl>
 <dd>
 
-**access_conditions:** `typing.Sequence[UpdateTierRequestAccessConditionsItem]` 
+**access_conditions:** `typing.List[UpdateTierRequestAccessConditionsItem]` 
     
 </dd>
 </dl>
@@ -16741,7 +17174,7 @@ client.tier.update_tier(
 <dl>
 <dd>
 
-**tier_rewards:** `typing.Sequence[UpdateTierRequestTierRewardsItem]` 
+**tier_rewards:** `typing.List[UpdateTierRequestTierRewardsItem]` 
     
 </dd>
 </dl>
@@ -16769,7 +17202,7 @@ client.tier.update_tier(
 </dl>
 </details>
 
-<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.tier.<a href="src/brevo/tier/client.py">delete_tier</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -16797,10 +17230,13 @@ Deletes a tier from a loyalty program tier group. *(The changes will take effect
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tier.delete_tier(
     pid="pid",
     tid="tid",
@@ -16849,7 +17285,7 @@ client.tier.delete_tier(
 </details>
 
 ## EmailCampaigns
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaigns</a>(...) -&gt; AsyncHttpResponse[GetEmailCampaignsResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaigns</a>(...) -> GetEmailCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16881,10 +17317,13 @@ You now need to specify which type of statistics you would like to retrieve. For
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.get_email_campaigns()
 
 ```
@@ -16985,7 +17424,7 @@ client.email_campaigns.get_email_campaigns()
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">create_email_campaign</a>(...) -&gt; AsyncHttpResponse[CreateEmailCampaignResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">create_email_campaign</a>(...) -> CreateEmailCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -16999,11 +17438,14 @@ client.email_campaigns.get_email_campaigns()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.email_campaigns import CreateEmailCampaignRequestSender
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.create_email_campaign(
     name="Newsletter - May 2017",
     sender=CreateEmailCampaignRequestSender(),
@@ -17291,7 +17733,7 @@ client.email_campaigns.create_email_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">upload_image_to_gallery</a>(...) -&gt; AsyncHttpResponse[UploadImageToGalleryResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">upload_image_to_gallery</a>(...) -> UploadImageToGalleryResponse</code></summary>
 <dl>
 <dd>
 
@@ -17305,10 +17747,13 @@ client.email_campaigns.create_email_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.upload_image_to_gallery(
     image_url="https://somedomain.com/image1.jpg",
 )
@@ -17355,7 +17800,7 @@ client.email_campaigns.upload_image_to_gallery(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaign</a>(...) -&gt; AsyncHttpResponse[GetEmailCampaignResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaign</a>(...) -> GetEmailCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -17369,10 +17814,13 @@ client.email_campaigns.upload_image_to_gallery(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.get_email_campaign(
     campaign_id=1000000,
 )
@@ -17419,7 +17867,7 @@ client.email_campaigns.get_email_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_email_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_email_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17433,10 +17881,13 @@ client.email_campaigns.get_email_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.update_email_campaign(
     campaign_id=1000000,
 )
@@ -17731,7 +18182,7 @@ client.email_campaigns.update_email_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">delete_email_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">delete_email_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17745,10 +18196,13 @@ client.email_campaigns.update_email_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.delete_email_campaign(
     campaign_id=1000000,
 )
@@ -17787,7 +18241,7 @@ client.email_campaigns.delete_email_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_ab_test_campaign_result</a>(...) -&gt; AsyncHttpResponse[GetAbTestCampaignResultResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_ab_test_campaign_result</a>(...) -> GetAbTestCampaignResultResponse</code></summary>
 <dl>
 <dd>
 
@@ -17815,10 +18269,13 @@ Obtain winning version of an A/B test email campaign
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.get_ab_test_campaign_result(
     campaign_id=1000000,
 )
@@ -17857,7 +18314,7 @@ client.email_campaigns.get_ab_test_campaign_result(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">email_export_recipients</a>(...) -&gt; AsyncHttpResponse[EmailExportRecipientsResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">email_export_recipients</a>(...) -> EmailExportRecipientsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17871,10 +18328,13 @@ client.email_campaigns.get_ab_test_campaign_result(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.email_export_recipients(
     campaign_id=1000000,
     recipients_type="all",
@@ -17930,7 +18390,7 @@ client.email_campaigns.email_export_recipients(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_email_campaign_now</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_email_campaign_now</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17944,10 +18404,13 @@ client.email_campaigns.email_export_recipients(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.send_email_campaign_now(
     campaign_id=1000000,
 )
@@ -17986,7 +18449,7 @@ client.email_campaigns.send_email_campaign_now(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_report</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_report</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18014,15 +18477,20 @@ A PDF will be sent to the specified email addresses
 
 ```python
 from brevo import Brevo, SendReportEmail
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.send_report(
     campaign_id=1000000,
     email=SendReportEmail(
         body="Please find attached the report of our last email campaign.",
-        to=["jim.suehan@example.com"],
+        to=[
+            "jim.suehan@example.com"
+        ],
     ),
 )
 
@@ -18048,15 +18516,7 @@ client.email_campaigns.send_report(
 <dl>
 <dd>
 
-**email:** `SendReportEmail` — Custom attributes for the report email.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**language:** `typing.Optional[SendReportLanguage]` — Language of email content for campaign report sending.
+**request:** `SendReport` 
     
 </dd>
 </dl>
@@ -18076,7 +18536,7 @@ client.email_campaigns.send_report(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_test_email</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">send_test_email</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18090,10 +18550,13 @@ client.email_campaigns.send_report(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.send_test_email(
     campaign_id=1000000,
 )
@@ -18120,7 +18583,7 @@ client.email_campaigns.send_test_email(
 <dl>
 <dd>
 
-**email_to:** `typing.Optional[typing.Sequence[str]]` — List of the email addresses of the recipients whom you wish to send the test mail. _If left empty, the test mail will be sent to your entire test list. You can not send more than 50 test emails per day_.
+**request:** `SendTestEmail` 
     
 </dd>
 </dl>
@@ -18140,7 +18603,7 @@ client.email_campaigns.send_test_email(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_shared_template_url</a>(...) -&gt; AsyncHttpResponse[GetSharedTemplateUrlResponse]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_shared_template_url</a>(...) -> GetSharedTemplateUrlResponse</code></summary>
 <dl>
 <dd>
 
@@ -18168,10 +18631,13 @@ Get a unique URL to share & import an email template from one Brevo account to a
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.get_shared_template_url(
     campaign_id=1000000,
 )
@@ -18210,7 +18676,7 @@ client.email_campaigns.get_shared_template_url(
 </dl>
 </details>
 
-<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_campaign_status</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">update_campaign_status</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18224,10 +18690,13 @@ client.email_campaigns.get_shared_template_url(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.email_campaigns.update_campaign_status(
     campaign_id=1000000,
 )
@@ -18254,7 +18723,7 @@ client.email_campaigns.update_campaign_status(
 <dl>
 <dd>
 
-**status:** `typing.Optional[UpdateCampaignStatusStatus]` — Note:- **replicateTemplate** status will be available **only for template type campaigns.**
+**request:** `UpdateCampaignStatus` 
     
 </dd>
 </dl>
@@ -18275,7 +18744,7 @@ client.email_campaigns.update_campaign_status(
 </details>
 
 ## SmsCampaigns
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaigns</a>(...) -&gt; AsyncHttpResponse[GetSmsCampaignsResponse]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaigns</a>(...) -> GetSmsCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18289,10 +18758,13 @@ client.email_campaigns.update_campaign_status(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.get_sms_campaigns()
 
 ```
@@ -18369,7 +18841,7 @@ client.sms_campaigns.get_sms_campaigns()
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">create_sms_campaign</a>(...) -&gt; AsyncHttpResponse[CreateSmsCampaignResponse]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">create_sms_campaign</a>(...) -> CreateSmsCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -18383,10 +18855,13 @@ client.sms_campaigns.get_sms_campaigns()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.create_sms_campaign(
     content="Get a discount by visiting our NY store and saying : Happy Spring!",
     name="Spring Promo Code",
@@ -18483,7 +18958,7 @@ client.sms_campaigns.create_sms_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaign</a>(...) -&gt; AsyncHttpResponse[GetSmsCampaignResponse]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">get_sms_campaign</a>(...) -> GetSmsCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -18497,10 +18972,13 @@ client.sms_campaigns.create_sms_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.get_sms_campaign(
     campaign_id=1000000,
 )
@@ -18539,7 +19017,7 @@ client.sms_campaigns.get_sms_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18553,10 +19031,13 @@ client.sms_campaigns.get_sms_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.update_sms_campaign(
     campaign_id=1000000,
 )
@@ -18659,7 +19140,7 @@ client.sms_campaigns.update_sms_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">delete_sms_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">delete_sms_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18673,10 +19154,13 @@ client.sms_campaigns.update_sms_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.delete_sms_campaign(
     campaign_id=1000000,
 )
@@ -18715,7 +19199,7 @@ client.sms_campaigns.delete_sms_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">request_sms_recipient_export</a>(...) -&gt; AsyncHttpResponse[RequestSmsRecipientExportResponse]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">request_sms_recipient_export</a>(...) -> RequestSmsRecipientExportResponse</code></summary>
 <dl>
 <dd>
 
@@ -18743,10 +19227,13 @@ It returns the background process ID which on completion calls the notify URL th
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.request_sms_recipient_export(
     campaign_id=1000000,
     recipients_type="all",
@@ -18802,7 +19289,7 @@ client.sms_campaigns.request_sms_recipient_export(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_campaign_now</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_campaign_now</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18816,10 +19303,13 @@ client.sms_campaigns.request_sms_recipient_export(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.send_sms_campaign_now(
     campaign_id=1000000,
 )
@@ -18858,7 +19348,7 @@ client.sms_campaigns.send_sms_campaign_now(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_report</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_sms_report</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18886,15 +19376,20 @@ Send report of Sent and Archived campaign, to the specified email addresses, wit
 
 ```python
 from brevo import Brevo, SendReportEmail
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.send_sms_report(
     campaign_id=1000000,
     email=SendReportEmail(
         body="Please find attached the report of our last email campaign.",
-        to=["jim.suehan@example.com"],
+        to=[
+            "jim.suehan@example.com"
+        ],
     ),
 )
 
@@ -18920,15 +19415,7 @@ client.sms_campaigns.send_sms_report(
 <dl>
 <dd>
 
-**email:** `SendReportEmail` — Custom attributes for the report email.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**language:** `typing.Optional[SendReportLanguage]` — Language of email content for campaign report sending.
+**request:** `SendReport` 
     
 </dd>
 </dl>
@@ -18948,7 +19435,7 @@ client.sms_campaigns.send_sms_report(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_test_sms</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">send_test_sms</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18962,10 +19449,13 @@ client.sms_campaigns.send_sms_report(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.send_test_sms(
     campaign_id=1000000,
 )
@@ -19012,7 +19502,7 @@ client.sms_campaigns.send_test_sms(
 </dl>
 </details>
 
-<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign_status</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.sms_campaigns.<a href="src/brevo/sms_campaigns/client.py">update_sms_campaign_status</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19026,10 +19516,13 @@ client.sms_campaigns.send_test_sms(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_campaigns.update_sms_campaign_status(
     campaign_id=1000000,
 )
@@ -19056,7 +19549,7 @@ client.sms_campaigns.update_sms_campaign_status(
 <dl>
 <dd>
 
-**status:** `typing.Optional[UpdateCampaignStatusStatus]` — Note:- **replicateTemplate** status will be available **only for template type campaigns.**
+**request:** `UpdateCampaignStatus` 
     
 </dd>
 </dl>
@@ -19077,7 +19570,7 @@ client.sms_campaigns.update_sms_campaign_status(
 </details>
 
 ## WhatsAppCampaigns
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaigns</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppCampaignsResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaigns</a>(...) -> GetWhatsAppCampaignsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19091,10 +19584,13 @@ client.sms_campaigns.update_sms_campaign_status(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.get_whats_app_campaigns()
 
 ```
@@ -19163,7 +19659,7 @@ client.whats_app_campaigns.get_whats_app_campaigns()
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[CreateWhatsAppCampaignResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_campaign</a>(...) -> CreateWhatsAppCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -19203,11 +19699,14 @@ This API requires the List and Segment ids as recipients in Body params. You can
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.whats_app_campaigns import CreateWhatsAppCampaignRequestRecipients
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.create_whats_app_campaign(
     name="Test Campaign",
     recipients=CreateWhatsAppCampaignRequestRecipients(),
@@ -19273,7 +19772,7 @@ client.whats_app_campaigns.create_whats_app_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_config</a>() -&gt; AsyncHttpResponse[GetWhatsAppConfigResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_config</a>() -> GetWhatsAppConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -19305,10 +19804,13 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.get_whats_app_config()
 
 ```
@@ -19337,7 +19839,7 @@ client.whats_app_campaigns.get_whats_app_config()
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_template</a>(...) -&gt; AsyncHttpResponse[CreateWhatsAppTemplateResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">create_whats_app_template</a>(...) -> CreateWhatsAppTemplateResponse</code></summary>
 <dl>
 <dd>
 
@@ -19369,10 +19871,13 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.create_whats_app_template(
     body_text="making it look like readable English",
     category="MARKETING",
@@ -19465,7 +19970,7 @@ Language of the template. For Example :
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_templates</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppTemplatesResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_templates</a>(...) -> GetWhatsAppTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19479,10 +19984,13 @@ Language of the template. For Example :
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.get_whats_app_templates()
 
 ```
@@ -19559,7 +20067,7 @@ client.whats_app_campaigns.get_whats_app_templates()
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">send_whats_app_template_approval</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">send_whats_app_template_approval</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19591,10 +20099,13 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.send_whats_app_template_approval(
     template_id=1000000,
 )
@@ -19633,7 +20144,7 @@ client.whats_app_campaigns.send_whats_app_template_approval(
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[GetWhatsAppCampaignResponse]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">get_whats_app_campaign</a>(...) -> GetWhatsAppCampaignResponse</code></summary>
 <dl>
 <dd>
 
@@ -19665,10 +20176,13 @@ You can use this API for WhatsApp only if you have setup your WhatsApp account o
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.get_whats_app_campaign(
     campaign_id=1000000,
 )
@@ -19707,7 +20221,7 @@ client.whats_app_campaigns.get_whats_app_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">update_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">update_whats_app_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19747,10 +20261,13 @@ This API requires the List and Segment ids as recipients in Body params. You can
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.update_whats_app_campaign(
     campaign_id=1000000,
 )
@@ -19821,7 +20338,7 @@ client.whats_app_campaigns.update_whats_app_campaign(
 </dl>
 </details>
 
-<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">delete_whats_app_campaign</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.whats_app_campaigns.<a href="src/brevo/whats_app_campaigns/client.py">delete_whats_app_campaign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19835,10 +20352,13 @@ client.whats_app_campaigns.update_whats_app_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.whats_app_campaigns.delete_whats_app_campaign(
     campaign_id=1000000,
 )
@@ -19878,7 +20398,7 @@ client.whats_app_campaigns.delete_whats_app_campaign(
 </details>
 
 ## Companies
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_all_companies</a>(...) -&gt; AsyncHttpResponse[GetCompaniesResponse]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_all_companies</a>(...) -> GetCompaniesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19892,10 +20412,13 @@ client.whats_app_campaigns.delete_whats_app_campaign(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.get_all_companies()
 
 ```
@@ -19996,7 +20519,7 @@ client.companies.get_all_companies()
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company</a>(...) -&gt; AsyncHttpResponse[PostCompaniesResponse]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company</a>(...) -> PostCompaniesResponse</code></summary>
 <dl>
 <dd>
 
@@ -20010,10 +20533,13 @@ client.companies.get_all_companies()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.create_a_company(
     name="company",
 )
@@ -20056,7 +20582,7 @@ client.companies.create_a_company(
 <dl>
 <dd>
 
-**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids to be linked with company
+**linked_contacts_ids:** `typing.Optional[typing.List[int]]` — Contact ids to be linked with company
     
 </dd>
 </dl>
@@ -20064,7 +20590,7 @@ client.companies.create_a_company(
 <dl>
 <dd>
 
-**linked_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids to be linked with company
+**linked_deals_ids:** `typing.Optional[typing.List[str]]` — Deal ids to be linked with company
     
 </dd>
 </dl>
@@ -20084,7 +20610,7 @@ client.companies.create_a_company(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">import_companies_creation_and_updation</a>(...) -&gt; AsyncHttpResponse[PostCompaniesImportResponse]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">import_companies_creation_and_updation</a>(...) -> PostCompaniesImportResponse</code></summary>
 <dl>
 <dd>
 
@@ -20112,11 +20638,16 @@ Import companies from a CSV file with mapping options.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
-client.companies.import_companies_creation_and_updation()
+
+client.companies.import_companies_creation_and_updation(
+    file="example_file",
+)
 
 ```
 </dd>
@@ -20132,9 +20663,7 @@ client.companies.import_companies_creation_and_updation()
 <dl>
 <dd>
 
-**file:** `from __future__ import annotations
-
-typing.Optional[core.File]` — See core.File for more documentation
+**file:** `typing.Optional[core.File]` — The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) company_id [brevo mongoID to update deals] (b) associated_contact (c) associated_deal (f) any other attribute with internal name
     
 </dd>
 </dl>
@@ -20169,7 +20698,7 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">link_and_unlink_company_with_contact_and_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">link_and_unlink_company_with_contact_and_deal</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20183,10 +20712,13 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.link_and_unlink_company_with_contact_and_deal(
     id="id",
 )
@@ -20213,7 +20745,7 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 <dl>
 <dd>
 
-**link_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be linked with company
+**link_contact_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts to be linked with company
     
 </dd>
 </dl>
@@ -20221,7 +20753,7 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 <dl>
 <dd>
 
-**link_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals to be linked with company
+**link_deals_ids:** `typing.Optional[typing.List[str]]` — Deal ids for deals to be linked with company
     
 </dd>
 </dl>
@@ -20229,7 +20761,7 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 <dl>
 <dd>
 
-**unlink_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be unlinked from company
+**unlink_contact_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts to be unlinked from company
     
 </dd>
 </dl>
@@ -20237,7 +20769,7 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 <dl>
 <dd>
 
-**unlink_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals to be unlinked from company
+**unlink_deals_ids:** `typing.Optional[typing.List[str]]` — Deal ids for deals to be unlinked from company
     
 </dd>
 </dl>
@@ -20257,7 +20789,7 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_a_company</a>(...) -&gt; AsyncHttpResponse[Company]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_a_company</a>(...) -> Company</code></summary>
 <dl>
 <dd>
 
@@ -20271,10 +20803,13 @@ client.companies.link_and_unlink_company_with_contact_and_deal(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.get_a_company(
     id="id",
 )
@@ -20313,7 +20848,7 @@ client.companies.get_a_company(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">delete_a_company</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">delete_a_company</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20327,10 +20862,13 @@ client.companies.get_a_company(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.delete_a_company(
     id="id",
 )
@@ -20369,7 +20907,7 @@ client.companies.delete_a_company(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">update_a_company</a>(...) -&gt; AsyncHttpResponse[Company]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">update_a_company</a>(...) -> Company</code></summary>
 <dl>
 <dd>
 
@@ -20383,10 +20921,13 @@ client.companies.delete_a_company(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.update_a_company(
     id="id",
 )
@@ -20429,7 +20970,7 @@ client.companies.update_a_company(
 <dl>
 <dd>
 
-**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+**linked_contacts_ids:** `typing.Optional[typing.List[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
     
 </dd>
 </dl>
@@ -20437,7 +20978,7 @@ client.companies.update_a_company(
 <dl>
 <dd>
 
-**linked_deals_ids:** `typing.Optional[typing.Sequence[str]]` — Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+**linked_deals_ids:** `typing.Optional[typing.List[str]]` — Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
     
 </dd>
 </dl>
@@ -20465,7 +21006,7 @@ client.companies.update_a_company(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company_deal_attribute</a>(...) -&gt; AsyncHttpResponse[PostCrmAttributesResponse]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">create_a_company_deal_attribute</a>(...) -> PostCrmAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -20479,10 +21020,13 @@ client.companies.update_a_company(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.create_a_company_deal_attribute(
     attribute_type="text",
     label="Attribute Label",
@@ -20535,7 +21079,7 @@ client.companies.create_a_company_deal_attribute(
 <dl>
 <dd>
 
-**options_labels:** `typing.Optional[typing.Sequence[str]]` — Options for multi-choice or single-select attributes
+**options_labels:** `typing.Optional[typing.List[str]]` — Options for multi-choice or single-select attributes
     
 </dd>
 </dl>
@@ -20555,7 +21099,7 @@ client.companies.create_a_company_deal_attribute(
 </dl>
 </details>
 
-<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_company_attributes</a>() -&gt; AsyncHttpResponse[typing.List[GetCrmAttributesCompaniesResponseItem]]</code></summary>
+<details><summary><code>client.companies.<a href="src/brevo/companies/client.py">get_company_attributes</a>() -> typing.List[GetCrmAttributesCompaniesResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -20569,10 +21113,13 @@ client.companies.create_a_company_deal_attribute(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.companies.get_company_attributes()
 
 ```
@@ -20602,7 +21149,7 @@ client.companies.get_company_attributes()
 </details>
 
 ## Deals
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_deal_attributes</a>() -&gt; AsyncHttpResponse[typing.List[GetCrmAttributesDealsResponseItem]]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_deal_attributes</a>() -> typing.List[GetCrmAttributesDealsResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -20616,10 +21163,13 @@ client.companies.get_company_attributes()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_deal_attributes()
 
 ```
@@ -20648,7 +21198,7 @@ client.deals.get_deal_attributes()
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_deals</a>(...) -&gt; AsyncHttpResponse[GetCrmDealsResponse]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_deals</a>(...) -> GetCrmDealsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20662,10 +21212,13 @@ client.deals.get_deal_attributes()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_all_deals()
 
 ```
@@ -20758,7 +21311,7 @@ client.deals.get_all_deals()
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">create_a_deal</a>(...) -&gt; AsyncHttpResponse[PostCrmDealsResponse]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">create_a_deal</a>(...) -> PostCrmDealsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20772,10 +21325,13 @@ client.deals.get_all_deals()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.create_a_deal(
     name="Deal: Connect with company",
 )
@@ -20810,7 +21366,7 @@ client.deals.create_a_deal(
 <dl>
 <dd>
 
-**linked_companies_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be linked with deal
+**linked_companies_ids:** `typing.Optional[typing.List[str]]` — Company ids to be linked with deal
     
 </dd>
 </dl>
@@ -20818,7 +21374,7 @@ client.deals.create_a_deal(
 <dl>
 <dd>
 
-**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids to be linked with deal
+**linked_contacts_ids:** `typing.Optional[typing.List[int]]` — Contact ids to be linked with deal
     
 </dd>
 </dl>
@@ -20838,7 +21394,7 @@ client.deals.create_a_deal(
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">import_deals_creation_and_updation</a>(...) -&gt; AsyncHttpResponse[PostCrmDealsImportResponse]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">import_deals_creation_and_updation</a>(...) -> PostCrmDealsImportResponse</code></summary>
 <dl>
 <dd>
 
@@ -20866,11 +21422,16 @@ Import deals from a CSV file with mapping options.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
-client.deals.import_deals_creation_and_updation()
+
+client.deals.import_deals_creation_and_updation(
+    file="example_file",
+)
 
 ```
 </dd>
@@ -20886,9 +21447,7 @@ client.deals.import_deals_creation_and_updation()
 <dl>
 <dd>
 
-**file:** `from __future__ import annotations
-
-typing.Optional[core.File]` — See core.File for more documentation
+**file:** `typing.Optional[core.File]` — The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name
     
 </dd>
 </dl>
@@ -20923,7 +21482,7 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">link_and_unlink_a_deal_with_contacts_and_companies</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">link_and_unlink_a_deal_with_contacts_and_companies</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20937,10 +21496,13 @@ The mapping options in JSON format. Here is an example of the JSON structure: ``
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
     id="id",
 )
@@ -20967,7 +21529,7 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 <dl>
 <dd>
 
-**link_company_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be linked with deal
+**link_company_ids:** `typing.Optional[typing.List[str]]` — Company ids to be linked with deal
     
 </dd>
 </dl>
@@ -20975,7 +21537,7 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 <dl>
 <dd>
 
-**link_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be linked with deal
+**link_contact_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts to be linked with deal
     
 </dd>
 </dl>
@@ -20983,7 +21545,7 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 <dl>
 <dd>
 
-**unlink_company_ids:** `typing.Optional[typing.Sequence[str]]` — Company ids to be unlinked from deal
+**unlink_company_ids:** `typing.Optional[typing.List[str]]` — Company ids to be unlinked from deal
     
 </dd>
 </dl>
@@ -20991,7 +21553,7 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 <dl>
 <dd>
 
-**unlink_contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts to be unlinked from deal
+**unlink_contact_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts to be unlinked from deal
     
 </dd>
 </dl>
@@ -21011,7 +21573,7 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_deal</a>(...) -&gt; AsyncHttpResponse[Deal]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_deal</a>(...) -> Deal</code></summary>
 <dl>
 <dd>
 
@@ -21025,10 +21587,13 @@ client.deals.link_and_unlink_a_deal_with_contacts_and_companies(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_a_deal(
     id="id",
 )
@@ -21067,7 +21632,7 @@ client.deals.get_a_deal(
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">delete_a_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">delete_a_deal</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21081,10 +21646,13 @@ client.deals.get_a_deal(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.delete_a_deal(
     id="id",
 )
@@ -21123,7 +21691,7 @@ client.deals.delete_a_deal(
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">update_a_deal</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">update_a_deal</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21137,10 +21705,13 @@ client.deals.delete_a_deal(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.update_a_deal(
     id="id",
 )
@@ -21175,7 +21746,7 @@ client.deals.update_a_deal(
 <dl>
 <dd>
 
-**linked_companies_ids:** `typing.Optional[typing.Sequence[str]]` — Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+**linked_companies_ids:** `typing.Optional[typing.List[str]]` — Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
     
 </dd>
 </dl>
@@ -21183,7 +21754,7 @@ client.deals.update_a_deal(
 <dl>
 <dd>
 
-**linked_contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+**linked_contacts_ids:** `typing.Optional[typing.List[int]]` — Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
     
 </dd>
 </dl>
@@ -21211,7 +21782,7 @@ client.deals.update_a_deal(
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_pipeline_stages</a>() -&gt; AsyncHttpResponse[Pipeline]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_pipeline_stages</a>() -> Pipeline</code></summary>
 <dl>
 <dd>
 
@@ -21239,10 +21810,13 @@ This endpoint is deprecated. Prefer /crm/pipeline/details/{pipelineID} instead.
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_pipeline_stages()
 
 ```
@@ -21271,7 +21845,7 @@ client.deals.get_pipeline_stages()
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_pipelines</a>() -&gt; AsyncHttpResponse[Pipelines]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_all_pipelines</a>() -> Pipelines</code></summary>
 <dl>
 <dd>
 
@@ -21285,10 +21859,13 @@ client.deals.get_pipeline_stages()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_all_pipelines()
 
 ```
@@ -21317,7 +21894,7 @@ client.deals.get_all_pipelines()
 </dl>
 </details>
 
-<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_pipeline</a>(...) -&gt; AsyncHttpResponse[Pipelines]</code></summary>
+<details><summary><code>client.deals.<a href="src/brevo/deals/client.py">get_a_pipeline</a>(...) -> Pipelines</code></summary>
 <dl>
 <dd>
 
@@ -21331,10 +21908,13 @@ client.deals.get_all_pipelines()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.deals.get_a_pipeline(
     pipeline_id="pipelineID",
 )
@@ -21374,7 +21954,7 @@ client.deals.get_a_pipeline(
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_all_files</a>(...) -&gt; AsyncHttpResponse[typing.List[FileData]]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_all_files</a>(...) -> typing.List[FileData]</code></summary>
 <dl>
 <dd>
 
@@ -21388,10 +21968,13 @@ client.deals.get_a_pipeline(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.files.get_all_files()
 
 ```
@@ -21476,7 +22059,7 @@ client.files.get_all_files()
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/brevo/files/client.py">upload_a_file</a>(...) -&gt; AsyncHttpResponse[FileData]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">upload_a_file</a>(...) -> FileData</code></summary>
 <dl>
 <dd>
 
@@ -21490,11 +22073,16 @@ client.files.get_all_files()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
-client.files.upload_a_file()
+
+client.files.upload_a_file(
+    file="example_file",
+)
 
 ```
 </dd>
@@ -21510,9 +22098,7 @@ client.files.upload_a_file()
 <dl>
 <dd>
 
-**file:** `from __future__ import annotations
-
-core.File` — See core.File for more documentation
+**file:** `core.File` — File data to create a file.
     
 </dd>
 </dl>
@@ -21556,7 +22142,7 @@ core.File` — See core.File for more documentation
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/brevo/files/client.py">download_a_file</a>(...) -&gt; AsyncHttpResponse[GetCrmFilesIdResponse]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">download_a_file</a>(...) -> GetCrmFilesIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -21570,10 +22156,13 @@ core.File` — See core.File for more documentation
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.files.download_a_file(
     id="id",
 )
@@ -21612,7 +22201,7 @@ client.files.download_a_file(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/brevo/files/client.py">delete_a_file</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">delete_a_file</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21626,10 +22215,13 @@ client.files.download_a_file(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.files.delete_a_file(
     id="id",
 )
@@ -21668,7 +22260,7 @@ client.files.delete_a_file(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_file_details</a>(...) -&gt; AsyncHttpResponse[FileData]</code></summary>
+<details><summary><code>client.files.<a href="src/brevo/files/client.py">get_file_details</a>(...) -> FileData</code></summary>
 <dl>
 <dd>
 
@@ -21682,10 +22274,13 @@ client.files.delete_a_file(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.files.get_file_details(
     id="id",
 )
@@ -21725,7 +22320,7 @@ client.files.get_file_details(
 </details>
 
 ## Notes
-<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_all_notes</a>(...) -&gt; AsyncHttpResponse[typing.List[Note]]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_all_notes</a>(...) -> typing.List[Note]</code></summary>
 <dl>
 <dd>
 
@@ -21739,10 +22334,13 @@ client.files.get_file_details(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.notes.get_all_notes()
 
 ```
@@ -21827,7 +22425,7 @@ client.notes.get_all_notes()
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">create_a_note</a>(...) -&gt; AsyncHttpResponse[PostCrmNotesResponse]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">create_a_note</a>(...) -> PostCrmNotesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21841,10 +22439,13 @@ client.notes.get_all_notes()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.notes.create_a_note(
     text="In communication with client_dev for resolution of queries.",
 )
@@ -21863,31 +22464,7 @@ client.notes.create_a_note(
 <dl>
 <dd>
 
-**text:** `str` — Text content of a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**company_ids:** `typing.Optional[typing.Sequence[str]]` — Company Ids linked to a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact Ids linked to a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**deal_ids:** `typing.Optional[typing.Sequence[str]]` — Deal Ids linked to a note
+**request:** `NoteData` 
     
 </dd>
 </dl>
@@ -21907,7 +22484,7 @@ client.notes.create_a_note(
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_a_note</a>(...) -&gt; AsyncHttpResponse[Note]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">get_a_note</a>(...) -> Note</code></summary>
 <dl>
 <dd>
 
@@ -21921,10 +22498,13 @@ client.notes.create_a_note(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.notes.get_a_note(
     id="id",
 )
@@ -21963,7 +22543,7 @@ client.notes.get_a_note(
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">delete_a_note</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">delete_a_note</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21977,10 +22557,13 @@ client.notes.get_a_note(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.notes.delete_a_note(
     id="id",
 )
@@ -22019,7 +22602,7 @@ client.notes.delete_a_note(
 </dl>
 </details>
 
-<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">update_a_note</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.notes.<a href="src/brevo/notes/client.py">update_a_note</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22033,10 +22616,13 @@ client.notes.delete_a_note(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.notes.update_a_note(
     id="id",
     text="In communication with client_dev for resolution of queries.",
@@ -22064,31 +22650,7 @@ client.notes.update_a_note(
 <dl>
 <dd>
 
-**text:** `str` — Text content of a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**company_ids:** `typing.Optional[typing.Sequence[str]]` — Company Ids linked to a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**contact_ids:** `typing.Optional[typing.Sequence[int]]` — Contact Ids linked to a note
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**deal_ids:** `typing.Optional[typing.Sequence[str]]` — Deal Ids linked to a note
+**request:** `NoteData` 
     
 </dd>
 </dl>
@@ -22109,7 +22671,7 @@ client.notes.update_a_note(
 </details>
 
 ## Tasks
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_tasks</a>(...) -&gt; AsyncHttpResponse[GetCrmTasksResponse]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_tasks</a>(...) -> GetCrmTasksResponse</code></summary>
 <dl>
 <dd>
 
@@ -22123,10 +22685,13 @@ client.notes.update_a_note(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.get_all_tasks(
     sort_by="name",
 )
@@ -22261,7 +22826,7 @@ client.tasks.get_all_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">create_a_task</a>(...) -&gt; AsyncHttpResponse[PostCrmTasksResponse]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">create_a_task</a>(...) -> PostCrmTasksResponse</code></summary>
 <dl>
 <dd>
 
@@ -22274,17 +22839,17 @@ client.tasks.get_all_tasks(
 <dd>
 
 ```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 import datetime
 
-from brevo import Brevo
-
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.create_a_task(
-    date=datetime.datetime.fromisoformat(
-        "2021-11-01 17:44:54+00:00",
-    ),
+    date=datetime.datetime.fromisoformat("2021-11-01T17:44:54+00:00"),
     name="Task: Connect with client_dev",
     task_type_id="61a5cd07ca1347c82306ad09",
 )
@@ -22303,7 +22868,7 @@ client.tasks.create_a_task(
 <dl>
 <dd>
 
-**date:** `dt.datetime` — Task due date and time
+**date:** `datetime.datetime` — Task due date and time
     
 </dd>
 </dl>
@@ -22335,7 +22900,7 @@ client.tasks.create_a_task(
 <dl>
 <dd>
 
-**companies_ids:** `typing.Optional[typing.Sequence[str]]` — Companies ids for companies a task is linked to
+**companies_ids:** `typing.Optional[typing.List[str]]` — Companies ids for companies a task is linked to
     
 </dd>
 </dl>
@@ -22343,7 +22908,7 @@ client.tasks.create_a_task(
 <dl>
 <dd>
 
-**contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts linked to this task
+**contacts_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts linked to this task
     
 </dd>
 </dl>
@@ -22351,7 +22916,7 @@ client.tasks.create_a_task(
 <dl>
 <dd>
 
-**deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals a task is linked to
+**deals_ids:** `typing.Optional[typing.List[str]]` — Deal ids for deals a task is linked to
     
 </dd>
 </dl>
@@ -22403,7 +22968,7 @@ client.tasks.create_a_task(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_a_task</a>(...) -&gt; AsyncHttpResponse[Task]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_a_task</a>(...) -> Task</code></summary>
 <dl>
 <dd>
 
@@ -22417,10 +22982,13 @@ client.tasks.create_a_task(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.get_a_task(
     id="id",
 )
@@ -22459,7 +23027,7 @@ client.tasks.get_a_task(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">delete_a_task</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">delete_a_task</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22473,10 +23041,13 @@ client.tasks.get_a_task(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.delete_a_task(
     id="id",
 )
@@ -22515,7 +23086,7 @@ client.tasks.delete_a_task(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">update_a_task</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">update_a_task</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22529,10 +23100,13 @@ client.tasks.delete_a_task(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.update_a_task(
     id="id",
 )
@@ -22567,7 +23141,7 @@ client.tasks.update_a_task(
 <dl>
 <dd>
 
-**companies_ids:** `typing.Optional[typing.Sequence[str]]` — Companies ids for companies a task is linked to
+**companies_ids:** `typing.Optional[typing.List[str]]` — Companies ids for companies a task is linked to
     
 </dd>
 </dl>
@@ -22575,7 +23149,7 @@ client.tasks.update_a_task(
 <dl>
 <dd>
 
-**contacts_ids:** `typing.Optional[typing.Sequence[int]]` — Contact ids for contacts linked to this task
+**contacts_ids:** `typing.Optional[typing.List[int]]` — Contact ids for contacts linked to this task
     
 </dd>
 </dl>
@@ -22583,7 +23157,7 @@ client.tasks.update_a_task(
 <dl>
 <dd>
 
-**date:** `typing.Optional[dt.datetime]` — Task date/time
+**date:** `typing.Optional[datetime.datetime]` — Task date/time
     
 </dd>
 </dl>
@@ -22591,7 +23165,7 @@ client.tasks.update_a_task(
 <dl>
 <dd>
 
-**deals_ids:** `typing.Optional[typing.Sequence[str]]` — Deal ids for deals a task is linked to
+**deals_ids:** `typing.Optional[typing.List[str]]` — Deal ids for deals a task is linked to
     
 </dd>
 </dl>
@@ -22659,7 +23233,7 @@ client.tasks.update_a_task(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_task_types</a>() -&gt; AsyncHttpResponse[GetCrmTasktypesResponse]</code></summary>
+<details><summary><code>client.tasks.<a href="src/brevo/tasks/client.py">get_all_task_types</a>() -> GetCrmTasktypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -22673,10 +23247,13 @@ client.tasks.update_a_task(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.tasks.get_all_task_types()
 
 ```
@@ -22706,7 +23283,7 @@ client.tasks.get_all_task_types()
 </details>
 
 ## TransactionalWhatsApp
-<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">send_whatsapp_message</a>(...) -&gt; AsyncHttpResponse[SendWhatsappMessageResponse]</code></summary>
+<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">send_whatsapp_message</a>(...) -> SendWhatsappMessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -22735,14 +23312,19 @@ This endpoint is used to send a WhatsApp message. <br/>(**The first message you 
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.transactional_whats_app import SendWhatsappMessageRequestParams
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_whats_app.send_whatsapp_message(
     request=SendWhatsappMessageRequestParams(
-        contact_numbers=["contactNumbers"],
+        contact_numbers=[
+            "contactNumbers"
+        ],
         sender_number="senderNumber",
         template_id=123,
     ),
@@ -22782,7 +23364,7 @@ client.transactional_whats_app.send_whatsapp_message(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">get_whatsapp_event_report</a>(...) -&gt; AsyncHttpResponse[GetWhatsappEventReportResponse]</code></summary>
+<details><summary><code>client.transactional_whats_app.<a href="src/brevo/transactional_whats_app/client.py">get_whatsapp_event_report</a>(...) -> GetWhatsappEventReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -22810,10 +23392,13 @@ This endpoint will show the unaggregated statistics for WhatsApp activity (30 da
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_whats_app.get_whatsapp_event_report()
 
 ```
@@ -22907,7 +23492,7 @@ client.transactional_whats_app.get_whatsapp_event_report()
 </details>
 
 ## TransactionalEmails
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_blocked_contacts</a>(...) -&gt; AsyncHttpResponse[GetTransacBlockedContactsResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_blocked_contacts</a>(...) -> GetTransacBlockedContactsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22921,10 +23506,13 @@ client.transactional_whats_app.get_whatsapp_event_report()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_transac_blocked_contacts()
 
 ```
@@ -23001,7 +23589,7 @@ client.transactional_emails.get_transac_blocked_contacts()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">unblock_or_resubscribe_a_transactional_contact</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">unblock_or_resubscribe_a_transactional_contact</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23015,10 +23603,13 @@ client.transactional_emails.get_transac_blocked_contacts()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.unblock_or_resubscribe_a_transactional_contact(
     email="email",
 )
@@ -23057,7 +23648,7 @@ client.transactional_emails.unblock_or_resubscribe_a_transactional_contact(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_blocked_domains</a>() -&gt; AsyncHttpResponse[GetBlockedDomainsResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_blocked_domains</a>() -> GetBlockedDomainsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23085,10 +23676,13 @@ Get the list of blocked domains
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_blocked_domains()
 
 ```
@@ -23117,7 +23711,7 @@ client.transactional_emails.get_blocked_domains()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">block_new_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">block_new_domain</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23145,10 +23739,13 @@ Blocks a new domain in order to avoid messages being sent to the same
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.block_new_domain(
     domain="example.com",
 )
@@ -23187,7 +23784,7 @@ client.transactional_emails.block_new_domain(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_blocked_domain</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_blocked_domain</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23215,10 +23812,13 @@ Unblocks an existing domain from the list of blocked domains
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.delete_blocked_domain(
     domain="domain",
 )
@@ -23257,7 +23857,7 @@ client.transactional_emails.delete_blocked_domain(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_hardbounces</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_hardbounces</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23285,10 +23885,13 @@ Delete hardbounces. To use carefully (e.g. in case of temporary ISP failures)
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.delete_hardbounces()
 
 ```
@@ -23341,7 +23944,7 @@ client.transactional_emails.delete_hardbounces()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_transac_email</a>(...) -&gt; AsyncHttpResponse[SendTransacEmailResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_transac_email</a>(...) -> SendTransacEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -23355,20 +23958,16 @@ client.transactional_emails.delete_hardbounces()
 
 ```python
 from brevo import Brevo
-from brevo.transactional_emails import (
-    SendTransacEmailRequestSender,
-    SendTransacEmailRequestToItem,
-)
+from brevo.environment import BrevoEnvironment
+from brevo.transactional_emails import SendTransacEmailRequestSender, SendTransacEmailRequestToItem
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.send_transac_email(
-    html_content="<html><head></head><body>Your delivery is expected {{params.estimatedArrival}}.Your tracking code: {{params.trackingCode}}</p></body></html>",
-    params={
-        "trackingCode": "JD01460000300002350000",
-        "estimatedArrival": "Tomorrow",
-    },
+    html_content="<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>",
     sender=SendTransacEmailRequestSender(
         email="hello@brevo.com",
         name="Alex from Brevo",
@@ -23396,7 +23995,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**attachment:** `typing.Optional[typing.Sequence[SendTransacEmailRequestAttachmentItem]]` — Array of attachment objects. Each attachment must include either an absolute URL (no local file paths) or base64-encoded content, along with the attachment filename. The `name` field is required when `content` is provided. Supported file extensions: xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub, eps, odt, mp3, m4a, m4v, wma, ogg, flac, wav, aif, aifc, aiff, mp4, mov, avi, mkv, mpeg, mpg, wmv, pkpass, xlsm. When `templateId` is specified: if the template uses the New Template Language format, both `url` and `content` attachment types are supported; if the template uses the Old Template Language format, the `attachment` parameter is ignored.
+**attachment:** `typing.Optional[typing.List[SendTransacEmailRequestAttachmentItem]]` — Array of attachment objects. Each attachment must include either an absolute URL (no local file paths) or base64-encoded content, along with the attachment filename. The `name` field is required when `content` is provided. Supported file extensions: xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub, eps, odt, mp3, m4a, m4v, wma, ogg, flac, wav, aif, aifc, aiff, mp4, mov, avi, mkv, mpeg, mpg, wmv, pkpass, xlsm. When `templateId` is specified: if the template uses the New Template Language format, both `url` and `content` attachment types are supported; if the template uses the Old Template Language format, the `attachment` parameter is ignored.
     
 </dd>
 </dl>
@@ -23412,7 +24011,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**bcc:** `typing.Optional[typing.Sequence[SendTransacEmailRequestBccItem]]` — Array of BCC recipient objects. Each object contains an email address and an optional name.
+**bcc:** `typing.Optional[typing.List[SendTransacEmailRequestBccItem]]` — Array of BCC recipient objects. Each object contains an email address and an optional name.
     
 </dd>
 </dl>
@@ -23420,7 +24019,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**cc:** `typing.Optional[typing.Sequence[SendTransacEmailRequestCcItem]]` — Array of CC recipient objects. Each object contains an email address and an optional name.
+**cc:** `typing.Optional[typing.List[SendTransacEmailRequestCcItem]]` — Array of CC recipient objects. Each object contains an email address and an optional name.
     
 </dd>
 </dl>
@@ -23444,7 +24043,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**message_versions:** `typing.Optional[typing.Sequence[SendTransacEmailRequestMessageVersionsItem]]` — Array of message version objects for sending customized email variants. The `templateId` can be customized per version only if a global `templateId` is provided. The `htmlContent` and `textContent` can be customized per version only if at least one of these is present in the global parameters. Global parameters such as `to` (required), `bcc`, `cc`, `replyTo`, and `subject` can be customized per version. Maximum total recipients per API request is 2000. Maximum recipients per message version is 99. Individual `params` objects must not exceed 100 KB. Cumulative `params` across all versions must not exceed 1000 KB. See https://developers.brevo.com/docs/batch-send-transactional-emails for detailed usage instructions.
+**message_versions:** `typing.Optional[typing.List[SendTransacEmailRequestMessageVersionsItem]]` — Array of message version objects for sending customized email variants. The `templateId` can be customized per version only if a global `templateId` is provided. The `htmlContent` and `textContent` can be customized per version only if at least one of these is present in the global parameters. Global parameters such as `to` (required), `bcc`, `cc`, `replyTo`, and `subject` can be customized per version. Maximum total recipients per API request is 2000. Maximum recipients per message version is 99. Individual `params` objects must not exceed 100 KB. Cumulative `params` across all versions must not exceed 1000 KB. See https://developers.brevo.com/docs/batch-send-transactional-emails for detailed usage instructions.
     
 </dd>
 </dl>
@@ -23468,7 +24067,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**scheduled_at:** `typing.Optional[dt.datetime]` — UTC date-time when the email should be sent (format: YYYY-MM-DDTHH:mm:ss.SSSZ). Include timezone information in the date-time value. Scheduled emails may be delayed by up to 5 minutes.
+**scheduled_at:** `typing.Optional[datetime.datetime]` — UTC date-time when the email should be sent (format: YYYY-MM-DDTHH:mm:ss.SSSZ). Include timezone information in the date-time value. Scheduled emails may be delayed by up to 5 minutes.
     
 </dd>
 </dl>
@@ -23492,7 +24091,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**tags:** `typing.Optional[typing.Sequence[str]]` — Array of tags for categorizing and filtering emails
+**tags:** `typing.Optional[typing.List[str]]` — Array of tags for categorizing and filtering emails
     
 </dd>
 </dl>
@@ -23516,7 +24115,7 @@ client.transactional_emails.send_transac_email(
 <dl>
 <dd>
 
-**to:** `typing.Optional[typing.Sequence[SendTransacEmailRequestToItem]]` — Array of recipient objects. Each object contains an email address and an optional display name. Required when `messageVersions` is not provided. Ignored when `messageVersions` is provided. Example: `[{"name":"Jimmy", "email":"jimmy@example.com"}, {"name":"Joe", "email":"joe@example.com"}]`
+**to:** `typing.Optional[typing.List[SendTransacEmailRequestToItem]]` — Array of recipient objects. Each object contains an email address and an optional display name. Required when `messageVersions` is not provided. Ignored when `messageVersions` is provided. Example: `[{"name":"Jimmy", "email":"jimmy@example.com"}, {"name":"Joe", "email":"joe@example.com"}]`
     
 </dd>
 </dl>
@@ -23536,7 +24135,7 @@ client.transactional_emails.send_transac_email(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_scheduled_email_by_id</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_scheduled_email_by_id</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23564,10 +24163,13 @@ Delete scheduled batch of emails by batchId or single scheduled email by message
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.delete_scheduled_email_by_id(
     identifier="4320f270-a4e3-4a2e-b591-edfe30a5e627",
 )
@@ -23606,7 +24208,7 @@ client.transactional_emails.delete_scheduled_email_by_id(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_scheduled_email_by_id</a>(...) -&gt; AsyncHttpResponse[GetScheduledEmailByIdResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_scheduled_email_by_id</a>(...) -> GetScheduledEmailByIdResponse</code></summary>
 <dl>
 <dd>
 
@@ -23633,21 +24235,19 @@ Fetch scheduled batch of emails by batchId or single scheduled email by messageI
 <dd>
 
 ```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 import datetime
 
-from brevo import Brevo
-
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_scheduled_email_by_id(
     identifier="4320f270-a4e3-4a2e-b591-edfe30a5e627",
-    start_date=datetime.date.fromisoformat(
-        "2022-02-02",
-    ),
-    end_date=datetime.date.fromisoformat(
-        "2022-03-02",
-    ),
+    start_date=datetime.date.fromisoformat("2022-02-02"),
+    end_date=datetime.date.fromisoformat("2022-03-02"),
 )
 
 ```
@@ -23672,7 +24272,7 @@ client.transactional_emails.get_scheduled_email_by_id(
 <dl>
 <dd>
 
-**start_date:** `typing.Optional[dt.date]` — Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
+**start_date:** `typing.Optional[datetime.date]` — Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
     
 </dd>
 </dl>
@@ -23680,7 +24280,7 @@ client.transactional_emails.get_scheduled_email_by_id(
 <dl>
 <dd>
 
-**end_date:** `typing.Optional[dt.date]` — Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
+**end_date:** `typing.Optional[datetime.date]` — Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
     
 </dd>
 </dl>
@@ -23732,7 +24332,7 @@ client.transactional_emails.get_scheduled_email_by_id(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_emails_list</a>(...) -&gt; AsyncHttpResponse[GetTransacEmailsListResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_emails_list</a>(...) -> GetTransacEmailsListResponse</code></summary>
 <dl>
 <dd>
 
@@ -23760,10 +24360,13 @@ This endpoint will show the list of emails for past 30 days by default. To retri
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_transac_emails_list()
 
 ```
@@ -23856,7 +24459,7 @@ client.transactional_emails.get_transac_emails_list()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_email_content</a>(...) -&gt; AsyncHttpResponse[GetTransacEmailContentResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_transac_email_content</a>(...) -> GetTransacEmailContentResponse</code></summary>
 <dl>
 <dd>
 
@@ -23890,10 +24493,13 @@ The uuid can also be fetched from the transactional logs page in your Brevo acco
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_transac_email_content(
     uuid_="uuid",
 )
@@ -23912,7 +24518,7 @@ client.transactional_emails.get_transac_email_content(
 <dl>
 <dd>
 
-**uuid_:** `str` — Unique id of the transactional email that has been sent to a particular contact
+**uuid:** `str` — Unique id of the transactional email that has been sent to a particular contact
     
 </dd>
 </dl>
@@ -23932,7 +24538,7 @@ client.transactional_emails.get_transac_email_content(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_an_smtp_transactional_log</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_an_smtp_transactional_log</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23946,10 +24552,13 @@ client.transactional_emails.get_transac_email_content(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.delete_an_smtp_transactional_log(
     identifier="identifier",
 )
@@ -23988,7 +24597,7 @@ client.transactional_emails.delete_an_smtp_transactional_log(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_aggregated_smtp_report</a>(...) -&gt; AsyncHttpResponse[GetAggregatedSmtpReportResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_aggregated_smtp_report</a>(...) -> GetAggregatedSmtpReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -24016,10 +24625,13 @@ This endpoint will show the aggregated stats for past 90 days by default if `sta
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_aggregated_smtp_report()
 
 ```
@@ -24080,7 +24692,7 @@ client.transactional_emails.get_aggregated_smtp_report()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_email_event_report</a>(...) -&gt; AsyncHttpResponse[GetEmailEventReportResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_email_event_report</a>(...) -> GetEmailEventReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -24108,10 +24720,13 @@ This endpoint will show the aggregated stats for past 30 days by default if `sta
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_email_event_report()
 
 ```
@@ -24228,7 +24843,7 @@ client.transactional_emails.get_email_event_report()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_report</a>(...) -&gt; AsyncHttpResponse[GetSmtpReportResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_report</a>(...) -> GetSmtpReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -24242,10 +24857,13 @@ client.transactional_emails.get_email_event_report()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_smtp_report()
 
 ```
@@ -24330,7 +24948,7 @@ client.transactional_emails.get_smtp_report()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">post_preview_smtp_email_templates</a>(...) -&gt; AsyncHttpResponse[PostPreviewSmtpEmailTemplatesResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">post_preview_smtp_email_templates</a>(...) -> PostPreviewSmtpEmailTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24344,10 +24962,13 @@ client.transactional_emails.get_smtp_report()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.post_preview_smtp_email_templates(
     request={"key": "value"},
 )
@@ -24386,7 +25007,7 @@ client.transactional_emails.post_preview_smtp_email_templates(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_templates</a>(...) -&gt; AsyncHttpResponse[GetSmtpTemplatesResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_templates</a>(...) -> GetSmtpTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -24400,10 +25021,13 @@ client.transactional_emails.post_preview_smtp_email_templates(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_smtp_templates()
 
 ```
@@ -24464,7 +25088,7 @@ client.transactional_emails.get_smtp_templates()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">create_smtp_template</a>(...) -&gt; AsyncHttpResponse[CreateSmtpTemplateResponse]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">create_smtp_template</a>(...) -> CreateSmtpTemplateResponse</code></summary>
 <dl>
 <dd>
 
@@ -24478,11 +25102,14 @@ client.transactional_emails.get_smtp_templates()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 from brevo.transactional_emails import CreateSmtpTemplateRequestSender
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.create_smtp_template(
     sender=CreateSmtpTemplateRequestSender(),
     subject="Thanks for your purchase !",
@@ -24595,7 +25222,7 @@ client.transactional_emails.create_smtp_template(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_template</a>(...) -&gt; AsyncHttpResponse[GetSmtpTemplateOverview]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">get_smtp_template</a>(...) -> GetSmtpTemplateOverview</code></summary>
 <dl>
 <dd>
 
@@ -24609,10 +25236,13 @@ client.transactional_emails.create_smtp_template(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.get_smtp_template(
     template_id=1000000,
 )
@@ -24651,7 +25281,7 @@ client.transactional_emails.get_smtp_template(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">update_smtp_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">update_smtp_template</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -24665,10 +25295,13 @@ client.transactional_emails.get_smtp_template(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.update_smtp_template(
     template_id=1000000,
 )
@@ -24787,7 +25420,7 @@ client.transactional_emails.update_smtp_template(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_smtp_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">delete_smtp_template</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -24801,10 +25434,13 @@ client.transactional_emails.update_smtp_template(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.delete_smtp_template(
     template_id=1000000,
 )
@@ -24843,7 +25479,7 @@ client.transactional_emails.delete_smtp_template(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_test_template</a>(...) -&gt; AsyncHttpResponse[None]</code></summary>
+<details><summary><code>client.transactional_emails.<a href="src/brevo/transactional_emails/client.py">send_test_template</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -24857,10 +25493,13 @@ client.transactional_emails.delete_smtp_template(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_emails.send_test_template(
     template_id=1000000,
 )
@@ -24887,7 +25526,7 @@ client.transactional_emails.send_test_template(
 <dl>
 <dd>
 
-**email_to:** `typing.Optional[typing.Sequence[str]]` — List of the email addresses of the recipients whom you wish to send the test mail. _If left empty, the test mail will be sent to your entire test list. You can not send more than 50 test emails per day_.
+**request:** `SendTestEmail` 
     
 </dd>
 </dl>
@@ -24908,7 +25547,7 @@ client.transactional_emails.send_test_template(
 </details>
 
 ## TransactionalSms
-<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_async_transactional_sms</a>(...) -&gt; AsyncHttpResponse[SendAsyncTransactionalSmsResponse]</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_async_transactional_sms</a>(...) -> SendAsyncTransactionalSmsResponse</code></summary>
 <dl>
 <dd>
 
@@ -24944,10 +25583,13 @@ Transactional SMS can be sent at any time without time restrictions. However, if
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_sms.send_async_transactional_sms(
     recipient="33689965433",
     sender="MyShop",
@@ -24967,71 +25609,7 @@ client.transactional_sms.send_async_transactional_sms(
 <dl>
 <dd>
 
-**recipient:** `str` — Mobile number to send SMS with the country code
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**sender:** `str` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**tag:** `typing.Optional[SendTransacSmsTag]` — Tag of the message
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**type:** `typing.Optional[SendTransacSmsType]` — Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**web_url:** `typing.Optional[str]` — Webhook to call for each event triggered by the message (delivered etc.)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**template_id:** `typing.Optional[int]` — Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**content:** `typing.Optional[str]` — Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
+**request:** `SendTransacSms` 
     
 </dd>
 </dl>
@@ -25051,7 +25629,7 @@ client.transactional_sms.send_async_transactional_sms(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_transac_sms</a>(...) -&gt; AsyncHttpResponse[SendTransacSmsResponse]</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">send_transac_sms</a>(...) -> SendTransacSmsResponse</code></summary>
 <dl>
 <dd>
 
@@ -25065,10 +25643,13 @@ client.transactional_sms.send_async_transactional_sms(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_sms.send_transac_sms(
     recipient="33689965433",
     sender="MyShop",
@@ -25088,71 +25669,7 @@ client.transactional_sms.send_transac_sms(
 <dl>
 <dd>
 
-**recipient:** `str` — Mobile number to send SMS with the country code
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**sender:** `str` — Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**organisation_prefix:** `typing.Optional[str]` — A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**tag:** `typing.Optional[SendTransacSmsTag]` — Tag of the message
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**type:** `typing.Optional[SendTransacSmsType]` — Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**unicode_enabled:** `typing.Optional[bool]` — Format of the message. It indicates whether the content should be treated as unicode or not.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**web_url:** `typing.Optional[str]` — Webhook to call for each event triggered by the message (delivered etc.)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**template_id:** `typing.Optional[int]` — Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**content:** `typing.Optional[str]` — Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
+**request:** `SendTransacSms` 
     
 </dd>
 </dl>
@@ -25172,7 +25689,7 @@ client.transactional_sms.send_transac_sms(
 </dl>
 </details>
 
-<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_aggregated_sms_report</a>(...) -&gt; AsyncHttpResponse[GetTransacAggregatedSmsReportResponse]</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_aggregated_sms_report</a>(...) -> GetTransacAggregatedSmsReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -25186,10 +25703,13 @@ client.transactional_sms.send_transac_sms(
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_sms.get_transac_aggregated_sms_report()
 
 ```
@@ -25250,7 +25770,7 @@ client.transactional_sms.get_transac_aggregated_sms_report()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_sms_events</a>(...) -&gt; AsyncHttpResponse[GetSmsEventsResponse]</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_sms_events</a>(...) -> GetSmsEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -25264,10 +25784,13 @@ client.transactional_sms.get_transac_aggregated_sms_report()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_sms.get_sms_events()
 
 ```
@@ -25368,7 +25891,7 @@ client.transactional_sms.get_sms_events()
 </dl>
 </details>
 
-<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_sms_report</a>(...) -&gt; AsyncHttpResponse[GetTransacSmsReportResponse]</code></summary>
+<details><summary><code>client.transactional_sms.<a href="src/brevo/transactional_sms/client.py">get_transac_sms_report</a>(...) -> GetTransacSmsReportResponse</code></summary>
 <dl>
 <dd>
 
@@ -25382,10 +25905,13 @@ client.transactional_sms.get_sms_events()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.transactional_sms.get_transac_sms_report()
 
 ```
@@ -25455,7 +25981,7 @@ client.transactional_sms.get_transac_sms_report()
 </details>
 
 ## SmsTemplates
-<details><summary><code>client.sms_templates.<a href="src/brevo/sms_templates/client.py">get_sms_templates</a>(...) -&gt; AsyncHttpResponse[GetSmsTemplatesResponse]</code></summary>
+<details><summary><code>client.sms_templates.<a href="src/brevo/sms_templates/client.py">get_sms_templates</a>(...) -> GetSmsTemplatesResponse</code></summary>
 <dl>
 <dd>
 
@@ -25469,10 +25995,13 @@ client.transactional_sms.get_transac_sms_report()
 
 ```python
 from brevo import Brevo
+from brevo.environment import BrevoEnvironment
 
 client = Brevo(
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
 )
+
 client.sms_templates.get_sms_templates()
 
 ```

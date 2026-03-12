@@ -1,7 +1,7 @@
 {
   "cliVersion": "4.25.0",
   "generatorName": "fernapi/fern-python-sdk",
-  "generatorVersion": "4.59.0",
+  "generatorVersion": "4.63.6",
   "generatorConfig": {
     "package_name": "brevo",
     "client_class_name": "Brevo",
@@ -19,5 +19,5 @@
     }
   },
   "originGitCommit": "54d086fd1182f577a555eb34fb46ad02e2c203ca",
-  "sdkVersion": "4.0.8"
+  "sdkVersion": "4.0.9"
 }
