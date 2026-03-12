@@ -3,5 +3,8 @@
 import typing
 
 GetEmailCampaignResponseStatus = typing.Union[
-    typing.Literal["draft", "sent", "archive", "queued", "suspended", "in_process"], typing.Any
+    typing.Literal[
+        "draft", "sent", "archive", "queued", "suspended", "in_process", "in_review", "cancelling", "cancelled"
+    ],
+    typing.Any,
 ]

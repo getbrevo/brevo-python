@@ -55,6 +55,18 @@ class SendTransacSms(UncheckedBaseModel):
             alias="webUrl", description="Webhook to call for each event triggered by the message (delivered etc.)"
         ),
     ] = None
+    template_id: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="templateId"),
+        pydantic.Field(
+            alias="templateId",
+            description="Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.",
+        ),
+    ] = None
+    content: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
