@@ -7,12 +7,6 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
-        CreateBatchEventsRequestItem,
-        CreateBatchEventsRequestItemContactPropertiesValue,
-        CreateBatchEventsRequestItemEventPropertiesValue,
-        CreateBatchEventsRequestItemIdentifiers,
-        CreateBatchEventsRequestItemObject,
-        CreateBatchEventsRequestItemObjectIdentifiers,
         CreateEventRequestContactPropertiesValue,
         CreateEventRequestEventPropertiesValue,
         CreateEventRequestIdentifiers,
@@ -20,12 +14,6 @@ if typing.TYPE_CHECKING:
         CreateEventRequestObjectIdentifiers,
     )
 _dynamic_imports: typing.Dict[str, str] = {
-    "CreateBatchEventsRequestItem": ".types",
-    "CreateBatchEventsRequestItemContactPropertiesValue": ".types",
-    "CreateBatchEventsRequestItemEventPropertiesValue": ".types",
-    "CreateBatchEventsRequestItemIdentifiers": ".types",
-    "CreateBatchEventsRequestItemObject": ".types",
-    "CreateBatchEventsRequestItemObjectIdentifiers": ".types",
     "CreateEventRequestContactPropertiesValue": ".types",
     "CreateEventRequestEventPropertiesValue": ".types",
     "CreateEventRequestIdentifiers": ".types",
@@ -56,12 +44,6 @@ def __dir__():
 
 
 __all__ = [
-    "CreateBatchEventsRequestItem",
-    "CreateBatchEventsRequestItemContactPropertiesValue",
-    "CreateBatchEventsRequestItemEventPropertiesValue",
-    "CreateBatchEventsRequestItemIdentifiers",
-    "CreateBatchEventsRequestItemObject",
-    "CreateBatchEventsRequestItemObjectIdentifiers",
     "CreateEventRequestContactPropertiesValue",
     "CreateEventRequestEventPropertiesValue",
     "CreateEventRequestIdentifiers",

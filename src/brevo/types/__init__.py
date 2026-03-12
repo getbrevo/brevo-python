@@ -16,8 +16,6 @@ if typing.TYPE_CHECKING:
         BalanceDefinitionBalanceAvailabilityDurationModifier,
     )
     from .balance_limit import BalanceLimit
-    from .batch_events_response import BatchEventsResponse
-    from .batch_events_response_errors_item import BatchEventsResponseErrorsItem
     from .cart import Cart
     from .company import Company
     from .configuration import Configuration
@@ -86,6 +84,8 @@ if typing.TYPE_CHECKING:
     from .order_identifiers import OrderIdentifiers
     from .order_meta_info_value import OrderMetaInfoValue
     from .order_products_item import OrderProductsItem
+    from .order_products_item_quantity import OrderProductsItemQuantity
+    from .order_products_item_quantity_float import OrderProductsItemQuantityFloat
     from .pipeline import Pipeline
     from .pipeline_stages_item import PipelineStagesItem
     from .pipelines import Pipelines
@@ -131,8 +131,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BalanceDefinition": ".balance_definition",
     "BalanceDefinitionBalanceAvailabilityDurationModifier": ".balance_definition_balance_availability_duration_modifier",
     "BalanceLimit": ".balance_limit",
-    "BatchEventsResponse": ".batch_events_response",
-    "BatchEventsResponseErrorsItem": ".batch_events_response_errors_item",
     "Cart": ".cart",
     "Company": ".company",
     "Configuration": ".configuration",
@@ -201,6 +199,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OrderIdentifiers": ".order_identifiers",
     "OrderMetaInfoValue": ".order_meta_info_value",
     "OrderProductsItem": ".order_products_item",
+    "OrderProductsItemQuantity": ".order_products_item_quantity",
+    "OrderProductsItemQuantityFloat": ".order_products_item_quantity_float",
     "Pipeline": ".pipeline",
     "PipelineStagesItem": ".pipeline_stages_item",
     "Pipelines": ".pipelines",
@@ -270,8 +270,6 @@ __all__ = [
     "BalanceDefinition",
     "BalanceDefinitionBalanceAvailabilityDurationModifier",
     "BalanceLimit",
-    "BatchEventsResponse",
-    "BatchEventsResponseErrorsItem",
     "Cart",
     "Company",
     "Configuration",
@@ -340,6 +338,8 @@ __all__ = [
     "OrderIdentifiers",
     "OrderMetaInfoValue",
     "OrderProductsItem",
+    "OrderProductsItemQuantity",
+    "OrderProductsItemQuantityFloat",
     "Pipeline",
     "PipelineStagesItem",
     "Pipelines",
