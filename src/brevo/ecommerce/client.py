@@ -624,7 +624,7 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import Brevo, OrderProductsItem
+        from brevo import Brevo, OrderProductsItemQuantity
 
         client = Brevo(
             api_key="YOUR_API_KEY",
@@ -634,9 +634,8 @@ class EcommerceClient:
             created_at="2021-07-29T20:59:23.383Z",
             id="14",
             products=[
-                OrderProductsItem(
-                    price=99.99,
-                    product_id="P1",
+                OrderProductsItemQuantity(
+                    quantity=10,
                 )
             ],
             status="completed",
@@ -691,7 +690,7 @@ class EcommerceClient:
 
         Examples
         --------
-        from brevo import Brevo, Order, OrderProductsItem
+        from brevo import Brevo, Order, OrderProductsItemQuantity
 
         client = Brevo(
             api_key="YOUR_API_KEY",
@@ -703,9 +702,8 @@ class EcommerceClient:
                     created_at="2021-07-29T20:59:23.383Z",
                     id="14",
                     products=[
-                        OrderProductsItem(
-                            price=99.99,
-                            product_id="P1",
+                        OrderProductsItemQuantity(
+                            quantity=10,
                         )
                     ],
                     status="completed",
@@ -1704,7 +1702,7 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevo, OrderProductsItem
+        from brevo import AsyncBrevo, OrderProductsItemQuantity
 
         client = AsyncBrevo(
             api_key="YOUR_API_KEY",
@@ -1717,9 +1715,8 @@ class AsyncEcommerceClient:
                 created_at="2021-07-29T20:59:23.383Z",
                 id="14",
                 products=[
-                    OrderProductsItem(
-                        price=99.99,
-                        product_id="P1",
+                    OrderProductsItemQuantity(
+                        quantity=10,
                     )
                 ],
                 status="completed",
@@ -1779,7 +1776,7 @@ class AsyncEcommerceClient:
         --------
         import asyncio
 
-        from brevo import AsyncBrevo, Order, OrderProductsItem
+        from brevo import AsyncBrevo, Order, OrderProductsItemQuantity
 
         client = AsyncBrevo(
             api_key="YOUR_API_KEY",
@@ -1794,9 +1791,8 @@ class AsyncEcommerceClient:
                         created_at="2021-07-29T20:59:23.383Z",
                         id="14",
                         products=[
-                            OrderProductsItem(
-                                price=99.99,
-                                product_id="P1",
+                            OrderProductsItemQuantity(
+                                quantity=10,
                             )
                         ],
                         status="completed",

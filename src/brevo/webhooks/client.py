@@ -139,7 +139,6 @@ class WebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
-            #### `reply`
 
         url : str
             URL of the webhook
@@ -216,16 +215,22 @@ class WebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ExportWebhooksHistoryResponse:
         """
-        <Note>
-        This is an enterprise feature. Contact us to activate it for your account.
-        </Note>
+        <Note>This is an enterprise feature.
 
-        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
+        To have it activated please send us a request and we will activate it for your account.</Note>
 
-        Use this endpoint to:
-        - Export webhook event history filtered by date range, event type, or email address
-        - Generate reports for compliance, auditing, or performance analysis
-        - Track delivery patterns and webhook reliability over time
+        Exports webhook event history to CSV format for analysis and reporting.
+
+        Use this to:
+        - Generate comprehensive webhook event reports
+        - Analyze webhook delivery patterns and success rates
+        - Export event data for external analysis tools
+        - Create historical reports for compliance and auditing
+        - Track webhook performance and reliability metrics
+
+        Key information returned:
+        - Process ID for tracking export completion
+        - CSV file will be delivered to specified webhook URL
 
         Parameters
         ----------
@@ -596,7 +601,6 @@ class AsyncWebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
-            #### `reply`
 
         url : str
             URL of the webhook
@@ -681,16 +685,22 @@ class AsyncWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ExportWebhooksHistoryResponse:
         """
-        <Note>
-        This is an enterprise feature. Contact us to activate it for your account.
-        </Note>
+        <Note>This is an enterprise feature.
 
-        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
+        To have it activated please send us a request and we will activate it for your account.</Note>
 
-        Use this endpoint to:
-        - Export webhook event history filtered by date range, event type, or email address
-        - Generate reports for compliance, auditing, or performance analysis
-        - Track delivery patterns and webhook reliability over time
+        Exports webhook event history to CSV format for analysis and reporting.
+
+        Use this to:
+        - Generate comprehensive webhook event reports
+        - Analyze webhook delivery patterns and success rates
+        - Export event data for external analysis tools
+        - Create historical reports for compliance and auditing
+        - Track webhook performance and reliability metrics
+
+        Key information returned:
+        - Process ID for tracking export completion
+        - CSV file will be delivered to specified webhook URL
 
         Parameters
         ----------

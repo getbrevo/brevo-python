@@ -6,7 +6,6 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
@@ -23,7 +22,6 @@ from .types.get_transac_sms_report_request_sort import GetTransacSmsReportReques
 from .types.get_transac_sms_report_response import GetTransacSmsReportResponse
 from .types.send_async_transactional_sms_response import SendAsyncTransactionalSmsResponse
 from .types.send_transac_sms_response import SendTransacSmsResponse
-from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -43,8 +41,6 @@ class RawTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
-        template_id: typing.Optional[int] = OMIT,
-        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SendAsyncTransactionalSmsResponse]:
         """
@@ -75,12 +71,6 @@ class RawTransactionalSmsClient:
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
 
-        template_id : typing.Optional[int]
-            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-
-        content : typing.Optional[str]
-            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -102,8 +92,6 @@ class RawTransactionalSmsClient:
                 "type": type,
                 "unicodeEnabled": unicode_enabled,
                 "webUrl": web_url,
-                "templateId": template_id,
-                "content": content,
             },
             headers={
                 "content-type": "application/json",
@@ -135,10 +123,6 @@ class RawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def send_transac_sms(
@@ -151,8 +135,6 @@ class RawTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
-        template_id: typing.Optional[int] = OMIT,
-        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SendTransacSmsResponse]:
         """
@@ -179,12 +161,6 @@ class RawTransactionalSmsClient:
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
 
-        template_id : typing.Optional[int]
-            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-
-        content : typing.Optional[str]
-            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -206,8 +182,6 @@ class RawTransactionalSmsClient:
                 "type": type,
                 "unicodeEnabled": unicode_enabled,
                 "webUrl": web_url,
-                "templateId": template_id,
-                "content": content,
             },
             headers={
                 "content-type": "application/json",
@@ -250,10 +224,6 @@ class RawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_transac_aggregated_sms_report(
@@ -323,10 +293,6 @@ class RawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_sms_events(
@@ -421,10 +387,6 @@ class RawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_transac_sms_report(
@@ -499,10 +461,6 @@ class RawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -520,8 +478,6 @@ class AsyncRawTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
-        template_id: typing.Optional[int] = OMIT,
-        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SendAsyncTransactionalSmsResponse]:
         """
@@ -552,12 +508,6 @@ class AsyncRawTransactionalSmsClient:
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
 
-        template_id : typing.Optional[int]
-            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-
-        content : typing.Optional[str]
-            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -579,8 +529,6 @@ class AsyncRawTransactionalSmsClient:
                 "type": type,
                 "unicodeEnabled": unicode_enabled,
                 "webUrl": web_url,
-                "templateId": template_id,
-                "content": content,
             },
             headers={
                 "content-type": "application/json",
@@ -612,10 +560,6 @@ class AsyncRawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def send_transac_sms(
@@ -628,8 +572,6 @@ class AsyncRawTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
-        template_id: typing.Optional[int] = OMIT,
-        content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SendTransacSmsResponse]:
         """
@@ -656,12 +598,6 @@ class AsyncRawTransactionalSmsClient:
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
 
-        template_id : typing.Optional[int]
-            Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
-
-        content : typing.Optional[str]
-            Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -683,8 +619,6 @@ class AsyncRawTransactionalSmsClient:
                 "type": type,
                 "unicodeEnabled": unicode_enabled,
                 "webUrl": web_url,
-                "templateId": template_id,
-                "content": content,
             },
             headers={
                 "content-type": "application/json",
@@ -727,10 +661,6 @@ class AsyncRawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_transac_aggregated_sms_report(
@@ -800,10 +730,6 @@ class AsyncRawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_sms_events(
@@ -898,10 +824,6 @@ class AsyncRawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_transac_sms_report(
@@ -976,8 +898,4 @@ class AsyncRawTransactionalSmsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

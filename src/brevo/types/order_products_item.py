@@ -2,52 +2,7 @@
 
 import typing
 
-import pydantic
-import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
-from ..core.serialization import FieldMetadata
-from ..core.unchecked_base_model import UncheckedBaseModel
+from .order_products_item_quantity import OrderProductsItemQuantity
+from .order_products_item_quantity_float import OrderProductsItemQuantityFloat
 
-
-class OrderProductsItem(UncheckedBaseModel):
-    """
-    Details for the Products in an order.
-    """
-
-    price: float = pydantic.Field()
-    """
-    The price of a unit of product
-    """
-
-    product_id: typing_extensions.Annotated[
-        str, FieldMetadata(alias="productId"), pydantic.Field(alias="productId", description="ID of the product.")
-    ]
-    variant_id: typing_extensions.Annotated[
-        typing.Optional[str],
-        FieldMetadata(alias="variantId"),
-        pydantic.Field(alias="variantId", description="Product ID of the red color shirts."),
-    ] = None
-    quantity: typing.Optional[int] = pydantic.Field(default=None)
-    """
-    **Required if quantityFloat is empty.**
-    
-    Number of product units added to the cart (whole numbers only, e.g., 10)
-    """
-
-    quantity_float: typing_extensions.Annotated[
-        typing.Optional[float],
-        FieldMetadata(alias="quantityFloat"),
-        pydantic.Field(
-            alias="quantityFloat",
-            description="**Required if quantity is empty.**\n\nNumber of product units added to the cart(supports decimals, e.g., 20.52)",
-        ),
-    ] = None
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
+OrderProductsItem = typing.Union[OrderProductsItemQuantity, OrderProductsItemQuantityFloat]

@@ -3,21 +3,14 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
-from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class BatchEventsResponseErrorsItem(UncheckedBaseModel):
-    event_index: typing_extensions.Annotated[
-        typing.Optional[typing.List[int]],
-        FieldMetadata(alias="eventIndex"),
-        pydantic.Field(alias="eventIndex", description="Index positions (0-based) of the events that caused the error"),
-    ] = None
-    message: typing.Optional[str] = pydantic.Field(default=None)
+class OrderProductsItemQuantity(UncheckedBaseModel):
+    quantity: int = pydantic.Field()
     """
-    Description of the error
+    **Required if quantityFloat is empty.** Number of product units added to the cart (whole numbers only)
     """
 
     if IS_PYDANTIC_V2:
