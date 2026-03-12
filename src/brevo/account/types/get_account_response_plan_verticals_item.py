@@ -43,7 +43,7 @@ class GetAccountResponsePlanVerticalsItem(UncheckedBaseModel):
         FieldMetadata(alias="endDate"),
         pydantic.Field(alias="endDate", description="Plan end date (Unix timestamp)"),
     ]
-    users: GetAccountResponsePlanVerticalsItemUsers = pydantic.Field()
+    users: typing.Optional[GetAccountResponsePlanVerticalsItemUsers] = pydantic.Field(default=None)
     """
     User seat information for the plan
     """
