@@ -13,6 +13,14 @@ from .get_extended_campaign_overview_type import GetExtendedCampaignOverviewType
 
 
 class GetExtendedCampaignOverview(UncheckedBaseModel):
+    attachment_file: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="attachmentFile"),
+        pydantic.Field(
+            alias="attachmentFile",
+            description="Url of the attachment file. Only available if the campaign has an attachment.",
+        ),
+    ] = None
     ab_testing: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="abTesting"),
@@ -186,6 +194,11 @@ class GetExtendedCampaignOverview(UncheckedBaseModel):
     tag: typing.Optional[str] = pydantic.Field(default=None)
     """
     Tag of the campaign
+    """
+
+    tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    List of tags of the campaign
     """
 
     test_sent: typing_extensions.Annotated[
