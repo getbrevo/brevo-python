@@ -32,6 +32,6 @@ def test_customObjects_batch_delete_object_records() -> None:
     client = get_client(test_id)
     client.custom_objects.batch_delete_object_records(
         object_type="vehicle",
-        identifiers=BatchDeleteObjectRecordsRequestIdentifiersIds(),
+        identifiers=BatchDeleteObjectRecordsRequestIdentifiersIds(ids=[1, 2, 3]),
     )
     verify_request_count(test_id, "POST", "/objects/vehicle/batch/delete", None, 1)
