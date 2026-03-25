@@ -190,13 +190,13 @@ def test_balance_get_transaction_history_api() -> None:
     client.balance.get_transaction_history_api(
         pid="pid",
         contact_id=1,
-        balance_definition_id="balance_definition_id",
+        balance_definition_id="balanceDefinitionId",
     )
     verify_request_count(
         test_id,
         "GET",
         "/loyalty/balance/programs/pid/transaction-history",
-        {"contact_id": "1", "balance_definition_id": "balance_definition_id"},
+        {"contactId": "1", "balanceDefinitionId": "balanceDefinitionId"},
         1,
     )
 

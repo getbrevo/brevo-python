@@ -300,6 +300,7 @@ class ProgramClient:
         contact_id: typing.Optional[str] = None,
         params: typing.Optional[str] = None,
         loyalty_subscription_id: typing.Optional[str] = None,
+        include_internal: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetParameterSubscriptionInfoResponse:
         """
@@ -318,6 +319,9 @@ class ProgramClient:
 
         loyalty_subscription_id : typing.Optional[str]
             The loyalty subscription ID to filter by.
+
+        include_internal : typing.Optional[bool]
+            Include balances tied to internal definitions.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -343,8 +347,45 @@ class ProgramClient:
             contact_id=contact_id,
             params=params,
             loyalty_subscription_id=loyalty_subscription_id,
+            include_internal=include_internal,
             request_options=request_options,
         )
+        return _response.data
+
+    def delete_contact_subscription(
+        self, pid: str, cid: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Delete subscription for a contact
+
+        Parameters
+        ----------
+        pid : str
+            Loyalty Program ID. A unique identifier for the loyalty program.
+
+        cid : int
+            Contact ID.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from brevo import Brevo
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.program.delete_contact_subscription(
+            pid="pid",
+            cid=1,
+        )
+        """
+        _response = self._raw_client.delete_contact_subscription(pid, cid, request_options=request_options)
         return _response.data
 
     def publish_loyalty_program(self, pid: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
@@ -860,6 +901,7 @@ class AsyncProgramClient:
         contact_id: typing.Optional[str] = None,
         params: typing.Optional[str] = None,
         loyalty_subscription_id: typing.Optional[str] = None,
+        include_internal: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetParameterSubscriptionInfoResponse:
         """
@@ -878,6 +920,9 @@ class AsyncProgramClient:
 
         loyalty_subscription_id : typing.Optional[str]
             The loyalty subscription ID to filter by.
+
+        include_internal : typing.Optional[bool]
+            Include balances tied to internal definitions.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -911,8 +956,53 @@ class AsyncProgramClient:
             contact_id=contact_id,
             params=params,
             loyalty_subscription_id=loyalty_subscription_id,
+            include_internal=include_internal,
             request_options=request_options,
         )
+        return _response.data
+
+    async def delete_contact_subscription(
+        self, pid: str, cid: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Delete subscription for a contact
+
+        Parameters
+        ----------
+        pid : str
+            Loyalty Program ID. A unique identifier for the loyalty program.
+
+        cid : int
+            Contact ID.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.program.delete_contact_subscription(
+                pid="pid",
+                cid=1,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_contact_subscription(pid, cid, request_options=request_options)
         return _response.data
 
     async def publish_loyalty_program(

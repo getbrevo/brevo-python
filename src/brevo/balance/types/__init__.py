@@ -21,8 +21,11 @@ if typing.TYPE_CHECKING:
     from .get_loyalty_balance_programs_pid_transaction_history_request_sort import (
         GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort,
     )
-    from .get_loyalty_balance_programs_pid_transaction_history_request_sort_field import (
-        GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField,
+    from .get_loyalty_balance_programs_pid_transaction_history_request_status import (
+        GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus,
+    )
+    from .get_loyalty_balance_programs_pid_transaction_history_request_transaction_type import (
+        GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType,
     )
     from .get_loyalty_balance_programs_pid_transaction_history_response import (
         GetLoyaltyBalanceProgramsPidTransactionHistoryResponse,
@@ -47,6 +50,9 @@ if typing.TYPE_CHECKING:
     from .post_loyalty_balance_programs_pid_balance_definitions_request_balance_option_debit_rounding import (
         PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding,
     )
+    from .post_loyalty_balance_programs_pid_balance_definitions_request_meta import (
+        PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestMeta,
+    )
     from .post_loyalty_balance_programs_pid_balance_definitions_request_unit import (
         PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestUnit,
     )
@@ -68,6 +74,7 @@ if typing.TYPE_CHECKING:
     from .update_balance_definition_request_balance_option_debit_rounding import (
         UpdateBalanceDefinitionRequestBalanceOptionDebitRounding,
     )
+    from .update_balance_definition_request_meta import UpdateBalanceDefinitionRequestMeta
     from .update_balance_definition_request_unit import UpdateBalanceDefinitionRequestUnit
     from .update_balance_limit_request_constraint_type import UpdateBalanceLimitRequestConstraintType
     from .update_balance_limit_request_duration_unit import UpdateBalanceLimitRequestDurationUnit
@@ -86,7 +93,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetContactBalancesResponse": ".get_contact_balances_response",
     "GetContactBalancesResponseBalancesItem": ".get_contact_balances_response_balances_item",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort": ".get_loyalty_balance_programs_pid_transaction_history_request_sort",
-    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField": ".get_loyalty_balance_programs_pid_transaction_history_request_sort_field",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus": ".get_loyalty_balance_programs_pid_transaction_history_request_status",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType": ".get_loyalty_balance_programs_pid_transaction_history_request_transaction_type",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponse": ".get_loyalty_balance_programs_pid_transaction_history_response",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem": ".get_loyalty_balance_programs_pid_transaction_history_response_transaction_history_item",
     "GetSubscriptionBalancesResponse": ".get_subscription_balances_response",
@@ -96,6 +104,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionAmountOvertakingStrategy": ".post_loyalty_balance_programs_pid_balance_definitions_request_balance_option_amount_overtaking_strategy",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionCreditRounding": ".post_loyalty_balance_programs_pid_balance_definitions_request_balance_option_credit_rounding",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding": ".post_loyalty_balance_programs_pid_balance_definitions_request_balance_option_debit_rounding",
+    "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestMeta": ".post_loyalty_balance_programs_pid_balance_definitions_request_meta",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestUnit": ".post_loyalty_balance_programs_pid_balance_definitions_request_unit",
     "PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse": ".post_loyalty_balance_programs_pid_subscriptions_cid_balances_response",
     "UpdateBalanceDefinitionRequestBalanceAvailabilityDurationModifier": ".update_balance_definition_request_balance_availability_duration_modifier",
@@ -103,6 +112,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdateBalanceDefinitionRequestBalanceOptionAmountOvertakingStrategy": ".update_balance_definition_request_balance_option_amount_overtaking_strategy",
     "UpdateBalanceDefinitionRequestBalanceOptionCreditRounding": ".update_balance_definition_request_balance_option_credit_rounding",
     "UpdateBalanceDefinitionRequestBalanceOptionDebitRounding": ".update_balance_definition_request_balance_option_debit_rounding",
+    "UpdateBalanceDefinitionRequestMeta": ".update_balance_definition_request_meta",
     "UpdateBalanceDefinitionRequestUnit": ".update_balance_definition_request_unit",
     "UpdateBalanceLimitRequestConstraintType": ".update_balance_limit_request_constraint_type",
     "UpdateBalanceLimitRequestDurationUnit": ".update_balance_limit_request_duration_unit",
@@ -145,7 +155,8 @@ __all__ = [
     "GetContactBalancesResponse",
     "GetContactBalancesResponseBalancesItem",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort",
-    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSortField",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus",
+    "GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponse",
     "GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem",
     "GetSubscriptionBalancesResponse",
@@ -155,6 +166,7 @@ __all__ = [
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionAmountOvertakingStrategy",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionCreditRounding",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestBalanceOptionDebitRounding",
+    "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestMeta",
     "PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestUnit",
     "PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse",
     "UpdateBalanceDefinitionRequestBalanceAvailabilityDurationModifier",
@@ -162,6 +174,7 @@ __all__ = [
     "UpdateBalanceDefinitionRequestBalanceOptionAmountOvertakingStrategy",
     "UpdateBalanceDefinitionRequestBalanceOptionCreditRounding",
     "UpdateBalanceDefinitionRequestBalanceOptionDebitRounding",
+    "UpdateBalanceDefinitionRequestMeta",
     "UpdateBalanceDefinitionRequestUnit",
     "UpdateBalanceLimitRequestConstraintType",
     "UpdateBalanceLimitRequestDurationUnit",

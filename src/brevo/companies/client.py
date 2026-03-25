@@ -10,6 +10,8 @@ from .raw_client import AsyncRawCompaniesClient, RawCompaniesClient
 from .types.get_companies_request_sort import GetCompaniesRequestSort
 from .types.get_companies_response import GetCompaniesResponse
 from .types.get_crm_attributes_companies_response_item import GetCrmAttributesCompaniesResponseItem
+from .types.patch_crm_attributes_id_request_object_type import PatchCrmAttributesIdRequestObjectType
+from .types.patch_crm_attributes_id_request_options_labels_item import PatchCrmAttributesIdRequestOptionsLabelsItem
 from .types.post_companies_import_response import PostCompaniesImportResponse
 from .types.post_companies_response import PostCompaniesResponse
 from .types.post_crm_attributes_request_attribute_type import PostCrmAttributesRequestAttributeType
@@ -441,6 +443,81 @@ class CompaniesClient:
             description=description,
             options_labels=options_labels,
             request_options=request_options,
+        )
+        return _response.data
+
+    def delete_an_attribute(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+            Attribute ID
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from brevo import Brevo
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.companies.delete_an_attribute(
+            id="id",
+        )
+        """
+        _response = self._raw_client.delete_an_attribute(id, request_options=request_options)
+        return _response.data
+
+    def update_an_attribute(
+        self,
+        id: str,
+        *,
+        label: typing.Optional[str] = OMIT,
+        options_labels: typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]] = OMIT,
+        object_type: typing.Optional[PatchCrmAttributesIdRequestObjectType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+            Attribute ID
+
+        label : typing.Optional[str]
+            Attribute display label
+
+        options_labels : typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]]
+            Updated labels for selectable options
+
+        object_type : typing.Optional[PatchCrmAttributesIdRequestObjectType]
+            The type of object the attribute belongs to, it cannot be updated after creation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from brevo import Brevo
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.companies.update_an_attribute(
+            id="id",
+        )
+        """
+        _response = self._raw_client.update_an_attribute(
+            id, label=label, options_labels=options_labels, object_type=object_type, request_options=request_options
         )
         return _response.data
 
@@ -956,6 +1033,97 @@ class AsyncCompaniesClient:
             description=description,
             options_labels=options_labels,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def delete_an_attribute(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+            Attribute ID
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.companies.delete_an_attribute(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_an_attribute(id, request_options=request_options)
+        return _response.data
+
+    async def update_an_attribute(
+        self,
+        id: str,
+        *,
+        label: typing.Optional[str] = OMIT,
+        options_labels: typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]] = OMIT,
+        object_type: typing.Optional[PatchCrmAttributesIdRequestObjectType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+            Attribute ID
+
+        label : typing.Optional[str]
+            Attribute display label
+
+        options_labels : typing.Optional[typing.Sequence[PatchCrmAttributesIdRequestOptionsLabelsItem]]
+            Updated labels for selectable options
+
+        object_type : typing.Optional[PatchCrmAttributesIdRequestObjectType]
+            The type of object the attribute belongs to, it cannot be updated after creation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.companies.update_an_attribute(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_an_attribute(
+            id, label=label, options_labels=options_labels, object_type=object_type, request_options=request_options
         )
         return _response.data
 

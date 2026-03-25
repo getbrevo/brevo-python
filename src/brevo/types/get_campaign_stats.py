@@ -11,13 +11,13 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class GetCampaignStats(UncheckedBaseModel):
     apple_mpp_opens: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="appleMppOpens"),
         pydantic.Field(
             alias="appleMppOpens",
             description="Numbers of times your email has been opened automatically through Apple MPP.",
         ),
-    ]
+    ] = None
     clickers: int = pydantic.Field()
     """
     Number of total clicks for the campaign
@@ -60,13 +60,13 @@ class GetCampaignStats(UncheckedBaseModel):
         ),
     ] = None
     opens_rate: typing_extensions.Annotated[
-        float,
+        typing.Optional[float],
         FieldMetadata(alias="opensRate"),
         pydantic.Field(
             alias="opensRate",
             description="Percentage of recipients who open the email out of your total number of recipients. Depending on your Campaign settings, they may include Apple MPP opens.",
         ),
-    ]
+    ] = None
     return_bounce: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="returnBounce"),

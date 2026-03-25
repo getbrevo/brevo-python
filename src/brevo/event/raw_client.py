@@ -11,7 +11,11 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
+from ..errors.internal_server_error import InternalServerError
 from ..errors.unauthorized_error import UnauthorizedError
+from ..types.batch_accepted_response import BatchAcceptedResponse
+from ..types.get_events_list import GetEventsList
+from .types.create_batch_events_request_item import CreateBatchEventsRequestItem
 from .types.create_event_request_contact_properties_value import CreateEventRequestContactPropertiesValue
 from .types.create_event_request_event_properties_value import CreateEventRequestEventPropertiesValue
 from .types.create_event_request_identifiers import CreateEventRequestIdentifiers
@@ -25,6 +29,122 @@ OMIT = typing.cast(typing.Any, ...)
 class RawEventClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def get_events(
+        self,
+        *,
+        contact_id: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
+        event_name: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        object_type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[GetEventsList]:
+        """
+        <Note>
+        This endpoint currently only supports custom events.
+        </Note>
+
+        Retrieve a list of events filtered by various criteria.
+
+        Parameters
+        ----------
+        contact_id : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by contact ID (repeatable)
+
+        event_name : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by event name (repeatable)
+
+        object_type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by object type (repeatable)
+
+        start_date : typing.Optional[str]
+            Mandatory if endDate is used. Start of date range (YYYY-MM-DD or RFC3339). Defaults to 6 months ago when omitted alongside endDate. Must be ≤ endDate.
+
+        end_date : typing.Optional[str]
+            Mandatory if startDate is used. End of date range (YYYY-MM-DD or RFC3339). Must be ≥ startDate.
+
+        limit : typing.Optional[int]
+            Max events to return. Default 100, min 1, max 10000.
+
+        offset : typing.Optional[int]
+            Events to skip for pagination. Default 0, min 0.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetEventsList]
+            List of events and total count for pagination
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "events",
+            method="GET",
+            params={
+                "contact_id": contact_id,
+                "event_name": event_name,
+                "object_type": object_type,
+                "startDate": start_date,
+                "endDate": end_date,
+                "limit": limit,
+                "offset": offset,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetEventsList,
+                    construct_type(
+                        type_=GetEventsList,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_event(
         self,
@@ -130,10 +250,200 @@ class RawEventClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def create_batch_events(
+        self,
+        *,
+        request: typing.Sequence[CreateBatchEventsRequestItem],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[BatchAcceptedResponse]:
+        """
+        Create multiple events to track contacts' interactions in a single request.
+
+        Parameters
+        ----------
+        request : typing.Sequence[CreateBatchEventsRequestItem]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[BatchAcceptedResponse]
+            Batch accepted - all events have been added to the processing queue
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "events/batch",
+            method="POST",
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=typing.Sequence[CreateBatchEventsRequestItem], direction="write"
+            ),
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BatchAcceptedResponse,
+                    construct_type(
+                        type_=BatchAcceptedResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawEventClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    async def get_events(
+        self,
+        *,
+        contact_id: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
+        event_name: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        object_type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[GetEventsList]:
+        """
+        <Note>
+        This endpoint currently only supports custom events.
+        </Note>
+
+        Retrieve a list of events filtered by various criteria.
+
+        Parameters
+        ----------
+        contact_id : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by contact ID (repeatable)
+
+        event_name : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by event name (repeatable)
+
+        object_type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by object type (repeatable)
+
+        start_date : typing.Optional[str]
+            Mandatory if endDate is used. Start of date range (YYYY-MM-DD or RFC3339). Defaults to 6 months ago when omitted alongside endDate. Must be ≤ endDate.
+
+        end_date : typing.Optional[str]
+            Mandatory if startDate is used. End of date range (YYYY-MM-DD or RFC3339). Must be ≥ startDate.
+
+        limit : typing.Optional[int]
+            Max events to return. Default 100, min 1, max 10000.
+
+        offset : typing.Optional[int]
+            Events to skip for pagination. Default 0, min 0.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetEventsList]
+            List of events and total count for pagination
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "events",
+            method="GET",
+            params={
+                "contact_id": contact_id,
+                "event_name": event_name,
+                "object_type": object_type,
+                "startDate": start_date,
+                "endDate": end_date,
+                "limit": limit,
+                "offset": offset,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetEventsList,
+                    construct_type(
+                        type_=GetEventsList,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_event(
         self,
@@ -208,6 +518,80 @@ class AsyncRawEventClient:
         try:
             if 200 <= _response.status_code < 300:
                 return AsyncHttpResponse(response=_response, data=None)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create_batch_events(
+        self,
+        *,
+        request: typing.Sequence[CreateBatchEventsRequestItem],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[BatchAcceptedResponse]:
+        """
+        Create multiple events to track contacts' interactions in a single request.
+
+        Parameters
+        ----------
+        request : typing.Sequence[CreateBatchEventsRequestItem]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[BatchAcceptedResponse]
+            Batch accepted - all events have been added to the processing queue
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "events/batch",
+            method="POST",
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=typing.Sequence[CreateBatchEventsRequestItem], direction="write"
+            ),
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BatchAcceptedResponse,
+                    construct_type(
+                        type_=BatchAcceptedResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 400:
                 raise BadRequestError(
                     headers=dict(_response.headers),

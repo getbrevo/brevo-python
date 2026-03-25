@@ -86,14 +86,6 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetContacts]:
         """
-        <Note title="Follow this format when passing a SMS phone number as an attribute">
-        Accepted Number Formats
-
-        91xxxxxxxxxx
-        +91xxxxxxxxxx
-        0091xxxxxxxxxx
-        </Note>
-
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -198,6 +190,8 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateContactResponse]:
         """
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
         Creates new contacts on Brevo. Contacts can be created by passing either - <br><br> 1. email address of the contact (email_id),  <br> 2. phone number of the contact (to be passed as "SMS" field in "attributes" along with proper country code), For example- {"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"} <br> 3. ext_id <br>
 
         Parameters
@@ -703,9 +697,7 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
-        <Note title="How to use attributes param?">
-        attributes param in this endpoint is an object containing key-value pairs where values can be either a string, integer, array, or boolean. You can create key-value pairs with these four datatypes. When a value is an array, it should be an array of strings.
-        </Note>
+        <Note title="How to use attributes param?">attributes param in this endpoint is an object containing key-value pairs where values can be either a string, integer, array, or boolean. You can create key-value pairs with these four datatypes. When a value is an array, it should be an array of strings.</Note>
 
         Parameters
         ----------
@@ -901,17 +893,11 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetFoldersResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint
-
+        <Note>Ongoing changes for this endpoint
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
         These are non breaking changes.
-
         The default value for the attributes will be 0.
-
-        The uniqueSubscribers field is deprecated
-        </Note>
+        The uniqueSubscribers field is deprecated</Note>
 
         Parameters
         ----------
@@ -1035,13 +1021,9 @@ class RawContactsClient:
         self, folder_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetFolder]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -1236,13 +1218,9 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetFolderListsResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -1444,13 +1422,9 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetListsResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -2099,14 +2073,8 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetContactInfoResponse]:
         """
-        <Note title="Follow this format when passing a SMS phone number as an attribute">
-        Accepted Number Formats
-
-        91xxxxxxxxxx
-        +91xxxxxxxxxx
-        0091xxxxxxxxxx
-        </Note>
-
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
         There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute <br><br>Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats ``https://developers.brevo.com/reference/contacts-7#getcontactstats`` endpoint with the appropriate date ranges.
 
         Parameters
@@ -2197,6 +2165,8 @@ class RawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx <br><br> If a blocklisted contact's email address is updated, it is going to remove that blocklisting from the contact and they will be resubscribed.</Note>
         There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
 
         Parameters
@@ -2480,14 +2450,6 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetContacts]:
         """
-        <Note title="Follow this format when passing a SMS phone number as an attribute">
-        Accepted Number Formats
-
-        91xxxxxxxxxx
-        +91xxxxxxxxxx
-        0091xxxxxxxxxx
-        </Note>
-
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -2592,6 +2554,8 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateContactResponse]:
         """
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
         Creates new contacts on Brevo. Contacts can be created by passing either - <br><br> 1. email address of the contact (email_id),  <br> 2. phone number of the contact (to be passed as "SMS" field in "attributes" along with proper country code), For example- {"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"} <br> 3. ext_id <br>
 
         Parameters
@@ -3097,9 +3061,7 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
-        <Note title="How to use attributes param?">
-        attributes param in this endpoint is an object containing key-value pairs where values can be either a string, integer, array, or boolean. You can create key-value pairs with these four datatypes. When a value is an array, it should be an array of strings.
-        </Note>
+        <Note title="How to use attributes param?">attributes param in this endpoint is an object containing key-value pairs where values can be either a string, integer, array, or boolean. You can create key-value pairs with these four datatypes. When a value is an array, it should be an array of strings.</Note>
 
         Parameters
         ----------
@@ -3295,17 +3257,11 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetFoldersResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint
-
+        <Note>Ongoing changes for this endpoint
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
         These are non breaking changes.
-
         The default value for the attributes will be 0.
-
-        The uniqueSubscribers field is deprecated
-        </Note>
+        The uniqueSubscribers field is deprecated</Note>
 
         Parameters
         ----------
@@ -3429,13 +3385,9 @@ class AsyncRawContactsClient:
         self, folder_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetFolder]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -3630,13 +3582,9 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetFolderListsResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -3838,13 +3786,9 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetListsResponse]:
         """
-        <Note>
-        Ongoing changes for this endpoint.
-
+        <Note>Ongoing changes for this endpoint.
         We're dropping support for the response attributes totalSubscribers and totalBlacklisted.
-
-        These are non breaking changes. The default value for the attributes will be 0.
-        </Note>
+        These are non breaking changes. The default value for the attributes will be 0.</Note>
 
         Parameters
         ----------
@@ -4493,14 +4437,8 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetContactInfoResponse]:
         """
-        <Note title="Follow this format when passing a SMS phone number as an attribute">
-        Accepted Number Formats
-
-        91xxxxxxxxxx
-        +91xxxxxxxxxx
-        0091xxxxxxxxxx
-        </Note>
-
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
         There are 2 ways to get a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute <br><br>Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats ``https://developers.brevo.com/reference/contacts-7#getcontactstats`` endpoint with the appropriate date ranges.
 
         Parameters
@@ -4591,6 +4529,8 @@ class AsyncRawContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        <Note>Follow this format when passing a "SMS" phone number as an attribute.
+        Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx <br><br> If a blocklisted contact's email address is updated, it is going to remove that blocklisting from the contact and they will be resubscribed.</Note>
         There are 2 ways to update a contact <br><br> Option 1- https://api.brevo.com/v3/contacts/{identifier} <br><br> Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType={} <br> <br> Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   <br><br> Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
 
         Parameters
