@@ -12,6 +12,7 @@ if typing.TYPE_CHECKING:
     )
     from .create_tier_for_tier_group_request_tier_rewards_item import CreateTierForTierGroupRequestTierRewardsItem
     from .create_tier_group_request_downgrade_strategy import CreateTierGroupRequestDowngradeStrategy
+    from .create_tier_group_request_meta import CreateTierGroupRequestMeta
     from .create_tier_group_request_upgrade_strategy import CreateTierGroupRequestUpgradeStrategy
     from .get_list_of_tier_groups_request_version import GetListOfTierGroupsRequestVersion
     from .get_list_of_tier_groups_response import GetListOfTierGroupsResponse
@@ -19,6 +20,7 @@ if typing.TYPE_CHECKING:
     from .get_loyalty_program_tier_response import GetLoyaltyProgramTierResponse
     from .get_tier_group_request_version import GetTierGroupRequestVersion
     from .update_tier_group_request_downgrade_strategy import UpdateTierGroupRequestDowngradeStrategy
+    from .update_tier_group_request_meta import UpdateTierGroupRequestMeta
     from .update_tier_group_request_upgrade_strategy import UpdateTierGroupRequestUpgradeStrategy
     from .update_tier_request_access_conditions_item import UpdateTierRequestAccessConditionsItem
     from .update_tier_request_tier_rewards_item import UpdateTierRequestTierRewardsItem
@@ -27,6 +29,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateTierForTierGroupRequestAccessConditionsItem": ".create_tier_for_tier_group_request_access_conditions_item",
     "CreateTierForTierGroupRequestTierRewardsItem": ".create_tier_for_tier_group_request_tier_rewards_item",
     "CreateTierGroupRequestDowngradeStrategy": ".create_tier_group_request_downgrade_strategy",
+    "CreateTierGroupRequestMeta": ".create_tier_group_request_meta",
     "CreateTierGroupRequestUpgradeStrategy": ".create_tier_group_request_upgrade_strategy",
     "GetListOfTierGroupsRequestVersion": ".get_list_of_tier_groups_request_version",
     "GetListOfTierGroupsResponse": ".get_list_of_tier_groups_response",
@@ -34,6 +37,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetLoyaltyProgramTierResponse": ".get_loyalty_program_tier_response",
     "GetTierGroupRequestVersion": ".get_tier_group_request_version",
     "UpdateTierGroupRequestDowngradeStrategy": ".update_tier_group_request_downgrade_strategy",
+    "UpdateTierGroupRequestMeta": ".update_tier_group_request_meta",
     "UpdateTierGroupRequestUpgradeStrategy": ".update_tier_group_request_upgrade_strategy",
     "UpdateTierRequestAccessConditionsItem": ".update_tier_request_access_conditions_item",
     "UpdateTierRequestTierRewardsItem": ".update_tier_request_tier_rewards_item",
@@ -66,6 +70,7 @@ __all__ = [
     "CreateTierForTierGroupRequestAccessConditionsItem",
     "CreateTierForTierGroupRequestTierRewardsItem",
     "CreateTierGroupRequestDowngradeStrategy",
+    "CreateTierGroupRequestMeta",
     "CreateTierGroupRequestUpgradeStrategy",
     "GetListOfTierGroupsRequestVersion",
     "GetListOfTierGroupsResponse",
@@ -73,6 +78,7 @@ __all__ = [
     "GetLoyaltyProgramTierResponse",
     "GetTierGroupRequestVersion",
     "UpdateTierGroupRequestDowngradeStrategy",
+    "UpdateTierGroupRequestMeta",
     "UpdateTierGroupRequestUpgradeStrategy",
     "UpdateTierRequestAccessConditionsItem",
     "UpdateTierRequestTierRewardsItem",

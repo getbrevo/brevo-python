@@ -164,6 +164,7 @@ class RawWebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
+            #### `reply`
 
         url : str
             URL of the webhook
@@ -268,22 +269,16 @@ class RawWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ExportWebhooksHistoryResponse]:
         """
-        <Note title="This feature is available for Professional and Enterprise plans">
-        To have it activated please send us a request and we will activate it for your account.
+        <Note>
+        This is an enterprise feature. Contact us to activate it for your account.
         </Note>
 
-        Exports webhook event history to CSV format for analysis and reporting.
+        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
 
-        Use this to:
-        - Generate comprehensive webhook event reports
-        - Analyze webhook delivery patterns and success rates
-        - Export event data for external analysis tools
-        - Create historical reports for compliance and auditing
-        - Track webhook performance and reliability metrics
-
-        Key information returned:
-        - Process ID for tracking export completion
-        - CSV file will be delivered to specified webhook URL
+        Use this endpoint to:
+        - Export webhook event history filtered by date range, event type, or email address
+        - Generate reports for compliance, auditing, or performance analysis
+        - Track delivery patterns and webhook reliability over time
 
         Parameters
         ----------
@@ -511,6 +506,7 @@ class RawWebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
+            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -777,6 +773,7 @@ class AsyncRawWebhooksClient:
             type **Marketing**  channel **SMS** ####
             `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
             `subscribe`,`skip`
+            #### `reply`
 
         url : str
             URL of the webhook
@@ -881,22 +878,16 @@ class AsyncRawWebhooksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ExportWebhooksHistoryResponse]:
         """
-        <Note title="This feature is available for Professional and Enterprise plans">
-        To have it activated please send us a request and we will activate it for your account.
+        <Note>
+        This is an enterprise feature. Contact us to activate it for your account.
         </Note>
 
-        Exports webhook event history to CSV format for analysis and reporting.
+        Submits a request to export webhook event history as a CSV file. The download link is sent to the `notifyURL` you provide in the request body.
 
-        Use this to:
-        - Generate comprehensive webhook event reports
-        - Analyze webhook delivery patterns and success rates
-        - Export event data for external analysis tools
-        - Create historical reports for compliance and auditing
-        - Track webhook performance and reliability metrics
-
-        Key information returned:
-        - Process ID for tracking export completion
-        - CSV file will be delivered to specified webhook URL
+        Use this endpoint to:
+        - Export webhook event history filtered by date range, event type, or email address
+        - Generate reports for compliance, auditing, or performance analysis
+        - Track delivery patterns and webhook reliability over time
 
         Parameters
         ----------
@@ -1124,6 +1115,7 @@ class AsyncRawWebhooksClient:
             #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
             `unsubscribed`, `listAddition` & `delivered` - Possible values
             for **Inbound** type webhook: #### `inboundEmailProcessed`
+            #### `reply`
 
         headers : typing.Optional[typing.Sequence[UpdateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks

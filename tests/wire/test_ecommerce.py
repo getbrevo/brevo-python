@@ -133,7 +133,6 @@ def test_ecommerce_create_order() -> None:
             OrderProductsItem(
                 price=99.99,
                 product_id="P1",
-                quantity=10,
             )
         ],
         status="completed",
@@ -156,7 +155,6 @@ def test_ecommerce_create_batch_order() -> None:
                     OrderProductsItem(
                         price=99.99,
                         product_id="P1",
-                        quantity=10,
                     )
                 ],
                 status="completed",

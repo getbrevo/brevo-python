@@ -10,6 +10,11 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class GetProductDetails(UncheckedBaseModel):
+    brand: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Brand of the product
+    """
+
     categories: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Category ID-s of the product
@@ -22,6 +27,11 @@ class GetProductDetails(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the product (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    description: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Description of the product
+    """
+
     id: str = pydantic.Field()
     """
     Product ID for which you requested the details

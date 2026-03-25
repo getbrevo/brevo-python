@@ -13,6 +13,11 @@ from .create_update_batch_products_request_products_item_meta_info_value import 
 
 
 class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
+    brand: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Brand of the product
+    """
+
     categories: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Category ID-s of the product
@@ -26,6 +31,11 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
             description="UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database",
         ),
     ] = None
+    description: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Description of the product
+    """
+
     id: str = pydantic.Field()
     """
     Product ID for which you requested the details
@@ -46,7 +56,7 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="metaInfo"),
         pydantic.Field(
             alias="metaInfo",
-            description="Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.",
+            description="Meta data of product such as description, vendor, producer, stock level. The total characters of cumulative metaInfo shall not exceed **20000 characters**.",
         ),
     ] = None
     name: str = pydantic.Field()

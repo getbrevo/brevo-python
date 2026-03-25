@@ -13,6 +13,7 @@ from .types.create_tier_for_tier_group_request_access_conditions_item import (
 )
 from .types.create_tier_for_tier_group_request_tier_rewards_item import CreateTierForTierGroupRequestTierRewardsItem
 from .types.create_tier_group_request_downgrade_strategy import CreateTierGroupRequestDowngradeStrategy
+from .types.create_tier_group_request_meta import CreateTierGroupRequestMeta
 from .types.create_tier_group_request_upgrade_strategy import CreateTierGroupRequestUpgradeStrategy
 from .types.get_list_of_tier_groups_request_version import GetListOfTierGroupsRequestVersion
 from .types.get_list_of_tier_groups_response import GetListOfTierGroupsResponse
@@ -20,6 +21,7 @@ from .types.get_loyalty_program_tier_request_version import GetLoyaltyProgramTie
 from .types.get_loyalty_program_tier_response import GetLoyaltyProgramTierResponse
 from .types.get_tier_group_request_version import GetTierGroupRequestVersion
 from .types.update_tier_group_request_downgrade_strategy import UpdateTierGroupRequestDowngradeStrategy
+from .types.update_tier_group_request_meta import UpdateTierGroupRequestMeta
 from .types.update_tier_group_request_upgrade_strategy import UpdateTierGroupRequestUpgradeStrategy
 from .types.update_tier_request_access_conditions_item import UpdateTierRequestAccessConditionsItem
 from .types.update_tier_request_tier_rewards_item import UpdateTierRequestTierRewardsItem
@@ -130,6 +132,7 @@ class TierClient:
         *,
         name: str,
         downgrade_strategy: typing.Optional[CreateTierGroupRequestDowngradeStrategy] = OMIT,
+        meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -147,6 +150,9 @@ class TierClient:
 
         downgrade_strategy : typing.Optional[CreateTierGroupRequestDowngradeStrategy]
             Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+
+        meta : typing.Optional[CreateTierGroupRequestMeta]
+            Additional metadata for the tier group.
 
         tier_order : typing.Optional[typing.Sequence[str]]
             Order of the tiers in the group in ascending order
@@ -178,6 +184,7 @@ class TierClient:
             pid,
             name=name,
             downgrade_strategy=downgrade_strategy,
+            meta=meta,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
             request_options=request_options,
@@ -238,6 +245,7 @@ class TierClient:
         name: str,
         tier_order: typing.Sequence[str],
         upgrade_strategy: UpdateTierGroupRequestUpgradeStrategy,
+        meta: typing.Optional[UpdateTierGroupRequestMeta] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TierGroup:
         """
@@ -262,6 +270,9 @@ class TierClient:
 
         upgrade_strategy : UpdateTierGroupRequestUpgradeStrategy
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
+
+        meta : typing.Optional[UpdateTierGroupRequestMeta]
+            Additional metadata for the tier group.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -294,6 +305,7 @@ class TierClient:
             name=name,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
+            meta=meta,
             request_options=request_options,
         )
         return _response.data
@@ -663,6 +675,7 @@ class AsyncTierClient:
         *,
         name: str,
         downgrade_strategy: typing.Optional[CreateTierGroupRequestDowngradeStrategy] = OMIT,
+        meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -680,6 +693,9 @@ class AsyncTierClient:
 
         downgrade_strategy : typing.Optional[CreateTierGroupRequestDowngradeStrategy]
             Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+
+        meta : typing.Optional[CreateTierGroupRequestMeta]
+            Additional metadata for the tier group.
 
         tier_order : typing.Optional[typing.Sequence[str]]
             Order of the tiers in the group in ascending order
@@ -719,6 +735,7 @@ class AsyncTierClient:
             pid,
             name=name,
             downgrade_strategy=downgrade_strategy,
+            meta=meta,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
             request_options=request_options,
@@ -787,6 +804,7 @@ class AsyncTierClient:
         name: str,
         tier_order: typing.Sequence[str],
         upgrade_strategy: UpdateTierGroupRequestUpgradeStrategy,
+        meta: typing.Optional[UpdateTierGroupRequestMeta] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TierGroup:
         """
@@ -811,6 +829,9 @@ class AsyncTierClient:
 
         upgrade_strategy : UpdateTierGroupRequestUpgradeStrategy
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
+
+        meta : typing.Optional[UpdateTierGroupRequestMeta]
+            Additional metadata for the tier group.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -851,6 +872,7 @@ class AsyncTierClient:
             name=name,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
+            meta=meta,
             request_options=request_options,
         )
         return _response.data
