@@ -1201,8 +1201,10 @@ class RawEcommerceClient:
         *,
         id: str,
         name: str,
+        brand: typing.Optional[str] = OMIT,
         categories: typing.Optional[typing.Sequence[str]] = OMIT,
         deleted_at: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
         image_url: typing.Optional[str] = OMIT,
         is_deleted: typing.Optional[bool] = OMIT,
         meta_info: typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]] = OMIT,
@@ -1223,11 +1225,17 @@ class RawEcommerceClient:
         name : str
             Mandatory in case of creation**. Name of the product for which you requested the details
 
+        brand : typing.Optional[str]
+            Brand of the product
+
         categories : typing.Optional[typing.Sequence[str]]
             Category ID-s of the product
 
         deleted_at : typing.Optional[str]
             UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database
+
+        description : typing.Optional[str]
+            Description of the product
 
         image_url : typing.Optional[str]
             Absolute URL to the cover image of the product
@@ -1236,7 +1244,7 @@ class RawEcommerceClient:
             product deleted from the shop's database
 
         meta_info : typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]]
-            Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.
+            Meta data of product such as description, vendor, producer, stock level. The total characters of cumulative metaInfo shall not exceed **20000 characters**.
 
         parent_id : typing.Optional[str]
             Parent product id of the product
@@ -1268,8 +1276,10 @@ class RawEcommerceClient:
             "products",
             method="POST",
             json={
+                "brand": brand,
                 "categories": categories,
                 "deletedAt": deleted_at,
+                "description": description,
                 "id": id,
                 "imageUrl": image_url,
                 "isDeleted": is_deleted,
@@ -2691,8 +2701,10 @@ class AsyncRawEcommerceClient:
         *,
         id: str,
         name: str,
+        brand: typing.Optional[str] = OMIT,
         categories: typing.Optional[typing.Sequence[str]] = OMIT,
         deleted_at: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
         image_url: typing.Optional[str] = OMIT,
         is_deleted: typing.Optional[bool] = OMIT,
         meta_info: typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]] = OMIT,
@@ -2713,11 +2725,17 @@ class AsyncRawEcommerceClient:
         name : str
             Mandatory in case of creation**. Name of the product for which you requested the details
 
+        brand : typing.Optional[str]
+            Brand of the product
+
         categories : typing.Optional[typing.Sequence[str]]
             Category ID-s of the product
 
         deleted_at : typing.Optional[str]
             UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database
+
+        description : typing.Optional[str]
+            Description of the product
 
         image_url : typing.Optional[str]
             Absolute URL to the cover image of the product
@@ -2726,7 +2744,7 @@ class AsyncRawEcommerceClient:
             product deleted from the shop's database
 
         meta_info : typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]]
-            Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20.
+            Meta data of product such as description, vendor, producer, stock level. The total characters of cumulative metaInfo shall not exceed **20000 characters**.
 
         parent_id : typing.Optional[str]
             Parent product id of the product
@@ -2758,8 +2776,10 @@ class AsyncRawEcommerceClient:
             "products",
             method="POST",
             json={
+                "brand": brand,
                 "categories": categories,
                 "deletedAt": deleted_at,
+                "description": description,
                 "id": id,
                 "imageUrl": image_url,
                 "isDeleted": is_deleted,

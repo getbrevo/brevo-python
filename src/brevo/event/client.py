@@ -4,7 +4,10 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.batch_accepted_response import BatchAcceptedResponse
+from ..types.get_events_list import GetEventsList
 from .raw_client import AsyncRawEventClient, RawEventClient
+from .types.create_batch_events_request_item import CreateBatchEventsRequestItem
 from .types.create_event_request_contact_properties_value import CreateEventRequestContactPropertiesValue
 from .types.create_event_request_event_properties_value import CreateEventRequestEventPropertiesValue
 from .types.create_event_request_identifiers import CreateEventRequestIdentifiers
@@ -28,6 +31,77 @@ class EventClient:
         RawEventClient
         """
         return self._raw_client
+
+    def get_events(
+        self,
+        *,
+        contact_id: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
+        event_name: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        object_type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetEventsList:
+        """
+        <Note>
+        This endpoint currently only supports custom events.
+        </Note>
+
+        Retrieve a list of events filtered by various criteria.
+
+        Parameters
+        ----------
+        contact_id : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by contact ID (repeatable)
+
+        event_name : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by event name (repeatable)
+
+        object_type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by object type (repeatable)
+
+        start_date : typing.Optional[str]
+            Mandatory if endDate is used. Start of date range (YYYY-MM-DD or RFC3339). Defaults to 6 months ago when omitted alongside endDate. Must be ≤ endDate.
+
+        end_date : typing.Optional[str]
+            Mandatory if startDate is used. End of date range (YYYY-MM-DD or RFC3339). Must be ≥ startDate.
+
+        limit : typing.Optional[int]
+            Max events to return. Default 100, min 1, max 10000.
+
+        offset : typing.Optional[int]
+            Events to skip for pagination. Default 0, min 0.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetEventsList
+            List of events and total count for pagination
+
+        Examples
+        --------
+        from brevo import Brevo
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.event.get_events()
+        """
+        _response = self._raw_client.get_events(
+            contact_id=contact_id,
+            event_name=event_name,
+            object_type=object_type,
+            start_date=start_date,
+            end_date=end_date,
+            limit=limit,
+            offset=offset,
+            request_options=request_options,
+        )
+        return _response.data
 
     def create_event(
         self,
@@ -94,6 +168,50 @@ class EventClient:
         )
         return _response.data
 
+    def create_batch_events(
+        self,
+        *,
+        request: typing.Sequence[CreateBatchEventsRequestItem],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BatchAcceptedResponse:
+        """
+        Create multiple events to track contacts' interactions in a single request.
+
+        Parameters
+        ----------
+        request : typing.Sequence[CreateBatchEventsRequestItem]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BatchAcceptedResponse
+            Batch accepted - all events have been added to the processing queue
+
+        Examples
+        --------
+        from brevo import Brevo
+        from brevo.event import (
+            CreateBatchEventsRequestItem,
+            CreateBatchEventsRequestItemIdentifiers,
+        )
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.event.create_batch_events(
+            request=[
+                CreateBatchEventsRequestItem(
+                    event_name="order_created",
+                    identifiers=CreateBatchEventsRequestItemIdentifiers(),
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.create_batch_events(request=request, request_options=request_options)
+        return _response.data
+
 
 class AsyncEventClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -109,6 +227,85 @@ class AsyncEventClient:
         AsyncRawEventClient
         """
         return self._raw_client
+
+    async def get_events(
+        self,
+        *,
+        contact_id: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
+        event_name: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        object_type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetEventsList:
+        """
+        <Note>
+        This endpoint currently only supports custom events.
+        </Note>
+
+        Retrieve a list of events filtered by various criteria.
+
+        Parameters
+        ----------
+        contact_id : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by contact ID (repeatable)
+
+        event_name : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by event name (repeatable)
+
+        object_type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Filter by object type (repeatable)
+
+        start_date : typing.Optional[str]
+            Mandatory if endDate is used. Start of date range (YYYY-MM-DD or RFC3339). Defaults to 6 months ago when omitted alongside endDate. Must be ≤ endDate.
+
+        end_date : typing.Optional[str]
+            Mandatory if startDate is used. End of date range (YYYY-MM-DD or RFC3339). Must be ≥ startDate.
+
+        limit : typing.Optional[int]
+            Max events to return. Default 100, min 1, max 10000.
+
+        offset : typing.Optional[int]
+            Events to skip for pagination. Default 0, min 0.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetEventsList
+            List of events and total count for pagination
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.event.get_events()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_events(
+            contact_id=contact_id,
+            event_name=event_name,
+            object_type=object_type,
+            start_date=start_date,
+            end_date=end_date,
+            limit=limit,
+            offset=offset,
+            request_options=request_options,
+        )
+        return _response.data
 
     async def create_event(
         self,
@@ -181,4 +378,56 @@ class AsyncEventClient:
             object=object,
             request_options=request_options,
         )
+        return _response.data
+
+    async def create_batch_events(
+        self,
+        *,
+        request: typing.Sequence[CreateBatchEventsRequestItem],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BatchAcceptedResponse:
+        """
+        Create multiple events to track contacts' interactions in a single request.
+
+        Parameters
+        ----------
+        request : typing.Sequence[CreateBatchEventsRequestItem]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BatchAcceptedResponse
+            Batch accepted - all events have been added to the processing queue
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+        from brevo.event import (
+            CreateBatchEventsRequestItem,
+            CreateBatchEventsRequestItemIdentifiers,
+        )
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.event.create_batch_events(
+                request=[
+                    CreateBatchEventsRequestItem(
+                        event_name="order_created",
+                        identifiers=CreateBatchEventsRequestItemIdentifiers(),
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_batch_events(request=request, request_options=request_options)
         return _response.data
