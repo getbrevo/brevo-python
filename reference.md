@@ -6261,7 +6261,7 @@ client.contacts.get_contacts()
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_contact</a>(...) -> CreateContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="src/brevo/contacts/client.py">create_contact</a>(...) -> typing.Optional[CreateContactResponse]</code></summary>
 <dl>
 <dd>
 
@@ -9639,7 +9639,7 @@ client.ecommerce.get_categories()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_category</a>(...) -> CreateUpdateCategoryResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_category</a>(...) -> typing.Optional[CreateUpdateCategoryResponse]</code></summary>
 <dl>
 <dd>
 
@@ -10735,7 +10735,7 @@ client.ecommerce.get_products()
 </dl>
 </details>
 
-<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_product</a>(...) -> CreateUpdateProductResponse</code></summary>
+<details><summary><code>client.ecommerce.<a href="src/brevo/ecommerce/client.py">create_update_product</a>(...) -> typing.Optional[CreateUpdateProductResponse]</code></summary>
 <dl>
 <dd>
 

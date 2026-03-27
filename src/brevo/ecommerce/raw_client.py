@@ -168,7 +168,7 @@ class RawEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateUpdateCategoryResponse]:
+    ) -> HttpResponse[typing.Optional[CreateUpdateCategoryResponse]]:
         """
         Parameters
         ----------
@@ -195,7 +195,7 @@ class RawEcommerceClient:
 
         Returns
         -------
-        HttpResponse[CreateUpdateCategoryResponse]
+        HttpResponse[typing.Optional[CreateUpdateCategoryResponse]]
             Category created
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -216,11 +216,13 @@ class RawEcommerceClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateUpdateCategoryResponse,
+                    typing.Optional[CreateUpdateCategoryResponse],
                     construct_type(
-                        type_=CreateUpdateCategoryResponse,  # type: ignore
+                        type_=typing.Optional[CreateUpdateCategoryResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1215,7 +1217,7 @@ class RawEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateUpdateProductResponse]:
+    ) -> HttpResponse[typing.Optional[CreateUpdateProductResponse]]:
         """
         Parameters
         ----------
@@ -1269,7 +1271,7 @@ class RawEcommerceClient:
 
         Returns
         -------
-        HttpResponse[CreateUpdateProductResponse]
+        HttpResponse[typing.Optional[CreateUpdateProductResponse]]
             Product created
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -1303,11 +1305,13 @@ class RawEcommerceClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateUpdateProductResponse,
+                    typing.Optional[CreateUpdateProductResponse],
                     construct_type(
-                        type_=CreateUpdateProductResponse,  # type: ignore
+                        type_=typing.Optional[CreateUpdateProductResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1668,7 +1672,7 @@ class AsyncRawEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateUpdateCategoryResponse]:
+    ) -> AsyncHttpResponse[typing.Optional[CreateUpdateCategoryResponse]]:
         """
         Parameters
         ----------
@@ -1695,7 +1699,7 @@ class AsyncRawEcommerceClient:
 
         Returns
         -------
-        AsyncHttpResponse[CreateUpdateCategoryResponse]
+        AsyncHttpResponse[typing.Optional[CreateUpdateCategoryResponse]]
             Category created
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1716,11 +1720,13 @@ class AsyncRawEcommerceClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateUpdateCategoryResponse,
+                    typing.Optional[CreateUpdateCategoryResponse],
                     construct_type(
-                        type_=CreateUpdateCategoryResponse,  # type: ignore
+                        type_=typing.Optional[CreateUpdateCategoryResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2715,7 +2721,7 @@ class AsyncRawEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateUpdateProductResponse]:
+    ) -> AsyncHttpResponse[typing.Optional[CreateUpdateProductResponse]]:
         """
         Parameters
         ----------
@@ -2769,7 +2775,7 @@ class AsyncRawEcommerceClient:
 
         Returns
         -------
-        AsyncHttpResponse[CreateUpdateProductResponse]
+        AsyncHttpResponse[typing.Optional[CreateUpdateProductResponse]]
             Product created
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -2803,11 +2809,13 @@ class AsyncRawEcommerceClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateUpdateProductResponse,
+                    typing.Optional[CreateUpdateProductResponse],
                     construct_type(
-                        type_=CreateUpdateProductResponse,  # type: ignore
+                        type_=typing.Optional[CreateUpdateProductResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )

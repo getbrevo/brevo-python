@@ -188,7 +188,7 @@ class RawContactsClient:
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateContactResponse]:
+    ) -> HttpResponse[typing.Optional[CreateContactResponse]]:
         """
         <Note>Follow this format when passing a "SMS" phone number as an attribute.
         Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
@@ -225,7 +225,7 @@ class RawContactsClient:
 
         Returns
         -------
-        HttpResponse[CreateContactResponse]
+        HttpResponse[typing.Optional[CreateContactResponse]]
             Contact created
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -252,11 +252,13 @@ class RawContactsClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateContactResponse,
+                    typing.Optional[CreateContactResponse],
                     construct_type(
-                        type_=CreateContactResponse,  # type: ignore
+                        type_=typing.Optional[CreateContactResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2552,7 +2554,7 @@ class AsyncRawContactsClient:
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateContactResponse]:
+    ) -> AsyncHttpResponse[typing.Optional[CreateContactResponse]]:
         """
         <Note>Follow this format when passing a "SMS" phone number as an attribute.
         Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
@@ -2589,7 +2591,7 @@ class AsyncRawContactsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CreateContactResponse]
+        AsyncHttpResponse[typing.Optional[CreateContactResponse]]
             Contact created
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -2616,11 +2618,13 @@ class AsyncRawContactsClient:
             omit=OMIT,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateContactResponse,
+                    typing.Optional[CreateContactResponse],
                     construct_type(
-                        type_=CreateContactResponse,  # type: ignore
+                        type_=typing.Optional[CreateContactResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )

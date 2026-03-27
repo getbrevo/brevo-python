@@ -151,7 +151,7 @@ class ContactsClient:
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateContactResponse:
+    ) -> typing.Optional[CreateContactResponse]:
         """
         <Note>Follow this format when passing a "SMS" phone number as an attribute.
         Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
@@ -188,7 +188,7 @@ class ContactsClient:
 
         Returns
         -------
-        CreateContactResponse
+        typing.Optional[CreateContactResponse]
             Contact created
 
         Examples
@@ -1627,7 +1627,7 @@ class AsyncContactsClient:
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateContactResponse:
+    ) -> typing.Optional[CreateContactResponse]:
         """
         <Note>Follow this format when passing a "SMS" phone number as an attribute.
         Accepted Number Formats 91xxxxxxxxxx +91xxxxxxxxxx 0091xxxxxxxxxx</Note>
@@ -1664,7 +1664,7 @@ class AsyncContactsClient:
 
         Returns
         -------
-        CreateContactResponse
+        typing.Optional[CreateContactResponse]
             Contact created
 
         Examples
