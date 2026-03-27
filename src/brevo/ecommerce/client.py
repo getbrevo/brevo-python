@@ -142,7 +142,7 @@ class EcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateUpdateCategoryResponse:
+    ) -> typing.Optional[CreateUpdateCategoryResponse]:
         """
         Parameters
         ----------
@@ -169,7 +169,7 @@ class EcommerceClient:
 
         Returns
         -------
-        CreateUpdateCategoryResponse
+        typing.Optional[CreateUpdateCategoryResponse]
             Category created
 
         Examples
@@ -843,7 +843,7 @@ class EcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateUpdateProductResponse:
+    ) -> typing.Optional[CreateUpdateProductResponse]:
         """
         Parameters
         ----------
@@ -897,7 +897,7 @@ class EcommerceClient:
 
         Returns
         -------
-        CreateUpdateProductResponse
+        typing.Optional[CreateUpdateProductResponse]
             Product created
 
         Examples
@@ -1151,7 +1151,7 @@ class AsyncEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateUpdateCategoryResponse:
+    ) -> typing.Optional[CreateUpdateCategoryResponse]:
         """
         Parameters
         ----------
@@ -1178,7 +1178,7 @@ class AsyncEcommerceClient:
 
         Returns
         -------
-        CreateUpdateCategoryResponse
+        typing.Optional[CreateUpdateCategoryResponse]
             Category created
 
         Examples
@@ -1955,7 +1955,7 @@ class AsyncEcommerceClient:
         update_enabled: typing.Optional[bool] = OMIT,
         url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateUpdateProductResponse:
+    ) -> typing.Optional[CreateUpdateProductResponse]:
         """
         Parameters
         ----------
@@ -2009,7 +2009,7 @@ class AsyncEcommerceClient:
 
         Returns
         -------
-        CreateUpdateProductResponse
+        typing.Optional[CreateUpdateProductResponse]
             Product created
 
         Examples
