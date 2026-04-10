@@ -3,5 +3,5 @@
 import typing
 
 GetProcessResponseStatus = typing.Union[
-    typing.Literal["queued", "processing", "completed", "failed", "cancelled"], typing.Any
+    typing.Literal["queued", "in_process", "processing", "completed", "failed", "cancelled"], typing.Any
 ]
