@@ -3,19 +3,19 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class CreateBatchOrderResponse(UncheckedBaseModel):
+    batch_id: typing_extensions.Annotated[
+        float, FieldMetadata(alias="batchId"), pydantic.Field(alias="batchId", description="Batch ID of the request")
+    ]
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of orders
-    """
-
-    batch_id: float = pydantic.Field()
-    """
-    Batch ID of the request
     """
 
     if IS_PYDANTIC_V2:

@@ -27,9 +27,9 @@ class GetProcessResponseInfoImport(UncheckedBaseModel):
     Number of duplicate external IDs
     """
 
-    duplicate_email_id: typing.Optional[int] = pydantic.Field(default=None)
+    duplicate_email_id: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Number of duplicate email IDs
+    URL to CSV file containing duplicate email IDs, or null if none
     """
 
     duplicate_phone_id: typing.Optional[int] = pydantic.Field(default=None)

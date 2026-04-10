@@ -2,4 +2,4 @@
 
 import typing
 
-CreateEventRequestContactPropertiesValue = typing.Union[str, int]
+CreateEventRequestContactPropertiesValue = typing.Union[str, int, bool]

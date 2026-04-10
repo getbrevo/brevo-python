@@ -2,4 +2,6 @@
 
 import typing
 
-CreateEventRequestEventPropertiesValue = typing.Union[str, int, typing.Dict[str, typing.Any], typing.List[typing.Any]]
+CreateEventRequestEventPropertiesValue = typing.Union[
+    str, int, bool, typing.Dict[str, typing.Any], typing.List[typing.Any]
+]

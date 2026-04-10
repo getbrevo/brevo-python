@@ -2,4 +2,4 @@
 
 import typing
 
-UpdateContactRequestAttributesValue = typing.Union[float, str, bool, typing.List[str]]
+UpdateContactRequestAttributesValue = typing.Union[float, int, str, bool, typing.List[str]]

@@ -2,4 +2,4 @@
 
 import typing
 
-CreateBatchEventsRequestItemContactPropertiesValue = typing.Union[str, int]
+CreateBatchEventsRequestItemContactPropertiesValue = typing.Union[str, int, bool]
