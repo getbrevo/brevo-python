@@ -11,23 +11,24 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class ConversationsMessageFileImageInfo(UncheckedBaseModel):
     """
-    image info is passed in case the file is an image
+    Image info, present when the file is an image.
+    """
+
+    width: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Width of the image in pixels.
     """
 
     height: typing.Optional[int] = pydantic.Field(default=None)
     """
-    height of the image
+    Height of the image in pixels.
     """
 
-    preview_url: typing_extensions.Annotated[
+    preview_link: typing_extensions.Annotated[
         typing.Optional[str],
-        FieldMetadata(alias="previewUrl"),
-        pydantic.Field(alias="previewUrl", description="URL of the preview"),
+        FieldMetadata(alias="previewLink"),
+        pydantic.Field(alias="previewLink", description="URL of the image preview."),
     ] = None
-    width: typing.Optional[int] = pydantic.Field(default=None)
-    """
-    Width of the image
-    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

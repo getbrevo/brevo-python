@@ -11,11 +11,6 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class CreateRewardResponse(UncheckedBaseModel):
-    created_at: typing_extensions.Annotated[
-        typing.Optional[dt.datetime],
-        FieldMetadata(alias="createdAt"),
-        pydantic.Field(alias="createdAt", description="Timestamp when the reward was created"),
-    ] = None
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the reward
@@ -24,9 +19,7 @@ class CreateRewardResponse(UncheckedBaseModel):
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
-        pydantic.Field(
-            alias="loyaltyProgramId", description="Id of the loyalty program to which the current reward belongs to"
-        ),
+        pydantic.Field(alias="loyaltyProgramId", description="Loyalty program to which the reward belongs"),
     ] = None
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -36,22 +29,27 @@ class CreateRewardResponse(UncheckedBaseModel):
     public_description: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicDescription"),
-        pydantic.Field(alias="publicDescription", description="Public description for the reward"),
+        pydantic.Field(alias="publicDescription", description="Public description of the reward"),
     ] = None
     public_image: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicImage"),
-        pydantic.Field(alias="publicImage", description="Public Image for the reward"),
+        pydantic.Field(alias="publicImage", description="Public image URL of the reward"),
     ] = None
     public_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicName"),
-        pydantic.Field(alias="publicName", description="Public name for the reward"),
+        pydantic.Field(alias="publicName", description="Public name of the reward"),
+    ] = None
+    created_at: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="createdAt"),
+        pydantic.Field(alias="createdAt", description="Timestamp when the reward was created"),
     ] = None
     updated_at: typing_extensions.Annotated[
-        typing.Optional[str],
+        typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
-        pydantic.Field(alias="updatedAt", description="Timestamp for when this reward was last updated."),
+        pydantic.Field(alias="updatedAt", description="Timestamp when the reward was last updated"),
     ] = None
 
     if IS_PYDANTIC_V2:

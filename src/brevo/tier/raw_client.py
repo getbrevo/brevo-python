@@ -27,8 +27,10 @@ from .types.create_tier_for_tier_group_request_access_conditions_item import (
     CreateTierForTierGroupRequestAccessConditionsItem,
 )
 from .types.create_tier_for_tier_group_request_tier_rewards_item import CreateTierForTierGroupRequestTierRewardsItem
+from .types.create_tier_group_request_downgrade_schedule import CreateTierGroupRequestDowngradeSchedule
 from .types.create_tier_group_request_downgrade_strategy import CreateTierGroupRequestDowngradeStrategy
 from .types.create_tier_group_request_meta import CreateTierGroupRequestMeta
+from .types.create_tier_group_request_upgrade_schedule import CreateTierGroupRequestUpgradeSchedule
 from .types.create_tier_group_request_upgrade_strategy import CreateTierGroupRequestUpgradeStrategy
 from .types.get_list_of_tier_groups_request_version import GetListOfTierGroupsRequestVersion
 from .types.get_list_of_tier_groups_response import GetListOfTierGroupsResponse
@@ -293,6 +295,8 @@ class RawTierClient:
         meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
+        upgrade_schedule: typing.Optional[CreateTierGroupRequestUpgradeSchedule] = OMIT,
+        downgrade_schedule: typing.Optional[CreateTierGroupRequestDowngradeSchedule] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[TierGroup]:
         """
@@ -318,13 +322,19 @@ class RawTierClient:
         upgrade_strategy : typing.Optional[CreateTierGroupRequestUpgradeStrategy]
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
 
+        upgrade_schedule : typing.Optional[CreateTierGroupRequestUpgradeSchedule]
+            Schedule configuration for tier upgrades. Required when upgradeStrategy is set to a schedule-based strategy.
+
+        downgrade_schedule : typing.Optional[CreateTierGroupRequestDowngradeSchedule]
+            Schedule configuration for tier downgrades. Required when downgradeStrategy is set to a schedule-based strategy.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
         HttpResponse[TierGroup]
-            Tier group Successfully created
+            Tier group successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
             f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
@@ -337,6 +347,12 @@ class RawTierClient:
                 ),
                 "tierOrder": tier_order,
                 "upgradeStrategy": upgrade_strategy,
+                "upgradeSchedule": convert_and_respect_annotation_metadata(
+                    object_=upgrade_schedule, annotation=CreateTierGroupRequestUpgradeSchedule, direction="write"
+                ),
+                "downgradeSchedule": convert_and_respect_annotation_metadata(
+                    object_=downgrade_schedule, annotation=CreateTierGroupRequestDowngradeSchedule, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -1506,6 +1522,8 @@ class AsyncRawTierClient:
         meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
+        upgrade_schedule: typing.Optional[CreateTierGroupRequestUpgradeSchedule] = OMIT,
+        downgrade_schedule: typing.Optional[CreateTierGroupRequestDowngradeSchedule] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[TierGroup]:
         """
@@ -1531,13 +1549,19 @@ class AsyncRawTierClient:
         upgrade_strategy : typing.Optional[CreateTierGroupRequestUpgradeStrategy]
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
 
+        upgrade_schedule : typing.Optional[CreateTierGroupRequestUpgradeSchedule]
+            Schedule configuration for tier upgrades. Required when upgradeStrategy is set to a schedule-based strategy.
+
+        downgrade_schedule : typing.Optional[CreateTierGroupRequestDowngradeSchedule]
+            Schedule configuration for tier downgrades. Required when downgradeStrategy is set to a schedule-based strategy.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
         AsyncHttpResponse[TierGroup]
-            Tier group Successfully created
+            Tier group successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
@@ -1550,6 +1574,12 @@ class AsyncRawTierClient:
                 ),
                 "tierOrder": tier_order,
                 "upgradeStrategy": upgrade_strategy,
+                "upgradeSchedule": convert_and_respect_annotation_metadata(
+                    object_=upgrade_schedule, annotation=CreateTierGroupRequestUpgradeSchedule, direction="write"
+                ),
+                "downgradeSchedule": convert_and_respect_annotation_metadata(
+                    object_=downgrade_schedule, annotation=CreateTierGroupRequestDowngradeSchedule, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",

@@ -2,4 +2,4 @@
 
 import typing
 
-CreateWebhookRequestChannel = typing.Union[typing.Literal["sms", "email"], typing.Any]
+CreateWebhookRequestChannel = typing.Union[typing.Literal["email", "sms"], typing.Any]

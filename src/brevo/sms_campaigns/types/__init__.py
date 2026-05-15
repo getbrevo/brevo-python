@@ -9,6 +9,11 @@ if typing.TYPE_CHECKING:
     from .create_sms_campaign_request_recipients import CreateSmsCampaignRequestRecipients
     from .create_sms_campaign_response import CreateSmsCampaignResponse
     from .get_sms_campaign_response import GetSmsCampaignResponse
+    from .get_sms_campaign_response_recipients import GetSmsCampaignResponseRecipients
+    from .get_sms_campaign_response_recipients_exclusion_lists_item import (
+        GetSmsCampaignResponseRecipientsExclusionListsItem,
+    )
+    from .get_sms_campaign_response_recipients_lists_item import GetSmsCampaignResponseRecipientsListsItem
     from .get_sms_campaign_response_status import GetSmsCampaignResponseStatus
     from .get_sms_campaigns_request_sort import GetSmsCampaignsRequestSort
     from .get_sms_campaigns_request_status import GetSmsCampaignsRequestStatus
@@ -22,6 +27,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateSmsCampaignRequestRecipients": ".create_sms_campaign_request_recipients",
     "CreateSmsCampaignResponse": ".create_sms_campaign_response",
     "GetSmsCampaignResponse": ".get_sms_campaign_response",
+    "GetSmsCampaignResponseRecipients": ".get_sms_campaign_response_recipients",
+    "GetSmsCampaignResponseRecipientsExclusionListsItem": ".get_sms_campaign_response_recipients_exclusion_lists_item",
+    "GetSmsCampaignResponseRecipientsListsItem": ".get_sms_campaign_response_recipients_lists_item",
     "GetSmsCampaignResponseStatus": ".get_sms_campaign_response_status",
     "GetSmsCampaignsRequestSort": ".get_sms_campaigns_request_sort",
     "GetSmsCampaignsRequestStatus": ".get_sms_campaigns_request_status",
@@ -59,6 +67,9 @@ __all__ = [
     "CreateSmsCampaignRequestRecipients",
     "CreateSmsCampaignResponse",
     "GetSmsCampaignResponse",
+    "GetSmsCampaignResponseRecipients",
+    "GetSmsCampaignResponseRecipientsExclusionListsItem",
+    "GetSmsCampaignResponseRecipientsListsItem",
     "GetSmsCampaignResponseStatus",
     "GetSmsCampaignsRequestSort",
     "GetSmsCampaignsRequestStatus",

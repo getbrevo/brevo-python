@@ -7,14 +7,14 @@ def test_balance_get_active_balances_api() -> None:
     client = get_client(test_id)
     client.balance.get_active_balances_api(
         pid="pid",
-        contact_id=1,
-        balance_definition_id="balance_definition_id",
+        contact_id=1000000,
+        balance_definition_id="balanceDefinitionId",
     )
     verify_request_count(
         test_id,
         "GET",
         "/loyalty/balance/programs/pid/active-balance",
-        {"contact_id": "1", "balance_definition_id": "balance_definition_id"},
+        {"contactId": "1000000", "balanceDefinitionId": "balanceDefinitionId"},
         1,
     )
 
@@ -141,8 +141,15 @@ def test_balance_get_contact_balances() -> None:
     client = get_client(test_id)
     client.balance.get_contact_balances(
         pid="pid",
+        balance_definition_id="balanceDefinitionId",
     )
-    verify_request_count(test_id, "GET", "/loyalty/balance/programs/pid/contact-balances", None, 1)
+    verify_request_count(
+        test_id,
+        "GET",
+        "/loyalty/balance/programs/pid/contact-balances",
+        {"balanceDefinitionId": "balanceDefinitionId"},
+        1,
+    )
 
 
 def test_balance_create_balance_order() -> None:
@@ -155,7 +162,7 @@ def test_balance_create_balance_order() -> None:
         balance_definition_id="balanceDefinitionId",
         contact_id=1,
         due_at="dueAt",
-        source="source",
+        source="engine",
     )
     verify_request_count(test_id, "POST", "/loyalty/balance/programs/pid/create-order", None, 1)
 
@@ -189,14 +196,14 @@ def test_balance_get_transaction_history_api() -> None:
     client = get_client(test_id)
     client.balance.get_transaction_history_api(
         pid="pid",
-        contact_id=1,
+        contact_id=1000000,
         balance_definition_id="balanceDefinitionId",
     )
     verify_request_count(
         test_id,
         "GET",
         "/loyalty/balance/programs/pid/transaction-history",
-        {"contactId": "1", "balanceDefinitionId": "balanceDefinitionId"},
+        {"contactId": "1000000", "balanceDefinitionId": "balanceDefinitionId"},
         1,
     )
 

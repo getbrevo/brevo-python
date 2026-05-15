@@ -52,7 +52,7 @@ class Order(UncheckedBaseModel):
         FieldMetadata(alias="metaInfo"),
         pydantic.Field(
             alias="metaInfo",
-            description="Meta data of order to store additional detal such as custom message, customer type, source.",
+            description="Meta data of order to store additional detail such as custom message, customer type, source.",
         ),
     ] = None
     products: typing.List[OrderProductsItem]

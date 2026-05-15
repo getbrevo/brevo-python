@@ -45,9 +45,7 @@ class GetProductDetails(UncheckedBaseModel):
     is_deleted: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isDeleted"),
-        pydantic.Field(
-            alias="isDeleted", description="Product get deleted from the shop's database but not from Brevo"
-        ),
+        pydantic.Field(alias="isDeleted", description="Product deleted from the shop's database but not from Brevo"),
     ] = None
     meta_info: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, typing.Any]],
@@ -79,6 +77,11 @@ class GetProductDetails(UncheckedBaseModel):
     Price of the product
     """
 
+    alternative_price: typing_extensions.Annotated[
+        typing.Optional[float],
+        FieldMetadata(alias="alternativePrice"),
+        pydantic.Field(alias="alternativePrice", description="Alternative price of the product"),
+    ] = None
     s3original: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="s3Original"),

@@ -43,13 +43,13 @@ class GetCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="estimatedViews"),
         pydantic.Field(
             alias="estimatedViews",
-            description="Rate of recipients without any privacy protection option enabled in their email client_dev, applied to all delivered emails",
+            description="Rate of recipients without any privacy protection option enabled in their email client, applied to all delivered emails",
         ),
     ] = None
     hard_bounces: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="hardBounces"),
-        pydantic.Field(alias="hardBounces", description="Number of harbounce for the campaign"),
+        pydantic.Field(alias="hardBounces", description="Number of hard bounces for the campaign"),
     ]
     list_id: typing_extensions.Annotated[
         typing.Optional[int],
@@ -89,7 +89,7 @@ class GetCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="trackableViews"),
         pydantic.Field(
             alias="trackableViews",
-            description="Recipients without any privacy protection option enabled in their email client_dev",
+            description="Recipients without any privacy protection option enabled in their email email client",
         ),
     ]
     trackable_views_rate: typing_extensions.Annotated[
@@ -97,7 +97,7 @@ class GetCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="trackableViewsRate"),
         pydantic.Field(
             alias="trackableViewsRate",
-            description="Rate of recipients without any privacy protection option enabled in their email client_dev",
+            description="Rate of recipients without any privacy protection option enabled in their email client",
         ),
     ] = None
     unique_clicks: typing_extensions.Annotated[

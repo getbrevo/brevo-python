@@ -20,7 +20,7 @@ class GetSmtpTemplateOverviewSender(UncheckedBaseModel):
 
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
-    From email for the template
+    Sender name for the template
     """
 
     if IS_PYDANTIC_V2:

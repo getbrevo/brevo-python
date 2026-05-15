@@ -6,28 +6,30 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .create_batch_events_request_item import CreateBatchEventsRequestItem
-    from .create_batch_events_request_item_contact_properties_value import (
-        CreateBatchEventsRequestItemContactPropertiesValue,
+    from .create_batch_events_request_events_item import CreateBatchEventsRequestEventsItem
+    from .create_batch_events_request_events_item_contact_properties_value import (
+        CreateBatchEventsRequestEventsItemContactPropertiesValue,
     )
-    from .create_batch_events_request_item_event_properties_value import (
-        CreateBatchEventsRequestItemEventPropertiesValue,
+    from .create_batch_events_request_events_item_event_properties_value import (
+        CreateBatchEventsRequestEventsItemEventPropertiesValue,
     )
-    from .create_batch_events_request_item_identifiers import CreateBatchEventsRequestItemIdentifiers
-    from .create_batch_events_request_item_object import CreateBatchEventsRequestItemObject
-    from .create_batch_events_request_item_object_identifiers import CreateBatchEventsRequestItemObjectIdentifiers
+    from .create_batch_events_request_events_item_identifiers import CreateBatchEventsRequestEventsItemIdentifiers
+    from .create_batch_events_request_events_item_object import CreateBatchEventsRequestEventsItemObject
+    from .create_batch_events_request_events_item_object_identifiers import (
+        CreateBatchEventsRequestEventsItemObjectIdentifiers,
+    )
     from .create_event_request_contact_properties_value import CreateEventRequestContactPropertiesValue
     from .create_event_request_event_properties_value import CreateEventRequestEventPropertiesValue
     from .create_event_request_identifiers import CreateEventRequestIdentifiers
     from .create_event_request_object import CreateEventRequestObject
     from .create_event_request_object_identifiers import CreateEventRequestObjectIdentifiers
 _dynamic_imports: typing.Dict[str, str] = {
-    "CreateBatchEventsRequestItem": ".create_batch_events_request_item",
-    "CreateBatchEventsRequestItemContactPropertiesValue": ".create_batch_events_request_item_contact_properties_value",
-    "CreateBatchEventsRequestItemEventPropertiesValue": ".create_batch_events_request_item_event_properties_value",
-    "CreateBatchEventsRequestItemIdentifiers": ".create_batch_events_request_item_identifiers",
-    "CreateBatchEventsRequestItemObject": ".create_batch_events_request_item_object",
-    "CreateBatchEventsRequestItemObjectIdentifiers": ".create_batch_events_request_item_object_identifiers",
+    "CreateBatchEventsRequestEventsItem": ".create_batch_events_request_events_item",
+    "CreateBatchEventsRequestEventsItemContactPropertiesValue": ".create_batch_events_request_events_item_contact_properties_value",
+    "CreateBatchEventsRequestEventsItemEventPropertiesValue": ".create_batch_events_request_events_item_event_properties_value",
+    "CreateBatchEventsRequestEventsItemIdentifiers": ".create_batch_events_request_events_item_identifiers",
+    "CreateBatchEventsRequestEventsItemObject": ".create_batch_events_request_events_item_object",
+    "CreateBatchEventsRequestEventsItemObjectIdentifiers": ".create_batch_events_request_events_item_object_identifiers",
     "CreateEventRequestContactPropertiesValue": ".create_event_request_contact_properties_value",
     "CreateEventRequestEventPropertiesValue": ".create_event_request_event_properties_value",
     "CreateEventRequestIdentifiers": ".create_event_request_identifiers",
@@ -58,12 +60,12 @@ def __dir__():
 
 
 __all__ = [
-    "CreateBatchEventsRequestItem",
-    "CreateBatchEventsRequestItemContactPropertiesValue",
-    "CreateBatchEventsRequestItemEventPropertiesValue",
-    "CreateBatchEventsRequestItemIdentifiers",
-    "CreateBatchEventsRequestItemObject",
-    "CreateBatchEventsRequestItemObjectIdentifiers",
+    "CreateBatchEventsRequestEventsItem",
+    "CreateBatchEventsRequestEventsItemContactPropertiesValue",
+    "CreateBatchEventsRequestEventsItemEventPropertiesValue",
+    "CreateBatchEventsRequestEventsItemIdentifiers",
+    "CreateBatchEventsRequestEventsItemObject",
+    "CreateBatchEventsRequestEventsItemObjectIdentifiers",
     "CreateEventRequestContactPropertiesValue",
     "CreateEventRequestEventPropertiesValue",
     "CreateEventRequestIdentifiers",

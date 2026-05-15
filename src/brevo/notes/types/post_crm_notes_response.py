@@ -9,7 +9,7 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 class PostCrmNotesResponse(UncheckedBaseModel):
     """
-    Updated Note ID
+    Created Note ID
     """
 
     id: typing.Optional[str] = pydantic.Field(default=None)

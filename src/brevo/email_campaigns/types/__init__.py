@@ -23,6 +23,8 @@ if typing.TYPE_CHECKING:
     from .get_ab_test_campaign_result_response_winning_version import GetAbTestCampaignResultResponseWinningVersion
     from .get_email_campaign_request_statistics import GetEmailCampaignRequestStatistics
     from .get_email_campaign_response import GetEmailCampaignResponse
+    from .get_email_campaign_response_email_expiration_date import GetEmailCampaignResponseEmailExpirationDate
+    from .get_email_campaign_response_email_expiration_date_unit import GetEmailCampaignResponseEmailExpirationDateUnit
     from .get_email_campaign_response_sender import GetEmailCampaignResponseSender
     from .get_email_campaign_response_status import GetEmailCampaignResponseStatus
     from .get_email_campaign_response_type import GetEmailCampaignResponseType
@@ -32,6 +34,12 @@ if typing.TYPE_CHECKING:
     from .get_email_campaigns_request_type import GetEmailCampaignsRequestType
     from .get_email_campaigns_response import GetEmailCampaignsResponse
     from .get_email_campaigns_response_campaigns_item import GetEmailCampaignsResponseCampaignsItem
+    from .get_email_campaigns_response_campaigns_item_email_expiration_date import (
+        GetEmailCampaignsResponseCampaignsItemEmailExpirationDate,
+    )
+    from .get_email_campaigns_response_campaigns_item_email_expiration_date_unit import (
+        GetEmailCampaignsResponseCampaignsItemEmailExpirationDateUnit,
+    )
     from .get_email_campaigns_response_campaigns_item_sender import GetEmailCampaignsResponseCampaignsItemSender
     from .get_email_campaigns_response_campaigns_item_status import GetEmailCampaignsResponseCampaignsItemStatus
     from .get_email_campaigns_response_campaigns_item_type import GetEmailCampaignsResponseCampaignsItemType
@@ -60,6 +68,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetAbTestCampaignResultResponseWinningVersion": ".get_ab_test_campaign_result_response_winning_version",
     "GetEmailCampaignRequestStatistics": ".get_email_campaign_request_statistics",
     "GetEmailCampaignResponse": ".get_email_campaign_response",
+    "GetEmailCampaignResponseEmailExpirationDate": ".get_email_campaign_response_email_expiration_date",
+    "GetEmailCampaignResponseEmailExpirationDateUnit": ".get_email_campaign_response_email_expiration_date_unit",
     "GetEmailCampaignResponseSender": ".get_email_campaign_response_sender",
     "GetEmailCampaignResponseStatus": ".get_email_campaign_response_status",
     "GetEmailCampaignResponseType": ".get_email_campaign_response_type",
@@ -69,6 +79,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetEmailCampaignsRequestType": ".get_email_campaigns_request_type",
     "GetEmailCampaignsResponse": ".get_email_campaigns_response",
     "GetEmailCampaignsResponseCampaignsItem": ".get_email_campaigns_response_campaigns_item",
+    "GetEmailCampaignsResponseCampaignsItemEmailExpirationDate": ".get_email_campaigns_response_campaigns_item_email_expiration_date",
+    "GetEmailCampaignsResponseCampaignsItemEmailExpirationDateUnit": ".get_email_campaigns_response_campaigns_item_email_expiration_date_unit",
     "GetEmailCampaignsResponseCampaignsItemSender": ".get_email_campaigns_response_campaigns_item_sender",
     "GetEmailCampaignsResponseCampaignsItemStatus": ".get_email_campaigns_response_campaigns_item_status",
     "GetEmailCampaignsResponseCampaignsItemType": ".get_email_campaigns_response_campaigns_item_type",
@@ -119,6 +131,8 @@ __all__ = [
     "GetAbTestCampaignResultResponseWinningVersion",
     "GetEmailCampaignRequestStatistics",
     "GetEmailCampaignResponse",
+    "GetEmailCampaignResponseEmailExpirationDate",
+    "GetEmailCampaignResponseEmailExpirationDateUnit",
     "GetEmailCampaignResponseSender",
     "GetEmailCampaignResponseStatus",
     "GetEmailCampaignResponseType",
@@ -128,6 +142,8 @@ __all__ = [
     "GetEmailCampaignsRequestType",
     "GetEmailCampaignsResponse",
     "GetEmailCampaignsResponseCampaignsItem",
+    "GetEmailCampaignsResponseCampaignsItemEmailExpirationDate",
+    "GetEmailCampaignsResponseCampaignsItemEmailExpirationDateUnit",
     "GetEmailCampaignsResponseCampaignsItemSender",
     "GetEmailCampaignsResponseCampaignsItemStatus",
     "GetEmailCampaignsResponseCampaignsItemType",

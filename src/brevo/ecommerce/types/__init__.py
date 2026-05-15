@@ -43,6 +43,7 @@ if typing.TYPE_CHECKING:
     from .get_ecommerce_config_display_currency_response import GetEcommerceConfigDisplayCurrencyResponse
     from .get_orders_request_sort import GetOrdersRequestSort
     from .get_products_request_sort import GetProductsRequestSort
+    from .get_products_request_sort_by_field import GetProductsRequestSortByField
     from .get_products_response import GetProductsResponse
     from .set_config_display_currency_response import SetConfigDisplayCurrencyResponse
 _dynamic_imports: typing.Dict[str, str] = {
@@ -69,6 +70,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetEcommerceConfigDisplayCurrencyResponse": ".get_ecommerce_config_display_currency_response",
     "GetOrdersRequestSort": ".get_orders_request_sort",
     "GetProductsRequestSort": ".get_products_request_sort",
+    "GetProductsRequestSortByField": ".get_products_request_sort_by_field",
     "GetProductsResponse": ".get_products_response",
     "SetConfigDisplayCurrencyResponse": ".set_config_display_currency_response",
 }
@@ -119,6 +121,7 @@ __all__ = [
     "GetEcommerceConfigDisplayCurrencyResponse",
     "GetOrdersRequestSort",
     "GetProductsRequestSort",
+    "GetProductsRequestSortByField",
     "GetProductsResponse",
     "SetConfigDisplayCurrencyResponse",
 ]

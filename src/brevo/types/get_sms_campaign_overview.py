@@ -41,12 +41,20 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
     Name of the SMS Campaign
     """
 
+    organisation_prefix: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="organisationPrefix"),
+        pydantic.Field(
+            alias="organisationPrefix",
+            description="A recognizable prefix added as the Brand Name before the message content. Empty string if not set.",
+        ),
+    ] = None
     scheduled_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="scheduledAt"),
         pydantic.Field(
             alias="scheduledAt",
-            description="UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format",
+            description="UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format. Empty string if not scheduled.",
         ),
     ] = None
     sender: str = pydantic.Field()
@@ -54,10 +62,27 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
     Sender of the SMS Campaign
     """
 
+    sent_date: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="sentDate"),
+        pydantic.Field(
+            alias="sentDate",
+            description="UTC date-time on which the SMS campaign was sent (YYYY-MM-DDTHH:mm:ss.SSSZ). Only available if the campaign status is 'sent'.",
+        ),
+    ] = None
     status: GetSmsCampaignOverviewStatus = pydantic.Field()
     """
     Status of the SMS Campaign
     """
+
+    unsubscribe_instruction: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="unsubscribeInstruction"),
+        pydantic.Field(
+            alias="unsubscribeInstruction",
+            description="Instructions to unsubscribe from future communications. Empty string if not set.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

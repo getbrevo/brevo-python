@@ -11,7 +11,7 @@ if typing.TYPE_CHECKING:
         GetCrmTasksRequestFilterStatus,
         GetCrmTasksRequestSort,
         GetCrmTasksResponse,
-        GetCrmTasktypesResponse,
+        GetCrmTasktypesResponseItem,
         PostCrmTasksResponse,
     )
 _dynamic_imports: typing.Dict[str, str] = {
@@ -19,7 +19,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetCrmTasksRequestFilterStatus": ".types",
     "GetCrmTasksRequestSort": ".types",
     "GetCrmTasksResponse": ".types",
-    "GetCrmTasktypesResponse": ".types",
+    "GetCrmTasktypesResponseItem": ".types",
     "PostCrmTasksResponse": ".types",
 }
 
@@ -50,6 +50,6 @@ __all__ = [
     "GetCrmTasksRequestFilterStatus",
     "GetCrmTasksRequestSort",
     "GetCrmTasksResponse",
-    "GetCrmTasktypesResponse",
+    "GetCrmTasktypesResponseItem",
     "PostCrmTasksResponse",
 ]

@@ -50,6 +50,8 @@ class WhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetWhatsAppCampaignsResponse:
         """
+        Retrieve a paginated list of all your WhatsApp campaigns with their statistics and metadata. Results can be filtered by creation date range using startDate and endDate, with a default limit of 50 and maximum of 100 per page. The sort order defaults to descending by modification date.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -271,6 +273,8 @@ class WhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetWhatsAppTemplatesResponse:
         """
+        Retrieve a paginated list of all your WhatsApp templates with their status, category, language, and metadata. Results can be filtered by creation date range and optionally by source (Automation or Conversations), with a default limit of 50 and maximum of 100 per page. The sort order defaults to descending by modification date.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -455,6 +459,8 @@ class WhatsAppCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete a WhatsApp campaign by its campaign ID. The campaign must exist; if the campaign ID is not found, a 404 error is returned. This action is permanent and cannot be undone.
+
         Parameters
         ----------
         campaign_id : int
@@ -508,6 +514,8 @@ class AsyncWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetWhatsAppCampaignsResponse:
         """
+        Retrieve a paginated list of all your WhatsApp campaigns with their statistics and metadata. Results can be filtered by creation date range using startDate and endDate, with a default limit of 50 and maximum of 100 per page. The sort order defaults to descending by modification date.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -761,6 +769,8 @@ class AsyncWhatsAppCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetWhatsAppTemplatesResponse:
         """
+        Retrieve a paginated list of all your WhatsApp templates with their status, category, language, and metadata. Results can be filtered by creation date range and optionally by source (Automation or Conversations), with a default limit of 50 and maximum of 100 per page. The sort order defaults to descending by modification date.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -979,6 +989,8 @@ class AsyncWhatsAppCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete a WhatsApp campaign by its campaign ID. The campaign must exist; if the campaign ID is not found, a 404 error is returned. This action is permanent and cannot be undone.
+
         Parameters
         ----------
         campaign_id : int

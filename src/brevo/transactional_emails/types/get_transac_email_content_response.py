@@ -12,11 +12,11 @@ from .get_transac_email_content_response_events_item import GetTransacEmailConte
 
 class GetTransacEmailContentResponse(UncheckedBaseModel):
     attachment_count: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="attachmentCount"),
         pydantic.Field(alias="attachmentCount", description="Count of the attachments that were sent in the email"),
-    ]
-    body: str = pydantic.Field()
+    ] = None
+    body: typing.Optional[str] = pydantic.Field(default=None)
     """
     Actual content of the transactional email that has been sent
     """

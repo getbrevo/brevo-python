@@ -45,6 +45,7 @@ class TransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        params: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         template_id: typing.Optional[int] = OMIT,
         content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -57,16 +58,16 @@ class TransactionalSmsClient:
         Parameters
         ----------
         recipient : str
-            Mobile number to send SMS with the country code
+            Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
 
         sender : str
-            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters.** Alphanumeric sender names (up to 11 characters) must contain only letters and digits. Numeric sender names (12-15 characters) must contain only digits.
 
         organisation_prefix : typing.Optional[str]
             A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
 
         tag : typing.Optional[SendTransacSmsTag]
-            Tag of the message
+            Tag of the message. Can be a single string or an array of strings (maximum 10 tags). Each tag must be a non-empty string.
 
         type : typing.Optional[SendTransacSmsType]
             Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -76,6 +77,9 @@ class TransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        params : typing.Optional[typing.Dict[str, typing.Any]]
+            Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
 
         template_id : typing.Optional[int]
             Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
@@ -111,6 +115,7 @@ class TransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            params=params,
             template_id=template_id,
             content=content,
             request_options=request_options,
@@ -127,24 +132,27 @@ class TransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        params: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         template_id: typing.Optional[int] = OMIT,
         content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacSmsResponse:
         """
+        Send a transactional SMS message to a single mobile number. The `sender`, `recipient`, and either `content` or `templateId` fields are required. The sender name is limited to 11 alphanumeric characters or 15 numeric characters, and the recipient must be a valid international phone number (6-15 digits, optional leading +). Tags can be a string or an array of up to 10 strings. The SMS type defaults to `transactional` but can be set to `marketing`; if the content includes a stop code, it is automatically treated as marketing. Returns the message ID, SMS count, credits used, and remaining credits.
+
         Parameters
         ----------
         recipient : str
-            Mobile number to send SMS with the country code
+            Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
 
         sender : str
-            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters.** Alphanumeric sender names (up to 11 characters) must contain only letters and digits. Numeric sender names (12-15 characters) must contain only digits.
 
         organisation_prefix : typing.Optional[str]
             A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
 
         tag : typing.Optional[SendTransacSmsTag]
-            Tag of the message
+            Tag of the message. Can be a single string or an array of strings (maximum 10 tags). Each tag must be a non-empty string.
 
         type : typing.Optional[SendTransacSmsType]
             Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -154,6 +162,9 @@ class TransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        params : typing.Optional[typing.Dict[str, typing.Any]]
+            Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
 
         template_id : typing.Optional[int]
             Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
@@ -189,6 +200,7 @@ class TransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            params=params,
             template_id=template_id,
             content=content,
             request_options=request_options,
@@ -205,6 +217,8 @@ class TransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacAggregatedSmsReportResponse:
         """
+        Retrieve an aggregated report of your transactional SMS activity over a specified time period, including counts for requests, delivered, hard bounces, soft bounces, blocked, unsubscribed, replied, accepted, rejected, and skipped messages. Filter by date range using `startDate` and `endDate` (both required together, YYYY-MM-DD format) or by a number of past `days` (not compatible with date range). You can further narrow results by `tag`. If no date filter is provided, the report covers all available data and returns the auto-detected date range.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -256,6 +270,8 @@ class TransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmsEventsResponse:
         """
+        Retrieve a paginated list of individual SMS event records (unaggregated), including event type, phone number, message ID, timestamp, tag, and reason or reply content where applicable. Results default to 50 per page (max 100) and are sorted in descending order unless overridden. Filter by date range (`startDate`/`endDate`), past `days` (not compatible with date range), specific `event` type (e.g. delivered, bounces, replies), `phoneNumber`, or `tags`. Bounce events include the failure reason, and reply events include the reply content.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -327,6 +343,8 @@ class TransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacSmsReportResponse:
         """
+        Retrieve a day-by-day breakdown of your transactional SMS activity, with each entry containing the date and counts for requests, delivered, hard bounces, soft bounces, blocked, unsubscribed, replied, accepted, rejected, and skipped messages. Filter by date range using `startDate` and `endDate` (both required together, YYYY-MM-DD format), by a number of past `days` (not compatible with date range), or by `tag`. Results are sorted in descending order by default unless overridden with the `sort` parameter.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -392,6 +410,7 @@ class AsyncTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        params: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         template_id: typing.Optional[int] = OMIT,
         content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -404,16 +423,16 @@ class AsyncTransactionalSmsClient:
         Parameters
         ----------
         recipient : str
-            Mobile number to send SMS with the country code
+            Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
 
         sender : str
-            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters.** Alphanumeric sender names (up to 11 characters) must contain only letters and digits. Numeric sender names (12-15 characters) must contain only digits.
 
         organisation_prefix : typing.Optional[str]
             A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
 
         tag : typing.Optional[SendTransacSmsTag]
-            Tag of the message
+            Tag of the message. Can be a single string or an array of strings (maximum 10 tags). Each tag must be a non-empty string.
 
         type : typing.Optional[SendTransacSmsType]
             Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -423,6 +442,9 @@ class AsyncTransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        params : typing.Optional[typing.Dict[str, typing.Any]]
+            Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
 
         template_id : typing.Optional[int]
             Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
@@ -466,6 +488,7 @@ class AsyncTransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            params=params,
             template_id=template_id,
             content=content,
             request_options=request_options,
@@ -482,24 +505,27 @@ class AsyncTransactionalSmsClient:
         type: typing.Optional[SendTransacSmsType] = OMIT,
         unicode_enabled: typing.Optional[bool] = OMIT,
         web_url: typing.Optional[str] = OMIT,
+        params: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         template_id: typing.Optional[int] = OMIT,
         content: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacSmsResponse:
         """
+        Send a transactional SMS message to a single mobile number. The `sender`, `recipient`, and either `content` or `templateId` fields are required. The sender name is limited to 11 alphanumeric characters or 15 numeric characters, and the recipient must be a valid international phone number (6-15 digits, optional leading +). Tags can be a string or an array of up to 10 strings. The SMS type defaults to `transactional` but can be set to `marketing`; if the content includes a stop code, it is automatically treated as marketing. Returns the message ID, SMS count, credits used, and remaining credits.
+
         Parameters
         ----------
         recipient : str
-            Mobile number to send SMS with the country code
+            Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
 
         sender : str
-            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+            Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters.** Alphanumeric sender names (up to 11 characters) must contain only letters and digits. Numeric sender names (12-15 characters) must contain only digits.
 
         organisation_prefix : typing.Optional[str]
             A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
 
         tag : typing.Optional[SendTransacSmsTag]
-            Tag of the message
+            Tag of the message. Can be a single string or an array of strings (maximum 10 tags). Each tag must be a non-empty string.
 
         type : typing.Optional[SendTransacSmsType]
             Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -509,6 +535,9 @@ class AsyncTransactionalSmsClient:
 
         web_url : typing.Optional[str]
             Webhook to call for each event triggered by the message (delivered etc.)
+
+        params : typing.Optional[typing.Dict[str, typing.Any]]
+            Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
 
         template_id : typing.Optional[int]
             Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
@@ -552,6 +581,7 @@ class AsyncTransactionalSmsClient:
             type=type,
             unicode_enabled=unicode_enabled,
             web_url=web_url,
+            params=params,
             template_id=template_id,
             content=content,
             request_options=request_options,
@@ -568,6 +598,8 @@ class AsyncTransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacAggregatedSmsReportResponse:
         """
+        Retrieve an aggregated report of your transactional SMS activity over a specified time period, including counts for requests, delivered, hard bounces, soft bounces, blocked, unsubscribed, replied, accepted, rejected, and skipped messages. Filter by date range using `startDate` and `endDate` (both required together, YYYY-MM-DD format) or by a number of past `days` (not compatible with date range). You can further narrow results by `tag`. If no date filter is provided, the report covers all available data and returns the auto-detected date range.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -627,6 +659,8 @@ class AsyncTransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmsEventsResponse:
         """
+        Retrieve a paginated list of individual SMS event records (unaggregated), including event type, phone number, message ID, timestamp, tag, and reason or reply content where applicable. Results default to 50 per page (max 100) and are sorted in descending order unless overridden. Filter by date range (`startDate`/`endDate`), past `days` (not compatible with date range), specific `event` type (e.g. delivered, bounces, replies), `phoneNumber`, or `tags`. Bounce events include the failure reason, and reply events include the reply content.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -706,6 +740,8 @@ class AsyncTransactionalSmsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacSmsReportResponse:
         """
+        Retrieve a day-by-day breakdown of your transactional SMS activity, with each entry containing the date and counts for requests, delivered, hard bounces, soft bounces, blocked, unsubscribed, replied, accepted, rejected, and skipped messages. Filter by date range using `startDate` and `endDate` (both required together, YYYY-MM-DD format), by a number of past `days` (not compatible with date range), or by `tag`. Results are sorted in descending order by default unless overridden with the `sort` parameter.
+
         Parameters
         ----------
         start_date : typing.Optional[str]

@@ -39,6 +39,8 @@ class RawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetCouponCollection]:
         """
+        Retrieve a paginated list of all coupon collections in your Brevo account. Results can be sorted by creation date, remaining coupons count, or expiration date, in ascending or descending order. Pagination defaults to 50 collections per page (maximum 100).
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -124,6 +126,8 @@ class RawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateCouponCollectionResponse]:
         """
+        Create a new coupon collection with a name and a default coupon value. You can optionally set an expiration date in RFC3339 format and configure alert thresholds to receive email notifications when remaining coupons or remaining days before expiration fall below a specified number. The collection ID is auto-generated as a UUID and returned in the response.
+
         Parameters
         ----------
         default_coupon : str
@@ -210,6 +214,8 @@ class RawCouponsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetCouponCollection]:
         """
+        Retrieve the details of a single coupon collection by its UUID. The response includes the collection name, default coupon value, total and remaining coupon counts, and creation timestamp. Returns a `404` error if no collection matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -291,6 +297,8 @@ class RawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[UpdateCouponCollectionResponse]:
         """
+        Update an existing coupon collection by its UUID. You can modify the default coupon value, set or remove the expiration date (pass `null` to remove), and configure or disable alert thresholds for remaining coupons or remaining days. Only the fields included in the request body are updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -380,6 +388,8 @@ class RawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Add coupons to an existing coupon collection. The `coupons` array must contain between 1 and 10,000 unique coupon code strings, all associated with the specified `collectionId`. Coupon creation is processed asynchronously and a `204` status is returned immediately upon acceptance. Returns a `404` error if the specified coupon collection does not exist.
+
         Parameters
         ----------
         collection_id : str
@@ -467,6 +477,8 @@ class AsyncRawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetCouponCollection]:
         """
+        Retrieve a paginated list of all coupon collections in your Brevo account. Results can be sorted by creation date, remaining coupons count, or expiration date, in ascending or descending order. Pagination defaults to 50 collections per page (maximum 100).
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -552,6 +564,8 @@ class AsyncRawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateCouponCollectionResponse]:
         """
+        Create a new coupon collection with a name and a default coupon value. You can optionally set an expiration date in RFC3339 format and configure alert thresholds to receive email notifications when remaining coupons or remaining days before expiration fall below a specified number. The collection ID is auto-generated as a UUID and returned in the response.
+
         Parameters
         ----------
         default_coupon : str
@@ -638,6 +652,8 @@ class AsyncRawCouponsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetCouponCollection]:
         """
+        Retrieve the details of a single coupon collection by its UUID. The response includes the collection name, default coupon value, total and remaining coupon counts, and creation timestamp. Returns a `404` error if no collection matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -719,6 +735,8 @@ class AsyncRawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[UpdateCouponCollectionResponse]:
         """
+        Update an existing coupon collection by its UUID. You can modify the default coupon value, set or remove the expiration date (pass `null` to remove), and configure or disable alert thresholds for remaining coupons or remaining days. Only the fields included in the request body are updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -808,6 +826,8 @@ class AsyncRawCouponsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Add coupons to an existing coupon collection. The `coupons` array must contain between 1 and 10,000 unique coupon code strings, all associated with the specified `collectionId`. Coupon creation is processed asynchronously and a `204` status is returned immediately upon acceptance. Returns a `404` error if the specified coupon collection does not exist.
+
         Parameters
         ----------
         collection_id : str

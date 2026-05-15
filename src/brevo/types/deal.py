@@ -14,25 +14,25 @@ class Deal(UncheckedBaseModel):
     Deal Details
     """
 
-    attributes: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
-    """
-    Deal attributes with values
-    """
-
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique deal id
     """
 
-    linked_companies_ids: typing_extensions.Annotated[
-        typing.Optional[typing.List[str]],
-        FieldMetadata(alias="linkedCompaniesIds"),
-        pydantic.Field(alias="linkedCompaniesIds", description="Companies ids for companies linked to this deal"),
-    ] = None
+    attributes: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    """
+    Deal attributes with values
+    """
+
     linked_contacts_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="linkedContactsIds"),
         pydantic.Field(alias="linkedContactsIds", description="Contact ids for contacts linked to this deal"),
+    ] = None
+    linked_companies_ids: typing_extensions.Annotated[
+        typing.Optional[typing.List[str]],
+        FieldMetadata(alias="linkedCompaniesIds"),
+        pydantic.Field(alias="linkedCompaniesIds", description="Companies ids for companies linked to this deal"),
     ] = None
 
     if IS_PYDANTIC_V2:

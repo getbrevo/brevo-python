@@ -17,7 +17,7 @@ class GetSegmentsResponseSegmentsItem(UncheckedBaseModel):
     ]
     id: int = pydantic.Field()
     """
-    ID of the list
+    ID of the segment
     """
 
     segment_name: typing_extensions.Annotated[
@@ -27,7 +27,7 @@ class GetSegmentsResponseSegmentsItem(UncheckedBaseModel):
         typing.Optional[str],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(
-            alias="updatedAt", description="Updation UTC date-time of the segment (YYYY-MM-DDTHH:mm:ss.SSSZ)"
+            alias="updatedAt", description="Last update UTC date-time of the segment (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ] = None
 

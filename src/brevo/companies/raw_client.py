@@ -39,7 +39,7 @@ class RawCompaniesClient:
     def get_all_companies(
         self,
         *,
-        filters: typing.Optional[str] = None,
+        filters_attributes_name: typing.Optional[str] = None,
         linked_contacts_ids: typing.Optional[int] = None,
         linked_deals_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -51,10 +51,12 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetCompaniesResponse]:
         """
+        Retrieve a paginated list of companies with optional filtering, sorting, and search capabilities. Results are sorted by creation date in descending order by default, and can be filtered by attributes, linked contacts, linked deals, or modification/creation timestamps.
+
         Parameters
         ----------
-        filters : typing.Optional[str]
-            Filter by attrbutes. If you have filter for owner on your side please send it as {"attributes.owner":"6299dcf3874a14eacbc65c46"}
+        filters_attributes_name : typing.Optional[str]
+            Filter by attributes. If you have a filter for the owner on your side please send it as filters[attributes.owner] and utilize the account email for the filtering.
 
         linked_contacts_ids : typing.Optional[int]
             Filter by linked contacts ids
@@ -63,10 +65,10 @@ class RawCompaniesClient:
             Filter by linked Deals ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the companies modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the companies created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         page : typing.Optional[int]
             Index of the first document of the page
@@ -92,7 +94,7 @@ class RawCompaniesClient:
             "companies",
             method="GET",
             params={
-                "filters": filters,
+                "filters[attributes.name]": filters_attributes_name,
                 "linkedContactsIds": linked_contacts_ids,
                 "linkedDealsIds": linked_deals_ids,
                 "modifiedSince": modified_since,
@@ -145,6 +147,8 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PostCompaniesResponse]:
         """
+        Create a new CRM company with the specified name, attributes, and optional associations to contacts and deals. The company name is required, and you can optionally provide a country code when a phone number attribute is included.
+
         Parameters
         ----------
         name : str
@@ -301,6 +305,8 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Link or unlink contacts and deals with a specific company in a single request. You can simultaneously link new contacts/deals and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -366,6 +372,8 @@ class RawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[Company]:
         """
+        Retrieve the full details of a single company by its identifier, including its attributes, linked contacts, and linked deals. Returns a 404 error if the company does not exist, or a 403 error if the user lacks permission to view the company.
+
         Parameters
         ----------
         id : str
@@ -429,6 +437,8 @@ class RawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[None]:
         """
+        Permanently delete a company by its identifier. The requesting user must be the company owner or have manage permission on companies; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -492,6 +502,8 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Company]:
         """
+        Update an existing company''s attributes, name, linked contacts, or linked deals. Note that passing `linkedContactsIds` or `linkedDealsIds` replaces the entire list of associations, so omitted IDs will be removed. The company name cannot be set to an empty string.
+
         Parameters
         ----------
         id : str
@@ -506,7 +518,7 @@ class RawCompaniesClient:
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
 
         linked_deals_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedDealsIds replaces the list of linked deals. Omitted IDs will be removed.
 
         name : typing.Optional[str]
             Name of company
@@ -587,6 +599,8 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PostCrmAttributesResponse]:
         """
+        Create a new custom attribute for companies or deals. The attribute label must be unique within the object type, cannot exceed 50 characters, and cannot use reserved names. For `single-select` or `multi-choice` attribute types, you must also provide the `optionsLabels` array.
+
         Parameters
         ----------
         attribute_type : PostCrmAttributesRequestAttributeType
@@ -596,7 +610,7 @@ class RawCompaniesClient:
             The label for the attribute (max 50 characters, cannot be empty)
 
         object_type : PostCrmAttributesRequestObjectType
-            The type of object the attribute belongs to (prefilled with `companies`, mandatory)
+            The type of object the attribute belongs to. Must be either `companies` or `deals`.
 
         description : typing.Optional[str]
             A description of the attribute
@@ -662,6 +676,8 @@ class RawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[None]:
         """
+        Delete an existing custom attribute by its identifier. This permanently removes the attribute definition and cleans up all references to it across companies or deals. System-default and non-editable attributes cannot be deleted.
+
         Parameters
         ----------
         id : str
@@ -723,6 +739,8 @@ class RawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Update an existing custom attribute''s label or options. You can rename the attribute label or modify the available options for `single-select` and `multi-choice` attribute types. System-default attributes cannot be modified except for specific editable fields.
+
         Parameters
         ----------
         id : str
@@ -800,6 +818,8 @@ class RawCompaniesClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[typing.List[GetCrmAttributesCompaniesResponseItem]]:
         """
+        Retrieve the list of all attributes defined for companies, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -825,6 +845,17 @@ class RawCompaniesClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -842,7 +873,7 @@ class AsyncRawCompaniesClient:
     async def get_all_companies(
         self,
         *,
-        filters: typing.Optional[str] = None,
+        filters_attributes_name: typing.Optional[str] = None,
         linked_contacts_ids: typing.Optional[int] = None,
         linked_deals_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -854,10 +885,12 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetCompaniesResponse]:
         """
+        Retrieve a paginated list of companies with optional filtering, sorting, and search capabilities. Results are sorted by creation date in descending order by default, and can be filtered by attributes, linked contacts, linked deals, or modification/creation timestamps.
+
         Parameters
         ----------
-        filters : typing.Optional[str]
-            Filter by attrbutes. If you have filter for owner on your side please send it as {"attributes.owner":"6299dcf3874a14eacbc65c46"}
+        filters_attributes_name : typing.Optional[str]
+            Filter by attributes. If you have a filter for the owner on your side please send it as filters[attributes.owner] and utilize the account email for the filtering.
 
         linked_contacts_ids : typing.Optional[int]
             Filter by linked contacts ids
@@ -866,10 +899,10 @@ class AsyncRawCompaniesClient:
             Filter by linked Deals ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the companies modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the companies created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         page : typing.Optional[int]
             Index of the first document of the page
@@ -895,7 +928,7 @@ class AsyncRawCompaniesClient:
             "companies",
             method="GET",
             params={
-                "filters": filters,
+                "filters[attributes.name]": filters_attributes_name,
                 "linkedContactsIds": linked_contacts_ids,
                 "linkedDealsIds": linked_deals_ids,
                 "modifiedSince": modified_since,
@@ -948,6 +981,8 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PostCompaniesResponse]:
         """
+        Create a new CRM company with the specified name, attributes, and optional associations to contacts and deals. The company name is required, and you can optionally provide a country code when a phone number attribute is included.
+
         Parameters
         ----------
         name : str
@@ -1104,6 +1139,8 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Link or unlink contacts and deals with a specific company in a single request. You can simultaneously link new contacts/deals and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -1169,6 +1206,8 @@ class AsyncRawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Company]:
         """
+        Retrieve the full details of a single company by its identifier, including its attributes, linked contacts, and linked deals. Returns a 404 error if the company does not exist, or a 403 error if the user lacks permission to view the company.
+
         Parameters
         ----------
         id : str
@@ -1232,6 +1271,8 @@ class AsyncRawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Permanently delete a company by its identifier. The requesting user must be the company owner or have manage permission on companies; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -1295,6 +1336,8 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Company]:
         """
+        Update an existing company''s attributes, name, linked contacts, or linked deals. Note that passing `linkedContactsIds` or `linkedDealsIds` replaces the entire list of associations, so omitted IDs will be removed. The company name cannot be set to an empty string.
+
         Parameters
         ----------
         id : str
@@ -1309,7 +1352,7 @@ class AsyncRawCompaniesClient:
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
 
         linked_deals_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedDealsIds replaces the list of linked deals. Omitted IDs will be removed.
 
         name : typing.Optional[str]
             Name of company
@@ -1390,6 +1433,8 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PostCrmAttributesResponse]:
         """
+        Create a new custom attribute for companies or deals. The attribute label must be unique within the object type, cannot exceed 50 characters, and cannot use reserved names. For `single-select` or `multi-choice` attribute types, you must also provide the `optionsLabels` array.
+
         Parameters
         ----------
         attribute_type : PostCrmAttributesRequestAttributeType
@@ -1399,7 +1444,7 @@ class AsyncRawCompaniesClient:
             The label for the attribute (max 50 characters, cannot be empty)
 
         object_type : PostCrmAttributesRequestObjectType
-            The type of object the attribute belongs to (prefilled with `companies`, mandatory)
+            The type of object the attribute belongs to. Must be either `companies` or `deals`.
 
         description : typing.Optional[str]
             A description of the attribute
@@ -1465,6 +1510,8 @@ class AsyncRawCompaniesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Delete an existing custom attribute by its identifier. This permanently removes the attribute definition and cleans up all references to it across companies or deals. System-default and non-editable attributes cannot be deleted.
+
         Parameters
         ----------
         id : str
@@ -1526,6 +1573,8 @@ class AsyncRawCompaniesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Update an existing custom attribute''s label or options. You can rename the attribute label or modify the available options for `single-select` and `multi-choice` attribute types. System-default attributes cannot be modified except for specific editable fields.
+
         Parameters
         ----------
         id : str
@@ -1603,6 +1652,8 @@ class AsyncRawCompaniesClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[typing.List[GetCrmAttributesCompaniesResponseItem]]:
         """
+        Retrieve the list of all attributes defined for companies, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -1628,6 +1679,17 @@ class AsyncRawCompaniesClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

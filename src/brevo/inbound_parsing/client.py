@@ -37,7 +37,7 @@ class InboundParsingClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetInboundEmailEventsResponse:
         """
-        This endpoint will show the list of all the events for the received emails.
+        This endpoint will show the list of all the events for the received emails. When no date range is provided, the last 30 days of events are returned by default.
 
         Parameters
         ----------
@@ -45,10 +45,10 @@ class InboundParsingClient:
             Email address of the sender.
 
         start_date : typing.Optional[str]
-            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         end_date : typing.Optional[str]
-            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents returned per page
@@ -104,7 +104,7 @@ class InboundParsingClient:
         Returns
         -------
         GetInboundEmailEventsByUuidResponse
-            Email campaign informations
+            Detailed information and event history for the specified received email.
 
         Examples
         --------
@@ -181,7 +181,7 @@ class AsyncInboundParsingClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetInboundEmailEventsResponse:
         """
-        This endpoint will show the list of all the events for the received emails.
+        This endpoint will show the list of all the events for the received emails. When no date range is provided, the last 30 days of events are returned by default.
 
         Parameters
         ----------
@@ -189,10 +189,10 @@ class AsyncInboundParsingClient:
             Email address of the sender.
 
         start_date : typing.Optional[str]
-            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         end_date : typing.Optional[str]
-            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents returned per page
@@ -256,7 +256,7 @@ class AsyncInboundParsingClient:
         Returns
         -------
         GetInboundEmailEventsByUuidResponse
-            Email campaign informations
+            Detailed information and event history for the specified received email.
 
         Examples
         --------

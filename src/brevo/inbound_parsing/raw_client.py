@@ -35,7 +35,7 @@ class RawInboundParsingClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetInboundEmailEventsResponse]:
         """
-        This endpoint will show the list of all the events for the received emails.
+        This endpoint will show the list of all the events for the received emails. When no date range is provided, the last 30 days of events are returned by default.
 
         Parameters
         ----------
@@ -43,10 +43,10 @@ class RawInboundParsingClient:
             Email address of the sender.
 
         start_date : typing.Optional[str]
-            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         end_date : typing.Optional[str]
-            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents returned per page
@@ -125,7 +125,7 @@ class RawInboundParsingClient:
         Returns
         -------
         HttpResponse[GetInboundEmailEventsByUuidResponse]
-            Email campaign informations
+            Detailed information and event history for the specified received email.
         """
         _response = self._client_wrapper.httpx_client.request(
             f"inbound/events/{jsonable_encoder(uuid_)}",
@@ -144,6 +144,17 @@ class RawInboundParsingClient:
                 return HttpResponse(response=_response, data=_data)
             if _response.status_code == 400:
                 raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -251,7 +262,7 @@ class AsyncRawInboundParsingClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetInboundEmailEventsResponse]:
         """
-        This endpoint will show the list of all the events for the received emails.
+        This endpoint will show the list of all the events for the received emails. When no date range is provided, the last 30 days of events are returned by default.
 
         Parameters
         ----------
@@ -259,10 +270,10 @@ class AsyncRawInboundParsingClient:
             Email address of the sender.
 
         start_date : typing.Optional[str]
-            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if endDate is used. Starting date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) from which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         end_date : typing.Optional[str]
-            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is one month.
+            Mandatory if startDate is used. Ending date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss.SSSZ) till which you want to fetch the list. Maximum time period that can be selected is 30 days. Must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents returned per page
@@ -341,7 +352,7 @@ class AsyncRawInboundParsingClient:
         Returns
         -------
         AsyncHttpResponse[GetInboundEmailEventsByUuidResponse]
-            Email campaign informations
+            Detailed information and event history for the specified received email.
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"inbound/events/{jsonable_encoder(uuid_)}",
@@ -360,6 +371,17 @@ class AsyncRawInboundParsingClient:
                 return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 400:
                 raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,

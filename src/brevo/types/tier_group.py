@@ -8,7 +8,9 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .tier_group_downgrade_schedule import TierGroupDowngradeSchedule
 from .tier_group_downgrade_strategy import TierGroupDowngradeStrategy
+from .tier_group_upgrade_schedule import TierGroupUpgradeSchedule
 from .tier_group_upgrade_strategy import TierGroupUpgradeStrategy
 
 
@@ -58,6 +60,16 @@ class TierGroup(UncheckedBaseModel):
             alias="upgradeStrategy",
             description="Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.",
         ),
+    ] = None
+    upgrade_schedule: typing_extensions.Annotated[
+        typing.Optional[TierGroupUpgradeSchedule],
+        FieldMetadata(alias="upgradeSchedule"),
+        pydantic.Field(alias="upgradeSchedule", description="Schedule configuration for tier upgrades."),
+    ] = None
+    downgrade_schedule: typing_extensions.Annotated[
+        typing.Optional[TierGroupDowngradeSchedule],
+        FieldMetadata(alias="downgradeSchedule"),
+        pydantic.Field(alias="downgradeSchedule", description="Schedule configuration for tier downgrades."),
     ] = None
 
     if IS_PYDANTIC_V2:

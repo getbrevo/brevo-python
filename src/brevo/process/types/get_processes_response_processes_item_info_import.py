@@ -9,22 +9,22 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 class GetProcessesResponseProcessesItemInfoImport(UncheckedBaseModel):
     """
-    Import process details
+    Import process details with URLs to CSV reports
     """
 
-    invalid_emails: typing.Optional[int] = pydantic.Field(default=None)
+    invalid_emails: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Number of invalid email addresses
-    """
-
-    duplicate_contact_id: typing.Optional[int] = pydantic.Field(default=None)
-    """
-    Number of duplicate contact IDs
+    URL to CSV file containing invalid email addresses, or null if none
     """
 
-    duplicate_ext_id: typing.Optional[int] = pydantic.Field(default=None)
+    duplicate_contact_id: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Number of duplicate external IDs
+    URL to CSV file containing duplicate contact IDs, or null if none
+    """
+
+    duplicate_ext_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    URL to CSV file containing duplicate external IDs, or null if none
     """
 
     duplicate_email_id: typing.Optional[str] = pydantic.Field(default=None)
@@ -32,19 +32,19 @@ class GetProcessesResponseProcessesItemInfoImport(UncheckedBaseModel):
     URL to CSV file containing duplicate email IDs, or null if none
     """
 
-    duplicate_phone_id: typing.Optional[int] = pydantic.Field(default=None)
+    duplicate_phone_id: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Number of duplicate phone numbers
-    """
-
-    duplicate_whatsapp_id: typing.Optional[int] = pydantic.Field(default=None)
-    """
-    Number of duplicate WhatsApp numbers
+    URL to CSV file containing duplicate phone numbers, or null if none
     """
 
-    duplicate_landline_number_id: typing.Optional[int] = pydantic.Field(default=None)
+    duplicate_whatsapp_id: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Number of duplicate landline numbers
+    URL to CSV file containing duplicate WhatsApp numbers, or null if none
+    """
+
+    duplicate_landline_number_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    URL to CSV file containing duplicate landline numbers, or null if none
     """
 
     if IS_PYDANTIC_V2:

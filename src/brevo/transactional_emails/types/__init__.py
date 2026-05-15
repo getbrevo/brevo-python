@@ -28,6 +28,7 @@ if typing.TYPE_CHECKING:
     from .get_smtp_report_request_sort import GetSmtpReportRequestSort
     from .get_smtp_report_response import GetSmtpReportResponse
     from .get_smtp_report_response_reports_item import GetSmtpReportResponseReportsItem
+    from .get_smtp_template_request_template_id import GetSmtpTemplateRequestTemplateId
     from .get_smtp_templates_request_sort import GetSmtpTemplatesRequestSort
     from .get_smtp_templates_response import GetSmtpTemplatesResponse
     from .get_transac_blocked_contacts_request_sort import GetTransacBlockedContactsRequestSort
@@ -46,6 +47,8 @@ if typing.TYPE_CHECKING:
     from .get_transac_emails_list_response_transactional_emails_item import (
         GetTransacEmailsListResponseTransactionalEmailsItem,
     )
+    from .post_preview_smtp_email_templates_request import PostPreviewSmtpEmailTemplatesRequest
+    from .post_preview_smtp_email_templates_request_params import PostPreviewSmtpEmailTemplatesRequestParams
     from .post_preview_smtp_email_templates_response import PostPreviewSmtpEmailTemplatesResponse
     from .send_transac_email_request_attachment_item import SendTransacEmailRequestAttachmentItem
     from .send_transac_email_request_bcc_item import SendTransacEmailRequestBccItem
@@ -68,6 +71,7 @@ if typing.TYPE_CHECKING:
     from .send_transac_email_request_to_item import SendTransacEmailRequestToItem
     from .send_transac_email_response import SendTransacEmailResponse
     from .update_smtp_template_request_sender import UpdateSmtpTemplateRequestSender
+    from .update_smtp_template_request_template_id import UpdateSmtpTemplateRequestTemplateId
 _dynamic_imports: typing.Dict[str, str] = {
     "CreateSmtpTemplateRequestSender": ".create_smtp_template_request_sender",
     "CreateSmtpTemplateResponse": ".create_smtp_template_response",
@@ -89,6 +93,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetSmtpReportRequestSort": ".get_smtp_report_request_sort",
     "GetSmtpReportResponse": ".get_smtp_report_response",
     "GetSmtpReportResponseReportsItem": ".get_smtp_report_response_reports_item",
+    "GetSmtpTemplateRequestTemplateId": ".get_smtp_template_request_template_id",
     "GetSmtpTemplatesRequestSort": ".get_smtp_templates_request_sort",
     "GetSmtpTemplatesResponse": ".get_smtp_templates_response",
     "GetTransacBlockedContactsRequestSort": ".get_transac_blocked_contacts_request_sort",
@@ -101,6 +106,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetTransacEmailsListRequestSort": ".get_transac_emails_list_request_sort",
     "GetTransacEmailsListResponse": ".get_transac_emails_list_response",
     "GetTransacEmailsListResponseTransactionalEmailsItem": ".get_transac_emails_list_response_transactional_emails_item",
+    "PostPreviewSmtpEmailTemplatesRequest": ".post_preview_smtp_email_templates_request",
+    "PostPreviewSmtpEmailTemplatesRequestParams": ".post_preview_smtp_email_templates_request_params",
     "PostPreviewSmtpEmailTemplatesResponse": ".post_preview_smtp_email_templates_response",
     "SendTransacEmailRequestAttachmentItem": ".send_transac_email_request_attachment_item",
     "SendTransacEmailRequestBccItem": ".send_transac_email_request_bcc_item",
@@ -115,6 +122,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SendTransacEmailRequestToItem": ".send_transac_email_request_to_item",
     "SendTransacEmailResponse": ".send_transac_email_response",
     "UpdateSmtpTemplateRequestSender": ".update_smtp_template_request_sender",
+    "UpdateSmtpTemplateRequestTemplateId": ".update_smtp_template_request_template_id",
 }
 
 
@@ -160,6 +168,7 @@ __all__ = [
     "GetSmtpReportRequestSort",
     "GetSmtpReportResponse",
     "GetSmtpReportResponseReportsItem",
+    "GetSmtpTemplateRequestTemplateId",
     "GetSmtpTemplatesRequestSort",
     "GetSmtpTemplatesResponse",
     "GetTransacBlockedContactsRequestSort",
@@ -172,6 +181,8 @@ __all__ = [
     "GetTransacEmailsListRequestSort",
     "GetTransacEmailsListResponse",
     "GetTransacEmailsListResponseTransactionalEmailsItem",
+    "PostPreviewSmtpEmailTemplatesRequest",
+    "PostPreviewSmtpEmailTemplatesRequestParams",
     "PostPreviewSmtpEmailTemplatesResponse",
     "SendTransacEmailRequestAttachmentItem",
     "SendTransacEmailRequestBccItem",
@@ -186,4 +197,5 @@ __all__ = [
     "SendTransacEmailRequestToItem",
     "SendTransacEmailResponse",
     "UpdateSmtpTemplateRequestSender",
+    "UpdateSmtpTemplateRequestTemplateId",
 ]

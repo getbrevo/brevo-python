@@ -11,8 +11,22 @@ if typing.TYPE_CHECKING:
         CreateTierForTierGroupRequestAccessConditionsItem,
     )
     from .create_tier_for_tier_group_request_tier_rewards_item import CreateTierForTierGroupRequestTierRewardsItem
+    from .create_tier_group_request_downgrade_schedule import CreateTierGroupRequestDowngradeSchedule
+    from .create_tier_group_request_downgrade_schedule_duration_modifier import (
+        CreateTierGroupRequestDowngradeScheduleDurationModifier,
+    )
+    from .create_tier_group_request_downgrade_schedule_duration_unit import (
+        CreateTierGroupRequestDowngradeScheduleDurationUnit,
+    )
     from .create_tier_group_request_downgrade_strategy import CreateTierGroupRequestDowngradeStrategy
     from .create_tier_group_request_meta import CreateTierGroupRequestMeta
+    from .create_tier_group_request_upgrade_schedule import CreateTierGroupRequestUpgradeSchedule
+    from .create_tier_group_request_upgrade_schedule_duration_modifier import (
+        CreateTierGroupRequestUpgradeScheduleDurationModifier,
+    )
+    from .create_tier_group_request_upgrade_schedule_duration_unit import (
+        CreateTierGroupRequestUpgradeScheduleDurationUnit,
+    )
     from .create_tier_group_request_upgrade_strategy import CreateTierGroupRequestUpgradeStrategy
     from .get_list_of_tier_groups_request_version import GetListOfTierGroupsRequestVersion
     from .get_list_of_tier_groups_response import GetListOfTierGroupsResponse
@@ -28,8 +42,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AddSubscriptionToTierResponse": ".add_subscription_to_tier_response",
     "CreateTierForTierGroupRequestAccessConditionsItem": ".create_tier_for_tier_group_request_access_conditions_item",
     "CreateTierForTierGroupRequestTierRewardsItem": ".create_tier_for_tier_group_request_tier_rewards_item",
+    "CreateTierGroupRequestDowngradeSchedule": ".create_tier_group_request_downgrade_schedule",
+    "CreateTierGroupRequestDowngradeScheduleDurationModifier": ".create_tier_group_request_downgrade_schedule_duration_modifier",
+    "CreateTierGroupRequestDowngradeScheduleDurationUnit": ".create_tier_group_request_downgrade_schedule_duration_unit",
     "CreateTierGroupRequestDowngradeStrategy": ".create_tier_group_request_downgrade_strategy",
     "CreateTierGroupRequestMeta": ".create_tier_group_request_meta",
+    "CreateTierGroupRequestUpgradeSchedule": ".create_tier_group_request_upgrade_schedule",
+    "CreateTierGroupRequestUpgradeScheduleDurationModifier": ".create_tier_group_request_upgrade_schedule_duration_modifier",
+    "CreateTierGroupRequestUpgradeScheduleDurationUnit": ".create_tier_group_request_upgrade_schedule_duration_unit",
     "CreateTierGroupRequestUpgradeStrategy": ".create_tier_group_request_upgrade_strategy",
     "GetListOfTierGroupsRequestVersion": ".get_list_of_tier_groups_request_version",
     "GetListOfTierGroupsResponse": ".get_list_of_tier_groups_response",
@@ -69,8 +89,14 @@ __all__ = [
     "AddSubscriptionToTierResponse",
     "CreateTierForTierGroupRequestAccessConditionsItem",
     "CreateTierForTierGroupRequestTierRewardsItem",
+    "CreateTierGroupRequestDowngradeSchedule",
+    "CreateTierGroupRequestDowngradeScheduleDurationModifier",
+    "CreateTierGroupRequestDowngradeScheduleDurationUnit",
     "CreateTierGroupRequestDowngradeStrategy",
     "CreateTierGroupRequestMeta",
+    "CreateTierGroupRequestUpgradeSchedule",
+    "CreateTierGroupRequestUpgradeScheduleDurationModifier",
+    "CreateTierGroupRequestUpgradeScheduleDurationUnit",
     "CreateTierGroupRequestUpgradeStrategy",
     "GetListOfTierGroupsRequestVersion",
     "GetListOfTierGroupsResponse",

@@ -27,6 +27,7 @@ if typing.TYPE_CHECKING:
         GetSmtpReportRequestSort,
         GetSmtpReportResponse,
         GetSmtpReportResponseReportsItem,
+        GetSmtpTemplateRequestTemplateId,
         GetSmtpTemplatesRequestSort,
         GetSmtpTemplatesResponse,
         GetTransacBlockedContactsRequestSort,
@@ -39,6 +40,8 @@ if typing.TYPE_CHECKING:
         GetTransacEmailsListRequestSort,
         GetTransacEmailsListResponse,
         GetTransacEmailsListResponseTransactionalEmailsItem,
+        PostPreviewSmtpEmailTemplatesRequest,
+        PostPreviewSmtpEmailTemplatesRequestParams,
         PostPreviewSmtpEmailTemplatesResponse,
         SendTransacEmailRequestAttachmentItem,
         SendTransacEmailRequestBccItem,
@@ -53,6 +56,7 @@ if typing.TYPE_CHECKING:
         SendTransacEmailRequestToItem,
         SendTransacEmailResponse,
         UpdateSmtpTemplateRequestSender,
+        UpdateSmtpTemplateRequestTemplateId,
     )
 _dynamic_imports: typing.Dict[str, str] = {
     "CreateSmtpTemplateRequestSender": ".types",
@@ -75,6 +79,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetSmtpReportRequestSort": ".types",
     "GetSmtpReportResponse": ".types",
     "GetSmtpReportResponseReportsItem": ".types",
+    "GetSmtpTemplateRequestTemplateId": ".types",
     "GetSmtpTemplatesRequestSort": ".types",
     "GetSmtpTemplatesResponse": ".types",
     "GetTransacBlockedContactsRequestSort": ".types",
@@ -87,6 +92,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetTransacEmailsListRequestSort": ".types",
     "GetTransacEmailsListResponse": ".types",
     "GetTransacEmailsListResponseTransactionalEmailsItem": ".types",
+    "PostPreviewSmtpEmailTemplatesRequest": ".types",
+    "PostPreviewSmtpEmailTemplatesRequestParams": ".types",
     "PostPreviewSmtpEmailTemplatesResponse": ".types",
     "SendTransacEmailRequestAttachmentItem": ".types",
     "SendTransacEmailRequestBccItem": ".types",
@@ -101,6 +108,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SendTransacEmailRequestToItem": ".types",
     "SendTransacEmailResponse": ".types",
     "UpdateSmtpTemplateRequestSender": ".types",
+    "UpdateSmtpTemplateRequestTemplateId": ".types",
 }
 
 
@@ -146,6 +154,7 @@ __all__ = [
     "GetSmtpReportRequestSort",
     "GetSmtpReportResponse",
     "GetSmtpReportResponseReportsItem",
+    "GetSmtpTemplateRequestTemplateId",
     "GetSmtpTemplatesRequestSort",
     "GetSmtpTemplatesResponse",
     "GetTransacBlockedContactsRequestSort",
@@ -158,6 +167,8 @@ __all__ = [
     "GetTransacEmailsListRequestSort",
     "GetTransacEmailsListResponse",
     "GetTransacEmailsListResponseTransactionalEmailsItem",
+    "PostPreviewSmtpEmailTemplatesRequest",
+    "PostPreviewSmtpEmailTemplatesRequestParams",
     "PostPreviewSmtpEmailTemplatesResponse",
     "SendTransacEmailRequestAttachmentItem",
     "SendTransacEmailRequestBccItem",
@@ -172,4 +183,5 @@ __all__ = [
     "SendTransacEmailRequestToItem",
     "SendTransacEmailResponse",
     "UpdateSmtpTemplateRequestSender",
+    "UpdateSmtpTemplateRequestTemplateId",
 ]

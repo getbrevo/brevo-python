@@ -7,6 +7,9 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
+from .get_loyalty_balance_programs_pid_transaction_history_response_transaction_history_item_transaction_type import (
+    GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItemTransactionType,
+)
 
 
 class GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem(UncheckedBaseModel):
@@ -19,6 +22,11 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryIt
     The transaction amount.
     """
 
+    transaction_type: typing_extensions.Annotated[
+        typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItemTransactionType],
+        FieldMetadata(alias="transactionType"),
+        pydantic.Field(alias="transactionType", description="The type of the transaction."),
+    ] = None
     balance_expiration_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceExpirationDate"),

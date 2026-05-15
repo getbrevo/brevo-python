@@ -13,11 +13,11 @@ class GetSubscriptionBalancesResponseBalanceItem(UncheckedBaseModel):
     balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceDefinitionId"),
-        pydantic.Field(alias="balanceDefinitionId", description="balance definition ID"),
+        pydantic.Field(alias="balanceDefinitionId", description="Balance definition ID."),
     ] = None
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
-    Unique identifier for the balance definition associated with this aggregate balance
+    Aggregate balance value for this definition.
     """
 
     if IS_PYDANTIC_V2:

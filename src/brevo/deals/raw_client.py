@@ -36,6 +36,8 @@ class RawDealsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[typing.List[GetCrmAttributesDealsResponseItem]]:
         """
+        Retrieve the list of all attributes defined for deals, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -61,6 +63,17 @@ class RawDealsClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -81,9 +94,12 @@ class RawDealsClient:
         offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[GetCrmDealsRequestSort] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetCrmDealsResponse]:
         """
+        Retrieve a paginated list of deals with optional filtering, sorting, and search capabilities. Results can be filtered by attributes such as deal name or owner, linked companies, linked contacts, or modification/creation timestamps. Default sort order is descending by creation date.
+
         Parameters
         ----------
         filters_attributes_deal_name : typing.Optional[str]
@@ -93,13 +109,13 @@ class RawDealsClient:
             Filter by linked companies ids
 
         filters_linked_contacts_ids : typing.Optional[str]
-            Filter by linked companies ids
+            Filter by linked contacts ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         offset : typing.Optional[int]
             Index of the first document of the page
@@ -109,6 +125,9 @@ class RawDealsClient:
 
         sort : typing.Optional[GetCrmDealsRequestSort]
             Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+
+        sort_by : typing.Optional[str]
+            The field used to sort field names.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -130,6 +149,7 @@ class RawDealsClient:
                 "offset": offset,
                 "limit": limit,
                 "sort": sort,
+                "sortBy": sort_by,
             },
             request_options=request_options,
         )
@@ -173,6 +193,8 @@ class RawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PostCrmDealsResponse]:
         """
+        Create a new deal in the CRM with the specified name, attributes, and optional associations to contacts and companies. You can assign the deal to a specific pipeline and stage by providing `pipeline` and `deal_stage` attribute IDs, which can be retrieved from the pipeline details endpoint.
+
         Parameters
         ----------
         name : str
@@ -259,7 +281,7 @@ class RawDealsClient:
             The mapping options in JSON format. Here is an example of the JSON structure: ```json {
               "link_entities": true, // Determines whether to link related entities during the import process
               "unlink_entities": false, // Determines whether to unlink related entities during the import process
-              "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+              "update_existing_records": true, // Determines whether to update based on deal ID or treat every row as create
               "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
             } ```
 
@@ -325,6 +347,8 @@ class RawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Link or unlink contacts and companies with a specific deal in a single request. You can simultaneously link new contacts/companies and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -388,6 +412,8 @@ class RawDealsClient:
 
     def get_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[Deal]:
         """
+        Retrieve the full details of a single deal by its identifier, including its attributes, pipeline stage, linked contacts, and linked companies. Returns a 404 error if the deal does not exist.
+
         Parameters
         ----------
         id : str
@@ -448,6 +474,8 @@ class RawDealsClient:
 
     def delete_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
         """
+        Permanently delete a deal by its identifier. The requesting user must be the deal owner or have manage permission on deals; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -509,6 +537,8 @@ class RawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Update an existing deal''s attributes, name, linked contacts, or linked companies. Note that passing `linkedContactsIds` or `linkedCompaniesIds` replaces the entire list of associations, so omitted IDs will be removed. To move a deal to a different pipeline or stage, provide both the `pipeline` and `deal_stage` attribute IDs.
+
         Parameters
         ----------
         id : str
@@ -517,7 +547,7 @@ class RawDealsClient:
             Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
 
         linked_companies_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked companies. Omitted IDs will be removed.
 
         linked_contacts_ids : typing.Optional[typing.Sequence[int]]
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
@@ -610,6 +640,17 @@ class RawDealsClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -621,6 +662,8 @@ class RawDealsClient:
 
     def get_all_pipelines(self, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[Pipelines]:
         """
+        Retrieve the list of all deal pipelines configured for your account, including each pipeline''s stages and settings. If no pipelines have been configured yet, a default pipeline is automatically created and returned.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -629,7 +672,7 @@ class RawDealsClient:
         Returns
         -------
         HttpResponse[Pipelines]
-            Returns list of pipelines and and there details
+            Returns list of pipelines and their details
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/pipeline/details/all",
@@ -670,6 +713,8 @@ class RawDealsClient:
         self, pipeline_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[Pipelines]:
         """
+        Retrieve the details of a specific deal pipeline by its identifier, including its stages, stage ordering, and configuration. Use this endpoint to obtain the pipeline and stage IDs needed when creating or updating deals.
+
         Parameters
         ----------
         pipeline_id : str
@@ -726,6 +771,8 @@ class AsyncRawDealsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[typing.List[GetCrmAttributesDealsResponseItem]]:
         """
+        Retrieve the list of all attributes defined for deals, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -751,6 +798,17 @@ class AsyncRawDealsClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -771,9 +829,12 @@ class AsyncRawDealsClient:
         offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[GetCrmDealsRequestSort] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetCrmDealsResponse]:
         """
+        Retrieve a paginated list of deals with optional filtering, sorting, and search capabilities. Results can be filtered by attributes such as deal name or owner, linked companies, linked contacts, or modification/creation timestamps. Default sort order is descending by creation date.
+
         Parameters
         ----------
         filters_attributes_deal_name : typing.Optional[str]
@@ -783,13 +844,13 @@ class AsyncRawDealsClient:
             Filter by linked companies ids
 
         filters_linked_contacts_ids : typing.Optional[str]
-            Filter by linked companies ids
+            Filter by linked contacts ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         offset : typing.Optional[int]
             Index of the first document of the page
@@ -799,6 +860,9 @@ class AsyncRawDealsClient:
 
         sort : typing.Optional[GetCrmDealsRequestSort]
             Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+
+        sort_by : typing.Optional[str]
+            The field used to sort field names.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -820,6 +884,7 @@ class AsyncRawDealsClient:
                 "offset": offset,
                 "limit": limit,
                 "sort": sort,
+                "sortBy": sort_by,
             },
             request_options=request_options,
         )
@@ -863,6 +928,8 @@ class AsyncRawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PostCrmDealsResponse]:
         """
+        Create a new deal in the CRM with the specified name, attributes, and optional associations to contacts and companies. You can assign the deal to a specific pipeline and stage by providing `pipeline` and `deal_stage` attribute IDs, which can be retrieved from the pipeline details endpoint.
+
         Parameters
         ----------
         name : str
@@ -949,7 +1016,7 @@ class AsyncRawDealsClient:
             The mapping options in JSON format. Here is an example of the JSON structure: ```json {
               "link_entities": true, // Determines whether to link related entities during the import process
               "unlink_entities": false, // Determines whether to unlink related entities during the import process
-              "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+              "update_existing_records": true, // Determines whether to update based on deal ID or treat every row as create
               "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
             } ```
 
@@ -1015,6 +1082,8 @@ class AsyncRawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Link or unlink contacts and companies with a specific deal in a single request. You can simultaneously link new contacts/companies and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -1080,6 +1149,8 @@ class AsyncRawDealsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Deal]:
         """
+        Retrieve the full details of a single deal by its identifier, including its attributes, pipeline stage, linked contacts, and linked companies. Returns a 404 error if the deal does not exist.
+
         Parameters
         ----------
         id : str
@@ -1142,6 +1213,8 @@ class AsyncRawDealsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Permanently delete a deal by its identifier. The requesting user must be the deal owner or have manage permission on deals; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -1203,6 +1276,8 @@ class AsyncRawDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Update an existing deal''s attributes, name, linked contacts, or linked companies. Note that passing `linkedContactsIds` or `linkedCompaniesIds` replaces the entire list of associations, so omitted IDs will be removed. To move a deal to a different pipeline or stage, provide both the `pipeline` and `deal_stage` attribute IDs.
+
         Parameters
         ----------
         id : str
@@ -1211,7 +1286,7 @@ class AsyncRawDealsClient:
             Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
 
         linked_companies_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked companies. Omitted IDs will be removed.
 
         linked_contacts_ids : typing.Optional[typing.Sequence[int]]
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
@@ -1306,6 +1381,17 @@ class AsyncRawDealsClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -1319,6 +1405,8 @@ class AsyncRawDealsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Pipelines]:
         """
+        Retrieve the list of all deal pipelines configured for your account, including each pipeline''s stages and settings. If no pipelines have been configured yet, a default pipeline is automatically created and returned.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -1327,7 +1415,7 @@ class AsyncRawDealsClient:
         Returns
         -------
         AsyncHttpResponse[Pipelines]
-            Returns list of pipelines and and there details
+            Returns list of pipelines and their details
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/pipeline/details/all",
@@ -1368,6 +1456,8 @@ class AsyncRawDealsClient:
         self, pipeline_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Pipelines]:
         """
+        Retrieve the details of a specific deal pipeline by its identifier, including its stages, stage ordering, and configuration. Use this endpoint to obtain the pipeline and stage IDs needed when creating or updating deals.
+
         Parameters
         ----------
         pipeline_id : str

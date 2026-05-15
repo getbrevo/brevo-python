@@ -14,7 +14,7 @@ def test_notes_create_a_note() -> None:
     test_id = "notes.create_a_note.0"
     client = get_client(test_id)
     client.notes.create_a_note(
-        text="In communication with client_dev for resolution of queries.",
+        text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
     )
     verify_request_count(test_id, "POST", "/crm/notes", None, 1)
 
@@ -45,6 +45,6 @@ def test_notes_update_a_note() -> None:
     client = get_client(test_id)
     client.notes.update_a_note(
         id="id",
-        text="In communication with client_dev for resolution of queries.",
+        text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
     )
     verify_request_count(test_id, "PATCH", "/crm/notes/id", None, 1)

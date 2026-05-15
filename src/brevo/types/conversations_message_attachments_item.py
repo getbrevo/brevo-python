@@ -7,38 +7,60 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .conversations_message_attachments_item_image_info import ConversationsMessageAttachmentsItemImageInfo
 
 
 class ConversationsMessageAttachmentsItem(UncheckedBaseModel):
-    file_name: typing_extensions.Annotated[
+    name: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The name of the file.
+    """
+
+    link: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The URL of the file.
+    """
+
+    mime_type: typing_extensions.Annotated[
         typing.Optional[str],
-        FieldMetadata(alias="fileName"),
-        pydantic.Field(alias="fileName", description="The name of the file."),
-    ] = None
-    inline_id: typing_extensions.Annotated[
-        typing.Optional[str],
-        FieldMetadata(alias="inlineId"),
-        pydantic.Field(alias="inlineId", description="The ID of the inline file."),
+        FieldMetadata(alias="mimeType"),
+        pydantic.Field(alias="mimeType", description="The MIME type of the file."),
     ] = None
     is_image: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isImage"),
         pydantic.Field(alias="isImage", description="`true` for images."),
     ] = None
+    is_sticker: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="isSticker"),
+        pydantic.Field(alias="isSticker", description="`true` for sticker files."),
+    ] = None
     is_inline: typing_extensions.Annotated[
-        typing.Optional[str],
+        typing.Optional[bool],
         FieldMetadata(alias="isInline"),
         pydantic.Field(alias="isInline", description="`true` for inline files."),
+    ] = None
+    inline_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="inlineId"),
+        pydantic.Field(alias="inlineId", description="The ID of the inline file."),
     ] = None
     size: typing.Optional[int] = pydantic.Field(default=None)
     """
     The size of the file in bytes.
     """
 
-    url: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    The URL of the file.
-    """
+    image_info: typing_extensions.Annotated[
+        typing.Optional[ConversationsMessageAttachmentsItemImageInfo],
+        FieldMetadata(alias="imageInfo"),
+        pydantic.Field(alias="imageInfo", description="Image information (only present for image files)."),
+    ] = None
+    is_allowed_file_type: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="isAllowedFileType"),
+        pydantic.Field(alias="isAllowedFileType", description="Whether the file extension is allowed for download."),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

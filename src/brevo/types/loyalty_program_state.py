@@ -2,4 +2,4 @@
 
 import typing
 
-LoyaltyProgramState = typing.Union[typing.Literal["inactive", "active"], typing.Any]
+LoyaltyProgramState = typing.Union[typing.Literal["inactive", "active", "draft"], typing.Any]

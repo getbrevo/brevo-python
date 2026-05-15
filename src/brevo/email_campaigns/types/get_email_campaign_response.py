@@ -9,6 +9,7 @@ from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.get_campaign_recipients import GetCampaignRecipients
 from ...types.get_extended_campaign_stats import GetExtendedCampaignStats
+from .get_email_campaign_response_email_expiration_date import GetEmailCampaignResponseEmailExpirationDate
 from .get_email_campaign_response_sender import GetEmailCampaignResponseSender
 from .get_email_campaign_response_status import GetEmailCampaignResponseStatus
 from .get_email_campaign_response_type import GetEmailCampaignResponseType
@@ -116,6 +117,14 @@ class GetEmailCampaignResponse(UncheckedBaseModel):
             description="The duration of the test in hours at the end of which the winning version will be sent. Only available if `abTesting` flag of the campaign is `true`",
         ),
     ] = None
+    attachment_url: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="attachmentUrl"),
+        pydantic.Field(
+            alias="attachmentUrl",
+            description="URL of the attachment file associated with the campaign. Empty string if no attachment is present.",
+        ),
+    ] = None
     created_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="createdAt"),
@@ -123,6 +132,14 @@ class GetEmailCampaignResponse(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    email_expiration_date: typing_extensions.Annotated[
+        typing.Optional[GetEmailCampaignResponseEmailExpirationDate],
+        FieldMetadata(alias="emailExpirationDate"),
+        pydantic.Field(
+            alias="emailExpirationDate",
+            description="Expiration date configuration for the email campaign, if set. Contains the duration and unit of the email expiry.",
+        ),
+    ] = None
     footer: str = pydantic.Field()
     """
     Footer of the campaign
@@ -191,7 +208,10 @@ class GetEmailCampaignResponse(UncheckedBaseModel):
     share_link: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="shareLink"),
-        pydantic.Field(alias="shareLink", description="Link to share the campaign on social medias"),
+        pydantic.Field(
+            alias="shareLink",
+            description="Link to share the campaign on social media. For trigger campaigns, this returns a descriptive message instead of a URL. For classic campaigns that have not been sent, this also returns a descriptive message.",
+        ),
     ] = None
     tag: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -219,20 +239,32 @@ class GetEmailCampaignResponse(UncheckedBaseModel):
     utm_campaign_value: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="utmCampaignValue"),
-        pydantic.Field(alias="utmCampaignValue", description="utm parameter associated with campaign"),
+        pydantic.Field(
+            alias="utmCampaignValue",
+            description="The utm_campaign value associated with the campaign. Only present if a UTM campaign value was set.",
+        ),
     ] = None
-    utm_id_active: typing_extensions.Annotated[
-        typing.Optional[bool],
-        FieldMetadata(alias="utmIDActive"),
-        pydantic.Field(alias="utmIDActive", description="utm id active"),
+    utm_id: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="utmID"),
+        pydantic.Field(
+            alias="utmID",
+            description="The campaign ID used as utm_id parameter. Only present if UTM campaign tracking with ID is enabled.",
+        ),
     ] = None
     utm_medium: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="utmMedium"), pydantic.Field(alias="utmMedium")
+        typing.Optional[str],
+        FieldMetadata(alias="utmMedium"),
+        pydantic.Field(
+            alias="utmMedium", description='The utm_medium value. Set to "EMAIL" when UTM campaign tracking is enabled.'
+        ),
     ] = None
     utm_source: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="utmSource"),
-        pydantic.Field(alias="utmSource", description="source of utm"),
+        pydantic.Field(
+            alias="utmSource", description='The utm_source value. Set to "Brevo" when UTM campaign tracking is enabled.'
+        ),
     ] = None
     recipients: GetCampaignRecipients
     statistics: GetExtendedCampaignStats

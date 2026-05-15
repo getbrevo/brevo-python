@@ -77,12 +77,15 @@ class ContactsClient:
         modified_since: typing.Optional[str] = None,
         created_since: typing.Optional[str] = None,
         sort: typing.Optional[GetContactsRequestSort] = None,
+        ids: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
         segment_id: typing.Optional[int] = None,
         list_ids: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
         filter: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContacts:
         """
+        Retrieve all contacts from your Brevo account with support for pagination, filtering, and sorting. Results default to 50 contacts per page (maximum 1000) sorted in descending order of creation, and can be filtered by modification date, creation date, contact IDs (up to 20), list IDs, segment ID, or contact attributes using the equals operator. Note that either listIds or segmentId can be passed but not both simultaneously.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -100,8 +103,11 @@ class ContactsClient:
         sort : typing.Optional[GetContactsRequestSort]
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 
+        ids : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by a list of contact IDs. You can pass a **maximum of 20 IDs**. All elements must be integers.
+
         segment_id : typing.Optional[int]
-            Id of the segment. **Either listIds or segmentId can be passed.**
+            Id of the segment. **Either listIds or segmentId can be passed.** Must be a positive integer (minimum value of 1).
 
         list_ids : typing.Optional[typing.Union[int, typing.Sequence[int]]]
             Ids of the list. **Either listIds or segmentId can be passed.**
@@ -132,6 +138,7 @@ class ContactsClient:
             modified_since=modified_since,
             created_since=created_since,
             sort=sort,
+            ids=ids,
             segment_id=segment_id,
             list_ids=list_ids,
             filter=filter,
@@ -150,6 +157,8 @@ class ContactsClient:
         sms_blacklisted: typing.Optional[bool] = OMIT,
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
+        force_merge: typing.Optional[bool] = OMIT,
+        get_id: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateContactResponse]:
         """
@@ -183,6 +192,12 @@ class ContactsClient:
         update_enabled : typing.Optional[bool]
             Facilitate to update the existing contact in the same request (updateEnabled = true)
 
+        force_merge : typing.Optional[bool]
+            When true, if the contact being created shares an identifier (email, SMS, ext_id, whatsapp, landline) with an existing contact, the two contacts are force-merged. The contact with the most recent `last_modified` timestamp is retained; the other is deleted. When false (default), a 4xx error is returned on identifier conflict.
+
+        get_id : typing.Optional[bool]
+            When true, the response returns the `id` of the surviving contact after merge.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -209,12 +224,16 @@ class ContactsClient:
             sms_blacklisted=sms_blacklisted,
             smtp_blacklist_sender=smtp_blacklist_sender,
             update_enabled=update_enabled,
+            force_merge=force_merge,
+            get_id=get_id,
             request_options=request_options,
         )
         return _response.data
 
     def get_attributes(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetAttributesResponse:
         """
+        Retrieve all contact attributes defined in your Brevo account, grouped by category (normal, transactional, category, calculated, global). Each attribute includes its name, type, and category, along with enumeration values for category-type attributes and options for multiple-choice-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -250,6 +269,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Create a new contact attribute under the specified category and name. The required body properties depend on the category: use "type" for normal, transactional, or category attributes; use "value" for calculated or global attributes; use "enumeration" for category attributes; and use "multiCategoryOptions" for normal multiple-choice attributes. None of the category or multicategory option values can exceed 200 characters.
+
         Parameters
         ----------
         attribute_category : CreateAttributeRequestAttributeCategory
@@ -315,6 +336,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing contact attribute identified by its category and name. For category-type attributes, you can update the enumeration values; for calculated or global attributes, update the computed value formula; and for normal multiple-choice attributes, update the multicategory options. None of the category or multicategory option values can exceed 200 characters.
+
         Parameters
         ----------
         attribute_category : UpdateAttributeRequestAttributeCategory
@@ -369,6 +392,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Permanently delete an existing contact attribute by its category and name. The attribute must exist in the specified category (normal, transactional, category, calculated, or global), otherwise a 404 error is returned.
+
         Parameters
         ----------
         attribute_category : DeleteAttributeRequestAttributeCategory
@@ -409,6 +434,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Delete a specific option from an existing multiple-choice contact attribute. The attribute type must be "multiple-choice", and both the attribute name and the option to delete must already exist in your account.
+
         Parameters
         ----------
         multiple_choice_attribute : str
@@ -448,6 +475,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update multiple contacts in a single API call by passing an array of contact objects. Each contact in the array must be identified by one of: email, id, or sms (only one identifier per contact). You can update attributes, blacklist status, list memberships, ext_id, and transactional email forbidden senders for each contact in the batch.
+
         Parameters
         ----------
         contacts : typing.Optional[typing.Sequence[UpdateBatchContactsRequestContactsItem]]
@@ -663,6 +692,8 @@ class ContactsClient:
         self, *, name: typing.Optional[str] = OMIT, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateFolderResponse:
         """
+        Create a new folder to organize your contact lists. Folders serve as containers for grouping related lists together. The folder name is required and must be provided in the request body.
+
         Parameters
         ----------
         name : typing.Optional[str]
@@ -729,6 +760,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update the name of an existing folder identified by its ID. The new folder name must be provided in the request body. Returns a 404 error if the folder ID does not exist.
+
         Parameters
         ----------
         folder_id : int
@@ -760,6 +793,8 @@ class ContactsClient:
 
     def delete_folder(self, folder_id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a folder identified by its ID. Deleting a folder will also delete all the contact lists contained within it. This action cannot be undone.
+
         Parameters
         ----------
         folder_id : int
@@ -973,6 +1008,8 @@ class ContactsClient:
         self, *, folder_id: int, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateListResponse:
         """
+        Create a new contact list inside a specified folder. Both the list name and the parent folder ID are required. The newly created list will be empty and ready to receive contacts via the add contacts endpoint.
+
         Parameters
         ----------
         folder_id : int
@@ -1013,13 +1050,15 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetListResponse:
         """
+        Retrieve the details of a specific contact list by its ID, including its name, folder ID, creation date, subscriber counts, and campaign statistics. You can optionally filter campaign statistics by providing startDate and endDate parameters (both must be used together in YYYY-MM-DD format).
+
         Parameters
         ----------
         list_id : int
             Id of the list
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
+            **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
 
         end_date : typing.Optional[str]
             **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
@@ -1057,6 +1096,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing contact list identified by its ID. You can update the list name, move it to a different folder by providing a new folderId, or both. Only one of the two parameters (name, folderId) needs to be provided per request.
+
         Parameters
         ----------
         list_id : int
@@ -1093,6 +1134,8 @@ class ContactsClient:
 
     def delete_list(self, list_id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a contact list identified by its ID. The contacts in the list are not deleted; they are only removed from this list. Returns a 404 error if the list ID does not exist.
+
         Parameters
         ----------
         list_id : int
@@ -1130,6 +1173,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContacts:
         """
+        Retrieve all contacts belonging to a specific list, identified by its list ID. Results are paginated with a default of 50 contacts per page (maximum 500) and sorted in descending order of creation. You can optionally filter contacts by their modification date using the modifiedSince parameter.
+
         Parameters
         ----------
         list_id : int
@@ -1267,6 +1312,8 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSegmentsResponse:
         """
+        Retrieve all contact segments defined in your Brevo account with support for pagination and sorting. Results default to 10 segments per page (maximum 50) sorted in descending order of creation. Each segment includes its ID, name, category name, and last update timestamp.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -1323,10 +1370,10 @@ class ContactsClient:
             email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate. Must not be greater than the current date.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.
+            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Must not be greater than the current date.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1368,6 +1415,7 @@ class ContactsClient:
         sms_blacklisted: typing.Optional[bool] = OMIT,
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         unlink_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        force_merge: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -1378,10 +1426,10 @@ class ContactsClient:
         Parameters
         ----------
         identifier : UpdateContactRequestIdentifier
-            Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
+            Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE_NUMBER attribute value
 
         identifier_type : typing.Optional[UpdateContactRequestIdentifierType]
-            email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+            email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 
         attributes : typing.Optional[typing.Dict[str, UpdateContactRequestAttributesValue]]
             Pass the set of attributes to be updated. **These attributes must be present in your account**. To update existing email address of a contact with the new one please pass EMAIL in attributes. For example, **{ "EMAIL":"newemail@domain.com", "FNAME":"Ellie", "LNAME":"Roger", "COUNTRIES":["India","China"]}**. The attribute's parameter should be passed in capital letter while updating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored .Keep in mind transactional attributes can be updated the same way as normal attributes. Mobile Number in **SMS** field should be passed with proper country code. For example: **{"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"}**
@@ -1403,6 +1451,9 @@ class ContactsClient:
 
         unlink_list_ids : typing.Optional[typing.Sequence[int]]
             Ids of the lists to remove the contact from
+
+        force_merge : typing.Optional[bool]
+            When true, if the contact being updated shares an identifier (email, SMS, ext_id, whatsapp, landline) with an existing contact, the two contacts are force-merged. The contact with the most recent `last_modified` timestamp is retained; the other is deleted. When false (default), a 4xx error is returned on identifier conflict.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1432,6 +1483,7 @@ class ContactsClient:
             sms_blacklisted=sms_blacklisted,
             smtp_blacklist_sender=smtp_blacklist_sender,
             unlink_list_ids=unlink_list_ids,
+            force_merge=force_merge,
             request_options=request_options,
         )
         return _response.data
@@ -1486,16 +1538,18 @@ class ContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContactStatsResponse:
         """
+        Retrieve email campaign statistics for a specific contact identified by email address or numeric ID. Statistics include messages sent, opens, clicks, hard/soft bounces, deliveries, unsubscriptions, complaints, and transactional attributes. By default, data covers the last 90 days; use startDate and endDate parameters (YYYY-MM-DD) to specify a custom range with a maximum span of 90 days.
+
         Parameters
         ----------
         identifier : GetContactStatsRequestIdentifier
             Email (urlencoded) OR ID of the contact
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate. Must not be greater than the current date.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Maximum difference between startDate and endDate should not be greater than 90 days
+            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Must not be greater than the current date. Maximum difference between startDate and endDate should not be greater than 90 days.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1545,12 +1599,15 @@ class AsyncContactsClient:
         modified_since: typing.Optional[str] = None,
         created_since: typing.Optional[str] = None,
         sort: typing.Optional[GetContactsRequestSort] = None,
+        ids: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
         segment_id: typing.Optional[int] = None,
         list_ids: typing.Optional[typing.Union[int, typing.Sequence[int]]] = None,
         filter: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContacts:
         """
+        Retrieve all contacts from your Brevo account with support for pagination, filtering, and sorting. Results default to 50 contacts per page (maximum 1000) sorted in descending order of creation, and can be filtered by modification date, creation date, contact IDs (up to 20), list IDs, segment ID, or contact attributes using the equals operator. Note that either listIds or segmentId can be passed but not both simultaneously.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -1568,8 +1625,11 @@ class AsyncContactsClient:
         sort : typing.Optional[GetContactsRequestSort]
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 
+        ids : typing.Optional[typing.Union[int, typing.Sequence[int]]]
+            Filter by a list of contact IDs. You can pass a **maximum of 20 IDs**. All elements must be integers.
+
         segment_id : typing.Optional[int]
-            Id of the segment. **Either listIds or segmentId can be passed.**
+            Id of the segment. **Either listIds or segmentId can be passed.** Must be a positive integer (minimum value of 1).
 
         list_ids : typing.Optional[typing.Union[int, typing.Sequence[int]]]
             Ids of the list. **Either listIds or segmentId can be passed.**
@@ -1608,6 +1668,7 @@ class AsyncContactsClient:
             modified_since=modified_since,
             created_since=created_since,
             sort=sort,
+            ids=ids,
             segment_id=segment_id,
             list_ids=list_ids,
             filter=filter,
@@ -1626,6 +1687,8 @@ class AsyncContactsClient:
         sms_blacklisted: typing.Optional[bool] = OMIT,
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
+        force_merge: typing.Optional[bool] = OMIT,
+        get_id: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateContactResponse]:
         """
@@ -1658,6 +1721,12 @@ class AsyncContactsClient:
 
         update_enabled : typing.Optional[bool]
             Facilitate to update the existing contact in the same request (updateEnabled = true)
+
+        force_merge : typing.Optional[bool]
+            When true, if the contact being created shares an identifier (email, SMS, ext_id, whatsapp, landline) with an existing contact, the two contacts are force-merged. The contact with the most recent `last_modified` timestamp is retained; the other is deleted. When false (default), a 4xx error is returned on identifier conflict.
+
+        get_id : typing.Optional[bool]
+            When true, the response returns the `id` of the surviving contact after merge.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1693,12 +1762,16 @@ class AsyncContactsClient:
             sms_blacklisted=sms_blacklisted,
             smtp_blacklist_sender=smtp_blacklist_sender,
             update_enabled=update_enabled,
+            force_merge=force_merge,
+            get_id=get_id,
             request_options=request_options,
         )
         return _response.data
 
     async def get_attributes(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetAttributesResponse:
         """
+        Retrieve all contact attributes defined in your Brevo account, grouped by category (normal, transactional, category, calculated, global). Each attribute includes its name, type, and category, along with enumeration values for category-type attributes and options for multiple-choice-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -1742,6 +1815,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Create a new contact attribute under the specified category and name. The required body properties depend on the category: use "type" for normal, transactional, or category attributes; use "value" for calculated or global attributes; use "enumeration" for category attributes; and use "multiCategoryOptions" for normal multiple-choice attributes. None of the category or multicategory option values can exceed 200 characters.
+
         Parameters
         ----------
         attribute_category : CreateAttributeRequestAttributeCategory
@@ -1815,6 +1890,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing contact attribute identified by its category and name. For category-type attributes, you can update the enumeration values; for calculated or global attributes, update the computed value formula; and for normal multiple-choice attributes, update the multicategory options. None of the category or multicategory option values can exceed 200 characters.
+
         Parameters
         ----------
         attribute_category : UpdateAttributeRequestAttributeCategory
@@ -1877,6 +1954,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Permanently delete an existing contact attribute by its category and name. The attribute must exist in the specified category (normal, transactional, category, calculated, or global), otherwise a 404 error is returned.
+
         Parameters
         ----------
         attribute_category : DeleteAttributeRequestAttributeCategory
@@ -1925,6 +2004,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Delete a specific option from an existing multiple-choice contact attribute. The attribute type must be "multiple-choice", and both the attribute name and the option to delete must already exist in your account.
+
         Parameters
         ----------
         multiple_choice_attribute : str
@@ -1972,6 +2053,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update multiple contacts in a single API call by passing an array of contact objects. Each contact in the array must be identified by one of: email, id, or sms (only one identifier per contact). You can update attributes, blacklist status, list memberships, ext_id, and transactional email forbidden senders for each contact in the batch.
+
         Parameters
         ----------
         contacts : typing.Optional[typing.Sequence[UpdateBatchContactsRequestContactsItem]]
@@ -2221,6 +2304,8 @@ class AsyncContactsClient:
         self, *, name: typing.Optional[str] = OMIT, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateFolderResponse:
         """
+        Create a new folder to organize your contact lists. Folders serve as containers for grouping related lists together. The folder name is required and must be provided in the request body.
+
         Parameters
         ----------
         name : typing.Optional[str]
@@ -2303,6 +2388,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update the name of an existing folder identified by its ID. The new folder name must be provided in the request body. Returns a 404 error if the folder ID does not exist.
+
         Parameters
         ----------
         folder_id : int
@@ -2342,6 +2429,8 @@ class AsyncContactsClient:
 
     async def delete_folder(self, folder_id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a folder identified by its ID. Deleting a folder will also delete all the contact lists contained within it. This action cannot be undone.
+
         Parameters
         ----------
         folder_id : int
@@ -2589,6 +2678,8 @@ class AsyncContactsClient:
         self, *, folder_id: int, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateListResponse:
         """
+        Create a new contact list inside a specified folder. Both the list name and the parent folder ID are required. The newly created list will be empty and ready to receive contacts via the add contacts endpoint.
+
         Parameters
         ----------
         folder_id : int
@@ -2637,13 +2728,15 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetListResponse:
         """
+        Retrieve the details of a specific contact list by its ID, including its name, folder ID, creation date, subscriber counts, and campaign statistics. You can optionally filter campaign statistics by providing startDate and endDate parameters (both must be used together in YYYY-MM-DD format).
+
         Parameters
         ----------
         list_id : int
             Id of the list
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
+            **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
 
         end_date : typing.Optional[str]
             **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to aggregate the sent email campaigns for a specific list id. **Prefer to pass your timezone in date-time format for accurate result**
@@ -2689,6 +2782,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing contact list identified by its ID. You can update the list name, move it to a different folder by providing a new folderId, or both. Only one of the two parameters (name, folderId) needs to be provided per request.
+
         Parameters
         ----------
         list_id : int
@@ -2733,6 +2828,8 @@ class AsyncContactsClient:
 
     async def delete_list(self, list_id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a contact list identified by its ID. The contacts in the list are not deleted; they are only removed from this list. Returns a 404 error if the list ID does not exist.
+
         Parameters
         ----------
         list_id : int
@@ -2778,6 +2875,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContacts:
         """
+        Retrieve all contacts belonging to a specific list, identified by its list ID. Results are paginated with a default of 50 contacts per page (maximum 500) and sorted in descending order of creation. You can optionally filter contacts by their modification date using the modifiedSince parameter.
+
         Parameters
         ----------
         list_id : int
@@ -2943,6 +3042,8 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSegmentsResponse:
         """
+        Retrieve all contact segments defined in your Brevo account with support for pagination and sorting. Results default to 10 segments per page (maximum 50) sorted in descending order of creation. Each segment includes its ID, name, category name, and last update timestamp.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -3007,10 +3108,10 @@ class AsyncContactsClient:
             email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate. Must not be greater than the current date.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.
+            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Must not be greater than the current date.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3060,6 +3161,7 @@ class AsyncContactsClient:
         sms_blacklisted: typing.Optional[bool] = OMIT,
         smtp_blacklist_sender: typing.Optional[typing.Sequence[str]] = OMIT,
         unlink_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        force_merge: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -3070,10 +3172,10 @@ class AsyncContactsClient:
         Parameters
         ----------
         identifier : UpdateContactRequestIdentifier
-            Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
+            Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE_NUMBER attribute value
 
         identifier_type : typing.Optional[UpdateContactRequestIdentifierType]
-            email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+            email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 
         attributes : typing.Optional[typing.Dict[str, UpdateContactRequestAttributesValue]]
             Pass the set of attributes to be updated. **These attributes must be present in your account**. To update existing email address of a contact with the new one please pass EMAIL in attributes. For example, **{ "EMAIL":"newemail@domain.com", "FNAME":"Ellie", "LNAME":"Roger", "COUNTRIES":["India","China"]}**. The attribute's parameter should be passed in capital letter while updating a contact. Values that don't match the attribute type (e.g. text or string in a date attribute) will be ignored .Keep in mind transactional attributes can be updated the same way as normal attributes. Mobile Number in **SMS** field should be passed with proper country code. For example: **{"SMS":"+91xxxxxxxxxx"} or {"SMS":"0091xxxxxxxxxx"}**
@@ -3095,6 +3197,9 @@ class AsyncContactsClient:
 
         unlink_list_ids : typing.Optional[typing.Sequence[int]]
             Ids of the lists to remove the contact from
+
+        force_merge : typing.Optional[bool]
+            When true, if the contact being updated shares an identifier (email, SMS, ext_id, whatsapp, landline) with an existing contact, the two contacts are force-merged. The contact with the most recent `last_modified` timestamp is retained; the other is deleted. When false (default), a 4xx error is returned on identifier conflict.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3132,6 +3237,7 @@ class AsyncContactsClient:
             sms_blacklisted=sms_blacklisted,
             smtp_blacklist_sender=smtp_blacklist_sender,
             unlink_list_ids=unlink_list_ids,
+            force_merge=force_merge,
             request_options=request_options,
         )
         return _response.data
@@ -3194,16 +3300,18 @@ class AsyncContactsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContactStatsResponse:
         """
+        Retrieve email campaign statistics for a specific contact identified by email address or numeric ID. Statistics include messages sent, opens, clicks, hard/soft bounces, deliveries, unsubscriptions, complaints, and transactional attributes. By default, data covers the last 90 days; use startDate and endDate parameters (YYYY-MM-DD) to specify a custom range with a maximum span of 90 days.
+
         Parameters
         ----------
         identifier : GetContactStatsRequestIdentifier
             Email (urlencoded) OR ID of the contact
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate
+            **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate. Must not be greater than the current date.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Maximum difference between startDate and endDate should not be greater than 90 days
+            **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Must not be greater than the current date. Maximum difference between startDate and endDate should not be greater than 90 days.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

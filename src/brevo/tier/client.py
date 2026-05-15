@@ -12,8 +12,10 @@ from .types.create_tier_for_tier_group_request_access_conditions_item import (
     CreateTierForTierGroupRequestAccessConditionsItem,
 )
 from .types.create_tier_for_tier_group_request_tier_rewards_item import CreateTierForTierGroupRequestTierRewardsItem
+from .types.create_tier_group_request_downgrade_schedule import CreateTierGroupRequestDowngradeSchedule
 from .types.create_tier_group_request_downgrade_strategy import CreateTierGroupRequestDowngradeStrategy
 from .types.create_tier_group_request_meta import CreateTierGroupRequestMeta
+from .types.create_tier_group_request_upgrade_schedule import CreateTierGroupRequestUpgradeSchedule
 from .types.create_tier_group_request_upgrade_strategy import CreateTierGroupRequestUpgradeStrategy
 from .types.get_list_of_tier_groups_request_version import GetListOfTierGroupsRequestVersion
 from .types.get_list_of_tier_groups_response import GetListOfTierGroupsResponse
@@ -135,6 +137,8 @@ class TierClient:
         meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
+        upgrade_schedule: typing.Optional[CreateTierGroupRequestUpgradeSchedule] = OMIT,
+        downgrade_schedule: typing.Optional[CreateTierGroupRequestDowngradeSchedule] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TierGroup:
         """
@@ -160,13 +164,19 @@ class TierClient:
         upgrade_strategy : typing.Optional[CreateTierGroupRequestUpgradeStrategy]
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
 
+        upgrade_schedule : typing.Optional[CreateTierGroupRequestUpgradeSchedule]
+            Schedule configuration for tier upgrades. Required when upgradeStrategy is set to a schedule-based strategy.
+
+        downgrade_schedule : typing.Optional[CreateTierGroupRequestDowngradeSchedule]
+            Schedule configuration for tier downgrades. Required when downgradeStrategy is set to a schedule-based strategy.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
         TierGroup
-            Tier group Successfully created
+            Tier group successfully created
 
         Examples
         --------
@@ -187,6 +197,8 @@ class TierClient:
             meta=meta,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
+            upgrade_schedule=upgrade_schedule,
+            downgrade_schedule=downgrade_schedule,
             request_options=request_options,
         )
         return _response.data
@@ -678,6 +690,8 @@ class AsyncTierClient:
         meta: typing.Optional[CreateTierGroupRequestMeta] = OMIT,
         tier_order: typing.Optional[typing.Sequence[str]] = OMIT,
         upgrade_strategy: typing.Optional[CreateTierGroupRequestUpgradeStrategy] = OMIT,
+        upgrade_schedule: typing.Optional[CreateTierGroupRequestUpgradeSchedule] = OMIT,
+        downgrade_schedule: typing.Optional[CreateTierGroupRequestDowngradeSchedule] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TierGroup:
         """
@@ -703,13 +717,19 @@ class AsyncTierClient:
         upgrade_strategy : typing.Optional[CreateTierGroupRequestUpgradeStrategy]
             Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
 
+        upgrade_schedule : typing.Optional[CreateTierGroupRequestUpgradeSchedule]
+            Schedule configuration for tier upgrades. Required when upgradeStrategy is set to a schedule-based strategy.
+
+        downgrade_schedule : typing.Optional[CreateTierGroupRequestDowngradeSchedule]
+            Schedule configuration for tier downgrades. Required when downgradeStrategy is set to a schedule-based strategy.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
         TierGroup
-            Tier group Successfully created
+            Tier group successfully created
 
         Examples
         --------
@@ -738,6 +758,8 @@ class AsyncTierClient:
             meta=meta,
             tier_order=tier_order,
             upgrade_strategy=upgrade_strategy,
+            upgrade_schedule=upgrade_schedule,
+            downgrade_schedule=downgrade_schedule,
             request_options=request_options,
         )
         return _response.data

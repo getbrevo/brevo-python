@@ -9,9 +9,11 @@ from ..types.balance_definition import BalanceDefinition
 from ..types.balance_limit import BalanceLimit
 from ..types.transaction import Transaction
 from .raw_client import AsyncRawBalanceClient, RawBalanceClient
+from .types.begin_transaction_request_transaction_type import BeginTransactionRequestTransactionType
 from .types.create_balance_limit_request_constraint_type import CreateBalanceLimitRequestConstraintType
 from .types.create_balance_limit_request_duration_unit import CreateBalanceLimitRequestDurationUnit
 from .types.create_balance_limit_request_transaction_type import CreateBalanceLimitRequestTransactionType
+from .types.create_balance_order_request_source import CreateBalanceOrderRequestSource
 from .types.create_balance_order_response import CreateBalanceOrderResponse
 from .types.get_balance_definition_list_request_sort import GetBalanceDefinitionListRequestSort
 from .types.get_balance_definition_list_request_sort_field import GetBalanceDefinitionListRequestSortField
@@ -19,7 +21,15 @@ from .types.get_balance_definition_list_request_version import GetBalanceDefinit
 from .types.get_balance_definition_list_response import GetBalanceDefinitionListResponse
 from .types.get_balance_definition_request_version import GetBalanceDefinitionRequestVersion
 from .types.get_balance_limit_request_version import GetBalanceLimitRequestVersion
+from .types.get_contact_balances_request_sort import GetContactBalancesRequestSort
+from .types.get_contact_balances_request_sort_field import GetContactBalancesRequestSortField
 from .types.get_contact_balances_response import GetContactBalancesResponse
+from .types.get_loyalty_balance_programs_pid_active_balance_request_sort import (
+    GetLoyaltyBalanceProgramsPidActiveBalanceRequestSort,
+)
+from .types.get_loyalty_balance_programs_pid_active_balance_response import (
+    GetLoyaltyBalanceProgramsPidActiveBalanceResponse,
+)
 from .types.get_loyalty_balance_programs_pid_transaction_history_request_sort import (
     GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort,
 )
@@ -105,11 +115,11 @@ class BalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[str] = None,
-        sort: typing.Optional[str] = None,
+        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
+        sort: typing.Optional[GetLoyaltyBalanceProgramsPidActiveBalanceRequestSort] = None,
         include_internal: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> BalanceLimit:
+    ) -> GetLoyaltyBalanceProgramsPidActiveBalanceResponse:
         """
         Returns Active Balances
 
@@ -130,10 +140,10 @@ class BalanceClient:
         offset : typing.Optional[int]
             Offset
 
-        sort_field : typing.Optional[str]
+        sort_field : typing.Optional[typing.Literal["createdAt"]]
             Sort Field
 
-        sort : typing.Optional[str]
+        sort : typing.Optional[GetLoyaltyBalanceProgramsPidActiveBalanceRequestSort]
             Sort Order
 
         include_internal : typing.Optional[bool]
@@ -144,8 +154,8 @@ class BalanceClient:
 
         Returns
         -------
-        BalanceLimit
-            Successful retrieval of active balance
+        GetLoyaltyBalanceProgramsPidActiveBalanceResponse
+            Successful retrieval of active balances
 
         Examples
         --------
@@ -156,8 +166,8 @@ class BalanceClient:
         )
         client.balance.get_active_balances_api(
             pid="pid",
-            contact_id=1,
-            balance_definition_id="balance_definition_id",
+            contact_id=1000000,
+            balance_definition_id="balanceDefinitionId",
         )
         """
         _response = self._raw_client.get_active_balances_api(
@@ -846,19 +856,39 @@ class BalanceClient:
         self,
         pid: str,
         *,
+        balance_definition_id: str,
         include_internal: typing.Optional[bool] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        sort: typing.Optional[GetContactBalancesRequestSort] = None,
+        sort_field: typing.Optional[GetContactBalancesRequestSortField] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContactBalancesResponse:
         """
-        Returns balance list
+        Returns contact balances for a given balance definition across all subscriptions.
 
         Parameters
         ----------
         pid : str
             Loyalty Program Id
 
+        balance_definition_id : str
+            Balance Definition ID (required)
+
         include_internal : typing.Optional[bool]
             Include balances tied to internal definitions.
+
+        limit : typing.Optional[int]
+            Limit the number of records returned
+
+        offset : typing.Optional[int]
+            Skip a number of records
+
+        sort : typing.Optional[GetContactBalancesRequestSort]
+            Sort order
+
+        sort_field : typing.Optional[GetContactBalancesRequestSortField]
+            Field to sort by
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -877,10 +907,18 @@ class BalanceClient:
         )
         client.balance.get_contact_balances(
             pid="pid",
+            balance_definition_id="balanceDefinitionId",
         )
         """
         _response = self._raw_client.get_contact_balances(
-            pid, include_internal=include_internal, request_options=request_options
+            pid,
+            balance_definition_id=balance_definition_id,
+            include_internal=include_internal,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            sort_field=sort_field,
+            request_options=request_options,
         )
         return _response.data
 
@@ -892,7 +930,7 @@ class BalanceClient:
         balance_definition_id: str,
         contact_id: int,
         due_at: str,
-        source: str,
+        source: CreateBalanceOrderRequestSource,
         expires_at: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -917,8 +955,8 @@ class BalanceClient:
         due_at : str
             RFC3339 timestamp specifying when the order is due.
 
-        source : str
-            Specifies the origin of the order (`engine` or `user`).
+        source : CreateBalanceOrderRequestSource
+            Specifies the origin of the order.
 
         expires_at : typing.Optional[str]
             Optional RFC3339 timestamp defining order expiration.
@@ -947,7 +985,7 @@ class BalanceClient:
             balance_definition_id="balanceDefinitionId",
             contact_id=1,
             due_at="dueAt",
-            source="source",
+            source="engine",
         )
         """
         _response = self._raw_client.create_balance_order(
@@ -1063,9 +1101,9 @@ class BalanceClient:
         offset: typing.Optional[int] = None,
         sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
-        filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         status: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus] = None,
         transaction_type: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType] = None,
+        loyalty_subscription_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetLoyaltyBalanceProgramsPidTransactionHistoryResponse:
         """
@@ -1092,16 +1130,16 @@ class BalanceClient:
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
-            Sort order, either asc or desc
-
-        filters : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-            Filters to apply
+            Sort order
 
         status : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus]
-            Transaction status filter. Allowed values: draft, completed, rejected, cancelled, expired
+            Transaction status filter
 
         transaction_type : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType]
-            Transaction type filter. Allowed values: credit, debit
+            Transaction type filter
+
+        loyalty_subscription_id : typing.Optional[str]
+            Loyalty Subscription ID filter
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1120,7 +1158,7 @@ class BalanceClient:
         )
         client.balance.get_transaction_history_api(
             pid="pid",
-            contact_id=1,
+            contact_id=1000000,
             balance_definition_id="balanceDefinitionId",
         )
         """
@@ -1132,9 +1170,9 @@ class BalanceClient:
             offset=offset,
             sort_field=sort_field,
             sort=sort,
-            filters=filters,
             status=status,
             transaction_type=transaction_type,
+            loyalty_subscription_id=loyalty_subscription_id,
             request_options=request_options,
         )
         return _response.data
@@ -1145,13 +1183,14 @@ class BalanceClient:
         *,
         amount: float,
         balance_definition_id: str,
-        loyalty_subscription_id: typing.Optional[str] = OMIT,
-        auto_complete: typing.Optional[bool] = OMIT,
-        balance_expiry_in_minutes: typing.Optional[int] = OMIT,
+        transaction_type: typing.Optional[BeginTransactionRequestTransactionType] = OMIT,
         contact_id: typing.Optional[int] = OMIT,
-        event_time: typing.Optional[str] = OMIT,
+        loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        event_time: typing.Optional[dt.datetime] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
+        balance_expiry_in_minutes: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Transaction:
         """
@@ -1163,31 +1202,34 @@ class BalanceClient:
             Loyalty Program Id
 
         amount : float
-            Transaction amount (must be provided).
+            Transaction amount. A positive value creates a credit transaction and a negative value creates a debit transaction (unless transactionType is explicitly provided).
 
         balance_definition_id : str
             Unique identifier (UUID) of the associated balance definition.
 
-        loyalty_subscription_id : typing.Optional[str]
-            Unique identifier for the loyalty subscription (required unless `contactId` is provided).
-
-        auto_complete : typing.Optional[bool]
-            Whether the transaction should be automatically completed.
-
-        balance_expiry_in_minutes : typing.Optional[int]
-            Optional expiry time for the balance in minutes (must be greater than 0 if provided).
+        transaction_type : typing.Optional[BeginTransactionRequestTransactionType]
+            Explicit transaction type. If not provided, the type is inferred from the sign of the amount (positive = credit, negative = debit).
 
         contact_id : typing.Optional[int]
-            Unique identifier of the contact involved in the transaction (required unless `LoyaltySubscriptionId` is provided).
+            Unique identifier of the contact involved in the transaction. Required unless `LoyaltySubscriptionId` is provided.
 
-        event_time : typing.Optional[str]
-            Optional timestamp specifying when the transaction occurred.
+        loyalty_subscription_id : typing.Optional[str]
+            Unique identifier for the loyalty subscription. Required unless `contactId` is provided.
 
         meta : typing.Optional[typing.Dict[str, typing.Any]]
             Optional metadata associated with the transaction.
 
         ttl : typing.Optional[int]
-            Optional time-to-live for the transaction (must be greater than 0 if provided).
+            Time-to-live for the transaction in seconds. Must be at least 10 seconds if provided.
+
+        event_time : typing.Optional[dt.datetime]
+            Timestamp specifying when the transaction event occurred (ISO 8601 / RFC 3339 format).
+
+        auto_complete : typing.Optional[bool]
+            Whether the transaction should be automatically completed.
+
+        balance_expiry_in_minutes : typing.Optional[int]
+            Expiry time for the balance in minutes. Must be greater than 0 if provided. Only applicable when autoComplete is true.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1195,7 +1237,7 @@ class BalanceClient:
         Returns
         -------
         Transaction
-            Transaction information
+            Transaction created successfully
 
         Examples
         --------
@@ -1214,13 +1256,14 @@ class BalanceClient:
             pid,
             amount=amount,
             balance_definition_id=balance_definition_id,
-            loyalty_subscription_id=loyalty_subscription_id,
-            auto_complete=auto_complete,
-            balance_expiry_in_minutes=balance_expiry_in_minutes,
+            transaction_type=transaction_type,
             contact_id=contact_id,
-            event_time=event_time,
+            loyalty_subscription_id=loyalty_subscription_id,
             meta=meta,
             ttl=ttl,
+            event_time=event_time,
+            auto_complete=auto_complete,
+            balance_expiry_in_minutes=balance_expiry_in_minutes,
             request_options=request_options,
         )
         return _response.data
@@ -1323,11 +1366,11 @@ class AsyncBalanceClient:
         balance_definition_id: str,
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
-        sort_field: typing.Optional[str] = None,
-        sort: typing.Optional[str] = None,
+        sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
+        sort: typing.Optional[GetLoyaltyBalanceProgramsPidActiveBalanceRequestSort] = None,
         include_internal: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> BalanceLimit:
+    ) -> GetLoyaltyBalanceProgramsPidActiveBalanceResponse:
         """
         Returns Active Balances
 
@@ -1348,10 +1391,10 @@ class AsyncBalanceClient:
         offset : typing.Optional[int]
             Offset
 
-        sort_field : typing.Optional[str]
+        sort_field : typing.Optional[typing.Literal["createdAt"]]
             Sort Field
 
-        sort : typing.Optional[str]
+        sort : typing.Optional[GetLoyaltyBalanceProgramsPidActiveBalanceRequestSort]
             Sort Order
 
         include_internal : typing.Optional[bool]
@@ -1362,8 +1405,8 @@ class AsyncBalanceClient:
 
         Returns
         -------
-        BalanceLimit
-            Successful retrieval of active balance
+        GetLoyaltyBalanceProgramsPidActiveBalanceResponse
+            Successful retrieval of active balances
 
         Examples
         --------
@@ -1379,8 +1422,8 @@ class AsyncBalanceClient:
         async def main() -> None:
             await client.balance.get_active_balances_api(
                 pid="pid",
-                contact_id=1,
-                balance_definition_id="balance_definition_id",
+                contact_id=1000000,
+                balance_definition_id="balanceDefinitionId",
             )
 
 
@@ -2146,19 +2189,39 @@ class AsyncBalanceClient:
         self,
         pid: str,
         *,
+        balance_definition_id: str,
         include_internal: typing.Optional[bool] = None,
+        limit: typing.Optional[int] = None,
+        offset: typing.Optional[int] = None,
+        sort: typing.Optional[GetContactBalancesRequestSort] = None,
+        sort_field: typing.Optional[GetContactBalancesRequestSortField] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetContactBalancesResponse:
         """
-        Returns balance list
+        Returns contact balances for a given balance definition across all subscriptions.
 
         Parameters
         ----------
         pid : str
             Loyalty Program Id
 
+        balance_definition_id : str
+            Balance Definition ID (required)
+
         include_internal : typing.Optional[bool]
             Include balances tied to internal definitions.
+
+        limit : typing.Optional[int]
+            Limit the number of records returned
+
+        offset : typing.Optional[int]
+            Skip a number of records
+
+        sort : typing.Optional[GetContactBalancesRequestSort]
+            Sort order
+
+        sort_field : typing.Optional[GetContactBalancesRequestSortField]
+            Field to sort by
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2182,13 +2245,21 @@ class AsyncBalanceClient:
         async def main() -> None:
             await client.balance.get_contact_balances(
                 pid="pid",
+                balance_definition_id="balanceDefinitionId",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.get_contact_balances(
-            pid, include_internal=include_internal, request_options=request_options
+            pid,
+            balance_definition_id=balance_definition_id,
+            include_internal=include_internal,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            sort_field=sort_field,
+            request_options=request_options,
         )
         return _response.data
 
@@ -2200,7 +2271,7 @@ class AsyncBalanceClient:
         balance_definition_id: str,
         contact_id: int,
         due_at: str,
-        source: str,
+        source: CreateBalanceOrderRequestSource,
         expires_at: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -2225,8 +2296,8 @@ class AsyncBalanceClient:
         due_at : str
             RFC3339 timestamp specifying when the order is due.
 
-        source : str
-            Specifies the origin of the order (`engine` or `user`).
+        source : CreateBalanceOrderRequestSource
+            Specifies the origin of the order.
 
         expires_at : typing.Optional[str]
             Optional RFC3339 timestamp defining order expiration.
@@ -2260,7 +2331,7 @@ class AsyncBalanceClient:
                 balance_definition_id="balanceDefinitionId",
                 contact_id=1,
                 due_at="dueAt",
-                source="source",
+                source="engine",
             )
 
 
@@ -2395,9 +2466,9 @@ class AsyncBalanceClient:
         offset: typing.Optional[int] = None,
         sort_field: typing.Optional[typing.Literal["createdAt"]] = None,
         sort: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort] = None,
-        filters: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         status: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus] = None,
         transaction_type: typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType] = None,
+        loyalty_subscription_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetLoyaltyBalanceProgramsPidTransactionHistoryResponse:
         """
@@ -2424,16 +2495,16 @@ class AsyncBalanceClient:
             Field to sort by
 
         sort : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestSort]
-            Sort order, either asc or desc
-
-        filters : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-            Filters to apply
+            Sort order
 
         status : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestStatus]
-            Transaction status filter. Allowed values: draft, completed, rejected, cancelled, expired
+            Transaction status filter
 
         transaction_type : typing.Optional[GetLoyaltyBalanceProgramsPidTransactionHistoryRequestTransactionType]
-            Transaction type filter. Allowed values: credit, debit
+            Transaction type filter
+
+        loyalty_subscription_id : typing.Optional[str]
+            Loyalty Subscription ID filter
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2457,7 +2528,7 @@ class AsyncBalanceClient:
         async def main() -> None:
             await client.balance.get_transaction_history_api(
                 pid="pid",
-                contact_id=1,
+                contact_id=1000000,
                 balance_definition_id="balanceDefinitionId",
             )
 
@@ -2472,9 +2543,9 @@ class AsyncBalanceClient:
             offset=offset,
             sort_field=sort_field,
             sort=sort,
-            filters=filters,
             status=status,
             transaction_type=transaction_type,
+            loyalty_subscription_id=loyalty_subscription_id,
             request_options=request_options,
         )
         return _response.data
@@ -2485,13 +2556,14 @@ class AsyncBalanceClient:
         *,
         amount: float,
         balance_definition_id: str,
-        loyalty_subscription_id: typing.Optional[str] = OMIT,
-        auto_complete: typing.Optional[bool] = OMIT,
-        balance_expiry_in_minutes: typing.Optional[int] = OMIT,
+        transaction_type: typing.Optional[BeginTransactionRequestTransactionType] = OMIT,
         contact_id: typing.Optional[int] = OMIT,
-        event_time: typing.Optional[str] = OMIT,
+        loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        event_time: typing.Optional[dt.datetime] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
+        balance_expiry_in_minutes: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Transaction:
         """
@@ -2503,31 +2575,34 @@ class AsyncBalanceClient:
             Loyalty Program Id
 
         amount : float
-            Transaction amount (must be provided).
+            Transaction amount. A positive value creates a credit transaction and a negative value creates a debit transaction (unless transactionType is explicitly provided).
 
         balance_definition_id : str
             Unique identifier (UUID) of the associated balance definition.
 
-        loyalty_subscription_id : typing.Optional[str]
-            Unique identifier for the loyalty subscription (required unless `contactId` is provided).
-
-        auto_complete : typing.Optional[bool]
-            Whether the transaction should be automatically completed.
-
-        balance_expiry_in_minutes : typing.Optional[int]
-            Optional expiry time for the balance in minutes (must be greater than 0 if provided).
+        transaction_type : typing.Optional[BeginTransactionRequestTransactionType]
+            Explicit transaction type. If not provided, the type is inferred from the sign of the amount (positive = credit, negative = debit).
 
         contact_id : typing.Optional[int]
-            Unique identifier of the contact involved in the transaction (required unless `LoyaltySubscriptionId` is provided).
+            Unique identifier of the contact involved in the transaction. Required unless `LoyaltySubscriptionId` is provided.
 
-        event_time : typing.Optional[str]
-            Optional timestamp specifying when the transaction occurred.
+        loyalty_subscription_id : typing.Optional[str]
+            Unique identifier for the loyalty subscription. Required unless `contactId` is provided.
 
         meta : typing.Optional[typing.Dict[str, typing.Any]]
             Optional metadata associated with the transaction.
 
         ttl : typing.Optional[int]
-            Optional time-to-live for the transaction (must be greater than 0 if provided).
+            Time-to-live for the transaction in seconds. Must be at least 10 seconds if provided.
+
+        event_time : typing.Optional[dt.datetime]
+            Timestamp specifying when the transaction event occurred (ISO 8601 / RFC 3339 format).
+
+        auto_complete : typing.Optional[bool]
+            Whether the transaction should be automatically completed.
+
+        balance_expiry_in_minutes : typing.Optional[int]
+            Expiry time for the balance in minutes. Must be greater than 0 if provided. Only applicable when autoComplete is true.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2535,7 +2610,7 @@ class AsyncBalanceClient:
         Returns
         -------
         Transaction
-            Transaction information
+            Transaction created successfully
 
         Examples
         --------
@@ -2562,13 +2637,14 @@ class AsyncBalanceClient:
             pid,
             amount=amount,
             balance_definition_id=balance_definition_id,
-            loyalty_subscription_id=loyalty_subscription_id,
-            auto_complete=auto_complete,
-            balance_expiry_in_minutes=balance_expiry_in_minutes,
+            transaction_type=transaction_type,
             contact_id=contact_id,
-            event_time=event_time,
+            loyalty_subscription_id=loyalty_subscription_id,
             meta=meta,
             ttl=ttl,
+            event_time=event_time,
+            auto_complete=auto_complete,
+            balance_expiry_in_minutes=balance_expiry_in_minutes,
             request_options=request_options,
         )
         return _response.data

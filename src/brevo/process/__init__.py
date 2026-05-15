@@ -9,7 +9,6 @@ if typing.TYPE_CHECKING:
     from .types import (
         GetProcessResponse,
         GetProcessResponseInfo,
-        GetProcessResponseInfoExport,
         GetProcessResponseInfoImport,
         GetProcessResponseName,
         GetProcessResponseStatus,
@@ -17,7 +16,6 @@ if typing.TYPE_CHECKING:
         GetProcessesResponse,
         GetProcessesResponseProcessesItem,
         GetProcessesResponseProcessesItemInfo,
-        GetProcessesResponseProcessesItemInfoExport,
         GetProcessesResponseProcessesItemInfoImport,
         GetProcessesResponseProcessesItemName,
         GetProcessesResponseProcessesItemStatus,
@@ -25,7 +23,6 @@ if typing.TYPE_CHECKING:
 _dynamic_imports: typing.Dict[str, str] = {
     "GetProcessResponse": ".types",
     "GetProcessResponseInfo": ".types",
-    "GetProcessResponseInfoExport": ".types",
     "GetProcessResponseInfoImport": ".types",
     "GetProcessResponseName": ".types",
     "GetProcessResponseStatus": ".types",
@@ -33,7 +30,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetProcessesResponse": ".types",
     "GetProcessesResponseProcessesItem": ".types",
     "GetProcessesResponseProcessesItemInfo": ".types",
-    "GetProcessesResponseProcessesItemInfoExport": ".types",
     "GetProcessesResponseProcessesItemInfoImport": ".types",
     "GetProcessesResponseProcessesItemName": ".types",
     "GetProcessesResponseProcessesItemStatus": ".types",
@@ -64,7 +60,6 @@ def __dir__():
 __all__ = [
     "GetProcessResponse",
     "GetProcessResponseInfo",
-    "GetProcessResponseInfoExport",
     "GetProcessResponseInfoImport",
     "GetProcessResponseName",
     "GetProcessResponseStatus",
@@ -72,7 +67,6 @@ __all__ = [
     "GetProcessesResponse",
     "GetProcessesResponseProcessesItem",
     "GetProcessesResponseProcessesItemInfo",
-    "GetProcessesResponseProcessesItemInfoExport",
     "GetProcessesResponseProcessesItemInfoImport",
     "GetProcessesResponseProcessesItemName",
     "GetProcessesResponseProcessesItemStatus",

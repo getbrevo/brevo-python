@@ -7,7 +7,6 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .get_webhook_channel import GetWebhookChannel
 from .get_webhook_type import GetWebhookType
 
 
@@ -21,11 +20,6 @@ class GetWebhook(UncheckedBaseModel):
     """
     Batching configuration of the webhook, we send batched webhooks if its
     true
-    """
-
-    channel: typing.Optional[GetWebhookChannel] = pydantic.Field(default=None)
-    """
-    channel of webhook
     """
 
     created_at: typing_extensions.Annotated[
@@ -56,7 +50,12 @@ class GetWebhook(UncheckedBaseModel):
     ]
     type: GetWebhookType = pydantic.Field()
     """
-    Type of webhook (marketing or transactional)
+    Type of webhook (marketing, transactional, or inbound)
+    """
+
+    domain: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Inbound domain of the webhook, only returned for inbound type webhooks
     """
 
     url: str = pydantic.Field()

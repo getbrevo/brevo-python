@@ -2,11 +2,35 @@
 
 import typing
 
-from .upsertrecords_request_records_item_associations_item_one import UpsertrecordsRequestRecordsItemAssociationsItemOne
-from .upsertrecords_request_records_item_associations_item_zero import (
-    UpsertrecordsRequestRecordsItemAssociationsItemZero,
+import pydantic
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
+from .upsertrecords_request_records_item_associations_item_action import (
+    UpsertrecordsRequestRecordsItemAssociationsItemAction,
+)
+from .upsertrecords_request_records_item_associations_item_records_item import (
+    UpsertrecordsRequestRecordsItemAssociationsItemRecordsItem,
 )
 
-UpsertrecordsRequestRecordsItemAssociationsItem = typing.Union[
-    UpsertrecordsRequestRecordsItemAssociationsItemZero, UpsertrecordsRequestRecordsItemAssociationsItemOne
-]
+
+class UpsertrecordsRequestRecordsItemAssociationsItem(UncheckedBaseModel):
+    object_type: str = pydantic.Field()
+    """
+    Type of the associated object
+    """
+
+    action: typing.Optional[UpsertrecordsRequestRecordsItemAssociationsItemAction] = pydantic.Field(default=None)
+    """
+    Action to perform on the association. - `link`: Create association between records (default if not provided) - `unlink`: Remove association between records. Idempotent — unlinking a non-existing association is a no-op success.
+    """
+
+    records: typing.List[UpsertrecordsRequestRecordsItemAssociationsItemRecordsItem]
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow

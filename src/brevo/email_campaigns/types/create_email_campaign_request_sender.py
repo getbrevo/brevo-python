@@ -9,17 +9,17 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 class CreateEmailCampaignRequestSender(UncheckedBaseModel):
     """
-    Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+    Sender details including id or email and name (optional). Only one of either Sender’s email or Sender’s ID shall be passed in one request at a time. Passing both `email` and `id` will result in an error. For example: **{"name":"xyz", "email":"example@abc.com"}** or **{"name":"xyz", "id":123}**
     """
 
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Sender email
+    Sender email. Must be a valid email address. Cannot be used together with `id` in the same request.
     """
 
     id: typing.Optional[int] = pydantic.Field(default=None)
     """
-    Select the sender for the campaign on the basis of sender id. _In order to select a sender with specific pool of IP’s, dedicated ip users shall pass id (instead of email)_.
+    Select the sender for the campaign on the basis of sender id. Cannot be used together with `email` in the same request. _In order to select a sender with a specific pool of IPs, dedicated IP users shall pass id (instead of email)._
     """
 
     name: typing.Optional[str] = pydantic.Field(default=None)

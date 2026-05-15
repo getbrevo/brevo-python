@@ -410,6 +410,7 @@ class RawRewardClient:
         loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         value: typing.Optional[float] = OMIT,
+        valid_from: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateVoucherResponse]:
         """
@@ -441,6 +442,9 @@ class RawRewardClient:
         value : typing.Optional[float]
             Value of the selected reward config
 
+        valid_from : typing.Optional[str]
+            Date from which the voucher becomes valid. Accepts RFC 3339 or DD/MM/YYYY HH:MM AM/PM format. Converted to UTC using the organization's timezone.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -460,6 +464,7 @@ class RawRewardClient:
                 "meta": meta,
                 "rewardId": reward_id,
                 "value": value,
+                "validFrom": valid_from,
             },
             headers={
                 "content-type": "application/json",
@@ -564,6 +569,7 @@ class RawRewardClient:
         order: typing.Optional[RedeemVoucherRequestOrder] = OMIT,
         reward_id: typing.Optional[str] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Redeem]:
         """
@@ -598,6 +604,9 @@ class RawRewardClient:
         ttl : typing.Optional[int]
             Time to live in seconds for the redemption request
 
+        auto_complete : typing.Optional[bool]
+            Whether the redemption should be automatically completed
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -620,6 +629,7 @@ class RawRewardClient:
                 ),
                 "rewardId": reward_id,
                 "ttl": ttl,
+                "autoComplete": auto_complete,
             },
             headers={
                 "content-type": "application/json",
@@ -1711,6 +1721,7 @@ class AsyncRawRewardClient:
         loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         value: typing.Optional[float] = OMIT,
+        valid_from: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateVoucherResponse]:
         """
@@ -1742,6 +1753,9 @@ class AsyncRawRewardClient:
         value : typing.Optional[float]
             Value of the selected reward config
 
+        valid_from : typing.Optional[str]
+            Date from which the voucher becomes valid. Accepts RFC 3339 or DD/MM/YYYY HH:MM AM/PM format. Converted to UTC using the organization's timezone.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1761,6 +1775,7 @@ class AsyncRawRewardClient:
                 "meta": meta,
                 "rewardId": reward_id,
                 "value": value,
+                "validFrom": valid_from,
             },
             headers={
                 "content-type": "application/json",
@@ -1865,6 +1880,7 @@ class AsyncRawRewardClient:
         order: typing.Optional[RedeemVoucherRequestOrder] = OMIT,
         reward_id: typing.Optional[str] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Redeem]:
         """
@@ -1899,6 +1915,9 @@ class AsyncRawRewardClient:
         ttl : typing.Optional[int]
             Time to live in seconds for the redemption request
 
+        auto_complete : typing.Optional[bool]
+            Whether the redemption should be automatically completed
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1921,6 +1940,7 @@ class AsyncRawRewardClient:
                 ),
                 "rewardId": reward_id,
                 "ttl": ttl,
+                "autoComplete": auto_complete,
             },
             headers={
                 "content-type": "application/json",

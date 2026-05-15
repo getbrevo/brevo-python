@@ -1,8 +1,8 @@
 from .conftest import get_client, verify_request_count
 
 from brevo.event import (
-    CreateBatchEventsRequestItem,
-    CreateBatchEventsRequestItemIdentifiers,
+    CreateBatchEventsRequestEventsItem,
+    CreateBatchEventsRequestEventsItemIdentifiers,
     CreateEventRequestIdentifiers,
 )
 
@@ -31,10 +31,10 @@ def test_event_create_batch_events() -> None:
     test_id = "event.create_batch_events.0"
     client = get_client(test_id)
     client.event.create_batch_events(
-        request=[
-            CreateBatchEventsRequestItem(
+        events=[
+            CreateBatchEventsRequestEventsItem(
                 event_name="order_created",
-                identifiers=CreateBatchEventsRequestItemIdentifiers(),
+                identifiers=CreateBatchEventsRequestEventsItemIdentifiers(),
             )
         ],
     )

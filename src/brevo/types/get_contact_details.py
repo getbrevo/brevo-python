@@ -64,6 +64,14 @@ class GetContactDetails(UncheckedBaseModel):
             description="Blacklist status for SMS campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    whatsapp_blacklisted: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="whatsappBlacklisted"),
+        pydantic.Field(
+            alias="whatsappBlacklisted",
+            description="Blacklist status for WhatsApp campaigns (true=blacklisted, false=not blacklisted)",
+        ),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

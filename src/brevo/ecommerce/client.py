@@ -40,6 +40,7 @@ from .types.get_ecommerce_attribution_products_conversion_source_conversion_sour
 from .types.get_ecommerce_config_display_currency_response import GetEcommerceConfigDisplayCurrencyResponse
 from .types.get_orders_request_sort import GetOrdersRequestSort
 from .types.get_products_request_sort import GetProductsRequestSort
+from .types.get_products_request_sort_by_field import GetProductsRequestSortByField
 from .types.get_products_response import GetProductsResponse
 from .types.set_config_display_currency_response import SetConfigDisplayCurrencyResponse
 
@@ -76,6 +77,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCategoriesResponse:
         """
+        Retrieve a paginated list of all ecommerce categories stored in your Brevo account. Results are sorted by creation date in descending order by default, and can be filtered by category IDs, name, modification date, creation date, or deletion status. The response includes a `count` field with the total number of matching categories, and pagination defaults to 50 categories per page (maximum 100).
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -144,6 +147,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateUpdateCategoryResponse]:
         """
+        Create a new ecommerce category or update an existing one, identified by the mandatory `id` field. When `updateEnabled` is set to `false` (the default), the endpoint performs an insert and returns `201`; if the category ID already exists, a `400` error is returned. When `updateEnabled` is `true`, the endpoint performs an upsert, returning `201` for a new category or `204` when an existing category is updated. The `name` field is mandatory for creation but optional for updates.
+
         Parameters
         ----------
         id : str
@@ -202,6 +207,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateUpdateBatchCategoryResponse:
         """
+        Create or update multiple ecommerce categories in a single request. The `categories` array accepts up to 100 category objects, each requiring a unique `id`. When `updateEnabled` is `false` (the default), all categories are inserted as new; if any ID already exists, a `400` error is returned. When `updateEnabled` is `true`, existing categories are updated and new ones are created via upsert. Duplicate IDs within the same request payload are rejected. The response returns the count of created and updated categories.
+
         Parameters
         ----------
         categories : typing.Sequence[CreateUpdateBatchCategoryRequestCategoriesItem]
@@ -243,6 +250,8 @@ class EcommerceClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetCategoryDetails:
         """
+        Retrieve the full details of a single ecommerce category by its unique ID. The response includes the category name, URL, creation and modification timestamps, and deletion status. Returns a `404` error if no category matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -254,7 +263,7 @@ class EcommerceClient:
         Returns
         -------
         GetCategoryDetails
-            Category informations
+            Category details
 
         Examples
         --------
@@ -307,6 +316,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionMetricsResponse:
         """
+        Retrieve aggregated ecommerce attribution metrics for one or more Brevo email campaigns, SMS campaigns, or automation workflows. You can optionally filter by a date range using `periodFrom` and `periodTo` in RFC3339 format. The response includes per-source metrics (orders count, revenue, and average basket) as well as aggregated totals across all requested sources.
+
         Parameters
         ----------
         period_from : typing.Optional[dt.datetime]
@@ -351,6 +362,7 @@ class EcommerceClient:
             period_to=datetime.datetime.fromisoformat(
                 "2022-01-03 00:00:00+00:00",
             ),
+            email_campaign_id_array=["sale"],
         )
         """
         _response = self._raw_client.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
@@ -372,6 +384,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse:
         """
+        Retrieve detailed attribution metrics for a single Brevo campaign or automation workflow, identified by its conversion source type and ID. The response includes orders count, revenue, average basket value, and the number of new customers attributed to that specific campaign or workflow.
+
         Parameters
         ----------
         conversion_source : GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequestConversionSource
@@ -413,6 +427,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse:
         """
+        Retrieve the list of products whose sales have been attributed to a specific Brevo campaign or automation workflow. Each product entry includes its ID, name, SKU, image URL, product URL, price, revenue, and orders count. The conversion source type must be one of `email_campaign`, `sms_campaign`, `automation_workflow_email`, or `automation_workflow_sms`.
+
         Parameters
         ----------
         conversion_source : GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequestConversionSource
@@ -450,6 +466,8 @@ class EcommerceClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetEcommerceConfigDisplayCurrencyResponse:
         """
+        Retrieve the ISO 4217 display currency code currently configured for your Brevo ecommerce account. This currency is used to display monetary values across the ecommerce dashboard and reports. Returns a `403` error if ecommerce is not activated on the account.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -478,6 +496,8 @@ class EcommerceClient:
         self, *, code: str, request_options: typing.Optional[RequestOptions] = None
     ) -> SetConfigDisplayCurrencyResponse:
         """
+        Set or update the ISO 4217 display currency code for your Brevo ecommerce account. This currency determines how monetary values are displayed in the ecommerce dashboard and reports. The provided currency code must be a valid ISO 4217 code; invalid codes result in a `422` error. Returns a `403` error if ecommerce is not activated on the account.
+
         Parameters
         ----------
         code : str
@@ -610,7 +630,7 @@ class EcommerceClient:
             Identifies the contact associated with the order.
 
         meta_info : typing.Optional[typing.Dict[str, OrderMetaInfoValue]]
-            Meta data of order to store additional detal such as custom message, customer type, source.
+            Meta data of order to store additional detail such as custom message, customer type, source.
 
         store_id : typing.Optional[str]
             ID of store where the order is placed
@@ -676,10 +696,10 @@ class EcommerceClient:
             array of order objects
 
         historical : typing.Optional[bool]
-            Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
+            Defines whether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
 
         notify_url : typing.Optional[str]
-            Notify Url provided by client_dev to get the status of batch request
+            Webhook URL to receive the status of the batch request
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -726,6 +746,7 @@ class EcommerceClient:
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetProductsRequestSort] = None,
         ids: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        search: typing.Optional[str] = None,
         name: typing.Optional[str] = None,
         price_lte: typing.Optional[float] = None,
         price_gte: typing.Optional[float] = None,
@@ -733,13 +754,22 @@ class EcommerceClient:
         price_gt: typing.Optional[float] = None,
         price_eq: typing.Optional[float] = None,
         price_ne: typing.Optional[float] = None,
+        alternative_price_lte: typing.Optional[float] = None,
+        alternative_price_gte: typing.Optional[float] = None,
+        alternative_price_lt: typing.Optional[float] = None,
+        alternative_price_gt: typing.Optional[float] = None,
+        alternative_price_eq: typing.Optional[float] = None,
+        alternative_price_ne: typing.Optional[float] = None,
         categories: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         modified_since: typing.Optional[str] = None,
         created_since: typing.Optional[str] = None,
+        sort_by_field: typing.Optional[GetProductsRequestSortByField] = None,
         is_deleted: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetProductsResponse:
         """
+        Retrieve a paginated list of all ecommerce products stored in your Brevo account. Results are sorted by creation date in descending order by default, and can be filtered by product IDs, name (minimum 3 characters), price range, category IDs, modification date, creation date, or deletion status. Use the `search` parameter to query across SKU, name, and ID simultaneously — results are prioritized as exact SKU match > SKU prefix match > name match > ID match. Pagination defaults to 50 products per page (maximum 1000), and the response includes a `count` field with the total number of matching products.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -753,6 +783,9 @@ class EcommerceClient:
 
         ids : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             Filter by product ids
+
+        search : typing.Optional[str]
+            Search products simultaneously across SKU, name, and ID fields. Results are returned in the following priority order: **exact SKU match** > **SKU prefix match** > **name match** > **ID match**. For example, `?search=123` on products with `{sku: "123"}` and `{sku: "123456"}` returns the exact SKU match first.
 
         name : typing.Optional[str]
             Filter by product name, minimum 3 characters should be present for search.
@@ -775,14 +808,35 @@ class EcommerceClient:
         price_ne : typing.Optional[float]
             Price filter for products not equals to particular amount
 
+        alternative_price_lte : typing.Optional[float]
+            Alternative price filter for products less than and equals to particular amount
+
+        alternative_price_gte : typing.Optional[float]
+            Alternative price filter for products greater than and equals to particular amount
+
+        alternative_price_lt : typing.Optional[float]
+            Alternative price filter for products less than particular amount
+
+        alternative_price_gt : typing.Optional[float]
+            Alternative price filter for products greater than particular amount
+
+        alternative_price_eq : typing.Optional[float]
+            Alternative price filter for products equals to particular amount
+
+        alternative_price_ne : typing.Optional[float]
+            Alternative price filter for products not equals to particular amount
+
         categories : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             Filter by categories ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+            Filter (urlencoded) the products modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+            Filter (urlencoded) the products created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+
+        sort_by_field : typing.Optional[GetProductsRequestSortByField]
+            Sort the results by a specific field. Default sort field is `created_at` when not passed.
 
         is_deleted : typing.Optional[str]
             Filter products by their deletion status. If `false` is passed, only products that are not deleted will be returned.
@@ -809,6 +863,7 @@ class EcommerceClient:
             offset=offset,
             sort=sort,
             ids=ids,
+            search=search,
             name=name,
             price_lte=price_lte,
             price_gte=price_gte,
@@ -816,9 +871,16 @@ class EcommerceClient:
             price_gt=price_gt,
             price_eq=price_eq,
             price_ne=price_ne,
+            alternative_price_lte=alternative_price_lte,
+            alternative_price_gte=alternative_price_gte,
+            alternative_price_lt=alternative_price_lt,
+            alternative_price_gt=alternative_price_gt,
+            alternative_price_eq=alternative_price_eq,
+            alternative_price_ne=alternative_price_ne,
             categories=categories,
             modified_since=modified_since,
             created_since=created_since,
+            sort_by_field=sort_by_field,
             is_deleted=is_deleted,
             request_options=request_options,
         )
@@ -838,6 +900,7 @@ class EcommerceClient:
         meta_info: typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]] = OMIT,
         parent_id: typing.Optional[str] = OMIT,
         price: typing.Optional[float] = OMIT,
+        alternative_price: typing.Optional[float] = OMIT,
         sku: typing.Optional[str] = OMIT,
         stock: typing.Optional[float] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
@@ -845,13 +908,15 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateUpdateProductResponse]:
         """
+        Create a new ecommerce product or update an existing one, identified by the mandatory `id` field. When `updateEnabled` is `false` (the default), the endpoint inserts a new product and returns `201`; if the product ID already exists, a `400` error is returned. When `updateEnabled` is `true`, the endpoint performs an upsert, returning `201` for a new product or `204` for an update. The `name` field is mandatory for creation but optional for updates. Product images are downloaded, validated (max 5 MB, formats: jpeg, jpg, png, bmp, gif, webp), and re-hosted on S3. The `metaInfo` object supports up to 20 keys with a cumulative size limit of approximately 1000 KB.
+
         Parameters
         ----------
         id : str
             Product ID for which you requested the details
 
         name : str
-            Mandatory in case of creation**. Name of the product for which you requested the details
+            **Mandatory in case of creation**. Name of the product, as displayed in the shop
 
         brand : typing.Optional[str]
             Brand of the product
@@ -880,6 +945,9 @@ class EcommerceClient:
         price : typing.Optional[float]
             Price of the product
 
+        alternative_price : typing.Optional[float]
+            Alternative price of the product
+
         sku : typing.Optional[str]
             Product identifier from the shop
 
@@ -887,7 +955,7 @@ class EcommerceClient:
             Current stock value of the product from the shop's database
 
         update_enabled : typing.Optional[bool]
-            Facilitate to update the existing category in the same request (updateEnabled = true)
+            Facilitate to update the existing product in the same request (updateEnabled = true)
 
         url : typing.Optional[str]
             URL to the product
@@ -924,6 +992,7 @@ class EcommerceClient:
             meta_info=meta_info,
             parent_id=parent_id,
             price=price,
+            alternative_price=alternative_price,
             sku=sku,
             stock=stock,
             update_enabled=update_enabled,
@@ -940,13 +1009,15 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateUpdateBatchProductsResponse:
         """
+        Create or update multiple ecommerce products in a single request. The `products` array accepts up to 100 product objects for creation (or up to 1000 when `updateEnabled` is `true` and the account has an increased limit). Each product requires a unique `id` and `name` (name is mandatory for creation only). When `updateEnabled` is `false`, all products are inserted as new; if any ID already exists, a `400` error is returned. When `updateEnabled` is `true`, existing products are updated and new ones are created via upsert. Duplicate IDs within the same request payload are rejected. The response returns the count of created and updated products.
+
         Parameters
         ----------
         products : typing.Sequence[CreateUpdateBatchProductsRequestProductsItem]
             array of products objects
 
         update_enabled : typing.Optional[bool]
-            Facilitate to update the existing categories in the same request (updateEnabled = true)
+            Facilitate to update the existing products in the same request (updateEnabled = true)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -982,6 +1053,8 @@ class EcommerceClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetProductDetails:
         """
+        Retrieve the full details of a single ecommerce product by its unique ID. The response includes the product name, price, SKU, URL, image URLs (original and thumbnails), categories, stock level, meta information, creation and modification timestamps, and deletion status. Returns a `404` error if no product matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -993,7 +1066,7 @@ class EcommerceClient:
         Returns
         -------
         GetProductDetails
-            Product informations
+            Product details
 
         Examples
         --------
@@ -1017,6 +1090,8 @@ class EcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Register a contact to receive an alert for a specific product event, such as `back_in_stock`. At least one contact identifier (`ext_id`, `email`, or `sms`) must be provided; when multiple are given, priority is `ext_id` > `email` > `sms`. Returns a `404` error if the product ID does not exist, and a `403` error if product alerts are not enabled for the account.
+
         Parameters
         ----------
         id : str
@@ -1077,6 +1152,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCategoriesResponse:
         """
+        Retrieve a paginated list of all ecommerce categories stored in your Brevo account. Results are sorted by creation date in descending order by default, and can be filtered by category IDs, name, modification date, creation date, or deletion status. The response includes a `count` field with the total number of matching categories, and pagination defaults to 50 categories per page (maximum 100).
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -1153,6 +1230,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateUpdateCategoryResponse]:
         """
+        Create a new ecommerce category or update an existing one, identified by the mandatory `id` field. When `updateEnabled` is set to `false` (the default), the endpoint performs an insert and returns `201`; if the category ID already exists, a `400` error is returned. When `updateEnabled` is `true`, the endpoint performs an upsert, returning `201` for a new category or `204` when an existing category is updated. The `name` field is mandatory for creation but optional for updates.
+
         Parameters
         ----------
         id : str
@@ -1219,6 +1298,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateUpdateBatchCategoryResponse:
         """
+        Create or update multiple ecommerce categories in a single request. The `categories` array accepts up to 100 category objects, each requiring a unique `id`. When `updateEnabled` is `false` (the default), all categories are inserted as new; if any ID already exists, a `400` error is returned. When `updateEnabled` is `true`, existing categories are updated and new ones are created via upsert. Duplicate IDs within the same request payload are rejected. The response returns the count of created and updated categories.
+
         Parameters
         ----------
         categories : typing.Sequence[CreateUpdateBatchCategoryRequestCategoriesItem]
@@ -1268,6 +1349,8 @@ class AsyncEcommerceClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetCategoryDetails:
         """
+        Retrieve the full details of a single ecommerce category by its unique ID. The response includes the category name, URL, creation and modification timestamps, and deletion status. Returns a `404` error if no category matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -1279,7 +1362,7 @@ class AsyncEcommerceClient:
         Returns
         -------
         GetCategoryDetails
-            Category informations
+            Category details
 
         Examples
         --------
@@ -1348,6 +1431,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionMetricsResponse:
         """
+        Retrieve aggregated ecommerce attribution metrics for one or more Brevo email campaigns, SMS campaigns, or automation workflows. You can optionally filter by a date range using `periodFrom` and `periodTo` in RFC3339 format. The response includes per-source metrics (orders count, revenue, and average basket) as well as aggregated totals across all requested sources.
+
         Parameters
         ----------
         period_from : typing.Optional[dt.datetime]
@@ -1396,6 +1481,7 @@ class AsyncEcommerceClient:
                 period_to=datetime.datetime.fromisoformat(
                     "2022-01-03 00:00:00+00:00",
                 ),
+                email_campaign_id_array=["sale"],
             )
 
 
@@ -1420,6 +1506,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionMetricsConversionSourceConversionSourceIdResponse:
         """
+        Retrieve detailed attribution metrics for a single Brevo campaign or automation workflow, identified by its conversion source type and ID. The response includes orders count, revenue, average basket value, and the number of new customers attributed to that specific campaign or workflow.
+
         Parameters
         ----------
         conversion_source : GetEcommerceAttributionMetricsConversionSourceConversionSourceIdRequestConversionSource
@@ -1469,6 +1557,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEcommerceAttributionProductsConversionSourceConversionSourceIdResponse:
         """
+        Retrieve the list of products whose sales have been attributed to a specific Brevo campaign or automation workflow. Each product entry includes its ID, name, SKU, image URL, product URL, price, revenue, and orders count. The conversion source type must be one of `email_campaign`, `sms_campaign`, `automation_workflow_email`, or `automation_workflow_sms`.
+
         Parameters
         ----------
         conversion_source : GetEcommerceAttributionProductsConversionSourceConversionSourceIdRequestConversionSource
@@ -1514,6 +1604,8 @@ class AsyncEcommerceClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetEcommerceConfigDisplayCurrencyResponse:
         """
+        Retrieve the ISO 4217 display currency code currently configured for your Brevo ecommerce account. This currency is used to display monetary values across the ecommerce dashboard and reports. Returns a `403` error if ecommerce is not activated on the account.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -1550,6 +1642,8 @@ class AsyncEcommerceClient:
         self, *, code: str, request_options: typing.Optional[RequestOptions] = None
     ) -> SetConfigDisplayCurrencyResponse:
         """
+        Set or update the ISO 4217 display currency code for your Brevo ecommerce account. This currency determines how monetary values are displayed in the ecommerce dashboard and reports. The provided currency code must be a valid ISO 4217 code; invalid codes result in a `422` error. Returns a `403` error if ecommerce is not activated on the account.
+
         Parameters
         ----------
         code : str
@@ -1698,7 +1792,7 @@ class AsyncEcommerceClient:
             Identifies the contact associated with the order.
 
         meta_info : typing.Optional[typing.Dict[str, OrderMetaInfoValue]]
-            Meta data of order to store additional detal such as custom message, customer type, source.
+            Meta data of order to store additional detail such as custom message, customer type, source.
 
         store_id : typing.Optional[str]
             ID of store where the order is placed
@@ -1772,10 +1866,10 @@ class AsyncEcommerceClient:
             array of order objects
 
         historical : typing.Optional[bool]
-            Defines wether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
+            Defines whether you want your orders to be considered as live data or as historical data (import of past data, synchronising data). True: orders will not trigger any automation workflows. False: orders will trigger workflows as usual.
 
         notify_url : typing.Optional[str]
-            Notify Url provided by client_dev to get the status of batch request
+            Webhook URL to receive the status of the batch request
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1830,6 +1924,7 @@ class AsyncEcommerceClient:
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetProductsRequestSort] = None,
         ids: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        search: typing.Optional[str] = None,
         name: typing.Optional[str] = None,
         price_lte: typing.Optional[float] = None,
         price_gte: typing.Optional[float] = None,
@@ -1837,13 +1932,22 @@ class AsyncEcommerceClient:
         price_gt: typing.Optional[float] = None,
         price_eq: typing.Optional[float] = None,
         price_ne: typing.Optional[float] = None,
+        alternative_price_lte: typing.Optional[float] = None,
+        alternative_price_gte: typing.Optional[float] = None,
+        alternative_price_lt: typing.Optional[float] = None,
+        alternative_price_gt: typing.Optional[float] = None,
+        alternative_price_eq: typing.Optional[float] = None,
+        alternative_price_ne: typing.Optional[float] = None,
         categories: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         modified_since: typing.Optional[str] = None,
         created_since: typing.Optional[str] = None,
+        sort_by_field: typing.Optional[GetProductsRequestSortByField] = None,
         is_deleted: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetProductsResponse:
         """
+        Retrieve a paginated list of all ecommerce products stored in your Brevo account. Results are sorted by creation date in descending order by default, and can be filtered by product IDs, name (minimum 3 characters), price range, category IDs, modification date, creation date, or deletion status. Use the `search` parameter to query across SKU, name, and ID simultaneously — results are prioritized as exact SKU match > SKU prefix match > name match > ID match. Pagination defaults to 50 products per page (maximum 1000), and the response includes a `count` field with the total number of matching products.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -1857,6 +1961,9 @@ class AsyncEcommerceClient:
 
         ids : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             Filter by product ids
+
+        search : typing.Optional[str]
+            Search products simultaneously across SKU, name, and ID fields. Results are returned in the following priority order: **exact SKU match** > **SKU prefix match** > **name match** > **ID match**. For example, `?search=123` on products with `{sku: "123"}` and `{sku: "123456"}` returns the exact SKU match first.
 
         name : typing.Optional[str]
             Filter by product name, minimum 3 characters should be present for search.
@@ -1879,14 +1986,35 @@ class AsyncEcommerceClient:
         price_ne : typing.Optional[float]
             Price filter for products not equals to particular amount
 
+        alternative_price_lte : typing.Optional[float]
+            Alternative price filter for products less than and equals to particular amount
+
+        alternative_price_gte : typing.Optional[float]
+            Alternative price filter for products greater than and equals to particular amount
+
+        alternative_price_lt : typing.Optional[float]
+            Alternative price filter for products less than particular amount
+
+        alternative_price_gt : typing.Optional[float]
+            Alternative price filter for products greater than particular amount
+
+        alternative_price_eq : typing.Optional[float]
+            Alternative price filter for products equals to particular amount
+
+        alternative_price_ne : typing.Optional[float]
+            Alternative price filter for products not equals to particular amount
+
         categories : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             Filter by categories ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+            Filter (urlencoded) the products modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+            Filter (urlencoded) the products created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**
+
+        sort_by_field : typing.Optional[GetProductsRequestSortByField]
+            Sort the results by a specific field. Default sort field is `created_at` when not passed.
 
         is_deleted : typing.Optional[str]
             Filter products by their deletion status. If `false` is passed, only products that are not deleted will be returned.
@@ -1921,6 +2049,7 @@ class AsyncEcommerceClient:
             offset=offset,
             sort=sort,
             ids=ids,
+            search=search,
             name=name,
             price_lte=price_lte,
             price_gte=price_gte,
@@ -1928,9 +2057,16 @@ class AsyncEcommerceClient:
             price_gt=price_gt,
             price_eq=price_eq,
             price_ne=price_ne,
+            alternative_price_lte=alternative_price_lte,
+            alternative_price_gte=alternative_price_gte,
+            alternative_price_lt=alternative_price_lt,
+            alternative_price_gt=alternative_price_gt,
+            alternative_price_eq=alternative_price_eq,
+            alternative_price_ne=alternative_price_ne,
             categories=categories,
             modified_since=modified_since,
             created_since=created_since,
+            sort_by_field=sort_by_field,
             is_deleted=is_deleted,
             request_options=request_options,
         )
@@ -1950,6 +2086,7 @@ class AsyncEcommerceClient:
         meta_info: typing.Optional[typing.Dict[str, CreateUpdateProductRequestMetaInfoValue]] = OMIT,
         parent_id: typing.Optional[str] = OMIT,
         price: typing.Optional[float] = OMIT,
+        alternative_price: typing.Optional[float] = OMIT,
         sku: typing.Optional[str] = OMIT,
         stock: typing.Optional[float] = OMIT,
         update_enabled: typing.Optional[bool] = OMIT,
@@ -1957,13 +2094,15 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[CreateUpdateProductResponse]:
         """
+        Create a new ecommerce product or update an existing one, identified by the mandatory `id` field. When `updateEnabled` is `false` (the default), the endpoint inserts a new product and returns `201`; if the product ID already exists, a `400` error is returned. When `updateEnabled` is `true`, the endpoint performs an upsert, returning `201` for a new product or `204` for an update. The `name` field is mandatory for creation but optional for updates. Product images are downloaded, validated (max 5 MB, formats: jpeg, jpg, png, bmp, gif, webp), and re-hosted on S3. The `metaInfo` object supports up to 20 keys with a cumulative size limit of approximately 1000 KB.
+
         Parameters
         ----------
         id : str
             Product ID for which you requested the details
 
         name : str
-            Mandatory in case of creation**. Name of the product for which you requested the details
+            **Mandatory in case of creation**. Name of the product, as displayed in the shop
 
         brand : typing.Optional[str]
             Brand of the product
@@ -1992,6 +2131,9 @@ class AsyncEcommerceClient:
         price : typing.Optional[float]
             Price of the product
 
+        alternative_price : typing.Optional[float]
+            Alternative price of the product
+
         sku : typing.Optional[str]
             Product identifier from the shop
 
@@ -1999,7 +2141,7 @@ class AsyncEcommerceClient:
             Current stock value of the product from the shop's database
 
         update_enabled : typing.Optional[bool]
-            Facilitate to update the existing category in the same request (updateEnabled = true)
+            Facilitate to update the existing product in the same request (updateEnabled = true)
 
         url : typing.Optional[str]
             URL to the product
@@ -2044,6 +2186,7 @@ class AsyncEcommerceClient:
             meta_info=meta_info,
             parent_id=parent_id,
             price=price,
+            alternative_price=alternative_price,
             sku=sku,
             stock=stock,
             update_enabled=update_enabled,
@@ -2060,13 +2203,15 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateUpdateBatchProductsResponse:
         """
+        Create or update multiple ecommerce products in a single request. The `products` array accepts up to 100 product objects for creation (or up to 1000 when `updateEnabled` is `true` and the account has an increased limit). Each product requires a unique `id` and `name` (name is mandatory for creation only). When `updateEnabled` is `false`, all products are inserted as new; if any ID already exists, a `400` error is returned. When `updateEnabled` is `true`, existing products are updated and new ones are created via upsert. Duplicate IDs within the same request payload are rejected. The response returns the count of created and updated products.
+
         Parameters
         ----------
         products : typing.Sequence[CreateUpdateBatchProductsRequestProductsItem]
             array of products objects
 
         update_enabled : typing.Optional[bool]
-            Facilitate to update the existing categories in the same request (updateEnabled = true)
+            Facilitate to update the existing products in the same request (updateEnabled = true)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2110,6 +2255,8 @@ class AsyncEcommerceClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetProductDetails:
         """
+        Retrieve the full details of a single ecommerce product by its unique ID. The response includes the product name, price, SKU, URL, image URLs (original and thumbnails), categories, stock level, meta information, creation and modification timestamps, and deletion status. Returns a `404` error if no product matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -2121,7 +2268,7 @@ class AsyncEcommerceClient:
         Returns
         -------
         GetProductDetails
-            Product informations
+            Product details
 
         Examples
         --------
@@ -2153,6 +2300,8 @@ class AsyncEcommerceClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Register a contact to receive an alert for a specific product event, such as `back_in_stock`. At least one contact identifier (`ext_id`, `email`, or `sms`) must be provided; when multiple are given, priority is `ext_id` > `email` > `sms`. Returns a `404` error if the product ID does not exist, and a `403` error if product alerts are not enabled for the account.
+
         Parameters
         ----------
         id : str

@@ -42,6 +42,8 @@ class RawPaymentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreatePaymentRequestResponse]:
         """
+        Create a new payment request for a Brevo contact. The request requires a reference (displayed on the payment page), a contact ID, and a cart with currency and amount in cents. You can optionally configure a custom success redirect URL and enable email notifications with reminders. Returns the payment request ID and its public payment URL. A `403` error is returned if Brevo Payments is not activated or the account is not validated.
+
         Parameters
         ----------
         cart : Cart
@@ -144,6 +146,8 @@ class RawPaymentsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetPaymentRequestResponse]:
         """
+        Retrieve the details of a specific payment request by its ID. The response includes the reference, status (created, sent, reminderSent, or paid), cart details, notification configuration, contact ID, and the number of reminders sent. Returns a `404` error if no payment request matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -229,6 +233,8 @@ class RawPaymentsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[None]:
         """
+        Delete a payment request by its UUID. Once deleted, the payment request can no longer be accessed or paid. Returns a `404` error if no payment request matches the provided ID, and a `403` error if Brevo Payments is not activated or the account is not validated.
+
         Parameters
         ----------
         id : str
@@ -308,6 +314,8 @@ class AsyncRawPaymentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreatePaymentRequestResponse]:
         """
+        Create a new payment request for a Brevo contact. The request requires a reference (displayed on the payment page), a contact ID, and a cart with currency and amount in cents. You can optionally configure a custom success redirect URL and enable email notifications with reminders. Returns the payment request ID and its public payment URL. A `403` error is returned if Brevo Payments is not activated or the account is not validated.
+
         Parameters
         ----------
         cart : Cart
@@ -410,6 +418,8 @@ class AsyncRawPaymentsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetPaymentRequestResponse]:
         """
+        Retrieve the details of a specific payment request by its ID. The response includes the reference, status (created, sent, reminderSent, or paid), cart details, notification configuration, contact ID, and the number of reminders sent. Returns a `404` error if no payment request matches the provided ID.
+
         Parameters
         ----------
         id : str
@@ -495,6 +505,8 @@ class AsyncRawPaymentsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Delete a payment request by its UUID. Once deleted, the payment request can no longer be accessed or paid. Returns a `404` error if no payment request matches the provided ID, and a `403` error if Brevo Payments is not activated or the account is not validated.
+
         Parameters
         ----------
         id : str

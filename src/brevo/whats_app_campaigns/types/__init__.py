@@ -13,6 +13,7 @@ if typing.TYPE_CHECKING:
     from .create_whats_app_template_response import CreateWhatsAppTemplateResponse
     from .get_whats_app_campaign_response import GetWhatsAppCampaignResponse
     from .get_whats_app_campaign_response_campaign_status import GetWhatsAppCampaignResponseCampaignStatus
+    from .get_whats_app_campaign_response_recipients import GetWhatsAppCampaignResponseRecipients
     from .get_whats_app_campaign_response_template import GetWhatsAppCampaignResponseTemplate
     from .get_whats_app_campaign_response_template_components_item import (
         GetWhatsAppCampaignResponseTemplateComponentsItem,
@@ -43,6 +44,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateWhatsAppTemplateResponse": ".create_whats_app_template_response",
     "GetWhatsAppCampaignResponse": ".get_whats_app_campaign_response",
     "GetWhatsAppCampaignResponseCampaignStatus": ".get_whats_app_campaign_response_campaign_status",
+    "GetWhatsAppCampaignResponseRecipients": ".get_whats_app_campaign_response_recipients",
     "GetWhatsAppCampaignResponseTemplate": ".get_whats_app_campaign_response_template",
     "GetWhatsAppCampaignResponseTemplateComponentsItem": ".get_whats_app_campaign_response_template_components_item",
     "GetWhatsAppCampaignsRequestSort": ".get_whats_app_campaigns_request_sort",
@@ -91,6 +93,7 @@ __all__ = [
     "CreateWhatsAppTemplateResponse",
     "GetWhatsAppCampaignResponse",
     "GetWhatsAppCampaignResponseCampaignStatus",
+    "GetWhatsAppCampaignResponseRecipients",
     "GetWhatsAppCampaignResponseTemplate",
     "GetWhatsAppCampaignResponseTemplateComponentsItem",
     "GetWhatsAppCampaignsRequestSort",

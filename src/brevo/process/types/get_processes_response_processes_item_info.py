@@ -7,24 +7,19 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
-from .get_processes_response_processes_item_info_export import GetProcessesResponseProcessesItemInfoExport
 from .get_processes_response_processes_item_info_import import GetProcessesResponseProcessesItemInfoImport
 
 
 class GetProcessesResponseProcessesItemInfo(UncheckedBaseModel):
     """
-    Additional process information (for completed processes)
+    Additional process information, only returned for completed IMPORTUSER processes. Contains URLs to CSV files with details about problematic records.
     """
 
     import_: typing_extensions.Annotated[
         typing.Optional[GetProcessesResponseProcessesItemInfoImport],
         FieldMetadata(alias="import"),
-        pydantic.Field(alias="import", description="Import process details"),
+        pydantic.Field(alias="import", description="Import process details with URLs to CSV reports"),
     ] = None
-    export: typing.Optional[GetProcessesResponseProcessesItemInfoExport] = pydantic.Field(default=None)
-    """
-    Export process details
-    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

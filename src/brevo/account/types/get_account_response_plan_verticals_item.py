@@ -34,15 +34,15 @@ class GetAccountResponsePlanVerticalsItem(UncheckedBaseModel):
     """
 
     start_date: typing_extensions.Annotated[
-        str,
+        typing.Optional[str],
         FieldMetadata(alias="startDate"),
         pydantic.Field(alias="startDate", description="Plan start date (Unix timestamp)"),
-    ]
+    ] = None
     end_date: typing_extensions.Annotated[
-        str,
+        typing.Optional[str],
         FieldMetadata(alias="endDate"),
         pydantic.Field(alias="endDate", description="Plan end date (Unix timestamp)"),
-    ]
+    ] = None
     users: typing.Optional[GetAccountResponsePlanVerticalsItemUsers] = pydantic.Field(default=None)
     """
     User seat information for the plan

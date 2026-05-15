@@ -31,7 +31,7 @@ class NoteData(UncheckedBaseModel):
     ] = None
     text: str = pydantic.Field()
     """
-    Text content of a note
+    Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
     """
 
     if IS_PYDANTIC_V2:

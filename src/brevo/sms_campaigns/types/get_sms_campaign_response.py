@@ -7,8 +7,8 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
-from ...types.get_campaign_recipients import GetCampaignRecipients
 from ...types.get_sms_campaign_stats import GetSmsCampaignStats
+from .get_sms_campaign_response_recipients import GetSmsCampaignResponseRecipients
 from .get_sms_campaign_response_status import GetSmsCampaignResponseStatus
 
 
@@ -43,12 +43,20 @@ class GetSmsCampaignResponse(UncheckedBaseModel):
     Name of the SMS Campaign
     """
 
+    organisation_prefix: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="organisationPrefix"),
+        pydantic.Field(
+            alias="organisationPrefix",
+            description="A recognizable prefix added as the Brand Name before the message content. Empty string if not set.",
+        ),
+    ] = None
     scheduled_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="scheduledAt"),
         pydantic.Field(
             alias="scheduledAt",
-            description="UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format",
+            description="UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format. Empty string if not scheduled.",
         ),
     ] = None
     sender: str = pydantic.Field()
@@ -56,13 +64,37 @@ class GetSmsCampaignResponse(UncheckedBaseModel):
     Sender of the SMS Campaign
     """
 
+    sent_date: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="sentDate"),
+        pydantic.Field(
+            alias="sentDate",
+            description="UTC date-time on which the SMS campaign was sent (YYYY-MM-DDTHH:mm:ss.SSSZ). Only available if the campaign status is 'sent'.",
+        ),
+    ] = None
     status: GetSmsCampaignResponseStatus = pydantic.Field()
     """
     Status of the SMS Campaign
     """
 
-    recipients: GetCampaignRecipients
+    unsubscribe_instruction: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="unsubscribeInstruction"),
+        pydantic.Field(
+            alias="unsubscribeInstruction",
+            description="Instructions to unsubscribe from future communications. Empty string if not set.",
+        ),
+    ] = None
+    recipients: GetSmsCampaignResponseRecipients = pydantic.Field()
+    """
+    Recipients of the SMS campaign. For a single campaign, lists and exclusion lists are returned as objects with id and name.
+    """
+
     statistics: GetSmsCampaignStats
+    tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    Tags (labels) associated with the SMS campaign. Only available when retrieving a single campaign.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

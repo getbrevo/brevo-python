@@ -61,11 +61,12 @@ class EmailCampaignsClient:
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetEmailCampaignsRequestSort] = None,
         exclude_html_content: typing.Optional[bool] = None,
+        exclude_pdf_attachment: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignsResponse:
         """
         <Note>The response payload for this endpoint has changed
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/2023/2/7).</Note>
 
         Parameters
         ----------
@@ -76,13 +77,13 @@ class EmailCampaignsClient:
             Filter on the status of the campaign
 
         statistics : typing.Optional[GetEmailCampaignsRequestStatistics]
-            Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint.
+            Filter on the type of statistics required. Example: **globalStats** value will only fetch globalStats info of the campaign in the returned response. This option only returns data for events that occurred in the last 6 months. For older campaigns, it is advisable to use the **Get Campaign Report** endpoint.
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+            **Mandatory if endDate is used.** Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result.** Only available if `status` is not passed or is set to `sent`. The date range between `startDate` and `endDate` must not exceed 2 years. `startDate` must not be in the future.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+            **Mandatory if startDate is used.** Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result.** Only available if `status` is not passed or is set to `sent`. The date range between `startDate` and `endDate` must not exceed 2 years. `endDate` must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents per page
@@ -94,7 +95,10 @@ class EmailCampaignsClient:
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 
         exclude_html_content : typing.Optional[bool]
-            Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
+            Use this flag to exclude htmlContent from the response body. If set to **true**, the htmlContent field will be returned as an empty string in the response body.
+
+        exclude_pdf_attachment : typing.Optional[bool]
+            Use this flag to filter out campaigns that have a PDF attachment. If set to **true**, only campaigns without a PDF attachment (or with no attachment at all) will be returned.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -102,7 +106,7 @@ class EmailCampaignsClient:
         Returns
         -------
         GetEmailCampaignsResponse
-            Email campaigns informations
+            Email campaigns information
 
         Examples
         --------
@@ -123,6 +127,7 @@ class EmailCampaignsClient:
             offset=offset,
             sort=sort,
             exclude_html_content=exclude_html_content,
+            exclude_pdf_attachment=exclude_pdf_attachment,
             request_options=request_options,
         )
         return _response.data
@@ -165,13 +170,15 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateEmailCampaignResponse:
         """
+        Create a new email campaign. The campaign requires at minimum a name and sender details, and is created in draft status by default. You must provide email content via one of three mutually exclusive options: htmlContent (inline HTML), htmlUrl (remote URL), or templateId (existing template); additionally, A/B testing can be enabled by setting abTesting to true with subjectA and subjectB, but this is incompatible with sendAtBestTime.
+
         Parameters
         ----------
         name : str
             Name of the campaign
 
         sender : CreateEmailCampaignRequestSender
-            Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+            Sender details including id or email and name (optional). Only one of either Sender’s email or Sender’s ID shall be passed in one request at a time. Passing both `email` and `id` will result in an error. For example: **{"name":"xyz", "email":"example@abc.com"}** or **{"name":"xyz", "id":123}**
 
         ab_testing : typing.Optional[bool]
             Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
@@ -189,10 +196,10 @@ class EmailCampaignsClient:
             Header of the email campaign
 
         html_content : typing.Optional[str]
-            Mandatory if htmlUrl and templateId are empty. Body of the message (HTML).
+            **Mandatory if htmlUrl and templateId are empty.** Body of the message (HTML). Must have more than 10 characters and be less than 1MB in size. Cannot be used together with `htmlUrl` or `templateId`.
 
         html_url : typing.Optional[str]
-            **Mandatory if htmlContent and templateId are empty**. Url to the message (HTML). For example: **https://html.domain.com**
+            **Mandatory if htmlContent and templateId are empty.** URL to the message (HTML). Cannot be used together with `htmlContent` or `templateId`. For example: **https://html.domain.com**
 
         increase_rate : typing.Optional[int]
             **Mandatory if ipWarmupEnable is set to true**. Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
@@ -243,7 +250,7 @@ class EmailCampaignsClient:
             Tag of the campaign
 
         template_id : typing.Optional[int]
-            **Mandatory if htmlContent and htmlUrl are empty**. Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature.
+            **Mandatory if htmlContent and htmlUrl are empty.** Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature. Cannot be used together with `htmlContent` or `htmlUrl`.
 
         to_field : typing.Optional[str]
             To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
@@ -329,6 +336,8 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UploadImageToGalleryResponse:
         """
+        Upload an image to your account''s image gallery by providing an absolute URL to the image. The maximum allowed image size is 2MB and supported formats are jpeg, jpg, png, bmp, and gif; local file uploads are not supported.
+
         Parameters
         ----------
         image_url : str
@@ -370,13 +379,15 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignResponse:
         """
+        Retrieve detailed information about a specific email campaign by its ID, including recipients, statistics, and HTML content. Use the statistics query parameter to select which statistics to include (globalStats, linksStats, statsByDomain, statsByDevice, or statsByBrowser); statsByDevice and statsByBrowser are only available on this single-campaign endpoint. You can exclude HTML content from the response by setting excludeHtmlContent to true.
+
         Parameters
         ----------
         campaign_id : int
             Id of the campaign
 
         statistics : typing.Optional[GetEmailCampaignRequestStatistics]
-            Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
+            Filter on the type of statistics required. Example: **globalStats** value will only fetch globalStats info of the campaign in the returned response. `statsByDevice` and `statsByBrowser` are only available when retrieving a single campaign (not in the list endpoint).
 
         exclude_html_content : typing.Optional[bool]
             Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
@@ -387,7 +398,7 @@ class EmailCampaignsClient:
         Returns
         -------
         GetEmailCampaignResponse
-            Email campaign informations
+            Email campaign information
 
         Examples
         --------
@@ -447,6 +458,8 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing email campaign''s properties such as name, subject, content, sender, recipients, schedule, and A/B testing configuration. The campaign must exist and the request body must contain at least one valid field to update. Only draft or scheduled campaigns can be modified; if sendAtBestTime is enabled, IP warmup will be automatically disabled.
+
         Parameters
         ----------
         campaign_id : int
@@ -608,6 +621,8 @@ class EmailCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete an email campaign by its campaign ID. Only campaigns that have not been scheduled can be deleted; attempting to delete a campaign that has already been scheduled will return a 403 permission denied error. Related data in templates, newsletter builder, and schedule collections is also cleaned up.
+
         Parameters
         ----------
         campaign_id : int
@@ -676,6 +691,8 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EmailExportRecipientsResponse:
         """
+        Export the recipients of a sent email campaign as an asynchronous process, filtered by recipient type (e.g. openers, clickers, hardBounces). The recipientsType field is required and determines which subset of recipients to export. An optional notifyURL webhook will be called once the export is complete, and the response returns a processId to track the export status.
+
         Parameters
         ----------
         campaign_id : int
@@ -716,6 +733,8 @@ class EmailCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Send an existing email campaign immediately by scheduling it for the current time. The campaign must have valid recipients and content configured before sending. The system verifies your account''s send limit and credit balance before dispatching; if credits are insufficient, a 402 error is returned.
+
         Parameters
         ----------
         campaign_id : int
@@ -799,6 +818,8 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Send a test version of an email campaign to specified email addresses or your entire test list. If the emailTo array is left empty, the test mail will be sent to all addresses in your test list. You can send a maximum of 50 test emails per day.
+
         Parameters
         ----------
         campaign_id : int
@@ -869,6 +890,8 @@ class EmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update the status of an email campaign, such as suspending, archiving, or replicating it. Available status values include suspended, archive, darchive, sent, queued, replicate, replicateTemplate, cancel, and draft. Note that the replicateTemplate status is only available for template type campaigns.
+
         Parameters
         ----------
         campaign_id : int
@@ -926,11 +949,12 @@ class AsyncEmailCampaignsClient:
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetEmailCampaignsRequestSort] = None,
         exclude_html_content: typing.Optional[bool] = None,
+        exclude_pdf_attachment: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignsResponse:
         """
         <Note>The response payload for this endpoint has changed
-        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/get-all-marketing-campaigns).</Note>
+        You now need to specify which type of statistics you would like to retrieve. For more information visit [this page](https://developers.brevo.com/changelog/2023/2/7).</Note>
 
         Parameters
         ----------
@@ -941,13 +965,13 @@ class AsyncEmailCampaignsClient:
             Filter on the status of the campaign
 
         statistics : typing.Optional[GetEmailCampaignsRequestStatistics]
-            Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.This option only returns data for events occurred in the last 6 months.For older campaigns, it’s advisable to use the **Get Campaign Report** endpoint.
+            Filter on the type of statistics required. Example: **globalStats** value will only fetch globalStats info of the campaign in the returned response. This option only returns data for events that occurred in the last 6 months. For older campaigns, it is advisable to use the **Get Campaign Report** endpoint.
 
         start_date : typing.Optional[str]
-            **Mandatory if endDate is used**. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+            **Mandatory if endDate is used.** Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result.** Only available if `status` is not passed or is set to `sent`. The date range between `startDate` and `endDate` must not exceed 2 years. `startDate` must not be in the future.
 
         end_date : typing.Optional[str]
-            **Mandatory if startDate is used**. Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result** ( only available if either 'status' not passed and if passed is set to 'sent' )
+            **Mandatory if startDate is used.** Ending (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent email campaigns. **Prefer to pass your timezone in date-time format for accurate result.** Only available if `status` is not passed or is set to `sent`. The date range between `startDate` and `endDate` must not exceed 2 years. `endDate` must not be in the future.
 
         limit : typing.Optional[int]
             Number of documents per page
@@ -959,7 +983,10 @@ class AsyncEmailCampaignsClient:
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 
         exclude_html_content : typing.Optional[bool]
-            Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
+            Use this flag to exclude htmlContent from the response body. If set to **true**, the htmlContent field will be returned as an empty string in the response body.
+
+        exclude_pdf_attachment : typing.Optional[bool]
+            Use this flag to filter out campaigns that have a PDF attachment. If set to **true**, only campaigns without a PDF attachment (or with no attachment at all) will be returned.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -967,7 +994,7 @@ class AsyncEmailCampaignsClient:
         Returns
         -------
         GetEmailCampaignsResponse
-            Email campaigns informations
+            Email campaigns information
 
         Examples
         --------
@@ -996,6 +1023,7 @@ class AsyncEmailCampaignsClient:
             offset=offset,
             sort=sort,
             exclude_html_content=exclude_html_content,
+            exclude_pdf_attachment=exclude_pdf_attachment,
             request_options=request_options,
         )
         return _response.data
@@ -1038,13 +1066,15 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateEmailCampaignResponse:
         """
+        Create a new email campaign. The campaign requires at minimum a name and sender details, and is created in draft status by default. You must provide email content via one of three mutually exclusive options: htmlContent (inline HTML), htmlUrl (remote URL), or templateId (existing template); additionally, A/B testing can be enabled by setting abTesting to true with subjectA and subjectB, but this is incompatible with sendAtBestTime.
+
         Parameters
         ----------
         name : str
             Name of the campaign
 
         sender : CreateEmailCampaignRequestSender
-            Sender details including id or email and name (_optional_). Only one of either Sender's email or Sender's ID shall be passed in one request at a time. For example: **{"name":"xyz", "email":"example@abc.com"}** **{"name":"xyz", "id":123}**
+            Sender details including id or email and name (optional). Only one of either Sender’s email or Sender’s ID shall be passed in one request at a time. Passing both `email` and `id` will result in an error. For example: **{"name":"xyz", "email":"example@abc.com"}** or **{"name":"xyz", "id":123}**
 
         ab_testing : typing.Optional[bool]
             Status of A/B Test. abTesting = false means it is disabled & abTesting = true means it is enabled. **subjectA, subjectB, splitRule, winnerCriteria & winnerDelay** will be considered when abTesting is set to true. subjectA & subjectB are mandatory together & subject if passed is ignored. **Can be set to true only if sendAtBestTime is false**. You will be able to set up two subject lines for your campaign and send them to a random sample of your total recipients. Half of the test group will receive version A, and the other half will receive version B
@@ -1062,10 +1092,10 @@ class AsyncEmailCampaignsClient:
             Header of the email campaign
 
         html_content : typing.Optional[str]
-            Mandatory if htmlUrl and templateId are empty. Body of the message (HTML).
+            **Mandatory if htmlUrl and templateId are empty.** Body of the message (HTML). Must have more than 10 characters and be less than 1MB in size. Cannot be used together with `htmlUrl` or `templateId`.
 
         html_url : typing.Optional[str]
-            **Mandatory if htmlContent and templateId are empty**. Url to the message (HTML). For example: **https://html.domain.com**
+            **Mandatory if htmlContent and templateId are empty.** URL to the message (HTML). Cannot be used together with `htmlContent` or `templateId`. For example: **https://html.domain.com**
 
         increase_rate : typing.Optional[int]
             **Mandatory if ipWarmupEnable is set to true**. Set a percentage increase rate for warming up your ip. We recommend you set the increase rate to 30% per day. If you want to send the same number of emails every day, set the daily increase value to 0%.
@@ -1116,7 +1146,7 @@ class AsyncEmailCampaignsClient:
             Tag of the campaign
 
         template_id : typing.Optional[int]
-            **Mandatory if htmlContent and htmlUrl are empty**. Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature.
+            **Mandatory if htmlContent and htmlUrl are empty.** Id of the transactional email template with status _active_. Used to copy only its content fetched from htmlContent/htmlUrl to an email campaign for RSS feature. Cannot be used together with `htmlContent` or `htmlUrl`.
 
         to_field : typing.Optional[str]
             To personalize the **To** Field. If you want to include the first name and last name of your recipient, add **{FNAME} {LNAME}**. These contact attributes must already exist in your Brevo account. If input parameter **params** used please use **{{contact.FNAME}} {{contact.LNAME}}** for personalization
@@ -1210,6 +1240,8 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UploadImageToGalleryResponse:
         """
+        Upload an image to your account''s image gallery by providing an absolute URL to the image. The maximum allowed image size is 2MB and supported formats are jpeg, jpg, png, bmp, and gif; local file uploads are not supported.
+
         Parameters
         ----------
         image_url : str
@@ -1259,13 +1291,15 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEmailCampaignResponse:
         """
+        Retrieve detailed information about a specific email campaign by its ID, including recipients, statistics, and HTML content. Use the statistics query parameter to select which statistics to include (globalStats, linksStats, statsByDomain, statsByDevice, or statsByBrowser); statsByDevice and statsByBrowser are only available on this single-campaign endpoint. You can exclude HTML content from the response by setting excludeHtmlContent to true.
+
         Parameters
         ----------
         campaign_id : int
             Id of the campaign
 
         statistics : typing.Optional[GetEmailCampaignRequestStatistics]
-            Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response.
+            Filter on the type of statistics required. Example: **globalStats** value will only fetch globalStats info of the campaign in the returned response. `statsByDevice` and `statsByBrowser` are only available when retrieving a single campaign (not in the list endpoint).
 
         exclude_html_content : typing.Optional[bool]
             Use this flag to exclude htmlContent from the response body. If set to **true**, htmlContent field will be returned as empty string in the response body
@@ -1276,7 +1310,7 @@ class AsyncEmailCampaignsClient:
         Returns
         -------
         GetEmailCampaignResponse
-            Email campaign informations
+            Email campaign information
 
         Examples
         --------
@@ -1344,6 +1378,8 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing email campaign''s properties such as name, subject, content, sender, recipients, schedule, and A/B testing configuration. The campaign must exist and the request body must contain at least one valid field to update. Only draft or scheduled campaigns can be modified; if sendAtBestTime is enabled, IP warmup will be automatically disabled.
+
         Parameters
         ----------
         campaign_id : int
@@ -1513,6 +1549,8 @@ class AsyncEmailCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete an email campaign by its campaign ID. Only campaigns that have not been scheduled can be deleted; attempting to delete a campaign that has already been scheduled will return a 403 permission denied error. Related data in templates, newsletter builder, and schedule collections is also cleaned up.
+
         Parameters
         ----------
         campaign_id : int
@@ -1597,6 +1635,8 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EmailExportRecipientsResponse:
         """
+        Export the recipients of a sent email campaign as an asynchronous process, filtered by recipient type (e.g. openers, clickers, hardBounces). The recipientsType field is required and determines which subset of recipients to export. An optional notifyURL webhook will be called once the export is complete, and the response returns a processId to track the export status.
+
         Parameters
         ----------
         campaign_id : int
@@ -1645,6 +1685,8 @@ class AsyncEmailCampaignsClient:
         self, campaign_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Send an existing email campaign immediately by scheduling it for the current time. The campaign must have valid recipients and content configured before sending. The system verifies your account''s send limit and credit balance before dispatching; if credits are insufficient, a 402 error is returned.
+
         Parameters
         ----------
         campaign_id : int
@@ -1744,6 +1786,8 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Send a test version of an email campaign to specified email addresses or your entire test list. If the emailTo array is left empty, the test mail will be sent to all addresses in your test list. You can send a maximum of 50 test emails per day.
+
         Parameters
         ----------
         campaign_id : int
@@ -1832,6 +1876,8 @@ class AsyncEmailCampaignsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update the status of an email campaign, such as suspending, archiving, or replicating it. Available status values include suspended, archive, darchive, sent, queued, replicate, replicateTemplate, cancel, and draft. Note that the replicateTemplate status is only available for template type campaigns.
+
         Parameters
         ----------
         campaign_id : int

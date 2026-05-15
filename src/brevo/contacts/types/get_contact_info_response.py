@@ -65,6 +65,14 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Blacklist status for SMS campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    whatsapp_blacklisted: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="whatsappBlacklisted"),
+        pydantic.Field(
+            alias="whatsappBlacklisted",
+            description="Blacklist status for WhatsApp campaigns (true=blacklisted, false=not blacklisted)",
+        ),
+    ]
     statistics: GetContactInfoResponseStatistics = pydantic.Field()
     """
     Campaign statistics of the contact

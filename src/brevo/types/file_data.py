@@ -15,40 +15,46 @@ class FileData(UncheckedBaseModel):
     File data that is uploaded
     """
 
+    id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Unique file id
+    """
+
+    name: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Name of uploaded file
+    """
+
     author_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="authorId"),
         pydantic.Field(alias="authorId", description="Account id of user which created the file"),
-    ] = None
-    company_id: typing_extensions.Annotated[
-        typing.Optional[str],
-        FieldMetadata(alias="companyId"),
-        pydantic.Field(alias="companyId", description="Company id linked to a file"),
     ] = None
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Contact id of contact on which file is uploaded"),
     ] = None
-    created_at: typing_extensions.Annotated[
-        typing.Optional[dt.datetime],
-        FieldMetadata(alias="createdAt"),
-        pydantic.Field(alias="createdAt", description="File created date/time"),
-    ] = None
     deal_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="dealId"),
         pydantic.Field(alias="dealId", description="Deal id linked to a file"),
     ] = None
-    name: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Name of uploaded file
-    """
-
+    company_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="companyId"),
+        pydantic.Field(alias="companyId", description="Company id linked to a file"),
+    ] = None
     size: typing.Optional[int] = pydantic.Field(default=None)
     """
     Size of file in bytes
     """
+
+    created_at: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="createdAt"),
+        pydantic.Field(alias="createdAt", description="File created date/time"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
