@@ -17,7 +17,8 @@ Official SDK for the Brevo API.
 - [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
-- [Migration From V1X](#migration-from-v1x)
+- [Upgrading from v4.x](#upgrading-from-v4x)
+- [Migration from v1.x](#migration-from-v1x)
 - [Usage](#usage)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
@@ -26,6 +27,7 @@ Official SDK for the Brevo API.
   - [Retries](#retries)
   - [Timeouts](#timeouts)
   - [Custom Client](#custom-client)
+  - [Logging](#logging)
 
 ## Documentation
 
@@ -34,16 +36,80 @@ API reference documentation is available [here](https://developers.brevo.com).
 ## Installation
 
 ```sh
-pip install brevo
+pip install brevo-python
 ```
 
 ## Reference
 
-A full reference for this library is available [here](https://github.com/mourraille/fern-sdk/blob/HEAD/./reference.md).
+A full reference for this library is available [here](https://github.com/getbrevo/brevo-python/blob/v5/reference.md).
+
+## Upgrading from v4.x
+
+v5 is a major release. Most breaking changes come from an internal effort at Brevo to make endpoints, parameters and models more **self-descriptive** — so names, shapes and required fields convey intent without needing to cross-reference external docs (both for developers and for AI agents working against the Brevo API). Every change below applies symmetrically to both `Brevo` (sync) and `AsyncBrevo`.
+
+v4.x remains supported. If you need to hold on v4 temporarily, pin it:
+
+```bash
+pip install "brevo-python>=4,<5"
+```
+
+<details>
+<summary>View v4 → v5 migration guide</summary>
+
+### Breaking changes
+
+**Companies — `get_companies(filters=...)` renamed**
+- The `filters` keyword is renamed to `filters_attributes_name` to match the wire format.
+- The old keyword is silently dropped, the request still succeeds, and the server returns an unfiltered list. Audit every call site.
+
+**Events — `event.create_batch_events` payload renamed**
+```python
+# v4
+client.event.create_batch_events(request=[item1, item2])
+
+# v5
+client.event.create_batch_events(events=[item1, item2])
+```
+Item types renamed in lockstep: `CreateBatchEventsRequestItem` → `CreateBatchEventsRequestEventsItem` (and 5 sub-types).
+
+**Balance — `get_contact_balances` requires `balance_definition_id`**
+
+**Balance — `get_active_balances_api` response shape changed**
+- Response type replaced with `GetLoyaltyBalanceProgramsPidActiveBalanceResponse`.
+
+**Balance — `begin_transaction.event_time` type tightened**
+- `str` → `datetime`. Type-checkers will fail on the old shape.
+
+**CRM — `tasks.get_all_task_types` returns a list** (`List[GetCrmTasktypesResponseItem]` instead of `GetCrmTasktypesResponse`). Old `.id` / `.title` access on the response now fails.
+
+**Webhooks — `create_webhook(events=...)` is now optional / keyword-only**. Positional callers break; switch to keyword arguments.
+
+**Webhooks — `message_id` is now `str`** (was `int`) on history-fetch endpoints.
+
+**Response fields removed**: `GetAccountResponse.date_time_preferences`, `GetWebhook.channel`, `GetProcessResponseInfo.export`.
+
+**Shape collapses**:
+- `SendTransacSmsTag` is now `Union[str, List[str]]` (was a pydantic model).
+- `GetExtendedCampaignStats.links_stats` is now `Dict[str, int]` (was a pydantic class).
+- `ConversationsMessageAttachmentsItem`: `file_name` → `name`, `inline_id` → `link`.
+
+**Top-level imports removed (21 names)** from `from brevo import ...`. Most notably:
+- `CreateBatchEventsRequestItem*` (6 names)
+- `GetWebhookChannel`
+- `GetAccountResponseDateTimePreferences`
+- `GetExtendedCampaignStatsLinksStats`
+- `SendTransacSmsTagField`
+- `UpsertrecordsRequestRecordsItemAssociationsItemZero/One*` (8 names)
+
+### Added
+
+- New optional fields and filters across `contacts.create_contact`, `contacts.update_contact`, `email_campaigns.get_email_campaigns`, `ecommerce.get_products`, and several other endpoints.
+
+</details>
 
 ## Migration from v1.x
 
-> **Warning**: The legacy v1.x SDK (`brevo-python` < 4.0) will continue to receive critical security updates but no new features. We recommend migrating to v4.x.
+> **Warning**: The legacy v1.x SDK (`brevo-python` < 4.0) will continue to receive critical security updates but no new features. We recommend migrating to v5.x.
 
 <details>
 <summary>View migration guide</summary>
@@ -66,7 +132,7 @@ api_instance = brevo_python.AccountApi(brevo_python.ApiClient(configuration))
 api_response = api_instance.get_account()
 ```
 
-**v4.x:**
+**v5.x:**
 ```python
 from brevo import Brevo
 
@@ -74,7 +140,7 @@ client = Brevo(api_key="YOUR_API_KEY")
 account = client.account.get_your_account_information_plan_and_credits_details()
 ```
 
-| Area | v1.x (`brevo_python`) | v4.x (`brevo`) |
+| Area | v1.x (`brevo_python`) | v5.x (`brevo`) |
 |---|---|---|
 | Module | `import brevo_python` | `from brevo import Brevo` |
 | Client | `AccountApi(ApiClient(config))` | `Brevo(api_key="...")` |
@@ -254,4 +320,60 @@ client = Brevo(
     ),
 )
 ```
+
+### Logging
+
+The SDK has a built-in, opt-in logger. Pass a `LogConfig` dict (or a pre-built `Logger`) via the `logging` constructor option on either `Brevo` or `AsyncBrevo`.
+
+> **Note**: The SDK is **silent by default** (`silent=True`). Nothing is logged unless you set `silent=False`. This keeps integration changes from accidentally producing log volume in production.
+
+```python
+from brevo import Brevo
+from brevo.core.logging import ConsoleLogger
+
+client = Brevo(
+    api_key="YOUR_API_KEY",
+    logging={
+        "level": "debug",          # "debug" | "info" | "warn" | "error"
+        "logger": ConsoleLogger(), # built-in; writes to stdlib logging under the "fern" logger
+        "silent": False,           # required to actually emit logs
+    },
+)
+```
+
+#### `LogConfig` fields
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `level` | `"debug" \| "info" \| "warn" \| "error"` | `"info"` | Minimum level forwarded to the logger |
+| `logger` | `ILogger` | `ConsoleLogger()` | Logger implementation — any object conforming to the `ILogger` protocol |
+| `silent` | `bool` | `True` | When `True`, all logging is suppressed regardless of `level` |
+
+#### Custom logger
+
+Implement the `ILogger` protocol (`debug`, `info`, `warn`, `error` methods) to forward to any logging library — stdlib `logging`, `structlog`, `loguru`, or your own sink.
+
+```python
+import logging
+from brevo import Brevo
+from brevo.core.logging import ILogger
+
+logging.basicConfig(level=logging.DEBUG)
+
+class StdlibLogger(ILogger):
+    def __init__(self, name: str = "brevo") -> None:
+        self._log = logging.getLogger(name)
+
+    def debug(self, message, **kwargs): self._log.debug(message, extra=kwargs)
+    def info(self,  message, **kwargs): self._log.info(message,  extra=kwargs)
+    def warn(self,  message, **kwargs): self._log.warning(message, extra=kwargs)
+    def error(self, message, **kwargs): self._log.error(message, extra=kwargs)
+
+client = Brevo(
+    api_key="YOUR_API_KEY",
+    logging={"level": "debug", "logger": StdlibLogger(), "silent": False},
+)
+```
+
+The default `ConsoleLogger` uses Python's stdlib `logging` module under the logger name `"fern"`. If you only need to filter or reformat output, configuring that logger via `logging.getLogger("fern")` may be enough — you don't always need a custom `ILogger`.
 
