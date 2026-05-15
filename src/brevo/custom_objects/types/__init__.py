@@ -54,29 +54,14 @@ if typing.TYPE_CHECKING:
     from .getrecords_response_records_item_identifiers import GetrecordsResponseRecordsItemIdentifiers
     from .upsertrecords_request_records_item import UpsertrecordsRequestRecordsItem
     from .upsertrecords_request_records_item_associations_item import UpsertrecordsRequestRecordsItemAssociationsItem
-    from .upsertrecords_request_records_item_associations_item_one import (
-        UpsertrecordsRequestRecordsItemAssociationsItemOne,
+    from .upsertrecords_request_records_item_associations_item_action import (
+        UpsertrecordsRequestRecordsItemAssociationsItemAction,
     )
-    from .upsertrecords_request_records_item_associations_item_one_records_item import (
-        UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItem,
+    from .upsertrecords_request_records_item_associations_item_records_item import (
+        UpsertrecordsRequestRecordsItemAssociationsItemRecordsItem,
     )
-    from .upsertrecords_request_records_item_associations_item_one_records_item_one import (
-        UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemOne,
-    )
-    from .upsertrecords_request_records_item_associations_item_one_records_item_zero import (
-        UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZero,
-    )
-    from .upsertrecords_request_records_item_associations_item_one_records_item_zero_identifiers import (
-        UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers,
-    )
-    from .upsertrecords_request_records_item_associations_item_zero import (
-        UpsertrecordsRequestRecordsItemAssociationsItemZero,
-    )
-    from .upsertrecords_request_records_item_associations_item_zero_records_item import (
-        UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItem,
-    )
-    from .upsertrecords_request_records_item_associations_item_zero_records_item_identifiers import (
-        UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItemIdentifiers,
+    from .upsertrecords_request_records_item_associations_item_records_item_identifiers import (
+        UpsertrecordsRequestRecordsItemAssociationsItemRecordsItemIdentifiers,
     )
     from .upsertrecords_request_records_item_identifiers import UpsertrecordsRequestRecordsItemIdentifiers
     from .upsertrecords_response import UpsertrecordsResponse
@@ -105,14 +90,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetrecordsResponseRecordsItemIdentifiers": ".getrecords_response_records_item_identifiers",
     "UpsertrecordsRequestRecordsItem": ".upsertrecords_request_records_item",
     "UpsertrecordsRequestRecordsItemAssociationsItem": ".upsertrecords_request_records_item_associations_item",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOne": ".upsertrecords_request_records_item_associations_item_one",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItem": ".upsertrecords_request_records_item_associations_item_one_records_item",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemOne": ".upsertrecords_request_records_item_associations_item_one_records_item_one",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZero": ".upsertrecords_request_records_item_associations_item_one_records_item_zero",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers": ".upsertrecords_request_records_item_associations_item_one_records_item_zero_identifiers",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZero": ".upsertrecords_request_records_item_associations_item_zero",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItem": ".upsertrecords_request_records_item_associations_item_zero_records_item",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItemIdentifiers": ".upsertrecords_request_records_item_associations_item_zero_records_item_identifiers",
+    "UpsertrecordsRequestRecordsItemAssociationsItemAction": ".upsertrecords_request_records_item_associations_item_action",
+    "UpsertrecordsRequestRecordsItemAssociationsItemRecordsItem": ".upsertrecords_request_records_item_associations_item_records_item",
+    "UpsertrecordsRequestRecordsItemAssociationsItemRecordsItemIdentifiers": ".upsertrecords_request_records_item_associations_item_records_item_identifiers",
     "UpsertrecordsRequestRecordsItemIdentifiers": ".upsertrecords_request_records_item_identifiers",
     "UpsertrecordsResponse": ".upsertrecords_response",
 }
@@ -164,14 +144,9 @@ __all__ = [
     "GetrecordsResponseRecordsItemIdentifiers",
     "UpsertrecordsRequestRecordsItem",
     "UpsertrecordsRequestRecordsItemAssociationsItem",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOne",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItem",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemOne",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZero",
-    "UpsertrecordsRequestRecordsItemAssociationsItemOneRecordsItemZeroIdentifiers",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZero",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItem",
-    "UpsertrecordsRequestRecordsItemAssociationsItemZeroRecordsItemIdentifiers",
+    "UpsertrecordsRequestRecordsItemAssociationsItemAction",
+    "UpsertrecordsRequestRecordsItemAssociationsItemRecordsItem",
+    "UpsertrecordsRequestRecordsItemAssociationsItemRecordsItemIdentifiers",
     "UpsertrecordsRequestRecordsItemIdentifiers",
     "UpsertrecordsResponse",
 ]

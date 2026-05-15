@@ -23,11 +23,6 @@ class GetAllExternalFeedsResponseFeedsItem(UncheckedBaseModel):
     Name of the feed
     """
 
-    alias: str = pydantic.Field()
-    """
-    URL-friendly alias for the feed
-    """
-
     url: str = pydantic.Field()
     """
     URL of the external data source
@@ -40,17 +35,17 @@ class GetAllExternalFeedsResponseFeedsItem(UncheckedBaseModel):
     ]
     username: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Username for basic authentication
+    Username for basic authentication. Only returned when authType is 'basic'. Excluded when authType is 'token'.
     """
 
     password: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Password for basic authentication
+    Password for basic authentication. Only returned when authType is 'basic'. Excluded when authType is 'token'.
     """
 
     token: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Token for token-based authentication
+    Token for token-based authentication. Only returned when authType is 'token'. Excluded when authType is 'basic' or 'noAuth'.
     """
 
     max_retries: typing_extensions.Annotated[
@@ -63,11 +58,6 @@ class GetAllExternalFeedsResponseFeedsItem(UncheckedBaseModel):
     Whether to cache the feed response
     """
 
-    is_internal: typing_extensions.Annotated[
-        bool,
-        FieldMetadata(alias="isInternal"),
-        pydantic.Field(alias="isInternal", description="Whether this is an internal Brevo system feed"),
-    ]
     headers: typing.Optional[typing.List[GetAllExternalFeedsResponseFeedsItemHeadersItem]] = pydantic.Field(
         default=None
     )

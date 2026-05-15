@@ -6,6 +6,7 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .get_lp_list_request_sort import GetLpListRequestSort
     from .get_lp_list_request_sort_field import GetLpListRequestSortField
     from .get_lp_list_response import GetLpListResponse
     from .get_parameter_subscription_info_response import GetParameterSubscriptionInfoResponse
@@ -19,6 +20,7 @@ if typing.TYPE_CHECKING:
     from .subscribe_member_to_a_subscription_response import SubscribeMemberToASubscriptionResponse
     from .subscribe_to_loyalty_program_response import SubscribeToLoyaltyProgramResponse
 _dynamic_imports: typing.Dict[str, str] = {
+    "GetLpListRequestSort": ".get_lp_list_request_sort",
     "GetLpListRequestSortField": ".get_lp_list_request_sort_field",
     "GetLpListResponse": ".get_lp_list_response",
     "GetParameterSubscriptionInfoResponse": ".get_parameter_subscription_info_response",
@@ -54,6 +56,7 @@ def __dir__():
 
 
 __all__ = [
+    "GetLpListRequestSort",
     "GetLpListRequestSortField",
     "GetLpListResponse",
     "GetParameterSubscriptionInfoResponse",

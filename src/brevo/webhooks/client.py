@@ -96,13 +96,13 @@ class WebhooksClient:
     def create_webhook(
         self,
         *,
-        events: typing.Sequence[CreateWebhookRequestEventsItem],
         url: str,
         auth: typing.Optional[CreateWebhookRequestAuth] = OMIT,
         batched: typing.Optional[bool] = OMIT,
         channel: typing.Optional[CreateWebhookRequestChannel] = OMIT,
         description: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        events: typing.Optional[typing.Sequence[CreateWebhookRequestEventsItem]] = OMIT,
         headers: typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]] = OMIT,
         type: typing.Optional[CreateWebhookRequestType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -123,24 +123,6 @@ class WebhooksClient:
 
         Parameters
         ----------
-        events : typing.Sequence[CreateWebhookRequestEventsItem]
-            - Events triggering the webhook. Possible values for
-            **Transactional** type webhook: #### `sent` OR `request`,
-            `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
-            `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
-            `unsubscribed` - Possible values for **Marketing** type webhook:
-            #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
-            `unsubscribed`, `listAddition` & `delivered` - Possible values
-            for **Inbound** type webhook: #### `inboundEmailProcessed` -
-            Possible values for type **Transactional** and channel **SMS**
-            ####
-            `accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
-            `subscribe`,`sent`,`blacklisted`,`skip` - Possible values for
-            type **Marketing**  channel **SMS** ####
-            `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
-            `subscribe`,`skip`
-            #### `reply`
-
         url : str
             URL of the webhook
 
@@ -151,7 +133,7 @@ class WebhooksClient:
             To send batched webhooks
 
         channel : typing.Optional[CreateWebhookRequestChannel]
-            channel of webhook
+            Channel of the webhook
 
         description : typing.Optional[str]
             Description of the webhook
@@ -159,6 +141,18 @@ class WebhooksClient:
         domain : typing.Optional[str]
             Inbound domain of webhook, required in case of event type
             `inbound`
+
+        events : typing.Optional[typing.Sequence[CreateWebhookRequestEventsItem]]
+            Events triggering the webhook. Required for transactional and
+            marketing types, optional for inbound type (defaults to
+            `inboundEmailProcessed`). Possible values for **Transactional**
+            type webhook: `sent` OR `request`, `delivered`, `hardBounce`,
+            `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`,
+            `opened`, `uniqueOpened` and `unsubscribed`. Possible values for
+            **Marketing** type webhook: `spam`, `opened`, `click`,
+            `hardBounce`, `softBounce`, `unsubscribed`, `listAddition`,
+            `delivered`, `contactUpdated` & `contactDeleted`. Possible values
+            for **Inbound** type webhook: `inboundEmailProcessed`.
 
         headers : typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -182,18 +176,17 @@ class WebhooksClient:
             api_key="YOUR_API_KEY",
         )
         client.webhooks.create_webhook(
-            events=["sent"],
             url="http://requestb.in/173lyyx1",
         )
         """
         _response = self._raw_client.create_webhook(
-            events=events,
             url=url,
             auth=auth,
             batched=batched,
             channel=channel,
             description=description,
             domain=domain,
+            events=events,
             headers=headers,
             type=type,
             request_options=request_options,
@@ -209,7 +202,7 @@ class WebhooksClient:
         days: typing.Optional[int] = OMIT,
         email: typing.Optional[str] = OMIT,
         end_date: typing.Optional[str] = OMIT,
-        message_id: typing.Optional[int] = OMIT,
+        message_id: typing.Optional[str] = OMIT,
         sort: typing.Optional[str] = OMIT,
         start_date: typing.Optional[str] = OMIT,
         webhook_id: typing.Optional[int] = OMIT,
@@ -249,7 +242,7 @@ class WebhooksClient:
             Mandatory if startDate is used. Ending date of the report
             (YYYY-MM-DD). Must be greater than equal to startDate
 
-        message_id : typing.Optional[int]
+        message_id : typing.Optional[str]
             Filter the history for a specific message id. Applicable
             only for transactional webhooks.
 
@@ -553,13 +546,13 @@ class AsyncWebhooksClient:
     async def create_webhook(
         self,
         *,
-        events: typing.Sequence[CreateWebhookRequestEventsItem],
         url: str,
         auth: typing.Optional[CreateWebhookRequestAuth] = OMIT,
         batched: typing.Optional[bool] = OMIT,
         channel: typing.Optional[CreateWebhookRequestChannel] = OMIT,
         description: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        events: typing.Optional[typing.Sequence[CreateWebhookRequestEventsItem]] = OMIT,
         headers: typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]] = OMIT,
         type: typing.Optional[CreateWebhookRequestType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -580,24 +573,6 @@ class AsyncWebhooksClient:
 
         Parameters
         ----------
-        events : typing.Sequence[CreateWebhookRequestEventsItem]
-            - Events triggering the webhook. Possible values for
-            **Transactional** type webhook: #### `sent` OR `request`,
-            `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`,
-            `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and
-            `unsubscribed` - Possible values for **Marketing** type webhook:
-            #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`,
-            `unsubscribed`, `listAddition` & `delivered` - Possible values
-            for **Inbound** type webhook: #### `inboundEmailProcessed` -
-            Possible values for type **Transactional** and channel **SMS**
-            ####
-            `accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
-            `subscribe`,`sent`,`blacklisted`,`skip` - Possible values for
-            type **Marketing**  channel **SMS** ####
-            `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`,
-            `subscribe`,`skip`
-            #### `reply`
-
         url : str
             URL of the webhook
 
@@ -608,7 +583,7 @@ class AsyncWebhooksClient:
             To send batched webhooks
 
         channel : typing.Optional[CreateWebhookRequestChannel]
-            channel of webhook
+            Channel of the webhook
 
         description : typing.Optional[str]
             Description of the webhook
@@ -616,6 +591,18 @@ class AsyncWebhooksClient:
         domain : typing.Optional[str]
             Inbound domain of webhook, required in case of event type
             `inbound`
+
+        events : typing.Optional[typing.Sequence[CreateWebhookRequestEventsItem]]
+            Events triggering the webhook. Required for transactional and
+            marketing types, optional for inbound type (defaults to
+            `inboundEmailProcessed`). Possible values for **Transactional**
+            type webhook: `sent` OR `request`, `delivered`, `hardBounce`,
+            `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`,
+            `opened`, `uniqueOpened` and `unsubscribed`. Possible values for
+            **Marketing** type webhook: `spam`, `opened`, `click`,
+            `hardBounce`, `softBounce`, `unsubscribed`, `listAddition`,
+            `delivered`, `contactUpdated` & `contactDeleted`. Possible values
+            for **Inbound** type webhook: `inboundEmailProcessed`.
 
         headers : typing.Optional[typing.Sequence[CreateWebhookRequestHeadersItem]]
             Custom headers to be send with webhooks
@@ -644,7 +631,6 @@ class AsyncWebhooksClient:
 
         async def main() -> None:
             await client.webhooks.create_webhook(
-                events=["sent"],
                 url="http://requestb.in/173lyyx1",
             )
 
@@ -652,13 +638,13 @@ class AsyncWebhooksClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create_webhook(
-            events=events,
             url=url,
             auth=auth,
             batched=batched,
             channel=channel,
             description=description,
             domain=domain,
+            events=events,
             headers=headers,
             type=type,
             request_options=request_options,
@@ -674,7 +660,7 @@ class AsyncWebhooksClient:
         days: typing.Optional[int] = OMIT,
         email: typing.Optional[str] = OMIT,
         end_date: typing.Optional[str] = OMIT,
-        message_id: typing.Optional[int] = OMIT,
+        message_id: typing.Optional[str] = OMIT,
         sort: typing.Optional[str] = OMIT,
         start_date: typing.Optional[str] = OMIT,
         webhook_id: typing.Optional[int] = OMIT,
@@ -714,7 +700,7 @@ class AsyncWebhooksClient:
             Mandatory if startDate is used. Ending date of the report
             (YYYY-MM-DD). Must be greater than equal to startDate
 
-        message_id : typing.Optional[int]
+        message_id : typing.Optional[str]
             Filter the history for a specific message id. Applicable
             only for transactional webhooks.
 

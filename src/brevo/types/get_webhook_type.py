@@ -2,4 +2,4 @@
 
 import typing
 
-GetWebhookType = typing.Union[typing.Literal["marketing", "transactional"], typing.Any]
+GetWebhookType = typing.Union[typing.Literal["marketing", "transactional", "inbound"], typing.Any]

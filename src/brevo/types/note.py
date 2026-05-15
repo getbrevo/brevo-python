@@ -15,26 +15,6 @@ class Note(UncheckedBaseModel):
     Note Details
     """
 
-    author_id: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Any]],
-        FieldMetadata(alias="authorId"),
-        pydantic.Field(alias="authorId", description="Account details of user which created the note"),
-    ] = None
-    contact_ids: typing_extensions.Annotated[
-        typing.Optional[typing.List[int]],
-        FieldMetadata(alias="contactIds"),
-        pydantic.Field(alias="contactIds", description="Contact ids linked to a note"),
-    ] = None
-    created_at: typing_extensions.Annotated[
-        typing.Optional[dt.datetime],
-        FieldMetadata(alias="createdAt"),
-        pydantic.Field(alias="createdAt", description="Note created date/time"),
-    ] = None
-    deal_ids: typing_extensions.Annotated[
-        typing.Optional[typing.List[str]],
-        FieldMetadata(alias="dealIds"),
-        pydantic.Field(alias="dealIds", description="Deal ids linked to a note"),
-    ] = None
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique note Id
@@ -42,9 +22,34 @@ class Note(UncheckedBaseModel):
 
     text: str = pydantic.Field()
     """
-    Text content of a note
+    Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
     """
 
+    contact_ids: typing_extensions.Annotated[
+        typing.Optional[typing.List[int]],
+        FieldMetadata(alias="contactIds"),
+        pydantic.Field(alias="contactIds", description="Contact ids linked to a note"),
+    ] = None
+    company_ids: typing_extensions.Annotated[
+        typing.Optional[typing.List[str]],
+        FieldMetadata(alias="companyIds"),
+        pydantic.Field(alias="companyIds", description="Company ids linked to a note"),
+    ] = None
+    deal_ids: typing_extensions.Annotated[
+        typing.Optional[typing.List[str]],
+        FieldMetadata(alias="dealIds"),
+        pydantic.Field(alias="dealIds", description="Deal ids linked to a note"),
+    ] = None
+    author_id: typing_extensions.Annotated[
+        typing.Optional[typing.Dict[str, typing.Any]],
+        FieldMetadata(alias="authorId"),
+        pydantic.Field(alias="authorId", description="Account details of user which created the note"),
+    ] = None
+    created_at: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="createdAt"),
+        pydantic.Field(alias="createdAt", description="Note created date/time"),
+    ] = None
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),

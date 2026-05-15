@@ -7,6 +7,7 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        GetLpListRequestSort,
         GetLpListRequestSortField,
         GetLpListResponse,
         GetParameterSubscriptionInfoResponse,
@@ -19,6 +20,7 @@ if typing.TYPE_CHECKING:
         SubscribeToLoyaltyProgramResponse,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "GetLpListRequestSort": ".types",
     "GetLpListRequestSortField": ".types",
     "GetLpListResponse": ".types",
     "GetParameterSubscriptionInfoResponse": ".types",
@@ -54,6 +56,7 @@ def __dir__():
 
 
 __all__ = [
+    "GetLpListRequestSort",
     "GetLpListRequestSortField",
     "GetLpListResponse",
     "GetParameterSubscriptionInfoResponse",

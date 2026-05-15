@@ -55,6 +55,11 @@ class GetWhatsAppTemplatesResponseTemplatesItem(UncheckedBaseModel):
     Status of the whatsApp template
     """
 
+    type: str = pydantic.Field()
+    """
+    Type of the whatsApp template
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

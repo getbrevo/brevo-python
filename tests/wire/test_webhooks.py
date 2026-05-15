@@ -14,7 +14,6 @@ def test_webhooks_create_webhook() -> None:
     test_id = "webhooks.create_webhook.0"
     client = get_client(test_id)
     client.webhooks.create_webhook(
-        events=["sent"],
         url="http://requestb.in/173lyyx1",
     )
     verify_request_count(test_id, "POST", "/webhooks", None, 1)

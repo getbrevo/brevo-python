@@ -8,6 +8,7 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .types import (
         GetCrmAttributesDealsResponseItem,
+        GetCrmAttributesDealsResponseItemAttributeOptionsItem,
         GetCrmDealsRequestSort,
         GetCrmDealsResponse,
         PostCrmDealsImportResponse,
@@ -15,6 +16,7 @@ if typing.TYPE_CHECKING:
     )
 _dynamic_imports: typing.Dict[str, str] = {
     "GetCrmAttributesDealsResponseItem": ".types",
+    "GetCrmAttributesDealsResponseItemAttributeOptionsItem": ".types",
     "GetCrmDealsRequestSort": ".types",
     "GetCrmDealsResponse": ".types",
     "PostCrmDealsImportResponse": ".types",
@@ -45,6 +47,7 @@ def __dir__():
 
 __all__ = [
     "GetCrmAttributesDealsResponseItem",
+    "GetCrmAttributesDealsResponseItemAttributeOptionsItem",
     "GetCrmDealsRequestSort",
     "GetCrmDealsResponse",
     "PostCrmDealsImportResponse",

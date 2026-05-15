@@ -3,7 +3,9 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 
 
@@ -15,8 +17,17 @@ class GetAttributesResponseAttributesItemEnumerationItem(UncheckedBaseModel):
 
     value: int = pydantic.Field()
     """
-    ID of Value of the "category" type attribute
+    Numeric ID of the "category" type attribute value. Set to 0 when the raw value cannot be converted to an integer (for example non-numeric values such as "en" or "fr"). Refer to `valueStr` for the original string representation.
     """
+
+    value_str: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="valueStr"),
+        pydantic.Field(
+            alias="valueStr",
+            description='String representation of the "category" type attribute value. Always contains the original value as stored. Use this field when the attribute value is non-numeric (e.g. "en", "fr") or when you need the exact string form alongside the numeric `value`.',
+        ),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

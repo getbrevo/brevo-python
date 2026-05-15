@@ -204,6 +204,7 @@ class RewardClient:
         loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         value: typing.Optional[float] = OMIT,
+        valid_from: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateVoucherResponse:
         """
@@ -235,6 +236,9 @@ class RewardClient:
         value : typing.Optional[float]
             Value of the selected reward config
 
+        valid_from : typing.Optional[str]
+            Date from which the voucher becomes valid. Accepts RFC 3339 or DD/MM/YYYY HH:MM AM/PM format. Converted to UTC using the organization's timezone.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -264,6 +268,7 @@ class RewardClient:
             loyalty_subscription_id=loyalty_subscription_id,
             meta=meta,
             value=value,
+            valid_from=valid_from,
             request_options=request_options,
         )
         return _response.data
@@ -280,6 +285,7 @@ class RewardClient:
         order: typing.Optional[RedeemVoucherRequestOrder] = OMIT,
         reward_id: typing.Optional[str] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Redeem:
         """
@@ -314,6 +320,9 @@ class RewardClient:
         ttl : typing.Optional[int]
             Time to live in seconds for the redemption request
 
+        auto_complete : typing.Optional[bool]
+            Whether the redemption should be automatically completed
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -343,6 +352,7 @@ class RewardClient:
             order=order,
             reward_id=reward_id,
             ttl=ttl,
+            auto_complete=auto_complete,
             request_options=request_options,
         )
         return _response.data
@@ -816,6 +826,7 @@ class AsyncRewardClient:
         loyalty_subscription_id: typing.Optional[str] = OMIT,
         meta: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         value: typing.Optional[float] = OMIT,
+        valid_from: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateVoucherResponse:
         """
@@ -846,6 +857,9 @@ class AsyncRewardClient:
 
         value : typing.Optional[float]
             Value of the selected reward config
+
+        valid_from : typing.Optional[str]
+            Date from which the voucher becomes valid. Accepts RFC 3339 or DD/MM/YYYY HH:MM AM/PM format. Converted to UTC using the organization's timezone.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -884,6 +898,7 @@ class AsyncRewardClient:
             loyalty_subscription_id=loyalty_subscription_id,
             meta=meta,
             value=value,
+            valid_from=valid_from,
             request_options=request_options,
         )
         return _response.data
@@ -900,6 +915,7 @@ class AsyncRewardClient:
         order: typing.Optional[RedeemVoucherRequestOrder] = OMIT,
         reward_id: typing.Optional[str] = OMIT,
         ttl: typing.Optional[int] = OMIT,
+        auto_complete: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Redeem:
         """
@@ -933,6 +949,9 @@ class AsyncRewardClient:
 
         ttl : typing.Optional[int]
             Time to live in seconds for the redemption request
+
+        auto_complete : typing.Optional[bool]
+            Whether the redemption should be automatically completed
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -971,6 +990,7 @@ class AsyncRewardClient:
             order=order,
             reward_id=reward_id,
             ttl=ttl,
+            auto_complete=auto_complete,
             request_options=request_options,
         )
         return _response.data

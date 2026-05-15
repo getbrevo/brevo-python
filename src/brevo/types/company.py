@@ -32,7 +32,7 @@ class Company(UncheckedBaseModel):
     linked_deals_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="linkedDealsIds"),
-        pydantic.Field(alias="linkedDealsIds", description="Deals ids for companies linked to this company"),
+        pydantic.Field(alias="linkedDealsIds", description="Deal ids for deals linked to this company"),
     ] = None
 
     if IS_PYDANTIC_V2:

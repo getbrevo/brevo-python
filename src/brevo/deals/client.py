@@ -38,6 +38,8 @@ class DealsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[GetCrmAttributesDealsResponseItem]:
         """
+        Retrieve the list of all attributes defined for deals, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -71,9 +73,12 @@ class DealsClient:
         offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[GetCrmDealsRequestSort] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCrmDealsResponse:
         """
+        Retrieve a paginated list of deals with optional filtering, sorting, and search capabilities. Results can be filtered by attributes such as deal name or owner, linked companies, linked contacts, or modification/creation timestamps. Default sort order is descending by creation date.
+
         Parameters
         ----------
         filters_attributes_deal_name : typing.Optional[str]
@@ -83,13 +88,13 @@ class DealsClient:
             Filter by linked companies ids
 
         filters_linked_contacts_ids : typing.Optional[str]
-            Filter by linked companies ids
+            Filter by linked contacts ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         offset : typing.Optional[int]
             Index of the first document of the page
@@ -99,6 +104,9 @@ class DealsClient:
 
         sort : typing.Optional[GetCrmDealsRequestSort]
             Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+
+        sort_by : typing.Optional[str]
+            The field used to sort field names.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -126,6 +134,7 @@ class DealsClient:
             offset=offset,
             limit=limit,
             sort=sort,
+            sort_by=sort_by,
             request_options=request_options,
         )
         return _response.data
@@ -140,6 +149,8 @@ class DealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmDealsResponse:
         """
+        Create a new deal in the CRM with the specified name, attributes, and optional associations to contacts and companies. You can assign the deal to a specific pipeline and stage by providing `pipeline` and `deal_stage` attribute IDs, which can be retrieved from the pipeline details endpoint.
+
         Parameters
         ----------
         name : str
@@ -201,7 +212,7 @@ class DealsClient:
             The mapping options in JSON format. Here is an example of the JSON structure: ```json {
               "link_entities": true, // Determines whether to link related entities during the import process
               "unlink_entities": false, // Determines whether to unlink related entities during the import process
-              "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+              "update_existing_records": true, // Determines whether to update based on deal ID or treat every row as create
               "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
             } ```
 
@@ -238,6 +249,8 @@ class DealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Link or unlink contacts and companies with a specific deal in a single request. You can simultaneously link new contacts/companies and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -284,6 +297,8 @@ class DealsClient:
 
     def get_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Deal:
         """
+        Retrieve the full details of a single deal by its identifier, including its attributes, pipeline stage, linked contacts, and linked companies. Returns a 404 error if the deal does not exist.
+
         Parameters
         ----------
         id : str
@@ -312,6 +327,8 @@ class DealsClient:
 
     def delete_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a deal by its identifier. The requesting user must be the deal owner or have manage permission on deals; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -348,6 +365,8 @@ class DealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing deal''s attributes, name, linked contacts, or linked companies. Note that passing `linkedContactsIds` or `linkedCompaniesIds` replaces the entire list of associations, so omitted IDs will be removed. To move a deal to a different pipeline or stage, provide both the `pipeline` and `deal_stage` attribute IDs.
+
         Parameters
         ----------
         id : str
@@ -356,7 +375,7 @@ class DealsClient:
             Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
 
         linked_companies_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked companies. Omitted IDs will be removed.
 
         linked_contacts_ids : typing.Optional[typing.Sequence[int]]
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
@@ -420,6 +439,8 @@ class DealsClient:
 
     def get_all_pipelines(self, *, request_options: typing.Optional[RequestOptions] = None) -> Pipelines:
         """
+        Retrieve the list of all deal pipelines configured for your account, including each pipeline''s stages and settings. If no pipelines have been configured yet, a default pipeline is automatically created and returned.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -428,7 +449,7 @@ class DealsClient:
         Returns
         -------
         Pipelines
-            Returns list of pipelines and and there details
+            Returns list of pipelines and their details
 
         Examples
         --------
@@ -444,6 +465,8 @@ class DealsClient:
 
     def get_a_pipeline(self, pipeline_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Pipelines:
         """
+        Retrieve the details of a specific deal pipeline by its identifier, including its stages, stage ordering, and configuration. Use this endpoint to obtain the pipeline and stage IDs needed when creating or updating deals.
+
         Parameters
         ----------
         pipeline_id : str
@@ -490,6 +513,8 @@ class AsyncDealsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[GetCrmAttributesDealsResponseItem]:
         """
+        Retrieve the list of all attributes defined for deals, including both system-default and custom attributes. Each attribute includes its label, internal name, type, required status, and available options for select-type attributes.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -531,9 +556,12 @@ class AsyncDealsClient:
         offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[GetCrmDealsRequestSort] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCrmDealsResponse:
         """
+        Retrieve a paginated list of deals with optional filtering, sorting, and search capabilities. Results can be filtered by attributes such as deal name or owner, linked companies, linked contacts, or modification/creation timestamps. Default sort order is descending by creation date.
+
         Parameters
         ----------
         filters_attributes_deal_name : typing.Optional[str]
@@ -543,13 +571,13 @@ class AsyncDealsClient:
             Filter by linked companies ids
 
         filters_linked_contacts_ids : typing.Optional[str]
-            Filter by linked companies ids
+            Filter by linked contacts ids
 
         modified_since : typing.Optional[str]
-            Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         created_since : typing.Optional[str]
-            Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+            Filter (urlencoded) the deals created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 
         offset : typing.Optional[int]
             Index of the first document of the page
@@ -559,6 +587,9 @@ class AsyncDealsClient:
 
         sort : typing.Optional[GetCrmDealsRequestSort]
             Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+
+        sort_by : typing.Optional[str]
+            The field used to sort field names.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -594,6 +625,7 @@ class AsyncDealsClient:
             offset=offset,
             limit=limit,
             sort=sort,
+            sort_by=sort_by,
             request_options=request_options,
         )
         return _response.data
@@ -608,6 +640,8 @@ class AsyncDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmDealsResponse:
         """
+        Create a new deal in the CRM with the specified name, attributes, and optional associations to contacts and companies. You can assign the deal to a specific pipeline and stage by providing `pipeline` and `deal_stage` attribute IDs, which can be retrieved from the pipeline details endpoint.
+
         Parameters
         ----------
         name : str
@@ -677,7 +711,7 @@ class AsyncDealsClient:
             The mapping options in JSON format. Here is an example of the JSON structure: ```json {
               "link_entities": true, // Determines whether to link related entities during the import process
               "unlink_entities": false, // Determines whether to unlink related entities during the import process
-              "update_existing_records": true, // Determines whether to update based on company ID or treat every row as create
+              "update_existing_records": true, // Determines whether to update based on deal ID or treat every row as create
               "unset_empty_attributes": false // Determines whether to unset a specific attribute during update if the values input is blank
             } ```
 
@@ -722,6 +756,8 @@ class AsyncDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Link or unlink contacts and companies with a specific deal in a single request. You can simultaneously link new contacts/companies and unlink existing ones by providing the respective ID arrays in the request body.
+
         Parameters
         ----------
         id : str
@@ -776,6 +812,8 @@ class AsyncDealsClient:
 
     async def get_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Deal:
         """
+        Retrieve the full details of a single deal by its identifier, including its attributes, pipeline stage, linked contacts, and linked companies. Returns a 404 error if the deal does not exist.
+
         Parameters
         ----------
         id : str
@@ -812,6 +850,8 @@ class AsyncDealsClient:
 
     async def delete_a_deal(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a deal by its identifier. The requesting user must be the deal owner or have manage permission on deals; otherwise, a 403 Forbidden error is returned.
+
         Parameters
         ----------
         id : str
@@ -856,6 +896,8 @@ class AsyncDealsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing deal''s attributes, name, linked contacts, or linked companies. Note that passing `linkedContactsIds` or `linkedCompaniesIds` replaces the entire list of associations, so omitted IDs will be removed. To move a deal to a different pipeline or stage, provide both the `pipeline` and `deal_stage` attribute IDs.
+
         Parameters
         ----------
         id : str
@@ -864,7 +906,7 @@ class AsyncDealsClient:
             Attributes for deal update To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID. If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage` Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}`
 
         linked_companies_ids : typing.Optional[typing.Sequence[str]]
-            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked contacts. Omitted IDs will be removed.
+            Warning - Using PATCH on linkedCompaniesIds replaces the list of linked companies. Omitted IDs will be removed.
 
         linked_contacts_ids : typing.Optional[typing.Sequence[int]]
             Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
@@ -944,6 +986,8 @@ class AsyncDealsClient:
 
     async def get_all_pipelines(self, *, request_options: typing.Optional[RequestOptions] = None) -> Pipelines:
         """
+        Retrieve the list of all deal pipelines configured for your account, including each pipeline''s stages and settings. If no pipelines have been configured yet, a default pipeline is automatically created and returned.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -952,7 +996,7 @@ class AsyncDealsClient:
         Returns
         -------
         Pipelines
-            Returns list of pipelines and and there details
+            Returns list of pipelines and their details
 
         Examples
         --------
@@ -978,6 +1022,8 @@ class AsyncDealsClient:
         self, pipeline_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> Pipelines:
         """
+        Retrieve the details of a specific deal pipeline by its identifier, including its stages, stage ordering, and configuration. Use this endpoint to obtain the pipeline and stage IDs needed when creating or updating deals.
+
         Parameters
         ----------
         pipeline_id : str

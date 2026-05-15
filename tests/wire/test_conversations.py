@@ -60,7 +60,7 @@ def test_conversations_send_an_automated_message_to_a_visitor() -> None:
     client = get_client(test_id)
     client.conversations.send_an_automated_message_to_a_visitor(
         group_id="PjRBMhWGen6aRHjif",
-        text="Your order has shipped! Here’s your tracking number: 9114 5847 3325 9667 4328 88",
+        text="Your order has shipped! Here's your tracking number: 9114 5847 3325 9667 4328 88",
         visitor_id="kZMvWhf8npAu3H6qd57w2Hv6nh6rnxvg",
     )
     verify_request_count(test_id, "POST", "/conversations/pushedMessages", None, 1)
@@ -82,7 +82,7 @@ def test_conversations_update_an_automated_message() -> None:
     client = get_client(test_id)
     client.conversations.update_an_automated_message(
         id="id",
-        text="Your order has shipped! Here’s your tracking number: 9114 5847 4668 7775 9233 54",
+        text="Your order has shipped! Here's your tracking number: 9114 5847 4668 7775 9233 54",
     )
     verify_request_count(test_id, "PUT", "/conversations/pushedMessages/id", None, 1)
 

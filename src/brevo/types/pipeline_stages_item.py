@@ -9,7 +9,7 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class PipelineStagesItem(UncheckedBaseModel):
     """
-    List of stages
+    Stage details
     """
 
     id: typing.Optional[str] = pydantic.Field(default=None)

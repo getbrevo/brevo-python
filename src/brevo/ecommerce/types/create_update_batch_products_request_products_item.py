@@ -61,7 +61,7 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
     ] = None
     name: str = pydantic.Field()
     """
-    Mandatory in case of creation**. Name of the product for which you requested the details
+    **Mandatory in case of creation**. Name of the product, as displayed in the shop
     """
 
     parent_id: typing_extensions.Annotated[
@@ -74,6 +74,11 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
     Price of the product
     """
 
+    alternative_price: typing_extensions.Annotated[
+        typing.Optional[float],
+        FieldMetadata(alias="alternativePrice"),
+        pydantic.Field(alias="alternativePrice", description="Alternative price of the product"),
+    ] = None
     sku: typing.Optional[str] = pydantic.Field(default=None)
     """
     Product identifier from the shop

@@ -20,7 +20,7 @@ from .types.get_crm_tasks_request_filter_date import GetCrmTasksRequestFilterDat
 from .types.get_crm_tasks_request_filter_status import GetCrmTasksRequestFilterStatus
 from .types.get_crm_tasks_request_sort import GetCrmTasksRequestSort
 from .types.get_crm_tasks_response import GetCrmTasksResponse
-from .types.get_crm_tasktypes_response import GetCrmTasktypesResponse
+from .types.get_crm_tasktypes_response_item import GetCrmTasktypesResponseItem
 from .types.post_crm_tasks_response import PostCrmTasksResponse
 from pydantic import ValidationError
 
@@ -51,6 +51,8 @@ class RawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetCrmTasksResponse]:
         """
+        Retrieve a paginated list of CRM tasks with optional filtering by task type, status, date range, assignee, and linked entities (contacts, deals, companies). Results are sorted by creation date in descending order by default, with a default limit of 50 tasks per page.
+
         Parameters
         ----------
         filter_type : typing.Optional[str]
@@ -167,6 +169,8 @@ class RawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PostCrmTasksResponse]:
         """
+        Create a new CRM task with the specified name, type, due date, and optional associations to contacts, companies, or deals. A task requires a name, task type ID, and due date at minimum. You can also set a duration, notes, a reminder, and assign the task to a specific user.
+
         Parameters
         ----------
         date : dt.datetime
@@ -265,6 +269,8 @@ class RawTasksClient:
 
     def get_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[Task]:
         """
+        Retrieve the full details of a single CRM task by its identifier. The response includes the task''s name, type, status, due date, duration, notes, assignee, reminder settings, and linked contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -325,6 +331,8 @@ class RawTasksClient:
 
     def delete_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
         """
+        Permanently delete a CRM task by its identifier. This removes the task and cancels any associated reminders. The requesting user must be the task assignee or have manage permission on tasks.
+
         Parameters
         ----------
         id : str
@@ -393,6 +401,8 @@ class RawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
         """
+        Update an existing CRM task''s properties such as name, type, due date, status, duration, notes, assignee, reminder, or linked entities. Only the fields provided in the request body will be updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -496,8 +506,10 @@ class RawTasksClient:
 
     def get_all_task_types(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[GetCrmTasktypesResponse]:
+    ) -> HttpResponse[typing.List[GetCrmTasktypesResponseItem]]:
         """
+        Retrieve the list of all available task types, such as Email, Call, Meeting, Todo, Lunch, Deadline, and LinkedIn. If no task types exist yet, the default set is automatically created and returned. Use the task type ID when creating or updating tasks.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -505,7 +517,7 @@ class RawTasksClient:
 
         Returns
         -------
-        HttpResponse[GetCrmTasktypesResponse]
+        HttpResponse[typing.List[GetCrmTasktypesResponseItem]]
             Returns all the Task types
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -516,13 +528,24 @@ class RawTasksClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetCrmTasktypesResponse,
+                    typing.List[GetCrmTasktypesResponseItem],
                     construct_type(
-                        type_=GetCrmTasktypesResponse,  # type: ignore
+                        type_=typing.List[GetCrmTasktypesResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -556,6 +579,8 @@ class AsyncRawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetCrmTasksResponse]:
         """
+        Retrieve a paginated list of CRM tasks with optional filtering by task type, status, date range, assignee, and linked entities (contacts, deals, companies). Results are sorted by creation date in descending order by default, with a default limit of 50 tasks per page.
+
         Parameters
         ----------
         filter_type : typing.Optional[str]
@@ -672,6 +697,8 @@ class AsyncRawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PostCrmTasksResponse]:
         """
+        Create a new CRM task with the specified name, type, due date, and optional associations to contacts, companies, or deals. A task requires a name, task type ID, and due date at minimum. You can also set a duration, notes, a reminder, and assign the task to a specific user.
+
         Parameters
         ----------
         date : dt.datetime
@@ -772,6 +799,8 @@ class AsyncRawTasksClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Task]:
         """
+        Retrieve the full details of a single CRM task by its identifier. The response includes the task''s name, type, status, due date, duration, notes, assignee, reminder settings, and linked contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -834,6 +863,8 @@ class AsyncRawTasksClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Permanently delete a CRM task by its identifier. This removes the task and cancels any associated reminders. The requesting user must be the task assignee or have manage permission on tasks.
+
         Parameters
         ----------
         id : str
@@ -902,6 +933,8 @@ class AsyncRawTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
         """
+        Update an existing CRM task''s properties such as name, type, due date, status, duration, notes, assignee, reminder, or linked entities. Only the fields provided in the request body will be updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -1005,8 +1038,10 @@ class AsyncRawTasksClient:
 
     async def get_all_task_types(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[GetCrmTasktypesResponse]:
+    ) -> AsyncHttpResponse[typing.List[GetCrmTasktypesResponseItem]]:
         """
+        Retrieve the list of all available task types, such as Email, Call, Meeting, Todo, Lunch, Deadline, and LinkedIn. If no task types exist yet, the default set is automatically created and returned. Use the task type ID when creating or updating tasks.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -1014,7 +1049,7 @@ class AsyncRawTasksClient:
 
         Returns
         -------
-        AsyncHttpResponse[GetCrmTasktypesResponse]
+        AsyncHttpResponse[typing.List[GetCrmTasktypesResponseItem]]
             Returns all the Task types
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1025,13 +1060,24 @@ class AsyncRawTasksClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetCrmTasktypesResponse,
+                    typing.List[GetCrmTasktypesResponseItem],
                     construct_type(
-                        type_=GetCrmTasktypesResponse,  # type: ignore
+                        type_=typing.List[GetCrmTasktypesResponseItem],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

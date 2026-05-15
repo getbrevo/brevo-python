@@ -7,12 +7,16 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .get_crm_attributes_deals_response_item import GetCrmAttributesDealsResponseItem
+    from .get_crm_attributes_deals_response_item_attribute_options_item import (
+        GetCrmAttributesDealsResponseItemAttributeOptionsItem,
+    )
     from .get_crm_deals_request_sort import GetCrmDealsRequestSort
     from .get_crm_deals_response import GetCrmDealsResponse
     from .post_crm_deals_import_response import PostCrmDealsImportResponse
     from .post_crm_deals_response import PostCrmDealsResponse
 _dynamic_imports: typing.Dict[str, str] = {
     "GetCrmAttributesDealsResponseItem": ".get_crm_attributes_deals_response_item",
+    "GetCrmAttributesDealsResponseItemAttributeOptionsItem": ".get_crm_attributes_deals_response_item_attribute_options_item",
     "GetCrmDealsRequestSort": ".get_crm_deals_request_sort",
     "GetCrmDealsResponse": ".get_crm_deals_response",
     "PostCrmDealsImportResponse": ".post_crm_deals_import_response",
@@ -43,6 +47,7 @@ def __dir__():
 
 __all__ = [
     "GetCrmAttributesDealsResponseItem",
+    "GetCrmAttributesDealsResponseItemAttributeOptionsItem",
     "GetCrmDealsRequestSort",
     "GetCrmDealsResponse",
     "PostCrmDealsImportResponse",

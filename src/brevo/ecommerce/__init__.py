@@ -30,6 +30,7 @@ if typing.TYPE_CHECKING:
         GetEcommerceConfigDisplayCurrencyResponse,
         GetOrdersRequestSort,
         GetProductsRequestSort,
+        GetProductsRequestSortByField,
         GetProductsResponse,
         SetConfigDisplayCurrencyResponse,
     )
@@ -57,6 +58,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetEcommerceConfigDisplayCurrencyResponse": ".types",
     "GetOrdersRequestSort": ".types",
     "GetProductsRequestSort": ".types",
+    "GetProductsRequestSortByField": ".types",
     "GetProductsResponse": ".types",
     "SetConfigDisplayCurrencyResponse": ".types",
 }
@@ -107,6 +109,7 @@ __all__ = [
     "GetEcommerceConfigDisplayCurrencyResponse",
     "GetOrdersRequestSort",
     "GetProductsRequestSort",
+    "GetProductsRequestSortByField",
     "GetProductsResponse",
     "SetConfigDisplayCurrencyResponse",
 ]

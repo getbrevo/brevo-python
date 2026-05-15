@@ -63,12 +63,13 @@ def test_ecommerce_get_attribution_metrics_for_one_or_more_brevo_campaigns_or_wo
     client.ecommerce.get_attribution_metrics_for_one_or_more_brevo_campaigns_or_workflows(
         period_from=datetime.datetime.fromisoformat("2022-01-02T00:00:00+00:00"),
         period_to=datetime.datetime.fromisoformat("2022-01-03T00:00:00+00:00"),
+        email_campaign_id_array=["sale"],
     )
     verify_request_count(
         test_id,
         "GET",
         "/ecommerce/attribution/metrics",
-        {"periodFrom": "2022-01-02T00:00:00Z", "periodTo": "2022-01-03T00:00:00Z"},
+        {"periodFrom": "2022-01-02T00:00:00Z", "periodTo": "2022-01-03T00:00:00Z", "emailCampaignId[]": "sale"},
         1,
     )
 

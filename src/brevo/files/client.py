@@ -43,6 +43,8 @@ class FilesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[FileData]:
         """
+        Retrieve a paginated list of CRM files with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 files per page.
+
         Parameters
         ----------
         entity : typing.Optional[GetCrmFilesRequestEntity]
@@ -105,6 +107,8 @@ class FilesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> FileData:
         """
+        Upload a file and associate it with a contact, company, or deal. The file must be sent as multipart form data with a maximum size of 10 MB. You can optionally link the file to a specific entity by providing the corresponding entity ID.
+
         Parameters
         ----------
         file : core.File
@@ -142,6 +146,8 @@ class FilesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetCrmFilesIdResponse:
         """
+        Get a temporary download URL for a CRM file by its identifier. The returned URL is valid for 5 minutes only and provides direct access to the file content.
+
         Parameters
         ----------
         id : str
@@ -171,6 +177,8 @@ class FilesClient:
 
     def delete_a_file(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM file by its identifier. This removes the file from storage and unlinks it from any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -199,6 +207,8 @@ class FilesClient:
 
     def get_file_details(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> FileData:
         """
+        Retrieve the metadata and details of a specific CRM file by its identifier. This returns information such as the file name, size, type, creation date, and associated entities, but does not include the file content itself.
+
         Parameters
         ----------
         id : str
@@ -255,6 +265,8 @@ class AsyncFilesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[FileData]:
         """
+        Retrieve a paginated list of CRM files with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 files per page.
+
         Parameters
         ----------
         entity : typing.Optional[GetCrmFilesRequestEntity]
@@ -325,6 +337,8 @@ class AsyncFilesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> FileData:
         """
+        Upload a file and associate it with a contact, company, or deal. The file must be sent as multipart form data with a maximum size of 10 MB. You can optionally link the file to a specific entity by providing the corresponding entity ID.
+
         Parameters
         ----------
         file : core.File
@@ -370,6 +384,8 @@ class AsyncFilesClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetCrmFilesIdResponse:
         """
+        Get a temporary download URL for a CRM file by its identifier. The returned URL is valid for 5 minutes only and provides direct access to the file content.
+
         Parameters
         ----------
         id : str
@@ -407,6 +423,8 @@ class AsyncFilesClient:
 
     async def delete_a_file(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM file by its identifier. This removes the file from storage and unlinks it from any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -443,6 +461,8 @@ class AsyncFilesClient:
 
     async def get_file_details(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> FileData:
         """
+        Retrieve the metadata and details of a specific CRM file by its identifier. This returns information such as the file name, size, type, creation date, and associated entities, but does not include the file content itself.
+
         Parameters
         ----------
         id : str

@@ -29,11 +29,6 @@ class GetEventsListEventsItem(UncheckedBaseModel):
     Filter ID of the event
     """
 
-    source: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Source of the event
-    """
-
     object_type: typing.Optional[str] = pydantic.Field(default=None)
     """
     Object type associated with the event

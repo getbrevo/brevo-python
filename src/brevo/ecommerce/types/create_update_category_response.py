@@ -8,7 +8,7 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class CreateUpdateCategoryResponse(UncheckedBaseModel):
-    id: typing.Optional[int] = pydantic.Field(default=None)
+    id: typing.Optional[str] = pydantic.Field(default=None)
     """
     ID of the category when a new category is created
     """

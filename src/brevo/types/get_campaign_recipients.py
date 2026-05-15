@@ -10,10 +10,19 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class GetCampaignRecipients(UncheckedBaseModel):
+    excluded_segments: typing_extensions.Annotated[
+        typing.Optional[typing.List[int]],
+        FieldMetadata(alias="excludedSegments"),
+        pydantic.Field(alias="excludedSegments", description="Segment IDs excluded from the campaign"),
+    ] = None
     exclusion_lists: typing_extensions.Annotated[
         typing.List[int], FieldMetadata(alias="exclusionLists"), pydantic.Field(alias="exclusionLists")
     ]
     lists: typing.List[int]
+    segments: typing.Optional[typing.List[int]] = pydantic.Field(default=None)
+    """
+    Segment IDs included in the campaign
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

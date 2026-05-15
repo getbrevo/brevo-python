@@ -22,17 +22,17 @@ class SendTransacSms(UncheckedBaseModel):
     ] = None
     recipient: str = pydantic.Field()
     """
-    Mobile number to send SMS with the country code
+    Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
     """
 
     sender: str = pydantic.Field()
     """
-    Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
+    Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters.** Alphanumeric sender names (up to 11 characters) must contain only letters and digits. Numeric sender names (12-15 characters) must contain only digits.
     """
 
     tag: typing.Optional[SendTransacSmsTag] = pydantic.Field(default=None)
     """
-    Tag of the message
+    Tag of the message. Can be a single string or an array of strings (maximum 10 tags). Each tag must be a non-empty string.
     """
 
     type: typing.Optional[SendTransacSmsType] = pydantic.Field(default=None)
@@ -55,6 +55,11 @@ class SendTransacSms(UncheckedBaseModel):
             alias="webUrl", description="Webhook to call for each event triggered by the message (delivered etc.)"
         ),
     ] = None
+    params: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    """
+    Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
+    """
+
     template_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="templateId"),

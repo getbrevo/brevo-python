@@ -42,6 +42,8 @@ class NotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[Note]:
         """
+        Retrieve a paginated list of CRM notes with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 notes per page.
+
         Parameters
         ----------
         entity : typing.Optional[GetCrmNotesRequestEntity]
@@ -104,10 +106,12 @@ class NotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmNotesResponse:
         """
+        Create a new CRM note and optionally associate it with contacts, companies, or deals. The note text content is required, and you can link the note to multiple entities simultaneously during creation.
+
         Parameters
         ----------
         text : str
-            Text content of a note
+            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
 
         company_ids : typing.Optional[typing.Sequence[str]]
             Company Ids linked to a note
@@ -134,7 +138,7 @@ class NotesClient:
             api_key="YOUR_API_KEY",
         )
         client.notes.create_a_note(
-            text="In communication with client_dev for resolution of queries.",
+            text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
         )
         """
         _response = self._raw_client.create_a_note(
@@ -148,6 +152,8 @@ class NotesClient:
 
     def get_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Note:
         """
+        Retrieve the full details of a single CRM note by its identifier. The response includes the note''s text content, creation date, author, and any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -177,6 +183,8 @@ class NotesClient:
 
     def delete_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM note by its identifier. This removes the note and unlinks it from any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -214,13 +222,15 @@ class NotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing CRM note''s text content and its associations with contacts, companies, or deals. You can modify the note text, change the pinned status, or update the linked entities.
+
         Parameters
         ----------
         id : str
             Note ID to update
 
         text : str
-            Text content of a note
+            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
 
         company_ids : typing.Optional[typing.Sequence[str]]
             Company Ids linked to a note
@@ -247,7 +257,7 @@ class NotesClient:
         )
         client.notes.update_a_note(
             id="id",
-            text="In communication with client_dev for resolution of queries.",
+            text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
         )
         """
         _response = self._raw_client.update_a_note(
@@ -289,6 +299,8 @@ class AsyncNotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[Note]:
         """
+        Retrieve a paginated list of CRM notes with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 notes per page.
+
         Parameters
         ----------
         entity : typing.Optional[GetCrmNotesRequestEntity]
@@ -359,10 +371,12 @@ class AsyncNotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmNotesResponse:
         """
+        Create a new CRM note and optionally associate it with contacts, companies, or deals. The note text content is required, and you can link the note to multiple entities simultaneously during creation.
+
         Parameters
         ----------
         text : str
-            Text content of a note
+            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
 
         company_ids : typing.Optional[typing.Sequence[str]]
             Company Ids linked to a note
@@ -394,7 +408,7 @@ class AsyncNotesClient:
 
         async def main() -> None:
             await client.notes.create_a_note(
-                text="In communication with client_dev for resolution of queries.",
+                text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
             )
 
 
@@ -411,6 +425,8 @@ class AsyncNotesClient:
 
     async def get_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Note:
         """
+        Retrieve the full details of a single CRM note by its identifier. The response includes the note''s text content, creation date, author, and any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -448,6 +464,8 @@ class AsyncNotesClient:
 
     async def delete_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM note by its identifier. This removes the note and unlinks it from any associated contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -493,13 +511,15 @@ class AsyncNotesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing CRM note''s text content and its associations with contacts, companies, or deals. You can modify the note text, change the pinned status, or update the linked entities.
+
         Parameters
         ----------
         id : str
             Note ID to update
 
         text : str
-            Text content of a note
+            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
 
         company_ids : typing.Optional[typing.Sequence[str]]
             Company Ids linked to a note
@@ -531,7 +551,7 @@ class AsyncNotesClient:
         async def main() -> None:
             await client.notes.update_a_note(
                 id="id",
-                text="In communication with client_dev for resolution of queries.",
+                text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
             )
 
 

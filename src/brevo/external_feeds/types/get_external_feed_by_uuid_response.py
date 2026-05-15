@@ -35,40 +35,19 @@ class GetExternalFeedByUuidResponse(UncheckedBaseModel):
     ]
     username: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Username for basic authentication (null if not using basic auth)
+    Username for basic authentication. Only returned when authType is 'basic'. Excluded from response when authType is 'token'.
     """
 
     password: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Password for basic authentication (null if not using basic auth)
+    Password for basic authentication. Only returned when authType is 'basic'. Excluded from response when authType is 'token'.
     """
 
     token: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Token for token-based authentication (null if not using token auth)
+    Token for token-based authentication. Only returned when authType is 'token'. Excluded from response when authType is 'basic' or 'noAuth'.
     """
 
-    personalization: bool = pydantic.Field()
-    """
-    Whether personalization is enabled for this feed
-    """
-
-    default_attr: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="defaultAttr"),
-        pydantic.Field(
-            alias="defaultAttr",
-            description="Default attribute name for personalization fallback (empty string if not set)",
-        ),
-    ]
-    default_contact: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="defaultContact"),
-        pydantic.Field(
-            alias="defaultContact",
-            description="Default contact email for personalization fallback (empty string if not set)",
-        ),
-    ]
     headers: typing.Optional[typing.List[GetExternalFeedByUuidResponseHeadersItem]] = pydantic.Field(default=None)
     """
     Custom HTTP headers for the feed request

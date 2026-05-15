@@ -3,13 +3,28 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_subscription_balances_response_balance_item import GetSubscriptionBalancesResponseBalanceItem
 
 
 class GetSubscriptionBalancesResponse(UncheckedBaseModel):
-    balance: typing.Optional[typing.List[GetSubscriptionBalancesResponseBalanceItem]] = None
+    loyalty_program_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="loyaltyProgramId"),
+        pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
+    ] = None
+    contact_id: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="contactId"),
+        pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
+    ] = None
+    balance: typing.Optional[typing.List[GetSubscriptionBalancesResponseBalanceItem]] = pydantic.Field(default=None)
+    """
+    Aggregate balance per balance definition.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

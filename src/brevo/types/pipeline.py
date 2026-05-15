@@ -10,7 +10,7 @@ from .pipeline_stages_item import PipelineStagesItem
 
 class Pipeline(UncheckedBaseModel):
     """
-    List of stages
+    Pipeline details with stages
     """
 
     pipeline: typing.Optional[str] = pydantic.Field(default=None)
@@ -25,7 +25,7 @@ class Pipeline(UncheckedBaseModel):
 
     stages: typing.Optional[typing.List[PipelineStagesItem]] = pydantic.Field(default=None)
     """
-    List of stages
+    List of pipeline stages
     """
 
     if IS_PYDANTIC_V2:

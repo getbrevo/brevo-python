@@ -3,5 +3,5 @@
 import typing
 
 BalanceDefinitionBalanceAvailabilityDurationModifier = typing.Union[
-    typing.Literal["startOfPeriod", "endOfPeriod", "noModification"], typing.Any
+    typing.Literal["noModification", "startOfPeriod", "endOfPeriod"], typing.Any
 ]

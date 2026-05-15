@@ -12,7 +12,7 @@ from .types.get_crm_tasks_request_filter_date import GetCrmTasksRequestFilterDat
 from .types.get_crm_tasks_request_filter_status import GetCrmTasksRequestFilterStatus
 from .types.get_crm_tasks_request_sort import GetCrmTasksRequestSort
 from .types.get_crm_tasks_response import GetCrmTasksResponse
-from .types.get_crm_tasktypes_response import GetCrmTasktypesResponse
+from .types.get_crm_tasktypes_response_item import GetCrmTasktypesResponseItem
 from .types.post_crm_tasks_response import PostCrmTasksResponse
 
 # this is used as the default value for optional parameters
@@ -53,6 +53,8 @@ class TasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCrmTasksResponse:
         """
+        Retrieve a paginated list of CRM tasks with optional filtering by task type, status, date range, assignee, and linked entities (contacts, deals, companies). Results are sorted by creation date in descending order by default, with a default limit of 50 tasks per page.
+
         Parameters
         ----------
         filter_type : typing.Optional[str]
@@ -148,6 +150,8 @@ class TasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmTasksResponse:
         """
+        Create a new CRM task with the specified name, type, due date, and optional associations to contacts, companies, or deals. A task requires a name, task type ID, and due date at minimum. You can also set a duration, notes, a reminder, and assign the task to a specific user.
+
         Parameters
         ----------
         date : dt.datetime
@@ -203,7 +207,7 @@ class TasksClient:
             date=datetime.datetime.fromisoformat(
                 "2021-11-01 17:44:54+00:00",
             ),
-            name="Task: Connect with client_dev",
+            name="Task: Connect with client",
             task_type_id="61a5cd07ca1347c82306ad09",
         )
         """
@@ -225,6 +229,8 @@ class TasksClient:
 
     def get_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Task:
         """
+        Retrieve the full details of a single CRM task by its identifier. The response includes the task''s name, type, status, due date, duration, notes, assignee, reminder settings, and linked contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -253,6 +259,8 @@ class TasksClient:
 
     def delete_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM task by its identifier. This removes the task and cancels any associated reminders. The requesting user must be the task assignee or have manage permission on tasks.
+
         Parameters
         ----------
         id : str
@@ -296,6 +304,8 @@ class TasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing CRM task''s properties such as name, type, due date, status, duration, notes, assignee, reminder, or linked entities. Only the fields provided in the request body will be updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -367,8 +377,12 @@ class TasksClient:
         )
         return _response.data
 
-    def get_all_task_types(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetCrmTasktypesResponse:
+    def get_all_task_types(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[GetCrmTasktypesResponseItem]:
         """
+        Retrieve the list of all available task types, such as Email, Call, Meeting, Todo, Lunch, Deadline, and LinkedIn. If no task types exist yet, the default set is automatically created and returned. Use the task type ID when creating or updating tasks.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -376,7 +390,7 @@ class TasksClient:
 
         Returns
         -------
-        GetCrmTasktypesResponse
+        typing.List[GetCrmTasktypesResponseItem]
             Returns all the Task types
 
         Examples
@@ -426,6 +440,8 @@ class AsyncTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetCrmTasksResponse:
         """
+        Retrieve a paginated list of CRM tasks with optional filtering by task type, status, date range, assignee, and linked entities (contacts, deals, companies). Results are sorted by creation date in descending order by default, with a default limit of 50 tasks per page.
+
         Parameters
         ----------
         filter_type : typing.Optional[str]
@@ -529,6 +545,8 @@ class AsyncTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PostCrmTasksResponse:
         """
+        Create a new CRM task with the specified name, type, due date, and optional associations to contacts, companies, or deals. A task requires a name, task type ID, and due date at minimum. You can also set a duration, notes, a reminder, and assign the task to a specific user.
+
         Parameters
         ----------
         date : dt.datetime
@@ -588,7 +606,7 @@ class AsyncTasksClient:
                 date=datetime.datetime.fromisoformat(
                     "2021-11-01 17:44:54+00:00",
                 ),
-                name="Task: Connect with client_dev",
+                name="Task: Connect with client",
                 task_type_id="61a5cd07ca1347c82306ad09",
             )
 
@@ -613,6 +631,8 @@ class AsyncTasksClient:
 
     async def get_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Task:
         """
+        Retrieve the full details of a single CRM task by its identifier. The response includes the task''s name, type, status, due date, duration, notes, assignee, reminder settings, and linked contacts, companies, or deals.
+
         Parameters
         ----------
         id : str
@@ -649,6 +669,8 @@ class AsyncTasksClient:
 
     async def delete_a_task(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Permanently delete a CRM task by its identifier. This removes the task and cancels any associated reminders. The requesting user must be the task assignee or have manage permission on tasks.
+
         Parameters
         ----------
         id : str
@@ -700,6 +722,8 @@ class AsyncTasksClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing CRM task''s properties such as name, type, due date, status, duration, notes, assignee, reminder, or linked entities. Only the fields provided in the request body will be updated; omitted fields remain unchanged.
+
         Parameters
         ----------
         id : str
@@ -781,8 +805,10 @@ class AsyncTasksClient:
 
     async def get_all_task_types(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> GetCrmTasktypesResponse:
+    ) -> typing.List[GetCrmTasktypesResponseItem]:
         """
+        Retrieve the list of all available task types, such as Email, Call, Meeting, Todo, Lunch, Deadline, and LinkedIn. If no task types exist yet, the default set is automatically created and returned. Use the task type ID when creating or updating tasks.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -790,7 +816,7 @@ class AsyncTasksClient:
 
         Returns
         -------
-        GetCrmTasktypesResponse
+        typing.List[GetCrmTasktypesResponseItem]
             Returns all the Task types
 
         Examples

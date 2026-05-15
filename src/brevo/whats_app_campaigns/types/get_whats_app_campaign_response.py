@@ -9,6 +9,7 @@ from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 from ...types.whatsapp_camp_stats import WhatsappCampStats
 from .get_whats_app_campaign_response_campaign_status import GetWhatsAppCampaignResponseCampaignStatus
+from .get_whats_app_campaign_response_recipients import GetWhatsAppCampaignResponseRecipients
 from .get_whats_app_campaign_response_template import GetWhatsAppCampaignResponseTemplate
 
 
@@ -51,6 +52,11 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
             description="UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format",
         ),
     ] = None
+    recipients: GetWhatsAppCampaignResponseRecipients = pydantic.Field()
+    """
+    Recipients of the WhatsApp Campaign
+    """
+
     sender_number: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="senderNumber"),

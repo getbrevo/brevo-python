@@ -10,14 +10,14 @@ if typing.TYPE_CHECKING:
     from .get_crm_tasks_request_filter_status import GetCrmTasksRequestFilterStatus
     from .get_crm_tasks_request_sort import GetCrmTasksRequestSort
     from .get_crm_tasks_response import GetCrmTasksResponse
-    from .get_crm_tasktypes_response import GetCrmTasktypesResponse
+    from .get_crm_tasktypes_response_item import GetCrmTasktypesResponseItem
     from .post_crm_tasks_response import PostCrmTasksResponse
 _dynamic_imports: typing.Dict[str, str] = {
     "GetCrmTasksRequestFilterDate": ".get_crm_tasks_request_filter_date",
     "GetCrmTasksRequestFilterStatus": ".get_crm_tasks_request_filter_status",
     "GetCrmTasksRequestSort": ".get_crm_tasks_request_sort",
     "GetCrmTasksResponse": ".get_crm_tasks_response",
-    "GetCrmTasktypesResponse": ".get_crm_tasktypes_response",
+    "GetCrmTasktypesResponseItem": ".get_crm_tasktypes_response_item",
     "PostCrmTasksResponse": ".post_crm_tasks_response",
 }
 
@@ -48,6 +48,6 @@ __all__ = [
     "GetCrmTasksRequestFilterStatus",
     "GetCrmTasksRequestSort",
     "GetCrmTasksResponse",
-    "GetCrmTasktypesResponse",
+    "GetCrmTasktypesResponseItem",
     "PostCrmTasksResponse",
 ]

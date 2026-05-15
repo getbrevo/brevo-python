@@ -82,6 +82,14 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
         FieldMetadata(alias="toField"),
         pydantic.Field(alias="toField", description='Customisation of the "to" field for the template'),
     ]
+    custom_template_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="customTemplateId"),
+        pydantic.Field(
+            alias="customTemplateId",
+            description="Custom template identifier, if one was assigned during template creation. Only present when the template has a custom ID.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

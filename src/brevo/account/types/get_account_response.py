@@ -8,7 +8,6 @@ from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_account_response_address import GetAccountResponseAddress
-from .get_account_response_date_time_preferences import GetAccountResponseDateTimePreferences
 from .get_account_response_marketing_automation import GetAccountResponseMarketingAutomation
 from .get_account_response_plan_item import GetAccountResponsePlanItem
 from .get_account_response_plan_verticals_item import GetAccountResponsePlanVerticalsItem
@@ -45,16 +44,11 @@ class GetAccountResponse(UncheckedBaseModel):
     last_name: typing_extensions.Annotated[
         str, FieldMetadata(alias="lastName"), pydantic.Field(alias="lastName", description="Last Name")
     ]
-    address: GetAccountResponseAddress = pydantic.Field()
+    address: typing.Optional[GetAccountResponseAddress] = pydantic.Field(default=None)
     """
     Address informations
     """
 
-    date_time_preferences: typing_extensions.Annotated[
-        GetAccountResponseDateTimePreferences,
-        FieldMetadata(alias="dateTimePreferences"),
-        pydantic.Field(alias="dateTimePreferences", description="User's date and time preferences"),
-    ]
     marketing_automation: typing_extensions.Annotated[
         typing.Optional[GetAccountResponseMarketingAutomation],
         FieldMetadata(alias="marketingAutomation"),

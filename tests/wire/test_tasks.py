@@ -19,7 +19,7 @@ def test_tasks_create_a_task() -> None:
     client = get_client(test_id)
     client.tasks.create_a_task(
         date=datetime.datetime.fromisoformat("2021-11-01T17:44:54+00:00"),
-        name="Task: Connect with client_dev",
+        name="Task: Connect with client",
         task_type_id="61a5cd07ca1347c82306ad09",
     )
     verify_request_count(test_id, "POST", "/crm/tasks", None, 1)

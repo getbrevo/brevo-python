@@ -26,12 +26,12 @@ class GetInboundEmailEventsByUuidResponse(UncheckedBaseModel):
         typing.Optional[dt.datetime],
         FieldMetadata(alias="deliveredAt"),
         pydantic.Field(
-            alias="deliveredAt", description="Date when email was delivered successfully to client_dev’s webhook"
+            alias="deliveredAt", description="Date when email was delivered successfully to the client’s webhook"
         ),
     ] = None
     logs: typing.Optional[typing.List[GetInboundEmailEventsByUuidResponseLogsItem]] = pydantic.Field(default=None)
     """
-    List of events/logs that describe the lifecycle of the email on SIB platform
+    List of events/logs that describe the lifecycle of the email on the Brevo platform
     """
 
     message_id: typing_extensions.Annotated[

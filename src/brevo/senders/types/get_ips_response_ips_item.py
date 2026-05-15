@@ -8,6 +8,11 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class GetIpsResponseIpsItem(UncheckedBaseModel):
+    id: int = pydantic.Field()
+    """
+    ID of the dedicated IP
+    """
+
     active: bool = pydantic.Field()
     """
     Status of the IP (true=active, false=inactive)
@@ -16,11 +21,6 @@ class GetIpsResponseIpsItem(UncheckedBaseModel):
     domain: str = pydantic.Field()
     """
     Domain associated to the IP
-    """
-
-    id: int = pydantic.Field()
-    """
-    ID of the dedicated IP
     """
 
     ip: str = pydantic.Field()

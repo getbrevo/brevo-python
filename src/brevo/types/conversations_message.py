@@ -171,6 +171,29 @@ class ConversationsMessage(UncheckedBaseModel):
     `"agent"` for agents’ messages, `"visitor"` for visitors’ messages.
     """
 
+    is_sent_via_js_api: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="isSentViaJsApi"),
+        pydantic.Field(alias="isSentViaJsApi", description="‘`true` if the message was sent via JavaScript API.’"),
+    ] = None
+    message_type: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="messageType"),
+        pydantic.Field(
+            alias="messageType",
+            description="The type of message content (e.g. for integration-specific message types).",
+        ),
+    ] = None
+    is_forward: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="isForward"),
+        pydantic.Field(alias="isForward", description="‘`true` if the message is a forwarded message.’"),
+    ] = None
+    source: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    """
+    Source information for the message.
+    """
+
     visitor_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="visitorId"),

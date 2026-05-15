@@ -19,6 +19,7 @@ from .types.get_scheduled_email_by_id_request_status import GetScheduledEmailByI
 from .types.get_scheduled_email_by_id_response import GetScheduledEmailByIdResponse
 from .types.get_smtp_report_request_sort import GetSmtpReportRequestSort
 from .types.get_smtp_report_response import GetSmtpReportResponse
+from .types.get_smtp_template_request_template_id import GetSmtpTemplateRequestTemplateId
 from .types.get_smtp_templates_request_sort import GetSmtpTemplatesRequestSort
 from .types.get_smtp_templates_response import GetSmtpTemplatesResponse
 from .types.get_transac_blocked_contacts_request_sort import GetTransacBlockedContactsRequestSort
@@ -26,6 +27,7 @@ from .types.get_transac_blocked_contacts_response import GetTransacBlockedContac
 from .types.get_transac_email_content_response import GetTransacEmailContentResponse
 from .types.get_transac_emails_list_request_sort import GetTransacEmailsListRequestSort
 from .types.get_transac_emails_list_response import GetTransacEmailsListResponse
+from .types.post_preview_smtp_email_templates_request import PostPreviewSmtpEmailTemplatesRequest
 from .types.post_preview_smtp_email_templates_response import PostPreviewSmtpEmailTemplatesResponse
 from .types.send_transac_email_request_attachment_item import SendTransacEmailRequestAttachmentItem
 from .types.send_transac_email_request_bcc_item import SendTransacEmailRequestBccItem
@@ -36,6 +38,7 @@ from .types.send_transac_email_request_sender import SendTransacEmailRequestSend
 from .types.send_transac_email_request_to_item import SendTransacEmailRequestToItem
 from .types.send_transac_email_response import SendTransacEmailResponse
 from .types.update_smtp_template_request_sender import UpdateSmtpTemplateRequestSender
+from .types.update_smtp_template_request_template_id import UpdateSmtpTemplateRequestTemplateId
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -68,6 +71,8 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacBlockedContactsResponse:
         """
+        Retrieve a paginated list of transactional contacts that have been blocked or unsubscribed, along with the reason for blocking (e.g. hard bounce, admin blocked, spam complaint, or unsubscription via email/API/Marketing Automation). Both `startDate` and `endDate` must be provided together when filtering by date range, and neither date can be in the future. Results default to 50 per page (max 100) and are sorted in descending order of record creation unless overridden with the `sort` parameter.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -120,6 +125,8 @@ class TransactionalEmailsClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Unblock or resubscribe a transactional contact by removing their email address from the blacklist. The email address must be URL-encoded in the path parameter and must be a valid email format. If the contact is not found in the blocklist, a 404 error is returned.
+
         Parameters
         ----------
         email : str
@@ -301,6 +308,8 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacEmailResponse:
         """
+        Send a transactional email to one or more recipients, either using inline HTML content or a pre-built template via `templateId`. You can schedule emails for future delivery using `scheduledAt` (UTC, up to 5-minute delay), send multiple personalized versions with `messageVersions` (max 2000 total recipients, 99 per version), and attach files via URL or base64-encoded content. A `sender` and `subject` are required when no `templateId` is provided; when a `templateId` is used, the template''s sender and subject are applied unless overridden.
+
         Parameters
         ----------
         attachment : typing.Optional[typing.Sequence[SendTransacEmailRequestAttachmentItem]]
@@ -415,7 +424,7 @@ class TransactionalEmailsClient:
         Parameters
         ----------
         identifier : str
-            The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
+            The `batchId` of scheduled emails batch (must be a valid UUIDv4) or the `messageId` of scheduled email (enclosed in angle brackets with @ sign, e.g. `<...@domain>`).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -456,10 +465,10 @@ class TransactionalEmailsClient:
         Parameters
         ----------
         identifier : str
-            The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
+            The `batchId` of scheduled emails batch (must be a valid UUIDv4) or the `messageId` of scheduled email (enclosed in angle brackets with @ sign, e.g. `<...@domain>`). When using `messageId`, the `limit`, `offset`, `sort`, and `status` query parameters are ignored.
 
         start_date : typing.Optional[dt.date]
-            Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
+            Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Cannot be more than 30 days older than the current date.
 
         end_date : typing.Optional[dt.date]
             Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
@@ -623,13 +632,26 @@ class TransactionalEmailsClient:
         return _response.data
 
     def delete_an_smtp_transactional_log(
-        self, identifier: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        identifier: str,
+        *,
+        from_date: typing.Optional[str] = None,
+        to_date: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Delete SMTP transactional log entries identified by a message ID (enclosed in angle brackets with an @ sign) or a valid email address. Optionally narrow the deletion to a specific date range using `from_date` and `to_date` query parameters (YYYY-MM-DD format). The operation also removes any associated stored email preview content.
+
         Parameters
         ----------
         identifier : str
-            MessageId of the transactional log(s) to delete
+            MessageId or email address of the transactional log(s) to delete. Must be a valid message ID (enclosed in angle brackets with @ sign) or a valid email address.
+
+        from_date : typing.Optional[str]
+            Starting date (YYYY-MM-DD) to narrow down logs for deletion
+
+        to_date : typing.Optional[str]
+            Ending date (YYYY-MM-DD) to narrow down logs for deletion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -649,7 +671,9 @@ class TransactionalEmailsClient:
             identifier="identifier",
         )
         """
-        _response = self._raw_client.delete_an_smtp_transactional_log(identifier, request_options=request_options)
+        _response = self._raw_client.delete_an_smtp_transactional_log(
+            identifier, from_date=from_date, to_date=to_date, request_options=request_options
+        )
         return _response.data
 
     def get_aggregated_smtp_report(
@@ -673,7 +697,7 @@ class TransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 90). _Not compatible with 'startDate' and 'endDate'_. Defaults to 90 if neither dates nor days are provided.
 
         tag : typing.Optional[str]
             Tag of the emails
@@ -734,7 +758,7 @@ class TransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 90). _Not compatible with 'startDate' and 'endDate'_. Defaults to 30 if neither dates nor days are provided.
 
         email : typing.Optional[str]
             Filter the report for a specific email addresses
@@ -800,6 +824,8 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmtpReportResponse:
         """
+        This endpoint will show the aggregated stats per day for the past 10 days by default if `startDate` and `endDate` OR `days` is not passed. The date range can not exceed 30 days.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -815,7 +841,7 @@ class TransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD)
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 30). _Not compatible with 'startDate' and 'endDate'_
 
         tag : typing.Optional[str]
             Tag of the emails
@@ -853,12 +879,14 @@ class TransactionalEmailsClient:
         return _response.data
 
     def post_preview_smtp_email_templates(
-        self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None
+        self, *, request: PostPreviewSmtpEmailTemplatesRequest, request_options: typing.Optional[RequestOptions] = None
     ) -> PostPreviewSmtpEmailTemplatesResponse:
         """
+        Generate a fully rendered preview of a transactional email template by resolving dynamic variables. Provide either an `email` address (to populate variables from the contact''s attributes) or a `params` object with key-value pairs for manual substitution; at least one of these is required alongside the mandatory `templateId`. The response includes the rendered HTML, subject, sender details, preview text, and any feed names used in the template.
+
         Parameters
         ----------
-        request : typing.Any
+        request : PostPreviewSmtpEmailTemplatesRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -889,9 +917,12 @@ class TransactionalEmailsClient:
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetSmtpTemplatesRequestSort] = None,
+        editor_type: typing.Optional[typing.Literal["richTextEditor"]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmtpTemplatesResponse:
         """
+        Retrieve a paginated list of all transactional email templates (including automation templates) with their details such as name, subject, sender, status, HTML content, and timestamps. Results default to 50 per page (max 1000) and are sorted in descending creation order unless overridden. You can filter by active/inactive status using `templateStatus` and by editor type using `editorType` (currently only `richTextEditor` is supported).
+
         Parameters
         ----------
         template_status : typing.Optional[bool]
@@ -905,6 +936,9 @@ class TransactionalEmailsClient:
 
         sort : typing.Optional[GetSmtpTemplatesRequestSort]
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+
+        editor_type : typing.Optional[typing.Literal["richTextEditor"]]
+            Filter on the editor type used to create the template. Currently only `richTextEditor` is supported as a filter value.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -924,7 +958,12 @@ class TransactionalEmailsClient:
         client.transactional_emails.get_smtp_templates()
         """
         _response = self._raw_client.get_smtp_templates(
-            template_status=template_status, limit=limit, offset=offset, sort=sort, request_options=request_options
+            template_status=template_status,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            editor_type=editor_type,
+            request_options=request_options,
         )
         return _response.data
 
@@ -944,6 +983,8 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateSmtpTemplateResponse:
         """
+        Create a new transactional email template with the specified sender, subject, and content. The `sender`, `subject`, and `templateName` fields are required. Template content can be provided via `htmlContent` (minimum 10 characters) or `htmlUrl`; at least one must be supplied. Templates are created as inactive by default unless `isActive` is explicitly set to `true`.
+
         Parameters
         ----------
         sender : CreateSmtpTemplateRequestSender
@@ -1014,13 +1055,15 @@ class TransactionalEmailsClient:
         return _response.data
 
     def get_smtp_template(
-        self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
+        self, template_id: GetSmtpTemplateRequestTemplateId, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetSmtpTemplateOverview:
         """
+        Retrieve the full details of a specific transactional email template by its numeric ID or custom template identifier string. The response includes the template name, subject, sender information, HTML content, active status, creation and modification timestamps, reply-to address, tag, and a `doiTemplate` flag indicating whether the template is a double opt-in template (detected by the presence of optin-related tags or variables in the content).
+
         Parameters
         ----------
-        template_id : int
-            id of the template
+        template_id : GetSmtpTemplateRequestTemplateId
+            ID of the template. Can be a numeric template ID or a custom template identifier string (alphanumeric, hyphens, and underscores only, max 64 characters, must start with a letter).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1046,7 +1089,7 @@ class TransactionalEmailsClient:
 
     def update_smtp_template(
         self,
-        template_id: int,
+        template_id: UpdateSmtpTemplateRequestTemplateId,
         *,
         attachment_url: typing.Optional[str] = OMIT,
         html_content: typing.Optional[str] = OMIT,
@@ -1061,10 +1104,12 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing transactional email template by its numeric ID or custom template identifier string. All fields in the request body are optional; only the provided fields will be updated. You can update the template name, subject, sender, reply-to address, HTML content (via `htmlContent` or `htmlUrl`), active status, tag, attachment URL, and the personalized `toField`. Only one of sender email or sender ID should be provided per request.
+
         Parameters
         ----------
-        template_id : int
-            id of the template
+        template_id : UpdateSmtpTemplateRequestTemplateId
+            ID of the template. Can be a numeric template ID or a custom template identifier string.
 
         attachment_url : typing.Optional[str]
             Absolute url of the attachment (**no local file**). Extensions allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
@@ -1134,6 +1179,8 @@ class TransactionalEmailsClient:
         self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Permanently delete a transactional email template by its numeric ID. Only inactive templates can be deleted; attempting to delete an active template returns a 405 error. To deactivate a template before deletion, use `PUT /smtp/templates/{templateId}` with `isActive` set to `false`. Deletion also removes associated newsletter template data and triggers asynchronous cleanup of shared assets.
+
         Parameters
         ----------
         template_id : int
@@ -1168,6 +1215,8 @@ class TransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Send a test email of the specified transactional template to one or more recipients. Provide an array of email addresses in the `emailTo` field; if left empty, the test mail is sent to your entire test list. You can send a maximum of 50 test emails per day, and all provided email addresses must be valid.
+
         Parameters
         ----------
         template_id : int
@@ -1225,6 +1274,8 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetTransacBlockedContactsResponse:
         """
+        Retrieve a paginated list of transactional contacts that have been blocked or unsubscribed, along with the reason for blocking (e.g. hard bounce, admin blocked, spam complaint, or unsubscription via email/API/Marketing Automation). Both `startDate` and `endDate` must be provided together when filtering by date range, and neither date can be in the future. Results default to 50 per page (max 100) and are sorted in descending order of record creation unless overridden with the `sort` parameter.
+
         Parameters
         ----------
         start_date : typing.Optional[str]
@@ -1285,6 +1336,8 @@ class AsyncTransactionalEmailsClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Unblock or resubscribe a transactional contact by removing their email address from the blacklist. The email address must be URL-encoded in the path parameter and must be a valid email format. If the contact is not found in the blocklist, a 404 error is returned.
+
         Parameters
         ----------
         email : str
@@ -1508,6 +1561,8 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SendTransacEmailResponse:
         """
+        Send a transactional email to one or more recipients, either using inline HTML content or a pre-built template via `templateId`. You can schedule emails for future delivery using `scheduledAt` (UTC, up to 5-minute delay), send multiple personalized versions with `messageVersions` (max 2000 total recipients, 99 per version), and attach files via URL or base64-encoded content. A `sender` and `subject` are required when no `templateId` is provided; when a `templateId` is used, the template''s sender and subject are applied unless overridden.
+
         Parameters
         ----------
         attachment : typing.Optional[typing.Sequence[SendTransacEmailRequestAttachmentItem]]
@@ -1630,7 +1685,7 @@ class AsyncTransactionalEmailsClient:
         Parameters
         ----------
         identifier : str
-            The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
+            The `batchId` of scheduled emails batch (must be a valid UUIDv4) or the `messageId` of scheduled email (enclosed in angle brackets with @ sign, e.g. `<...@domain>`).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1679,10 +1734,10 @@ class AsyncTransactionalEmailsClient:
         Parameters
         ----------
         identifier : str
-            The `batchId` of scheduled emails batch (Should be a valid UUIDv4) or the `messageId` of scheduled email.
+            The `batchId` of scheduled emails batch (must be a valid UUIDv4) or the `messageId` of scheduled email (enclosed in angle brackets with @ sign, e.g. `<...@domain>`). When using `messageId`, the `limit`, `offset`, `sort`, and `status` query parameters are ignored.
 
         start_date : typing.Optional[dt.date]
-            Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Can be maximum 30 days older tha current date.
+            Mandatory if `endDate` is used. Starting date (YYYY-MM-DD) from which you want to fetch the list. Cannot be more than 30 days older than the current date.
 
         end_date : typing.Optional[dt.date]
             Mandatory if `startDate` is used. Ending date (YYYY-MM-DD) till which you want to fetch the list. Maximum time period that can be selected is one month.
@@ -1869,13 +1924,26 @@ class AsyncTransactionalEmailsClient:
         return _response.data
 
     async def delete_an_smtp_transactional_log(
-        self, identifier: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        identifier: str,
+        *,
+        from_date: typing.Optional[str] = None,
+        to_date: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Delete SMTP transactional log entries identified by a message ID (enclosed in angle brackets with an @ sign) or a valid email address. Optionally narrow the deletion to a specific date range using `from_date` and `to_date` query parameters (YYYY-MM-DD format). The operation also removes any associated stored email preview content.
+
         Parameters
         ----------
         identifier : str
-            MessageId of the transactional log(s) to delete
+            MessageId or email address of the transactional log(s) to delete. Must be a valid message ID (enclosed in angle brackets with @ sign) or a valid email address.
+
+        from_date : typing.Optional[str]
+            Starting date (YYYY-MM-DD) to narrow down logs for deletion
+
+        to_date : typing.Optional[str]
+            Ending date (YYYY-MM-DD) to narrow down logs for deletion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1903,7 +1971,9 @@ class AsyncTransactionalEmailsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.delete_an_smtp_transactional_log(identifier, request_options=request_options)
+        _response = await self._raw_client.delete_an_smtp_transactional_log(
+            identifier, from_date=from_date, to_date=to_date, request_options=request_options
+        )
         return _response.data
 
     async def get_aggregated_smtp_report(
@@ -1927,7 +1997,7 @@ class AsyncTransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 90). _Not compatible with 'startDate' and 'endDate'_. Defaults to 90 if neither dates nor days are provided.
 
         tag : typing.Optional[str]
             Tag of the emails
@@ -1996,7 +2066,7 @@ class AsyncTransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD). Must be greater than equal to startDate
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 90). _Not compatible with 'startDate' and 'endDate'_. Defaults to 30 if neither dates nor days are provided.
 
         email : typing.Optional[str]
             Filter the report for a specific email addresses
@@ -2070,6 +2140,8 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmtpReportResponse:
         """
+        This endpoint will show the aggregated stats per day for the past 10 days by default if `startDate` and `endDate` OR `days` is not passed. The date range can not exceed 30 days.
+
         Parameters
         ----------
         limit : typing.Optional[int]
@@ -2085,7 +2157,7 @@ class AsyncTransactionalEmailsClient:
             **Mandatory if startDate is used.** Ending date of the report (YYYY-MM-DD)
 
         days : typing.Optional[int]
-            Number of days in the past including today (positive integer). _Not compatible with 'startDate' and 'endDate'_
+            Number of days in the past including today (positive integer, maximum 30). _Not compatible with 'startDate' and 'endDate'_
 
         tag : typing.Optional[str]
             Tag of the emails
@@ -2131,12 +2203,14 @@ class AsyncTransactionalEmailsClient:
         return _response.data
 
     async def post_preview_smtp_email_templates(
-        self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None
+        self, *, request: PostPreviewSmtpEmailTemplatesRequest, request_options: typing.Optional[RequestOptions] = None
     ) -> PostPreviewSmtpEmailTemplatesResponse:
         """
+        Generate a fully rendered preview of a transactional email template by resolving dynamic variables. Provide either an `email` address (to populate variables from the contact''s attributes) or a `params` object with key-value pairs for manual substitution; at least one of these is required alongside the mandatory `templateId`. The response includes the rendered HTML, subject, sender details, preview text, and any feed names used in the template.
+
         Parameters
         ----------
-        request : typing.Any
+        request : PostPreviewSmtpEmailTemplatesRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2177,9 +2251,12 @@ class AsyncTransactionalEmailsClient:
         limit: typing.Optional[int] = None,
         offset: typing.Optional[int] = None,
         sort: typing.Optional[GetSmtpTemplatesRequestSort] = None,
+        editor_type: typing.Optional[typing.Literal["richTextEditor"]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetSmtpTemplatesResponse:
         """
+        Retrieve a paginated list of all transactional email templates (including automation templates) with their details such as name, subject, sender, status, HTML content, and timestamps. Results default to 50 per page (max 1000) and are sorted in descending creation order unless overridden. You can filter by active/inactive status using `templateStatus` and by editor type using `editorType` (currently only `richTextEditor` is supported).
+
         Parameters
         ----------
         template_status : typing.Optional[bool]
@@ -2193,6 +2270,9 @@ class AsyncTransactionalEmailsClient:
 
         sort : typing.Optional[GetSmtpTemplatesRequestSort]
             Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
+
+        editor_type : typing.Optional[typing.Literal["richTextEditor"]]
+            Filter on the editor type used to create the template. Currently only `richTextEditor` is supported as a filter value.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2220,7 +2300,12 @@ class AsyncTransactionalEmailsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_smtp_templates(
-            template_status=template_status, limit=limit, offset=offset, sort=sort, request_options=request_options
+            template_status=template_status,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            editor_type=editor_type,
+            request_options=request_options,
         )
         return _response.data
 
@@ -2240,6 +2325,8 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateSmtpTemplateResponse:
         """
+        Create a new transactional email template with the specified sender, subject, and content. The `sender`, `subject`, and `templateName` fields are required. Template content can be provided via `htmlContent` (minimum 10 characters) or `htmlUrl`; at least one must be supplied. Templates are created as inactive by default unless `isActive` is explicitly set to `true`.
+
         Parameters
         ----------
         sender : CreateSmtpTemplateRequestSender
@@ -2318,13 +2405,15 @@ class AsyncTransactionalEmailsClient:
         return _response.data
 
     async def get_smtp_template(
-        self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
+        self, template_id: GetSmtpTemplateRequestTemplateId, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetSmtpTemplateOverview:
         """
+        Retrieve the full details of a specific transactional email template by its numeric ID or custom template identifier string. The response includes the template name, subject, sender information, HTML content, active status, creation and modification timestamps, reply-to address, tag, and a `doiTemplate` flag indicating whether the template is a double opt-in template (detected by the presence of optin-related tags or variables in the content).
+
         Parameters
         ----------
-        template_id : int
-            id of the template
+        template_id : GetSmtpTemplateRequestTemplateId
+            ID of the template. Can be a numeric template ID or a custom template identifier string (alphanumeric, hyphens, and underscores only, max 64 characters, must start with a letter).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2358,7 +2447,7 @@ class AsyncTransactionalEmailsClient:
 
     async def update_smtp_template(
         self,
-        template_id: int,
+        template_id: UpdateSmtpTemplateRequestTemplateId,
         *,
         attachment_url: typing.Optional[str] = OMIT,
         html_content: typing.Optional[str] = OMIT,
@@ -2373,10 +2462,12 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Update an existing transactional email template by its numeric ID or custom template identifier string. All fields in the request body are optional; only the provided fields will be updated. You can update the template name, subject, sender, reply-to address, HTML content (via `htmlContent` or `htmlUrl`), active status, tag, attachment URL, and the personalized `toField`. Only one of sender email or sender ID should be provided per request.
+
         Parameters
         ----------
-        template_id : int
-            id of the template
+        template_id : UpdateSmtpTemplateRequestTemplateId
+            ID of the template. Can be a numeric template ID or a custom template identifier string.
 
         attachment_url : typing.Optional[str]
             Absolute url of the attachment (**no local file**). Extensions allowed: #### xlsx, xls, ods, docx, docm, doc, csv, pdf, txt, gif, jpg, jpeg, png, tif, tiff, rtf, bmp, cgm, css, shtml, html, htm, zip, xml, ppt, pptx, tar, ez, ics, mobi, msg, pub and eps
@@ -2454,6 +2545,8 @@ class AsyncTransactionalEmailsClient:
         self, template_id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Permanently delete a transactional email template by its numeric ID. Only inactive templates can be deleted; attempting to delete an active template returns a 405 error. To deactivate a template before deletion, use `PUT /smtp/templates/{templateId}` with `isActive` set to `false`. Deletion also removes associated newsletter template data and triggers asynchronous cleanup of shared assets.
+
         Parameters
         ----------
         template_id : int
@@ -2496,6 +2589,8 @@ class AsyncTransactionalEmailsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        Send a test email of the specified transactional template to one or more recipients. Provide an array of email addresses in the `emailTo` field; if left empty, the test mail is sent to your entire test list. You can send a maximum of 50 test emails per day, and all provided email addresses must be valid.
+
         Parameters
         ----------
         template_id : int

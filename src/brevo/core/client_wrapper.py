@@ -27,12 +27,12 @@ class BaseClientWrapper:
         import platform
 
         headers: typing.Dict[str, str] = {
-            "User-Agent": "brevo-python/4.0.10",
+            "User-Agent": "brevo-python/v5.0.0-rc.1",
             "X-Fern-Language": "Python",
             "X-Fern-Runtime": f"python/{platform.python_version()}",
             "X-Fern-Platform": f"{platform.system().lower()}/{platform.release()}",
             "X-Fern-SDK-Name": "brevo-python",
-            "X-Fern-SDK-Version": "4.0.10",
+            "X-Fern-SDK-Version": "v5.0.0-rc.1",
             **(self.get_custom_headers() or {}),
         }
         headers["api-key"] = self.api_key

@@ -37,6 +37,8 @@ class UserClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetInvitedUsersListResponse:
         """
+        Retrieves the list of all users associated with your organization, including both active and pending invited users. Each user entry includes their email address, owner status, current invitation status, and feature access levels for marketing, CRM, and conversations.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -63,6 +65,8 @@ class UserClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> PutRevokeUserPermissionResponse:
         """
+        Revokes all permissions for an invited user in the organization, effectively removing their access to the platform. If the user''s plan change generated credit notes, they are returned in the response for billing reconciliation.
+
         Parameters
         ----------
         email : str
@@ -212,6 +216,8 @@ class UserClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PutresendcancelinvitationResponse:
         """
+        Resends or cancels a pending invitation for a user in the organization, depending on the action path parameter. Use `resend` to send a new invitation email to the user, or `cancel` to revoke the pending invitation entirely and remove the user''s pending access.
+
         Parameters
         ----------
         action : PutresendcancelinvitationRequestAction
@@ -360,6 +366,8 @@ class UserClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetUserPermissionResponse:
         """
+        Retrieves the granular feature-level permissions assigned to a specific user in the organization, identified by their email address. The response includes the user''s current status (active or pending) and a detailed list of privileges specifying which features and permission levels are granted.
+
         Parameters
         ----------
         email : str
@@ -407,6 +415,8 @@ class AsyncUserClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetInvitedUsersListResponse:
         """
+        Retrieves the list of all users associated with your organization, including both active and pending invited users. Each user entry includes their email address, owner status, current invitation status, and feature access levels for marketing, CRM, and conversations.
+
         Parameters
         ----------
         request_options : typing.Optional[RequestOptions]
@@ -441,6 +451,8 @@ class AsyncUserClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> PutRevokeUserPermissionResponse:
         """
+        Revokes all permissions for an invited user in the organization, effectively removing their access to the platform. If the user''s plan change generated credit notes, they are returned in the response for billing reconciliation.
+
         Parameters
         ----------
         email : str
@@ -606,6 +618,8 @@ class AsyncUserClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PutresendcancelinvitationResponse:
         """
+        Resends or cancels a pending invitation for a user in the organization, depending on the action path parameter. Use `resend` to send a new invitation email to the user, or `cancel` to revoke the pending invitation entirely and remove the user''s pending access.
+
         Parameters
         ----------
         action : PutresendcancelinvitationRequestAction
@@ -770,6 +784,8 @@ class AsyncUserClient:
         self, email: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetUserPermissionResponse:
         """
+        Retrieves the granular feature-level permissions assigned to a specific user in the organization, identified by their email address. The response includes the user''s current status (active or pending) and a detailed list of privileges specifying which features and permission levels are granted.
+
         Parameters
         ----------
         email : str

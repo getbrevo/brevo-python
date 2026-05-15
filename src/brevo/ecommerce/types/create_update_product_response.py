@@ -8,9 +8,9 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class CreateUpdateProductResponse(UncheckedBaseModel):
-    id: typing.Optional[int] = pydantic.Field(default=None)
+    id: typing.Optional[str] = pydantic.Field(default=None)
     """
-    ID of the Product when a new product is created
+    ID of the product when a new product is created
     """
 
     if IS_PYDANTIC_V2:

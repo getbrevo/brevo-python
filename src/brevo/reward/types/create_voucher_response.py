@@ -66,6 +66,12 @@ class CreateVoucherResponse(UncheckedBaseModel):
     Value of the selected reward config
     """
 
+    valid_from: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="validFrom"),
+        pydantic.Field(alias="validFrom", description="Date from which the voucher becomes valid"),
+    ] = None
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

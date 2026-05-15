@@ -7,28 +7,46 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
+from .get_crm_attributes_deals_response_item_attribute_options_item import (
+    GetCrmAttributesDealsResponseItemAttributeOptionsItem,
+)
 
 
 class GetCrmAttributesDealsResponseItem(UncheckedBaseModel):
     """
-    List of attributes
+    Deal attribute details
+    """
+
+    internal_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="internalName"),
+        pydantic.Field(alias="internalName", description="Internal name of the attribute"),
+    ] = None
+    attribute_type_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="attributeTypeName"),
+        pydantic.Field(alias="attributeTypeName", description="Type of the attribute"),
+    ] = None
+    label: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Display label of the attribute
     """
 
     attribute_options: typing_extensions.Annotated[
-        typing.Optional[typing.List[typing.Dict[str, typing.Any]]],
+        typing.Optional[typing.List[GetCrmAttributesDealsResponseItemAttributeOptionsItem]],
         FieldMetadata(alias="attributeOptions"),
-        pydantic.Field(alias="attributeOptions"),
-    ] = None
-    attribute_type_name: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="attributeTypeName"), pydantic.Field(alias="attributeTypeName")
-    ] = None
-    internal_name: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="internalName"), pydantic.Field(alias="internalName")
+        pydantic.Field(alias="attributeOptions", description="Options for single-select or multi-choice attributes"),
     ] = None
     is_required: typing_extensions.Annotated[
-        typing.Optional[bool], FieldMetadata(alias="isRequired"), pydantic.Field(alias="isRequired")
+        typing.Optional[bool],
+        FieldMetadata(alias="isRequired"),
+        pydantic.Field(alias="isRequired", description="Whether this attribute is required"),
     ] = None
-    label: typing.Optional[str] = None
+    is_value_readonly: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="isValueReadonly"),
+        pydantic.Field(alias="isValueReadonly", description="Whether this attribute value is read-only"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

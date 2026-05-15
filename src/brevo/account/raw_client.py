@@ -30,25 +30,22 @@ class RawAccountClient:
         - Check plan details (type, credits, expiration)
         - Get relay information (for transactional emails)
         - Check Marketing Automation status
-        - View date/time preferences and account settings
         - Access organization and user identifiers
 
         **Key information returned:**
         - Complete account details (organization ID, user ID, company information)
         - Address and contact information
         - Plan configurations and credit allocations across different verticals
-        - Marketing Automation settings and tracker key
+        - Marketing Automation settings and tracker key (when enabled)
         - SMTP relay configuration for transactional emails
-        - Date/time preferences and account settings
         - Enterprise features availability status
 
         **Important considerations:**
         - Provides comprehensive account overview for billing and configuration management
         - Essential for understanding current plan limitations and feature availability
-        - Marketing Automation key required for advanced automation features
-        - Plan verticals show detailed breakdown across Marketing, Chat, and CRM categories
+        - Marketing Automation key is only returned when Marketing Automation is enabled on the account
+        - Plan verticals show detailed breakdown across Marketing, Chat, and CRM categories (only returned when plan verticals are available)
         - Relay configuration crucial for transactional email setup and deliverability
-        - Date/time preferences affect campaign scheduling and reporting displays
         - Enterprise status determines access to advanced features and sub-account management
 
         Parameters
@@ -76,6 +73,17 @@ class RawAccountClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -202,25 +210,22 @@ class AsyncRawAccountClient:
         - Check plan details (type, credits, expiration)
         - Get relay information (for transactional emails)
         - Check Marketing Automation status
-        - View date/time preferences and account settings
         - Access organization and user identifiers
 
         **Key information returned:**
         - Complete account details (organization ID, user ID, company information)
         - Address and contact information
         - Plan configurations and credit allocations across different verticals
-        - Marketing Automation settings and tracker key
+        - Marketing Automation settings and tracker key (when enabled)
         - SMTP relay configuration for transactional emails
-        - Date/time preferences and account settings
         - Enterprise features availability status
 
         **Important considerations:**
         - Provides comprehensive account overview for billing and configuration management
         - Essential for understanding current plan limitations and feature availability
-        - Marketing Automation key required for advanced automation features
-        - Plan verticals show detailed breakdown across Marketing, Chat, and CRM categories
+        - Marketing Automation key is only returned when Marketing Automation is enabled on the account
+        - Plan verticals show detailed breakdown across Marketing, Chat, and CRM categories (only returned when plan verticals are available)
         - Relay configuration crucial for transactional email setup and deliverability
-        - Date/time preferences affect campaign scheduling and reporting displays
         - Enterprise status determines access to advanced features and sub-account management
 
         Parameters
@@ -248,6 +253,17 @@ class AsyncRawAccountClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

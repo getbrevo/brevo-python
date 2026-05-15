@@ -125,6 +125,6 @@ def test_program_subscribe_to_loyalty_program() -> None:
     client = get_client(test_id)
     client.program.subscribe_to_loyalty_program(
         pid="pid",
-        contact_id=1,
+        contact_id=1000000,
     )
     verify_request_count(test_id, "POST", "/loyalty/config/programs/pid/subscriptions", None, 1)
