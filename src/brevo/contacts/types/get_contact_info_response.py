@@ -7,6 +7,7 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
+from ...types.consent_group_item import ConsentGroupItem
 from .get_contact_info_response_attributes import GetContactInfoResponseAttributes
 from .get_contact_info_response_statistics import GetContactInfoResponseStatistics
 
@@ -73,6 +74,14 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Blacklist status for WhatsApp campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    consent_groups: typing_extensions.Annotated[
+        typing.Optional[typing.List[ConsentGroupItem]],
+        FieldMetadata(alias="consentGroups"),
+        pydantic.Field(
+            alias="consentGroups",
+            description="Consent groups the contact belongs to, with their subscription status. Only present when the Consent Groups feature is enabled for your account.",
+        ),
+    ] = None
     statistics: GetContactInfoResponseStatistics = pydantic.Field()
     """
     Campaign statistics of the contact

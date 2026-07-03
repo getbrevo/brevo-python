@@ -242,9 +242,6 @@ class RawUserClient:
                     object_=privileges, annotation=typing.Sequence[InviteuserPrivilegesItem], direction="write"
                 ),
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -443,9 +440,6 @@ class RawUserClient:
                 "privileges": convert_and_respect_annotation_metadata(
                     object_=privileges, annotation=typing.Sequence[InviteuserPrivilegesItem], direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -750,9 +744,6 @@ class AsyncRawUserClient:
                     object_=privileges, annotation=typing.Sequence[InviteuserPrivilegesItem], direction="write"
                 ),
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -951,9 +942,6 @@ class AsyncRawUserClient:
                 "privileges": convert_and_respect_annotation_metadata(
                     object_=privileges, annotation=typing.Sequence[InviteuserPrivilegesItem], direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

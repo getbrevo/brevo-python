@@ -18,12 +18,12 @@ class GetCampaignStats(UncheckedBaseModel):
             description="Numbers of times your email has been opened automatically through Apple MPP.",
         ),
     ] = None
-    clickers: int = pydantic.Field()
+    clickers: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of total clicks for the campaign
     """
 
-    complaints: int = pydantic.Field()
+    complaints: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of complaints (Spam reports) for the campaign
     """
@@ -33,7 +33,7 @@ class GetCampaignStats(UncheckedBaseModel):
     Number of deferred emails for the campaign
     """
 
-    delivered: int = pydantic.Field()
+    delivered: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of delivered emails for the campaign
     """
@@ -47,10 +47,10 @@ class GetCampaignStats(UncheckedBaseModel):
         ),
     ] = None
     hard_bounces: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hard bounces for the campaign"),
-    ]
+    ] = None
     list_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="listId"),
@@ -74,24 +74,24 @@ class GetCampaignStats(UncheckedBaseModel):
             alias="returnBounce", description="Total number of non-delivered campaigns for a particular campaign id."
         ),
     ] = None
-    sent: int = pydantic.Field()
+    sent: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of sent emails for the campaign
     """
 
     soft_bounces: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounce for the campaign"),
-    ]
+    ] = None
     trackable_views: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="trackableViews"),
         pydantic.Field(
             alias="trackableViews",
             description="Recipients without any privacy protection option enabled in their email email client",
         ),
-    ]
+    ] = None
     trackable_views_rate: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="trackableViewsRate"),
@@ -101,21 +101,21 @@ class GetCampaignStats(UncheckedBaseModel):
         ),
     ] = None
     unique_clicks: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="uniqueClicks"),
         pydantic.Field(alias="uniqueClicks", description="Number of unique clicks for the campaign"),
-    ]
+    ] = None
     unique_views: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="uniqueViews"),
         pydantic.Field(alias="uniqueViews", description="Number of unique openings for the campaign"),
-    ]
-    unsubscriptions: int = pydantic.Field()
+    ] = None
+    unsubscriptions: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of unsubscription for the campaign
     """
 
-    viewed: int = pydantic.Field()
+    viewed: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of openings for the campaign
     """

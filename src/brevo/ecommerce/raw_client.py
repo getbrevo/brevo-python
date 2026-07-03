@@ -984,9 +984,6 @@ class RawEcommerceClient:
                 "storeId": store_id,
                 "updatedAt": updated_at,
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -2560,9 +2557,6 @@ class AsyncRawEcommerceClient:
                 "status": status,
                 "storeId": store_id,
                 "updatedAt": updated_at,
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

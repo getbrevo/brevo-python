@@ -29,10 +29,10 @@ class GetTransacBlockedContactsResponseContactsItem(UncheckedBaseModel):
     """
 
     sender_email: typing_extensions.Annotated[
-        str,
+        typing.Optional[str],
         FieldMetadata(alias="senderEmail"),
         pydantic.Field(alias="senderEmail", description="Sender email address of the blocked or unsubscribed contact"),
-    ]
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -11,10 +11,10 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 class GetContactInfoResponseStatisticsUnsubscriptionsUserUnsubscriptionItem(UncheckedBaseModel):
     campaign_id: typing_extensions.Annotated[
-        int,
+        typing.Optional[int],
         FieldMetadata(alias="campaignId"),
         pydantic.Field(alias="campaignId", description="ID of the campaign which generated the event"),
-    ]
+    ] = None
     event_time: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="eventTime"),

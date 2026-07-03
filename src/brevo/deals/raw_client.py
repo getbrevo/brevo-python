@@ -87,6 +87,9 @@ class RawDealsClient:
         self,
         *,
         filters_attributes_deal_name: typing.Optional[str] = None,
+        filters_attributes_deal_owner: typing.Optional[str] = None,
+        filters_attributes_deal_stage: typing.Optional[str] = None,
+        filters_attributes_pipeline: typing.Optional[str] = None,
         filters_linked_companies_ids: typing.Optional[str] = None,
         filters_linked_contacts_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -104,6 +107,15 @@ class RawDealsClient:
         ----------
         filters_attributes_deal_name : typing.Optional[str]
             Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+
+        filters_attributes_deal_owner : typing.Optional[str]
+            Filter by the deal owner. Pass the account email address of the deal owner.
+
+        filters_attributes_deal_stage : typing.Optional[str]
+            Filter by the deal stage. Pass the stage id, retrievable from GET /crm/pipeline/details/{pipelineID}.
+
+        filters_attributes_pipeline : typing.Optional[str]
+            Filter by the pipeline. Pass the pipeline id, retrievable from GET /crm/pipeline/details/{pipelineID}.
 
         filters_linked_companies_ids : typing.Optional[str]
             Filter by linked companies ids
@@ -142,6 +154,9 @@ class RawDealsClient:
             method="GET",
             params={
                 "filters[attributes.deal_name]": filters_attributes_deal_name,
+                "filters[attributes.deal_owner]": filters_attributes_deal_owner,
+                "filters[attributes.deal_stage]": filters_attributes_deal_stage,
+                "filters[attributes.pipeline]": filters_attributes_pipeline,
                 "filters[linkedCompaniesIds]": filters_linked_companies_ids,
                 "filters[linkedContactsIds]": filters_linked_contacts_ids,
                 "modifiedSince": modified_since,
@@ -822,6 +837,9 @@ class AsyncRawDealsClient:
         self,
         *,
         filters_attributes_deal_name: typing.Optional[str] = None,
+        filters_attributes_deal_owner: typing.Optional[str] = None,
+        filters_attributes_deal_stage: typing.Optional[str] = None,
+        filters_attributes_pipeline: typing.Optional[str] = None,
         filters_linked_companies_ids: typing.Optional[str] = None,
         filters_linked_contacts_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -839,6 +857,15 @@ class AsyncRawDealsClient:
         ----------
         filters_attributes_deal_name : typing.Optional[str]
             Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+
+        filters_attributes_deal_owner : typing.Optional[str]
+            Filter by the deal owner. Pass the account email address of the deal owner.
+
+        filters_attributes_deal_stage : typing.Optional[str]
+            Filter by the deal stage. Pass the stage id, retrievable from GET /crm/pipeline/details/{pipelineID}.
+
+        filters_attributes_pipeline : typing.Optional[str]
+            Filter by the pipeline. Pass the pipeline id, retrievable from GET /crm/pipeline/details/{pipelineID}.
 
         filters_linked_companies_ids : typing.Optional[str]
             Filter by linked companies ids
@@ -877,6 +904,9 @@ class AsyncRawDealsClient:
             method="GET",
             params={
                 "filters[attributes.deal_name]": filters_attributes_deal_name,
+                "filters[attributes.deal_owner]": filters_attributes_deal_owner,
+                "filters[attributes.deal_stage]": filters_attributes_deal_stage,
+                "filters[attributes.pipeline]": filters_attributes_pipeline,
                 "filters[linkedCompaniesIds]": filters_linked_companies_ids,
                 "filters[linkedContactsIds]": filters_linked_contacts_ids,
                 "modifiedSince": modified_since,

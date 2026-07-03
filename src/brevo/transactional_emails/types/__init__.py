@@ -48,7 +48,6 @@ if typing.TYPE_CHECKING:
         GetTransacEmailsListResponseTransactionalEmailsItem,
     )
     from .post_preview_smtp_email_templates_request import PostPreviewSmtpEmailTemplatesRequest
-    from .post_preview_smtp_email_templates_request_params import PostPreviewSmtpEmailTemplatesRequestParams
     from .post_preview_smtp_email_templates_response import PostPreviewSmtpEmailTemplatesResponse
     from .send_transac_email_request_attachment_item import SendTransacEmailRequestAttachmentItem
     from .send_transac_email_request_bcc_item import SendTransacEmailRequestBccItem
@@ -107,7 +106,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetTransacEmailsListResponse": ".get_transac_emails_list_response",
     "GetTransacEmailsListResponseTransactionalEmailsItem": ".get_transac_emails_list_response_transactional_emails_item",
     "PostPreviewSmtpEmailTemplatesRequest": ".post_preview_smtp_email_templates_request",
-    "PostPreviewSmtpEmailTemplatesRequestParams": ".post_preview_smtp_email_templates_request_params",
     "PostPreviewSmtpEmailTemplatesResponse": ".post_preview_smtp_email_templates_response",
     "SendTransacEmailRequestAttachmentItem": ".send_transac_email_request_attachment_item",
     "SendTransacEmailRequestBccItem": ".send_transac_email_request_bcc_item",
@@ -182,7 +180,6 @@ __all__ = [
     "GetTransacEmailsListResponse",
     "GetTransacEmailsListResponseTransactionalEmailsItem",
     "PostPreviewSmtpEmailTemplatesRequest",
-    "PostPreviewSmtpEmailTemplatesRequestParams",
     "PostPreviewSmtpEmailTemplatesResponse",
     "SendTransacEmailRequestAttachmentItem",
     "SendTransacEmailRequestBccItem",

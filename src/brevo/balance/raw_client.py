@@ -258,7 +258,7 @@ class RawBalanceClient:
         sort: typing.Optional[GetBalanceDefinitionListRequestSort] = None,
         version: typing.Optional[GetBalanceDefinitionListRequestVersion] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GetBalanceDefinitionListResponse]:
+    ) -> HttpResponse[typing.Optional[GetBalanceDefinitionListResponse]]:
         """
         Returns balance definition page
 
@@ -287,7 +287,7 @@ class RawBalanceClient:
 
         Returns
         -------
-        HttpResponse[GetBalanceDefinitionListResponse]
+        HttpResponse[typing.Optional[GetBalanceDefinitionListResponse]]
             Successful retrieval of balance definition page
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -303,11 +303,13 @@ class RawBalanceClient:
             request_options=request_options,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetBalanceDefinitionListResponse,
+                    typing.Optional[GetBalanceDefinitionListResponse],
                     construct_type(
-                        type_=GetBalanceDefinitionListResponse,  # type: ignore
+                        type_=typing.Optional[GetBalanceDefinitionListResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2628,7 +2630,7 @@ class AsyncRawBalanceClient:
         sort: typing.Optional[GetBalanceDefinitionListRequestSort] = None,
         version: typing.Optional[GetBalanceDefinitionListRequestVersion] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GetBalanceDefinitionListResponse]:
+    ) -> AsyncHttpResponse[typing.Optional[GetBalanceDefinitionListResponse]]:
         """
         Returns balance definition page
 
@@ -2657,7 +2659,7 @@ class AsyncRawBalanceClient:
 
         Returns
         -------
-        AsyncHttpResponse[GetBalanceDefinitionListResponse]
+        AsyncHttpResponse[typing.Optional[GetBalanceDefinitionListResponse]]
             Successful retrieval of balance definition page
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -2673,11 +2675,13 @@ class AsyncRawBalanceClient:
             request_options=request_options,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetBalanceDefinitionListResponse,
+                    typing.Optional[GetBalanceDefinitionListResponse],
                     construct_type(
-                        type_=GetBalanceDefinitionListResponse,  # type: ignore
+                        type_=typing.Optional[GetBalanceDefinitionListResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -111,9 +111,6 @@ class RawTransactionalSmsClient:
                 "templateId": template_id,
                 "content": content,
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -221,9 +218,6 @@ class RawTransactionalSmsClient:
                 "params": params,
                 "templateId": template_id,
                 "content": content,
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -617,9 +611,6 @@ class AsyncRawTransactionalSmsClient:
                 "templateId": template_id,
                 "content": content,
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -727,9 +718,6 @@ class AsyncRawTransactionalSmsClient:
                 "params": params,
                 "templateId": template_id,
                 "content": content,
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

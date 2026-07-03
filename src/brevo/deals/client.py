@@ -66,6 +66,9 @@ class DealsClient:
         self,
         *,
         filters_attributes_deal_name: typing.Optional[str] = None,
+        filters_attributes_deal_owner: typing.Optional[str] = None,
+        filters_attributes_deal_stage: typing.Optional[str] = None,
+        filters_attributes_pipeline: typing.Optional[str] = None,
         filters_linked_companies_ids: typing.Optional[str] = None,
         filters_linked_contacts_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -83,6 +86,15 @@ class DealsClient:
         ----------
         filters_attributes_deal_name : typing.Optional[str]
             Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+
+        filters_attributes_deal_owner : typing.Optional[str]
+            Filter by the deal owner. Pass the account email address of the deal owner.
+
+        filters_attributes_deal_stage : typing.Optional[str]
+            Filter by the deal stage. Pass the stage id, retrievable from GET /crm/pipeline/details/{pipelineID}.
+
+        filters_attributes_pipeline : typing.Optional[str]
+            Filter by the pipeline. Pass the pipeline id, retrievable from GET /crm/pipeline/details/{pipelineID}.
 
         filters_linked_companies_ids : typing.Optional[str]
             Filter by linked companies ids
@@ -127,6 +139,9 @@ class DealsClient:
         """
         _response = self._raw_client.get_all_deals(
             filters_attributes_deal_name=filters_attributes_deal_name,
+            filters_attributes_deal_owner=filters_attributes_deal_owner,
+            filters_attributes_deal_stage=filters_attributes_deal_stage,
+            filters_attributes_pipeline=filters_attributes_pipeline,
             filters_linked_companies_ids=filters_linked_companies_ids,
             filters_linked_contacts_ids=filters_linked_contacts_ids,
             modified_since=modified_since,
@@ -549,6 +564,9 @@ class AsyncDealsClient:
         self,
         *,
         filters_attributes_deal_name: typing.Optional[str] = None,
+        filters_attributes_deal_owner: typing.Optional[str] = None,
+        filters_attributes_deal_stage: typing.Optional[str] = None,
+        filters_attributes_pipeline: typing.Optional[str] = None,
         filters_linked_companies_ids: typing.Optional[str] = None,
         filters_linked_contacts_ids: typing.Optional[str] = None,
         modified_since: typing.Optional[str] = None,
@@ -566,6 +584,15 @@ class AsyncDealsClient:
         ----------
         filters_attributes_deal_name : typing.Optional[str]
             Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+
+        filters_attributes_deal_owner : typing.Optional[str]
+            Filter by the deal owner. Pass the account email address of the deal owner.
+
+        filters_attributes_deal_stage : typing.Optional[str]
+            Filter by the deal stage. Pass the stage id, retrievable from GET /crm/pipeline/details/{pipelineID}.
+
+        filters_attributes_pipeline : typing.Optional[str]
+            Filter by the pipeline. Pass the pipeline id, retrievable from GET /crm/pipeline/details/{pipelineID}.
 
         filters_linked_companies_ids : typing.Optional[str]
             Filter by linked companies ids
@@ -618,6 +645,9 @@ class AsyncDealsClient:
         """
         _response = await self._raw_client.get_all_deals(
             filters_attributes_deal_name=filters_attributes_deal_name,
+            filters_attributes_deal_owner=filters_attributes_deal_owner,
+            filters_attributes_deal_stage=filters_attributes_deal_stage,
+            filters_attributes_pipeline=filters_attributes_pipeline,
             filters_linked_companies_ids=filters_linked_companies_ids,
             filters_linked_contacts_ids=filters_linked_contacts_ids,
             modified_since=modified_since,
