@@ -32,6 +32,11 @@ if typing.TYPE_CHECKING:
     from .cart import Cart
     from .company import Company
     from .configuration import Configuration
+    from .consent_group import ConsentGroup
+    from .consent_group_item import ConsentGroupItem
+    from .consent_group_item_status import ConsentGroupItemStatus
+    from .consent_group_signup_mode import ConsentGroupSignupMode
+    from .consent_groups_list_response import ConsentGroupsListResponse
     from .contact_error_model import ContactErrorModel
     from .contact_error_model_code import ContactErrorModelCode
     from .conversations_message import ConversationsMessage
@@ -146,6 +151,7 @@ if typing.TYPE_CHECKING:
     from .update_campaign_status_status import UpdateCampaignStatusStatus
     from .value_response import ValueResponse
     from .variables_items import VariablesItems
+    from .wallet_pass_install_url import WalletPassInstallUrl
     from .whatsapp_camp_stats import WhatsappCampStats
 _dynamic_imports: typing.Dict[str, str] = {
     "AbTestVersionClicks": ".ab_test_version_clicks",
@@ -170,6 +176,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Cart": ".cart",
     "Company": ".company",
     "Configuration": ".configuration",
+    "ConsentGroup": ".consent_group",
+    "ConsentGroupItem": ".consent_group_item",
+    "ConsentGroupItemStatus": ".consent_group_item_status",
+    "ConsentGroupSignupMode": ".consent_group_signup_mode",
+    "ConsentGroupsListResponse": ".consent_groups_list_response",
     "ContactErrorModel": ".contact_error_model",
     "ContactErrorModelCode": ".contact_error_model_code",
     "ConversationsMessage": ".conversations_message",
@@ -282,6 +293,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdateCampaignStatusStatus": ".update_campaign_status_status",
     "ValueResponse": ".value_response",
     "VariablesItems": ".variables_items",
+    "WalletPassInstallUrl": ".wallet_pass_install_url",
     "WhatsappCampStats": ".whatsapp_camp_stats",
 }
 
@@ -330,6 +342,11 @@ __all__ = [
     "Cart",
     "Company",
     "Configuration",
+    "ConsentGroup",
+    "ConsentGroupItem",
+    "ConsentGroupItemStatus",
+    "ConsentGroupSignupMode",
+    "ConsentGroupsListResponse",
     "ContactErrorModel",
     "ContactErrorModelCode",
     "ConversationsMessage",
@@ -442,5 +459,6 @@ __all__ = [
     "UpdateCampaignStatusStatus",
     "ValueResponse",
     "VariablesItems",
+    "WalletPassInstallUrl",
     "WhatsappCampStats",
 ]

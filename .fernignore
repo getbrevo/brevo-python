@@ -7,3 +7,6 @@ changelog.md
 # but the generated test instantiates the class with no arguments, causing a Pydantic
 # ValidationError. Fixed to pass ids=[1, 2, 3]. Protected until Fern fixes the generator.
 tests/wire/test_customObjects.py
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes

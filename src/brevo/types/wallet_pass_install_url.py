@@ -3,19 +3,14 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2
-from ...core.unchecked_base_model import UncheckedBaseModel
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class CreateBatchOrderResponse(UncheckedBaseModel):
-    count: typing.Optional[int] = pydantic.Field(default=None)
+class WalletPassInstallUrl(UncheckedBaseModel):
+    url: str = pydantic.Field()
     """
-    Number of orders
-    """
-
-    batch_id: typing.Optional[float] = pydantic.Field(default=None)
-    """
-    Batch ID of the request
+    The wallet installation URL for the contact. Opening it lets the contact add the pass to their Apple Wallet or Google Wallet.
     """
 
     if IS_PYDANTIC_V2:

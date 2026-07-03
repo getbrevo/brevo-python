@@ -883,6 +883,7 @@ class ContactsClient:
         file_url: typing.Optional[str] = OMIT,
         json_body: typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]] = OMIT,
         list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        consent_group_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         new_list: typing.Optional[ImportContactsRequestNewList] = OMIT,
         notify_url: typing.Optional[str] = OMIT,
         sms_blacklist: typing.Optional[bool] = OMIT,
@@ -914,6 +915,9 @@ class ContactsClient:
 
         list_ids : typing.Optional[typing.Sequence[int]]
             **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+
+        consent_group_ids : typing.Optional[typing.Sequence[int]]
+            **Optional.** Ids of the consent groups to which all imported contacts will be added. Requires consent groups to be enabled for the organisation. For example, **[1, 3]**.
 
         new_list : typing.Optional[ImportContactsRequestNewList]
             To create a new list and import the contacts into it, pass the listName and an optional folderId.
@@ -952,6 +956,7 @@ class ContactsClient:
             file_url=file_url,
             json_body=json_body,
             list_ids=list_ids,
+            consent_group_ids=consent_group_ids,
             new_list=new_list,
             notify_url=notify_url,
             sms_blacklist=sms_blacklist,
@@ -2535,6 +2540,7 @@ class AsyncContactsClient:
         file_url: typing.Optional[str] = OMIT,
         json_body: typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]] = OMIT,
         list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        consent_group_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         new_list: typing.Optional[ImportContactsRequestNewList] = OMIT,
         notify_url: typing.Optional[str] = OMIT,
         sms_blacklist: typing.Optional[bool] = OMIT,
@@ -2566,6 +2572,9 @@ class AsyncContactsClient:
 
         list_ids : typing.Optional[typing.Sequence[int]]
             **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+
+        consent_group_ids : typing.Optional[typing.Sequence[int]]
+            **Optional.** Ids of the consent groups to which all imported contacts will be added. Requires consent groups to be enabled for the organisation. For example, **[1, 3]**.
 
         new_list : typing.Optional[ImportContactsRequestNewList]
             To create a new list and import the contacts into it, pass the listName and an optional folderId.
@@ -2612,6 +2621,7 @@ class AsyncContactsClient:
             file_url=file_url,
             json_body=json_body,
             list_ids=list_ids,
+            consent_group_ids=consent_group_ids,
             new_list=new_list,
             notify_url=notify_url,
             sms_blacklist=sms_blacklist,

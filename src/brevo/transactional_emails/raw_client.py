@@ -1273,9 +1273,6 @@ class RawTransactionalEmailsClient:
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=PostPreviewSmtpEmailTemplatesRequest, direction="write"
             ),
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -3032,9 +3029,6 @@ class AsyncRawTransactionalEmailsClient:
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=PostPreviewSmtpEmailTemplatesRequest, direction="write"
             ),
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )

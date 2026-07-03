@@ -193,7 +193,7 @@ class BalanceClient:
         sort: typing.Optional[GetBalanceDefinitionListRequestSort] = None,
         version: typing.Optional[GetBalanceDefinitionListRequestVersion] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetBalanceDefinitionListResponse:
+    ) -> typing.Optional[GetBalanceDefinitionListResponse]:
         """
         Returns balance definition page
 
@@ -222,7 +222,7 @@ class BalanceClient:
 
         Returns
         -------
-        GetBalanceDefinitionListResponse
+        typing.Optional[GetBalanceDefinitionListResponse]
             Successful retrieval of balance definition page
 
         Examples
@@ -1452,7 +1452,7 @@ class AsyncBalanceClient:
         sort: typing.Optional[GetBalanceDefinitionListRequestSort] = None,
         version: typing.Optional[GetBalanceDefinitionListRequestVersion] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetBalanceDefinitionListResponse:
+    ) -> typing.Optional[GetBalanceDefinitionListResponse]:
         """
         Returns balance definition page
 
@@ -1481,7 +1481,7 @@ class AsyncBalanceClient:
 
         Returns
         -------
-        GetBalanceDefinitionListResponse
+        typing.Optional[GetBalanceDefinitionListResponse]
             Successful retrieval of balance definition page
 
         Examples

@@ -13,6 +13,7 @@ if typing.TYPE_CHECKING:
     from .account.client import AccountClient, AsyncAccountClient
     from .balance.client import AsyncBalanceClient, BalanceClient
     from .companies.client import AsyncCompaniesClient, CompaniesClient
+    from .consent_groups.client import AsyncConsentGroupsClient, ConsentGroupsClient
     from .contacts.client import AsyncContactsClient, ContactsClient
     from .conversations.client import AsyncConversationsClient, ConversationsClient
     from .coupons.client import AsyncCouponsClient, CouponsClient
@@ -40,6 +41,7 @@ if typing.TYPE_CHECKING:
     from .transactional_sms.client import AsyncTransactionalSmsClient, TransactionalSmsClient
     from .transactional_whats_app.client import AsyncTransactionalWhatsAppClient, TransactionalWhatsAppClient
     from .user.client import AsyncUserClient, UserClient
+    from .wallet.client import AsyncWalletClient, WalletClient
     from .webhooks.client import AsyncWebhooksClient, WebhooksClient
     from .whats_app_campaigns.client import AsyncWhatsAppCampaignsClient, WhatsAppCampaignsClient
 
@@ -124,6 +126,7 @@ class Brevo:
         self._external_feeds: typing.Optional[ExternalFeedsClient] = None
         self._custom_objects: typing.Optional[CustomObjectsClient] = None
         self._contacts: typing.Optional[ContactsClient] = None
+        self._consent_groups: typing.Optional[ConsentGroupsClient] = None
         self._conversations: typing.Optional[ConversationsClient] = None
         self._ecommerce: typing.Optional[EcommerceClient] = None
         self._coupons: typing.Optional[CouponsClient] = None
@@ -134,6 +137,7 @@ class Brevo:
         self._program: typing.Optional[ProgramClient] = None
         self._reward: typing.Optional[RewardClient] = None
         self._tier: typing.Optional[TierClient] = None
+        self._wallet: typing.Optional[WalletClient] = None
         self._email_campaigns: typing.Optional[EmailCampaignsClient] = None
         self._sms_campaigns: typing.Optional[SmsCampaignsClient] = None
         self._whats_app_campaigns: typing.Optional[WhatsAppCampaignsClient] = None
@@ -228,6 +232,14 @@ class Brevo:
         return self._contacts
 
     @property
+    def consent_groups(self):
+        if self._consent_groups is None:
+            from .consent_groups.client import ConsentGroupsClient  # noqa: E402
+
+            self._consent_groups = ConsentGroupsClient(client_wrapper=self._client_wrapper)
+        return self._consent_groups
+
+    @property
     def conversations(self):
         if self._conversations is None:
             from .conversations.client import ConversationsClient  # noqa: E402
@@ -306,6 +318,14 @@ class Brevo:
 
             self._tier = TierClient(client_wrapper=self._client_wrapper)
         return self._tier
+
+    @property
+    def wallet(self):
+        if self._wallet is None:
+            from .wallet.client import WalletClient  # noqa: E402
+
+            self._wallet = WalletClient(client_wrapper=self._client_wrapper)
+        return self._wallet
 
     @property
     def email_campaigns(self):
@@ -484,6 +504,7 @@ class AsyncBrevo:
         self._external_feeds: typing.Optional[AsyncExternalFeedsClient] = None
         self._custom_objects: typing.Optional[AsyncCustomObjectsClient] = None
         self._contacts: typing.Optional[AsyncContactsClient] = None
+        self._consent_groups: typing.Optional[AsyncConsentGroupsClient] = None
         self._conversations: typing.Optional[AsyncConversationsClient] = None
         self._ecommerce: typing.Optional[AsyncEcommerceClient] = None
         self._coupons: typing.Optional[AsyncCouponsClient] = None
@@ -494,6 +515,7 @@ class AsyncBrevo:
         self._program: typing.Optional[AsyncProgramClient] = None
         self._reward: typing.Optional[AsyncRewardClient] = None
         self._tier: typing.Optional[AsyncTierClient] = None
+        self._wallet: typing.Optional[AsyncWalletClient] = None
         self._email_campaigns: typing.Optional[AsyncEmailCampaignsClient] = None
         self._sms_campaigns: typing.Optional[AsyncSmsCampaignsClient] = None
         self._whats_app_campaigns: typing.Optional[AsyncWhatsAppCampaignsClient] = None
@@ -588,6 +610,14 @@ class AsyncBrevo:
         return self._contacts
 
     @property
+    def consent_groups(self):
+        if self._consent_groups is None:
+            from .consent_groups.client import AsyncConsentGroupsClient  # noqa: E402
+
+            self._consent_groups = AsyncConsentGroupsClient(client_wrapper=self._client_wrapper)
+        return self._consent_groups
+
+    @property
     def conversations(self):
         if self._conversations is None:
             from .conversations.client import AsyncConversationsClient  # noqa: E402
@@ -666,6 +696,14 @@ class AsyncBrevo:
 
             self._tier = AsyncTierClient(client_wrapper=self._client_wrapper)
         return self._tier
+
+    @property
+    def wallet(self):
+        if self._wallet is None:
+            from .wallet.client import AsyncWalletClient  # noqa: E402
+
+            self._wallet = AsyncWalletClient(client_wrapper=self._client_wrapper)
+        return self._wallet
 
     @property
     def email_campaigns(self):

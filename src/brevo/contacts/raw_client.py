@@ -1025,9 +1025,6 @@ class RawContactsClient:
             json={
                 "name": name,
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -1353,6 +1350,7 @@ class RawContactsClient:
         file_url: typing.Optional[str] = OMIT,
         json_body: typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]] = OMIT,
         list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        consent_group_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         new_list: typing.Optional[ImportContactsRequestNewList] = OMIT,
         notify_url: typing.Optional[str] = OMIT,
         sms_blacklist: typing.Optional[bool] = OMIT,
@@ -1384,6 +1382,9 @@ class RawContactsClient:
 
         list_ids : typing.Optional[typing.Sequence[int]]
             **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+
+        consent_group_ids : typing.Optional[typing.Sequence[int]]
+            **Optional.** Ids of the consent groups to which all imported contacts will be added. Requires consent groups to be enabled for the organisation. For example, **[1, 3]**.
 
         new_list : typing.Optional[ImportContactsRequestNewList]
             To create a new list and import the contacts into it, pass the listName and an optional folderId.
@@ -1418,6 +1419,7 @@ class RawContactsClient:
                     object_=json_body, annotation=typing.Sequence[ImportContactsRequestJsonBodyItem], direction="write"
                 ),
                 "listIds": list_ids,
+                "consentGroupIds": consent_group_ids,
                 "newList": convert_and_respect_annotation_metadata(
                     object_=new_list, annotation=ImportContactsRequestNewList, direction="write"
                 ),
@@ -3467,9 +3469,6 @@ class AsyncRawContactsClient:
             json={
                 "name": name,
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -3795,6 +3794,7 @@ class AsyncRawContactsClient:
         file_url: typing.Optional[str] = OMIT,
         json_body: typing.Optional[typing.Sequence[ImportContactsRequestJsonBodyItem]] = OMIT,
         list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        consent_group_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         new_list: typing.Optional[ImportContactsRequestNewList] = OMIT,
         notify_url: typing.Optional[str] = OMIT,
         sms_blacklist: typing.Optional[bool] = OMIT,
@@ -3826,6 +3826,9 @@ class AsyncRawContactsClient:
 
         list_ids : typing.Optional[typing.Sequence[int]]
             **Mandatory if newList is not defined.** Ids of the lists in which the contacts shall be imported. For example, **[2, 4, 7]**.
+
+        consent_group_ids : typing.Optional[typing.Sequence[int]]
+            **Optional.** Ids of the consent groups to which all imported contacts will be added. Requires consent groups to be enabled for the organisation. For example, **[1, 3]**.
 
         new_list : typing.Optional[ImportContactsRequestNewList]
             To create a new list and import the contacts into it, pass the listName and an optional folderId.
@@ -3860,6 +3863,7 @@ class AsyncRawContactsClient:
                     object_=json_body, annotation=typing.Sequence[ImportContactsRequestJsonBodyItem], direction="write"
                 ),
                 "listIds": list_ids,
+                "consentGroupIds": consent_group_ids,
                 "newList": convert_and_respect_annotation_metadata(
                     object_=new_list, annotation=ImportContactsRequestNewList, direction="write"
                 ),

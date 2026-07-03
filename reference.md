@@ -7921,6 +7921,14 @@ client.contacts.import_contacts()
 <dl>
 <dd>
 
+**consent_group_ids:** `typing.Optional[typing.List[int]]` — **Optional.** Ids of the consent groups to which all imported contacts will be added. Requires consent groups to be enabled for the organisation. For example, **[1, 3]**.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **new_list:** `typing.Optional[ImportContactsRequestNewList]` — To create a new list and import the contacts into it, pass the listName and an optional folderId.
     
 </dd>
@@ -9119,6 +9127,461 @@ client.contacts.get_contact_stats(
 <dd>
 
 **end_date:** `typing.Optional[str]` — **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. Must not be greater than the current date. Maximum difference between startDate and endDate should not be greater than 90 days.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConsentGroups
+<details><summary><code>client.consent_groups.<a href="src/brevo/consent_groups/client.py">get_consent_groups</a>(...) -> ConsentGroupsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of consent groups for the account.
+
+<Note>This endpoint is only available when the Consent Groups feature is enabled for your account. Returns `403` if the feature is not activated.</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.consent_groups.get_consent_groups()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Maximum number of results to return (default 10, max 50)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` — Number of results to skip (default 0)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `typing.Optional[int]` — Filter by consent group ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — Filter by name (case-insensitive partial match)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**signup_mode:** `typing.Optional[GetConsentGroupsRequestSignupMode]` — Filter by signup mode
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.consent_groups.<a href="src/brevo/consent_groups/client.py">create_consent_group</a>(...) -> ConsentGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new consent group for the account.
+
+<Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.consent_groups.create_consent_group(
+    name="Newsletter EU",
+    signup_mode="manual",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `str` — Unique name for the consent group (max 255 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**signup_mode:** `CreateConsentGroupRequestSignupMode` — Controls how contacts are added to the group. `manual` — contacts are added explicitly via the API. `automatic` — contacts are added automatically at signup.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Optional description (max 500 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**list_ids:** `typing.Optional[typing.List[int]]` — Optional list of contact list IDs. Contacts from these lists will be copied once into this consent group at creation time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.consent_groups.<a href="src/brevo/consent_groups/client.py">get_consent_group</a>(...) -> ConsentGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a single consent group by ID for the account.
+
+<Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.consent_groups.get_consent_group(
+    id=1000000,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — ID of the consent group
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.consent_groups.<a href="src/brevo/consent_groups/client.py">update_consent_group</a>(...) -> ConsentGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates name, description, or signupMode of a consent group. At least one field must be provided.
+
+<Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.consent_groups.update_consent_group(
+    id=1000000,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — ID of the consent group to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — New name for the consent group (max 255 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — New description (max 500 characters)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**signup_mode:** `typing.Optional[UpdateConsentGroupRequestSignupMode]` — New signup mode
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.consent_groups.<a href="src/brevo/consent_groups/client.py">delete_consent_group</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a consent group by ID and removes it from all associated contacts.
+
+<Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.consent_groups.delete_consent_group(
+    id=1000000,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — ID of the consent group to delete
     
 </dd>
 </dl>
@@ -13276,7 +13739,7 @@ client.balance.get_active_balances_api(
 </dl>
 </details>
 
-<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition_list</a>(...) -> GetBalanceDefinitionListResponse</code></summary>
+<details><summary><code>client.balance.<a href="src/brevo/balance/client.py">get_balance_definition_list</a>(...) -> typing.Optional[GetBalanceDefinitionListResponse]</code></summary>
 <dl>
 <dd>
 
@@ -18518,6 +18981,89 @@ client.tier.delete_tier(
 </dl>
 </details>
 
+## Wallet
+<details><summary><code>client.wallet.<a href="src/brevo/wallet/client.py">get_wallet_pass_install_url</a>(...) -> WalletPassInstallUrl</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a wallet installation URL for a specific contact. The returned URL points to the pass installation page and encodes the pass, contact and organization identifiers as an encrypted token, so it can be shared with the contact (email, SMS, QR code, ...) to add the pass to their Apple Wallet or Google Wallet.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from brevo import Brevo
+from brevo.environment import BrevoEnvironment
+
+client = Brevo(
+    api_key="<value>",
+    environment=BrevoEnvironment.DEFAULT,
+)
+
+client.wallet.get_wallet_pass_install_url(
+    pass_id="passId",
+    contact_id=1000000,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**pass_id:** `str` — Pass ID. The unique identifier of the wallet pass for which to generate an installation URL.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_id:** `int` — The Brevo contact ID the installation URL is generated for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## EmailCampaigns
 <details><summary><code>client.email_campaigns.<a href="src/brevo/email_campaigns/client.py">get_email_campaigns</a>(...) -> GetEmailCampaignsResponse</code></summary>
 <dl>
@@ -23048,6 +23594,30 @@ client.deals.get_all_deals()
 <dd>
 
 **filters_attributes_deal_name:** `typing.Optional[str]` — Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters_attributes_deal_owner:** `typing.Optional[str]` — Filter by the deal owner. Pass the account email address of the deal owner.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters_attributes_deal_stage:** `typing.Optional[str]` — Filter by the deal stage. Pass the stage id, retrievable from GET /crm/pipeline/details/{pipelineID}.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters_attributes_pipeline:** `typing.Optional[str]` — Filter by the pipeline. Pass the pipeline id, retrievable from GET /crm/pipeline/details/{pipelineID}.
     
 </dd>
 </dl>

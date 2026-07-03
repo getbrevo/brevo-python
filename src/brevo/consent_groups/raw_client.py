@@ -11,89 +11,84 @@ from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
+from ..errors.conflict_error import ConflictError
+from ..errors.forbidden_error import ForbiddenError
 from ..errors.not_found_error import NotFoundError
-from ..errors.unsupported_media_type_error import UnsupportedMediaTypeError
+from ..errors.too_many_requests_error import TooManyRequestsError
+from ..types.consent_group import ConsentGroup
+from ..types.consent_groups_list_response import ConsentGroupsListResponse
 from ..types.error_model import ErrorModel
-from ..types.note import Note
-from .types.get_crm_notes_request_entity import GetCrmNotesRequestEntity
-from .types.get_crm_notes_request_sort import GetCrmNotesRequestSort
-from .types.post_crm_notes_response import PostCrmNotesResponse
+from .types.create_consent_group_request_signup_mode import CreateConsentGroupRequestSignupMode
+from .types.get_consent_groups_request_signup_mode import GetConsentGroupsRequestSignupMode
+from .types.update_consent_group_request_signup_mode import UpdateConsentGroupRequestSignupMode
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class RawNotesClient:
+class RawConsentGroupsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get_all_notes(
+    def get_consent_groups(
         self,
         *,
-        entity: typing.Optional[GetCrmNotesRequestEntity] = None,
-        entity_ids: typing.Optional[str] = None,
-        date_from: typing.Optional[int] = None,
-        date_to: typing.Optional[int] = None,
-        offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
-        sort: typing.Optional[GetCrmNotesRequestSort] = None,
+        offset: typing.Optional[int] = None,
+        id: typing.Optional[int] = None,
+        name: typing.Optional[str] = None,
+        signup_mode: typing.Optional[GetConsentGroupsRequestSignupMode] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.List[Note]]:
+    ) -> HttpResponse[ConsentGroupsListResponse]:
         """
-        Retrieve a paginated list of CRM notes with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 notes per page.
+        Returns a paginated list of consent groups for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account. Returns `403` if the feature is not activated.</Note>
 
         Parameters
         ----------
-        entity : typing.Optional[GetCrmNotesRequestEntity]
-            Filter by note entity type
-
-        entity_ids : typing.Optional[str]
-            Filter by note entity IDs
-
-        date_from : typing.Optional[int]
-            dateFrom to date range filter type (timestamp in milliseconds)
-
-        date_to : typing.Optional[int]
-            dateTo to date range filter type (timestamp in milliseconds)
+        limit : typing.Optional[int]
+            Maximum number of results to return (default 10, max 50)
 
         offset : typing.Optional[int]
-            Index of the first document of the page
+            Number of results to skip (default 0)
 
-        limit : typing.Optional[int]
-            Number of documents per page
+        id : typing.Optional[int]
+            Filter by consent group ID
 
-        sort : typing.Optional[GetCrmNotesRequestSort]
-            Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+        name : typing.Optional[str]
+            Filter by name (case-insensitive partial match)
+
+        signup_mode : typing.Optional[GetConsentGroupsRequestSignupMode]
+            Filter by signup mode
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.List[Note]]
-            Returns notes list with filters
+        HttpResponse[ConsentGroupsListResponse]
+            Paginated list of consent groups
         """
         _response = self._client_wrapper.httpx_client.request(
-            "crm/notes",
+            "contacts/consent-groups",
             method="GET",
             params={
-                "entity": entity,
-                "entityIds": entity_ids,
-                "dateFrom": date_from,
-                "dateTo": date_to,
-                "offset": offset,
                 "limit": limit,
-                "sort": sort,
+                "offset": offset,
+                "id": id,
+                "name": name,
+                "signupMode": signup_mode,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.List[Note],
+                    ConsentGroupsListResponse,
                     construct_type(
-                        type_=typing.List[Note],  # type: ignore
+                        type_=ConsentGroupsListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -109,73 +104,8 @@ class RawNotesClient:
                         ),
                     ),
                 )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_a_note(
-        self,
-        *,
-        text: str,
-        company_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        contact_ids: typing.Optional[typing.Sequence[int]] = OMIT,
-        deal_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[PostCrmNotesResponse]:
-        """
-        Create a new CRM note and optionally associate it with contacts, companies, or deals. The note text content is required, and you can link the note to multiple entities simultaneously during creation.
-
-        Parameters
-        ----------
-        text : str
-            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
-
-        company_ids : typing.Optional[typing.Sequence[str]]
-            Company Ids linked to a note
-
-        contact_ids : typing.Optional[typing.Sequence[int]]
-            Contact Ids linked to a note
-
-        deal_ids : typing.Optional[typing.Sequence[str]]
-            Deal Ids linked to a note
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[PostCrmNotesResponse]
-            Created new note
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "crm/notes",
-            method="POST",
-            json={
-                "companyIds": company_ids,
-                "contactIds": contact_ids,
-                "dealIds": deal_ids,
-                "text": text,
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    PostCrmNotesResponse,
-                    construct_type(
-                        type_=PostCrmNotesResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -185,8 +115,8 @@ class RawNotesClient:
                         ),
                     ),
                 )
-            if _response.status_code == 415:
-                raise UnsupportedMediaTypeError(
+            if _response.status_code == 429:
+                raise TooManyRequestsError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
@@ -205,40 +135,158 @@ class RawNotesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[Note]:
+    def create_consent_group(
+        self,
+        *,
+        name: str,
+        signup_mode: CreateConsentGroupRequestSignupMode,
+        description: typing.Optional[str] = OMIT,
+        list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ConsentGroup]:
         """
-        Retrieve the full details of a single CRM note by its identifier. The response includes the note''s text content, creation date, author, and any associated contacts, companies, or deals.
+        Creates a new consent group for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
 
         Parameters
         ----------
-        id : str
-            Note ID to get
+        name : str
+            Unique name for the consent group (max 255 characters)
+
+        signup_mode : CreateConsentGroupRequestSignupMode
+            Controls how contacts are added to the group. `manual` — contacts are added explicitly via the API. `automatic` — contacts are added automatically at signup.
+
+        description : typing.Optional[str]
+            Optional description (max 500 characters)
+
+        list_ids : typing.Optional[typing.Sequence[int]]
+            Optional list of contact list IDs. Contacts from these lists will be copied once into this consent group at creation time.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[Note]
-            Returns the Note by id
+        HttpResponse[ConsentGroup]
+            Consent group created successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
-            method="GET",
+            "contacts/consent-groups",
+            method="POST",
+            json={
+                "name": name,
+                "description": description,
+                "signupMode": signup_mode,
+                "listIds": list_ids,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Note,
+                    ConsentGroup,
                     construct_type(
-                        type_=Note,  # type: ignore
+                        type_=ConsentGroup,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
             if _response.status_code == 400:
                 raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorModel,
+                        construct_type(
+                            type_=ErrorModel,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_consent_group(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ConsentGroup]:
+        """
+        Returns a single consent group by ID for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+
+        Parameters
+        ----------
+        id : int
+            ID of the consent group
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ConsentGroup]
+            Consent group details
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConsentGroup,
+                    construct_type(
+                        type_=ConsentGroup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -268,14 +316,131 @@ class RawNotesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete_a_note(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
+    def update_consent_group(
+        self,
+        id: int,
+        *,
+        name: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
+        signup_mode: typing.Optional[UpdateConsentGroupRequestSignupMode] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ConsentGroup]:
         """
-        Permanently delete a CRM note by its identifier. This removes the note and unlinks it from any associated contacts, companies, or deals.
+        Updates name, description, or signupMode of a consent group. At least one field must be provided.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
 
         Parameters
         ----------
-        id : str
-            Note ID to delete
+        id : int
+            ID of the consent group to update
+
+        name : typing.Optional[str]
+            New name for the consent group (max 255 characters)
+
+        description : typing.Optional[str]
+            New description (max 500 characters)
+
+        signup_mode : typing.Optional[UpdateConsentGroupRequestSignupMode]
+            New signup mode
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ConsentGroup]
+            Updated consent group
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "description": description,
+                "signupMode": signup_mode,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConsentGroup,
+                    construct_type(
+                        type_=ConsentGroup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorModel,
+                        construct_type(
+                            type_=ErrorModel,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_consent_group(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[None]:
+        """
+        Deletes a consent group by ID and removes it from all associated contacts.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+
+        Parameters
+        ----------
+        id : int
+            ID of the consent group to delete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -285,7 +450,7 @@ class RawNotesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -303,83 +468,8 @@ class RawNotesClient:
                         ),
                     ),
                 )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def update_a_note(
-        self,
-        id: str,
-        *,
-        text: str,
-        company_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        contact_ids: typing.Optional[typing.Sequence[int]] = OMIT,
-        deal_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[None]:
-        """
-        Update an existing CRM note''s text content and its associations with contacts, companies, or deals. You can modify the note text, change the pinned status, or update the linked entities.
-
-        Parameters
-        ----------
-        id : str
-            Note ID to update
-
-        text : str
-            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
-
-        company_ids : typing.Optional[typing.Sequence[str]]
-            Company Ids linked to a note
-
-        contact_ids : typing.Optional[typing.Sequence[int]]
-            Contact Ids linked to a note
-
-        deal_ids : typing.Optional[typing.Sequence[str]]
-            Deal Ids linked to a note
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[None]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
-            method="PATCH",
-            json={
-                "companyIds": company_ids,
-                "contactIds": contact_ids,
-                "dealIds": deal_ids,
-                "text": text,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -400,17 +490,6 @@ class RawNotesClient:
                         ),
                     ),
                 )
-            if _response.status_code == 415:
-                raise UnsupportedMediaTypeError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorModel,
-                        construct_type(
-                            type_=ErrorModel,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -421,76 +500,68 @@ class RawNotesClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawNotesClient:
+class AsyncRawConsentGroupsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get_all_notes(
+    async def get_consent_groups(
         self,
         *,
-        entity: typing.Optional[GetCrmNotesRequestEntity] = None,
-        entity_ids: typing.Optional[str] = None,
-        date_from: typing.Optional[int] = None,
-        date_to: typing.Optional[int] = None,
-        offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
-        sort: typing.Optional[GetCrmNotesRequestSort] = None,
+        offset: typing.Optional[int] = None,
+        id: typing.Optional[int] = None,
+        name: typing.Optional[str] = None,
+        signup_mode: typing.Optional[GetConsentGroupsRequestSignupMode] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.List[Note]]:
+    ) -> AsyncHttpResponse[ConsentGroupsListResponse]:
         """
-        Retrieve a paginated list of CRM notes with optional filtering by entity type, entity IDs, and date range. Results are sorted by creation date in descending order by default, with a default limit of 50 notes per page.
+        Returns a paginated list of consent groups for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account. Returns `403` if the feature is not activated.</Note>
 
         Parameters
         ----------
-        entity : typing.Optional[GetCrmNotesRequestEntity]
-            Filter by note entity type
-
-        entity_ids : typing.Optional[str]
-            Filter by note entity IDs
-
-        date_from : typing.Optional[int]
-            dateFrom to date range filter type (timestamp in milliseconds)
-
-        date_to : typing.Optional[int]
-            dateTo to date range filter type (timestamp in milliseconds)
+        limit : typing.Optional[int]
+            Maximum number of results to return (default 10, max 50)
 
         offset : typing.Optional[int]
-            Index of the first document of the page
+            Number of results to skip (default 0)
 
-        limit : typing.Optional[int]
-            Number of documents per page
+        id : typing.Optional[int]
+            Filter by consent group ID
 
-        sort : typing.Optional[GetCrmNotesRequestSort]
-            Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
+        name : typing.Optional[str]
+            Filter by name (case-insensitive partial match)
+
+        signup_mode : typing.Optional[GetConsentGroupsRequestSignupMode]
+            Filter by signup mode
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.List[Note]]
-            Returns notes list with filters
+        AsyncHttpResponse[ConsentGroupsListResponse]
+            Paginated list of consent groups
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "crm/notes",
+            "contacts/consent-groups",
             method="GET",
             params={
-                "entity": entity,
-                "entityIds": entity_ids,
-                "dateFrom": date_from,
-                "dateTo": date_to,
-                "offset": offset,
                 "limit": limit,
-                "sort": sort,
+                "offset": offset,
+                "id": id,
+                "name": name,
+                "signupMode": signup_mode,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.List[Note],
+                    ConsentGroupsListResponse,
                     construct_type(
-                        type_=typing.List[Note],  # type: ignore
+                        type_=ConsentGroupsListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -506,73 +577,8 @@ class AsyncRawNotesClient:
                         ),
                     ),
                 )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def create_a_note(
-        self,
-        *,
-        text: str,
-        company_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        contact_ids: typing.Optional[typing.Sequence[int]] = OMIT,
-        deal_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[PostCrmNotesResponse]:
-        """
-        Create a new CRM note and optionally associate it with contacts, companies, or deals. The note text content is required, and you can link the note to multiple entities simultaneously during creation.
-
-        Parameters
-        ----------
-        text : str
-            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
-
-        company_ids : typing.Optional[typing.Sequence[str]]
-            Company Ids linked to a note
-
-        contact_ids : typing.Optional[typing.Sequence[int]]
-            Contact Ids linked to a note
-
-        deal_ids : typing.Optional[typing.Sequence[str]]
-            Deal Ids linked to a note
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[PostCrmNotesResponse]
-            Created new note
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "crm/notes",
-            method="POST",
-            json={
-                "companyIds": company_ids,
-                "contactIds": contact_ids,
-                "dealIds": deal_ids,
-                "text": text,
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    PostCrmNotesResponse,
-                    construct_type(
-                        type_=PostCrmNotesResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -582,8 +588,8 @@ class AsyncRawNotesClient:
                         ),
                     ),
                 )
-            if _response.status_code == 415:
-                raise UnsupportedMediaTypeError(
+            if _response.status_code == 429:
+                raise TooManyRequestsError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorModel,
@@ -602,42 +608,158 @@ class AsyncRawNotesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_a_note(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[Note]:
+    async def create_consent_group(
+        self,
+        *,
+        name: str,
+        signup_mode: CreateConsentGroupRequestSignupMode,
+        description: typing.Optional[str] = OMIT,
+        list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ConsentGroup]:
         """
-        Retrieve the full details of a single CRM note by its identifier. The response includes the note''s text content, creation date, author, and any associated contacts, companies, or deals.
+        Creates a new consent group for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
 
         Parameters
         ----------
-        id : str
-            Note ID to get
+        name : str
+            Unique name for the consent group (max 255 characters)
+
+        signup_mode : CreateConsentGroupRequestSignupMode
+            Controls how contacts are added to the group. `manual` — contacts are added explicitly via the API. `automatic` — contacts are added automatically at signup.
+
+        description : typing.Optional[str]
+            Optional description (max 500 characters)
+
+        list_ids : typing.Optional[typing.Sequence[int]]
+            Optional list of contact list IDs. Contacts from these lists will be copied once into this consent group at creation time.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[Note]
-            Returns the Note by id
+        AsyncHttpResponse[ConsentGroup]
+            Consent group created successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
-            method="GET",
+            "contacts/consent-groups",
+            method="POST",
+            json={
+                "name": name,
+                "description": description,
+                "signupMode": signup_mode,
+                "listIds": list_ids,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Note,
+                    ConsentGroup,
                     construct_type(
-                        type_=Note,  # type: ignore
+                        type_=ConsentGroup,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 400:
                 raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorModel,
+                        construct_type(
+                            type_=ErrorModel,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_consent_group(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ConsentGroup]:
+        """
+        Returns a single consent group by ID for the account.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+
+        Parameters
+        ----------
+        id : int
+            ID of the consent group
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ConsentGroup]
+            Consent group details
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConsentGroup,
+                    construct_type(
+                        type_=ConsentGroup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -667,16 +789,131 @@ class AsyncRawNotesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def delete_a_note(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    async def update_consent_group(
+        self,
+        id: int,
+        *,
+        name: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
+        signup_mode: typing.Optional[UpdateConsentGroupRequestSignupMode] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ConsentGroup]:
         """
-        Permanently delete a CRM note by its identifier. This removes the note and unlinks it from any associated contacts, companies, or deals.
+        Updates name, description, or signupMode of a consent group. At least one field must be provided.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
 
         Parameters
         ----------
-        id : str
-            Note ID to delete
+        id : int
+            ID of the consent group to update
+
+        name : typing.Optional[str]
+            New name for the consent group (max 255 characters)
+
+        description : typing.Optional[str]
+            New description (max 500 characters)
+
+        signup_mode : typing.Optional[UpdateConsentGroupRequestSignupMode]
+            New signup mode
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ConsentGroup]
+            Updated consent group
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "description": description,
+                "signupMode": signup_mode,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConsentGroup,
+                    construct_type(
+                        type_=ConsentGroup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorModel,
+                        construct_type(
+                            type_=ErrorModel,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_consent_group(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
+        """
+        Deletes a consent group by ID and removes it from all associated contacts.
+
+        <Note>This endpoint is only available when the Consent Groups feature is enabled for your account.</Note>
+
+        Parameters
+        ----------
+        id : int
+            ID of the consent group to delete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -686,7 +923,7 @@ class AsyncRawNotesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
+            f"contacts/consent-groups/{jsonable_encoder(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -704,83 +941,8 @@ class AsyncRawNotesClient:
                         ),
                     ),
                 )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Any,
-                        construct_type(
-                            type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def update_a_note(
-        self,
-        id: str,
-        *,
-        text: str,
-        company_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        contact_ids: typing.Optional[typing.Sequence[int]] = OMIT,
-        deal_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[None]:
-        """
-        Update an existing CRM note''s text content and its associations with contacts, companies, or deals. You can modify the note text, change the pinned status, or update the linked entities.
-
-        Parameters
-        ----------
-        id : str
-            Note ID to update
-
-        text : str
-            Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.
-
-        company_ids : typing.Optional[typing.Sequence[str]]
-            Company Ids linked to a note
-
-        contact_ids : typing.Optional[typing.Sequence[int]]
-            Contact Ids linked to a note
-
-        deal_ids : typing.Optional[typing.Sequence[str]]
-            Deal Ids linked to a note
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[None]
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"crm/notes/{jsonable_encoder(id)}",
-            method="PATCH",
-            json={
-                "companyIds": company_ids,
-                "contactIds": contact_ids,
-                "dealIds": deal_ids,
-                "text": text,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
-            if _response.status_code == 400:
-                raise BadRequestError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
@@ -797,17 +959,6 @@ class AsyncRawNotesClient:
                         typing.Any,
                         construct_type(
                             type_=typing.Any,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 415:
-                raise UnsupportedMediaTypeError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorModel,
-                        construct_type(
-                            type_=ErrorModel,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
