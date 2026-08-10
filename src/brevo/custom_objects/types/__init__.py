@@ -12,6 +12,9 @@ if typing.TYPE_CHECKING:
     )
     from .batch_delete_object_records_request_identifiers_ids import BatchDeleteObjectRecordsRequestIdentifiersIds
     from .batch_delete_object_records_response import BatchDeleteObjectRecordsResponse
+    from .get_associated_records_response import GetAssociatedRecordsResponse
+    from .get_associated_records_response_items_item import GetAssociatedRecordsResponseItemsItem
+    from .get_associated_records_response_items_item_object import GetAssociatedRecordsResponseItemsItemObject
     from .getrecords_request_association import GetrecordsRequestAssociation
     from .getrecords_request_sort import GetrecordsRequestSort
     from .getrecords_response import GetrecordsResponse
@@ -70,6 +73,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BatchDeleteObjectRecordsRequestIdentifiersExtIds": ".batch_delete_object_records_request_identifiers_ext_ids",
     "BatchDeleteObjectRecordsRequestIdentifiersIds": ".batch_delete_object_records_request_identifiers_ids",
     "BatchDeleteObjectRecordsResponse": ".batch_delete_object_records_response",
+    "GetAssociatedRecordsResponse": ".get_associated_records_response",
+    "GetAssociatedRecordsResponseItemsItem": ".get_associated_records_response_items_item",
+    "GetAssociatedRecordsResponseItemsItemObject": ".get_associated_records_response_items_item_object",
     "GetrecordsRequestAssociation": ".getrecords_request_association",
     "GetrecordsRequestSort": ".getrecords_request_sort",
     "GetrecordsResponse": ".getrecords_response",
@@ -124,6 +130,9 @@ __all__ = [
     "BatchDeleteObjectRecordsRequestIdentifiersExtIds",
     "BatchDeleteObjectRecordsRequestIdentifiersIds",
     "BatchDeleteObjectRecordsResponse",
+    "GetAssociatedRecordsResponse",
+    "GetAssociatedRecordsResponseItemsItem",
+    "GetAssociatedRecordsResponseItemsItemObject",
     "GetrecordsRequestAssociation",
     "GetrecordsRequestSort",
     "GetrecordsResponse",

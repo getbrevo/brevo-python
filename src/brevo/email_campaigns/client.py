@@ -165,6 +165,8 @@ class EmailCampaignsClient:
         unsubscription_page_id: typing.Optional[str] = OMIT,
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
+        utm_content: typing.Optional[str] = OMIT,
+        utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -264,6 +266,12 @@ class EmailCampaignsClient:
         utm_campaign : typing.Optional[str]
             Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
 
+        utm_content : typing.Optional[str]
+            Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
+        utm_term : typing.Optional[str]
+            Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
         winner_criteria : typing.Optional[CreateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -322,6 +330,8 @@ class EmailCampaignsClient:
             unsubscription_page_id=unsubscription_page_id,
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
+            utm_content=utm_content,
+            utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -453,6 +463,8 @@ class EmailCampaignsClient:
         unsubscription_page_id: typing.Optional[str] = OMIT,
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
+        utm_content: typing.Optional[str] = OMIT,
+        utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -555,6 +567,12 @@ class EmailCampaignsClient:
         utm_campaign : typing.Optional[str]
             Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
 
+        utm_content : typing.Optional[str]
+            Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
+        utm_term : typing.Optional[str]
+            Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
         winner_criteria : typing.Optional[UpdateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -611,6 +629,8 @@ class EmailCampaignsClient:
             unsubscription_page_id=unsubscription_page_id,
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
+            utm_content=utm_content,
+            utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -1061,6 +1081,8 @@ class AsyncEmailCampaignsClient:
         unsubscription_page_id: typing.Optional[str] = OMIT,
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
+        utm_content: typing.Optional[str] = OMIT,
+        utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1160,6 +1182,12 @@ class AsyncEmailCampaignsClient:
         utm_campaign : typing.Optional[str]
             Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
 
+        utm_content : typing.Optional[str]
+            Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
+        utm_term : typing.Optional[str]
+            Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
         winner_criteria : typing.Optional[CreateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -1226,6 +1254,8 @@ class AsyncEmailCampaignsClient:
             unsubscription_page_id=unsubscription_page_id,
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
+            utm_content=utm_content,
+            utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -1373,6 +1403,8 @@ class AsyncEmailCampaignsClient:
         unsubscription_page_id: typing.Optional[str] = OMIT,
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
+        utm_content: typing.Optional[str] = OMIT,
+        utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1475,6 +1507,12 @@ class AsyncEmailCampaignsClient:
         utm_campaign : typing.Optional[str]
             Customize the utm_campaign value. If this field is empty, the campaign name will be used. Only alphanumeric characters and spaces are allowed
 
+        utm_content : typing.Optional[str]
+            Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
+        utm_term : typing.Optional[str]
+            Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
+
         winner_criteria : typing.Optional[UpdateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -1539,6 +1577,8 @@ class AsyncEmailCampaignsClient:
             unsubscription_page_id=unsubscription_page_id,
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
+            utm_content=utm_content,
+            utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
