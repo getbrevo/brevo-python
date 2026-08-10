@@ -7,6 +7,7 @@ from ..core.request_options import RequestOptions
 from .raw_client import AsyncRawCustomObjectsClient, RawCustomObjectsClient
 from .types.batch_delete_object_records_request_identifiers import BatchDeleteObjectRecordsRequestIdentifiers
 from .types.batch_delete_object_records_response import BatchDeleteObjectRecordsResponse
+from .types.get_associated_records_response import GetAssociatedRecordsResponse
 from .types.getrecords_request_association import GetrecordsRequestAssociation
 from .types.getrecords_request_sort import GetrecordsRequestSort
 from .types.getrecords_response import GetrecordsResponse
@@ -272,6 +273,101 @@ class CustomObjectsClient:
         """
         _response = self._raw_client.batch_delete_object_records(
             object_type, identifiers=identifiers, request_options=request_options
+        )
+        return _response.data
+
+    def get_associated_records(
+        self,
+        object_type: str,
+        *,
+        id: typing.Optional[int] = None,
+        ext_id: typing.Optional[str] = None,
+        email: typing.Optional[str] = None,
+        sms: typing.Optional[str] = None,
+        type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetAssociatedRecordsResponse:
+        """
+        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
+        This feature is in beta. These are subject to change.</Note>
+        Returns the records associated with a single source record. Associations of every type are returned together in one paginated list, ordered by association creation time with the most recently created association first.
+
+        **Identifying the source record**
+        Provide exactly one of `id`, `ext_id`, `email` or `sms`. Passing none of them, or more than one, returns `400`. `email` and `sms` are only accepted when `object_type` is `contact`; using either with any other object type returns `400`.
+
+        **Object types**
+        Use the object type exactly as it is defined in your account, for example `vehicle` for a custom object of that name, or `contact` for contacts. An object type that does not exist in your account returns `400`.
+
+        **Filtering by associated object type**
+        Use `type` to restrict the response to one or more associated object types, for example `?type=contact&type=garage`. Up to 5 types can be requested per call; more returns `400`. When `type` is omitted, associations of every type are returned.
+
+        **Pagination**
+        Results are returned 20 per page. The page size is fixed and cannot be changed. Increase `offset` by 20 to walk through the pages until `has_more` is `false`. An `offset` beyond the last record returns an empty `items` array with `has_more` set to `false`.
+
+        **Working with contacts**
+        - `contact` is supported both as the source `object_type` and as an associated object type.
+        - An `id`, `ext_id`, `email` or `sms` that matches no contact returns `404`.
+        - If several contacts share the same `ext_id`, `email` or `sms`, identify the contact by `id` to be sure of which one is used.
+        - Contacts returned in `items` carry all of the contact's attributes, with attribute keys in lowercase — `email`, `first_name`, `last_name`, `sms`, `ext_id`, and any other contact attribute lowercased.
+        - For contacts, `ext_id`, `created_at` and `updated_at` are not returned on `object`. A contact's external ID is available as `attributes.ext_id` when it is set.
+
+        Parameters
+        ----------
+        object_type : str
+            Object type of the source record, exactly as defined in your account. Accepts any object type defined in the account, for example a custom object type or `contact`.
+
+        id : typing.Optional[int]
+            Internal Brevo ID of the source record. Must be a positive integer. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        ext_id : typing.Optional[str]
+            External ID of the source record in your system. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        email : typing.Optional[str]
+            Email address of the source contact. Only accepted when `object_type` is `contact`. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        sms : typing.Optional[str]
+            Phone number of the source contact, including the country code. It may be given with or without a leading `+`; percent-encode the `+` as `%2B`, because a literal `+` in a query string is read as a space. Only accepted when `object_type` is `contact`. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Restricts the response to the given associated object types. Repeat the parameter to request several types, for example `?type=contact&type=garage`. Maximum 5 types per call. Associations of every type are returned when omitted.
+
+        offset : typing.Optional[int]
+            Number of records to skip before the first record of the page. Defaults to 0. Increase by 20 to fetch the next page.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAssociatedRecordsResponse
+            A page of records associated with the source record.
+
+        Examples
+        --------
+        from brevo import Brevo
+
+        client = Brevo(
+            api_key="YOUR_API_KEY",
+        )
+        client.custom_objects.get_associated_records(
+            object_type="vehicle",
+            id=16789,
+            ext_id="507f1f77bc",
+            email="jane.doe@example.com",
+            sms="33612345678",
+            offset=0,
+        )
+        """
+        _response = self._raw_client.get_associated_records(
+            object_type,
+            id=id,
+            ext_id=ext_id,
+            email=email,
+            sms=sms,
+            type=type,
+            offset=offset,
+            request_options=request_options,
         )
         return _response.data
 
@@ -555,5 +651,108 @@ class AsyncCustomObjectsClient:
         """
         _response = await self._raw_client.batch_delete_object_records(
             object_type, identifiers=identifiers, request_options=request_options
+        )
+        return _response.data
+
+    async def get_associated_records(
+        self,
+        object_type: str,
+        *,
+        id: typing.Optional[int] = None,
+        ext_id: typing.Optional[str] = None,
+        email: typing.Optional[str] = None,
+        sms: typing.Optional[str] = None,
+        type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        offset: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetAssociatedRecordsResponse:
+        """
+        <Note title="Enterprise access only">Custom objects are only available to Enterprise plans.
+        This feature is in beta. These are subject to change.</Note>
+        Returns the records associated with a single source record. Associations of every type are returned together in one paginated list, ordered by association creation time with the most recently created association first.
+
+        **Identifying the source record**
+        Provide exactly one of `id`, `ext_id`, `email` or `sms`. Passing none of them, or more than one, returns `400`. `email` and `sms` are only accepted when `object_type` is `contact`; using either with any other object type returns `400`.
+
+        **Object types**
+        Use the object type exactly as it is defined in your account, for example `vehicle` for a custom object of that name, or `contact` for contacts. An object type that does not exist in your account returns `400`.
+
+        **Filtering by associated object type**
+        Use `type` to restrict the response to one or more associated object types, for example `?type=contact&type=garage`. Up to 5 types can be requested per call; more returns `400`. When `type` is omitted, associations of every type are returned.
+
+        **Pagination**
+        Results are returned 20 per page. The page size is fixed and cannot be changed. Increase `offset` by 20 to walk through the pages until `has_more` is `false`. An `offset` beyond the last record returns an empty `items` array with `has_more` set to `false`.
+
+        **Working with contacts**
+        - `contact` is supported both as the source `object_type` and as an associated object type.
+        - An `id`, `ext_id`, `email` or `sms` that matches no contact returns `404`.
+        - If several contacts share the same `ext_id`, `email` or `sms`, identify the contact by `id` to be sure of which one is used.
+        - Contacts returned in `items` carry all of the contact's attributes, with attribute keys in lowercase — `email`, `first_name`, `last_name`, `sms`, `ext_id`, and any other contact attribute lowercased.
+        - For contacts, `ext_id`, `created_at` and `updated_at` are not returned on `object`. A contact's external ID is available as `attributes.ext_id` when it is set.
+
+        Parameters
+        ----------
+        object_type : str
+            Object type of the source record, exactly as defined in your account. Accepts any object type defined in the account, for example a custom object type or `contact`.
+
+        id : typing.Optional[int]
+            Internal Brevo ID of the source record. Must be a positive integer. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        ext_id : typing.Optional[str]
+            External ID of the source record in your system. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        email : typing.Optional[str]
+            Email address of the source contact. Only accepted when `object_type` is `contact`. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        sms : typing.Optional[str]
+            Phone number of the source contact, including the country code. It may be given with or without a leading `+`; percent-encode the `+` as `%2B`, because a literal `+` in a query string is read as a space. Only accepted when `object_type` is `contact`. Provide exactly one of `id`, `ext_id`, `email` or `sms`.
+
+        type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            Restricts the response to the given associated object types. Repeat the parameter to request several types, for example `?type=contact&type=garage`. Maximum 5 types per call. Associations of every type are returned when omitted.
+
+        offset : typing.Optional[int]
+            Number of records to skip before the first record of the page. Defaults to 0. Increase by 20 to fetch the next page.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAssociatedRecordsResponse
+            A page of records associated with the source record.
+
+        Examples
+        --------
+        import asyncio
+
+        from brevo import AsyncBrevo
+
+        client = AsyncBrevo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.custom_objects.get_associated_records(
+                object_type="vehicle",
+                id=16789,
+                ext_id="507f1f77bc",
+                email="jane.doe@example.com",
+                sms="33612345678",
+                offset=0,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_associated_records(
+            object_type,
+            id=id,
+            ext_id=ext_id,
+            email=email,
+            sms=sms,
+            type=type,
+            offset=offset,
+            request_options=request_options,
         )
         return _response.data

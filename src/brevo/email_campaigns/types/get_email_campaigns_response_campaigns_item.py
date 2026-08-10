@@ -243,6 +243,14 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
             description="The utm_campaign value associated with the campaign. Only present if a UTM campaign value was set.",
         ),
     ] = None
+    utm_content: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="utmContent"),
+        pydantic.Field(
+            alias="utmContent",
+            description="The utm_content value associated with the campaign. Only present if a utm_content value was set on create or update.",
+        ),
+    ] = None
     utm_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="utmID"),
@@ -263,6 +271,14 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="utmSource"),
         pydantic.Field(
             alias="utmSource", description='The utm_source value. Set to "Brevo" when UTM campaign tracking is enabled.'
+        ),
+    ] = None
+    utm_term: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="utmTerm"),
+        pydantic.Field(
+            alias="utmTerm",
+            description="The utm_term value associated with the campaign. Only present if a utm_term value was set on create or update.",
         ),
     ] = None
     recipients: GetCampaignRecipients
