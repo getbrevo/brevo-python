@@ -167,6 +167,9 @@ class EmailCampaignsClient:
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -272,6 +275,15 @@ class EmailCampaignsClient:
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
         winner_criteria : typing.Optional[CreateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -332,6 +344,9 @@ class EmailCampaignsClient:
             utm_campaign=utm_campaign,
             utm_content=utm_content,
             utm_term=utm_term,
+            utm_source=utm_source,
+            utm_medium=utm_medium,
+            utm_id=utm_id,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -465,6 +480,9 @@ class EmailCampaignsClient:
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -573,6 +591,15 @@ class EmailCampaignsClient:
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
         winner_criteria : typing.Optional[UpdateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -631,6 +658,9 @@ class EmailCampaignsClient:
             utm_campaign=utm_campaign,
             utm_content=utm_content,
             utm_term=utm_term,
+            utm_source=utm_source,
+            utm_medium=utm_medium,
+            utm_id=utm_id,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -1083,6 +1113,9 @@ class AsyncEmailCampaignsClient:
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1188,6 +1221,15 @@ class AsyncEmailCampaignsClient:
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
         winner_criteria : typing.Optional[CreateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -1256,6 +1298,9 @@ class AsyncEmailCampaignsClient:
             utm_campaign=utm_campaign,
             utm_content=utm_content,
             utm_term=utm_term,
+            utm_source=utm_source,
+            utm_medium=utm_medium,
+            utm_id=utm_id,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,
@@ -1405,6 +1450,9 @@ class AsyncEmailCampaignsClient:
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1513,6 +1561,15 @@ class AsyncEmailCampaignsClient:
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
         winner_criteria : typing.Optional[UpdateEmailCampaignRequestWinnerCriteria]
             Choose the metrics that will determinate the winning version. **Mandatory if _splitRule_ >= 1 and < 50**. If splitRule = 50, `winnerCriteria` is ignored if passed
 
@@ -1579,6 +1636,9 @@ class AsyncEmailCampaignsClient:
             utm_campaign=utm_campaign,
             utm_content=utm_content,
             utm_term=utm_term,
+            utm_source=utm_source,
+            utm_medium=utm_medium,
+            utm_id=utm_id,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
             request_options=request_options,

@@ -258,6 +258,14 @@ class GetExtendedCampaignOverview(UncheckedBaseModel):
             description="The campaign ID used as utm_id parameter. Only present if UTM campaign tracking with ID is enabled.",
         ),
     ] = None
+    utm_id_string: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="utmId"),
+        pydantic.Field(
+            alias="utmId",
+            description="The utm_id value applied to the campaign's tracking links, returned verbatim as a string. Falls back to your account's global UTM settings when no custom value was set on the campaign. Only returned when UTM tracking is enabled on the campaign and a value is set at one of these levels. Preferred field for new consumers — covers both numeric IDs and customer-supplied non-numeric strings.",
+        ),
+    ] = None
     utm_medium: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="utmMedium"),
