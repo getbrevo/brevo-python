@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -79,6 +79,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/group",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "groupName": group_name,
@@ -146,7 +147,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/unlink/{jsonable_encoder(group_id)}/subAccounts",
+            f"corporate/group/unlink/{encode_path_param(group_id)}/subAccounts",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "subAccountIds": sub_account_ids,
@@ -201,7 +203,8 @@ class RawMasterAccountClient:
             Group details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -265,7 +268,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "groupName": group_name,
@@ -320,7 +324,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -365,6 +370,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/groups",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -435,6 +441,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/invited/users",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "type": type,
@@ -492,6 +499,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/ip",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -543,6 +551,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/masterAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -600,6 +609,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/ssoToken",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "email": email,
@@ -676,6 +686,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "offset": offset,
@@ -753,6 +764,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "companyName": company_name,
@@ -822,6 +834,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ip/associate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "ids": ids,
@@ -887,6 +900,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ip/dissociate",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "ids": ids,
@@ -945,6 +959,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount/key",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "id": id,
@@ -1034,6 +1049,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ssoToken",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "email": email,
@@ -1108,7 +1124,8 @@ class RawMasterAccountClient:
             Sub-account organization details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1161,7 +1178,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1203,6 +1221,7 @@ class RawMasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -1226,6 +1245,11 @@ class RawMasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -1284,9 +1308,11 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/applications/toggle",
+            f"corporate/subAccount/{encode_path_param(id)}/applications/toggle",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
+                "analytics": analytics,
                 "automation": automation,
                 "conversations": conversations,
                 "crm": crm,
@@ -1374,7 +1400,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/plan",
+            f"corporate/subAccount/{encode_path_param(id)}/plan",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -1458,6 +1485,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/subAccounts/plan",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -1568,6 +1596,7 @@ class RawMasterAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "corporate/user/invitation/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -1644,7 +1673,8 @@ class RawMasterAccountClient:
             Response of the action performed
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"corporate/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -1698,7 +1728,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/revoke/{jsonable_encoder(email)}",
+            f"corporate/user/revoke/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1745,7 +1776,8 @@ class RawMasterAccountClient:
             List of user's permissions
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1809,7 +1841,8 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "all_features_access": all_features_access,
@@ -1881,6 +1914,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/group",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "groupName": group_name,
@@ -1948,7 +1982,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/unlink/{jsonable_encoder(group_id)}/subAccounts",
+            f"corporate/group/unlink/{encode_path_param(group_id)}/subAccounts",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "subAccountIds": sub_account_ids,
@@ -2003,7 +2038,8 @@ class AsyncRawMasterAccountClient:
             Group details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2067,7 +2103,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "groupName": group_name,
@@ -2124,7 +2161,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -2169,6 +2207,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/groups",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2239,6 +2278,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/invited/users",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "type": type,
@@ -2296,6 +2336,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/ip",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2347,6 +2388,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/masterAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2404,6 +2446,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/ssoToken",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "email": email,
@@ -2480,6 +2523,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "offset": offset,
@@ -2557,6 +2601,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "companyName": company_name,
@@ -2626,6 +2671,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ip/associate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "ids": ids,
@@ -2691,6 +2737,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ip/dissociate",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "ids": ids,
@@ -2749,6 +2796,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount/key",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "id": id,
@@ -2838,6 +2886,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccount/ssoToken",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "email": email,
@@ -2912,7 +2961,8 @@ class AsyncRawMasterAccountClient:
             Sub-account organization details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2965,7 +3015,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -3007,6 +3058,7 @@ class AsyncRawMasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -3030,6 +3082,11 @@ class AsyncRawMasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -3088,9 +3145,11 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/applications/toggle",
+            f"corporate/subAccount/{encode_path_param(id)}/applications/toggle",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
+                "analytics": analytics,
                 "automation": automation,
                 "conversations": conversations,
                 "crm": crm,
@@ -3178,7 +3237,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/plan",
+            f"corporate/subAccount/{encode_path_param(id)}/plan",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -3262,6 +3322,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/subAccounts/plan",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -3372,6 +3433,7 @@ class AsyncRawMasterAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "corporate/user/invitation/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -3448,7 +3510,8 @@ class AsyncRawMasterAccountClient:
             Response of the action performed
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"corporate/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -3502,7 +3565,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/revoke/{jsonable_encoder(email)}",
+            f"corporate/user/revoke/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -3549,7 +3613,8 @@ class AsyncRawMasterAccountClient:
             List of user's permissions
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -3613,7 +3678,8 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "all_features_access": all_features_access,

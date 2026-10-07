@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -77,6 +77,7 @@ class RawProcessClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "processes",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -153,7 +154,8 @@ class RawProcessClient:
             Process information retrieved successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"processes/{jsonable_encoder(process_id)}",
+            f"processes/{encode_path_param(process_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -258,6 +260,7 @@ class AsyncRawProcessClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "processes",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -334,7 +337,8 @@ class AsyncRawProcessClient:
             Process information retrieved successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"processes/{jsonable_encoder(process_id)}",
+            f"processes/{encode_path_param(process_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )

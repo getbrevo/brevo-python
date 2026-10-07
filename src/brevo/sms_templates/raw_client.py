@@ -49,6 +49,7 @@ class RawSmsTemplatesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -122,6 +123,7 @@ class AsyncRawSmsTemplatesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,

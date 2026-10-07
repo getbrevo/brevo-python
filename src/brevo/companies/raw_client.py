@@ -8,7 +8,7 @@ from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param, jsonable_encoder
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -92,6 +92,7 @@ class RawCompaniesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "filters[attributes.name]": filters_attributes_name,
@@ -176,6 +177,7 @@ class RawCompaniesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributes": attributes,
@@ -253,9 +255,10 @@ class RawCompaniesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "companies/import",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -331,7 +334,8 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/link-unlink/{jsonable_encoder(id)}",
+            f"companies/link-unlink/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "linkContactIds": link_contact_ids,
@@ -388,7 +392,8 @@ class RawCompaniesClient:
             Returns the Company
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -452,7 +457,8 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -532,7 +538,8 @@ class RawCompaniesClient:
             Company updated successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -628,6 +635,7 @@ class RawCompaniesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/attributes",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributeType": attribute_type,
@@ -691,7 +699,8 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -763,7 +772,8 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "label": label,
@@ -832,6 +842,7 @@ class RawCompaniesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/attributes/companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -926,6 +937,7 @@ class AsyncRawCompaniesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "filters[attributes.name]": filters_attributes_name,
@@ -1010,6 +1022,7 @@ class AsyncRawCompaniesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributes": attributes,
@@ -1087,9 +1100,10 @@ class AsyncRawCompaniesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "companies/import",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -1165,7 +1179,8 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/link-unlink/{jsonable_encoder(id)}",
+            f"companies/link-unlink/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "linkContactIds": link_contact_ids,
@@ -1222,7 +1237,8 @@ class AsyncRawCompaniesClient:
             Returns the Company
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1286,7 +1302,8 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1366,7 +1383,8 @@ class AsyncRawCompaniesClient:
             Company updated successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -1462,6 +1480,7 @@ class AsyncRawCompaniesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/attributes",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributeType": attribute_type,
@@ -1525,7 +1544,8 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1597,7 +1617,8 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "label": label,
@@ -1666,6 +1687,7 @@ class AsyncRawCompaniesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/attributes/companies",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )

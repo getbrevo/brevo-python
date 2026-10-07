@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import os
 import typing
 
 import httpx
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.logging import LogConfig, Logger
+from .core.oauth_token_provider import AsyncOAuthTokenProvider, OAuthTokenProvider
 from .environment import BrevoEnvironment
 
 if typing.TYPE_CHECKING:
@@ -28,6 +30,7 @@ if typing.TYPE_CHECKING:
     from .inbound_parsing.client import AsyncInboundParsingClient, InboundParsingClient
     from .master_account.client import AsyncMasterAccountClient, MasterAccountClient
     from .notes.client import AsyncNotesClient, NotesClient
+    from .o_auth.client import AsyncOAuthClient, OAuthClient
     from .payments.client import AsyncPaymentsClient, PaymentsClient
     from .process.client import AsyncProcessClient, ProcessClient
     from .program.client import AsyncProgramClient, ProgramClient
@@ -52,24 +55,18 @@ class Brevo:
 
     Parameters
     ----------
-    base_url : typing.Optional[str]
-        The base url to use for requests from the client.
 
-    environment : BrevoEnvironment
-        The environment to use for requests from the client. from .environment import BrevoEnvironment
+    client_id : str
+        The client identifier used for authentication.
 
-
-
-        Defaults to BrevoEnvironment.DEFAULT
-
-
-
-    api_key : str
-    headers : typing.Optional[typing.Dict[str, str]]
-        Additional headers to send with every request.
+    client_secret : str
+        The client secret used for authentication.
 
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
 
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
@@ -77,26 +74,83 @@ class Brevo:
     httpx_client : typing.Optional[httpx.Client]
         The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
 
-    logging : typing.Optional[typing.Union[LogConfig, Logger]]
-        Configure logging for the SDK. Accepts a LogConfig dict with 'level' (debug/info/warn/error), 'logger' (custom logger implementation), and 'silent' (boolean, defaults to True) fields. You can also pass a pre-configured Logger instance.
+    # or ...
+
+    token : typing.Callable[[], str]
+        Authenticate by providing a callable that returns a pre-generated bearer token. In this mode, OAuth client credentials are not required.
+
+    timeout : typing.Optional[float]
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
+    follow_redirects : typing.Optional[bool]
+        Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
+
+    httpx_client : typing.Optional[httpx.Client]
+        The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
 
     Examples
     --------
     from brevo import Brevo
 
     client = Brevo(
-        api_key="YOUR_API_KEY",
+        client_id="YOUR_CLIENT_ID",
+        client_secret="YOUR_CLIENT_SECRET",
+    )
+
+    # or ...
+
+    from brevo import Brevo
+
+    client = Brevo(
+        base_url="https://yourhost.com/path/to/api",
+        token="YOUR_BEARER_TOKEN",
     )
     """
 
+    @typing.overload
     def __init__(
         self,
         *,
-        base_url: typing.Optional[str] = None,
         environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.Client] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+        client_id: typing.Optional[str] = os.getenv("BREVO_CLIENT_ID"),
+        client_secret: typing.Optional[str] = os.getenv("BREVO_CLIENT_SECRET"),
+    ): ...
+    @typing.overload
+    def __init__(
+        self,
+        *,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
+        api_key: typing.Optional[str] = None,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.Client] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+        token: typing.Callable[[], str],
+    ): ...
+    def __init__(
+        self,
+        *,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
+        api_key: typing.Optional[str] = None,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        client_id: typing.Optional[str] = os.getenv("BREVO_CLIENT_ID"),
+        client_secret: typing.Optional[str] = os.getenv("BREVO_CLIENT_SECRET"),
+        token: typing.Optional[typing.Callable[[], str]] = None,
+        _token_getter_override: typing.Optional[typing.Callable[[], str]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
@@ -104,18 +158,68 @@ class Brevo:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
-        self._client_wrapper = SyncClientWrapper(
-            base_url=_get_base_url(base_url=base_url, environment=environment),
-            api_key=api_key,
-            headers=headers,
-            httpx_client=httpx_client
-            if httpx_client is not None
-            else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
-            if follow_redirects is not None
-            else httpx.Client(timeout=_defaulted_timeout),
-            timeout=_defaulted_timeout,
-            logging=logging,
-        )
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
+        if token is not None:
+            self._client_wrapper = SyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+                if follow_redirects is not None
+                else httpx.Client(timeout=_defaulted_timeout),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+                token=_token_getter_override if _token_getter_override is not None else token,
+            )
+        elif client_id is not None and client_secret is not None:
+            oauth_token_provider = OAuthTokenProvider(
+                client_id=client_id,
+                client_secret=client_secret,
+                client_wrapper=SyncClientWrapper(
+                    environment=environment,
+                    api_key=api_key,
+                    headers=headers,
+                    httpx_client=httpx_client
+                    if httpx_client is not None
+                    else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+                    if follow_redirects is not None
+                    else httpx.Client(timeout=_defaulted_timeout),
+                    timeout=_defaulted_timeout,
+                    max_retries=_defaulted_max_retries,
+                    logging=logging,
+                ),
+            )
+            self._client_wrapper = SyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                token=_token_getter_override if _token_getter_override is not None else oauth_token_provider.get_token,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+                if follow_redirects is not None
+                else httpx.Client(timeout=_defaulted_timeout),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+            )
+        else:
+            self._client_wrapper = SyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+                if follow_redirects is not None
+                else httpx.Client(timeout=_defaulted_timeout),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+            )
         self._account: typing.Optional[AccountClient] = None
         self._master_account: typing.Optional[MasterAccountClient] = None
         self._user: typing.Optional[UserClient] = None
@@ -150,6 +254,7 @@ class Brevo:
         self._transactional_emails: typing.Optional[TransactionalEmailsClient] = None
         self._transactional_sms: typing.Optional[TransactionalSmsClient] = None
         self._sms_templates: typing.Optional[SmsTemplatesClient] = None
+        self._o_auth: typing.Optional[OAuthClient] = None
 
     @property
     def account(self):
@@ -423,6 +528,32 @@ class Brevo:
             self._sms_templates = SmsTemplatesClient(client_wrapper=self._client_wrapper)
         return self._sms_templates
 
+    @property
+    def o_auth(self):
+        if self._o_auth is None:
+            from .o_auth.client import OAuthClient  # noqa: E402
+
+            self._o_auth = OAuthClient(client_wrapper=self._client_wrapper)
+        return self._o_auth
+
+
+def _make_default_async_client(
+    timeout: typing.Optional[float],
+    follow_redirects: typing.Optional[bool],
+) -> httpx.AsyncClient:
+    try:
+        import httpx_aiohttp  # type: ignore[import-not-found]
+    except ImportError:
+        pass
+    else:
+        if follow_redirects is not None:
+            return httpx_aiohttp.HttpxAiohttpClient(timeout=timeout, follow_redirects=follow_redirects)
+        return httpx_aiohttp.HttpxAiohttpClient(timeout=timeout)
+
+    if follow_redirects is not None:
+        return httpx.AsyncClient(timeout=timeout, follow_redirects=follow_redirects)
+    return httpx.AsyncClient(timeout=timeout)
+
 
 class AsyncBrevo:
     """
@@ -430,24 +561,18 @@ class AsyncBrevo:
 
     Parameters
     ----------
-    base_url : typing.Optional[str]
-        The base url to use for requests from the client.
 
-    environment : BrevoEnvironment
-        The environment to use for requests from the client. from .environment import BrevoEnvironment
+    client_id : str
+        The client identifier used for authentication.
 
-
-
-        Defaults to BrevoEnvironment.DEFAULT
-
-
-
-    api_key : str
-    headers : typing.Optional[typing.Dict[str, str]]
-        Additional headers to send with every request.
+    client_secret : str
+        The client secret used for authentication.
 
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
 
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
@@ -455,26 +580,83 @@ class AsyncBrevo:
     httpx_client : typing.Optional[httpx.AsyncClient]
         The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
 
-    logging : typing.Optional[typing.Union[LogConfig, Logger]]
-        Configure logging for the SDK. Accepts a LogConfig dict with 'level' (debug/info/warn/error), 'logger' (custom logger implementation), and 'silent' (boolean, defaults to True) fields. You can also pass a pre-configured Logger instance.
+    # or ...
+
+    token : typing.Callable[[], str]
+        Authenticate by providing a callable that returns a pre-generated bearer token. In this mode, OAuth client credentials are not required.
+
+    timeout : typing.Optional[float]
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
+    follow_redirects : typing.Optional[bool]
+        Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
+
+    httpx_client : typing.Optional[httpx.AsyncClient]
+        The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
 
     Examples
     --------
     from brevo import AsyncBrevo
 
     client = AsyncBrevo(
-        api_key="YOUR_API_KEY",
+        client_id="YOUR_CLIENT_ID",
+        client_secret="YOUR_CLIENT_SECRET",
+    )
+
+    # or ...
+
+    from brevo import AsyncBrevo
+
+    client = AsyncBrevo(
+        base_url="https://yourhost.com/path/to/api",
+        token="YOUR_BEARER_TOKEN",
     )
     """
 
+    @typing.overload
     def __init__(
         self,
         *,
-        base_url: typing.Optional[str] = None,
         environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.AsyncClient] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+        client_id: typing.Optional[str] = os.getenv("BREVO_CLIENT_ID"),
+        client_secret: typing.Optional[str] = os.getenv("BREVO_CLIENT_SECRET"),
+    ): ...
+    @typing.overload
+    def __init__(
+        self,
+        *,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
+        api_key: typing.Optional[str] = None,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.AsyncClient] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+        token: typing.Callable[[], str],
+    ): ...
+    def __init__(
+        self,
+        *,
+        environment: BrevoEnvironment = BrevoEnvironment.DEFAULT,
+        api_key: typing.Optional[str] = None,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        client_id: typing.Optional[str] = os.getenv("BREVO_CLIENT_ID"),
+        client_secret: typing.Optional[str] = os.getenv("BREVO_CLIENT_SECRET"),
+        token: typing.Optional[typing.Callable[[], str]] = None,
+        _token_getter_override: typing.Optional[typing.Callable[[], str]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
@@ -482,18 +664,63 @@ class AsyncBrevo:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
-        self._client_wrapper = AsyncClientWrapper(
-            base_url=_get_base_url(base_url=base_url, environment=environment),
-            api_key=api_key,
-            headers=headers,
-            httpx_client=httpx_client
-            if httpx_client is not None
-            else httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
-            if follow_redirects is not None
-            else httpx.AsyncClient(timeout=_defaulted_timeout),
-            timeout=_defaulted_timeout,
-            logging=logging,
-        )
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
+        if token is not None:
+            self._client_wrapper = AsyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+                token=_token_getter_override if _token_getter_override is not None else token,
+            )
+        elif client_id is not None and client_secret is not None:
+            oauth_token_provider = AsyncOAuthTokenProvider(
+                client_id=client_id,
+                client_secret=client_secret,
+                client_wrapper=AsyncClientWrapper(
+                    environment=environment,
+                    api_key=api_key,
+                    headers=headers,
+                    httpx_client=httpx_client
+                    if httpx_client is not None
+                    else httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+                    if follow_redirects is not None
+                    else httpx.AsyncClient(timeout=_defaulted_timeout),
+                    timeout=_defaulted_timeout,
+                    max_retries=_defaulted_max_retries,
+                    logging=logging,
+                ),
+            )
+            self._client_wrapper = AsyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                token=_token_getter_override,
+                async_token=oauth_token_provider.get_token,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+            )
+        else:
+            self._client_wrapper = AsyncClientWrapper(
+                environment=environment,
+                api_key=api_key,
+                headers=headers,
+                httpx_client=httpx_client
+                if httpx_client is not None
+                else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
+                timeout=_defaulted_timeout,
+                max_retries=_defaulted_max_retries,
+                logging=logging,
+            )
         self._account: typing.Optional[AsyncAccountClient] = None
         self._master_account: typing.Optional[AsyncMasterAccountClient] = None
         self._user: typing.Optional[AsyncUserClient] = None
@@ -528,6 +755,7 @@ class AsyncBrevo:
         self._transactional_emails: typing.Optional[AsyncTransactionalEmailsClient] = None
         self._transactional_sms: typing.Optional[AsyncTransactionalSmsClient] = None
         self._sms_templates: typing.Optional[AsyncSmsTemplatesClient] = None
+        self._o_auth: typing.Optional[AsyncOAuthClient] = None
 
     @property
     def account(self):
@@ -801,11 +1029,10 @@ class AsyncBrevo:
             self._sms_templates = AsyncSmsTemplatesClient(client_wrapper=self._client_wrapper)
         return self._sms_templates
 
+    @property
+    def o_auth(self):
+        if self._o_auth is None:
+            from .o_auth.client import AsyncOAuthClient  # noqa: E402
 
-def _get_base_url(*, base_url: typing.Optional[str] = None, environment: BrevoEnvironment) -> str:
-    if base_url is not None:
-        return base_url
-    elif environment is not None:
-        return environment.value
-    else:
-        raise Exception("Please pass in either base_url or environment to construct the client")
+            self._o_auth = AsyncOAuthClient(client_wrapper=self._client_wrapper)
+        return self._o_auth

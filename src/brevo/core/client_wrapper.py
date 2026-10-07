@@ -3,6 +3,7 @@
 import typing
 
 import httpx
+from ..environment import BrevoEnvironment
 from .http_client import AsyncHttpClient, HttpClient
 from .logging import LogConfig, Logger
 
@@ -11,60 +12,87 @@ class BaseClientWrapper:
     def __init__(
         self,
         *,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
+        token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
-        base_url: str,
+        environment: BrevoEnvironment,
         timeout: typing.Optional[float] = None,
+        max_retries: int = 2,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
     ):
         self.api_key = api_key
+        self._token = token
         self._headers = headers
-        self._base_url = base_url
+        self._environment = environment
         self._timeout = timeout
+        self._max_retries = max_retries
         self._logging = logging
 
     def get_headers(self) -> typing.Dict[str, str]:
         import platform
 
         headers: typing.Dict[str, str] = {
-            "User-Agent": "brevo-python/5.0.2",
+            "User-Agent": "brevo-python/5.0.3",
             "X-Fern-Language": "Python",
             "X-Fern-Runtime": f"python/{platform.python_version()}",
             "X-Fern-Platform": f"{platform.system().lower()}/{platform.release()}",
             "X-Fern-SDK-Name": "brevo-python",
-            "X-Fern-SDK-Version": "5.0.2",
+            "X-Fern-SDK-Version": "5.0.3",
             **(self.get_custom_headers() or {}),
         }
-        headers["api-key"] = self.api_key
+        if self.api_key is not None:
+            headers["api-key"] = self.api_key
+        token = self._get_token()
+        if token is not None:
+            headers["Authorization"] = f"Bearer {token}"
         return headers
+
+    def _get_token(self) -> typing.Optional[str]:
+        if isinstance(self._token, str) or self._token is None:
+            return self._token
+        else:
+            return self._token()
 
     def get_custom_headers(self) -> typing.Optional[typing.Dict[str, str]]:
         return self._headers
 
-    def get_base_url(self) -> str:
-        return self._base_url
+    def get_environment(self) -> BrevoEnvironment:
+        return self._environment
 
     def get_timeout(self) -> typing.Optional[float]:
         return self._timeout
+
+    def get_max_retries(self) -> int:
+        return self._max_retries
 
 
 class SyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
+        token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
-        base_url: str,
+        environment: BrevoEnvironment,
         timeout: typing.Optional[float] = None,
+        max_retries: int = 2,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
         httpx_client: httpx.Client,
     ):
-        super().__init__(api_key=api_key, headers=headers, base_url=base_url, timeout=timeout, logging=logging)
+        super().__init__(
+            api_key=api_key,
+            token=token,
+            headers=headers,
+            environment=environment,
+            timeout=timeout,
+            max_retries=max_retries,
+            logging=logging,
+        )
         self.httpx_client = HttpClient(
             httpx_client=httpx_client,
             base_headers=self.get_headers,
             base_timeout=self.get_timeout,
-            base_url=self.get_base_url,
+            base_max_retries=self.get_max_retries(),
             logging_config=self._logging,
         )
 
@@ -73,21 +101,31 @@ class AsyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
+        token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
-        base_url: str,
+        environment: BrevoEnvironment,
         timeout: typing.Optional[float] = None,
+        max_retries: int = 2,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
         async_token: typing.Optional[typing.Callable[[], typing.Awaitable[str]]] = None,
         httpx_client: httpx.AsyncClient,
     ):
-        super().__init__(api_key=api_key, headers=headers, base_url=base_url, timeout=timeout, logging=logging)
+        super().__init__(
+            api_key=api_key,
+            token=token,
+            headers=headers,
+            environment=environment,
+            timeout=timeout,
+            max_retries=max_retries,
+            logging=logging,
+        )
         self._async_token = async_token
         self.httpx_client = AsyncHttpClient(
             httpx_client=httpx_client,
             base_headers=self.get_headers,
             base_timeout=self.get_timeout,
-            base_url=self.get_base_url,
+            base_max_retries=self.get_max_retries(),
             async_base_headers=self.async_get_headers,
             logging_config=self._logging,
         )

@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -81,6 +81,7 @@ class RawWebhooksClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "webhooks",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "type": type,
@@ -195,6 +196,7 @@ class RawWebhooksClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "webhooks",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "auth": convert_and_respect_annotation_metadata(
@@ -320,6 +322,7 @@ class RawWebhooksClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "webhooks/export",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "days": days,
@@ -403,7 +406,8 @@ class RawWebhooksClient:
             Webhook informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -516,7 +520,8 @@ class RawWebhooksClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "auth": convert_and_respect_annotation_metadata(
@@ -599,7 +604,8 @@ class RawWebhooksClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -684,6 +690,7 @@ class AsyncRawWebhooksClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "webhooks",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "type": type,
@@ -798,6 +805,7 @@ class AsyncRawWebhooksClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "webhooks",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "auth": convert_and_respect_annotation_metadata(
@@ -923,6 +931,7 @@ class AsyncRawWebhooksClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "webhooks/export",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "days": days,
@@ -1006,7 +1015,8 @@ class AsyncRawWebhooksClient:
             Webhook informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1119,7 +1129,8 @@ class AsyncRawWebhooksClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "auth": convert_and_respect_annotation_metadata(
@@ -1202,7 +1213,8 @@ class AsyncRawWebhooksClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"webhooks/{jsonable_encoder(webhook_id)}",
+            f"webhooks/{encode_path_param(webhook_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )

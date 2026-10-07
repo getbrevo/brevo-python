@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -107,7 +107,8 @@ class RawCustomObjectsClient:
             Batch request accepted for processing of upsert object records.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/batch/upsert",
+            f"objects/{encode_path_param(object_type)}/batch/upsert",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "records": convert_and_respect_annotation_metadata(
@@ -224,7 +225,8 @@ class RawCustomObjectsClient:
             A list of object records for an object type. If association param is set true it will return 5 associated records per association for an object type.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/records",
+            f"objects/{encode_path_param(object_type)}/records",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -326,7 +328,8 @@ class RawCustomObjectsClient:
             Batch request accepted for deletion - process started
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/batch/delete",
+            f"objects/{encode_path_param(object_type)}/batch/delete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "identifiers": convert_and_respect_annotation_metadata(
@@ -459,7 +462,8 @@ class RawCustomObjectsClient:
             A page of records associated with the source record.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/associated-records",
+            f"objects/{encode_path_param(object_type)}/associated-records",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "id": id,
@@ -601,7 +605,8 @@ class AsyncRawCustomObjectsClient:
             Batch request accepted for processing of upsert object records.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/batch/upsert",
+            f"objects/{encode_path_param(object_type)}/batch/upsert",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "records": convert_and_respect_annotation_metadata(
@@ -718,7 +723,8 @@ class AsyncRawCustomObjectsClient:
             A list of object records for an object type. If association param is set true it will return 5 associated records per association for an object type.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/records",
+            f"objects/{encode_path_param(object_type)}/records",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -820,7 +826,8 @@ class AsyncRawCustomObjectsClient:
             Batch request accepted for deletion - process started
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/batch/delete",
+            f"objects/{encode_path_param(object_type)}/batch/delete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "identifiers": convert_and_respect_annotation_metadata(
@@ -953,7 +960,8 @@ class AsyncRawCustomObjectsClient:
             A page of records associated with the source record.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"objects/{jsonable_encoder(object_type)}/associated-records",
+            f"objects/{encode_path_param(object_type)}/associated-records",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "id": id,

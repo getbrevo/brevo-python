@@ -113,7 +113,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.get_email_campaigns()
         """
@@ -166,6 +167,9 @@ class EmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -269,6 +273,15 @@ class EmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -292,7 +305,8 @@ class EmailCampaignsClient:
         from brevo.email_campaigns import CreateEmailCampaignRequestSender
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.create_email_campaign(
             name="Newsletter - May 2017",
@@ -331,6 +345,9 @@ class EmailCampaignsClient:
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
             utm_content=utm_content,
+            utm_id=utm_id,
+            utm_medium=utm_medium,
+            utm_source=utm_source,
             utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
@@ -354,7 +371,7 @@ class EmailCampaignsClient:
             The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
 
         name : typing.Optional[str]
-            Name of the image.
+            Name shown in your Brevo image gallery. Include the file extension, e.g. product-banner.png
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -369,7 +386,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.upload_image_to_gallery(
             image_url="https://somedomain.com/image1.jpg",
@@ -415,7 +433,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.get_email_campaign(
             campaign_id=1000000,
@@ -464,6 +483,9 @@ class EmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -570,6 +592,15 @@ class EmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -591,7 +622,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.update_email_campaign(
             campaign_id=1000000,
@@ -630,6 +662,9 @@ class EmailCampaignsClient:
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
             utm_content=utm_content,
+            utm_id=utm_id,
+            utm_medium=utm_medium,
+            utm_source=utm_source,
             utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
@@ -660,7 +695,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.delete_email_campaign(
             campaign_id=1000000,
@@ -693,7 +729,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.get_ab_test_campaign_result(
             campaign_id=1000000,
@@ -737,7 +774,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.email_export_recipients(
             campaign_id=1000000,
@@ -772,7 +810,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.send_email_campaign_now(
             campaign_id=1000000,
@@ -815,7 +854,8 @@ class EmailCampaignsClient:
         from brevo import Brevo, SendReportEmail
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.send_report(
             campaign_id=1000000,
@@ -860,7 +900,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.send_test_email(
             campaign_id=1000000,
@@ -893,7 +934,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.get_shared_template_url(
             campaign_id=1000000,
@@ -932,7 +974,8 @@ class EmailCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.email_campaigns.update_campaign_status(
             campaign_id=1000000,
@@ -1023,7 +1066,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1082,6 +1126,9 @@ class AsyncEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -1185,6 +1232,15 @@ class AsyncEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -1210,7 +1266,8 @@ class AsyncEmailCampaignsClient:
         from brevo.email_campaigns import CreateEmailCampaignRequestSender
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1255,6 +1312,9 @@ class AsyncEmailCampaignsClient:
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
             utm_content=utm_content,
+            utm_id=utm_id,
+            utm_medium=utm_medium,
+            utm_source=utm_source,
             utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
@@ -1278,7 +1338,7 @@ class AsyncEmailCampaignsClient:
             The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
 
         name : typing.Optional[str]
-            Name of the image.
+            Name shown in your Brevo image gallery. Include the file extension, e.g. product-banner.png
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1295,7 +1355,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1349,7 +1410,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1404,6 +1466,9 @@ class AsyncEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -1510,6 +1575,15 @@ class AsyncEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -1533,7 +1607,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1578,6 +1653,9 @@ class AsyncEmailCampaignsClient:
             update_form_id=update_form_id,
             utm_campaign=utm_campaign,
             utm_content=utm_content,
+            utm_id=utm_id,
+            utm_medium=utm_medium,
+            utm_source=utm_source,
             utm_term=utm_term,
             winner_criteria=winner_criteria,
             winner_delay=winner_delay,
@@ -1610,7 +1688,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1651,7 +1730,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1703,7 +1783,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1746,7 +1827,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1797,7 +1879,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo, SendReportEmail
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1850,7 +1933,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1893,7 +1977,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1940,7 +2025,8 @@ class AsyncEmailCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

@@ -60,6 +60,7 @@ class RawAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "account",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -154,6 +155,7 @@ class RawAccountClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "organization/activities",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -240,6 +242,7 @@ class AsyncRawAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "account",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -334,6 +337,7 @@ class AsyncRawAccountClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "organization/activities",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,

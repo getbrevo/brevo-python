@@ -27,6 +27,11 @@ class Transaction(UncheckedBaseModel):
     The transaction amount.
     """
 
+    balance: typing.Optional[float] = pydantic.Field(default=None)
+    """
+    The contact's total balance for this balance definition after the transaction was applied. Only returned when the transaction actually updated the balance (i.e. it was completed or auto-completed).
+    """
+
     transaction_type: typing_extensions.Annotated[
         typing.Optional[TransactionTransactionType],
         FieldMetadata(alias="transactionType"),

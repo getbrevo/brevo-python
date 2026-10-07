@@ -240,7 +240,7 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="utmCampaignValue"),
         pydantic.Field(
             alias="utmCampaignValue",
-            description="The utm_campaign value associated with the campaign. Only present if a UTM campaign value was set.",
+            description="The utm_campaign value applied to the campaign's tracking links. Falls back to your account's global UTM settings when no custom value was set on the campaign, or the campaign name if neither is configured. Only returned when UTM tracking is enabled on the campaign.",
         ),
     ] = None
     utm_content: typing_extensions.Annotated[
@@ -248,7 +248,7 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="utmContent"),
         pydantic.Field(
             alias="utmContent",
-            description="The utm_content value associated with the campaign. Only present if a utm_content value was set on create or update.",
+            description="The utm_content value applied to the campaign's tracking links. Falls back to your account's global UTM settings when no custom value was set on the campaign. Only returned when UTM tracking is enabled on the campaign and a value is set at one of these levels.",
         ),
     ] = None
     utm_id: typing_extensions.Annotated[
@@ -256,21 +256,31 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="utmID"),
         pydantic.Field(
             alias="utmID",
-            description="The campaign ID used as utm_id parameter. Only present if UTM campaign tracking with ID is enabled.",
+            description="Legacy numeric utm_id value applied to the campaign's tracking links. Present only when UTM tracking is enabled on the campaign and the resolved utm_id is numeric (typically the campaign's ID). For customer-supplied non-numeric values (for example `promo_042`), read `utmId` (string) instead. Kept for backward compatibility.",
+        ),
+    ] = None
+    utm_id_string: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="utmId"),
+        pydantic.Field(
+            alias="utmId",
+            description="The utm_id value applied to the campaign's tracking links, returned verbatim as a string. Falls back to your account's global UTM settings when no custom value was set on the campaign. Only returned when UTM tracking is enabled on the campaign and a value is set at one of these levels. Preferred field for new consumers — covers both numeric IDs and customer-supplied non-numeric strings.",
         ),
     ] = None
     utm_medium: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="utmMedium"),
         pydantic.Field(
-            alias="utmMedium", description='The utm_medium value. Set to "EMAIL" when UTM campaign tracking is enabled.'
+            alias="utmMedium",
+            description="The utm_medium value applied to the campaign's tracking links. Falls back to your account's global UTM settings when no custom value was set on the campaign, or the default `email` if neither is configured. Case is preserved verbatim. Only returned when UTM tracking is enabled on the campaign.",
         ),
     ] = None
     utm_source: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="utmSource"),
         pydantic.Field(
-            alias="utmSource", description='The utm_source value. Set to "Brevo" when UTM campaign tracking is enabled.'
+            alias="utmSource",
+            description="The utm_source value applied to the campaign's tracking links. Falls back to your account's global UTM settings when no custom value was set on the campaign, or the account default (`brevo` or `sendinblue`) if neither is configured. Case is preserved verbatim. Only returned when UTM tracking is enabled on the campaign.",
         ),
     ] = None
     utm_term: typing_extensions.Annotated[
@@ -278,7 +288,7 @@ class GetEmailCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="utmTerm"),
         pydantic.Field(
             alias="utmTerm",
-            description="The utm_term value associated with the campaign. Only present if a utm_term value was set on create or update.",
+            description="The utm_term value applied to the campaign's tracking links. Falls back to your account's global UTM settings when no custom value was set on the campaign. Only returned when UTM tracking is enabled on the campaign and a value is set at one of these levels.",
         ),
     ] = None
     recipients: GetCampaignRecipients

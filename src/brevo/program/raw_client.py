@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -72,6 +72,7 @@ class RawProgramClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "loyalty/config/programs",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -202,6 +203,7 @@ class RawProgramClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "loyalty/config/programs",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "description": description,
@@ -309,7 +311,8 @@ class RawProgramClient:
             Successfully retrieved loyalty program.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -422,7 +425,8 @@ class RawProgramClient:
             Successfully updated loyalty program.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "description": description,
@@ -539,7 +543,8 @@ class RawProgramClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -645,7 +650,8 @@ class RawProgramClient:
             Successfully updated loyalty program.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "description": description,
@@ -782,7 +788,8 @@ class RawProgramClient:
             Successfully retrieved subscription info.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/account-info",
+            f"loyalty/config/programs/{encode_path_param(pid)}/account-info",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "contactId": contact_id,
@@ -888,7 +895,8 @@ class RawProgramClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/contact/{jsonable_encoder(cid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}/contact/{encode_path_param(cid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -989,7 +997,8 @@ class RawProgramClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/publish",
+            f"loyalty/config/programs/{encode_path_param(pid)}/publish",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -1095,7 +1104,8 @@ class RawProgramClient:
             Successfully added subscription member.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscription-members",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscription-members",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactId": contact_id,
@@ -1215,7 +1225,8 @@ class RawProgramClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscription-members",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscription-members",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "memberContactIds": member_contact_ids,
@@ -1339,7 +1350,8 @@ class RawProgramClient:
             Successfully created subscription.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscriptions",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscriptions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactId": contact_id,
@@ -1479,6 +1491,7 @@ class AsyncRawProgramClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "loyalty/config/programs",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1609,6 +1622,7 @@ class AsyncRawProgramClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "loyalty/config/programs",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "description": description,
@@ -1716,7 +1730,8 @@ class AsyncRawProgramClient:
             Successfully retrieved loyalty program.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1829,7 +1844,8 @@ class AsyncRawProgramClient:
             Successfully updated loyalty program.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "description": description,
@@ -1946,7 +1962,8 @@ class AsyncRawProgramClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -2052,7 +2069,8 @@ class AsyncRawProgramClient:
             Successfully updated loyalty program.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "description": description,
@@ -2189,7 +2207,8 @@ class AsyncRawProgramClient:
             Successfully retrieved subscription info.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/account-info",
+            f"loyalty/config/programs/{encode_path_param(pid)}/account-info",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "contactId": contact_id,
@@ -2295,7 +2314,8 @@ class AsyncRawProgramClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/contact/{jsonable_encoder(cid)}",
+            f"loyalty/config/programs/{encode_path_param(pid)}/contact/{encode_path_param(cid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -2396,7 +2416,8 @@ class AsyncRawProgramClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/publish",
+            f"loyalty/config/programs/{encode_path_param(pid)}/publish",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -2502,7 +2523,8 @@ class AsyncRawProgramClient:
             Successfully added subscription member.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscription-members",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscription-members",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactId": contact_id,
@@ -2622,7 +2644,8 @@ class AsyncRawProgramClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscription-members",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscription-members",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "memberContactIds": member_contact_ids,
@@ -2746,7 +2769,8 @@ class AsyncRawProgramClient:
             Successfully created subscription.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/config/programs/{jsonable_encoder(pid)}/subscriptions",
+            f"loyalty/config/programs/{encode_path_param(pid)}/subscriptions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactId": contact_id,

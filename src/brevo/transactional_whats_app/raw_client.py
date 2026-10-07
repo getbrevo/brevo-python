@@ -48,6 +48,7 @@ class RawTransactionalWhatsAppClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsapp/sendMessage",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=SendWhatsappMessageRequest, direction="write"
@@ -137,6 +138,7 @@ class RawTransactionalWhatsAppClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsapp/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -207,6 +209,7 @@ class AsyncRawTransactionalWhatsAppClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsapp/sendMessage",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=SendWhatsappMessageRequest, direction="write"
@@ -296,6 +299,7 @@ class AsyncRawTransactionalWhatsAppClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsapp/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,

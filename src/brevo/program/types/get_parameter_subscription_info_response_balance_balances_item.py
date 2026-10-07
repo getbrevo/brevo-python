@@ -15,6 +15,11 @@ class GetParameterSubscriptionInfoResponseBalanceBalancesItem(UncheckedBaseModel
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Unique identifier for the balance definition)."),
     ] = None
+    balance_definition_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="balanceDefinitionName"),
+        pydantic.Field(alias="balanceDefinitionName", description="Name of the balance definition."),
+    ] = None
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     The amount of the balance.

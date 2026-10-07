@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -59,6 +59,7 @@ class RawConversationsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "conversations/agentOnlinePing",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentEmail": agent_email,
@@ -139,6 +140,7 @@ class RawConversationsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "conversations/messages",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentEmail": agent_email,
@@ -204,7 +206,8 @@ class RawConversationsClient:
             Requested message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -272,7 +275,8 @@ class RawConversationsClient:
             Updated message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "text": text,
@@ -343,7 +347,8 @@ class RawConversationsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -417,6 +422,7 @@ class RawConversationsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "conversations/pushedMessages",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentId": agent_id,
@@ -480,7 +486,8 @@ class RawConversationsClient:
             Requested message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -548,7 +555,8 @@ class RawConversationsClient:
             Updated message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "text": text,
@@ -619,7 +627,8 @@ class RawConversationsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -677,6 +686,7 @@ class RawConversationsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "conversations/visitorGroup",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "groupId": group_id,
@@ -768,6 +778,7 @@ class AsyncRawConversationsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "conversations/agentOnlinePing",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentEmail": agent_email,
@@ -848,6 +859,7 @@ class AsyncRawConversationsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "conversations/messages",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentEmail": agent_email,
@@ -913,7 +925,8 @@ class AsyncRawConversationsClient:
             Requested message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -981,7 +994,8 @@ class AsyncRawConversationsClient:
             Updated message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "text": text,
@@ -1052,7 +1066,8 @@ class AsyncRawConversationsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1126,6 +1141,7 @@ class AsyncRawConversationsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "conversations/pushedMessages",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "agentId": agent_id,
@@ -1189,7 +1205,8 @@ class AsyncRawConversationsClient:
             Requested message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1257,7 +1274,8 @@ class AsyncRawConversationsClient:
             Updated message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "text": text,
@@ -1328,7 +1346,8 @@ class AsyncRawConversationsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1386,6 +1405,7 @@ class AsyncRawConversationsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "conversations/visitorGroup",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "groupId": group_id,
