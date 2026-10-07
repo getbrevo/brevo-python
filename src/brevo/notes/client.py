@@ -80,7 +80,8 @@ class NotesClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.notes.get_all_notes()
         """
@@ -135,7 +136,8 @@ class NotesClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.notes.create_a_note(
             text='<p>Meeting notes: <b>Action item</b> - visit <a href="https://www.brevo.com/">Brevo</a> for details.</p>',
@@ -172,7 +174,8 @@ class NotesClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.notes.get_a_note(
             id="id",
@@ -202,7 +205,8 @@ class NotesClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.notes.delete_a_note(
             id="id",
@@ -253,7 +257,8 @@ class NotesClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.notes.update_a_note(
             id="id",
@@ -339,7 +344,8 @@ class AsyncNotesClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -402,7 +408,8 @@ class AsyncNotesClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -447,7 +454,8 @@ class AsyncNotesClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -485,7 +493,8 @@ class AsyncNotesClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -544,7 +553,8 @@ class AsyncNotesClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

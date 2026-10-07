@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -161,7 +161,8 @@ class RawBalanceClient:
             Successful retrieval of active balances
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/active-balance",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/active-balance",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -291,7 +292,8 @@ class RawBalanceClient:
             Successful retrieval of balance definition page
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -464,7 +466,8 @@ class RawBalanceClient:
             Successful creation of balance definition
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "balanceAvailabilityDurationModifier": balance_availability_duration_modifier,
@@ -599,7 +602,8 @@ class RawBalanceClient:
             Successful retrieval of balance definition
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -779,7 +783,8 @@ class RawBalanceClient:
             Successful update of balance definition
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "balanceAvailabilityDurationModifier": balance_availability_duration_modifier,
@@ -914,7 +919,8 @@ class RawBalanceClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1036,7 +1042,8 @@ class RawBalanceClient:
             Successful creation of balance limit
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "constraintType": constraint_type,
@@ -1161,7 +1168,8 @@ class RawBalanceClient:
             Successful retrieval of balance limit
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -1297,7 +1305,8 @@ class RawBalanceClient:
             Successful update of balance limit
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "constraintType": constraint_type,
@@ -1412,7 +1421,8 @@ class RawBalanceClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1530,7 +1540,8 @@ class RawBalanceClient:
             Successful retrieval of contact balance
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/contact-balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/contact-balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "includeInternal": include_internal,
@@ -1667,7 +1678,8 @@ class RawBalanceClient:
             Successful creation of order
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/create-order",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/create-order",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -1778,7 +1790,8 @@ class RawBalanceClient:
             Successful retrieval of contact balance
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/subscriptions/{jsonable_encoder(cid)}/balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/subscriptions/{encode_path_param(cid)}/balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "includeInternal": include_internal,
@@ -1885,7 +1898,8 @@ class RawBalanceClient:
             Successful creation of balance
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/subscriptions/{jsonable_encoder(cid)}/balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/subscriptions/{encode_path_param(cid)}/balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "balanceDefinitionId": balance_definition_id,
@@ -2029,7 +2043,8 @@ class RawBalanceClient:
             Successful retrieval of transaction history
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transaction-history",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transaction-history",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2181,7 +2196,8 @@ class RawBalanceClient:
             Transaction created successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -2298,7 +2314,8 @@ class RawBalanceClient:
             Transaction information
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions/{jsonable_encoder(tid)}/cancel",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions/{encode_path_param(tid)}/cancel",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -2399,7 +2416,8 @@ class RawBalanceClient:
             Transaction information
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions/{jsonable_encoder(tid)}/complete",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions/{encode_path_param(tid)}/complete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -2533,7 +2551,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of active balances
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/active-balance",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/active-balance",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2663,7 +2682,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of balance definition page
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2836,7 +2856,8 @@ class AsyncRawBalanceClient:
             Successful creation of balance definition
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "balanceAvailabilityDurationModifier": balance_availability_duration_modifier,
@@ -2971,7 +2992,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of balance definition
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -3151,7 +3173,8 @@ class AsyncRawBalanceClient:
             Successful update of balance definition
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "balanceAvailabilityDurationModifier": balance_availability_duration_modifier,
@@ -3286,7 +3309,8 @@ class AsyncRawBalanceClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -3408,7 +3432,8 @@ class AsyncRawBalanceClient:
             Successful creation of balance limit
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "constraintType": constraint_type,
@@ -3533,7 +3558,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of balance limit
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -3669,7 +3695,8 @@ class AsyncRawBalanceClient:
             Successful update of balance limit
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "constraintType": constraint_type,
@@ -3784,7 +3811,8 @@ class AsyncRawBalanceClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/balance-definitions/{jsonable_encoder(bdid)}/limits/{jsonable_encoder(blid)}",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/balance-definitions/{encode_path_param(bdid)}/limits/{encode_path_param(blid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -3902,7 +3930,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of contact balance
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/contact-balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/contact-balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "includeInternal": include_internal,
@@ -4039,7 +4068,8 @@ class AsyncRawBalanceClient:
             Successful creation of order
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/create-order",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/create-order",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -4150,7 +4180,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of contact balance
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/subscriptions/{jsonable_encoder(cid)}/balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/subscriptions/{encode_path_param(cid)}/balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "includeInternal": include_internal,
@@ -4257,7 +4288,8 @@ class AsyncRawBalanceClient:
             Successful creation of balance
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/subscriptions/{jsonable_encoder(cid)}/balances",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/subscriptions/{encode_path_param(cid)}/balances",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "balanceDefinitionId": balance_definition_id,
@@ -4401,7 +4433,8 @@ class AsyncRawBalanceClient:
             Successful retrieval of transaction history
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transaction-history",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transaction-history",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -4553,7 +4586,8 @@ class AsyncRawBalanceClient:
             Transaction created successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -4670,7 +4704,8 @@ class AsyncRawBalanceClient:
             Transaction information
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions/{jsonable_encoder(tid)}/cancel",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions/{encode_path_param(tid)}/cancel",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -4771,7 +4806,8 @@ class AsyncRawBalanceClient:
             Transaction information
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/balance/programs/{jsonable_encoder(pid)}/transactions/{jsonable_encoder(tid)}/complete",
+            f"loyalty/balance/programs/{encode_path_param(pid)}/transactions/{encode_path_param(tid)}/complete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )

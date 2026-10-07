@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -71,7 +71,8 @@ class RawRewardClient:
             Code count successfully fetched
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/code-pools/{jsonable_encoder(cpid)}/codes-count",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/code-pools/{encode_path_param(cpid)}/codes-count",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -188,7 +189,8 @@ class RawRewardClient:
             Reward list successfully retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/offers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/offers",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -322,7 +324,8 @@ class RawRewardClient:
             Reward successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/offers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/offers",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -454,7 +457,8 @@ class RawRewardClient:
             Voucher successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/attribute",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/attribute",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "code": code,
@@ -616,7 +620,8 @@ class RawRewardClient:
             Redeem request successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/redeem",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/redeem",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributedRewardId": attributed_reward_id,
@@ -767,7 +772,8 @@ class RawRewardClient:
             Voucher Redeem completed
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/redeem/{jsonable_encoder(tid)}/complete",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/redeem/{encode_path_param(tid)}/complete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -904,7 +910,8 @@ class RawRewardClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/revoke",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/revoke",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "attributedRewardIds": attributed_reward_ids,
@@ -992,7 +999,8 @@ class RawRewardClient:
             Reward successfully validated
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/validate",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/validate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributedRewardId": attributed_reward_id,
@@ -1124,7 +1132,8 @@ class RawRewardClient:
             Successful retrieval of reward data
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/{jsonable_encoder(rid)}",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/{encode_path_param(rid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -1267,7 +1276,8 @@ class RawRewardClient:
             Voucher list successfully retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/vouchers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/vouchers",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1382,7 +1392,8 @@ class AsyncRawRewardClient:
             Code count successfully fetched
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/code-pools/{jsonable_encoder(cpid)}/codes-count",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/code-pools/{encode_path_param(cpid)}/codes-count",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1499,7 +1510,8 @@ class AsyncRawRewardClient:
             Reward list successfully retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/offers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/offers",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1633,7 +1645,8 @@ class AsyncRawRewardClient:
             Reward successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/offers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/offers",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -1765,7 +1778,8 @@ class AsyncRawRewardClient:
             Voucher successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/attribute",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/attribute",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "code": code,
@@ -1927,7 +1941,8 @@ class AsyncRawRewardClient:
             Redeem request successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/redeem",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/redeem",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributedRewardId": attributed_reward_id,
@@ -2078,7 +2093,8 @@ class AsyncRawRewardClient:
             Voucher Redeem completed
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/redeem/{jsonable_encoder(tid)}/complete",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/redeem/{encode_path_param(tid)}/complete",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -2215,7 +2231,8 @@ class AsyncRawRewardClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/revoke",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/revoke",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "attributedRewardIds": attributed_reward_ids,
@@ -2303,7 +2320,8 @@ class AsyncRawRewardClient:
             Reward successfully validated
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/validate",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/validate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributedRewardId": attributed_reward_id,
@@ -2435,7 +2453,8 @@ class AsyncRawRewardClient:
             Successful retrieval of reward data
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/rewards/{jsonable_encoder(rid)}",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/rewards/{encode_path_param(rid)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "version": version,
@@ -2578,7 +2597,8 @@ class AsyncRawRewardClient:
             Voucher list successfully retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/offer/programs/{jsonable_encoder(pid)}/vouchers",
+            f"loyalty/offer/programs/{encode_path_param(pid)}/vouchers",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,

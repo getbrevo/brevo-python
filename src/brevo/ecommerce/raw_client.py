@@ -8,7 +8,7 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.datetime_utils import serialize_datetime
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -118,6 +118,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "categories",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -205,6 +206,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "categories",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "deletedAt": deleted_at,
@@ -280,6 +282,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "categories/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "categories": convert_and_respect_annotation_metadata(
@@ -345,7 +348,8 @@ class RawEcommerceClient:
             Category details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"categories/{jsonable_encoder(id)}",
+            f"categories/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -407,6 +411,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "ecommerce/activate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -449,10 +454,10 @@ class RawEcommerceClient:
         *,
         period_from: typing.Optional[dt.datetime] = None,
         period_to: typing.Optional[dt.datetime] = None,
-        email_campaign_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        sms_campaign_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        automation_workflow_email_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        automation_workflow_sms_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        email_campaign_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        sms_campaign_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        automation_workflow_email_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        automation_workflow_sms_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetEcommerceAttributionMetricsResponse]:
         """
@@ -466,16 +471,16 @@ class RawEcommerceClient:
         period_to : typing.Optional[dt.datetime]
             When getting metrics for a specific period, define the end datetime in RFC3339 format
 
-        email_campaign_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        email_campaign_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The email campaign ID(s) to get metrics for
 
-        sms_campaign_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        sms_campaign_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The SMS campaign ID(s) to get metrics for
 
-        automation_workflow_email_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        automation_workflow_email_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The automation workflow ID(s) to get email attribution metrics for
 
-        automation_workflow_sms_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        automation_workflow_sms_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The automation workflow ID(s) to get SMS attribution metrics for
 
         request_options : typing.Optional[RequestOptions]
@@ -488,14 +493,15 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "ecommerce/attribution/metrics",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "periodFrom": serialize_datetime(period_from) if period_from is not None else None,
                 "periodTo": serialize_datetime(period_to) if period_to is not None else None,
-                "emailCampaignId[]": email_campaign_id_array,
-                "smsCampaignId[]": sms_campaign_id_array,
-                "automationWorkflowEmailId[]": automation_workflow_email_id_array,
-                "automationWorkflowSmsId[]": automation_workflow_sms_id_array,
+                "emailCampaignId[]": email_campaign_id,
+                "smsCampaignId[]": sms_campaign_id,
+                "automationWorkflowEmailId[]": automation_workflow_email_id,
+                "automationWorkflowSmsId[]": automation_workflow_sms_id,
             },
             request_options=request_options,
         )
@@ -556,7 +562,8 @@ class RawEcommerceClient:
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/metrics/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/metrics/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -617,7 +624,8 @@ class RawEcommerceClient:
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/products/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/products/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -669,6 +677,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "ecommerce/config/displayCurrency",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -745,6 +754,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "ecommerce/config/displayCurrency",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "code": code,
@@ -858,6 +868,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "orders",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -962,6 +973,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "orders/status",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -1042,6 +1054,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "orders/status/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "historical": historical,
@@ -1198,6 +1211,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "products",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1340,6 +1354,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "products",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "brand": brand,
@@ -1429,6 +1444,7 @@ class RawEcommerceClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "products/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "products": convert_and_respect_annotation_metadata(
@@ -1494,7 +1510,8 @@ class RawEcommerceClient:
             Product details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}",
+            f"products/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1564,7 +1581,8 @@ class RawEcommerceClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}/alerts/back_in_stock",
+            f"products/{encode_path_param(id)}/alerts/back_in_stock",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactIdentifiers": convert_and_respect_annotation_metadata(
@@ -1692,6 +1710,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "categories",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1779,6 +1798,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "categories",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "deletedAt": deleted_at,
@@ -1854,6 +1874,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "categories/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "categories": convert_and_respect_annotation_metadata(
@@ -1919,7 +1940,8 @@ class AsyncRawEcommerceClient:
             Category details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"categories/{jsonable_encoder(id)}",
+            f"categories/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1981,6 +2003,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "ecommerce/activate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -2023,10 +2046,10 @@ class AsyncRawEcommerceClient:
         *,
         period_from: typing.Optional[dt.datetime] = None,
         period_to: typing.Optional[dt.datetime] = None,
-        email_campaign_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        sms_campaign_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        automation_workflow_email_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        automation_workflow_sms_id_array: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        email_campaign_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        sms_campaign_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        automation_workflow_email_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        automation_workflow_sms_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetEcommerceAttributionMetricsResponse]:
         """
@@ -2040,16 +2063,16 @@ class AsyncRawEcommerceClient:
         period_to : typing.Optional[dt.datetime]
             When getting metrics for a specific period, define the end datetime in RFC3339 format
 
-        email_campaign_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        email_campaign_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The email campaign ID(s) to get metrics for
 
-        sms_campaign_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        sms_campaign_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The SMS campaign ID(s) to get metrics for
 
-        automation_workflow_email_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        automation_workflow_email_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The automation workflow ID(s) to get email attribution metrics for
 
-        automation_workflow_sms_id_array : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        automation_workflow_sms_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             The automation workflow ID(s) to get SMS attribution metrics for
 
         request_options : typing.Optional[RequestOptions]
@@ -2062,14 +2085,15 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "ecommerce/attribution/metrics",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "periodFrom": serialize_datetime(period_from) if period_from is not None else None,
                 "periodTo": serialize_datetime(period_to) if period_to is not None else None,
-                "emailCampaignId[]": email_campaign_id_array,
-                "smsCampaignId[]": sms_campaign_id_array,
-                "automationWorkflowEmailId[]": automation_workflow_email_id_array,
-                "automationWorkflowSmsId[]": automation_workflow_sms_id_array,
+                "emailCampaignId[]": email_campaign_id,
+                "smsCampaignId[]": sms_campaign_id,
+                "automationWorkflowEmailId[]": automation_workflow_email_id,
+                "automationWorkflowSmsId[]": automation_workflow_sms_id,
             },
             request_options=request_options,
         )
@@ -2130,7 +2154,8 @@ class AsyncRawEcommerceClient:
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/metrics/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/metrics/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2191,7 +2216,8 @@ class AsyncRawEcommerceClient:
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/products/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/products/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2243,6 +2269,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "ecommerce/config/displayCurrency",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2319,6 +2346,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "ecommerce/config/displayCurrency",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "code": code,
@@ -2432,6 +2460,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "orders",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2536,6 +2565,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "orders/status",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "amount": amount,
@@ -2616,6 +2646,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "orders/status/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "historical": historical,
@@ -2772,6 +2803,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "products",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2914,6 +2946,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "products",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "brand": brand,
@@ -3003,6 +3036,7 @@ class AsyncRawEcommerceClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "products/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "products": convert_and_respect_annotation_metadata(
@@ -3068,7 +3102,8 @@ class AsyncRawEcommerceClient:
             Product details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}",
+            f"products/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -3138,7 +3173,8 @@ class AsyncRawEcommerceClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}/alerts/back_in_stock",
+            f"products/{encode_path_param(id)}/alerts/back_in_stock",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactIdentifiers": convert_and_respect_annotation_metadata(

@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -101,6 +101,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/blockedContacts",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -161,7 +162,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/blockedContacts/{jsonable_encoder(email)}",
+            f"smtp/blockedContacts/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -217,6 +219,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/blockedDomains",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -270,6 +273,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/blockedDomains",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "domain": domain,
@@ -322,7 +326,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/blockedDomains/{jsonable_encoder(domain)}",
+            f"smtp/blockedDomains/{encode_path_param(domain)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -391,6 +396,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/deleteHardbounces",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactEmail": contact_email,
@@ -510,6 +516,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/email",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attachment": convert_and_respect_annotation_metadata(
@@ -602,7 +609,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/email/{jsonable_encoder(identifier)}",
+            f"smtp/email/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -687,7 +695,8 @@ class RawTransactionalEmailsClient:
             Scheduled email batches
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/emailStatus/{jsonable_encoder(identifier)}",
+            f"smtp/emailStatus/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": str(start_date) if start_date is not None else None,
@@ -792,6 +801,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/emails",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "email": email,
@@ -857,7 +867,8 @@ class RawTransactionalEmailsClient:
             Transactional email content
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/emails/{jsonable_encoder(uuid_)}",
+            f"smtp/emails/{encode_path_param(uuid_)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -932,7 +943,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/log/{jsonable_encoder(identifier)}",
+            f"smtp/log/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "from_date": from_date,
@@ -1010,6 +1022,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/statistics/aggregatedReport",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -1113,6 +1126,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1207,6 +1221,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/statistics/reports",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -1269,6 +1284,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/template/preview",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=PostPreviewSmtpEmailTemplatesRequest, direction="write"
@@ -1346,6 +1362,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "templateStatus": template_status,
@@ -1446,6 +1463,7 @@ class RawTransactionalEmailsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "smtp/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attachmentUrl": attachment_url,
@@ -1517,7 +1535,8 @@ class RawTransactionalEmailsClient:
             Email template informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1624,7 +1643,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "attachmentUrl": attachment_url,
@@ -1699,7 +1719,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}",
+            f"smtp/templates/{encode_path_param(template_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1763,7 +1784,8 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}/sendTest",
+            f"smtp/templates/{encode_path_param(template_id)}/sendTest",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "emailTo": email_to,
@@ -1857,6 +1879,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/blockedContacts",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -1917,7 +1940,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/blockedContacts/{jsonable_encoder(email)}",
+            f"smtp/blockedContacts/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1973,6 +1997,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/blockedDomains",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2026,6 +2051,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/blockedDomains",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "domain": domain,
@@ -2078,7 +2104,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/blockedDomains/{jsonable_encoder(domain)}",
+            f"smtp/blockedDomains/{encode_path_param(domain)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -2147,6 +2174,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/deleteHardbounces",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contactEmail": contact_email,
@@ -2266,6 +2294,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/email",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attachment": convert_and_respect_annotation_metadata(
@@ -2358,7 +2387,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/email/{jsonable_encoder(identifier)}",
+            f"smtp/email/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -2443,7 +2473,8 @@ class AsyncRawTransactionalEmailsClient:
             Scheduled email batches
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/emailStatus/{jsonable_encoder(identifier)}",
+            f"smtp/emailStatus/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": str(start_date) if start_date is not None else None,
@@ -2548,6 +2579,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/emails",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "email": email,
@@ -2613,7 +2645,8 @@ class AsyncRawTransactionalEmailsClient:
             Transactional email content
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/emails/{jsonable_encoder(uuid_)}",
+            f"smtp/emails/{encode_path_param(uuid_)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -2688,7 +2721,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/log/{jsonable_encoder(identifier)}",
+            f"smtp/log/{encode_path_param(identifier)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             params={
                 "from_date": from_date,
@@ -2766,6 +2800,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/statistics/aggregatedReport",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -2869,6 +2904,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -2963,6 +2999,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/statistics/reports",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -3025,6 +3062,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/template/preview",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=PostPreviewSmtpEmailTemplatesRequest, direction="write"
@@ -3102,6 +3140,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "templateStatus": template_status,
@@ -3202,6 +3241,7 @@ class AsyncRawTransactionalEmailsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "smtp/templates",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attachmentUrl": attachment_url,
@@ -3273,7 +3313,8 @@ class AsyncRawTransactionalEmailsClient:
             Email template informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -3380,7 +3421,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "attachmentUrl": attachment_url,
@@ -3455,7 +3497,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}",
+            f"smtp/templates/{encode_path_param(template_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -3519,7 +3562,8 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}/sendTest",
+            f"smtp/templates/{encode_path_param(template_id)}/sendTest",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "emailTo": email_to,

@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -77,6 +77,7 @@ class RawWhatsAppCampaignsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsappCampaigns",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -157,6 +158,7 @@ class RawWhatsAppCampaignsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsappCampaigns",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -221,6 +223,7 @@ class RawWhatsAppCampaignsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/config",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -304,6 +307,7 @@ class RawWhatsAppCampaignsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/template",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "bodyText": body_text,
@@ -394,6 +398,7 @@ class RawWhatsAppCampaignsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/template-list",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -455,7 +460,8 @@ class RawWhatsAppCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/template/approval/{jsonable_encoder(template_id)}",
+            f"whatsappCampaigns/template/approval/{encode_path_param(template_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -506,7 +512,8 @@ class RawWhatsAppCampaignsClient:
             Get whatsApp campaign information on the basis of campaignId
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -593,7 +600,8 @@ class RawWhatsAppCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "campaignName": campaign_name,
@@ -651,7 +659,8 @@ class RawWhatsAppCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -734,6 +743,7 @@ class AsyncRawWhatsAppCampaignsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsappCampaigns",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -814,6 +824,7 @@ class AsyncRawWhatsAppCampaignsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsappCampaigns",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -878,6 +889,7 @@ class AsyncRawWhatsAppCampaignsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/config",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -961,6 +973,7 @@ class AsyncRawWhatsAppCampaignsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/template",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "bodyText": body_text,
@@ -1051,6 +1064,7 @@ class AsyncRawWhatsAppCampaignsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "whatsappCampaigns/template-list",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -1112,7 +1126,8 @@ class AsyncRawWhatsAppCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/template/approval/{jsonable_encoder(template_id)}",
+            f"whatsappCampaigns/template/approval/{encode_path_param(template_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             request_options=request_options,
         )
@@ -1163,7 +1178,8 @@ class AsyncRawWhatsAppCampaignsClient:
             Get whatsApp campaign information on the basis of campaignId
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1250,7 +1266,8 @@ class AsyncRawWhatsAppCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "campaignName": campaign_name,
@@ -1308,7 +1325,8 @@ class AsyncRawWhatsAppCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"whatsappCampaigns/{jsonable_encoder(campaign_id)}",
+            f"whatsappCampaigns/{encode_path_param(campaign_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )

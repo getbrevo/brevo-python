@@ -84,7 +84,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.get_sms_campaigns()
         """
@@ -153,7 +154,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.create_sms_campaign(
             content="Get a discount by visiting our NY store and saying : Happy Spring!",
@@ -198,7 +200,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.get_sms_campaign(
             campaign_id=1000000,
@@ -264,7 +267,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.update_sms_campaign(
             campaign_id=1000000,
@@ -305,7 +309,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.delete_sms_campaign(
             campaign_id=1000000,
@@ -349,7 +354,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.request_sms_recipient_export(
             campaign_id=1000000,
@@ -384,7 +390,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.send_sms_campaign_now(
             campaign_id=1000000,
@@ -427,7 +434,8 @@ class SmsCampaignsClient:
         from brevo import Brevo, SendReportEmail
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.send_sms_report(
             campaign_id=1000000,
@@ -472,7 +480,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.send_test_sms(
             campaign_id=1000000,
@@ -513,7 +522,8 @@ class SmsCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.sms_campaigns.update_sms_campaign_status(
             campaign_id=1000000,
@@ -589,7 +599,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -666,7 +677,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -719,7 +731,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -793,7 +806,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -844,7 +858,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -896,7 +911,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -939,7 +955,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -990,7 +1007,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo, SendReportEmail
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1043,7 +1061,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1092,7 +1111,8 @@ class AsyncSmsCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

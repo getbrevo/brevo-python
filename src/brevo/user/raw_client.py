@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -49,6 +49,7 @@ class RawUserClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "organization/invited/users",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -102,7 +103,8 @@ class RawUserClient:
             Credit note exists
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"organization/user/invitation/revoke/{jsonable_encoder(email)}",
+            f"organization/user/invitation/revoke/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -234,6 +236,7 @@ class RawUserClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "organization/user/invitation/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -302,7 +305,8 @@ class RawUserClient:
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"organization/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"organization/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -433,6 +437,7 @@ class RawUserClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "organization/user/update/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -494,7 +499,8 @@ class RawUserClient:
             list of all the user's permissions
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"organization/user/{jsonable_encoder(email)}/permissions",
+            f"organization/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -551,6 +557,7 @@ class AsyncRawUserClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "organization/invited/users",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -604,7 +611,8 @@ class AsyncRawUserClient:
             Credit note exists
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"organization/user/invitation/revoke/{jsonable_encoder(email)}",
+            f"organization/user/invitation/revoke/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -736,6 +744,7 @@ class AsyncRawUserClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "organization/user/invitation/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -804,7 +813,8 @@ class AsyncRawUserClient:
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"organization/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"organization/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             request_options=request_options,
         )
@@ -935,6 +945,7 @@ class AsyncRawUserClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "organization/user/update/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "all_features_access": all_features_access,
@@ -996,7 +1007,8 @@ class AsyncRawUserClient:
             list of all the user's permissions
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"organization/user/{jsonable_encoder(email)}/permissions",
+            f"organization/user/{encode_path_param(email)}/permissions",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )

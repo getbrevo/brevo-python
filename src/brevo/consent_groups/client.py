@@ -75,7 +75,8 @@ class ConsentGroupsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.consent_groups.get_consent_groups()
         """
@@ -125,7 +126,8 @@ class ConsentGroupsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.consent_groups.create_consent_group(
             name="Newsletter EU",
@@ -165,7 +167,8 @@ class ConsentGroupsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.consent_groups.get_consent_group(
             id=1000000,
@@ -215,7 +218,8 @@ class ConsentGroupsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.consent_groups.update_consent_group(
             id=1000000,
@@ -249,7 +253,8 @@ class ConsentGroupsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.consent_groups.delete_consent_group(
             id=1000000,
@@ -321,7 +326,8 @@ class AsyncConsentGroupsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -379,7 +385,8 @@ class AsyncConsentGroupsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -429,7 +436,8 @@ class AsyncConsentGroupsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -487,7 +495,8 @@ class AsyncConsentGroupsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -529,7 +538,8 @@ class AsyncConsentGroupsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

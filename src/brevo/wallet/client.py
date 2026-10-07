@@ -50,7 +50,8 @@ class WalletClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.wallet.get_wallet_pass_install_url(
             pass_id="passId",
@@ -105,7 +106,8 @@ class AsyncWalletClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

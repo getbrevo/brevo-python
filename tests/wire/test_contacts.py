@@ -2,7 +2,7 @@ from .conftest import get_client, verify_request_count
 
 from brevo.contacts import (
     AddContactToListRequestBodyEmails,
-    RemoveContactFromListRequestBodyEmails,
+    RemoveContactFromListRequestBodyAll,
     RequestContactExportRequestCustomContactFilter,
 )
 
@@ -254,7 +254,9 @@ def test_contacts_remove_contact_from_list() -> None:
     client = get_client(test_id)
     client.contacts.remove_contact_from_list(
         list_id=1000000,
-        request=RemoveContactFromListRequestBodyEmails(),
+        request=RemoveContactFromListRequestBodyAll(
+            all_=True,
+        ),
     )
     verify_request_count(test_id, "POST", "/contacts/lists/1000000/contacts/remove", None, 1)
 

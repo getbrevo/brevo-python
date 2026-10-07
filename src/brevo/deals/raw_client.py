@@ -8,7 +8,7 @@ from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param, jsonable_encoder
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -50,6 +50,7 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/attributes/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -151,6 +152,7 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "filters[attributes.deal_name]": filters_attributes_deal_name,
@@ -234,6 +236,7 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributes": attributes,
@@ -310,9 +313,10 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/deals/import",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -388,7 +392,8 @@ class RawDealsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/deals/link-unlink/{jsonable_encoder(id)}",
+            f"crm/deals/link-unlink/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "linkCompanyIds": link_company_ids,
@@ -442,7 +447,8 @@ class RawDealsClient:
             Returns the deal by id
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -503,7 +509,8 @@ class RawDealsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -578,7 +585,8 @@ class RawDealsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -642,6 +650,7 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/pipeline/details",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -691,6 +700,7 @@ class RawDealsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "crm/pipeline/details/all",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -743,7 +753,8 @@ class RawDealsClient:
             Returns pipeline and its details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/pipeline/details/{jsonable_encoder(pipeline_id)}",
+            f"crm/pipeline/details/{encode_path_param(pipeline_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -800,6 +811,7 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/attributes/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -901,6 +913,7 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "filters[attributes.deal_name]": filters_attributes_deal_name,
@@ -984,6 +997,7 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/deals",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "attributes": attributes,
@@ -1060,9 +1074,10 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/deals/import",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -1138,7 +1153,8 @@ class AsyncRawDealsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/deals/link-unlink/{jsonable_encoder(id)}",
+            f"crm/deals/link-unlink/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "linkCompanyIds": link_company_ids,
@@ -1194,7 +1210,8 @@ class AsyncRawDealsClient:
             Returns the deal by id
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1257,7 +1274,8 @@ class AsyncRawDealsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -1332,7 +1350,8 @@ class AsyncRawDealsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/deals/{jsonable_encoder(id)}",
+            f"crm/deals/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -1398,6 +1417,7 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/pipeline/details",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1449,6 +1469,7 @@ class AsyncRawDealsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "crm/pipeline/details/all",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -1501,7 +1522,8 @@ class AsyncRawDealsClient:
             Returns pipeline and its details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/pipeline/details/{jsonable_encoder(pipeline_id)}",
+            f"crm/pipeline/details/{encode_path_param(pipeline_id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )

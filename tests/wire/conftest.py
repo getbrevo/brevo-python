@@ -16,6 +16,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from brevo.client import Brevo
+from brevo.environment import BrevoEnvironment
 
 # Check once at import time whether the client constructor accepts a headers kwarg.
 try:
@@ -44,15 +45,19 @@ def get_client(test_id: str) -> Brevo:
 
     if _CLIENT_SUPPORTS_HEADERS:
         return Brevo(
-            base_url=base_url,
+            environment=BrevoEnvironment(base=base_url, o_auth=base_url),
             headers=test_headers,
             api_key="test_api_key",
+            client_id="test_client_id",
+            client_secret="test_client_secret",
         )
 
     return Brevo(
-        base_url=base_url,
+        environment=BrevoEnvironment(base=base_url, o_auth=base_url),
         httpx_client=httpx.Client(headers=test_headers),
         api_key="test_api_key",
+        client_id="test_client_id",
+        client_secret="test_client_secret",
     )
 
 
@@ -60,7 +65,7 @@ def verify_request_count(
     test_id: str,
     method: str,
     url_path: str,
-    query_params: Optional[Dict[str, str]],
+    query_params: Optional[Dict[str, Any]],
     expected: int,
 ) -> None:
     """Verifies the number of requests made to WireMock filtered by test ID for concurrency safety."""
@@ -71,7 +76,12 @@ def verify_request_count(
         "headers": {"X-Test-Id": {"equalTo": test_id}},
     }
     if query_params:
-        query_parameters = {k: {"equalTo": v} for k, v in query_params.items()}
+        query_parameters = {}
+        for k, v in query_params.items():
+            if isinstance(v, list):
+                query_parameters[k] = {"hasExactly": [{"equalTo": item} for item in v]}
+            else:
+                query_parameters[k] = {"equalTo": v}
         request_body["queryParameters"] = query_parameters
     response = httpx.post(f"{wiremock_admin_url}/requests/find", json=request_body)
     assert response.status_code == 200, "Failed to query WireMock requests"

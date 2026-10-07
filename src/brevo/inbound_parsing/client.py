@@ -72,7 +72,8 @@ class InboundParsingClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.inbound_parsing.get_inbound_email_events()
         """
@@ -111,7 +112,8 @@ class InboundParsingClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.inbound_parsing.get_inbound_email_events_by_uuid(
             uuid_="uuid",
@@ -144,7 +146,8 @@ class InboundParsingClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.inbound_parsing.get_inbound_email_attachment(
             download_token="downloadToken",
@@ -218,7 +221,8 @@ class AsyncInboundParsingClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -265,7 +269,8 @@ class AsyncInboundParsingClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -306,7 +311,8 @@ class AsyncInboundParsingClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

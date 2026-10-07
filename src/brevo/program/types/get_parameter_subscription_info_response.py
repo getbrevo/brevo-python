@@ -3,10 +3,13 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
 from .get_parameter_subscription_info_response_balance import GetParameterSubscriptionInfoResponseBalance
 from .get_parameter_subscription_info_response_members_item import GetParameterSubscriptionInfoResponseMembersItem
+from .get_parameter_subscription_info_response_membership import GetParameterSubscriptionInfoResponseMembership
 from .get_parameter_subscription_info_response_reward_item import GetParameterSubscriptionInfoResponseRewardItem
 from .get_parameter_subscription_info_response_tier_item import GetParameterSubscriptionInfoResponseTierItem
 
@@ -17,11 +20,21 @@ class GetParameterSubscriptionInfoResponse(UncheckedBaseModel):
     Balance details for the subscription.
     """
 
+    loyalty_program_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="loyaltyProgramName"),
+        pydantic.Field(alias="loyaltyProgramName", description="Name of the loyalty program."),
+    ] = None
     members: typing.Optional[typing.List[GetParameterSubscriptionInfoResponseMembersItem]] = pydantic.Field(
         default=None
     )
     """
     List of members associated with the subscription.
+    """
+
+    membership: typing.Optional[GetParameterSubscriptionInfoResponseMembership] = pydantic.Field(default=None)
+    """
+    Membership details of the subscription. Returned when the subscription could be resolved from the provided `contactId` or `loyaltySubscriptionId`.
     """
 
     reward: typing.Optional[typing.List[GetParameterSubscriptionInfoResponseRewardItem]] = pydantic.Field(default=None)

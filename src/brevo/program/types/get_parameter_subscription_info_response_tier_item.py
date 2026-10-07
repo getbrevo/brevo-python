@@ -25,6 +25,11 @@ class GetParameterSubscriptionInfoResponseTierItem(UncheckedBaseModel):
         FieldMetadata(alias="groupId"),
         pydantic.Field(alias="groupId", description="Unique identifier of the group associated with the tier."),
     ] = None
+    group_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="groupName"),
+        pydantic.Field(alias="groupName", description="Name of the group associated with the tier."),
+    ] = None
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
@@ -39,6 +44,11 @@ class GetParameterSubscriptionInfoResponseTierItem(UncheckedBaseModel):
         typing.Optional[str],
         FieldMetadata(alias="tierId"),
         pydantic.Field(alias="tierId", description="Unique identifier of the tier."),
+    ] = None
+    tier_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="tierName"),
+        pydantic.Field(alias="tierName", description="Name of the tier."),
     ] = None
     updated_at: typing_extensions.Annotated[
         typing.Optional[str],

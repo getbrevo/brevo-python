@@ -8,6 +8,9 @@ import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
 from ...core.unchecked_base_model import UncheckedBaseModel
+from .get_parameter_subscription_info_response_reward_item_unit import (
+    GetParameterSubscriptionInfoResponseRewardItemUnit,
+)
 
 
 class GetParameterSubscriptionInfoResponseRewardItem(UncheckedBaseModel):
@@ -46,11 +49,32 @@ class GetParameterSubscriptionInfoResponseRewardItem(UncheckedBaseModel):
     Additional metadata related to the reward.
     """
 
+    public_description: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="publicDescription"),
+        pydantic.Field(
+            alias="publicDescription",
+            description="Customer-facing description of the reward, as configured on the reward definition.",
+        ),
+    ] = None
     reward_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="rewardId"),
         pydantic.Field(alias="rewardId", description="Unique identifier of the reward definition."),
     ] = None
+    reward_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="rewardName"),
+        pydantic.Field(
+            alias="rewardName",
+            description="Customer-facing name of the reward. Falls back to the internal reward name when no public name is set.",
+        ),
+    ] = None
+    unit: typing.Optional[GetParameterSubscriptionInfoResponseRewardItemUnit] = pydantic.Field(default=None)
+    """
+    Unit the reward's value is expressed in — one of the currency codes listed below, or PERCENT. Omitted when the reward has no unit (e.g. free-product rewards).
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
@@ -61,6 +85,10 @@ class GetParameterSubscriptionInfoResponseRewardItem(UncheckedBaseModel):
         FieldMetadata(alias="validFrom"),
         pydantic.Field(alias="validFrom", description="Date from which the voucher becomes valid."),
     ] = None
+    value: typing.Optional[float] = pydantic.Field(default=None)
+    """
+    The value recorded when this reward was attributed to the contact — a snapshot, not necessarily the reward's current configured value. Omitted when not set.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

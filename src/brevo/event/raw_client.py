@@ -83,6 +83,7 @@ class RawEventClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "contact_id": contact_id,
@@ -190,6 +191,7 @@ class RawEventClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "events",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contact_properties": convert_and_respect_annotation_metadata(
@@ -274,6 +276,7 @@ class RawEventClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "events/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "events": convert_and_respect_annotation_metadata(
@@ -384,6 +387,7 @@ class AsyncRawEventClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "contact_id": contact_id,
@@ -491,6 +495,7 @@ class AsyncRawEventClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "events",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "contact_properties": convert_and_respect_annotation_metadata(
@@ -575,6 +580,7 @@ class AsyncRawEventClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "events/batch",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "events": convert_and_respect_annotation_metadata(

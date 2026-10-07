@@ -96,6 +96,7 @@ class RawTransactionalSmsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "organisationPrefix": organisation_prefix,
@@ -204,6 +205,7 @@ class RawTransactionalSmsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/sms",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "organisationPrefix": organisation_prefix,
@@ -310,6 +312,7 @@ class RawTransactionalSmsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/aggregatedReport",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -405,6 +408,7 @@ class RawTransactionalSmsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -489,6 +493,7 @@ class RawTransactionalSmsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/reports",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -596,6 +601,7 @@ class AsyncRawTransactionalSmsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/send",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "organisationPrefix": organisation_prefix,
@@ -704,6 +710,7 @@ class AsyncRawTransactionalSmsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/sms",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "organisationPrefix": organisation_prefix,
@@ -810,6 +817,7 @@ class AsyncRawTransactionalSmsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/aggregatedReport",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,
@@ -905,6 +913,7 @@ class AsyncRawTransactionalSmsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/events",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -989,6 +998,7 @@ class AsyncRawTransactionalSmsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "transactionalSMS/statistics/reports",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "startDate": start_date,

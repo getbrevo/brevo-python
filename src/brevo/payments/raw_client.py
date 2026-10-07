@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -71,6 +71,7 @@ class RawPaymentsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "payments/requests",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "cart": convert_and_respect_annotation_metadata(object_=cart, annotation=Cart, direction="write"),
@@ -162,7 +163,8 @@ class RawPaymentsClient:
             Payment request details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"payments/requests/{jsonable_encoder(id)}",
+            f"payments/requests/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -248,7 +250,8 @@ class RawPaymentsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"payments/requests/{jsonable_encoder(id)}",
+            f"payments/requests/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )
@@ -343,6 +346,7 @@ class AsyncRawPaymentsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "payments/requests",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "cart": convert_and_respect_annotation_metadata(object_=cart, annotation=Cart, direction="write"),
@@ -434,7 +438,8 @@ class AsyncRawPaymentsClient:
             Payment request details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"payments/requests/{jsonable_encoder(id)}",
+            f"payments/requests/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -520,7 +525,8 @@ class AsyncRawPaymentsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"payments/requests/{jsonable_encoder(id)}",
+            f"payments/requests/{encode_path_param(id)}",
+            base_url=self._client_wrapper.get_environment().base,
             method="DELETE",
             request_options=request_options,
         )

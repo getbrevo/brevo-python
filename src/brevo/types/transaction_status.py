@@ -2,4 +2,4 @@
 
 import typing
 
-TransactionStatus = typing.Union[typing.Literal["pending", "complete", "rejected", "cancelled", "expired"], typing.Any]
+TransactionStatus = typing.Union[typing.Literal["draft", "completed", "rejected", "cancelled", "expired"], typing.Any]
