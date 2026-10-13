@@ -8,7 +8,7 @@ from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param, jsonable_encoder
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -255,7 +255,7 @@ class RawCompaniesClient:
             "companies/import",
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -331,7 +331,7 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/link-unlink/{jsonable_encoder(id)}",
+            f"companies/link-unlink/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "linkContactIds": link_contact_ids,
@@ -388,7 +388,7 @@ class RawCompaniesClient:
             Returns the Company
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -452,7 +452,7 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -532,7 +532,7 @@ class RawCompaniesClient:
             Company updated successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -691,7 +691,7 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -763,7 +763,7 @@ class RawCompaniesClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "label": label,
@@ -1089,7 +1089,7 @@ class AsyncRawCompaniesClient:
             "companies/import",
             method="POST",
             data={
-                "mapping": json.dumps(jsonable_encoder(mapping)),
+                "mapping": json.dumps(jsonable_encoder(mapping)) if mapping is not OMIT else OMIT,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -1165,7 +1165,7 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/link-unlink/{jsonable_encoder(id)}",
+            f"companies/link-unlink/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "linkContactIds": link_contact_ids,
@@ -1222,7 +1222,7 @@ class AsyncRawCompaniesClient:
             Returns the Company
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1286,7 +1286,7 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1366,7 +1366,7 @@ class AsyncRawCompaniesClient:
             Company updated successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"companies/{jsonable_encoder(id)}",
+            f"companies/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "attributes": attributes,
@@ -1525,7 +1525,7 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1597,7 +1597,7 @@ class AsyncRawCompaniesClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/attributes/{jsonable_encoder(id)}",
+            f"crm/attributes/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "label": label,

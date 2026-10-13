@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -146,7 +146,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/unlink/{jsonable_encoder(group_id)}/subAccounts",
+            f"corporate/group/unlink/{encode_path_param(group_id)}/subAccounts",
             method="PUT",
             json={
                 "subAccountIds": sub_account_ids,
@@ -201,7 +201,7 @@ class RawMasterAccountClient:
             Group details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -265,7 +265,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="PUT",
             json={
                 "groupName": group_name,
@@ -320,7 +320,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1108,7 +1108,7 @@ class RawMasterAccountClient:
             Sub-account organization details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1161,7 +1161,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1203,6 +1203,7 @@ class RawMasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -1226,6 +1227,11 @@ class RawMasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -1284,9 +1290,10 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/applications/toggle",
+            f"corporate/subAccount/{encode_path_param(id)}/applications/toggle",
             method="PUT",
             json={
+                "analytics": analytics,
                 "automation": automation,
                 "conversations": conversations,
                 "crm": crm,
@@ -1374,7 +1381,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/plan",
+            f"corporate/subAccount/{encode_path_param(id)}/plan",
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -1644,7 +1651,7 @@ class RawMasterAccountClient:
             Response of the action performed
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"corporate/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
             method="PUT",
             request_options=request_options,
         )
@@ -1698,7 +1705,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/revoke/{jsonable_encoder(email)}",
+            f"corporate/user/revoke/{encode_path_param(email)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1745,7 +1752,7 @@ class RawMasterAccountClient:
             List of user's permissions
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
             method="GET",
             request_options=request_options,
         )
@@ -1809,7 +1816,7 @@ class RawMasterAccountClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
             method="PUT",
             json={
                 "all_features_access": all_features_access,
@@ -1948,7 +1955,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/unlink/{jsonable_encoder(group_id)}/subAccounts",
+            f"corporate/group/unlink/{encode_path_param(group_id)}/subAccounts",
             method="PUT",
             json={
                 "subAccountIds": sub_account_ids,
@@ -2003,7 +2010,7 @@ class AsyncRawMasterAccountClient:
             Group details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -2067,7 +2074,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="PUT",
             json={
                 "groupName": group_name,
@@ -2124,7 +2131,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/group/{jsonable_encoder(id)}",
+            f"corporate/group/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2912,7 +2919,7 @@ class AsyncRawMasterAccountClient:
             Sub-account organization details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -2965,7 +2972,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}",
+            f"corporate/subAccount/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3007,6 +3014,7 @@ class AsyncRawMasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -3030,6 +3038,11 @@ class AsyncRawMasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -3088,9 +3101,10 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/applications/toggle",
+            f"corporate/subAccount/{encode_path_param(id)}/applications/toggle",
             method="PUT",
             json={
+                "analytics": analytics,
                 "automation": automation,
                 "conversations": conversations,
                 "crm": crm,
@@ -3178,7 +3192,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/subAccount/{jsonable_encoder(id)}/plan",
+            f"corporate/subAccount/{encode_path_param(id)}/plan",
             method="PUT",
             json={
                 "credits": convert_and_respect_annotation_metadata(
@@ -3448,7 +3462,7 @@ class AsyncRawMasterAccountClient:
             Response of the action performed
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/invitation/{jsonable_encoder(action)}/{jsonable_encoder(email)}",
+            f"corporate/user/invitation/{encode_path_param(action)}/{encode_path_param(email)}",
             method="PUT",
             request_options=request_options,
         )
@@ -3502,7 +3516,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/revoke/{jsonable_encoder(email)}",
+            f"corporate/user/revoke/{encode_path_param(email)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3549,7 +3563,7 @@ class AsyncRawMasterAccountClient:
             List of user's permissions
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
             method="GET",
             request_options=request_options,
         )
@@ -3613,7 +3627,7 @@ class AsyncRawMasterAccountClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"corporate/user/{jsonable_encoder(email)}/permissions",
+            f"corporate/user/{encode_path_param(email)}/permissions",
             method="PUT",
             json={
                 "all_features_access": all_features_access,

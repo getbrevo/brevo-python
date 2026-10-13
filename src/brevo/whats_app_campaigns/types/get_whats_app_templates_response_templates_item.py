@@ -22,11 +22,19 @@ class GetWhatsAppTemplatesResponseTemplatesItem(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the whatsApp template (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the whatsApp template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     error_reason: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="errorReason"),
         pydantic.Field(alias="errorReason", description="Error reason in the template creation"),
     ] = None
+    """
+    Error reason in the template creation
+    """
+
     id: int = pydantic.Field()
     """
     ID of the whatsApp template
@@ -45,6 +53,10 @@ class GetWhatsAppTemplatesResponseTemplatesItem(UncheckedBaseModel):
             description="UTC date-time of last modification of the whatsApp template (YYYY-MM-DDTHH:mm:ss.SSSZ)",
         ),
     ]
+    """
+    UTC date-time of last modification of the whatsApp template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     name: str = pydantic.Field()
     """
     Name of the whatsApp template

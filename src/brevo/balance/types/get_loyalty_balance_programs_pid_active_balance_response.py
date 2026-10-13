@@ -27,21 +27,36 @@ class GetLoyaltyBalanceProgramsPidActiveBalanceResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
     ] = None
+    """
+    Unique identifier of the loyalty program.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
     ] = None
+    """
+    Unique identifier of the contact.
+    """
+
     balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Unique identifier of the balance definition."),
     ] = None
+    """
+    Unique identifier of the balance definition.
+    """
+
     active_balances: typing_extensions.Annotated[
         typing.Optional[typing.List[GetLoyaltyBalanceProgramsPidActiveBalanceResponseActiveBalancesItem]],
         FieldMetadata(alias="activeBalances"),
         pydantic.Field(alias="activeBalances", description="List of active balances."),
     ] = None
+    """
+    List of active balances.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

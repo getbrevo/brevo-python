@@ -28,6 +28,11 @@ class GetCorporateMasterAccountResponsePlanInfoFeaturesItem(UncheckedBaseModel):
             description="Quantity with overages provided in the plan (only\napplicable on ENTv2)",
         ),
     ] = None
+    """
+    Quantity with overages provided in the plan (only
+    applicable on ENTv2)
+    """
+
     remaining: typing.Optional[int] = pydantic.Field(default=None)
     """
     Quantity remaining in the plan
@@ -38,6 +43,10 @@ class GetCorporateMasterAccountResponsePlanInfoFeaturesItem(UncheckedBaseModel):
         FieldMetadata(alias="unitValue"),
         pydantic.Field(alias="unitValue", description="Unit value of the feature"),
     ] = None
+    """
+    Unit value of the feature
+    """
+
     used: typing.Optional[int] = pydantic.Field(default=None)
     """
     Quantity consumed by master
@@ -51,6 +60,10 @@ class GetCorporateMasterAccountResponsePlanInfoFeaturesItem(UncheckedBaseModel):
             description="Quantity consumed by sub-organizations over the\nadmin plan limit (only applicable on ENTv2)",
         ),
     ] = None
+    """
+    Quantity consumed by sub-organizations over the
+    admin plan limit (only applicable on ENTv2)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

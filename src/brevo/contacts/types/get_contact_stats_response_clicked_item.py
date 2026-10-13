@@ -16,6 +16,10 @@ class GetContactStatsResponseClickedItem(UncheckedBaseModel):
         FieldMetadata(alias="campaignId"),
         pydantic.Field(alias="campaignId", description="ID of the campaign which generated the event"),
     ]
+    """
+    ID of the campaign which generated the event
+    """
+
     links: typing.List[GetContactStatsResponseClickedItemLinksItem]
 
     if IS_PYDANTIC_V2:

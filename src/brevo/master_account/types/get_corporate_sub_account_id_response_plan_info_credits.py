@@ -39,6 +39,10 @@ class GetCorporateSubAccountIdResponsePlanInfoCredits(UncheckedBaseModel):
         FieldMetadata(alias="externalFeeds"),
         pydantic.Field(alias="externalFeeds", description="externalFeeds credits remaining on the sub-account"),
     ] = None
+    """
+    externalFeeds credits remaining on the sub-account
+    """
+
     sms: typing.Optional[GetCorporateSubAccountIdResponsePlanInfoCreditsSms] = pydantic.Field(default=None)
     """
     SMS credits remaining on the sub-account
@@ -54,6 +58,9 @@ class GetCorporateSubAccountIdResponsePlanInfoCredits(UncheckedBaseModel):
         FieldMetadata(alias="wpSubscribers"),
         pydantic.Field(alias="wpSubscribers", description="Push credits remaining on the sub-account"),
     ] = None
+    """
+    Push credits remaining on the sub-account
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

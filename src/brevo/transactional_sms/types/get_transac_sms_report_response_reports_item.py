@@ -36,6 +36,10 @@ class GetTransacSmsReportResponseReportsItem(UncheckedBaseModel):
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hardbounces for the date"),
     ] = None
+    """
+    Number of hardbounces for the date
+    """
+
     rejected: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of rejected SMS for the date
@@ -61,6 +65,10 @@ class GetTransacSmsReportResponseReportsItem(UncheckedBaseModel):
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounces for the date"),
     ] = None
+    """
+    Number of softbounces for the date
+    """
+
     unsubscribed: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of unsubscription for the date

@@ -18,11 +18,19 @@ class GetExtendedCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="campaignStats"),
         pydantic.Field(alias="campaignStats", description="List-wise statistics of the campaign."),
     ]
+    """
+    List-wise statistics of the campaign.
+    """
+
     global_stats: typing_extensions.Annotated[
         GetCampaignStats,
         FieldMetadata(alias="globalStats"),
         pydantic.Field(alias="globalStats", description="Overall statistics of the campaign"),
     ]
+    """
+    Overall statistics of the campaign
+    """
+
     links_stats: typing_extensions.Annotated[
         typing.Dict[str, int],
         FieldMetadata(alias="linksStats"),
@@ -31,11 +39,19 @@ class GetExtendedCampaignStats(UncheckedBaseModel):
             description="Statistics about the number of clicks for each link in the campaign. Keys are the link URLs, values are click counts. Only populated when the `statistics` query parameter is set to `linksStats`.",
         ),
     ]
+    """
+    Statistics about the number of clicks for each link in the campaign. Keys are the link URLs, values are click counts. Only populated when the `statistics` query parameter is set to `linksStats`.
+    """
+
     mirror_click: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="mirrorClick"),
         pydantic.Field(alias="mirrorClick", description="Number of clicks on mirror link"),
     ]
+    """
+    Number of clicks on mirror link
+    """
+
     remaining: int = pydantic.Field()
     """
     Number of remaining emails to send
@@ -49,6 +65,10 @@ class GetExtendedCampaignStats(UncheckedBaseModel):
             description="Statistics of the campaign grouped by browser. Only available when retrieving a single campaign with the `statistics` query parameter set to `statsByBrowser`.",
         ),
     ] = None
+    """
+    Statistics of the campaign grouped by browser. Only available when retrieving a single campaign with the `statistics` query parameter set to `statsByBrowser`.
+    """
+
     stats_by_device: typing_extensions.Annotated[
         typing.Optional[GetExtendedCampaignStatsStatsByDevice],
         FieldMetadata(alias="statsByDevice"),
@@ -62,6 +82,9 @@ class GetExtendedCampaignStats(UncheckedBaseModel):
             description="Statistics of the campaign grouped by email domain. Only populated when the `statistics` query parameter is set to `statsByDomain`.",
         ),
     ] = None
+    """
+    Statistics of the campaign grouped by email domain. Only populated when the `statistics` query parameter is set to `statsByDomain`.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

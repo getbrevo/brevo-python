@@ -25,6 +25,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the contact (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the contact (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email address of the contact for which you requested the details
@@ -38,6 +42,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Blacklist status for email campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    """
+    Blacklist status for email campaigns (true=blacklisted, false=not blacklisted)
+    """
+
     id: int = pydantic.Field()
     """
     ID of the contact for which you requested the details
@@ -58,6 +66,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             alias="modifiedAt", description="Last modification UTC date-time of the contact (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Last modification UTC date-time of the contact (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     sms_blacklisted: typing_extensions.Annotated[
         bool,
         FieldMetadata(alias="smsBlacklisted"),
@@ -66,6 +78,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Blacklist status for SMS campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    """
+    Blacklist status for SMS campaigns (true=blacklisted, false=not blacklisted)
+    """
+
     whatsapp_blacklisted: typing_extensions.Annotated[
         bool,
         FieldMetadata(alias="whatsappBlacklisted"),
@@ -74,6 +90,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Blacklist status for WhatsApp campaigns (true=blacklisted, false=not blacklisted)",
         ),
     ]
+    """
+    Blacklist status for WhatsApp campaigns (true=blacklisted, false=not blacklisted)
+    """
+
     consent_groups: typing_extensions.Annotated[
         typing.Optional[typing.List[ConsentGroupItem]],
         FieldMetadata(alias="consentGroups"),
@@ -82,6 +102,10 @@ class GetContactInfoResponse(UncheckedBaseModel):
             description="Consent groups the contact belongs to, with their subscription status. Only present when the Consent Groups feature is enabled for your account.",
         ),
     ] = None
+    """
+    Consent groups the contact belongs to, with their subscription status. Only present when the Consent Groups feature is enabled for your account.
+    """
+
     statistics: GetContactInfoResponseStatistics = pydantic.Field()
     """
     Campaign statistics of the contact

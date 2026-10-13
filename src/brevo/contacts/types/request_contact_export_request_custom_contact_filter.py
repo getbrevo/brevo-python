@@ -31,6 +31,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="**Mandatory if neither actionForEmailCampaigns nor actionForSmsCampaigns is passed.** This will export the contacts on the basis of provided action applied on contacts as per the list id. * **allContacts** - Fetch the list of all contacts for a particular list. * **subscribed & unsubscribed** - Fetch the list of subscribed / unsubscribed (blacklisted via any means) contacts for a particular list. * **unsubscribedPerList** - Fetch the list of contacts that are unsubscribed from a particular list only.",
         ),
     ] = None
+    """
+    **Mandatory if neither actionForEmailCampaigns nor actionForSmsCampaigns is passed.** This will export the contacts on the basis of provided action applied on contacts as per the list id. * **allContacts** - Fetch the list of all contacts for a particular list. * **subscribed & unsubscribed** - Fetch the list of subscribed / unsubscribed (blacklisted via any means) contacts for a particular list. * **unsubscribedPerList** - Fetch the list of contacts that are unsubscribed from a particular list only.
+    """
+
     action_for_email_campaigns: typing_extensions.Annotated[
         typing.Optional[RequestContactExportRequestCustomContactFilterActionForEmailCampaigns],
         FieldMetadata(alias="actionForEmailCampaigns"),
@@ -39,6 +43,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="**Mandatory if neither actionForContacts nor actionForSmsCampaigns is passed.** This will export the contacts on the basis of provided action applied on email campaigns. * **openers & nonOpeners** - emailCampaignId is mandatory. Fetch the list of readers / non-readers for a particular email campaign. * **clickers & nonClickers** - emailCampaignId is mandatory. Fetch the list of clickers / non-clickers for a particular email campaign. * **unsubscribed** - emailCampaignId is mandatory. Fetch the list of all unsubscribed (blacklisted via any means) contacts for a particular email campaign. * **hardBounces & softBounces** - emailCampaignId is optional. Fetch the list of hard bounces / soft bounces for a particular / all email campaign(s).",
         ),
     ] = None
+    """
+    **Mandatory if neither actionForContacts nor actionForSmsCampaigns is passed.** This will export the contacts on the basis of provided action applied on email campaigns. * **openers & nonOpeners** - emailCampaignId is mandatory. Fetch the list of readers / non-readers for a particular email campaign. * **clickers & nonClickers** - emailCampaignId is mandatory. Fetch the list of clickers / non-clickers for a particular email campaign. * **unsubscribed** - emailCampaignId is mandatory. Fetch the list of all unsubscribed (blacklisted via any means) contacts for a particular email campaign. * **hardBounces & softBounces** - emailCampaignId is optional. Fetch the list of hard bounces / soft bounces for a particular / all email campaign(s).
+    """
+
     action_for_sms_campaigns: typing_extensions.Annotated[
         typing.Optional[RequestContactExportRequestCustomContactFilterActionForSmsCampaigns],
         FieldMetadata(alias="actionForSmsCampaigns"),
@@ -47,6 +55,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="**Mandatory if neither actionForContacts nor actionForEmailCampaigns is passed.** This will export the contacts on the basis of provided action applied on sms campaigns. * **unsubscribed** - Fetch the list of all unsubscribed (blacklisted via any means) contacts for all / particular sms campaigns. * **hardBounces & softBounces** - Fetch the list of hard bounces / soft bounces for all / particular sms campaigns.",
         ),
     ] = None
+    """
+    **Mandatory if neither actionForContacts nor actionForEmailCampaigns is passed.** This will export the contacts on the basis of provided action applied on sms campaigns. * **unsubscribed** - Fetch the list of all unsubscribed (blacklisted via any means) contacts for all / particular sms campaigns. * **hardBounces & softBounces** - Fetch the list of hard bounces / soft bounces for all / particular sms campaigns.
+    """
+
     email_campaign_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="emailCampaignId"),
@@ -55,6 +67,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="Considered only if **actionForEmailCampaigns** is passed, ignored otherwise. **Mandatory if action is one of the following - openers, nonOpeners, clickers, nonClickers, unsubscribed.** The id of the email campaign for which the corresponding action shall be applied in the filter.",
         ),
     ] = None
+    """
+    Considered only if **actionForEmailCampaigns** is passed, ignored otherwise. **Mandatory if action is one of the following - openers, nonOpeners, clickers, nonClickers, unsubscribed.** The id of the email campaign for which the corresponding action shall be applied in the filter.
+    """
+
     list_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="listId"),
@@ -63,6 +79,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.",
         ),
     ] = None
+    """
+    ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.
+    """
+
     segment_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="segmentId"),
@@ -71,6 +91,10 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included.",
         ),
     ] = None
+    """
+    ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included.
+    """
+
     sms_campaign_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="smsCampaignId"),
@@ -79,6 +103,9 @@ class RequestContactExportRequestCustomContactFilter(UncheckedBaseModel):
             description="Considered only if **actionForSmsCampaigns** is passed, ignored otherwise. The id of sms campaign for which the corresponding action shall be applied in the filter.",
         ),
     ] = None
+    """
+    Considered only if **actionForSmsCampaigns** is passed, ignored otherwise. The id of sms campaign for which the corresponding action shall be applied in the filter.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

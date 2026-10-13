@@ -19,16 +19,28 @@ class NoteData(UncheckedBaseModel):
         FieldMetadata(alias="companyIds"),
         pydantic.Field(alias="companyIds", description="Company Ids linked to a note"),
     ] = None
+    """
+    Company Ids linked to a note
+    """
+
     contact_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="contactIds"),
         pydantic.Field(alias="contactIds", description="Contact Ids linked to a note"),
     ] = None
+    """
+    Contact Ids linked to a note
+    """
+
     deal_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="dealIds"),
         pydantic.Field(alias="dealIds", description="Deal Ids linked to a note"),
     ] = None
+    """
+    Deal Ids linked to a note
+    """
+
     text: str = pydantic.Field()
     """
     Content of the note. Supports HTML for rich text formatting. Supported tags include: `<p>` (paragraph), `<b>` / `<strong>` (bold), `<i>` / `<em>` (italic), `<u>` (underline), `<br>` (line break), `<a href="...">` (labelled hyperlink). Example labelled link: `<a href="https://example.com">Link text</a>`.

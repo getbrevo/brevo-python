@@ -20,6 +20,10 @@ class GetWhatsAppConfigResponse(UncheckedBaseModel):
         FieldMetadata(alias="businessStatus"),
         pydantic.Field(alias="businessStatus", description="Verification status information of the Business account"),
     ] = None
+    """
+    Verification status information of the Business account
+    """
+
     phone_number_name_status: typing_extensions.Annotated[
         typing.Optional[GetWhatsAppConfigResponsePhoneNumberNameStatus],
         FieldMetadata(alias="phoneNumberNameStatus"),
@@ -27,6 +31,10 @@ class GetWhatsAppConfigResponse(UncheckedBaseModel):
             alias="phoneNumberNameStatus", description="Status of the name associated with WhatsApp Phone number"
         ),
     ] = None
+    """
+    Status of the name associated with WhatsApp Phone number
+    """
+
     phone_number_quality: typing_extensions.Annotated[
         typing.Optional[GetWhatsAppConfigResponsePhoneNumberQuality],
         FieldMetadata(alias="phoneNumberQuality"),
@@ -35,16 +43,28 @@ class GetWhatsAppConfigResponse(UncheckedBaseModel):
             description="Quality status of phone number associated with WhatsApp account. There are three quality ratings. example - **High (GREEN) , Medium (YELLOW) and Low(RED)**",
         ),
     ] = None
+    """
+    Quality status of phone number associated with WhatsApp account. There are three quality ratings. example - **High (GREEN) , Medium (YELLOW) and Low(RED)**
+    """
+
     sending_limit: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="sendingLimit"),
         pydantic.Field(alias="sendingLimit", description="Sending limit of the WhatsApp account"),
     ] = None
+    """
+    Sending limit of the WhatsApp account
+    """
+
     whatsapp_business_account_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="whatsappBusinessAccountId"),
         pydantic.Field(alias="whatsappBusinessAccountId", description="Id of the WhatsApp business account"),
     ] = None
+    """
+    Id of the WhatsApp business account
+    """
+
     whatsapp_business_account_status: typing_extensions.Annotated[
         typing.Optional[GetWhatsAppConfigResponseWhatsappBusinessAccountStatus],
         FieldMetadata(alias="whatsappBusinessAccountStatus"),
@@ -52,6 +72,9 @@ class GetWhatsAppConfigResponse(UncheckedBaseModel):
             alias="whatsappBusinessAccountStatus", description="Status information related to WhatsApp Api account"
         ),
     ] = None
+    """
+    Status information related to WhatsApp Api account
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

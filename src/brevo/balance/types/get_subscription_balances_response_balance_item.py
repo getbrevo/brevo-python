@@ -15,6 +15,10 @@ class GetSubscriptionBalancesResponseBalanceItem(UncheckedBaseModel):
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Balance definition ID."),
     ] = None
+    """
+    Balance definition ID.
+    """
+
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     Aggregate balance value for this definition.

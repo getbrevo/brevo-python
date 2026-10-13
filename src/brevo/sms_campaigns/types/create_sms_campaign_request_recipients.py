@@ -15,6 +15,10 @@ class CreateSmsCampaignRequestRecipients(UncheckedBaseModel):
         FieldMetadata(alias="exclusionListIds"),
         pydantic.Field(alias="exclusionListIds", description="List ids which have to be excluded from a campaign"),
     ] = None
+    """
+    List ids which have to be excluded from a campaign
+    """
+
     list_ids: typing_extensions.Annotated[
         typing.List[int],
         FieldMetadata(alias="listIds"),
@@ -22,6 +26,9 @@ class CreateSmsCampaignRequestRecipients(UncheckedBaseModel):
             alias="listIds", description="Lists Ids to send the campaign to. **REQUIRED if scheduledAt is not empty**"
         ),
     ]
+    """
+    Lists Ids to send the campaign to. **REQUIRED if scheduledAt is not empty**
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

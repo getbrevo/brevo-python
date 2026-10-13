@@ -128,7 +128,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_contacts()
         """
@@ -211,7 +212,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.create_contact()
         """
@@ -249,7 +251,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_attributes()
         """
@@ -306,7 +309,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.create_attribute(
             attribute_category="normal",
@@ -367,7 +371,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.update_attribute(
             attribute_category="category",
@@ -414,7 +419,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.delete_attribute(
             attribute_category="normal",
@@ -456,7 +462,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.delete_multi_attribute_options(
             multiple_choice_attribute="multipleChoiceAttribute",
@@ -494,7 +501,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.update_batch_contacts()
         """
@@ -509,6 +517,7 @@ class ContactsClient:
         redirection_url: str,
         template_id: int,
         attributes: typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]] = OMIT,
+        contact_pixel_tracking_consent: typing.Optional[bool] = OMIT,
         exclude_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -532,6 +541,9 @@ class ContactsClient:
         attributes : typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]]
             Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
 
+        contact_pixel_tracking_consent : typing.Optional[bool]
+            Consent of the DOI recipient for open (pixel) and click tracking in the double opt-in confirmation email, resolved by the sender at send time. Considered only if the per-contact pixel tracking consent feature is enabled for your account. Pass `true` if this recipient has consented to open and click tracking, in which case the open pixel and tracked links identify the recipient. Pass `false` to anonymise the open and click events (counted in aggregate statistics only). If it is not passed, the recipient is treated as unknown consent status and the email is still sent (the open and click are anonymised unless your account tracks unknown-consent contacts). A value other than `true`/`false` is rejected. Ignored when the feature is not enabled for your account.
+
         exclude_list_ids : typing.Optional[typing.Sequence[int]]
             Lists under user account where contact should not be added
 
@@ -547,7 +559,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.create_doi_contact(
             email="elly@example.com",
@@ -562,6 +575,7 @@ class ContactsClient:
             redirection_url=redirection_url,
             template_id=template_id,
             attributes=attributes,
+            contact_pixel_tracking_consent=contact_pixel_tracking_consent,
             exclude_list_ids=exclude_list_ids,
             request_options=request_options,
         )
@@ -623,7 +637,8 @@ class ContactsClient:
         from brevo.contacts import RequestContactExportRequestCustomContactFilter
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.request_contact_export(
             custom_contact_filter=RequestContactExportRequestCustomContactFilter(),
@@ -681,7 +696,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_folders()
         """
@@ -712,7 +728,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.create_folder()
         """
@@ -743,7 +760,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_folder(
             folder_id=1000000,
@@ -782,7 +800,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.update_folder(
             folder_id=1000000,
@@ -812,7 +831,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.delete_folder(
             folder_id=1000000,
@@ -862,7 +882,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_folder_lists(
             folder_id=1000000,
@@ -944,7 +965,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.import_contacts()
         """
@@ -1002,7 +1024,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_lists()
         """
@@ -1036,7 +1059,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.create_list(
             folder_id=2,
@@ -1081,7 +1105,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_list(
             list_id=1000000,
@@ -1126,7 +1151,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.update_list(
             list_id=1000000,
@@ -1158,7 +1184,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.delete_list(
             list_id=1000000,
@@ -1210,7 +1237,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_contacts_from_list(
             list_id=1000000,
@@ -1255,7 +1283,8 @@ class ContactsClient:
         from brevo.contacts import AddContactToListRequestBodyEmails
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.add_contact_to_list(
             list_id=1000000,
@@ -1296,7 +1325,8 @@ class ContactsClient:
         from brevo.contacts import RemoveContactFromListRequestBodyAll
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.remove_contact_from_list(
             list_id=1000000,
@@ -1343,7 +1373,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_segments()
         """
@@ -1393,7 +1424,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_contact_info(
             identifier="identifier",
@@ -1472,7 +1504,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.update_contact(
             identifier="identifier",
@@ -1523,7 +1556,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.delete_contact(
             identifier="identifier",
@@ -1569,7 +1603,8 @@ class ContactsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.contacts.get_contact_stats(
             identifier="identifier",
@@ -1657,7 +1692,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1748,7 +1784,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1794,7 +1831,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1859,7 +1897,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1928,7 +1967,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1983,7 +2023,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2033,7 +2074,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2079,7 +2121,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2100,6 +2143,7 @@ class AsyncContactsClient:
         redirection_url: str,
         template_id: int,
         attributes: typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]] = OMIT,
+        contact_pixel_tracking_consent: typing.Optional[bool] = OMIT,
         exclude_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -2123,6 +2167,9 @@ class AsyncContactsClient:
         attributes : typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]]
             Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
 
+        contact_pixel_tracking_consent : typing.Optional[bool]
+            Consent of the DOI recipient for open (pixel) and click tracking in the double opt-in confirmation email, resolved by the sender at send time. Considered only if the per-contact pixel tracking consent feature is enabled for your account. Pass `true` if this recipient has consented to open and click tracking, in which case the open pixel and tracked links identify the recipient. Pass `false` to anonymise the open and click events (counted in aggregate statistics only). If it is not passed, the recipient is treated as unknown consent status and the email is still sent (the open and click are anonymised unless your account tracks unknown-consent contacts). A value other than `true`/`false` is rejected. Ignored when the feature is not enabled for your account.
+
         exclude_list_ids : typing.Optional[typing.Sequence[int]]
             Lists under user account where contact should not be added
 
@@ -2140,7 +2187,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2161,6 +2209,7 @@ class AsyncContactsClient:
             redirection_url=redirection_url,
             template_id=template_id,
             attributes=attributes,
+            contact_pixel_tracking_consent=contact_pixel_tracking_consent,
             exclude_list_ids=exclude_list_ids,
             request_options=request_options,
         )
@@ -2224,7 +2273,8 @@ class AsyncContactsClient:
         from brevo.contacts import RequestContactExportRequestCustomContactFilter
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2290,7 +2340,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2331,7 +2382,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2370,7 +2422,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2417,7 +2470,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2455,7 +2509,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2513,7 +2568,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2603,7 +2659,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2669,7 +2726,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2713,7 +2771,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2766,7 +2825,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2819,7 +2879,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2859,7 +2920,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2919,7 +2981,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2972,7 +3035,8 @@ class AsyncContactsClient:
         from brevo.contacts import AddContactToListRequestBodyEmails
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3023,7 +3087,8 @@ class AsyncContactsClient:
         from brevo.contacts import RemoveContactFromListRequestBodyAll
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3080,7 +3145,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3138,7 +3204,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3225,7 +3292,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3284,7 +3352,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -3338,7 +3407,8 @@ class AsyncContactsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

@@ -17,11 +17,19 @@ class GetScheduledEmailByIdResponseCreatedAt(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Datetime on which the email was scheduled"),
     ]
+    """
+    Datetime on which the email was scheduled
+    """
+
     scheduled_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="scheduledAt"),
         pydantic.Field(alias="scheduledAt", description="Datetime for which the email was scheduled"),
     ]
+    """
+    Datetime for which the email was scheduled
+    """
+
     status: GetScheduledEmailByIdResponseCreatedAtStatus = pydantic.Field()
     """
     Current status of the scheduled email

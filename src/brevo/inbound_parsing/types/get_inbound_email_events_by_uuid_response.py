@@ -29,6 +29,10 @@ class GetInboundEmailEventsByUuidResponse(UncheckedBaseModel):
             alias="deliveredAt", description="Date when email was delivered successfully to the client’s webhook"
         ),
     ] = None
+    """
+    Date when email was delivered successfully to the client’s webhook
+    """
+
     logs: typing.Optional[typing.List[GetInboundEmailEventsByUuidResponseLogsItem]] = pydantic.Field(default=None)
     """
     List of events/logs that describe the lifecycle of the email on the Brevo platform
@@ -42,11 +46,19 @@ class GetInboundEmailEventsByUuidResponse(UncheckedBaseModel):
             description="Value of the Message-ID header. This will be present only after the processing is done.",
         ),
     ] = None
+    """
+    Value of the Message-ID header. This will be present only after the processing is done.
+    """
+
     received_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="receivedAt"),
         pydantic.Field(alias="receivedAt", description="Date when email was received on SMTP relay"),
     ] = None
+    """
+    Date when email was received on SMTP relay
+    """
+
     recipient: typing.Optional[str] = pydantic.Field(default=None)
     """
     Recipient’s email address

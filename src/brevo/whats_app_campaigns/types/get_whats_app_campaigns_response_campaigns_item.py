@@ -19,11 +19,19 @@ class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="campaignName"),
         pydantic.Field(alias="campaignName", description="Name of the WhatsApp Campaign"),
     ]
+    """
+    Name of the WhatsApp Campaign
+    """
+
     campaign_status: typing_extensions.Annotated[
         GetWhatsAppCampaignsResponseCampaignsItemCampaignStatus,
         FieldMetadata(alias="campaignStatus"),
         pydantic.Field(alias="campaignStatus", description="Status of the Whatsapp Campaign"),
     ]
+    """
+    Status of the Whatsapp Campaign
+    """
+
     created_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="createdAt"),
@@ -31,11 +39,19 @@ class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     error_reason: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="errorReason"),
         pydantic.Field(alias="errorReason", description="Error Reason associated with the WhatsApp campaign sending"),
     ] = None
+    """
+    Error Reason associated with the WhatsApp campaign sending
+    """
+
     id: int = pydantic.Field()
     """
     ID of the WhatsApp Campaign
@@ -46,6 +62,10 @@ class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
         FieldMetadata(alias="invalidatedContacts"),
         pydantic.Field(alias="invalidatedContacts", description="Count of invalidated contacts"),
     ] = None
+    """
+    Count of invalidated contacts
+    """
+
     modified_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="modifiedAt"),
@@ -54,11 +74,19 @@ class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
             description="UTC date-time of last modification of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)",
         ),
     ]
+    """
+    UTC date-time of last modification of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     read_percentage: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="readPercentage"),
         pydantic.Field(alias="readPercentage", description="Read percentage of the the whatsapp campaign created"),
     ] = None
+    """
+    Read percentage of the the whatsapp campaign created
+    """
+
     scheduled_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="scheduledAt"),
@@ -67,12 +95,19 @@ class GetWhatsAppCampaignsResponseCampaignsItem(UncheckedBaseModel):
             description="UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format",
         ),
     ]
+    """
+    UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format
+    """
+
     stats: typing.Optional[WhatsappCampStats] = None
     template_id: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="templateId"),
         pydantic.Field(alias="templateId", description="Id of the WhatsApp template"),
     ]
+    """
+    Id of the WhatsApp template
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -15,16 +15,27 @@ class GetParameterSubscriptionInfoResponseMembersItem(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the member was created."),
     ] = None
+    """
+    Timestamp when the member was created.
+    """
+
     member_contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="memberContactId"),
         pydantic.Field(alias="memberContactId", description="Unique identifier of the member."),
     ] = None
+    """
+    Unique identifier of the member.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the member was last updated."),
     ] = None
+    """
+    Timestamp when the member was last updated.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

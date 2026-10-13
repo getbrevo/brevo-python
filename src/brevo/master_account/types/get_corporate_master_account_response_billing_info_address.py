@@ -19,6 +19,10 @@ class GetCorporateMasterAccountResponseBillingInfoAddress(UncheckedBaseModel):
         FieldMetadata(alias="countryCode"),
         pydantic.Field(alias="countryCode", description="Country code"),
     ] = None
+    """
+    Country code
+    """
+
     locality: typing.Optional[str] = pydantic.Field(default=None)
     """
     Locality
@@ -29,16 +33,27 @@ class GetCorporateMasterAccountResponseBillingInfoAddress(UncheckedBaseModel):
         FieldMetadata(alias="postalCode"),
         pydantic.Field(alias="postalCode", description="Postal code"),
     ] = None
+    """
+    Postal code
+    """
+
     state_code: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="stateCode"),
         pydantic.Field(alias="stateCode", description="State code"),
     ] = None
+    """
+    State code
+    """
+
     street_address: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="streetAddress"),
         pydantic.Field(alias="streetAddress", description="Street address"),
     ] = None
+    """
+    Street address
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -15,16 +15,28 @@ class GetInboundEmailEventsByUuidResponseAttachmentsItem(UncheckedBaseModel):
         FieldMetadata(alias="contentId"),
         pydantic.Field(alias="contentId", description="value of the Content-ID header of the attachment."),
     ] = None
+    """
+    value of the Content-ID header of the attachment.
+    """
+
     content_length: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contentLength"),
         pydantic.Field(alias="contentLength", description="size of the attachment in bytes"),
     ] = None
+    """
+    size of the attachment in bytes
+    """
+
     content_type: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="contentType"),
         pydantic.Field(alias="contentType", description="value of the Content-Type header of the attachment"),
     ] = None
+    """
+    value of the Content-Type header of the attachment
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     filename specified in the Content-Disposition header of the attachment

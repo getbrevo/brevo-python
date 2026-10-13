@@ -28,6 +28,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseRule(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the rule was created"),
     ] = None
+    """
+    Timestamp when the rule was created
+    """
+
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the rule
@@ -43,16 +47,28 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseRule(UncheckedBaseModel):
         FieldMetadata(alias="isInternal"),
         pydantic.Field(alias="isInternal", description="Metric to identify if it's an internal rule or not"),
     ] = None
+    """
+    Metric to identify if it's an internal rule or not
+    """
+
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty Program id to which current rule is associated"),
     ] = None
+    """
+    Loyalty Program id to which current rule is associated
+    """
+
     loyalty_version_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="loyaltyVersionId"),
         pydantic.Field(alias="loyaltyVersionId", description="Loyalty Version id to which current rule is associated"),
     ] = None
+    """
+    Loyalty Version id to which current rule is associated
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional data to define the rule
@@ -75,16 +91,27 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseRule(UncheckedBaseModel):
         FieldMetadata(alias="ruleId"),
         pydantic.Field(alias="ruleId", description="Unique identifier for the rule"),
     ] = None
+    """
+    Unique identifier for the rule
+    """
+
     rule_type: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="ruleType"),
         pydantic.Field(alias="ruleType", description="Type of the rule"),
     ] = None
+    """
+    Type of the rule
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the rule was updated"),
     ] = None
+    """
+    Timestamp when the rule was updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

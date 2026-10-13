@@ -15,11 +15,18 @@ class PutConversationsVisitorGroupResponse(UncheckedBaseModel):
         FieldMetadata(alias="groupId"),
         pydantic.Field(alias="groupId", description="group ID the visitor was assigned to"),
     ] = None
+    """
+    group ID the visitor was assigned to
+    """
+
     visitor_id: typing_extensions.Annotated[
         typing.Optional[typing.Any],
         FieldMetadata(alias="visitorId"),
         pydantic.Field(alias="visitorId", description="visitor ID"),
     ] = None
+    """
+    visitor ID
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

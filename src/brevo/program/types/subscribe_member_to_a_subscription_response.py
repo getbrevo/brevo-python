@@ -16,26 +16,45 @@ class SubscribeMemberToASubscriptionResponse(UncheckedBaseModel):
         FieldMetadata(alias="organizationId"),
         pydantic.Field(alias="organizationId", description="Unique identifier of the organization."),
     ] = None
+    """
+    Unique identifier of the organization.
+    """
+
     owner_contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="ownerContactId"),
         pydantic.Field(alias="ownerContactId", description="Unique identifier of the subscription owner."),
     ] = None
+    """
+    Unique identifier of the subscription owner.
+    """
+
     member_contact_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="memberContactIds"),
         pydantic.Field(alias="memberContactIds", description="List of unique member contact IDs."),
     ] = None
+    """
+    List of unique member contact IDs.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the subscription member was created."),
     ] = None
+    """
+    Timestamp when the subscription member was created.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the subscription member was last updated."),
     ] = None
+    """
+    Timestamp when the subscription member was last updated.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

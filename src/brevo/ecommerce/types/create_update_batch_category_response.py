@@ -15,11 +15,18 @@ class CreateUpdateBatchCategoryResponse(UncheckedBaseModel):
         FieldMetadata(alias="createdCount"),
         pydantic.Field(alias="createdCount", description="Number of the new created categories"),
     ] = None
+    """
+    Number of the new created categories
+    """
+
     updated_count: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="updatedCount"),
         pydantic.Field(alias="updatedCount", description="Number of the existing categories updated"),
     ] = None
+    """
+    Number of the existing categories updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

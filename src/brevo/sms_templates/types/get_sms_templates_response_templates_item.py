@@ -68,6 +68,10 @@ class GetSmsTemplatesResponseTemplatesItem(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ] = None
+    """
+    Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="updatedAt"),
@@ -75,6 +79,9 @@ class GetSmsTemplatesResponseTemplatesItem(UncheckedBaseModel):
             alias="updatedAt", description="Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ] = None
+    """
+    Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

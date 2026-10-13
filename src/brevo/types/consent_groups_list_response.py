@@ -20,6 +20,10 @@ class ConsentGroupsListResponse(UncheckedBaseModel):
         FieldMetadata(alias="consentGroups"),
         pydantic.Field(alias="consentGroups", description="List of consent groups matching the filter"),
     ]
+    """
+    List of consent groups matching the filter
+    """
+
     total: int = pydantic.Field()
     """
     Total number of consent groups matching the filter

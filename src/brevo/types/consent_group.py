@@ -39,16 +39,28 @@ class ConsentGroup(UncheckedBaseModel):
             description="Controls how contacts are added to the group. `manual` — contacts are added explicitly via the API. `automatic` — contacts are added automatically at signup.",
         ),
     ]
+    """
+    Controls how contacts are added to the group. `manual` — contacts are added explicitly via the API. `automatic` — contacts are added automatically at signup.
+    """
+
     contacts_count: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="contactsCount"),
         pydantic.Field(alias="contactsCount", description="Number of contacts currently in this consent group"),
     ]
+    """
+    Number of contacts currently in this consent group
+    """
+
     is_default: typing_extensions.Annotated[
         bool,
         FieldMetadata(alias="isDefault"),
         pydantic.Field(alias="isDefault", description="Whether this is a system-created default consent group"),
     ]
+    """
+    Whether this is a system-created default consent group
+    """
+
     created_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="createdAt"),
@@ -56,6 +68,10 @@ class ConsentGroup(UncheckedBaseModel):
             alias="createdAt", description="UTC date-time when the consent group was created (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    UTC date-time when the consent group was created (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     updated_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="updatedAt"),
@@ -64,6 +80,9 @@ class ConsentGroup(UncheckedBaseModel):
             description="UTC date-time when the consent group was last updated (YYYY-MM-DDTHH:mm:ss.SSSZ)",
         ),
     ]
+    """
+    UTC date-time when the consent group was last updated (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

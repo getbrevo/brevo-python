@@ -24,11 +24,19 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponse(UncheckedBaseModel)
             alias="balanceDefinitionId", description="Unique identifier of the associated balance definition."
         ),
     ] = None
+    """
+    Unique identifier of the associated balance definition.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact related to the transactions."),
     ] = None
+    """
+    Unique identifier of the contact related to the transactions.
+    """
+
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Total number of transactions in the history.
@@ -39,6 +47,10 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponse(UncheckedBaseModel)
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the associated loyalty program."),
     ] = None
+    """
+    Unique identifier of the associated loyalty program.
+    """
+
     transaction_history: typing_extensions.Annotated[
         typing.Optional[typing.List[GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryItem]],
         FieldMetadata(alias="transactionHistory"),
@@ -46,6 +58,9 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponse(UncheckedBaseModel)
             alias="transactionHistory", description="List of past transactions associated with the balance."
         ),
     ] = None
+    """
+    List of past transactions associated with the balance.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

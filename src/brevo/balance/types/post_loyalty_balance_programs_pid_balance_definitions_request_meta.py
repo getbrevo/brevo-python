@@ -19,6 +19,9 @@ class PostLoyaltyBalanceProgramsPidBalanceDefinitionsRequestMeta(UncheckedBaseMo
         FieldMetadata(alias="isInternal"),
         pydantic.Field(alias="isInternal", description="Indicates whether the balance definition is internal."),
     ] = None
+    """
+    Indicates whether the balance definition is internal.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

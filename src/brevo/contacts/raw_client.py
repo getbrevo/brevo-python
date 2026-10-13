@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -408,7 +408,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="POST",
             json={
                 "enumeration": convert_and_respect_annotation_metadata(
@@ -488,7 +488,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="PUT",
             json={
                 "enumeration": convert_and_respect_annotation_metadata(
@@ -565,7 +565,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -629,7 +629,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/multiple-choice/{jsonable_encoder(multiple_choice_attribute)}/{jsonable_encoder(multiple_choice_attribute_option)}",
+            f"contacts/attributes/multiple-choice/{encode_path_param(multiple_choice_attribute)}/{encode_path_param(multiple_choice_attribute_option)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -735,6 +735,7 @@ class RawContactsClient:
         redirection_url: str,
         template_id: int,
         attributes: typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]] = OMIT,
+        contact_pixel_tracking_consent: typing.Optional[bool] = OMIT,
         exclude_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
@@ -758,6 +759,9 @@ class RawContactsClient:
         attributes : typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]]
             Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
 
+        contact_pixel_tracking_consent : typing.Optional[bool]
+            Consent of the DOI recipient for open (pixel) and click tracking in the double opt-in confirmation email, resolved by the sender at send time. Considered only if the per-contact pixel tracking consent feature is enabled for your account. Pass `true` if this recipient has consented to open and click tracking, in which case the open pixel and tracked links identify the recipient. Pass `false` to anonymise the open and click events (counted in aggregate statistics only). If it is not passed, the recipient is treated as unknown consent status and the email is still sent (the open and click are anonymised unless your account tracks unknown-consent contacts). A value other than `true`/`false` is rejected. Ignored when the feature is not enabled for your account.
+
         exclude_list_ids : typing.Optional[typing.Sequence[int]]
             Lists under user account where contact should not be added
 
@@ -777,6 +781,7 @@ class RawContactsClient:
                     annotation=typing.Dict[str, CreateDoiContactRequestAttributesValue],
                     direction="write",
                 ),
+                "contactPixelTrackingConsent": contact_pixel_tracking_consent,
                 "email": email,
                 "excludeListIds": exclude_list_ids,
                 "includeListIds": include_list_ids,
@@ -1080,7 +1085,7 @@ class RawContactsClient:
             Folder details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1151,7 +1156,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="PUT",
             json={
                 "name": name,
@@ -1215,7 +1220,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1290,7 +1295,7 @@ class RawContactsClient:
             Folder's Lists details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}/lists",
+            f"contacts/folders/{encode_path_param(folder_id)}/lists",
             method="GET",
             params={
                 "limit": limit,
@@ -1631,7 +1636,7 @@ class RawContactsClient:
             List informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="GET",
             params={
                 "startDate": start_date,
@@ -1710,7 +1715,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="PUT",
             json={
                 "folderId": folder_id,
@@ -1775,7 +1780,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1852,7 +1857,7 @@ class RawContactsClient:
             Contact informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts",
             method="GET",
             params={
                 "modifiedSince": modified_since,
@@ -1938,7 +1943,7 @@ class RawContactsClient:
             All contacts have been added successfully to the list with details of failed ones
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts/add",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts/add",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=AddContactToListRequestBody, direction="write"
@@ -2014,7 +2019,7 @@ class RawContactsClient:
             All contacts have been removed successfully from the list with details of failed ones
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts/remove",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts/remove",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=RemoveContactFromListRequestBody, direction="write"
@@ -2173,7 +2178,7 @@ class RawContactsClient:
             Contact informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="GET",
             params={
                 "identifierType": identifier_type,
@@ -2283,7 +2288,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="PUT",
             params={
                 "identifierType": identifier_type,
@@ -2379,7 +2384,7 @@ class RawContactsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="DELETE",
             params={
                 "identifierType": identifier_type,
@@ -2462,7 +2467,7 @@ class RawContactsClient:
             Contact campaign statistics informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}/campaignStats",
+            f"contacts/{encode_path_param(identifier)}/campaignStats",
             method="GET",
             params={
                 "startDate": start_date,
@@ -2852,7 +2857,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="POST",
             json={
                 "enumeration": convert_and_respect_annotation_metadata(
@@ -2932,7 +2937,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="PUT",
             json={
                 "enumeration": convert_and_respect_annotation_metadata(
@@ -3009,7 +3014,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/{jsonable_encoder(attribute_category)}/{jsonable_encoder(attribute_name)}",
+            f"contacts/attributes/{encode_path_param(attribute_category)}/{encode_path_param(attribute_name)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3073,7 +3078,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/attributes/multiple-choice/{jsonable_encoder(multiple_choice_attribute)}/{jsonable_encoder(multiple_choice_attribute_option)}",
+            f"contacts/attributes/multiple-choice/{encode_path_param(multiple_choice_attribute)}/{encode_path_param(multiple_choice_attribute_option)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3179,6 +3184,7 @@ class AsyncRawContactsClient:
         redirection_url: str,
         template_id: int,
         attributes: typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]] = OMIT,
+        contact_pixel_tracking_consent: typing.Optional[bool] = OMIT,
         exclude_list_ids: typing.Optional[typing.Sequence[int]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
@@ -3202,6 +3208,9 @@ class AsyncRawContactsClient:
         attributes : typing.Optional[typing.Dict[str, CreateDoiContactRequestAttributesValue]]
             Pass the set of attributes and their values. **These attributes must be present in your Brevo account**. For eg. **{'FNAME':'Elly', 'LNAME':'Roger', 'COUNTRIES': ['India','China']}**
 
+        contact_pixel_tracking_consent : typing.Optional[bool]
+            Consent of the DOI recipient for open (pixel) and click tracking in the double opt-in confirmation email, resolved by the sender at send time. Considered only if the per-contact pixel tracking consent feature is enabled for your account. Pass `true` if this recipient has consented to open and click tracking, in which case the open pixel and tracked links identify the recipient. Pass `false` to anonymise the open and click events (counted in aggregate statistics only). If it is not passed, the recipient is treated as unknown consent status and the email is still sent (the open and click are anonymised unless your account tracks unknown-consent contacts). A value other than `true`/`false` is rejected. Ignored when the feature is not enabled for your account.
+
         exclude_list_ids : typing.Optional[typing.Sequence[int]]
             Lists under user account where contact should not be added
 
@@ -3221,6 +3230,7 @@ class AsyncRawContactsClient:
                     annotation=typing.Dict[str, CreateDoiContactRequestAttributesValue],
                     direction="write",
                 ),
+                "contactPixelTrackingConsent": contact_pixel_tracking_consent,
                 "email": email,
                 "excludeListIds": exclude_list_ids,
                 "includeListIds": include_list_ids,
@@ -3524,7 +3534,7 @@ class AsyncRawContactsClient:
             Folder details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -3595,7 +3605,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="PUT",
             json={
                 "name": name,
@@ -3659,7 +3669,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}",
+            f"contacts/folders/{encode_path_param(folder_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3734,7 +3744,7 @@ class AsyncRawContactsClient:
             Folder's Lists details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/folders/{jsonable_encoder(folder_id)}/lists",
+            f"contacts/folders/{encode_path_param(folder_id)}/lists",
             method="GET",
             params={
                 "limit": limit,
@@ -4075,7 +4085,7 @@ class AsyncRawContactsClient:
             List informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="GET",
             params={
                 "startDate": start_date,
@@ -4154,7 +4164,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="PUT",
             json={
                 "folderId": folder_id,
@@ -4219,7 +4229,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}",
+            f"contacts/lists/{encode_path_param(list_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -4296,7 +4306,7 @@ class AsyncRawContactsClient:
             Contact informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts",
             method="GET",
             params={
                 "modifiedSince": modified_since,
@@ -4382,7 +4392,7 @@ class AsyncRawContactsClient:
             All contacts have been added successfully to the list with details of failed ones
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts/add",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts/add",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=AddContactToListRequestBody, direction="write"
@@ -4458,7 +4468,7 @@ class AsyncRawContactsClient:
             All contacts have been removed successfully from the list with details of failed ones
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/lists/{jsonable_encoder(list_id)}/contacts/remove",
+            f"contacts/lists/{encode_path_param(list_id)}/contacts/remove",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=RemoveContactFromListRequestBody, direction="write"
@@ -4617,7 +4627,7 @@ class AsyncRawContactsClient:
             Contact informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="GET",
             params={
                 "identifierType": identifier_type,
@@ -4727,7 +4737,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="PUT",
             params={
                 "identifierType": identifier_type,
@@ -4823,7 +4833,7 @@ class AsyncRawContactsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}",
+            f"contacts/{encode_path_param(identifier)}",
             method="DELETE",
             params={
                 "identifierType": identifier_type,
@@ -4906,7 +4916,7 @@ class AsyncRawContactsClient:
             Contact campaign statistics informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"contacts/{jsonable_encoder(identifier)}/campaignStats",
+            f"contacts/{encode_path_param(identifier)}/campaignStats",
             method="GET",
             params={
                 "startDate": start_date,

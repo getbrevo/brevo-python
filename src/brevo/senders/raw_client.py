@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -317,7 +317,7 @@ class RawSendersClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}",
+            f"senders/{encode_path_param(sender_id)}",
             method="PUT",
             json={
                 "email": email,
@@ -393,7 +393,7 @@ class RawSendersClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}",
+            f"senders/{encode_path_param(sender_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -462,7 +462,7 @@ class RawSendersClient:
             List of dedicated IPs retrieved successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}/ips",
+            f"senders/{encode_path_param(sender_id)}/ips",
             method="GET",
             request_options=request_options,
         )
@@ -539,7 +539,7 @@ class RawSendersClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}/validate",
+            f"senders/{encode_path_param(sender_id)}/validate",
             method="PUT",
             json={
                 "otp": otp,
@@ -879,7 +879,7 @@ class AsyncRawSendersClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}",
+            f"senders/{encode_path_param(sender_id)}",
             method="PUT",
             json={
                 "email": email,
@@ -955,7 +955,7 @@ class AsyncRawSendersClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}",
+            f"senders/{encode_path_param(sender_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1024,7 +1024,7 @@ class AsyncRawSendersClient:
             List of dedicated IPs retrieved successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}/ips",
+            f"senders/{encode_path_param(sender_id)}/ips",
             method="GET",
             request_options=request_options,
         )
@@ -1101,7 +1101,7 @@ class AsyncRawSendersClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/{jsonable_encoder(sender_id)}/validate",
+            f"senders/{encode_path_param(sender_id)}/validate",
             method="PUT",
             json={
                 "otp": otp,

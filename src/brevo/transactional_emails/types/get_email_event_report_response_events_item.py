@@ -31,6 +31,10 @@ class GetEmailEventReportResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="from"),
         pydantic.Field(alias="from", description="Sender email from which the emails are sent"),
     ] = None
+    """
+    Sender email from which the emails are sent
+    """
+
     ip: typing.Optional[str] = pydantic.Field(default=None)
     """
     IP from which the user has opened the email or clicked on the link (only available if the event is opened or clicks)
@@ -46,6 +50,10 @@ class GetEmailEventReportResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="Message ID which generated the event"),
     ]
+    """
+    Message ID which generated the event
+    """
+
     reason: typing.Optional[str] = pydantic.Field(default=None)
     """
     Reason of bounce (only available if the event is hardbounce or softbounce)
@@ -68,6 +76,9 @@ class GetEmailEventReportResponseEventsItem(UncheckedBaseModel):
             alias="templateId", description="ID of the template (only available if the email is template based)"
         ),
     ] = None
+    """
+    ID of the template (only available if the email is template based)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

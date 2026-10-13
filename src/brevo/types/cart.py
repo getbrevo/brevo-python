@@ -27,6 +27,9 @@ class Cart(UncheckedBaseModel):
             description="Payment amount, in cents. e.g. if you want to request €12.00, then the amount in cents is 1200.",
         ),
     ]
+    """
+    Payment amount, in cents. e.g. if you want to request €12.00, then the amount in cents is 1200.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

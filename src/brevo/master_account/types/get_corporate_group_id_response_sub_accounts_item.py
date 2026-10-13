@@ -15,11 +15,19 @@ class GetCorporateGroupIdResponseSubAccountsItem(UncheckedBaseModel):
         FieldMetadata(alias="companyName"),
         pydantic.Field(alias="companyName", description="Name of the sub-account organzation"),
     ] = None
+    """
+    Name of the sub-account organzation
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Creation date of the sub-account organzation"),
     ] = None
+    """
+    Creation date of the sub-account organzation
+    """
+
     id: typing.Optional[int] = pydantic.Field(default=None)
     """
     Id of the sub-account organzation

@@ -18,6 +18,9 @@ class RemoveContactFromListRequestBodyExtIds(UncheckedBaseModel):
             description="**Required if 'all' is false, 'ids' and 'emails' are empty.** EXT_ID attributes to remove from a list. You can pass a **maximum of 150 EXT_ID attributes** for removal in one request.",
         ),
     ] = None
+    """
+    **Required if 'all' is false, 'ids' and 'emails' are empty.** EXT_ID attributes to remove from a list. You can pass a **maximum of 150 EXT_ID attributes** for removal in one request.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

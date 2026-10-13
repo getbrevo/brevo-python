@@ -25,16 +25,27 @@ class GetFolder(UncheckedBaseModel):
         FieldMetadata(alias="totalBlacklisted"),
         pydantic.Field(alias="totalBlacklisted", description="Number of blacklisted contacts in the folder"),
     ]
+    """
+    Number of blacklisted contacts in the folder
+    """
+
     total_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="totalSubscribers"),
         pydantic.Field(alias="totalSubscribers", description="Number of contacts in the folder"),
     ]
+    """
+    Number of contacts in the folder
+    """
+
     unique_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueSubscribers"),
         pydantic.Field(alias="uniqueSubscribers", description="Number of unique contacts in the folder"),
     ]
+    """
+    Number of unique contacts in the folder
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

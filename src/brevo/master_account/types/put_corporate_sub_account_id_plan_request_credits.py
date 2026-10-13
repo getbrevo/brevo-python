@@ -28,6 +28,11 @@ class PutCorporateSubAccountIdPlanRequestCredits(UncheckedBaseModel):
             description="Number of externalFeeds credits, possible values are 0 or 1\n|available in ENTv2 only",
         ),
     ] = None
+    """
+    Number of externalFeeds credits, possible values are 0 or 1
+    |available in ENTv2 only
+    """
+
     sms: typing.Optional[float] = pydantic.Field(default=None)
     """
     Number of SMS credits | Pass the value -1 for unlimited SMS
@@ -48,6 +53,10 @@ class PutCorporateSubAccountIdPlanRequestCredits(UncheckedBaseModel):
             description="Number of Push credits, possible value is 0 and -1 |\navailable in ENT-v2 only",
         ),
     ] = None
+    """
+    Number of Push credits, possible value is 0 and -1 |
+    available in ENT-v2 only
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

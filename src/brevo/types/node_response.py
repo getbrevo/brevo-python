@@ -37,9 +37,17 @@ class NodeResponse(UncheckedBaseModel):
         FieldMetadata(alias="float"),
         pydantic.Field(alias="float", description="Float values for rule definition"),
     ] = None
+    """
+    Float values for rule definition
+    """
+
     int_: typing_extensions.Annotated[
         typing.Optional[int], FieldMetadata(alias="int"), pydantic.Field(alias="int", description="int64")
     ] = None
+    """
+    int64
+    """
+
     op: typing.Optional[str] = pydantic.Field(default=None)
     """
     Operator selected for rule definition

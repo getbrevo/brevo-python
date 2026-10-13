@@ -15,6 +15,10 @@ class GetCampaignRecipients(UncheckedBaseModel):
         FieldMetadata(alias="excludedSegments"),
         pydantic.Field(alias="excludedSegments", description="Segment IDs excluded from the campaign"),
     ] = None
+    """
+    Segment IDs excluded from the campaign
+    """
+
     exclusion_lists: typing_extensions.Annotated[
         typing.List[int], FieldMetadata(alias="exclusionLists"), pydantic.Field(alias="exclusionLists")
     ]

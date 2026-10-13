@@ -15,6 +15,10 @@ class SendWhatsappMessageRequestParams(UncheckedBaseModel):
         FieldMetadata(alias="contactNumbers"),
         pydantic.Field(alias="contactNumbers", description="List of phone numbers of the contacts"),
     ]
+    """
+    List of phone numbers of the contacts
+    """
+
     params: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}.
@@ -25,11 +29,18 @@ class SendWhatsappMessageRequestParams(UncheckedBaseModel):
         FieldMetadata(alias="senderNumber"),
         pydantic.Field(alias="senderNumber", description="WhatsApp Number with country code. Example, 85264318721"),
     ]
+    """
+    WhatsApp Number with country code. Example, 85264318721
+    """
+
     template_id: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="templateId"),
         pydantic.Field(alias="templateId", description="ID of the template to send"),
     ]
+    """
+    ID of the template to send
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

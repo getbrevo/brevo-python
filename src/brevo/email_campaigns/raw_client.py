@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -191,6 +191,9 @@ class RawEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -294,6 +297,15 @@ class RawEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -354,6 +366,9 @@ class RawEmailCampaignsClient:
                 "updateFormId": update_form_id,
                 "utmCampaign": utm_campaign,
                 "utmContent": utm_content,
+                "utmId": utm_id,
+                "utmMedium": utm_medium,
+                "utmSource": utm_source,
                 "utmTerm": utm_term,
                 "winnerCriteria": winner_criteria,
                 "winnerDelay": winner_delay,
@@ -421,7 +436,7 @@ class RawEmailCampaignsClient:
             The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
 
         name : typing.Optional[str]
-            Name of the image.
+            Name shown in your Brevo image gallery. Include the file extension, e.g. product-banner.png
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -505,7 +520,7 @@ class RawEmailCampaignsClient:
             Email campaign information
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="GET",
             params={
                 "statistics": statistics,
@@ -589,6 +604,9 @@ class RawEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -695,6 +713,15 @@ class RawEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -712,7 +739,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="PUT",
             json={
                 "abTesting": ab_testing,
@@ -754,6 +781,9 @@ class RawEmailCampaignsClient:
                 "updateFormId": update_form_id,
                 "utmCampaign": utm_campaign,
                 "utmContent": utm_content,
+                "utmId": utm_id,
+                "utmMedium": utm_medium,
+                "utmSource": utm_source,
                 "utmTerm": utm_term,
                 "winnerCriteria": winner_criteria,
                 "winnerDelay": winner_delay,
@@ -828,7 +858,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -897,7 +927,7 @@ class RawEmailCampaignsClient:
             A/B test email campaign Result
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/abTestCampaignResult",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/abTestCampaignResult",
             method="GET",
             request_options=request_options,
         )
@@ -973,7 +1003,7 @@ class RawEmailCampaignsClient:
             process id created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/exportRecipients",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/exportRecipients",
             method="POST",
             json={
                 "notifyURL": notify_url,
@@ -1045,7 +1075,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendNow",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendNow",
             method="POST",
             request_options=request_options,
         )
@@ -1124,7 +1154,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendReport",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendReport",
             method="POST",
             json={
                 "email": convert_and_respect_annotation_metadata(
@@ -1198,7 +1228,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendTest",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendTest",
             method="POST",
             json={
                 "emailTo": email_to,
@@ -1263,7 +1293,7 @@ class RawEmailCampaignsClient:
             Shared template URL information
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sharedUrl",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sharedUrl",
             method="GET",
             request_options=request_options,
         )
@@ -1345,7 +1375,7 @@ class RawEmailCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/status",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/status",
             method="PUT",
             json={
                 "status": status,
@@ -1535,6 +1565,9 @@ class AsyncRawEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[CreateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -1638,6 +1671,15 @@ class AsyncRawEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -1698,6 +1740,9 @@ class AsyncRawEmailCampaignsClient:
                 "updateFormId": update_form_id,
                 "utmCampaign": utm_campaign,
                 "utmContent": utm_content,
+                "utmId": utm_id,
+                "utmMedium": utm_medium,
+                "utmSource": utm_source,
                 "utmTerm": utm_term,
                 "winnerCriteria": winner_criteria,
                 "winnerDelay": winner_delay,
@@ -1765,7 +1810,7 @@ class AsyncRawEmailCampaignsClient:
             The absolute url of the image (**no local file**). Maximum allowed size for image is **2MB**. Allowed extensions for images are: #### jpeg, jpg, png, bmp, gif.
 
         name : typing.Optional[str]
-            Name of the image.
+            Name shown in your Brevo image gallery. Include the file extension, e.g. product-banner.png
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1849,7 +1894,7 @@ class AsyncRawEmailCampaignsClient:
             Email campaign information
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="GET",
             params={
                 "statistics": statistics,
@@ -1933,6 +1978,9 @@ class AsyncRawEmailCampaignsClient:
         update_form_id: typing.Optional[str] = OMIT,
         utm_campaign: typing.Optional[str] = OMIT,
         utm_content: typing.Optional[str] = OMIT,
+        utm_id: typing.Optional[str] = OMIT,
+        utm_medium: typing.Optional[str] = OMIT,
+        utm_source: typing.Optional[str] = OMIT,
         utm_term: typing.Optional[str] = OMIT,
         winner_criteria: typing.Optional[UpdateEmailCampaignRequestWinnerCriteria] = OMIT,
         winner_delay: typing.Optional[int] = OMIT,
@@ -2039,6 +2087,15 @@ class AsyncRawEmailCampaignsClient:
         utm_content : typing.Optional[str]
             Customize the utm_content value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
+        utm_id : typing.Optional[str]
+            Customize the utm_id value. Appears on outgoing tracking links alongside utm_campaign. When omitted or empty, the utm_id entry from the account's global utm_settings is used if enabled; otherwise no utm_id parameter is emitted.
+
+        utm_medium : typing.Optional[str]
+            Customize the utm_medium value. When omitted or empty, the utm_medium entry from the account's global utm_settings is used if set; otherwise the default `email` is used.
+
+        utm_source : typing.Optional[str]
+            Customize the utm_source value. When omitted or empty, the utm_source entry from the account's global utm_settings is used if set; otherwise the account default (`brevo` or `sendinblue`) is used.
+
         utm_term : typing.Optional[str]
             Customize the utm_term value. Appears on outgoing tracking links alongside utm_campaign. Only alphanumeric characters and spaces are allowed
 
@@ -2056,7 +2113,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="PUT",
             json={
                 "abTesting": ab_testing,
@@ -2098,6 +2155,9 @@ class AsyncRawEmailCampaignsClient:
                 "updateFormId": update_form_id,
                 "utmCampaign": utm_campaign,
                 "utmContent": utm_content,
+                "utmId": utm_id,
+                "utmMedium": utm_medium,
+                "utmSource": utm_source,
                 "utmTerm": utm_term,
                 "winnerCriteria": winner_criteria,
                 "winnerDelay": winner_delay,
@@ -2172,7 +2232,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}",
+            f"emailCampaigns/{encode_path_param(campaign_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2241,7 +2301,7 @@ class AsyncRawEmailCampaignsClient:
             A/B test email campaign Result
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/abTestCampaignResult",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/abTestCampaignResult",
             method="GET",
             request_options=request_options,
         )
@@ -2317,7 +2377,7 @@ class AsyncRawEmailCampaignsClient:
             process id created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/exportRecipients",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/exportRecipients",
             method="POST",
             json={
                 "notifyURL": notify_url,
@@ -2389,7 +2449,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendNow",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendNow",
             method="POST",
             request_options=request_options,
         )
@@ -2468,7 +2528,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendReport",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendReport",
             method="POST",
             json={
                 "email": convert_and_respect_annotation_metadata(
@@ -2542,7 +2602,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sendTest",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sendTest",
             method="POST",
             json={
                 "emailTo": email_to,
@@ -2607,7 +2667,7 @@ class AsyncRawEmailCampaignsClient:
             Shared template URL information
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/sharedUrl",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/sharedUrl",
             method="GET",
             request_options=request_options,
         )
@@ -2689,7 +2749,7 @@ class AsyncRawEmailCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"emailCampaigns/{jsonable_encoder(campaign_id)}/status",
+            f"emailCampaigns/{encode_path_param(campaign_id)}/status",
             method="PUT",
             json={
                 "status": status,

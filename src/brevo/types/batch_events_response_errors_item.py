@@ -15,6 +15,10 @@ class BatchEventsResponseErrorsItem(UncheckedBaseModel):
         FieldMetadata(alias="eventIndex"),
         pydantic.Field(alias="eventIndex", description="Index positions (0-based) of the events that caused the error"),
     ] = None
+    """
+    Index positions (0-based) of the events that caused the error
+    """
+
     message: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the error

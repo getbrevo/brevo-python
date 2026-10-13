@@ -18,6 +18,10 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     doi_template: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="doiTemplate"),
@@ -26,11 +30,19 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
             description="It is true if template is a valid Double opt-in (DOI) template, otherwise it is false. This field will be available only in case of single template detail call.",
         ),
     ] = None
+    """
+    It is true if template is a valid Double opt-in (DOI) template, otherwise it is false. This field will be available only in case of single template detail call.
+    """
+
     html_content: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="htmlContent"),
         pydantic.Field(alias="htmlContent", description="HTML content of the template"),
     ]
+    """
+    HTML content of the template
+    """
+
     id: int = pydantic.Field()
     """
     ID of the template
@@ -41,6 +53,10 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
         FieldMetadata(alias="isActive"),
         pydantic.Field(alias="isActive", description="Status of template (true=active, false=inactive)"),
     ]
+    """
+    Status of template (true=active, false=inactive)
+    """
+
     modified_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="modifiedAt"),
@@ -48,6 +64,10 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
             alias="modifiedAt", description="Last modification UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Last modification UTC date-time of the template (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     name: str = pydantic.Field()
     """
     Name of the template
@@ -58,6 +78,10 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
         FieldMetadata(alias="replyTo"),
         pydantic.Field(alias="replyTo", description='Email defined as the "Reply to" for the template'),
     ]
+    """
+    Email defined as the "Reply to" for the template
+    """
+
     sender: GetSmtpTemplateOverviewSender
     subject: str = pydantic.Field()
     """
@@ -77,11 +101,19 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
             description="Status of test sending for the template (true=test email has been sent, false=test email has not been sent)",
         ),
     ]
+    """
+    Status of test sending for the template (true=test email has been sent, false=test email has not been sent)
+    """
+
     to_field: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="toField"),
         pydantic.Field(alias="toField", description='Customisation of the "to" field for the template'),
     ]
+    """
+    Customisation of the "to" field for the template
+    """
+
     custom_template_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="customTemplateId"),
@@ -90,6 +122,9 @@ class GetSmtpTemplateOverview(UncheckedBaseModel):
             description="Custom template identifier, if one was assigned during template creation. Only present when the template has a custom ID.",
         ),
     ] = None
+    """
+    Custom template identifier, if one was assigned during template creation. Only present when the template has a custom ID.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

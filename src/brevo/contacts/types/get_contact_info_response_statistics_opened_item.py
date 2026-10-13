@@ -15,6 +15,10 @@ class GetContactInfoResponseStatisticsOpenedItem(UncheckedBaseModel):
         FieldMetadata(alias="campaignId"),
         pydantic.Field(alias="campaignId", description="ID of the campaign which generated the event"),
     ]
+    """
+    ID of the campaign which generated the event
+    """
+
     count: int = pydantic.Field()
     """
     Number of openings for the campaign
@@ -25,6 +29,10 @@ class GetContactInfoResponseStatisticsOpenedItem(UncheckedBaseModel):
         FieldMetadata(alias="eventTime"),
         pydantic.Field(alias="eventTime", description="UTC date-time of the event"),
     ]
+    """
+    UTC date-time of the event
+    """
+
     ip: str = pydantic.Field()
     """
     IP from which the user has opened the email

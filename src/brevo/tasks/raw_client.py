@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -284,7 +284,7 @@ class RawTasksClient:
             Returns the Task by id
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -345,7 +345,7 @@ class RawTasksClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -447,7 +447,7 @@ class RawTasksClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "assignToId": assign_to_id,
@@ -814,7 +814,7 @@ class AsyncRawTasksClient:
             Returns the Task by id
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -877,7 +877,7 @@ class AsyncRawTasksClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -979,7 +979,7 @@ class AsyncRawTasksClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"crm/tasks/{jsonable_encoder(id)}",
+            f"crm/tasks/{encode_path_param(id)}",
             method="PATCH",
             json={
                 "assignToId": assign_to_id,

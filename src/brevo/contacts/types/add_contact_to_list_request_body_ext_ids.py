@@ -18,6 +18,9 @@ class AddContactToListRequestBodyExtIds(UncheckedBaseModel):
             description="EXT_ID attributes to add to a list. You can pass a **maximum of 150 EXT_ID attributes** for addition in one request. **_If you need to add the emails in bulk, please prefer /contacts/import api._**",
         ),
     ] = None
+    """
+    EXT_ID attributes to add to a list. You can pass a **maximum of 150 EXT_ID attributes** for addition in one request. **_If you need to add the emails in bulk, please prefer /contacts/import api._**
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

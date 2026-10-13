@@ -18,6 +18,9 @@ class GetSharedTemplateUrlResponse(UncheckedBaseModel):
             description="A unique URL for the email campaign or transactional template. This URL can be shared with other Brevo users.",
         ),
     ]
+    """
+    A unique URL for the email campaign or transactional template. This URL can be shared with other Brevo users.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -22,11 +22,19 @@ class OrderProductsItem(UncheckedBaseModel):
     product_id: typing_extensions.Annotated[
         str, FieldMetadata(alias="productId"), pydantic.Field(alias="productId", description="ID of the product.")
     ]
+    """
+    ID of the product.
+    """
+
     variant_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="variantId"),
         pydantic.Field(alias="variantId", description="Product ID of the red color shirts."),
     ] = None
+    """
+    Product ID of the red color shirts.
+    """
+
     quantity: typing.Optional[int] = pydantic.Field(default=None)
     """
     **Required if quantityFloat is empty.**
@@ -42,6 +50,11 @@ class OrderProductsItem(UncheckedBaseModel):
             description="**Required if quantity is empty.**\n\nNumber of product units added to the cart(supports decimals, e.g., 20.52)",
         ),
     ] = None
+    """
+    **Required if quantity is empty.**
+    
+    Number of product units added to the cart(supports decimals, e.g., 20.52)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

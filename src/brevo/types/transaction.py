@@ -27,11 +27,20 @@ class Transaction(UncheckedBaseModel):
     The transaction amount.
     """
 
+    balance: typing.Optional[float] = pydantic.Field(default=None)
+    """
+    The contact's total balance for this balance definition after the transaction was applied. Only returned when the transaction actually updated the balance (i.e. it was completed or auto-completed).
+    """
+
     transaction_type: typing_extensions.Annotated[
         typing.Optional[TransactionTransactionType],
         FieldMetadata(alias="transactionType"),
         pydantic.Field(alias="transactionType", description="The type of the transaction."),
     ] = None
+    """
+    The type of the transaction.
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Optional metadata associated with the transaction.
@@ -49,6 +58,10 @@ class Transaction(UncheckedBaseModel):
             alias="loyaltyProgramId", description="Unique identifier (UUID) of the associated loyalty program."
         ),
     ] = None
+    """
+    Unique identifier (UUID) of the associated loyalty program.
+    """
+
     balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceDefinitionId"),
@@ -56,6 +69,10 @@ class Transaction(UncheckedBaseModel):
             alias="balanceDefinitionId", description="Unique identifier (UUID) of the associated balance definition."
         ),
     ] = None
+    """
+    Unique identifier (UUID) of the associated balance definition.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
@@ -63,6 +80,10 @@ class Transaction(UncheckedBaseModel):
             alias="contactId", description="Unique identifier of the contact associated with the transaction."
         ),
     ] = None
+    """
+    Unique identifier of the contact associated with the transaction.
+    """
+
     event_time: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="eventTime"),
@@ -71,6 +92,10 @@ class Transaction(UncheckedBaseModel):
             description="Optional timestamp indicating when the transaction event occurred (ISO 8601 format).",
         ),
     ] = None
+    """
+    Optional timestamp indicating when the transaction event occurred (ISO 8601 format).
+    """
+
     reject_reason: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="rejectReason"),
@@ -78,36 +103,63 @@ class Transaction(UncheckedBaseModel):
             alias="rejectReason", description="Reason for rejection if the transaction was declined (nullable)."
         ),
     ] = None
+    """
+    Reason for rejection if the transaction was declined (nullable).
+    """
+
     rejected_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="rejectedAt"),
         pydantic.Field(alias="rejectedAt", description="Timestamp when the transaction was rejected (nullable)."),
     ] = None
+    """
+    Timestamp when the transaction was rejected (nullable).
+    """
+
     expiration_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expirationDate"),
         pydantic.Field(alias="expirationDate", description="Expiry date of the transaction (nullable)."),
     ] = None
+    """
+    Expiry date of the transaction (nullable).
+    """
+
     completed_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="completedAt"),
         pydantic.Field(alias="completedAt", description="Timestamp when the transaction was completed (nullable)."),
     ] = None
+    """
+    Timestamp when the transaction was completed (nullable).
+    """
+
     cancelled_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="cancelledAt"),
         pydantic.Field(alias="cancelledAt", description="Timestamp when the transaction was canceled (nullable)."),
     ] = None
+    """
+    Timestamp when the transaction was canceled (nullable).
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the transaction was created."),
     ] = None
+    """
+    Timestamp when the transaction was created.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the transaction was last updated."),
     ] = None
+    """
+    Timestamp when the transaction was last updated.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

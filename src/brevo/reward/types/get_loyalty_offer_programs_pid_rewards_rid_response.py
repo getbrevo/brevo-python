@@ -37,11 +37,19 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Maximum number of times a consumer can be attributed this reward",
         ),
     ] = None
+    """
+    Maximum number of times a consumer can be attributed this reward
+    """
+
     balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Unique identifier for the balance definition"),
     ] = None
+    """
+    Unique identifier for the balance definition
+    """
+
     code: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique code for the reward
@@ -52,16 +60,28 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="codeCount"),
         pydantic.Field(alias="codeCount", description="Total number of codes generated"),
     ] = None
+    """
+    Total number of codes generated
+    """
+
     code_generator_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="codeGeneratorId"),
         pydantic.Field(alias="codeGeneratorId", description="Unique identifier for the code generator"),
     ] = None
+    """
+    Unique identifier for the code generator
+    """
+
     code_pool_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="codePoolId"),
         pydantic.Field(alias="codePoolId", description="Unique identifier for the code pool"),
     ] = None
+    """
+    Unique identifier for the code pool
+    """
+
     config: typing.Optional[str] = pydantic.Field(default=None)
     """
     Configuration settings for the reward
@@ -72,21 +92,37 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the reward was created"),
     ] = None
+    """
+    Timestamp when the reward was created
+    """
+
     disabled_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="disabledAt"),
         pydantic.Field(alias="disabledAt", description="Disabled date of the reward"),
     ] = None
+    """
+    Disabled date of the reward
+    """
+
     end_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="endDate"),
         pydantic.Field(alias="endDate", description="End date of the reward validity"),
     ] = None
+    """
+    End date of the reward validity
+    """
+
     expiration_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expirationDate"),
         pydantic.Field(alias="expirationDate", description="Expiration date of the reward"),
     ] = None
+    """
+    Expiration date of the reward
+    """
+
     expiration_modifier: typing_extensions.Annotated[
         typing.Optional[GetLoyaltyOfferProgramsPidRewardsRidResponseExpirationModifier],
         FieldMetadata(alias="expirationModifier"),
@@ -95,6 +131,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Select startOfPeriod to configure rewards expiry on start of day/week/month/year. Select endOfPeriod to configure reward expiry on end of day/week/month/year, else select noModification",
         ),
     ] = None
+    """
+    Select startOfPeriod to configure rewards expiry on start of day/week/month/year. Select endOfPeriod to configure reward expiry on end of day/week/month/year, else select noModification
+    """
+
     expiration_unit: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="expirationUnit"),
@@ -103,11 +143,19 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Unit of time for the rewards's availability (e.g., day/week/month/year).",
         ),
     ] = None
+    """
+    Unit of time for the rewards's availability (e.g., day/week/month/year).
+    """
+
     expiration_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="expirationValue"),
         pydantic.Field(alias="expirationValue", description="Number of days/weeks/month/year for reward expiry"),
     ] = None
+    """
+    Number of days/weeks/month/year for reward expiry
+    """
+
     generator: typing.Optional[GetLoyaltyOfferProgramsPidRewardsRidResponseGenerator] = pydantic.Field(default=None)
     """
     object
@@ -132,6 +180,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             alias="loyaltyProgramId", description="Id of the loyalty program to which the current reward belongs to"
         ),
     ] = None
+    """
+    Id of the loyalty program to which the current reward belongs to
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional data for reward definition
@@ -154,31 +206,55 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="publicDescription"),
         pydantic.Field(alias="publicDescription", description="Public description for the reward"),
     ] = None
+    """
+    Public description for the reward
+    """
+
     public_image: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicImage"),
         pydantic.Field(alias="publicImage", description="Public Image for the reward"),
     ] = None
+    """
+    Public Image for the reward
+    """
+
     public_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicName"),
         pydantic.Field(alias="publicName", description="Public name for the reward"),
     ] = None
+    """
+    Public name for the reward
+    """
+
     redeem_per_consumer: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="redeemPerConsumer"),
         pydantic.Field(alias="redeemPerConsumer", description="Defines the redeem limit for the consumer"),
     ] = None
+    """
+    Defines the redeem limit for the consumer
+    """
+
     redeem_rules: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="redeemRules"),
         pydantic.Field(alias="redeemRules", description="Rules defined to redeem a reward"),
     ] = None
+    """
+    Rules defined to redeem a reward
+    """
+
     reward_configs: typing_extensions.Annotated[
         typing.Optional[GetLoyaltyOfferProgramsPidRewardsRidResponseRewardConfigs],
         FieldMetadata(alias="rewardConfigs"),
         pydantic.Field(alias="rewardConfigs", description="object"),
     ] = None
+    """
+    object
+    """
+
     rule: typing.Optional[GetLoyaltyOfferProgramsPidRewardsRidResponseRule] = pydantic.Field(default=None)
     """
     Rule to define the reward
@@ -189,6 +265,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="startDate"),
         pydantic.Field(alias="startDate", description="Start date of attribution of the reward"),
     ] = None
+    """
+    Start date of attribution of the reward
+    """
+
     subtract_balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="subtractBalanceDefinitionId"),
@@ -197,6 +277,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Id of the selected balance while redeeming / attributing a reward",
         ),
     ] = None
+    """
+    Id of the selected balance while redeeming / attributing a reward
+    """
+
     subtract_balance_strategy: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="subtractBalanceStrategy"),
@@ -205,6 +289,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Strategy of the Balance while redeeming / attributing a reward",
         ),
     ] = None
+    """
+    Strategy of the Balance while redeeming / attributing a reward
+    """
+
     subtract_balance_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="subtractBalanceValue"),
@@ -213,11 +301,19 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             description="Amount of balance to be selected while redeeming / attributing a reward",
         ),
     ] = None
+    """
+    Amount of balance to be selected while redeeming / attributing a reward
+    """
+
     subtract_total_balance: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="subtractTotalBalance"),
         pydantic.Field(alias="subtractTotalBalance", description="Value to indicate to subtract full balance or not"),
     ] = None
+    """
+    Value to indicate to subtract full balance or not
+    """
+
     total_attribution: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="totalAttribution"),
@@ -225,16 +321,28 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
             alias="totalAttribution", description="Defines the limit to which a consumer can attribute a reward"
         ),
     ] = None
+    """
+    Defines the limit to which a consumer can attribute a reward
+    """
+
     total_redeem: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="totalRedeem"),
         pydantic.Field(alias="totalRedeem", description="Defines the limit to which a consumer can redeem a reward"),
     ] = None
+    """
+    Defines the limit to which a consumer can redeem a reward
+    """
+
     trigger_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="triggerId"),
         pydantic.Field(alias="triggerId", description="Id of the Rule to be updated for that reward"),
     ] = None
+    """
+    Id of the Rule to be updated for that reward
+    """
+
     unit: typing.Optional[str] = pydantic.Field(default=None)
     """
     Selected unit of the balance
@@ -245,6 +353,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp for when this reward was last updated."),
     ] = None
+    """
+    Timestamp for when this reward was last updated.
+    """
+
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     Value of metric in selected config for reward definition
@@ -255,6 +367,9 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponse(UncheckedBaseModel):
         FieldMetadata(alias="valueType"),
         pydantic.Field(alias="valueType", description="Type of config selected for reward definition"),
     ] = None
+    """
+    Type of config selected for reward definition
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

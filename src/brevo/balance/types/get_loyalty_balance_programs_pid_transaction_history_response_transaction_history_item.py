@@ -27,6 +27,10 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryIt
         FieldMetadata(alias="transactionType"),
         pydantic.Field(alias="transactionType", description="The type of the transaction."),
     ] = None
+    """
+    The type of the transaction.
+    """
+
     balance_expiration_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceExpirationDate"),
@@ -35,21 +39,37 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryIt
             description="Expiration date of the balance associated with this transaction.",
         ),
     ] = None
+    """
+    Expiration date of the balance associated with this transaction.
+    """
+
     cancelled_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="cancelledAt"),
         pydantic.Field(alias="cancelledAt", description="Timestamp when the transaction was canceled, if applicable."),
     ] = None
+    """
+    Timestamp when the transaction was canceled, if applicable.
+    """
+
     completed_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="completedAt"),
         pydantic.Field(alias="completedAt", description="Timestamp when the transaction was successfully completed."),
     ] = None
+    """
+    Timestamp when the transaction was successfully completed.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the transaction was initiated."),
     ] = None
+    """
+    Timestamp when the transaction was initiated.
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier of the transaction.
@@ -65,11 +85,19 @@ class GetLoyaltyBalanceProgramsPidTransactionHistoryResponseTransactionHistoryIt
         FieldMetadata(alias="rejectReason"),
         pydantic.Field(alias="rejectReason", description="Reason for rejection, if the transaction was declined."),
     ] = None
+    """
+    Reason for rejection, if the transaction was declined.
+    """
+
     rejected_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="rejectedAt"),
         pydantic.Field(alias="rejectedAt", description="Timestamp when the transaction was rejected."),
     ] = None
+    """
+    Timestamp when the transaction was rejected.
+    """
+
     status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Current status of the transaction (e.g., pending, completed, rejected).

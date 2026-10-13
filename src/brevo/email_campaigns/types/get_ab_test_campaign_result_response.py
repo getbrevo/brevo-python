@@ -19,6 +19,10 @@ class GetAbTestCampaignResultResponse(UncheckedBaseModel):
         FieldMetadata(alias="clickRate"),
         pydantic.Field(alias="clickRate", description="Click rate for current winning version"),
     ] = None
+    """
+    Click rate for current winning version
+    """
+
     clicked_links: typing_extensions.Annotated[
         typing.Optional[GetAbTestCampaignResultResponseClickedLinks],
         FieldMetadata(alias="clickedLinks"),
@@ -29,17 +33,29 @@ class GetAbTestCampaignResultResponse(UncheckedBaseModel):
         FieldMetadata(alias="openRate"),
         pydantic.Field(alias="openRate", description="Open rate for current winning version"),
     ] = None
+    """
+    Open rate for current winning version
+    """
+
     statistics: typing.Optional[GetAbTestCampaignResultResponseStatistics] = None
     winning_criteria: typing_extensions.Annotated[
         typing.Optional[GetAbTestCampaignResultResponseWinningCriteria],
         FieldMetadata(alias="winningCriteria"),
         pydantic.Field(alias="winningCriteria", description="Criteria chosen for winning version (Open/Click)"),
     ] = None
+    """
+    Criteria chosen for winning version (Open/Click)
+    """
+
     winning_subject_line: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="winningSubjectLine"),
         pydantic.Field(alias="winningSubjectLine", description="Subject Line of current winning version"),
     ] = None
+    """
+    Subject Line of current winning version
+    """
+
     winning_version: typing_extensions.Annotated[
         typing.Optional[GetAbTestCampaignResultResponseWinningVersion],
         FieldMetadata(alias="winningVersion"),
@@ -48,11 +64,18 @@ class GetAbTestCampaignResultResponse(UncheckedBaseModel):
             description="Winning Campaign Info. pending = Campaign has been picked for sending and winning version is yet to be decided, tie = A tie happened between both the versions, notAvailable = Campaign has not yet been picked for sending.",
         ),
     ] = None
+    """
+    Winning Campaign Info. pending = Campaign has been picked for sending and winning version is yet to be decided, tie = A tie happened between both the versions, notAvailable = Campaign has not yet been picked for sending.
+    """
+
     winning_version_rate: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="winningVersionRate"),
         pydantic.Field(alias="winningVersionRate", description="Open/Click rate for the winner version"),
     ] = None
+    """
+    Open/Click rate for the winner version
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

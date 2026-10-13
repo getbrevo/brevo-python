@@ -15,11 +15,19 @@ class GetCorporateGroupIdResponseGroup(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Group creation date"),
     ] = None
+    """
+    Group creation date
+    """
+
     group_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="groupName"),
         pydantic.Field(alias="groupName", description="Name of the group"),
     ] = None
+    """
+    Name of the group
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Group id

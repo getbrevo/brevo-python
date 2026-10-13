@@ -117,7 +117,8 @@ class ExternalFeedsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.external_feeds.get_all_external_feeds(
             search="product",
@@ -220,7 +221,8 @@ class ExternalFeedsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.external_feeds.create_external_feed(
             name="Public API Feed",
@@ -289,7 +291,8 @@ class ExternalFeedsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.external_feeds.get_external_feed_by_uuid(
             uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
@@ -377,7 +380,8 @@ class ExternalFeedsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.external_feeds.update_external_feed(
             uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
@@ -437,7 +441,8 @@ class ExternalFeedsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.external_feeds.delete_external_feed(
             uuid_="b1c2d3e4-f5a6-47b8-89c0-d1e2f3a4b5c6",
@@ -545,7 +550,8 @@ class AsyncExternalFeedsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -656,7 +662,8 @@ class AsyncExternalFeedsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -733,7 +740,8 @@ class AsyncExternalFeedsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -829,7 +837,8 @@ class AsyncExternalFeedsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -899,7 +908,8 @@ class AsyncExternalFeedsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

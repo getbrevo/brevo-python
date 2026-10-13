@@ -20,6 +20,9 @@ class GetProcessesResponseProcessesItemInfo(UncheckedBaseModel):
         FieldMetadata(alias="import"),
         pydantic.Field(alias="import", description="Import process details with URLs to CSV reports"),
     ] = None
+    """
+    Import process details with URLs to CSV reports
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

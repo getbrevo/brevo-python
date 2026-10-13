@@ -31,6 +31,9 @@ class GetInboundEmailEventsResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="uuid"),
         pydantic.Field(alias="uuid", description="UUID that can be used to fetch additional data"),
     ]
+    """
+    UUID that can be used to fetch additional data
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

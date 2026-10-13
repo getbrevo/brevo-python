@@ -28,6 +28,10 @@ class GetCorporateMasterAccountResponseBillingInfo(UncheckedBaseModel):
         FieldMetadata(alias="companyName"),
         pydantic.Field(alias="companyName", description="Company name of master account"),
     ] = None
+    """
+    Company name of master account
+    """
+
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Billing email id of master account

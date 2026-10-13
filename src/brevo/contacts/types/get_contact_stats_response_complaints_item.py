@@ -15,11 +15,18 @@ class GetContactStatsResponseComplaintsItem(UncheckedBaseModel):
         FieldMetadata(alias="campaignId"),
         pydantic.Field(alias="campaignId", description="ID of the campaign which generated the event"),
     ]
+    """
+    ID of the campaign which generated the event
+    """
+
     event_time: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="eventTime"),
         pydantic.Field(alias="eventTime", description="UTC date-time of the event"),
     ]
+    """
+    UTC date-time of the event
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

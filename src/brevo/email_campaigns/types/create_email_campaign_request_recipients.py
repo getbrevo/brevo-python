@@ -19,6 +19,10 @@ class CreateEmailCampaignRequestRecipients(UncheckedBaseModel):
         FieldMetadata(alias="exclusionListIds"),
         pydantic.Field(alias="exclusionListIds", description="List ids to exclude from the campaign"),
     ] = None
+    """
+    List ids to exclude from the campaign
+    """
+
     exclusion_segment_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="exclusionSegmentIds"),
@@ -26,6 +30,10 @@ class CreateEmailCampaignRequestRecipients(UncheckedBaseModel):
             alias="exclusionSegmentIds", description="Segment ids which have to be excluded from a campaign."
         ),
     ] = None
+    """
+    Segment ids which have to be excluded from a campaign.
+    """
+
     list_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="listIds"),
@@ -33,6 +41,10 @@ class CreateEmailCampaignRequestRecipients(UncheckedBaseModel):
             alias="listIds", description="**Mandatory if scheduledAt is not empty**. List Ids to send the campaign to"
         ),
     ] = None
+    """
+    **Mandatory if scheduledAt is not empty**. List Ids to send the campaign to
+    """
+
     segment_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="segmentIds"),
@@ -41,6 +53,9 @@ class CreateEmailCampaignRequestRecipients(UncheckedBaseModel):
             description="**Mandatory if listIds are not used**. Segment ids to send the campaign to.",
         ),
     ] = None
+    """
+    **Mandatory if listIds are not used**. Segment ids to send the campaign to.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

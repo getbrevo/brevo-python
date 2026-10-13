@@ -16,6 +16,10 @@ class GetTransacEmailContentResponse(UncheckedBaseModel):
         FieldMetadata(alias="attachmentCount"),
         pydantic.Field(alias="attachmentCount", description="Count of the attachments that were sent in the email"),
     ] = None
+    """
+    Count of the attachments that were sent in the email
+    """
+
     body: typing.Optional[str] = pydantic.Field(default=None)
     """
     Actual content of the transactional email that has been sent
@@ -46,6 +50,9 @@ class GetTransacEmailContentResponse(UncheckedBaseModel):
         FieldMetadata(alias="templateId"),
         pydantic.Field(alias="templateId", description="Id of the template"),
     ] = None
+    """
+    Id of the template
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

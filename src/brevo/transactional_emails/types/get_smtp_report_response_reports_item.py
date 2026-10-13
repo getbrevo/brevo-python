@@ -36,6 +36,10 @@ class GetSmtpReportResponseReportsItem(UncheckedBaseModel):
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hardbounces for the date"),
     ]
+    """
+    Number of hardbounces for the date
+    """
+
     invalid: int = pydantic.Field()
     """
     Number of invalid emails for the date
@@ -56,21 +60,37 @@ class GetSmtpReportResponseReportsItem(UncheckedBaseModel):
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounces for the date"),
     ]
+    """
+    Number of softbounces for the date
+    """
+
     spam_reports: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="spamReports"),
         pydantic.Field(alias="spamReports", description="Number of complaints (spam reports) for the date"),
     ]
+    """
+    Number of complaints (spam reports) for the date
+    """
+
     unique_clicks: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueClicks"),
         pydantic.Field(alias="uniqueClicks", description="Number of unique clicks for the date"),
     ]
+    """
+    Number of unique clicks for the date
+    """
+
     unique_opens: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueOpens"),
         pydantic.Field(alias="uniqueOpens", description="Number of unique openings for the date"),
     ]
+    """
+    Number of unique openings for the date
+    """
+
     unsubscribed: int = pydantic.Field()
     """
     Number of unsubscribed emails for the date

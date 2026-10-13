@@ -25,11 +25,19 @@ class RedeemVoucherRequestOrderBilling(UncheckedBaseModel):
         FieldMetadata(alias="countryCode"),
         pydantic.Field(alias="countryCode", description="Country code of the user"),
     ] = None
+    """
+    Country code of the user
+    """
+
     payment_method: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="paymentMethod"),
         pydantic.Field(alias="paymentMethod", description="Payment method opted by the user"),
     ] = None
+    """
+    Payment method opted by the user
+    """
+
     phone: typing.Optional[int] = pydantic.Field(default=None)
     """
     Phone number of the user
@@ -40,6 +48,10 @@ class RedeemVoucherRequestOrderBilling(UncheckedBaseModel):
         FieldMetadata(alias="postCode"),
         pydantic.Field(alias="postCode", description="Postal Code of user's location"),
     ] = None
+    """
+    Postal Code of user's location
+    """
+
     region: typing.Optional[str] = pydantic.Field(default=None)
     """
     Region where user resides

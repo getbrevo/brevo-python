@@ -17,16 +17,27 @@ class SendTransacSmsResponse(UncheckedBaseModel):
         FieldMetadata(alias="remainingCredits"),
         pydantic.Field(alias="remainingCredits", description="Remaining SMS credits of the user"),
     ] = None
+    """
+    Remaining SMS credits of the user
+    """
+
     sms_count: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="smsCount"),
         pydantic.Field(alias="smsCount", description="Count of SMS's to send multiple text messages"),
     ] = None
+    """
+    Count of SMS's to send multiple text messages
+    """
+
     used_credits: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="usedCredits"),
         pydantic.Field(alias="usedCredits", description="SMS credits used per text message"),
     ] = None
+    """
+    SMS credits used per text message
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

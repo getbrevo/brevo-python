@@ -32,6 +32,9 @@ class GetAccountResponseAddress(UncheckedBaseModel):
     zip_code: typing_extensions.Annotated[
         str, FieldMetadata(alias="zipCode"), pydantic.Field(alias="zipCode", description="Zip Code information")
     ]
+    """
+    Zip Code information
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

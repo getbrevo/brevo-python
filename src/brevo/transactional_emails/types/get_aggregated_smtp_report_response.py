@@ -30,6 +30,10 @@ class GetAggregatedSmtpReportResponse(UncheckedBaseModel):
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hardbounces for the timeframe"),
     ] = None
+    """
+    Number of hardbounces for the timeframe
+    """
+
     invalid: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of invalid emails for the timeframe
@@ -55,21 +59,37 @@ class GetAggregatedSmtpReportResponse(UncheckedBaseModel):
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounces for the timeframe"),
     ] = None
+    """
+    Number of softbounces for the timeframe
+    """
+
     spam_reports: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="spamReports"),
         pydantic.Field(alias="spamReports", description="Number of complaint (spam report) for the timeframe"),
     ] = None
+    """
+    Number of complaint (spam report) for the timeframe
+    """
+
     unique_clicks: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="uniqueClicks"),
         pydantic.Field(alias="uniqueClicks", description="Number of unique clicks for the timeframe"),
     ] = None
+    """
+    Number of unique clicks for the timeframe
+    """
+
     unique_opens: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="uniqueOpens"),
         pydantic.Field(alias="uniqueOpens", description="Number of unique openings for the timeframe"),
     ] = None
+    """
+    Number of unique openings for the timeframe
+    """
+
     unsubscribed: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of unsubscribed emails for the timeframe

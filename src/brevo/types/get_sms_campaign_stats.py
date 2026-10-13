@@ -25,6 +25,10 @@ class GetSmsCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hardbounced SMS"),
     ]
+    """
+    Number of hardbounced SMS
+    """
+
     processing: int = pydantic.Field()
     """
     Number of processing SMS
@@ -40,6 +44,10 @@ class GetSmsCampaignStats(UncheckedBaseModel):
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounced SMS"),
     ]
+    """
+    Number of softbounced SMS
+    """
+
     unsubscriptions: int = pydantic.Field()
     """
     Number of unsubscription SMS

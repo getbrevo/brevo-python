@@ -21,12 +21,20 @@ class GetPaymentRequestResponse(UncheckedBaseModel):
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Brevo ID of the contact requested to pay."),
     ] = None
+    """
+    Brevo ID of the contact requested to pay.
+    """
+
     notification: Notification
     number_of_reminders_sent: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="numberOfRemindersSent"),
         pydantic.Field(alias="numberOfRemindersSent", description="number of reminders sent."),
     ] = None
+    """
+    number of reminders sent.
+    """
+
     reference: str = pydantic.Field()
     """
     Reference of the payment request, it will appear on the payment page.

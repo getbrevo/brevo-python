@@ -30,21 +30,37 @@ class FileData(UncheckedBaseModel):
         FieldMetadata(alias="authorId"),
         pydantic.Field(alias="authorId", description="Account id of user which created the file"),
     ] = None
+    """
+    Account id of user which created the file
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Contact id of contact on which file is uploaded"),
     ] = None
+    """
+    Contact id of contact on which file is uploaded
+    """
+
     deal_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="dealId"),
         pydantic.Field(alias="dealId", description="Deal id linked to a file"),
     ] = None
+    """
+    Deal id linked to a file
+    """
+
     company_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="companyId"),
         pydantic.Field(alias="companyId", description="Company id linked to a file"),
     ] = None
+    """
+    Company id linked to a file
+    """
+
     size: typing.Optional[int] = pydantic.Field(default=None)
     """
     Size of file in bytes
@@ -55,6 +71,9 @@ class FileData(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="File created date/time"),
     ] = None
+    """
+    File created date/time
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

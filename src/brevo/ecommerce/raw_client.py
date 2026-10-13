@@ -8,7 +8,7 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.datetime_utils import serialize_datetime
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -345,7 +345,7 @@ class RawEcommerceClient:
             Category details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"categories/{jsonable_encoder(id)}",
+            f"categories/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -556,7 +556,7 @@ class RawEcommerceClient:
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/metrics/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/metrics/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -617,7 +617,7 @@ class RawEcommerceClient:
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/products/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/products/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1494,7 +1494,7 @@ class RawEcommerceClient:
             Product details
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}",
+            f"products/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1564,7 +1564,7 @@ class RawEcommerceClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}/alerts/back_in_stock",
+            f"products/{encode_path_param(id)}/alerts/back_in_stock",
             method="POST",
             json={
                 "contactIdentifiers": convert_and_respect_annotation_metadata(
@@ -1919,7 +1919,7 @@ class AsyncRawEcommerceClient:
             Category details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"categories/{jsonable_encoder(id)}",
+            f"categories/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -2130,7 +2130,7 @@ class AsyncRawEcommerceClient:
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/metrics/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/metrics/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -2191,7 +2191,7 @@ class AsyncRawEcommerceClient:
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"ecommerce/attribution/products/{jsonable_encoder(conversion_source)}/{jsonable_encoder(conversion_source_id)}",
+            f"ecommerce/attribution/products/{encode_path_param(conversion_source)}/{encode_path_param(conversion_source_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -3068,7 +3068,7 @@ class AsyncRawEcommerceClient:
             Product details
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}",
+            f"products/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -3138,7 +3138,7 @@ class AsyncRawEcommerceClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"products/{jsonable_encoder(id)}/alerts/back_in_stock",
+            f"products/{encode_path_param(id)}/alerts/back_in_stock",
             method="POST",
             json={
                 "contactIdentifiers": convert_and_respect_annotation_metadata(

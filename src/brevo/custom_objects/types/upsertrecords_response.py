@@ -19,6 +19,9 @@ class UpsertrecordsResponse(UncheckedBaseModel):
             description="Unique Id for the batch process used to track the status of the batch. **How to use this processId:**   Refer to the [Get process status API](https://developers.brevo.com/reference/get-process) to check the execution status of this batch using the returned `processId`.",
         ),
     ] = None
+    """
+    Unique Id for the batch process used to track the status of the batch. **How to use this processId:**   Refer to the [Get process status API](https://developers.brevo.com/reference/get-process) to check the execution status of this batch using the returned `processId`.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

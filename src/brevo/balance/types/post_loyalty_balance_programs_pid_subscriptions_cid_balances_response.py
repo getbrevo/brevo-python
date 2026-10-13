@@ -26,36 +26,63 @@ class PostLoyaltyBalanceProgramsPidSubscriptionsCidBalancesResponse(UncheckedBas
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty program ID."),
     ] = None
+    """
+    Loyalty program ID.
+    """
+
     organization_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="organizationId"),
         pydantic.Field(alias="organizationId", description="Organization ID."),
     ] = None
+    """
+    Organization ID.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Contact ID."),
     ] = None
+    """
+    Contact ID.
+    """
+
     balance_definition_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Balance definition ID."),
     ] = None
+    """
+    Balance definition ID.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp of when the balance was created."),
     ] = None
+    """
+    Timestamp of when the balance was created.
+    """
+
     expires_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expiresAt"),
         pydantic.Field(alias="expiresAt", description="Expiration timestamp of the balance."),
     ] = None
+    """
+    Expiration timestamp of the balance.
+    """
+
     consumed_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="consumedAt"),
         pydantic.Field(alias="consumedAt", description="Timestamp of when the balance was last consumed."),
     ] = None
+    """
+    Timestamp of when the balance was last consumed.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

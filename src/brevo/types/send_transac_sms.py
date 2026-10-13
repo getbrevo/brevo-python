@@ -20,6 +20,10 @@ class SendTransacSms(UncheckedBaseModel):
             description="A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**",
         ),
     ] = None
+    """
+    A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+    """
+
     recipient: str = pydantic.Field()
     """
     Mobile number to send SMS with the country code. Must contain between 6 and 15 digits, optionally prefixed with '+'.
@@ -48,6 +52,10 @@ class SendTransacSms(UncheckedBaseModel):
             description="Format of the message. It indicates whether the content should be treated as unicode or not.",
         ),
     ] = None
+    """
+    Format of the message. It indicates whether the content should be treated as unicode or not.
+    """
+
     web_url: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="webUrl"),
@@ -55,6 +63,10 @@ class SendTransacSms(UncheckedBaseModel):
             alias="webUrl", description="Webhook to call for each event triggered by the message (delivered etc.)"
         ),
     ] = None
+    """
+    Webhook to call for each event triggered by the message (delivered etc.)
+    """
+
     params: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Pass the set of attributes to customize the template. For example, {"FNAME":"Joe", "LNAME":"Doe"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.
@@ -68,6 +80,10 @@ class SendTransacSms(UncheckedBaseModel):
             description="Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.",
         ),
     ] = None
+    """
+    Template ID to send SMS with the template. When provided, overrides the content parameter. Mandatory if 'content' is not passed.
+    """
+
     content: typing.Optional[str] = pydantic.Field(default=None)
     """
     Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed.

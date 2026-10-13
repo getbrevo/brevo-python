@@ -17,6 +17,10 @@ class GetCategoryDetails(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the category (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the category (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     id: str = pydantic.Field()
     """
     Category ID for which you requested the details
@@ -27,6 +31,10 @@ class GetCategoryDetails(UncheckedBaseModel):
         FieldMetadata(alias="isDeleted"),
         pydantic.Field(alias="isDeleted", description="category deleted from the shop's database"),
     ]
+    """
+    category deleted from the shop's database
+    """
+
     modified_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="modifiedAt"),
@@ -34,6 +42,10 @@ class GetCategoryDetails(UncheckedBaseModel):
             alias="modifiedAt", description="Last modification UTC date-time of the category (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Last modification UTC date-time of the category (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     name: str = pydantic.Field()
     """
     Name of the category for which you requested the details

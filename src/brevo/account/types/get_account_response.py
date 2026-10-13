@@ -33,6 +33,10 @@ class GetAccountResponse(UncheckedBaseModel):
     company_name: typing_extensions.Annotated[
         str, FieldMetadata(alias="companyName"), pydantic.Field(alias="companyName", description="Name of the company")
     ]
+    """
+    Name of the company
+    """
+
     email: str = pydantic.Field()
     """
     Login Email
@@ -41,9 +45,17 @@ class GetAccountResponse(UncheckedBaseModel):
     first_name: typing_extensions.Annotated[
         str, FieldMetadata(alias="firstName"), pydantic.Field(alias="firstName", description="First Name")
     ]
+    """
+    First Name
+    """
+
     last_name: typing_extensions.Annotated[
         str, FieldMetadata(alias="lastName"), pydantic.Field(alias="lastName", description="Last Name")
     ]
+    """
+    Last Name
+    """
+
     address: typing.Optional[GetAccountResponseAddress] = pydantic.Field(default=None)
     """
     Address informations
@@ -64,6 +76,10 @@ class GetAccountResponse(UncheckedBaseModel):
         FieldMetadata(alias="planVerticals"),
         pydantic.Field(alias="planVerticals", description="Detailed information about different plan categories"),
     ] = None
+    """
+    Detailed information about different plan categories
+    """
+
     relay: GetAccountResponseRelay = pydantic.Field()
     """
     Information about your transactional email account

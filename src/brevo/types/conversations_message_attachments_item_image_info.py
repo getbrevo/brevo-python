@@ -29,6 +29,9 @@ class ConversationsMessageAttachmentsItemImageInfo(UncheckedBaseModel):
         FieldMetadata(alias="previewLink"),
         pydantic.Field(alias="previewLink", description="URL of the image preview."),
     ] = None
+    """
+    URL of the image preview.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

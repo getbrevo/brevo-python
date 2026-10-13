@@ -16,11 +16,19 @@ class GetSubscriptionBalancesResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
     ] = None
+    """
+    Unique identifier of the loyalty program.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
     ] = None
+    """
+    Unique identifier of the contact.
+    """
+
     balance: typing.Optional[typing.List[GetSubscriptionBalancesResponseBalanceItem]] = pydantic.Field(default=None)
     """
     Aggregate balance per balance definition.

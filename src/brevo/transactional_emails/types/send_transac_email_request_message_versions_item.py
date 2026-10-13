@@ -32,6 +32,10 @@ class SendTransacEmailRequestMessageVersionsItem(UncheckedBaseModel):
             description="HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.",
         ),
     ] = None
+    """
+    HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.
+    """
+
     params: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Key-value pairs for template variable substitution. Only applicable when the template uses the New Template Language format.
@@ -45,6 +49,10 @@ class SendTransacEmailRequestMessageVersionsItem(UncheckedBaseModel):
             description="Reply-to email address (required) and optional display name. Recipients will use this address when replying to the email.",
         ),
     ] = None
+    """
+    Reply-to email address (required) and optional display name. Recipients will use this address when replying to the email.
+    """
+
     subject: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email subject line for this message version
@@ -58,6 +66,10 @@ class SendTransacEmailRequestMessageVersionsItem(UncheckedBaseModel):
             description="Plain text body content of the email. Ignored when `templateId` is provided.",
         ),
     ] = None
+    """
+    Plain text body content of the email. Ignored when `templateId` is provided.
+    """
+
     to: typing.List[SendTransacEmailRequestMessageVersionsItemToItem] = pydantic.Field()
     """
     Array of recipient objects. Each object contains an email address and an optional display name.

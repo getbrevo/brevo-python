@@ -17,6 +17,10 @@ class RuleConditionResponse(UncheckedBaseModel):
         FieldMetadata(alias="and"),
         pydantic.Field(alias="and", description="Metric to indicate AND between rules"),
     ] = None
+    """
+    Metric to indicate AND between rules
+    """
+
     lhs: typing.Optional["ValueResponse"] = pydantic.Field(default=None)
     """
     Condition of the rule
@@ -32,6 +36,10 @@ class RuleConditionResponse(UncheckedBaseModel):
         FieldMetadata(alias="or"),
         pydantic.Field(alias="or", description="Metric to indicate OR between rules"),
     ] = None
+    """
+    Metric to indicate OR between rules
+    """
+
     rhs: typing.Optional["ValueResponse"] = pydantic.Field(default=None)
     """
     Action of the rule

@@ -17,16 +17,28 @@ class GetCorporateMasterAccountResponse(UncheckedBaseModel):
         FieldMetadata(alias="billingInfo"),
         pydantic.Field(alias="billingInfo", description="Billing details of the master account organization"),
     ] = None
+    """
+    Billing details of the master account organization
+    """
+
     company_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="companyName"),
         pydantic.Field(alias="companyName", description="Company name of master account organization"),
     ] = None
+    """
+    Company name of master account organization
+    """
+
     currency_code: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="currencyCode"),
         pydantic.Field(alias="currencyCode", description="Currency code of the master account organization"),
     ] = None
+    """
+    Currency code of the master account organization
+    """
+
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email id of master account
@@ -42,6 +54,10 @@ class GetCorporateMasterAccountResponse(UncheckedBaseModel):
         FieldMetadata(alias="planInfo"),
         pydantic.Field(alias="planInfo", description="Plan details"),
     ] = None
+    """
+    Plan details
+    """
+
     timezone: typing.Optional[str] = pydantic.Field(default=None)
     """
     Timezone of the master account organization

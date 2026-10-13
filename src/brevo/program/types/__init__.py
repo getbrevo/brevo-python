@@ -15,7 +15,11 @@ if typing.TYPE_CHECKING:
         GetParameterSubscriptionInfoResponseBalanceBalancesItem,
     )
     from .get_parameter_subscription_info_response_members_item import GetParameterSubscriptionInfoResponseMembersItem
+    from .get_parameter_subscription_info_response_membership import GetParameterSubscriptionInfoResponseMembership
     from .get_parameter_subscription_info_response_reward_item import GetParameterSubscriptionInfoResponseRewardItem
+    from .get_parameter_subscription_info_response_reward_item_unit import (
+        GetParameterSubscriptionInfoResponseRewardItemUnit,
+    )
     from .get_parameter_subscription_info_response_tier_item import GetParameterSubscriptionInfoResponseTierItem
     from .subscribe_member_to_a_subscription_response import SubscribeMemberToASubscriptionResponse
     from .subscribe_to_loyalty_program_response import SubscribeToLoyaltyProgramResponse
@@ -27,7 +31,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetParameterSubscriptionInfoResponseBalance": ".get_parameter_subscription_info_response_balance",
     "GetParameterSubscriptionInfoResponseBalanceBalancesItem": ".get_parameter_subscription_info_response_balance_balances_item",
     "GetParameterSubscriptionInfoResponseMembersItem": ".get_parameter_subscription_info_response_members_item",
+    "GetParameterSubscriptionInfoResponseMembership": ".get_parameter_subscription_info_response_membership",
     "GetParameterSubscriptionInfoResponseRewardItem": ".get_parameter_subscription_info_response_reward_item",
+    "GetParameterSubscriptionInfoResponseRewardItemUnit": ".get_parameter_subscription_info_response_reward_item_unit",
     "GetParameterSubscriptionInfoResponseTierItem": ".get_parameter_subscription_info_response_tier_item",
     "SubscribeMemberToASubscriptionResponse": ".subscribe_member_to_a_subscription_response",
     "SubscribeToLoyaltyProgramResponse": ".subscribe_to_loyalty_program_response",
@@ -63,7 +69,9 @@ __all__ = [
     "GetParameterSubscriptionInfoResponseBalance",
     "GetParameterSubscriptionInfoResponseBalanceBalancesItem",
     "GetParameterSubscriptionInfoResponseMembersItem",
+    "GetParameterSubscriptionInfoResponseMembership",
     "GetParameterSubscriptionInfoResponseRewardItem",
+    "GetParameterSubscriptionInfoResponseRewardItemUnit",
     "GetParameterSubscriptionInfoResponseTierItem",
     "SubscribeMemberToASubscriptionResponse",
     "SubscribeToLoyaltyProgramResponse",

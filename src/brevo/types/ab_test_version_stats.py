@@ -19,11 +19,18 @@ class AbTestVersionStats(UncheckedBaseModel):
         FieldMetadata(alias="Version A"),
         pydantic.Field(alias="Version A", description="percentage of an event for version A"),
     ]
+    """
+    percentage of an event for version A
+    """
+
     version_b: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="Version B"),
         pydantic.Field(alias="Version B", description="percentage of an event for version B"),
     ]
+    """
+    percentage of an event for version B
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

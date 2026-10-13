@@ -20,6 +20,10 @@ class TierGroup(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the tier group was created"),
     ] = None
+    """
+    Timestamp when the tier group was created
+    """
+
     downgrade_strategy: typing_extensions.Annotated[
         typing.Optional[TierGroupDowngradeStrategy],
         FieldMetadata(alias="downgradeStrategy"),
@@ -28,6 +32,10 @@ class TierGroup(UncheckedBaseModel):
             description="Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.",
         ),
     ] = None
+    """
+    Select real_time to downgrade tier on real time balance updates. Select membership_anniversary to downgrade tier on subscription anniversary. Select tier_anniversary to downgrade tier on tier anniversary.
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Tier group unique identifier
@@ -38,6 +46,10 @@ class TierGroup(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Associated loyalty program Id"),
     ] = None
+    """
+    Associated loyalty program Id
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     Tier group name
@@ -48,11 +60,19 @@ class TierGroup(UncheckedBaseModel):
         FieldMetadata(alias="tierOrder"),
         pydantic.Field(alias="tierOrder", description="Order of the tiers in the group in ascending order"),
     ] = None
+    """
+    Order of the tiers in the group in ascending order
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the tier group was last updated"),
     ] = None
+    """
+    Timestamp when the tier group was last updated
+    """
+
     upgrade_strategy: typing_extensions.Annotated[
         typing.Optional[TierGroupUpgradeStrategy],
         FieldMetadata(alias="upgradeStrategy"),
@@ -61,16 +81,27 @@ class TierGroup(UncheckedBaseModel):
             description="Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.",
         ),
     ] = None
+    """
+    Select real_time to upgrade tier on real time balance updates. Select membership_anniversary to upgrade tier on subscription anniversary. Select tier_anniversary to upgrade tier on tier anniversary.
+    """
+
     upgrade_schedule: typing_extensions.Annotated[
         typing.Optional[TierGroupUpgradeSchedule],
         FieldMetadata(alias="upgradeSchedule"),
         pydantic.Field(alias="upgradeSchedule", description="Schedule configuration for tier upgrades."),
     ] = None
+    """
+    Schedule configuration for tier upgrades.
+    """
+
     downgrade_schedule: typing_extensions.Annotated[
         typing.Optional[TierGroupDowngradeSchedule],
         FieldMetadata(alias="downgradeSchedule"),
         pydantic.Field(alias="downgradeSchedule", description="Schedule configuration for tier downgrades."),
     ] = None
+    """
+    Schedule configuration for tier downgrades.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -28,6 +28,10 @@ class UpdateBatchContactsRequestContactsItem(UncheckedBaseModel):
             description="Set/unset this field to blacklist/allow the contact for emails (emailBlacklisted = true)",
         ),
     ] = None
+    """
+    Set/unset this field to blacklist/allow the contact for emails (emailBlacklisted = true)
+    """
+
     ext_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Pass your own Id to update ext_id of a contact.
@@ -43,6 +47,10 @@ class UpdateBatchContactsRequestContactsItem(UncheckedBaseModel):
         FieldMetadata(alias="listIds"),
         pydantic.Field(alias="listIds", description="Ids of the lists to add the contact to"),
     ] = None
+    """
+    Ids of the lists to add the contact to
+    """
+
     sms: typing.Optional[str] = pydantic.Field(default=None)
     """
     SMS of the user to be updated (For each operation only pass one of the supported contact identifiers. Email, id or sms)
@@ -56,6 +64,10 @@ class UpdateBatchContactsRequestContactsItem(UncheckedBaseModel):
             description="Set/unset this field to blacklist/allow the contact for SMS (smsBlacklisted = true)",
         ),
     ] = None
+    """
+    Set/unset this field to blacklist/allow the contact for SMS (smsBlacklisted = true)
+    """
+
     smtp_blacklist_sender: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="smtpBlacklistSender"),
@@ -64,11 +76,18 @@ class UpdateBatchContactsRequestContactsItem(UncheckedBaseModel):
             description="transactional email forbidden sender for contact. Use only for email Contact",
         ),
     ] = None
+    """
+    transactional email forbidden sender for contact. Use only for email Contact
+    """
+
     unlink_list_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="unlinkListIds"),
         pydantic.Field(alias="unlinkListIds", description="Ids of the lists to remove the contact from"),
     ] = None
+    """
+    Ids of the lists to remove the contact from
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

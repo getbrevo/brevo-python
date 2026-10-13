@@ -26,11 +26,18 @@ class GetLoyaltyBalanceProgramsPidActiveBalanceResponseActiveBalancesItem(Unchec
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the balance was created."),
     ] = None
+    """
+    Timestamp when the balance was created.
+    """
+
     expires_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expiresAt"),
         pydantic.Field(alias="expiresAt", description="Timestamp when the balance expires (if applicable)."),
     ] = None
+    """
+    Timestamp when the balance expires (if applicable).
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

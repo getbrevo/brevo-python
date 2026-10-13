@@ -24,6 +24,10 @@ class BalanceLimit(UncheckedBaseModel):
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Balance definition ID."),
     ] = None
+    """
+    Balance definition ID.
+    """
+
     transaction_type: typing_extensions.Annotated[
         typing.Optional[BalanceLimitTransactionType],
         FieldMetadata(alias="transactionType"),
@@ -31,6 +35,10 @@ class BalanceLimit(UncheckedBaseModel):
             alias="transactionType", description="Specifies whether the limit applies to credit or debit transactions."
         ),
     ] = None
+    """
+    Specifies whether the limit applies to credit or debit transactions.
+    """
+
     constraint_type: typing_extensions.Annotated[
         typing.Optional[BalanceLimitConstraintType],
         FieldMetadata(alias="constraintType"),
@@ -38,16 +46,28 @@ class BalanceLimit(UncheckedBaseModel):
             alias="constraintType", description="Defines the type of constraint (transaction count or amount)."
         ),
     ] = None
+    """
+    Defines the type of constraint (transaction count or amount).
+    """
+
     duration_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="durationValue"),
         pydantic.Field(alias="durationValue", description="Number of time units the balance limit applies to."),
     ] = None
+    """
+    Number of time units the balance limit applies to.
+    """
+
     duration_unit: typing_extensions.Annotated[
         typing.Optional[BalanceLimitDurationUnit],
         FieldMetadata(alias="durationUnit"),
         pydantic.Field(alias="durationUnit", description="Time unit for the balance limit."),
     ] = None
+    """
+    Time unit for the balance limit.
+    """
+
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     The maximum allowed value for the defined constraint.
@@ -61,16 +81,27 @@ class BalanceLimit(UncheckedBaseModel):
             description="Indicates if the limit resets periodically based on a sliding schedule.",
         ),
     ] = None
+    """
+    Indicates if the limit resets periodically based on a sliding schedule.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp of when the balance limit was created."),
     ] = None
+    """
+    Timestamp of when the balance limit was created.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp of the last update to the balance limit."),
     ] = None
+    """
+    Timestamp of the last update to the balance limit.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -15,6 +15,10 @@ class GetContactInfoResponseStatisticsUnsubscriptionsAdminUnsubscriptionItem(Unc
         FieldMetadata(alias="eventTime"),
         pydantic.Field(alias="eventTime", description="UTC date-time of the event"),
     ]
+    """
+    UTC date-time of the event
+    """
+
     ip: typing.Optional[str] = pydantic.Field(default=None)
     """
     IP from which the user has been unsubscribed

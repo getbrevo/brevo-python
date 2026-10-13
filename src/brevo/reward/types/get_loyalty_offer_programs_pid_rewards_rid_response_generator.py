@@ -16,6 +16,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseGenerator(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the reward was created"),
     ] = None
+    """
+    Timestamp when the reward was created
+    """
+
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Public facing description of the reward
@@ -41,6 +45,9 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseGenerator(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the reward was created"),
     ] = None
+    """
+    Timestamp when the reward was created
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -29,6 +29,10 @@ class GetWebhook(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the webhook (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the webhook (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     description: str = pydantic.Field()
     """
     Description of the webhook
@@ -48,6 +52,10 @@ class GetWebhook(UncheckedBaseModel):
             alias="modifiedAt", description="Last modification UTC date-time of the webhook (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Last modification UTC date-time of the webhook (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     type: GetWebhookType = pydantic.Field()
     """
     Type of webhook (marketing, transactional, or inbound)

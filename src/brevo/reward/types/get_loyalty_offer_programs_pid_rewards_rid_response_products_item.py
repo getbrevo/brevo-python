@@ -15,16 +15,28 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseProductsItem(UncheckedBaseMode
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the product was created"),
     ] = None
+    """
+    Timestamp when the product was created
+    """
+
     image_ref: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="imageRef"),
         pydantic.Field(alias="imageRef", description="URL of the product image"),
     ] = None
+    """
+    URL of the product image
+    """
+
     product_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="productId"),
         pydantic.Field(alias="productId", description="Unique identifier for the product"),
     ] = None
+    """
+    Unique identifier for the product
+    """
+
     value: typing.Optional[str] = pydantic.Field(default=None)
     """
     string
