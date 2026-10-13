@@ -19,11 +19,19 @@ class GetScheduledEmailByIdResponseBatchesBatchesItem(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Datetime on which the batch was scheduled"),
     ]
+    """
+    Datetime on which the batch was scheduled
+    """
+
     scheduled_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="scheduledAt"),
         pydantic.Field(alias="scheduledAt", description="Datetime for which the batch was scheduled"),
     ]
+    """
+    Datetime for which the batch was scheduled
+    """
+
     status: GetScheduledEmailByIdResponseBatchesBatchesItemStatus = pydantic.Field()
     """
     Current status of the scheduled batch

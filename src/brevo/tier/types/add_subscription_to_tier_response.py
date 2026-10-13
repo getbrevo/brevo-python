@@ -16,6 +16,10 @@ class AddSubscriptionToTierResponse(UncheckedBaseModel):
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Contact to which the tier is assigned"),
     ] = None
+    """
+    Contact to which the tier is assigned
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="createdAt"), pydantic.Field(alias="createdAt")
     ] = None
@@ -24,6 +28,10 @@ class AddSubscriptionToTierResponse(UncheckedBaseModel):
         FieldMetadata(alias="groupId"),
         pydantic.Field(alias="groupId", description="Group Id to which the tier is associated"),
     ] = None
+    """
+    Group Id to which the tier is associated
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the assigned tier
@@ -34,6 +42,10 @@ class AddSubscriptionToTierResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Associated loyalty program Id"),
     ] = None
+    """
+    Associated loyalty program Id
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     object

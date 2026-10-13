@@ -20,11 +20,18 @@ class GetCorporateGroupIdResponseUsersItem(UncheckedBaseModel):
         FieldMetadata(alias="firstName"),
         pydantic.Field(alias="firstName", description="First name of the user"),
     ] = None
+    """
+    First name of the user
+    """
+
     last_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="lastName"),
         pydantic.Field(alias="lastName", description="Last name of the user"),
     ] = None
+    """
+    Last name of the user
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

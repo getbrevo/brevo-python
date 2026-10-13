@@ -15,11 +15,19 @@ class AbTestVersionClicksItem(UncheckedBaseModel):
         FieldMetadata(alias="clickRate"),
         pydantic.Field(alias="clickRate", description="Percentage of clicks of link with respect to total clicks"),
     ]
+    """
+    Percentage of clicks of link with respect to total clicks
+    """
+
     clicks_count: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="clicksCount"),
         pydantic.Field(alias="clicksCount", description="Number of times a link is clicked"),
     ]
+    """
+    Number of times a link is clicked
+    """
+
     link: str = pydantic.Field()
     """
     URL of the link

@@ -25,6 +25,10 @@ class Task(UncheckedBaseModel):
         FieldMetadata(alias="taskTypeId"),
         pydantic.Field(alias="taskTypeId", description="Id for type of task e.g Call / Email / Meeting etc."),
     ]
+    """
+    Id for type of task e.g Call / Email / Meeting etc.
+    """
+
     name: str = pydantic.Field()
     """
     Name of task
@@ -35,21 +39,37 @@ class Task(UncheckedBaseModel):
         FieldMetadata(alias="companiesIds"),
         pydantic.Field(alias="companiesIds", description="Companies ids for companies a task is linked to"),
     ] = None
+    """
+    Companies ids for companies a task is linked to
+    """
+
     deals_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="dealsIds"),
         pydantic.Field(alias="dealsIds", description="Deal ids for deals a task is linked to"),
     ] = None
+    """
+    Deal ids for deals a task is linked to
+    """
+
     contacts_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="contactsIds"),
         pydantic.Field(alias="contactsIds", description="Contact ids for contacts linked to this task"),
     ] = None
+    """
+    Contact ids for contacts linked to this task
+    """
+
     assign_to_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="assignToId"),
         pydantic.Field(alias="assignToId", description="Account id of the user assigned to this task"),
     ] = None
+    """
+    Account id of the user assigned to this task
+    """
+
     date: dt.datetime = pydantic.Field()
     """
     Task due date and time
@@ -70,11 +90,18 @@ class Task(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Task creation date/time"),
     ] = None
+    """
+    Task creation date/time
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Task last update date/time"),
     ] = None
+    """
+    Task last update date/time
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

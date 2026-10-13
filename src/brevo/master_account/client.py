@@ -83,7 +83,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.create_a_new_group_of_sub_accounts(
             group_name="My group",
@@ -124,7 +125,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.delete_sub_account_from_group(
             group_id="groupId",
@@ -161,7 +163,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_a_group_details(
             id="id",
@@ -204,7 +207,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.update_a_group_of_sub_accounts(
             id="id",
@@ -239,7 +243,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.delete_a_group(
             id="id",
@@ -269,7 +274,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_sub_account_groups()
         """
@@ -316,7 +322,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_corporate_invited_users_list()
         """
@@ -347,7 +354,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.list_of_all_i_ps()
         """
@@ -375,7 +383,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_the_details_of_requested_master_account()
         """
@@ -409,7 +418,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.generate_sso_token_to_access_admin_account(
             email="vipin+ent-user@brevo.com",
@@ -448,7 +458,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_the_list_of_all_the_sub_accounts_of_the_master_account(
             offset=1,
@@ -503,7 +514,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.create_a_new_sub_account_under_a_master_account(
             company_name="Test Sub-account",
@@ -551,7 +563,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.associate_an_ip_to_sub_accounts(
             ids=[234322, 325553, 893432],
@@ -588,7 +601,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.dissociate_an_ip_to_sub_accounts(
             ids=[234322, 325553, 893432],
@@ -625,7 +639,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.create_an_api_key_for_a_sub_account(
             id=3232323,
@@ -688,7 +703,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.generate_sso_token_to_access_sub_account(
             id=3232323,
@@ -723,7 +739,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_sub_account_details(
             id=1000000,
@@ -753,7 +770,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.delete_a_sub_account(
             id=1000000,
@@ -766,6 +784,7 @@ class MasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -789,6 +808,11 @@ class MasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -851,7 +875,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.enable_disable_sub_account_application_s(
             id=1000000,
@@ -864,6 +889,7 @@ class MasterAccountClient:
         """
         _response = self._raw_client.enable_disable_sub_account_application_s(
             id,
+            analytics=analytics,
             automation=automation,
             conversations=conversations,
             crm=crm,
@@ -922,7 +948,8 @@ class MasterAccountClient:
         )
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.update_sub_account_plan(
             id=1000000,
@@ -987,7 +1014,8 @@ class MasterAccountClient:
         )
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.update_sub_accounts_plan(
             credits=PutCorporateSubAccountsPlanRequestCredits(
@@ -1074,7 +1102,8 @@ class MasterAccountClient:
         from brevo.master_account import InviteAdminUserRequestPrivilegesItem
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.invite_admin_user(
             all_features_access=True,
@@ -1124,7 +1153,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.resend_cancel_admin_user_invitation(
             action="resend",
@@ -1156,7 +1186,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.revoke_an_admin_user(
             email="email",
@@ -1189,7 +1220,8 @@ class MasterAccountClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.get_corporate_user_permission(
             email="email",
@@ -1235,7 +1267,8 @@ class MasterAccountClient:
         )
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.master_account.change_admin_user_permissions(
             email="email",
@@ -1339,7 +1372,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1388,7 +1422,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1433,7 +1468,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1484,7 +1520,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1527,7 +1564,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1565,7 +1603,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1620,7 +1659,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1659,7 +1699,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1695,7 +1736,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1737,7 +1779,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1784,7 +1827,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1847,7 +1891,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1903,7 +1948,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1950,7 +1996,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1997,7 +2044,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2068,7 +2116,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2111,7 +2160,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2149,7 +2199,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2168,6 +2219,7 @@ class AsyncMasterAccountClient:
         self,
         id: int,
         *,
+        analytics: typing.Optional[bool] = OMIT,
         automation: typing.Optional[bool] = OMIT,
         conversations: typing.Optional[bool] = OMIT,
         crm: typing.Optional[bool] = OMIT,
@@ -2191,6 +2243,11 @@ class AsyncMasterAccountClient:
         ----------
         id : int
             Id of the sub-account organization (mandatory)
+
+        analytics : typing.Optional[bool]
+            Set this field to enable or disable Analytics on the
+            sub-account. Requires the master account's plan to include
+            Analytics; otherwise the call returns a 400 error.
 
         automation : typing.Optional[bool]
             Set this field to enable or disable Automation on the
@@ -2255,7 +2312,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2274,6 +2332,7 @@ class AsyncMasterAccountClient:
         """
         _response = await self._raw_client.enable_disable_sub_account_application_s(
             id,
+            analytics=analytics,
             automation=automation,
             conversations=conversations,
             crm=crm,
@@ -2334,7 +2393,8 @@ class AsyncMasterAccountClient:
         )
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2407,7 +2467,8 @@ class AsyncMasterAccountClient:
         )
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2502,7 +2563,8 @@ class AsyncMasterAccountClient:
         from brevo.master_account import InviteAdminUserRequestPrivilegesItem
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2560,7 +2622,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2604,7 +2667,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2645,7 +2709,8 @@ class AsyncMasterAccountClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -2699,7 +2764,8 @@ class AsyncMasterAccountClient:
         )
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

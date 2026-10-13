@@ -19,6 +19,9 @@ class UpdateTierGroupRequestMeta(UncheckedBaseModel):
         FieldMetadata(alias="isInternal"),
         pydantic.Field(alias="isInternal", description="Indicates whether the tier group is internal."),
     ] = None
+    """
+    Indicates whether the tier group is internal.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -31,6 +31,9 @@ class GetCorporateSubAccountIdResponsePlanInfo(UncheckedBaseModel):
         FieldMetadata(alias="planType"),
         pydantic.Field(alias="planType", description="type of the plan"),
     ] = None
+    """
+    type of the plan
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

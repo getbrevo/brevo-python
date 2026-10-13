@@ -27,6 +27,10 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
             description="Optional unique identifier (UUID) of the associated balance definition.",
         ),
     ] = None
+    """
+    Optional unique identifier (UUID) of the associated balance definition.
+    """
+
     contact_id: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="contactId"),
@@ -34,16 +38,28 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
             alias="contactId", description="Unique identifier of the contact placing the order (must be ≥ 1)."
         ),
     ]
+    """
+    Unique identifier of the contact placing the order (must be ≥ 1).
+    """
+
     created_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="RFC3339 timestamp indicating when the order was created."),
     ]
+    """
+    RFC3339 timestamp indicating when the order was created.
+    """
+
     due_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="dueAt"),
         pydantic.Field(alias="dueAt", description="RFC3339 timestamp specifying when the order is due in the future."),
     ]
+    """
+    RFC3339 timestamp specifying when the order is due in the future.
+    """
+
     expires_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="expiresAt"),
@@ -51,6 +67,10 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
             alias="expiresAt", description="Optional RFC3339 timestamp defining order expiration in the future."
         ),
     ] = None
+    """
+    Optional RFC3339 timestamp defining order expiration in the future.
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the balance order.
@@ -63,6 +83,10 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
             alias="loyaltyProgramId", description="Unique identifier of the loyalty program associated with the order."
         ),
     ]
+    """
+    Unique identifier of the loyalty program associated with the order.
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Optional metadata associated with the order.
@@ -75,6 +99,10 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
             alias="processedAt", description="Optional RFC3339 timestamp indicating when the order was processed."
         ),
     ] = None
+    """
+    Optional RFC3339 timestamp indicating when the order was processed.
+    """
+
     transactionid: typing.Optional[str] = pydantic.Field(default=None)
     """
     Optional reference to the associated transaction ID.
@@ -85,6 +113,9 @@ class CreateBalanceOrderResponse(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="RFC3339 timestamp indicating the last update to the order."),
     ]
+    """
+    RFC3339 timestamp indicating the last update to the order.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

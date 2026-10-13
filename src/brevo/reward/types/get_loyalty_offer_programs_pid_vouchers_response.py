@@ -18,11 +18,19 @@ class GetLoyaltyOfferProgramsPidVouchersResponse(UncheckedBaseModel):
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Contact id associated with the current reward"),
     ] = None
+    """
+    Contact id associated with the current reward
+    """
+
     contact_rewards: typing_extensions.Annotated[
         typing.Optional[typing.List[GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem]],
         FieldMetadata(alias="contactRewards"),
         pydantic.Field(alias="contactRewards", description="List of all the rewards for current contact"),
     ] = None
+    """
+    List of all the rewards for current contact
+    """
+
     count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Count of the rewards associated with the current contact
@@ -33,11 +41,18 @@ class GetLoyaltyOfferProgramsPidVouchersResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty Program Id for the contact"),
     ] = None
+    """
+    Loyalty Program Id for the contact
+    """
+
     loyalty_subscription_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltySubscriptionId"),
         pydantic.Field(alias="loyaltySubscriptionId", description="Loyalty Subscription Id for the contact"),
     ] = None
+    """
+    Loyalty Subscription Id for the contact
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

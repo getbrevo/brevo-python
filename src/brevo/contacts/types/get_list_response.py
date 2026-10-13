@@ -26,16 +26,28 @@ class GetListResponse(UncheckedBaseModel):
         FieldMetadata(alias="totalBlacklisted"),
         pydantic.Field(alias="totalBlacklisted", description="Number of blacklisted contacts in the list"),
     ]
+    """
+    Number of blacklisted contacts in the list
+    """
+
     total_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="totalSubscribers"),
         pydantic.Field(alias="totalSubscribers", description="Number of contacts in the list"),
     ]
+    """
+    Number of contacts in the list
+    """
+
     unique_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueSubscribers"),
         pydantic.Field(alias="uniqueSubscribers", description="Number of unique contacts in the list"),
     ]
+    """
+    Number of unique contacts in the list
+    """
+
     campaign_stats: typing_extensions.Annotated[
         typing.Optional[typing.List[GetListResponseCampaignStatsItem]],
         FieldMetadata(alias="campaignStats"),
@@ -46,6 +58,10 @@ class GetListResponse(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Creation UTC date-time of the list (YYYY-MM-DDTHH:mm:ss.SSSZ)"),
     ]
+    """
+    Creation UTC date-time of the list (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     dynamic_list: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="dynamicList"),
@@ -54,9 +70,16 @@ class GetListResponse(UncheckedBaseModel):
             description="Status telling if the list is dynamic or not (true=dynamic, false=not dynamic)",
         ),
     ] = None
+    """
+    Status telling if the list is dynamic or not (true=dynamic, false=not dynamic)
+    """
+
     folder_id: typing_extensions.Annotated[
         int, FieldMetadata(alias="folderId"), pydantic.Field(alias="folderId", description="ID of the folder")
     ]
+    """
+    ID of the folder
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

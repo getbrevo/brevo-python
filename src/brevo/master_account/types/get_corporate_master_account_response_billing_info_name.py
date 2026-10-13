@@ -19,11 +19,18 @@ class GetCorporateMasterAccountResponseBillingInfoName(UncheckedBaseModel):
         FieldMetadata(alias="familyName"),
         pydantic.Field(alias="familyName", description="Last name for billing"),
     ] = None
+    """
+    Last name for billing
+    """
+
     given_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="givenName"),
         pydantic.Field(alias="givenName", description="First name for billing"),
     ] = None
+    """
+    First name for billing
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

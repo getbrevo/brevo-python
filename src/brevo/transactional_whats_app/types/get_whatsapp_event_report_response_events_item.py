@@ -21,6 +21,10 @@ class GetWhatsappEventReportResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="contactNumber"),
         pydantic.Field(alias="contactNumber", description="WhatsApp Number with country code. Example, 85264318721"),
     ]
+    """
+    WhatsApp Number with country code. Example, 85264318721
+    """
+
     date: str = pydantic.Field()
     """
     UTC date-time on which the event has been generated
@@ -39,11 +43,19 @@ class GetWhatsappEventReportResponseEventsItem(UncheckedBaseModel):
             description="Url of the media reply (will be there only in case of `reply` event with media)",
         ),
     ] = None
+    """
+    Url of the media reply (will be there only in case of `reply` event with media)
+    """
+
     message_id: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="Message ID which generated the event"),
     ]
+    """
+    Message ID which generated the event
+    """
+
     reason: typing.Optional[str] = pydantic.Field(default=None)
     """
     Reason for the event (will be there in case of `error` and `soft-bounce` events)
@@ -54,6 +66,9 @@ class GetWhatsappEventReportResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="senderNumber"),
         pydantic.Field(alias="senderNumber", description="WhatsApp Number with country code. Example, 85264318721"),
     ]
+    """
+    WhatsApp Number with country code. Example, 85264318721
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -21,21 +21,37 @@ class CreateVoucherResponse(UncheckedBaseModel):
         FieldMetadata(alias="consumedAt"),
         pydantic.Field(alias="consumedAt", description="Timestamp for when this reward was consumed"),
     ] = None
+    """
+    Timestamp for when this reward was consumed
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Id of the contact that attributed the reward"),
     ] = None
+    """
+    Id of the contact that attributed the reward
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp for when this reward was created"),
     ] = None
+    """
+    Timestamp for when this reward was created
+    """
+
     expiration_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expirationDate"),
         pydantic.Field(alias="expirationDate", description="Expiration date of the reward"),
     ] = None
+    """
+    Expiration date of the reward
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier
@@ -46,6 +62,10 @@ class CreateVoucherResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty Program Id to which attributed reward belongs"),
     ] = None
+    """
+    Loyalty Program Id to which attributed reward belongs
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional data to define the reward
@@ -56,11 +76,19 @@ class CreateVoucherResponse(UncheckedBaseModel):
         FieldMetadata(alias="rewardId"),
         pydantic.Field(alias="rewardId", description="Unique identifier for the reward"),
     ] = None
+    """
+    Unique identifier for the reward
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp for when this reward was updated"),
     ] = None
+    """
+    Timestamp for when this reward was updated
+    """
+
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     Value of the selected reward config
@@ -71,6 +99,9 @@ class CreateVoucherResponse(UncheckedBaseModel):
         FieldMetadata(alias="validFrom"),
         pydantic.Field(alias="validFrom", description="Date from which the voucher becomes valid"),
     ] = None
+    """
+    Date from which the voucher becomes valid
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

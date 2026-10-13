@@ -15,11 +15,19 @@ class PostPreviewSmtpEmailTemplatesResponse(UncheckedBaseModel):
         FieldMetadata(alias="fromEmail"),
         pydantic.Field(alias="fromEmail", description="Sender email address"),
     ] = None
+    """
+    Sender email address
+    """
+
     from_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="fromName"),
         pydantic.Field(alias="fromName", description="Sender Name"),
     ] = None
+    """
+    Sender Name
+    """
+
     html: typing.Optional[str] = pydantic.Field(default=None)
     """
     Html content of the template
@@ -30,6 +38,10 @@ class PostPreviewSmtpEmailTemplatesResponse(UncheckedBaseModel):
         FieldMetadata(alias="previewText"),
         pydantic.Field(alias="previewText", description="Preview text of the template"),
     ] = None
+    """
+    Preview text of the template
+    """
+
     subject: typing.Optional[str] = pydantic.Field(default=None)
     """
     subject of the template

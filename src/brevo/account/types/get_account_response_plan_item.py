@@ -24,6 +24,13 @@ class GetAccountResponsePlanItem(UncheckedBaseModel):
             description='This is the type of the credit, "Send Limit" is one\nof the possible types of credit of a user. "Send\nLimit" implies the total number of emails you can\nsend to the subscribers in your account.',
         ),
     ] = "sendLimit"
+    """
+    This is the type of the credit, "Send Limit" is one
+    of the possible types of credit of a user. "Send
+    Limit" implies the total number of emails you can
+    send to the subscribers in your account.
+    """
+
     end_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="endDate"),
@@ -31,6 +38,11 @@ class GetAccountResponsePlanItem(UncheckedBaseModel):
             alias="endDate", description="Date of the period from which the plan will end\n(Unix timestamp format)"
         ),
     ] = None
+    """
+    Date of the period from which the plan will end
+    (Unix timestamp format)
+    """
+
     start_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="startDate"),
@@ -38,6 +50,11 @@ class GetAccountResponsePlanItem(UncheckedBaseModel):
             alias="startDate", description="Date of the period from which the plan will start\n(Unix timestamp format)"
         ),
     ] = None
+    """
+    Date of the period from which the plan will start
+    (Unix timestamp format)
+    """
+
     type: GetAccountResponsePlanItemType = pydantic.Field()
     """
     Displays the plan type of the user

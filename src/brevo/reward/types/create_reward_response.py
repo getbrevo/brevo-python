@@ -21,6 +21,10 @@ class CreateRewardResponse(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty program to which the reward belongs"),
     ] = None
+    """
+    Loyalty program to which the reward belongs
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     Name of the reward
@@ -31,26 +35,45 @@ class CreateRewardResponse(UncheckedBaseModel):
         FieldMetadata(alias="publicDescription"),
         pydantic.Field(alias="publicDescription", description="Public description of the reward"),
     ] = None
+    """
+    Public description of the reward
+    """
+
     public_image: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicImage"),
         pydantic.Field(alias="publicImage", description="Public image URL of the reward"),
     ] = None
+    """
+    Public image URL of the reward
+    """
+
     public_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="publicName"),
         pydantic.Field(alias="publicName", description="Public name of the reward"),
     ] = None
+    """
+    Public name of the reward
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the reward was created"),
     ] = None
+    """
+    Timestamp when the reward was created
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the reward was last updated"),
     ] = None
+    """
+    Timestamp when the reward was last updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

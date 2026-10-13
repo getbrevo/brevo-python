@@ -15,6 +15,9 @@ class CreateTierForTierGroupRequestTierRewardsItem(UncheckedBaseModel):
         FieldMetadata(alias="rewardId"),
         pydantic.Field(alias="rewardId", description="Reward unique identifier"),
     ] = None
+    """
+    Reward unique identifier
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

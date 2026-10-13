@@ -25,6 +25,10 @@ class GetCorporateMasterAccountResponsePlanInfo(UncheckedBaseModel):
         FieldMetadata(alias="currencyCode"),
         pydantic.Field(alias="currencyCode", description="Plan currency"),
     ] = None
+    """
+    Plan currency
+    """
+
     features: typing.Optional[typing.List[GetCorporateMasterAccountResponsePlanInfoFeaturesItem]] = pydantic.Field(
         default=None
     )
@@ -37,11 +41,19 @@ class GetCorporateMasterAccountResponsePlanInfo(UncheckedBaseModel):
         FieldMetadata(alias="nextBillingAt"),
         pydantic.Field(alias="nextBillingAt", description="Timestamp of next billing date"),
     ] = None
+    """
+    Timestamp of next billing date
+    """
+
     plan_period: typing_extensions.Annotated[
         typing.Optional[GetCorporateMasterAccountResponsePlanInfoPlanPeriod],
         FieldMetadata(alias="planPeriod"),
         pydantic.Field(alias="planPeriod", description="Plan period type"),
     ] = None
+    """
+    Plan period type
+    """
+
     price: typing.Optional[float] = pydantic.Field(default=None)
     """
     Plan amount
@@ -52,6 +64,9 @@ class GetCorporateMasterAccountResponsePlanInfo(UncheckedBaseModel):
         FieldMetadata(alias="subAccounts"),
         pydantic.Field(alias="subAccounts", description="Number of sub-accounts"),
     ] = None
+    """
+    Number of sub-accounts
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

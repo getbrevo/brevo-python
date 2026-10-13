@@ -16,11 +16,19 @@ class GetCouponCollection(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Datetime on which the collection was created."),
     ]
+    """
+    Datetime on which the collection was created.
+    """
+
     default_coupon: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="defaultCoupon"),
         pydantic.Field(alias="defaultCoupon", description="The default coupon of the collection."),
     ]
+    """
+    The default coupon of the collection.
+    """
+
     expiration_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expirationDate"),
@@ -28,6 +36,10 @@ class GetCouponCollection(UncheckedBaseModel):
             alias="expirationDate", description="Expiration date for the coupon collection in RFC3339 format."
         ),
     ] = None
+    """
+    Expiration date for the coupon collection in RFC3339 format.
+    """
+
     id: str = pydantic.Field()
     """
     The id of the collection.
@@ -43,6 +55,10 @@ class GetCouponCollection(UncheckedBaseModel):
         FieldMetadata(alias="remainingCoupons"),
         pydantic.Field(alias="remainingCoupons", description="Number of coupons that have not been sent yet."),
     ]
+    """
+    Number of coupons that have not been sent yet.
+    """
+
     remaining_coupons_alert: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="remainingCouponsAlert"),
@@ -51,6 +67,10 @@ class GetCouponCollection(UncheckedBaseModel):
             description="If present, an email notification is going to be sent when the total number of available coupons falls below the defined threshold.",
         ),
     ] = None
+    """
+    If present, an email notification is going to be sent when the total number of available coupons falls below the defined threshold.
+    """
+
     remaining_days_alert: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="remainingDaysAlert"),
@@ -59,11 +79,18 @@ class GetCouponCollection(UncheckedBaseModel):
             description="If present, an email notification is going to be sent the defined amount of days before to the expiration date.",
         ),
     ] = None
+    """
+    If present, an email notification is going to be sent the defined amount of days before to the expiration date.
+    """
+
     total_coupons: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="totalCoupons"),
         pydantic.Field(alias="totalCoupons", description="Total number of coupons in the collection."),
     ]
+    """
+    Total number of coupons in the collection.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

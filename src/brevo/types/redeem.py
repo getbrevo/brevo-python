@@ -16,31 +16,55 @@ class Redeem(UncheckedBaseModel):
         FieldMetadata(alias="cancelledAt"),
         pydantic.Field(alias="cancelledAt", description="Timestamp when the redemption was cancelled"),
     ] = None
+    """
+    Timestamp when the redemption was cancelled
+    """
+
     completed_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="completedAt"),
         pydantic.Field(alias="completedAt", description="Timestamp when the redemption was completed"),
     ] = None
+    """
+    Timestamp when the redemption was completed
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier for the contact"),
     ] = None
+    """
+    Unique identifier for the contact
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the redemption was created"),
     ] = None
+    """
+    Timestamp when the redemption was created
+    """
+
     debit_transaction_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="debitTransactionId"),
         pydantic.Field(alias="debitTransactionId", description="Unique identifier for the debit transaction"),
     ] = None
+    """
+    Unique identifier for the debit transaction
+    """
+
     expires_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="expiresAt"),
         pydantic.Field(alias="expiresAt", description="Timestamp when the redemption expires"),
     ] = None
+    """
+    Timestamp when the redemption expires
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the redemption
@@ -51,6 +75,10 @@ class Redeem(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier for the loyalty program"),
     ] = None
+    """
+    Unique identifier for the loyalty program
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional metadata associated with the redemption
@@ -61,16 +89,28 @@ class Redeem(UncheckedBaseModel):
         FieldMetadata(alias="rejectReason"),
         pydantic.Field(alias="rejectReason", description="Reason for rejection if the redemption was rejected"),
     ] = None
+    """
+    Reason for rejection if the redemption was rejected
+    """
+
     rejected_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="rejectedAt"),
         pydantic.Field(alias="rejectedAt", description="Timestamp when the redemption was rejected"),
     ] = None
+    """
+    Timestamp when the redemption was rejected
+    """
+
     reward_attribution_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="rewardAttributionId"),
         pydantic.Field(alias="rewardAttributionId", description="Unique identifier for the reward attribution"),
     ] = None
+    """
+    Unique identifier for the reward attribution
+    """
+
     status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Current status of the redemption
@@ -81,6 +121,9 @@ class Redeem(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the redemption was last updated"),
     ] = None
+    """
+    Timestamp when the redemption was last updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

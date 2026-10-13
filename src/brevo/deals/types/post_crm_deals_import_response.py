@@ -15,6 +15,9 @@ class PostCrmDealsImportResponse(UncheckedBaseModel):
         FieldMetadata(alias="processId"),
         pydantic.Field(alias="processId", description="The ID of the import process"),
     ] = None
+    """
+    The ID of the import process
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

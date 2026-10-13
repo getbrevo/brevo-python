@@ -18,6 +18,11 @@ class CreateSenderResponse(UncheckedBaseModel):
             description="Status of DKIM configuration for the sender (true = DKIM not\nwell configured, false = DKIM well configured)",
         ),
     ] = None
+    """
+    Status of DKIM configuration for the sender (true = DKIM not
+    well configured, false = DKIM well configured)
+    """
+
     id: int = pydantic.Field()
     """
     ID of the Sender created
@@ -31,6 +36,10 @@ class CreateSenderResponse(UncheckedBaseModel):
             description="Status of SPF configuration for the sender (true = SPF not\nwell configured, false = SPF well configured)",
         ),
     ] = None
+    """
+    Status of SPF configuration for the sender (true = SPF not
+    well configured, false = SPF well configured)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

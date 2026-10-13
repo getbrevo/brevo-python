@@ -21,16 +21,28 @@ class GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem(UncheckedBase
         FieldMetadata(alias="consumedAt"),
         pydantic.Field(alias="consumedAt", description="Timestamp when the reward limit was consumed"),
     ] = None
+    """
+    Timestamp when the reward limit was consumed
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the reward limit was created"),
     ] = None
+    """
+    Timestamp when the reward limit was created
+    """
+
     expiration_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="expirationDate"),
         pydantic.Field(alias="expirationDate", description="Reward expiration date"),
     ] = None
+    """
+    Reward expiration date
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the contact
@@ -46,6 +58,10 @@ class GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem(UncheckedBase
         FieldMetadata(alias="rewardId"),
         pydantic.Field(alias="rewardId", description="Unique identifier for the reward"),
     ] = None
+    """
+    Unique identifier for the reward
+    """
+
     unit: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unit of the balance selected in the reward definition
@@ -56,6 +72,10 @@ class GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem(UncheckedBase
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the reward limit was updated"),
     ] = None
+    """
+    Timestamp when the reward limit was updated
+    """
+
     value: typing.Optional[float] = pydantic.Field(default=None)
     """
     Value of the selected reward config
@@ -66,6 +86,9 @@ class GetLoyaltyOfferProgramsPidVouchersResponseContactRewardsItem(UncheckedBase
         FieldMetadata(alias="validFrom"),
         pydantic.Field(alias="validFrom", description="Date from which the voucher becomes valid"),
     ] = None
+    """
+    Date from which the voucher becomes valid
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

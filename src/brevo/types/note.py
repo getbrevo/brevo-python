@@ -30,31 +30,54 @@ class Note(UncheckedBaseModel):
         FieldMetadata(alias="contactIds"),
         pydantic.Field(alias="contactIds", description="Contact ids linked to a note"),
     ] = None
+    """
+    Contact ids linked to a note
+    """
+
     company_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="companyIds"),
         pydantic.Field(alias="companyIds", description="Company ids linked to a note"),
     ] = None
+    """
+    Company ids linked to a note
+    """
+
     deal_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="dealIds"),
         pydantic.Field(alias="dealIds", description="Deal ids linked to a note"),
     ] = None
+    """
+    Deal ids linked to a note
+    """
+
     author_id: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, typing.Any]],
         FieldMetadata(alias="authorId"),
         pydantic.Field(alias="authorId", description="Account details of user which created the note"),
     ] = None
+    """
+    Account details of user which created the note
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Note created date/time"),
     ] = None
+    """
+    Note created date/time
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Note updated date/time"),
     ] = None
+    """
+    Note updated date/time
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

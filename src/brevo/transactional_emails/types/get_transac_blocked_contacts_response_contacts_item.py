@@ -18,6 +18,10 @@ class GetTransacBlockedContactsResponseContactsItem(UncheckedBaseModel):
         FieldMetadata(alias="blockedAt"),
         pydantic.Field(alias="blockedAt", description="Date when the contact was blocked or unsubscribed on"),
     ]
+    """
+    Date when the contact was blocked or unsubscribed on
+    """
+
     email: str = pydantic.Field()
     """
     Email address of the blocked or unsubscribed contact
@@ -33,6 +37,9 @@ class GetTransacBlockedContactsResponseContactsItem(UncheckedBaseModel):
         FieldMetadata(alias="senderEmail"),
         pydantic.Field(alias="senderEmail", description="Sender email address of the blocked or unsubscribed contact"),
     ] = None
+    """
+    Sender email address of the blocked or unsubscribed contact
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

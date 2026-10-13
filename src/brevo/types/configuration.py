@@ -19,6 +19,9 @@ class Configuration(UncheckedBaseModel):
         FieldMetadata(alias="customSuccessUrl"),
         pydantic.Field(alias="customSuccessUrl", description="Absolute URL of the custom success page."),
     ]
+    """
+    Absolute URL of the custom success page.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

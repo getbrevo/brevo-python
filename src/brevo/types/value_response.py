@@ -27,6 +27,10 @@ class ValueResponse(UncheckedBaseModel):
         FieldMetadata(alias="contactProperty"),
         pydantic.Field(alias="contactProperty", description="string"),
     ] = None
+    """
+    string
+    """
+
     date: typing.Optional[str] = pydantic.Field(default=None)
     """
     Selected date for rule definition
@@ -37,6 +41,10 @@ class ValueResponse(UncheckedBaseModel):
         FieldMetadata(alias="eventProperty"),
         pydantic.Field(alias="eventProperty", description="Selected event property for rule definition"),
     ] = None
+    """
+    Selected event property for rule definition
+    """
+
     expression: typing.Optional["NodeResponse"] = pydantic.Field(default=None)
     """
     Created expression for rule definition

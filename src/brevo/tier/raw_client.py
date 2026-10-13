@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -78,7 +78,7 @@ class RawTierClient:
             Tier successfully assigned to membership
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/contacts/{jsonable_encoder(cid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/contacts/{encode_path_param(cid)}/tiers/{encode_path_param(tid)}",
             method="POST",
             request_options=request_options,
         )
@@ -205,7 +205,7 @@ class RawTierClient:
             Tier group list successfully retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups",
             method="GET",
             params={
                 "version": version,
@@ -337,7 +337,7 @@ class RawTierClient:
             Tier group successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups",
             method="POST",
             json={
                 "downgradeStrategy": downgrade_strategy,
@@ -476,7 +476,7 @@ class RawTierClient:
             Tier group information successfully retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="GET",
             params={
                 "version": version,
@@ -604,7 +604,7 @@ class RawTierClient:
             Tier group successfully updated
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="PUT",
             json={
                 "downgradeStrategy": downgrade_strategy,
@@ -717,7 +717,7 @@ class RawTierClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -840,7 +840,7 @@ class RawTierClient:
             Tier successfully created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}/tiers",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}/tiers",
             method="POST",
             json={
                 "accessConditions": convert_and_respect_annotation_metadata(
@@ -963,7 +963,7 @@ class RawTierClient:
             Tier list successfully retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers",
             method="GET",
             params={
                 "version": version,
@@ -1085,7 +1085,7 @@ class RawTierClient:
             Tier successfully updated
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers/{encode_path_param(tid)}",
             method="PUT",
             json={
                 "accessConditions": convert_and_respect_annotation_metadata(
@@ -1203,7 +1203,7 @@ class RawTierClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers/{encode_path_param(tid)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1305,7 +1305,7 @@ class AsyncRawTierClient:
             Tier successfully assigned to membership
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/contacts/{jsonable_encoder(cid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/contacts/{encode_path_param(cid)}/tiers/{encode_path_param(tid)}",
             method="POST",
             request_options=request_options,
         )
@@ -1432,7 +1432,7 @@ class AsyncRawTierClient:
             Tier group list successfully retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups",
             method="GET",
             params={
                 "version": version,
@@ -1564,7 +1564,7 @@ class AsyncRawTierClient:
             Tier group successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups",
             method="POST",
             json={
                 "downgradeStrategy": downgrade_strategy,
@@ -1703,7 +1703,7 @@ class AsyncRawTierClient:
             Tier group information successfully retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="GET",
             params={
                 "version": version,
@@ -1831,7 +1831,7 @@ class AsyncRawTierClient:
             Tier group successfully updated
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="PUT",
             json={
                 "downgradeStrategy": downgrade_strategy,
@@ -1944,7 +1944,7 @@ class AsyncRawTierClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2067,7 +2067,7 @@ class AsyncRawTierClient:
             Tier successfully created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tier-groups/{jsonable_encoder(gid)}/tiers",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tier-groups/{encode_path_param(gid)}/tiers",
             method="POST",
             json={
                 "accessConditions": convert_and_respect_annotation_metadata(
@@ -2190,7 +2190,7 @@ class AsyncRawTierClient:
             Tier list successfully retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers",
             method="GET",
             params={
                 "version": version,
@@ -2312,7 +2312,7 @@ class AsyncRawTierClient:
             Tier successfully updated
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers/{encode_path_param(tid)}",
             method="PUT",
             json={
                 "accessConditions": convert_and_respect_annotation_metadata(
@@ -2430,7 +2430,7 @@ class AsyncRawTierClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"loyalty/tier/programs/{jsonable_encoder(pid)}/tiers/{jsonable_encoder(tid)}",
+            f"loyalty/tier/programs/{encode_path_param(pid)}/tiers/{encode_path_param(tid)}",
             method="DELETE",
             request_options=request_options,
         )

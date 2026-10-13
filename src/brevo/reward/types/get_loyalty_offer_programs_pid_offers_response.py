@@ -23,6 +23,9 @@ class GetLoyaltyOfferProgramsPidOffersResponse(UncheckedBaseModel):
         FieldMetadata(alias="totalCount"),
         pydantic.Field(alias="totalCount", description="Count of the associated parameter in current reward"),
     ] = None
+    """
+    Count of the associated parameter in current reward
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

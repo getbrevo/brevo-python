@@ -19,11 +19,18 @@ class GetAccountResponsePlanVerticalsItemUsers(UncheckedBaseModel):
         FieldMetadata(alias="purchasedSeats"),
         pydantic.Field(alias="purchasedSeats", description="Number of purchased user seats"),
     ]
+    """
+    Number of purchased user seats
+    """
+
     used_seats: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="usedSeats"),
         pydantic.Field(alias="usedSeats", description="Number of used user seats"),
     ]
+    """
+    Number of used user seats
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

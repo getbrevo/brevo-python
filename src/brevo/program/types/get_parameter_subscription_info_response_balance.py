@@ -25,11 +25,18 @@ class GetParameterSubscriptionInfoResponseBalance(UncheckedBaseModel):
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
     ] = None
+    """
+    Unique identifier of the contact.
+    """
+
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
     ] = None
+    """
+    Unique identifier of the loyalty program.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

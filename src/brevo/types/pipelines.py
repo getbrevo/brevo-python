@@ -5,3 +5,6 @@ import typing
 from .pipeline import Pipeline
 
 Pipelines = typing.List[Pipeline]
+"""
+List of pipeline
+"""

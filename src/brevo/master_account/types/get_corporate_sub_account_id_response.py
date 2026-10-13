@@ -17,6 +17,10 @@ class GetCorporateSubAccountIdResponse(UncheckedBaseModel):
         FieldMetadata(alias="companyName"),
         pydantic.Field(alias="companyName", description="Sub-account company name"),
     ] = None
+    """
+    Sub-account company name
+    """
+
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email id of the sub-account organization
@@ -37,6 +41,9 @@ class GetCorporateSubAccountIdResponse(UncheckedBaseModel):
         FieldMetadata(alias="planInfo"),
         pydantic.Field(alias="planInfo", description="Sub-account plan details"),
     ] = None
+    """
+    Sub-account plan details
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

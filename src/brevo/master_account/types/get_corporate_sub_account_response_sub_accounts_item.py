@@ -23,11 +23,19 @@ class GetCorporateSubAccountResponseSubAccountsItem(UncheckedBaseModel):
         FieldMetadata(alias="companyName"),
         pydantic.Field(alias="companyName", description="Name of the sub-account company"),
     ]
+    """
+    Name of the sub-account company
+    """
+
     created_at: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the sub-account was created"),
     ]
+    """
+    Timestamp when the sub-account was created
+    """
+
     groups: typing.List[GetCorporateSubAccountResponseSubAccountsItemGroupsItem] = pydantic.Field()
     """
     Group details

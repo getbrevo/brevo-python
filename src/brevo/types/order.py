@@ -37,6 +37,10 @@ class Order(UncheckedBaseModel):
             description="Event occurrence UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when order is actually created.",
         ),
     ]
+    """
+    Event occurrence UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when order is actually created.
+    """
+
     id: str = pydantic.Field()
     """
     Unique ID of the order.
@@ -55,6 +59,10 @@ class Order(UncheckedBaseModel):
             description="Meta data of order to store additional detail such as custom message, customer type, source.",
         ),
     ] = None
+    """
+    Meta data of order to store additional detail such as custom message, customer type, source.
+    """
+
     products: typing.List[OrderProductsItem]
     status: str = pydantic.Field()
     """
@@ -66,6 +74,10 @@ class Order(UncheckedBaseModel):
         FieldMetadata(alias="storeId"),
         pydantic.Field(alias="storeId", description="ID of store where the order is placed"),
     ] = None
+    """
+    ID of store where the order is placed
+    """
+
     updated_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="updatedAt"),
@@ -74,6 +86,9 @@ class Order(UncheckedBaseModel):
             description="Event updated UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when the status of the order is actually changed/updated.",
         ),
     ]
+    """
+    Event updated UTC date-time (YYYY-MM-DDTHH:mm:ssZ), when the status of the order is actually changed/updated.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

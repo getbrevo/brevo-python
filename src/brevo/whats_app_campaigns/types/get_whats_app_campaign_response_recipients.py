@@ -19,11 +19,19 @@ class GetWhatsAppCampaignResponseRecipients(UncheckedBaseModel):
         FieldMetadata(alias="excludedLists"),
         pydantic.Field(alias="excludedLists", description="List of excluded list IDs"),
     ] = None
+    """
+    List of excluded list IDs
+    """
+
     included_lists: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="includedLists"),
         pydantic.Field(alias="includedLists", description="List of included list IDs"),
     ] = None
+    """
+    List of included list IDs
+    """
+
     segments: typing.Optional[typing.List[int]] = pydantic.Field(default=None)
     """
     List of segment IDs

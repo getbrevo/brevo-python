@@ -16,26 +16,46 @@ class SubscribeToLoyaltyProgramResponse(UncheckedBaseModel):
         FieldMetadata(alias="organizationId"),
         pydantic.Field(alias="organizationId", description="Unique identifier of the organization."),
     ] = None
+    """
+    Unique identifier of the organization.
+    """
+
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
     ] = None
+    """
+    Unique identifier of the loyalty program.
+    """
+
     version_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="versionId"),
         pydantic.Field(alias="versionId", description="Version number of the subscription."),
     ] = None
+    """
+    Version number of the subscription.
+    """
+
     contact_id: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
     ] = None
+    """
+    Unique identifier of the contact.
+    """
+
     loyalty_subscription_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltySubscriptionId"),
         pydantic.Field(alias="loyaltySubscriptionId", description="Unique identifier of the subscription."),
     ] = None
+    """
+    Unique identifier of the subscription.
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Metadata associated with the subscription.
@@ -46,11 +66,18 @@ class SubscribeToLoyaltyProgramResponse(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the subscription was created."),
     ] = None
+    """
+    Timestamp when the subscription was created.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the subscription was last updated."),
     ] = None
+    """
+    Timestamp when the subscription was last updated.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

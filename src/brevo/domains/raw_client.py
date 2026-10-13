@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -195,7 +195,7 @@ class RawDomainsClient:
             Domain configuration retrieved successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}",
+            f"senders/domains/{encode_path_param(domain_name)}",
             method="GET",
             request_options=request_options,
         )
@@ -267,7 +267,7 @@ class RawDomainsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}",
+            f"senders/domains/{encode_path_param(domain_name)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -335,7 +335,7 @@ class RawDomainsClient:
             Domain authenticated successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}/authenticate",
+            f"senders/domains/{encode_path_param(domain_name)}/authenticate",
             method="PUT",
             request_options=request_options,
         )
@@ -554,7 +554,7 @@ class AsyncRawDomainsClient:
             Domain configuration retrieved successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}",
+            f"senders/domains/{encode_path_param(domain_name)}",
             method="GET",
             request_options=request_options,
         )
@@ -626,7 +626,7 @@ class AsyncRawDomainsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}",
+            f"senders/domains/{encode_path_param(domain_name)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -694,7 +694,7 @@ class AsyncRawDomainsClient:
             Domain authenticated successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"senders/domains/{jsonable_encoder(domain_name)}/authenticate",
+            f"senders/domains/{encode_path_param(domain_name)}/authenticate",
             method="PUT",
             request_options=request_options,
         )

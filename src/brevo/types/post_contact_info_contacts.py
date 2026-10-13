@@ -21,6 +21,10 @@ class PostContactInfoContacts(UncheckedBaseModel):
             description='Id of the process created to remove contacts from list when user opts for "all" option.',
         ),
     ] = None
+    """
+    Id of the process created to remove contacts from list when user opts for "all" option.
+    """
+
     success: typing.Optional[PostContactInfoContactsSuccess] = None
     total: typing.Optional[int] = pydantic.Field(default=None)
     """

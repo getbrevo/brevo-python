@@ -18,6 +18,10 @@ class GetAttributesResponseAttributesItem(UncheckedBaseModel):
         FieldMetadata(alias="calculatedValue"),
         pydantic.Field(alias="calculatedValue", description="Calculated value formula"),
     ] = None
+    """
+    Calculated value formula
+    """
+
     category: GetAttributesResponseAttributesItemCategory = pydantic.Field()
     """
     Category of the attribute
@@ -37,6 +41,10 @@ class GetAttributesResponseAttributesItem(UncheckedBaseModel):
             alias="multiCategoryOptions", description='Parameter only available for "multiple-choice" type attributes.'
         ),
     ] = None
+    """
+    Parameter only available for "multiple-choice" type attributes.
+    """
+
     name: str = pydantic.Field()
     """
     Name of the attribute

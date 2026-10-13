@@ -19,6 +19,10 @@ class CreateWhatsAppCampaignRequestRecipients(UncheckedBaseModel):
         FieldMetadata(alias="excludedListIds"),
         pydantic.Field(alias="excludedListIds", description="List ids to exclude from the campaign"),
     ] = None
+    """
+    List ids to exclude from the campaign
+    """
+
     list_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="listIds"),
@@ -26,6 +30,10 @@ class CreateWhatsAppCampaignRequestRecipients(UncheckedBaseModel):
             alias="listIds", description="**Mandatory if scheduledAt is not empty**. List Ids to send the campaign to"
         ),
     ] = None
+    """
+    **Mandatory if scheduledAt is not empty**. List Ids to send the campaign to
+    """
+
     segments: typing.Optional[typing.List[int]] = pydantic.Field(default=None)
     """
     **Mandatory if listIds are not used**. Segment ids to send the campaign to.

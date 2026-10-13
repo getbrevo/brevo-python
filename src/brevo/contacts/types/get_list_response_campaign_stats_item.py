@@ -14,6 +14,10 @@ class GetListResponseCampaignStatsItem(UncheckedBaseModel):
     campaign_id: typing_extensions.Annotated[
         int, FieldMetadata(alias="campaignId"), pydantic.Field(alias="campaignId", description="ID of the campaign")
     ]
+    """
+    ID of the campaign
+    """
+
     stats: GetCampaignStats
 
     if IS_PYDANTIC_V2:

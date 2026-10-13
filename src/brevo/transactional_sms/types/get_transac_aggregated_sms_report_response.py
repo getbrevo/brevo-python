@@ -30,6 +30,10 @@ class GetTransacAggregatedSmsReportResponse(UncheckedBaseModel):
         FieldMetadata(alias="hardBounces"),
         pydantic.Field(alias="hardBounces", description="Number of hardbounces for the timeframe"),
     ] = None
+    """
+    Number of hardbounces for the timeframe
+    """
+
     range: typing.Optional[str] = pydantic.Field(default=None)
     """
     Time frame of the report
@@ -60,6 +64,10 @@ class GetTransacAggregatedSmsReportResponse(UncheckedBaseModel):
         FieldMetadata(alias="softBounces"),
         pydantic.Field(alias="softBounces", description="Number of softbounces for the timeframe"),
     ] = None
+    """
+    Number of softbounces for the timeframe
+    """
+
     unsubscribed: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of unsubscription for the timeframe

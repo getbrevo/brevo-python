@@ -19,6 +19,9 @@ class GetCrmFilesIdResponse(UncheckedBaseModel):
         FieldMetadata(alias="fileUrl"),
         pydantic.Field(alias="fileUrl", description="A unique link to download the requested file."),
     ] = None
+    """
+    A unique link to download the requested file.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

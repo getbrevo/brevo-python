@@ -19,6 +19,10 @@ class TierTierRewardsItem(UncheckedBaseModel):
         FieldMetadata(alias="rewardId"),
         pydantic.Field(alias="rewardId", description="Reward to be attributed on tier assignment"),
     ] = None
+    """
+    Reward to be attributed on tier assignment
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="updatedAt"), pydantic.Field(alias="updatedAt")
     ] = None

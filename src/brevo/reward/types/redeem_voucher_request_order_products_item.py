@@ -25,6 +25,10 @@ class RedeemVoucherRequestOrderProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="productId"),
         pydantic.Field(alias="productId", description="Unique identifier for the product"),
     ] = None
+    """
+    Unique identifier for the product
+    """
+
     quantity: typing.Optional[float] = pydantic.Field(default=None)
     """
     Quantity of the product
@@ -35,6 +39,9 @@ class RedeemVoucherRequestOrderProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="variantId"),
         pydantic.Field(alias="variantId", description="Identifier for the product variant"),
     ] = None
+    """
+    Identifier for the product variant
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

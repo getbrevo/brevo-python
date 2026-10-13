@@ -14,12 +14,23 @@ class GetContactStatsResponseTransacAttributesItem(UncheckedBaseModel):
     order_date: typing_extensions.Annotated[
         dt.date, FieldMetadata(alias="orderDate"), pydantic.Field(alias="orderDate", description="Date of the order")
     ]
+    """
+    Date of the order
+    """
+
     order_id: typing_extensions.Annotated[
         int, FieldMetadata(alias="orderId"), pydantic.Field(alias="orderId", description="ID of the order")
     ]
+    """
+    ID of the order
+    """
+
     order_price: typing_extensions.Annotated[
         float, FieldMetadata(alias="orderPrice"), pydantic.Field(alias="orderPrice", description="Price of the order")
     ]
+    """
+    Price of the order
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

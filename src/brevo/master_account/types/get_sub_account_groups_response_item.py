@@ -15,6 +15,10 @@ class GetSubAccountGroupsResponseItem(UncheckedBaseModel):
         FieldMetadata(alias="groupName"),
         pydantic.Field(alias="groupName", description="The name of the group of sub-accounts"),
     ] = None
+    """
+    The name of the group of sub-accounts
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique id of the group

@@ -5,3 +5,6 @@ import typing
 from .ab_test_version_clicks_item import AbTestVersionClicksItem
 
 AbTestVersionClicks = typing.List[AbTestVersionClicksItem]
+"""
+Information on clicked links for a particular version
+"""

@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -242,7 +242,7 @@ class RawSmsCampaignsClient:
             SMS campaign information
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -340,7 +340,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="PUT",
             json={
                 "content": content,
@@ -413,7 +413,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -482,7 +482,7 @@ class RawSmsCampaignsClient:
             process id created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/exportRecipients",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/exportRecipients",
             method="POST",
             json={
                 "notifyURL": notify_url,
@@ -554,7 +554,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendNow",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendNow",
             method="POST",
             request_options=request_options,
         )
@@ -633,7 +633,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendReport",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendReport",
             method="POST",
             json={
                 "email": convert_and_respect_annotation_metadata(
@@ -707,7 +707,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendTest",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendTest",
             method="POST",
             json={
                 "phoneNumber": phone_number,
@@ -778,7 +778,7 @@ class RawSmsCampaignsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/status",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/status",
             method="PUT",
             json={
                 "status": status,
@@ -1033,7 +1033,7 @@ class AsyncRawSmsCampaignsClient:
             SMS campaign information
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1131,7 +1131,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="PUT",
             json={
                 "content": content,
@@ -1204,7 +1204,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}",
+            f"smsCampaigns/{encode_path_param(campaign_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1273,7 +1273,7 @@ class AsyncRawSmsCampaignsClient:
             process id created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/exportRecipients",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/exportRecipients",
             method="POST",
             json={
                 "notifyURL": notify_url,
@@ -1345,7 +1345,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendNow",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendNow",
             method="POST",
             request_options=request_options,
         )
@@ -1424,7 +1424,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendReport",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendReport",
             method="POST",
             json={
                 "email": convert_and_respect_annotation_metadata(
@@ -1498,7 +1498,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/sendTest",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/sendTest",
             method="POST",
             json={
                 "phoneNumber": phone_number,
@@ -1569,7 +1569,7 @@ class AsyncRawSmsCampaignsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smsCampaigns/{jsonable_encoder(campaign_id)}/status",
+            f"smsCampaigns/{encode_path_param(campaign_id)}/status",
             method="PUT",
             json={
                 "status": status,

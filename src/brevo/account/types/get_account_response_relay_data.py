@@ -29,6 +29,9 @@ class GetAccountResponseRelayData(UncheckedBaseModel):
         FieldMetadata(alias="userName"),
         pydantic.Field(alias="userName", description="Email to use as login on transactional platform"),
     ]
+    """
+    Email to use as login on transactional platform
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

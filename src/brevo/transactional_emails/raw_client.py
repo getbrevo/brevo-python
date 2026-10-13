@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -161,7 +161,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/blockedContacts/{jsonable_encoder(email)}",
+            f"smtp/blockedContacts/{encode_path_param(email)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -322,7 +322,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/blockedDomains/{jsonable_encoder(domain)}",
+            f"smtp/blockedDomains/{encode_path_param(domain)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -465,7 +465,7 @@ class RawTransactionalEmailsClient:
             Array of CC recipient objects. Each object contains an email address and an optional name.
 
         headers : typing.Optional[typing.Dict[str, typing.Any]]
-            Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "Idempotency-Key":"abc-123"}`
+            Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "IdempotencyKey":"abc-123"}`
 
         html_content : typing.Optional[str]
             HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.
@@ -602,7 +602,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/email/{jsonable_encoder(identifier)}",
+            f"smtp/email/{encode_path_param(identifier)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -687,7 +687,7 @@ class RawTransactionalEmailsClient:
             Scheduled email batches
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/emailStatus/{jsonable_encoder(identifier)}",
+            f"smtp/emailStatus/{encode_path_param(identifier)}",
             method="GET",
             params={
                 "startDate": str(start_date) if start_date is not None else None,
@@ -857,7 +857,7 @@ class RawTransactionalEmailsClient:
             Transactional email content
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/emails/{jsonable_encoder(uuid_)}",
+            f"smtp/emails/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -932,7 +932,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/log/{jsonable_encoder(identifier)}",
+            f"smtp/log/{encode_path_param(identifier)}",
             method="DELETE",
             params={
                 "from_date": from_date,
@@ -1517,7 +1517,7 @@ class RawTransactionalEmailsClient:
             Email template informations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
             method="GET",
             request_options=request_options,
         )
@@ -1624,7 +1624,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
             method="PUT",
             json={
                 "attachmentUrl": attachment_url,
@@ -1699,7 +1699,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}",
+            f"smtp/templates/{encode_path_param(template_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1763,7 +1763,7 @@ class RawTransactionalEmailsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}/sendTest",
+            f"smtp/templates/{encode_path_param(template_id)}/sendTest",
             method="POST",
             json={
                 "emailTo": email_to,
@@ -1917,7 +1917,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/blockedContacts/{jsonable_encoder(email)}",
+            f"smtp/blockedContacts/{encode_path_param(email)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2078,7 +2078,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/blockedDomains/{jsonable_encoder(domain)}",
+            f"smtp/blockedDomains/{encode_path_param(domain)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2221,7 +2221,7 @@ class AsyncRawTransactionalEmailsClient:
             Array of CC recipient objects. Each object contains an email address and an optional name.
 
         headers : typing.Optional[typing.Dict[str, typing.Any]]
-            Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "Idempotency-Key":"abc-123"}`
+            Custom email headers (non-standard headers) to include in the email. The `sender.ip` header can be set to specify the IP address used for sending transactional emails (dedicated IP users only). Header names must use Title-Case-Format (words separated by hyphens with the first letter of each word capitalized). Headers not in this format are automatically converted. Standard email headers are not supported. Example: `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_value", "IdempotencyKey":"abc-123"}`
 
         html_content : typing.Optional[str]
             HTML body content of the email. Required when `templateId` is not provided. Ignored when `templateId` is provided.
@@ -2358,7 +2358,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/email/{jsonable_encoder(identifier)}",
+            f"smtp/email/{encode_path_param(identifier)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -2443,7 +2443,7 @@ class AsyncRawTransactionalEmailsClient:
             Scheduled email batches
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/emailStatus/{jsonable_encoder(identifier)}",
+            f"smtp/emailStatus/{encode_path_param(identifier)}",
             method="GET",
             params={
                 "startDate": str(start_date) if start_date is not None else None,
@@ -2613,7 +2613,7 @@ class AsyncRawTransactionalEmailsClient:
             Transactional email content
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/emails/{jsonable_encoder(uuid_)}",
+            f"smtp/emails/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -2688,7 +2688,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/log/{jsonable_encoder(identifier)}",
+            f"smtp/log/{encode_path_param(identifier)}",
             method="DELETE",
             params={
                 "from_date": from_date,
@@ -3273,7 +3273,7 @@ class AsyncRawTransactionalEmailsClient:
             Email template informations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=GetSmtpTemplateRequestTemplateId, direction='write'))}",
             method="GET",
             request_options=request_options,
         )
@@ -3380,7 +3380,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
+            f"smtp/templates/{encode_path_param(convert_and_respect_annotation_metadata(object_=template_id, annotation=UpdateSmtpTemplateRequestTemplateId, direction='write'))}",
             method="PUT",
             json={
                 "attachmentUrl": attachment_url,
@@ -3455,7 +3455,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}",
+            f"smtp/templates/{encode_path_param(template_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -3519,7 +3519,7 @@ class AsyncRawTransactionalEmailsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"smtp/templates/{jsonable_encoder(template_id)}/sendTest",
+            f"smtp/templates/{encode_path_param(template_id)}/sendTest",
             method="POST",
             json={
                 "emailTo": email_to,

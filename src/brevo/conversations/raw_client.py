@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -204,7 +204,7 @@ class RawConversationsClient:
             Requested message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -272,7 +272,7 @@ class RawConversationsClient:
             Updated message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="PUT",
             json={
                 "text": text,
@@ -343,7 +343,7 @@ class RawConversationsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -480,7 +480,7 @@ class RawConversationsClient:
             Requested message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -548,7 +548,7 @@ class RawConversationsClient:
             Updated message is returned as a response.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="PUT",
             json={
                 "text": text,
@@ -619,7 +619,7 @@ class RawConversationsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -913,7 +913,7 @@ class AsyncRawConversationsClient:
             Requested message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -981,7 +981,7 @@ class AsyncRawConversationsClient:
             Updated message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="PUT",
             json={
                 "text": text,
@@ -1052,7 +1052,7 @@ class AsyncRawConversationsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/messages/{jsonable_encoder(id)}",
+            f"conversations/messages/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -1189,7 +1189,7 @@ class AsyncRawConversationsClient:
             Requested message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1257,7 +1257,7 @@ class AsyncRawConversationsClient:
             Updated message is returned as a response.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="PUT",
             json={
                 "text": text,
@@ -1328,7 +1328,7 @@ class AsyncRawConversationsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"conversations/pushedMessages/{jsonable_encoder(id)}",
+            f"conversations/pushedMessages/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )

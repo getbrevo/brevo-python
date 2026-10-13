@@ -30,6 +30,9 @@ class GetDomainsResponseDomainsItemCreator(UncheckedBaseModel):
         FieldMetadata(alias="creationDate"),
         pydantic.Field(alias="creationDate", description="Domain creation date"),
     ]
+    """
+    Domain creation date
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

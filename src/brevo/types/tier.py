@@ -18,6 +18,10 @@ class Tier(UncheckedBaseModel):
         FieldMetadata(alias="accessConditions"),
         pydantic.Field(alias="accessConditions", description="Conditions required to access this tier"),
     ] = None
+    """
+    Conditions required to access this tier
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="createdAt"), pydantic.Field(alias="createdAt")
     ] = None
@@ -26,16 +30,28 @@ class Tier(UncheckedBaseModel):
         FieldMetadata(alias="groupId"),
         pydantic.Field(alias="groupId", description="Associated group Id"),
     ] = None
+    """
+    Associated group Id
+    """
+
     image_ref: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="imageRef"),
         pydantic.Field(alias="imageRef", description="Tier image reference"),
     ] = None
+    """
+    Tier image reference
+    """
+
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Associated loyalty program Id"),
     ] = None
+    """
+    Associated loyalty program Id
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     Tier name
@@ -44,11 +60,19 @@ class Tier(UncheckedBaseModel):
     tier_id: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="tierId"), pydantic.Field(alias="tierId", description="Tier id")
     ] = None
+    """
+    Tier id
+    """
+
     tier_rewards: typing_extensions.Annotated[
         typing.Optional[typing.List[TierTierRewardsItem]],
         FieldMetadata(alias="tierRewards"),
         pydantic.Field(alias="tierRewards", description="Rewards associated with this tier"),
     ] = None
+    """
+    Rewards associated with this tier
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="updatedAt"), pydantic.Field(alias="updatedAt")
     ] = None

@@ -22,6 +22,10 @@ class GetDeviceBrowserStats(UncheckedBaseModel):
             alias="uniqueClicks", description="Number of unique clicks for the campaign using the particular browser"
         ),
     ]
+    """
+    Number of unique clicks for the campaign using the particular browser
+    """
+
     unique_views: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueViews"),
@@ -29,6 +33,10 @@ class GetDeviceBrowserStats(UncheckedBaseModel):
             alias="uniqueViews", description="Number of unique openings for the campaign using the particular browser"
         ),
     ]
+    """
+    Number of unique openings for the campaign using the particular browser
+    """
+
     viewed: int = pydantic.Field()
     """
     Number of openings for the campaign using the particular browser

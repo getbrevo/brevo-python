@@ -26,26 +26,46 @@ class ConversationsMessageFile(UncheckedBaseModel):
         FieldMetadata(alias="mimeType"),
         pydantic.Field(alias="mimeType", description="MIME type of the file."),
     ] = None
+    """
+    MIME type of the file.
+    """
+
     is_image: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isImage"),
         pydantic.Field(alias="isImage", description="Whether the file is an image."),
     ] = None
+    """
+    Whether the file is an image.
+    """
+
     is_sticker: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isSticker"),
         pydantic.Field(alias="isSticker", description="Whether the file is a sticker."),
     ] = None
+    """
+    Whether the file is a sticker.
+    """
+
     is_inline: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isInline"),
         pydantic.Field(alias="isInline", description="Whether the file is inline."),
     ] = None
+    """
+    Whether the file is inline.
+    """
+
     inline_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="inlineId"),
         pydantic.Field(alias="inlineId", description="The ID of the inline file."),
     ] = None
+    """
+    The ID of the inline file.
+    """
+
     size: typing.Optional[int] = pydantic.Field(default=None)
     """
     Size in bytes.
@@ -56,11 +76,18 @@ class ConversationsMessageFile(UncheckedBaseModel):
         FieldMetadata(alias="imageInfo"),
         pydantic.Field(alias="imageInfo", description="Image info, present when the file is an image."),
     ] = None
+    """
+    Image info, present when the file is an image.
+    """
+
     is_allowed_file_type: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isAllowedFileType"),
         pydantic.Field(alias="isAllowedFileType", description="Whether the file extension is allowed for download."),
     ] = None
+    """
+    Whether the file extension is allowed for download.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

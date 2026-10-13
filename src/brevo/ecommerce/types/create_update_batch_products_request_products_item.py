@@ -31,6 +31,10 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
             description="UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database",
         ),
     ] = None
+    """
+    UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop's database
+    """
+
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the product
@@ -46,11 +50,19 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="imageUrl"),
         pydantic.Field(alias="imageUrl", description="Absolute URL to the cover image of the product"),
     ] = None
+    """
+    Absolute URL to the cover image of the product
+    """
+
     is_deleted: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isDeleted"),
         pydantic.Field(alias="isDeleted", description="product deleted from the shop's database"),
     ] = None
+    """
+    product deleted from the shop's database
+    """
+
     meta_info: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, CreateUpdateBatchProductsRequestProductsItemMetaInfoValue]],
         FieldMetadata(alias="metaInfo"),
@@ -59,6 +71,10 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
             description="Meta data of product such as description, vendor, producer, stock level. The total characters of cumulative metaInfo shall not exceed **20000 characters**.",
         ),
     ] = None
+    """
+    Meta data of product such as description, vendor, producer, stock level. The total characters of cumulative metaInfo shall not exceed **20000 characters**.
+    """
+
     name: str = pydantic.Field()
     """
     **Mandatory in case of creation**. Name of the product, as displayed in the shop
@@ -69,6 +85,10 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="parentId"),
         pydantic.Field(alias="parentId", description="Parent product id of the product"),
     ] = None
+    """
+    Parent product id of the product
+    """
+
     price: typing.Optional[float] = pydantic.Field(default=None)
     """
     Price of the product
@@ -79,6 +99,10 @@ class CreateUpdateBatchProductsRequestProductsItem(UncheckedBaseModel):
         FieldMetadata(alias="alternativePrice"),
         pydantic.Field(alias="alternativePrice", description="Alternative price of the product"),
     ] = None
+    """
+    Alternative price of the product
+    """
+
     sku: typing.Optional[str] = pydantic.Field(default=None)
     """
     Product identifier from the shop

@@ -41,6 +41,10 @@ class BalanceDefinition(UncheckedBaseModel):
         FieldMetadata(alias="imageRef"),
         pydantic.Field(alias="imageRef", description="Optional image reference URL."),
     ] = None
+    """
+    Optional image reference URL.
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional metadata for the balance definition.
@@ -56,21 +60,37 @@ class BalanceDefinition(UncheckedBaseModel):
         FieldMetadata(alias="minAmount"),
         pydantic.Field(alias="minAmount", description="Minimum allowable balance."),
     ] = None
+    """
+    Minimum allowable balance.
+    """
+
     max_amount: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="maxAmount"),
         pydantic.Field(alias="maxAmount", description="Maximum allowable balance."),
     ] = None
+    """
+    Maximum allowable balance.
+    """
+
     max_credit_amount_limit: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="maxCreditAmountLimit"),
         pydantic.Field(alias="maxCreditAmountLimit", description="Maximum credit allowed per operation."),
     ] = None
+    """
+    Maximum credit allowed per operation.
+    """
+
     max_debit_amount_limit: typing_extensions.Annotated[
         typing.Optional[float],
         FieldMetadata(alias="maxDebitAmountLimit"),
         pydantic.Field(alias="maxDebitAmountLimit", description="Maximum debit allowed per operation."),
     ] = None
+    """
+    Maximum debit allowed per operation.
+    """
+
     balance_option_amount_overtaking_strategy: typing_extensions.Annotated[
         typing.Optional[BalanceDefinitionBalanceOptionAmountOvertakingStrategy],
         FieldMetadata(alias="balanceOptionAmountOvertakingStrategy"),
@@ -79,16 +99,28 @@ class BalanceDefinition(UncheckedBaseModel):
             description="Partial enables partial credit of balance if maximum balance limit is reached. Strict enables rejection of a transaction if it will breach the max balance limit.",
         ),
     ] = None
+    """
+    Partial enables partial credit of balance if maximum balance limit is reached. Strict enables rejection of a transaction if it will breach the max balance limit.
+    """
+
     balance_option_credit_rounding: typing_extensions.Annotated[
         typing.Optional[BalanceDefinitionBalanceOptionCreditRounding],
         FieldMetadata(alias="balanceOptionCreditRounding"),
         pydantic.Field(alias="balanceOptionCreditRounding", description="Rounding strategy for credit transactions."),
     ] = None
+    """
+    Rounding strategy for credit transactions.
+    """
+
     balance_option_debit_rounding: typing_extensions.Annotated[
         typing.Optional[BalanceDefinitionBalanceOptionDebitRounding],
         FieldMetadata(alias="balanceOptionDebitRounding"),
         pydantic.Field(alias="balanceOptionDebitRounding", description="Rounding strategy for debit transactions."),
     ] = None
+    """
+    Rounding strategy for debit transactions.
+    """
+
     balance_availability_duration_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="balanceAvailabilityDurationValue"),
@@ -96,6 +128,10 @@ class BalanceDefinition(UncheckedBaseModel):
             alias="balanceAvailabilityDurationValue", description="Number of time units before the balance expires."
         ),
     ] = None
+    """
+    Number of time units before the balance expires.
+    """
+
     balance_availability_duration_unit: typing_extensions.Annotated[
         typing.Optional[BalanceDefinitionBalanceAvailabilityDurationUnit],
         FieldMetadata(alias="balanceAvailabilityDurationUnit"),
@@ -103,6 +139,10 @@ class BalanceDefinition(UncheckedBaseModel):
             alias="balanceAvailabilityDurationUnit", description="Unit of time for the balance availability duration."
         ),
     ] = None
+    """
+    Unit of time for the balance availability duration.
+    """
+
     balance_availability_duration_modifier: typing_extensions.Annotated[
         typing.Optional[BalanceDefinitionBalanceAvailabilityDurationModifier],
         FieldMetadata(alias="balanceAvailabilityDurationModifier"),
@@ -111,6 +151,10 @@ class BalanceDefinition(UncheckedBaseModel):
             description="Modifier for balance availability duration. startOfPeriod causes expiry at the start of the period, endOfPeriod at the end. noModification uses the exact duration from the credit date.",
         ),
     ] = None
+    """
+    Modifier for balance availability duration. startOfPeriod causes expiry at the start of the period, endOfPeriod at the end. noModification uses the exact duration from the credit date.
+    """
+
     balance_expiration_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="balanceExpirationDate"),
@@ -119,21 +163,36 @@ class BalanceDefinition(UncheckedBaseModel):
             description="Fixed expiration date in dd/mm format. The balance expires when this date next appears in the calendar. Only one of balanceExpirationDate or balance availability duration fields can be used.",
         ),
     ] = None
+    """
+    Fixed expiration date in dd/mm format. The balance expires when this date next appears in the calendar. Only one of balanceExpirationDate or balance availability duration fields can be used.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp of balance definition creation."),
     ] = None
+    """
+    Timestamp of balance definition creation.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp of the last update."),
     ] = None
+    """
+    Timestamp of the last update.
+    """
+
     deleted_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="deletedAt"),
         pydantic.Field(alias="deletedAt", description="Timestamp of balance definition deletion (nullable)."),
     ] = None
+    """
+    Timestamp of balance definition deletion (nullable).
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

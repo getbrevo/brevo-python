@@ -27,6 +27,10 @@ class GetProductDetails(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the product (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the product (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the product
@@ -42,11 +46,19 @@ class GetProductDetails(UncheckedBaseModel):
         FieldMetadata(alias="imageUrl"),
         pydantic.Field(alias="imageUrl", description="Absolute URL to the cover image of the product"),
     ] = None
+    """
+    Absolute URL to the cover image of the product
+    """
+
     is_deleted: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isDeleted"),
         pydantic.Field(alias="isDeleted", description="Product deleted from the shop's database but not from Brevo"),
     ] = None
+    """
+    Product deleted from the shop's database but not from Brevo
+    """
+
     meta_info: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, typing.Any]],
         FieldMetadata(alias="metaInfo"),
@@ -55,6 +67,10 @@ class GetProductDetails(UncheckedBaseModel):
             description="Meta data of product such as description, vendor, producer, stock level, etc.",
         ),
     ] = None
+    """
+    Meta data of product such as description, vendor, producer, stock level, etc.
+    """
+
     modified_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="modifiedAt"),
@@ -62,6 +78,10 @@ class GetProductDetails(UncheckedBaseModel):
             alias="modifiedAt", description="Last modification UTC date-time of the product (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Last modification UTC date-time of the product (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     name: str = pydantic.Field()
     """
     Name of the product for which you requested the details
@@ -72,6 +92,10 @@ class GetProductDetails(UncheckedBaseModel):
         FieldMetadata(alias="parentId"),
         pydantic.Field(alias="parentId", description="Parent product id of the product"),
     ] = None
+    """
+    Parent product id of the product
+    """
+
     price: typing.Optional[float] = pydantic.Field(default=None)
     """
     Price of the product
@@ -82,11 +106,19 @@ class GetProductDetails(UncheckedBaseModel):
         FieldMetadata(alias="alternativePrice"),
         pydantic.Field(alias="alternativePrice", description="Alternative price of the product"),
     ] = None
+    """
+    Alternative price of the product
+    """
+
     s3original: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="s3Original"),
         pydantic.Field(alias="s3Original", description="S3 url of original image"),
     ] = None
+    """
+    S3 url of original image
+    """
+
     s3thumb_analytics: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="s3ThumbAnalytics"),
@@ -95,6 +127,10 @@ class GetProductDetails(UncheckedBaseModel):
             description="S3 thumbnail url of original image in 120x120 dimension for analytics section",
         ),
     ]
+    """
+    S3 thumbnail url of original image in 120x120 dimension for analytics section
+    """
+
     s3thumb_editor: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="s3ThumbEditor"),
@@ -103,6 +139,10 @@ class GetProductDetails(UncheckedBaseModel):
             description="S3 thumbnail url of original image in 600x400 dimension for editor section",
         ),
     ]
+    """
+    S3 thumbnail url of original image in 600x400 dimension for editor section
+    """
+
     sku: typing.Optional[str] = pydantic.Field(default=None)
     """
     Product identifier from the shop

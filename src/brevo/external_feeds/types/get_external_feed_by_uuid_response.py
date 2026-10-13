@@ -33,6 +33,10 @@ class GetExternalFeedByUuidResponse(UncheckedBaseModel):
         FieldMetadata(alias="authType"),
         pydantic.Field(alias="authType", description="Authentication type for accessing the feed"),
     ]
+    """
+    Authentication type for accessing the feed
+    """
+
     username: typing.Optional[str] = pydantic.Field(default=None)
     """
     Username for basic authentication. Only returned when authType is 'basic'. Excluded from response when authType is 'token'.
@@ -58,6 +62,10 @@ class GetExternalFeedByUuidResponse(UncheckedBaseModel):
         FieldMetadata(alias="maxRetries"),
         pydantic.Field(alias="maxRetries", description="Maximum number of retry attempts for failed requests"),
     ]
+    """
+    Maximum number of retry attempts for failed requests
+    """
+
     cache: bool = pydantic.Field()
     """
     Whether to cache the feed response
@@ -68,11 +76,18 @@ class GetExternalFeedByUuidResponse(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Feed creation timestamp"),
     ]
+    """
+    Feed creation timestamp
+    """
+
     modified_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="modifiedAt"),
         pydantic.Field(alias="modifiedAt", description="Feed last modification timestamp"),
     ]
+    """
+    Feed last modification timestamp
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

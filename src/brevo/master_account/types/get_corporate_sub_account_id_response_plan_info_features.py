@@ -36,6 +36,10 @@ class GetCorporateSubAccountIdResponsePlanInfoFeatures(UncheckedBaseModel):
         FieldMetadata(alias="landingPage"),
         pydantic.Field(alias="landingPage", description="Landing page details / Not applicable on ENTv2"),
     ] = None
+    """
+    Landing page details / Not applicable on ENTv2
+    """
+
     sales_users: typing_extensions.Annotated[
         typing.Optional[GetCorporateSubAccountIdResponsePlanInfoFeaturesSalesUsers],
         FieldMetadata(alias="salesUsers"),
@@ -43,6 +47,11 @@ class GetCorporateSubAccountIdResponsePlanInfoFeatures(UncheckedBaseModel):
             alias="salesUsers", description="Sales and service users to use phone, sales and\nconversations"
         ),
     ] = None
+    """
+    Sales and service users to use phone, sales and
+    conversations
+    """
+
     users: typing.Optional[GetCorporateSubAccountIdResponsePlanInfoFeaturesUsers] = pydantic.Field(default=None)
     """
     Marketing users to manage the marketing channels

@@ -19,6 +19,10 @@ class UpdateEmailCampaignRequestRecipients(UncheckedBaseModel):
         FieldMetadata(alias="exclusionListIds"),
         pydantic.Field(alias="exclusionListIds", description="List ids which have to be excluded from a campaign"),
     ] = None
+    """
+    List ids which have to be excluded from a campaign
+    """
+
     exclusion_segment_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="exclusionSegmentIds"),
@@ -26,6 +30,10 @@ class UpdateEmailCampaignRequestRecipients(UncheckedBaseModel):
             alias="exclusionSegmentIds", description="Segment ids which have to be excluded from a campaign."
         ),
     ] = None
+    """
+    Segment ids which have to be excluded from a campaign.
+    """
+
     list_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="listIds"),
@@ -34,6 +42,10 @@ class UpdateEmailCampaignRequestRecipients(UncheckedBaseModel):
             description="Lists Ids to send the campaign to. **Campaign should only be updated with listIds if listIds were used to create it. REQUIRED if already not present in campaign and scheduledAt is not empty**",
         ),
     ] = None
+    """
+    Lists Ids to send the campaign to. **Campaign should only be updated with listIds if listIds were used to create it. REQUIRED if already not present in campaign and scheduledAt is not empty**
+    """
+
     segment_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[int]],
         FieldMetadata(alias="segmentIds"),
@@ -42,6 +54,9 @@ class UpdateEmailCampaignRequestRecipients(UncheckedBaseModel):
             description="**Mandatory if listIds are not used. Campaign should only be updated with segmentIds if segmentIds were used to create it.** Segment ids to send the campaign to.",
         ),
     ] = None
+    """
+    **Mandatory if listIds are not used. Campaign should only be updated with segmentIds if segmentIds were used to create it.** Segment ids to send the campaign to.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -22,11 +22,19 @@ class GetCrmAttributesCompaniesResponseItem(UncheckedBaseModel):
         FieldMetadata(alias="internalName"),
         pydantic.Field(alias="internalName", description="Internal name of the attribute"),
     ] = None
+    """
+    Internal name of the attribute
+    """
+
     attribute_type_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="attributeTypeName"),
         pydantic.Field(alias="attributeTypeName", description="Type of the attribute"),
     ] = None
+    """
+    Type of the attribute
+    """
+
     label: typing.Optional[str] = pydantic.Field(default=None)
     """
     Display label of the attribute
@@ -37,16 +45,27 @@ class GetCrmAttributesCompaniesResponseItem(UncheckedBaseModel):
         FieldMetadata(alias="attributeOptions"),
         pydantic.Field(alias="attributeOptions", description="Options for single-select or multi-choice attributes"),
     ] = None
+    """
+    Options for single-select or multi-choice attributes
+    """
+
     is_required: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isRequired"),
         pydantic.Field(alias="isRequired", description="Whether this attribute is required"),
     ] = None
+    """
+    Whether this attribute is required
+    """
+
     is_value_readonly: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="isValueReadonly"),
         pydantic.Field(alias="isValueReadonly", description="Whether this attribute value is read-only"),
     ] = None
+    """
+    Whether this attribute value is read-only
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

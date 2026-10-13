@@ -16,11 +16,19 @@ class GetLoyaltyOfferProgramsPidOffersResponseItemsItem(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp for when this reward was created"),
     ] = None
+    """
+    Timestamp for when this reward was created
+    """
+
     end_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="endDate"),
         pydantic.Field(alias="endDate", description="Timestamp for when this reward attribution ended"),
     ] = None
+    """
+    Timestamp for when this reward attribution ended
+    """
+
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Unique identifier for the reward
@@ -31,6 +39,10 @@ class GetLoyaltyOfferProgramsPidOffersResponseItemsItem(UncheckedBaseModel):
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Loyalty Program to which current reward is associated"),
     ] = None
+    """
+    Loyalty Program to which current reward is associated
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     Name of the reward
@@ -41,11 +53,19 @@ class GetLoyaltyOfferProgramsPidOffersResponseItemsItem(UncheckedBaseModel):
         FieldMetadata(alias="publicImage"),
         pydantic.Field(alias="publicImage", description="Public image of the reward"),
     ] = None
+    """
+    Public image of the reward
+    """
+
     start_date: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="startDate"),
         pydantic.Field(alias="startDate", description="Timestamp for when this reward attribution started"),
     ] = None
+    """
+    Timestamp for when this reward attribution started
+    """
+
     state: typing.Optional[str] = pydantic.Field(default=None)
     """
     State of the reward
@@ -56,6 +76,9 @@ class GetLoyaltyOfferProgramsPidOffersResponseItemsItem(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp for when this reward attribution was updated"),
     ] = None
+    """
+    Timestamp for when this reward attribution was updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

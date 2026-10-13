@@ -25,21 +25,36 @@ class CreateTierGroupRequestDowngradeSchedule(UncheckedBaseModel):
         FieldMetadata(alias="durationValue"),
         pydantic.Field(alias="durationValue", description="Duration value for the schedule."),
     ] = None
+    """
+    Duration value for the schedule.
+    """
+
     duration_unit: typing_extensions.Annotated[
         typing.Optional[CreateTierGroupRequestDowngradeScheduleDurationUnit],
         FieldMetadata(alias="durationUnit"),
         pydantic.Field(alias="durationUnit", description="Duration unit for the schedule."),
     ] = None
+    """
+    Duration unit for the schedule.
+    """
+
     duration_modifier: typing_extensions.Annotated[
         typing.Optional[CreateTierGroupRequestDowngradeScheduleDurationModifier],
         FieldMetadata(alias="durationModifier"),
         pydantic.Field(alias="durationModifier", description="Modifier for the duration."),
     ] = None
+    """
+    Modifier for the duration.
+    """
+
     scheduled_date: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="scheduledDate"),
         pydantic.Field(alias="scheduledDate", description="Scheduled date in DD/MM format."),
     ] = None
+    """
+    Scheduled date in DD/MM format.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

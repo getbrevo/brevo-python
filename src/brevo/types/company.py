@@ -29,11 +29,18 @@ class Company(UncheckedBaseModel):
         FieldMetadata(alias="linkedContactsIds"),
         pydantic.Field(alias="linkedContactsIds", description="Contact ids for contacts linked to this company"),
     ] = None
+    """
+    Contact ids for contacts linked to this company
+    """
+
     linked_deals_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]],
         FieldMetadata(alias="linkedDealsIds"),
         pydantic.Field(alias="linkedDealsIds", description="Deal ids for deals linked to this company"),
     ] = None
+    """
+    Deal ids for deals linked to this company
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

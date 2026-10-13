@@ -15,6 +15,9 @@ class RequestSmsRecipientExportResponse(UncheckedBaseModel):
         FieldMetadata(alias="processId"),
         pydantic.Field(alias="processId", description="Id of the process created"),
     ]
+    """
+    Id of the process created
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

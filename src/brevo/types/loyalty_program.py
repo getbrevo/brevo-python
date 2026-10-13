@@ -42,11 +42,19 @@ class LoyaltyProgram(UncheckedBaseModel):
         FieldMetadata(alias="subscriptionPoolId"),
         pydantic.Field(alias="subscriptionPoolId", description="Loyalty Program subscription pool ID."),
     ] = None
+    """
+    Loyalty Program subscription pool ID.
+    """
+
     subscription_generator_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="subscriptionGeneratorId"),
         pydantic.Field(alias="subscriptionGeneratorId", description="Loyalty Program subscription generator ID."),
     ] = None
+    """
+    Loyalty Program subscription generator ID.
+    """
+
     pattern: typing.Optional[str] = pydantic.Field(default=None)
     """
     Subscription code pattern.
@@ -57,26 +65,45 @@ class LoyaltyProgram(UncheckedBaseModel):
         FieldMetadata(alias="codeCount"),
         pydantic.Field(alias="codeCount", description="Number of available subscription codes."),
     ] = None
+    """
+    Number of available subscription codes.
+    """
+
     document_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="documentId"),
         pydantic.Field(alias="documentId", description="Associated document identifier."),
     ] = None
+    """
+    Associated document identifier.
+    """
+
     birthday_attribute: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="birthdayAttribute"),
         pydantic.Field(alias="birthdayAttribute", description="Contact attribute name used for birthday tracking."),
     ] = None
+    """
+    Contact attribute name used for birthday tracking.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the loyalty program was created."),
     ] = None
+    """
+    Timestamp when the loyalty program was created.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the loyalty program was last modified."),
     ] = None
+    """
+    Timestamp when the loyalty program was last modified.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

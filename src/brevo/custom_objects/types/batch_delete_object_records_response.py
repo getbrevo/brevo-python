@@ -15,6 +15,10 @@ class BatchDeleteObjectRecordsResponse(UncheckedBaseModel):
         FieldMetadata(alias="processId"),
         pydantic.Field(alias="processId", description="Identifier for batch process tracking"),
     ] = None
+    """
+    Identifier for batch process tracking
+    """
+
     message: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:

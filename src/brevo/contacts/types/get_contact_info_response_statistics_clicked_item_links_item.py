@@ -20,6 +20,10 @@ class GetContactInfoResponseStatisticsClickedItemLinksItem(UncheckedBaseModel):
         FieldMetadata(alias="eventTime"),
         pydantic.Field(alias="eventTime", description="UTC date-time of the event"),
     ]
+    """
+    UTC date-time of the event
+    """
+
     ip: str = pydantic.Field()
     """
     IP from which the user has clicked on the link

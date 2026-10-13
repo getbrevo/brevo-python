@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -330,7 +330,7 @@ class RawExternalFeedsClient:
             External feed details retrieved successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -450,7 +450,7 @@ class RawExternalFeedsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="PUT",
             json={
                 "name": name,
@@ -540,7 +540,7 @@ class RawExternalFeedsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -880,7 +880,7 @@ class AsyncRawExternalFeedsClient:
             External feed details retrieved successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -1000,7 +1000,7 @@ class AsyncRawExternalFeedsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="PUT",
             json={
                 "name": name,
@@ -1090,7 +1090,7 @@ class AsyncRawExternalFeedsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"feeds/{jsonable_encoder(uuid_)}",
+            f"feeds/{encode_path_param(uuid_)}",
             method="DELETE",
             request_options=request_options,
         )

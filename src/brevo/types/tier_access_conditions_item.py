@@ -16,6 +16,10 @@ class TierAccessConditionsItem(UncheckedBaseModel):
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Balance definition identifier"),
     ] = None
+    """
+    Balance definition identifier
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="createdAt"), pydantic.Field(alias="createdAt")
     ] = None
@@ -24,6 +28,10 @@ class TierAccessConditionsItem(UncheckedBaseModel):
         FieldMetadata(alias="minimumValue"),
         pydantic.Field(alias="minimumValue", description="Minimum value required to access this tier"),
     ] = None
+    """
+    Minimum value required to access this tier
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime], FieldMetadata(alias="updatedAt"), pydantic.Field(alias="updatedAt")
     ] = None

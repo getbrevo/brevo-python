@@ -15,11 +15,18 @@ class CreateTierForTierGroupRequestAccessConditionsItem(UncheckedBaseModel):
         FieldMetadata(alias="balanceDefinitionId"),
         pydantic.Field(alias="balanceDefinitionId", description="Balance definition identifier for accessing the tier"),
     ] = None
+    """
+    Balance definition identifier for accessing the tier
+    """
+
     minimum_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="minimumValue"),
         pydantic.Field(alias="minimumValue", description="Minimum value required to access the tier"),
     ] = None
+    """
+    Minimum value required to access the tier
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -15,21 +15,46 @@ class GetParameterSubscriptionInfoResponseTierItem(UncheckedBaseModel):
         FieldMetadata(alias="contactId"),
         pydantic.Field(alias="contactId", description="Unique identifier of the contact."),
     ] = None
+    """
+    Unique identifier of the contact.
+    """
+
     created_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the tier was assigned."),
     ] = None
+    """
+    Timestamp when the tier was assigned.
+    """
+
     group_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="groupId"),
         pydantic.Field(alias="groupId", description="Unique identifier of the group associated with the tier."),
     ] = None
+    """
+    Unique identifier of the group associated with the tier.
+    """
+
+    group_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="groupName"),
+        pydantic.Field(alias="groupName", description="Name of the group associated with the tier."),
+    ] = None
+    """
+    Name of the group associated with the tier.
+    """
+
     loyalty_program_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="loyaltyProgramId"),
         pydantic.Field(alias="loyaltyProgramId", description="Unique identifier of the loyalty program."),
     ] = None
+    """
+    Unique identifier of the loyalty program.
+    """
+
     meta: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Additional metadata related to the tier.
@@ -40,11 +65,27 @@ class GetParameterSubscriptionInfoResponseTierItem(UncheckedBaseModel):
         FieldMetadata(alias="tierId"),
         pydantic.Field(alias="tierId", description="Unique identifier of the tier."),
     ] = None
+    """
+    Unique identifier of the tier.
+    """
+
+    tier_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="tierName"),
+        pydantic.Field(alias="tierName", description="Name of the tier."),
+    ] = None
+    """
+    Name of the tier.
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the tier was last updated"),
     ] = None
+    """
+    Timestamp when the tier was last updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

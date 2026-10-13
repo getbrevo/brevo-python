@@ -22,6 +22,10 @@ class ImportContactsRequestNewList(UncheckedBaseModel):
             description="Id of the folder where this new list shall be created. **Mandatory if listName is not empty**",
         ),
     ] = None
+    """
+    Id of the folder where this new list shall be created. **Mandatory if listName is not empty**
+    """
+
     list_name: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="listName"),
@@ -30,6 +34,9 @@ class ImportContactsRequestNewList(UncheckedBaseModel):
             description="List with listName will be created first and users will be imported in it. **Mandatory if listIds is empty**.",
         ),
     ] = None
+    """
+    List with listName will be created first and users will be imported in it. **Mandatory if listIds is empty**.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

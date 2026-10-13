@@ -31,6 +31,10 @@ class GetrecordsResponseRecordsItem(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the object record was created"),
     ] = None
+    """
+    Timestamp when the object record was created
+    """
+
     identifiers: typing.Optional[GetrecordsResponseRecordsItemIdentifiers] = pydantic.Field(default=None)
     """
     Identifiers for the object record. Supports `id` (singular, not `ids`) or `ext_id`.
@@ -43,6 +47,9 @@ class GetrecordsResponseRecordsItem(UncheckedBaseModel):
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the object record was last updated"),
     ] = None
+    """
+    Timestamp when the object record was last updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

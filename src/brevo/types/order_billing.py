@@ -34,6 +34,10 @@ class OrderBilling(UncheckedBaseModel):
         FieldMetadata(alias="countryCode"),
         pydantic.Field(alias="countryCode", description="Billing country 2-letter ISO code."),
     ] = None
+    """
+    Billing country 2-letter ISO code.
+    """
+
     payment_method: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="paymentMethod"),
@@ -41,6 +45,10 @@ class OrderBilling(UncheckedBaseModel):
             alias="paymentMethod", description="How the visitor will pay for the item(s), e.g. paypal, check, etc."
         ),
     ] = None
+    """
+    How the visitor will pay for the item(s), e.g. paypal, check, etc.
+    """
+
     phone: typing.Optional[str] = pydantic.Field(default=None)
     """
     Billing phone number.
@@ -51,6 +59,10 @@ class OrderBilling(UncheckedBaseModel):
         FieldMetadata(alias="postCode"),
         pydantic.Field(alias="postCode", description="Postcode for delivery and billing."),
     ] = None
+    """
+    Postcode for delivery and billing.
+    """
+
     region: typing.Optional[str] = pydantic.Field(default=None)
     """
     Exact region (state/province) for delivery and billing.

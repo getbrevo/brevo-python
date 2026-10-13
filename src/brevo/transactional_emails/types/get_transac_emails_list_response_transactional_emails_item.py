@@ -25,11 +25,19 @@ class GetTransacEmailsListResponseTransactionalEmailsItem(UncheckedBaseModel):
         FieldMetadata(alias="from"),
         pydantic.Field(alias="from", description="Email address of the sender from which the email was sent"),
     ] = None
+    """
+    Email address of the sender from which the email was sent
+    """
+
     message_id: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="Message Id of the sent email"),
     ]
+    """
+    Message Id of the sent email
+    """
+
     subject: str = pydantic.Field()
     """
     Subject of the sent email
@@ -45,11 +53,18 @@ class GetTransacEmailsListResponseTransactionalEmailsItem(UncheckedBaseModel):
         FieldMetadata(alias="templateId"),
         pydantic.Field(alias="templateId", description="Id of the template"),
     ] = None
+    """
+    Id of the template
+    """
+
     uuid_: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="uuid"),
         pydantic.Field(alias="uuid", description="Unique id of the email sent to a particular contact"),
     ]
+    """
+    Unique id of the email sent to a particular contact
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

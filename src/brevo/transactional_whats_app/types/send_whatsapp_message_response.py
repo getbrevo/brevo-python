@@ -15,6 +15,9 @@ class SendWhatsappMessageResponse(UncheckedBaseModel):
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="messageId of sent message"),
     ]
+    """
+    messageId of sent message
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

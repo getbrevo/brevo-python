@@ -19,11 +19,19 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
         FieldMetadata(alias="campaignName"),
         pydantic.Field(alias="campaignName", description="Name of the WhatsApp Campaign"),
     ]
+    """
+    Name of the WhatsApp Campaign
+    """
+
     campaign_status: typing_extensions.Annotated[
         GetWhatsAppCampaignResponseCampaignStatus,
         FieldMetadata(alias="campaignStatus"),
         pydantic.Field(alias="campaignStatus", description="Status of the WhatsApp Campaign"),
     ]
+    """
+    Status of the WhatsApp Campaign
+    """
+
     created_at: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="createdAt"),
@@ -31,6 +39,10 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     id: int = pydantic.Field()
     """
     ID of the WhatsApp Campaign
@@ -44,6 +56,10 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
             description="UTC date-time of last modification of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)",
         ),
     ]
+    """
+    UTC date-time of last modification of the WhatsApp campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     scheduled_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="scheduledAt"),
@@ -52,6 +68,10 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
             description="UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format",
         ),
     ] = None
+    """
+    UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format
+    """
+
     recipients: GetWhatsAppCampaignResponseRecipients = pydantic.Field()
     """
     Recipients of the WhatsApp Campaign
@@ -62,6 +82,10 @@ class GetWhatsAppCampaignResponse(UncheckedBaseModel):
         FieldMetadata(alias="senderNumber"),
         pydantic.Field(alias="senderNumber", description="Sender of the WhatsApp Campaign"),
     ]
+    """
+    Sender of the WhatsApp Campaign
+    """
+
     stats: typing.Optional[WhatsappCampStats] = None
     template: GetWhatsAppCampaignResponseTemplate
 

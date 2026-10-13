@@ -19,11 +19,19 @@ class PutCorporateSubAccountsPlanRequestFeatures(UncheckedBaseModel):
         FieldMetadata(alias="landingPage"),
         pydantic.Field(alias="landingPage", description="Number of landing pages"),
     ] = None
+    """
+    Number of landing pages
+    """
+
     sales_users: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="salesUsers"),
         pydantic.Field(alias="salesUsers", description="Number of sales and service users | only available in ENT-V2"),
     ] = None
+    """
+    Number of sales and service users | only available in ENT-V2
+    """
+
     users: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of multi-users

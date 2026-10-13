@@ -23,6 +23,10 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             alias="createdAt", description="Creation UTC date-time of the SMS campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)"
         ),
     ]
+    """
+    Creation UTC date-time of the SMS campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     id: int = pydantic.Field()
     """
     ID of the SMS Campaign
@@ -36,6 +40,10 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             description="UTC date-time of last modification of the SMS campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)",
         ),
     ]
+    """
+    UTC date-time of last modification of the SMS campaign (YYYY-MM-DDTHH:mm:ss.SSSZ)
+    """
+
     name: str = pydantic.Field()
     """
     Name of the SMS Campaign
@@ -49,6 +57,10 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             description="A recognizable prefix added as the Brand Name before the message content. Empty string if not set.",
         ),
     ] = None
+    """
+    A recognizable prefix added as the Brand Name before the message content. Empty string if not set.
+    """
+
     scheduled_at: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="scheduledAt"),
@@ -57,6 +69,10 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             description="UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format. Empty string if not scheduled.",
         ),
     ] = None
+    """
+    UTC date-time on which SMS campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format. Empty string if not scheduled.
+    """
+
     sender: str = pydantic.Field()
     """
     Sender of the SMS Campaign
@@ -70,6 +86,10 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             description="UTC date-time on which the SMS campaign was sent (YYYY-MM-DDTHH:mm:ss.SSSZ). Only available if the campaign status is 'sent'.",
         ),
     ] = None
+    """
+    UTC date-time on which the SMS campaign was sent (YYYY-MM-DDTHH:mm:ss.SSSZ). Only available if the campaign status is 'sent'.
+    """
+
     status: GetSmsCampaignOverviewStatus = pydantic.Field()
     """
     Status of the SMS Campaign
@@ -83,6 +103,9 @@ class GetSmsCampaignOverview(UncheckedBaseModel):
             description="Instructions to unsubscribe from future communications. Empty string if not set.",
         ),
     ] = None
+    """
+    Instructions to unsubscribe from future communications. Empty string if not set.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

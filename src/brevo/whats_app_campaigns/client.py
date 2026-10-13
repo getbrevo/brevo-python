@@ -82,7 +82,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.get_whats_app_campaigns()
         """
@@ -140,7 +141,8 @@ class WhatsAppCampaignsClient:
         from brevo.whats_app_campaigns import CreateWhatsAppCampaignRequestRecipients
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.create_whats_app_campaign(
             name="Test Campaign",
@@ -180,7 +182,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.get_whats_app_config()
         """
@@ -240,7 +243,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.create_whats_app_template(
             body_text="making it look like readable English",
@@ -308,7 +312,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.get_whats_app_templates()
         """
@@ -347,7 +352,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.send_whats_app_template_approval(
             template_id=1000000,
@@ -384,7 +390,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.get_whats_app_campaign(
             campaign_id=1000000,
@@ -439,7 +446,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.update_whats_app_campaign(
             campaign_id=1000000,
@@ -478,7 +486,8 @@ class WhatsAppCampaignsClient:
         from brevo import Brevo
 
         client = Brevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
         client.whats_app_campaigns.delete_whats_app_campaign(
             campaign_id=1000000,
@@ -548,7 +557,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -614,7 +624,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo.whats_app_campaigns import CreateWhatsAppCampaignRequestRecipients
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -662,7 +673,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -730,7 +742,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -806,7 +819,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -853,7 +867,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -900,7 +915,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -963,7 +979,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 
@@ -1010,7 +1027,8 @@ class AsyncWhatsAppCampaignsClient:
         from brevo import AsyncBrevo
 
         client = AsyncBrevo(
-            api_key="YOUR_API_KEY",
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
         )
 
 

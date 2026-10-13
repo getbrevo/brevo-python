@@ -15,6 +15,10 @@ class UpdateCouponCollectionResponse(UncheckedBaseModel):
         FieldMetadata(alias="defaultCoupon"),
         pydantic.Field(alias="defaultCoupon", description="The default coupon of the collection"),
     ]
+    """
+    The default coupon of the collection
+    """
+
     id: str = pydantic.Field()
     """
     The id of the collection

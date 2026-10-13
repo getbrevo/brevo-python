@@ -21,6 +21,10 @@ class GetContactStatsResponseUnsubscriptions(UncheckedBaseModel):
         FieldMetadata(alias="adminUnsubscription"),
         pydantic.Field(alias="adminUnsubscription", description="Contact has been unsubscribed from the administrator"),
     ]
+    """
+    Contact has been unsubscribed from the administrator
+    """
+
     user_unsubscription: typing_extensions.Annotated[
         typing.List[GetContactStatsResponseUnsubscriptionsUserUnsubscriptionItem],
         FieldMetadata(alias="userUnsubscription"),
@@ -28,6 +32,9 @@ class GetContactStatsResponseUnsubscriptions(UncheckedBaseModel):
             alias="userUnsubscription", description="Contact has unsubscribed via the unsubscription link in the email"
         ),
     ]
+    """
+    Contact has unsubscribed via the unsubscription link in the email
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

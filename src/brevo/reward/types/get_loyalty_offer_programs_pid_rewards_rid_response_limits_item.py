@@ -16,6 +16,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseLimitsItem(UncheckedBaseModel)
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the reward limit was created"),
     ] = None
+    """
+    Timestamp when the reward limit was created
+    """
+
     duration_unit: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="durationUnit"),
@@ -24,21 +28,37 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseLimitsItem(UncheckedBaseModel)
             description="Unit of time for the reward limit's availability (e.g., day/week/month/year).",
         ),
     ] = None
+    """
+    Unit of time for the reward limit's availability (e.g., day/week/month/year).
+    """
+
     duration_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="durationValue"),
         pydantic.Field(alias="durationValue", description="Number of days/weeks/month/year for reward limit"),
     ] = None
+    """
+    Number of days/weeks/month/year for reward limit
+    """
+
     limit_value: typing_extensions.Annotated[
         typing.Optional[int],
         FieldMetadata(alias="limitValue"),
         pydantic.Field(alias="limitValue", description="Value of the limit"),
     ] = None
+    """
+    Value of the limit
+    """
+
     reward_limit_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="rewardLimitId"),
         pydantic.Field(alias="rewardLimitId", description="Unique identifier for the reward limit"),
     ] = None
+    """
+    Unique identifier for the reward limit
+    """
+
     sliding_schedule: typing_extensions.Annotated[
         typing.Optional[bool],
         FieldMetadata(alias="slidingSchedule"),
@@ -47,6 +67,10 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseLimitsItem(UncheckedBaseModel)
             description="Select true to calculate all redeems/attributions from the previous value of selected durationUnit to the current time",
         ),
     ] = None
+    """
+    Select true to calculate all redeems/attributions from the previous value of selected durationUnit to the current time
+    """
+
     type: typing.Optional[str] = pydantic.Field(default=None)
     """
     Type of reward
@@ -57,6 +81,9 @@ class GetLoyaltyOfferProgramsPidRewardsRidResponseLimitsItem(UncheckedBaseModel)
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the reward limit was created"),
     ] = None
+    """
+    Timestamp when the reward limit was created
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

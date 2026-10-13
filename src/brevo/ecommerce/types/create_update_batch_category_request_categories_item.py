@@ -18,6 +18,10 @@ class CreateUpdateBatchCategoryRequestCategoriesItem(UncheckedBaseModel):
             description="UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop's database",
         ),
     ] = None
+    """
+    UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop's database
+    """
+
     id: str = pydantic.Field()
     """
     Unique Category ID as saved in the shop
@@ -28,6 +32,10 @@ class CreateUpdateBatchCategoryRequestCategoriesItem(UncheckedBaseModel):
         FieldMetadata(alias="isDeleted"),
         pydantic.Field(alias="isDeleted", description="category deleted from the shop's database"),
     ] = None
+    """
+    category deleted from the shop's database
+    """
+
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
     **Mandatory in case of creation**. Name of the Category, as displayed in the shop

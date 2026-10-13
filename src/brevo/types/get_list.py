@@ -25,16 +25,27 @@ class GetList(UncheckedBaseModel):
         FieldMetadata(alias="totalBlacklisted"),
         pydantic.Field(alias="totalBlacklisted", description="Number of blacklisted contacts in the list"),
     ]
+    """
+    Number of blacklisted contacts in the list
+    """
+
     total_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="totalSubscribers"),
         pydantic.Field(alias="totalSubscribers", description="Number of contacts in the list"),
     ]
+    """
+    Number of contacts in the list
+    """
+
     unique_subscribers: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="uniqueSubscribers"),
         pydantic.Field(alias="uniqueSubscribers", description="Number of unique contacts in the list"),
     ]
+    """
+    Number of unique contacts in the list
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

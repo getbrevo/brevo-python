@@ -39,6 +39,10 @@ class RedeemVoucherRequestOrder(UncheckedBaseModel):
         FieldMetadata(alias="createdAt"),
         pydantic.Field(alias="createdAt", description="Timestamp when the order was created"),
     ] = None
+    """
+    Timestamp when the order was created
+    """
+
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email address associated with the order
@@ -69,11 +73,18 @@ class RedeemVoucherRequestOrder(UncheckedBaseModel):
         FieldMetadata(alias="storeId"),
         pydantic.Field(alias="storeId", description="Identifier for the store where the order was placed"),
     ] = None
+    """
+    Identifier for the store where the order was placed
+    """
+
     updated_at: typing_extensions.Annotated[
         typing.Optional[dt.datetime],
         FieldMetadata(alias="updatedAt"),
         pydantic.Field(alias="updatedAt", description="Timestamp when the order was last updated"),
     ] = None
+    """
+    Timestamp when the order was last updated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

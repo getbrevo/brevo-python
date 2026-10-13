@@ -7,7 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
@@ -128,7 +128,7 @@ class RawInboundParsingClient:
             Detailed information and event history for the specified received email.
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"inbound/events/{jsonable_encoder(uuid_)}",
+            f"inbound/events/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -194,7 +194,7 @@ class RawInboundParsingClient:
             Attachment information
         """
         with self._client_wrapper.httpx_client.stream(
-            f"inbound/attachments/{jsonable_encoder(download_token)}",
+            f"inbound/attachments/{encode_path_param(download_token)}",
             method="GET",
             request_options=request_options,
         ) as _response:
@@ -355,7 +355,7 @@ class AsyncRawInboundParsingClient:
             Detailed information and event history for the specified received email.
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"inbound/events/{jsonable_encoder(uuid_)}",
+            f"inbound/events/{encode_path_param(uuid_)}",
             method="GET",
             request_options=request_options,
         )
@@ -421,7 +421,7 @@ class AsyncRawInboundParsingClient:
             Attachment information
         """
         async with self._client_wrapper.httpx_client.stream(
-            f"inbound/attachments/{jsonable_encoder(download_token)}",
+            f"inbound/attachments/{encode_path_param(download_token)}",
             method="GET",
             request_options=request_options,
         ) as _response:

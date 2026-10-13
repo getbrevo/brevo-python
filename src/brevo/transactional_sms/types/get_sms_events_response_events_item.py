@@ -26,11 +26,19 @@ class GetSmsEventsResponseEventsItem(UncheckedBaseModel):
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="Message ID which generated the event"),
     ] = None
+    """
+    Message ID which generated the event
+    """
+
     phone_number: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="phoneNumber"),
         pydantic.Field(alias="phoneNumber", description="Phone number which has generated the event"),
     ] = None
+    """
+    Phone number which has generated the event
+    """
+
     reason: typing.Optional[str] = pydantic.Field(default=None)
     """
     Reason of bounce (only available if the event is hardbounce or softbounce)

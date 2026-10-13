@@ -15,6 +15,10 @@ class SendTransacEmailResponse(UncheckedBaseModel):
         FieldMetadata(alias="messageId"),
         pydantic.Field(alias="messageId", description="Message ID of the transactional email sent"),
     ] = None
+    """
+    Message ID of the transactional email sent
+    """
+
     message_ids: typing_extensions.Annotated[
         typing.Optional[typing.List[str]], FieldMetadata(alias="messageIds"), pydantic.Field(alias="messageIds")
     ] = None
