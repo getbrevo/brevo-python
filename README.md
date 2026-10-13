@@ -20,6 +20,9 @@ Official SDK for the Brevo API.
 - [Upgrading from v4.x](#upgrading-from-v4x)
 - [Migration from v1.x](#migration-from-v1x)
 - [Usage](#usage)
+- [Authentication](#authentication)
+  - [API key](#api-key)
+  - [OAuth 2.0 machine-to-machine (M2M)](#oauth-20-machine-to-machine-m2m)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
 - [Advanced](#advanced)
@@ -186,6 +189,53 @@ client.transactional_emails.send_transac_email(
     ],
 )
 ```
+
+## Authentication
+
+The client supports two authentication methods. Use one per client.
+
+### API key
+
+```python
+from brevo import Brevo
+
+client = Brevo(api_key="xkeysib-xxx")
+```
+
+Create an API key in your Brevo account at [app.brevo.com/settings/keys/api](https://app.brevo.com/settings/keys/api). See [API key authentication](https://developers.brevo.com/docs/api-key-authentication).
+
+### OAuth 2.0 machine-to-machine (M2M)
+
+Pass the client ID and secret of an M2M app. The client exchanges them for an access token on the first request, reuses the token, and fetches a new one shortly before it expires (tokens are valid for about one hour).
+
+```python
+from brevo import Brevo
+
+client = Brevo(
+    client_id="your-client-id",
+    client_secret="your-client-secret",
+)
+
+account = client.account.get_account()
+```
+
+`AsyncBrevo` accepts the same `client_id` and `client_secret` arguments.
+
+Or set `BREVO_CLIENT_ID` and `BREVO_CLIENT_SECRET` in the environment and create the client without arguments. The variables are read when `brevo` is imported, so set them before the import:
+
+```python
+from brevo import Brevo
+
+client = Brevo()
+```
+
+If you already have an access token, pass it directly. The client sends it as-is and does not refresh it:
+
+```python
+client = Brevo(token="your-access-token")
+```
+
+A token requested by the client carries every scope granted to the app. To create an M2M app and choose its scopes, or to request a token with specific scopes, see [Machine-to-machine (M2M) authentication](https://developers.brevo.com/docs/oauth-m2m-authentication).
 
 ## Async Client
 
